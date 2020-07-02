@@ -1,0 +1,54 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/main/main",
+    "pages/classify/classifies",
+    "pages/cart/cart",
+    "pages/user/user",
+    "pages/main/details/details"
+  ],
+  "subPackages": [],
+  "window": {
+    "navigationBarTextStyle": "black",
+    "navigationBarBackgroundColor": "#ffffff",
+    "backgroundColor": "#f8f8f8"
+  },
+  "tabBar": {
+    "color": "#999",
+    "selectedColor": "#039798",
+    "backgroundColor": "#ffffff",
+    "list": [
+      {
+        "pagePath": "pages/main/main",
+        "text": "首页",
+        "iconPath": "static/img/tb_sy_wxz.png",
+        "selectedIconPath": "static/img/tb_sy_xz.png"
+      },
+      {
+        "pagePath": "pages/classify/classifies",
+        "text": "分类",
+        "iconPath": "static/img/tb_fl_wxz.png",
+        "selectedIconPath": "static/img/tb_fl_xz.png"
+      },
+      {
+        "pagePath": "pages/user/user",
+        "text": "我的",
+        "iconPath": "static/img/tb_wd_wxz.png",
+        "selectedIconPath": "static/img/tb_wd_xz.png"
+      }
+    ]
+  },
+  "permission": {
+    "scope.userLocation": {
+      "desc": "试图访问您的位置，用来为你提供准确的信息"
+    }
+  },
+  "usingComponents": {
+    "load-more": "/components/uni-load-more/uni-load-more",
+    "tui-button": "/components/button/button",
+    "cu-custom": "/components/cu-custom/cu-custom",
+    "icon": "/components/icon/icon",
+    "tui-modal": "/components/modal/modal",
+    "tui-tag": "/components/tag/tag"
+  }
+}

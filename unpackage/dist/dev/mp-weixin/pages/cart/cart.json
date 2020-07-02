@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "",
+  "enablePullDownRefresh": false,
+  "usingComponents": {
+    "cu-custom": "/components/cu-custom/cu-custom",
+    "tui-numberbox": "/components/numberbox/numberbox",
+    "tui-tips": "/components/extend/tips/tips"
+  }
+}

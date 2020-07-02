@@ -1,0 +1,8 @@
+.pages.data-v-13ace5c4 {
+  background: #fff;
+}
+.pages .btu.data-v-13ace5c4 {
+  padding: 20rpx 40rpx;
+  margin-top: 20rpx;
+}
+
