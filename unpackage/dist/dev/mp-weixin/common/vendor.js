@@ -1,6 +1,6 @@
-(global["webpackJsonp"] = global["webpackJsonp"] || []).push([["common/vendor"],[
-/* 0 */,
-/* 1 */
+(global["webpackJsonp"] = global["webpackJsonp"] || []).push([["common/vendor"],{
+
+/***/ 1:
 /*!************************************************************!*\
   !*** ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js ***!
   \************************************************************/
@@ -1563,7 +1563,3396 @@ var uni$1 = uni;var _default =
 uni$1;exports.default = _default;
 
 /***/ }),
-/* 2 */
+
+/***/ 11:
+/*!*****************************************!*\
+  !*** G:/work/马桶福利购/utils/http/index.js ***!
+  \*****************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _interface = _interopRequireDefault(__webpack_require__(/*! ./interface */ 12));
+
+
+var _auth = _interopRequireDefault(__webpack_require__(/*! ../module/auth.js */ 16));
+var _SET = _interopRequireDefault(__webpack_require__(/*! ../../SET.js */ 15));
+
+var _business = _interopRequireDefault(__webpack_require__(/*! ../module/business.js */ 17));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}
+
+// 集合部分升星
+// import LevelUp from '../module/levelUp.js'
+
+/**
+ * 将业务所有接口统一起来便于维护
+ * 如果项目很大可以将 url 独立成文件，接口分成不同的模块
+ * 
+ */
+
+// 单独导出(测试接口) import {test} from '@/common/vmeitime-http/'
+// export const test = (data) => {
+// 	// /* http.config.baseUrl = "http://localhost:8080/api/"
+// 	//设置请求前拦截器 若设置会覆盖全局
+// 	http.interceptor.request = (config) => {
+// 		config.header = {
+// 			"token": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+// 		}
+// 		console.log('个性化request....');
+// 		// return config
+// 	} 
+// 	//设置请求结束后拦截器
+// 	http.interceptor.response = (response) => {
+// 		console.log('个性化response....')
+// 		//判断返回状态 执行相应操作
+// 		return response; 
+// 	}
+//     return http.request({
+// 		// baseUrl: 'https://unsdaf.net.cn/',
+//         url: 'ajax/echo/text?name=uni-app',
+// 		dataType: 'text',
+//         data,
+//     })
+// }
+// 
+
+
+// 默认全部导出  import api from '@/common/vmeitime-http/'
+var _default = _objectSpread({},
+_auth.default, {},
+_business.default, {
+  // ...LevelUp,
+  baseUrl: _SET.default.baseUrl,
+  mainUrl: _SET.default.mainUrl });
+
+
+// export const baseUrl = 'http://taobao.fjdmll.com'
+exports.default = _default;
+
+/***/ }),
+
+/***/ 12:
+/*!*********************************************!*\
+  !*** G:/work/马桶福利购/utils/http/interface.js ***!
+  \*********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
+
+
+
+var _index = _interopRequireDefault(__webpack_require__(/*! ../../store/index.js */ 13));
+var _SET = _interopRequireDefault(__webpack_require__(/*! ../../SET.js */ 15));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} /**
+                                                                                                                                                          * 通用uni-app网络请求
+                                                                                                                                                          * 基于 Promise 对象实现更简单的 request 使用方式，支持请求和响应拦截
+                                                                                                                                                          */var _default = { config: { // baseUrl: "https://hp.fjhjc.net/Data",
+    baseUrl: _SET.default.baseUrl,
+
+    // baseUrl: "https://testapi.kuxiong999.com",   //测试连接
+    header: {
+      'Content-Type': 'application/json;charset=UTF-8'
+      // 'Content-Type':'application/x-www-form-urlencoded'
+    },
+    data: {},
+    method: "GET",
+    dataType: "json",
+    /* 如设为json，会对返回的数据做一次 JSON.parse */
+    responseType: "text",
+    success: function success() {},
+    fail: function fail() {},
+    complete: function complete() {
+
+    } },
+
+  interceptor: {
+    request: function request(config, ifLoad) {
+      var value = uni.getStorageSync('hepai_token');
+      // console.log(value)
+      if (value) {
+        config.header.Authorization = value;
+      }
+      return config;
+    },
+    response: function response(_response, ifLoad) {
+      var statusCode = _response.statusCode;
+      var that = this;
+      // console.log(response)
+      // 一般在这里做全局的错误事件处理
+      if (statusCode === 200) {//成功
+        return _response.data;
+      } else if (statusCode === 401) {
+        // if (true) {	
+        if (!_index.default.state.hasLogin) return;
+        uni.showModal({
+          title: ' 洁利来商城提醒您',
+          content: '登陆状态失效,请重新登陆',
+          showCancel: false,
+          success: function success(res) {
+            if (res.confirm) {
+              uni.removeStorageSync('hepai_token');
+              uni.removeStorageSync('user');
+              uni.navigateTo({
+                url: '/pages/role/login/login' });
+
+            }
+          } });
+
+        return '权限失效';
+      } else if (_response.errMsg == "request:fail abort") {
+
+
+
+
+
+
+        var ifLock = uni.getStorageSync('errlock');
+        console.log(ifLock);
+        // uni.setStorageSync('errlock',false)
+        if (!ifLock) {
+          uni.setStorageSync('errlock', true);
+          setTimeout(function () {
+            uni.navigateTo({
+              url: '/pages/errors/errors' });
+
+
+          }, 1000);
+
+        }
+
+
+        return '请检查网络';
+      } else {
+
+        return '未知错误';
+      }
+
+    } },
+
+  request: function request(options, ifLoad) {var _this = this;
+    var that = this;
+    if (!options) {
+      options = {};
+    }
+    options.baseUrl = options.baseUrl || this.config.baseUrl;
+    options.dataType = options.dataType || this.config.dataType;
+    options.url = options.baseUrl + options.url;
+    options.data = options.data || {};
+    options.method = options.method || this.config.method;
+    options.timeout = 10000;
+    // console.log('执行')
+
+    return new Promise(function (resolve, reject) {
+      var _config = null;
+
+      options.complete = function (response) {
+        var statusCode = response.statusCode;
+        // console.log(response)
+        // response.config = _config
+        if (_this.interceptor.response) {
+          // reject('没有权限')
+          var re = _this.interceptor.response(response, ifLoad);
+          // console.log(re)
+          if (re === '权限失效') {
+            reject('权限失效');
+            return;
+          } else if (re === '请检查网络') {
+            reject('请检查网络');
+            return;
+          } else if (re === '未知错误') {
+            reject('未知错误');
+            return;
+          } else {
+            resolve(re);
+          }
+        }
+
+      };
+
+      _config = Object.assign({}, _this.config, options);
+      _config.requestId = new Date().getTime();
+      // console.log(_config)
+      if (_this.interceptor.request) {
+        var re = _this.interceptor.request(_config, ifLoad);
+        _config = re;
+      }
+
+
+      uni.request(_config);
+    });
+  } };
+
+
+
+/**
+        * 请求接口日志记录
+        */exports.default = _default;
+function _reqlog(req) {
+  if (true) {
+    // console.log("【" + req.requestId + "】 地址：" + req.url)
+    if (req.data) {
+      // console.log("【" + req.requestId + "】 请求参数：" + JSON.stringify(req.data))
+    }
+  }
+  //TODO 调接口异步写入日志数据库
+}
+
+/**
+   * 响应接口日志记录
+   */
+function _reslog(res) {
+  var _statusCode = res.statusCode;
+  if (true) {
+    // console.log("【" + res.config.requestId + "】 地址：" + res.config.url)
+    if (res.config.data) {
+
+    } // console.log("【" + res.config.requestId + "】 请求参数：" + JSON.stringify(res.config.data))
+    // console.log("【" + res.config.requestId + "】 响应结果：" + JSON.stringify(res))
+  }
+  //TODO 除了接口服务错误外，其他日志调接口异步写入日志数据库
+  switch (_statusCode) {
+    case 200:
+      break;
+    case 401:
+      break;
+    case 404:
+      break;
+    default:
+      break;}
+
+}
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
+
+/***/ }),
+
+/***/ 13:
+/*!************************************!*\
+  !*** G:/work/马桶福利购/store/index.js ***!
+  \************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ 2));
+var _vuex = _interopRequireDefault(__webpack_require__(/*! vuex */ 14));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _toConsumableArray(arr) {return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread();}function _nonIterableSpread() {throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");}function _unsupportedIterableToArray(o, minLen) {if (!o) return;if (typeof o === "string") return _arrayLikeToArray(o, minLen);var n = Object.prototype.toString.call(o).slice(8, -1);if (n === "Object" && o.constructor) n = o.constructor.name;if (n === "Map" || n === "Set") return Array.from(n);if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);}function _iterableToArray(iter) {if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter);}function _arrayWithoutHoles(arr) {if (Array.isArray(arr)) return _arrayLikeToArray(arr);}function _arrayLikeToArray(arr, len) {if (len == null || len > arr.length) len = arr.length;for (var i = 0, arr2 = new Array(len); i < len; i++) {arr2[i] = arr[i];}return arr2;}function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}
+
+_vue.default.use(_vuex.default);
+
+var store = new _vuex.default.Store({
+  state: {
+    /**
+            * 是否需要强制登录
+            */
+    forcedLogin: false,
+    hasLogin: false,
+    userInfo: {}, //用户微信获得基本信息
+    accountInfo: {}, //账户基本信息
+    merchantInfo: {}, //店铺基本信息
+    levelAccount: {}, //渠道个人信息
+    config: {},
+    currentChannel: 0, //1聚友之家  2粉丝空间 3vip空间
+    cards: {}, //购物车
+    currentOrder: [], //创建订单
+    currentPro: {},
+    currentRoleCode: '' //聚友空间当前的账户身份的 code
+  },
+  mutations: {
+    login: function login(state, userName) {
+      console.log('login_STORE');
+      state.hasLogin = true;
+    },
+    logout: function logout(state) {
+      state.hasLogin = false;
+      state.accountInfo = {}; //账户基本信息
+      state.merchantInfo = {}; //店铺基本信息
+      state.levelAccount = {}; //渠道个人信息
+    },
+    setRoleCode: function setRoleCode(state, info) {
+      // console.log('储存信息1')
+      state.currentRoleCode = info;
+    },
+    setUserInfo: function setUserInfo(state, info) {
+      // console.log('储存信息1')
+      state.userInfo = _objectSpread({}, info);
+    },
+    setAccountInfo: function setAccountInfo(state, info) {
+      // console.log('储存信息2')
+      state.accountInfo = _objectSpread({}, info);
+    },
+    setConfig: function setConfig(state, info) {
+      // console.log('储存信息2')
+      state.config = _objectSpread({}, info);
+    },
+    setMerchantInfo: function setMerchantInfo(state, info) {
+      // console.log('储存信息2')
+      state.merchantInfo = _objectSpread({}, info);
+    },
+    setCurrentChannel: function setCurrentChannel(state, info) {
+      state.currentChannel = info;
+    },
+    setLevelAccountInfo: function setLevelAccountInfo(state, info) {
+      state.levelAccount = info;
+    },
+    addCard: function addCard(state, item) {
+
+      state.cards = Object.assign(state.cards, item);
+      // console.log(state.cards)
+    },
+    creatOrder: function creatOrder(state, items) {
+      state.currentOrder = _toConsumableArray(items);
+      // debugger
+    },
+    completeOrder: function completeOrder(state) {
+      state.currentOrder = new Array();
+    },
+    currenPro: function currenPro(state, items) {
+      state.currentPro = _objectSpread({}, items);
+    } },
+
+  getters: {
+    cardsProduct: function cardsProduct(state) {
+      // console.log(state.cards)
+      // let arr = Object.values(state.cards)  不能用额
+      // let arr = Object.keys(state.cards) 
+      // let res = []
+      // arr.forEach(item=>{
+      // 	res.push(state.cards[item])
+      // })
+      // console.log(res)
+      // return res
+      return state.cards;
+    } } });var _default =
+
+
+
+store;exports.default = _default;
+
+/***/ }),
+
+/***/ 14:
+/*!********************************************!*\
+  !*** ./node_modules/vuex/dist/vuex.esm.js ***!
+  \********************************************/
+/*! exports provided: Store, install, mapState, mapMutations, mapGetters, mapActions, createNamespacedHelpers, default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Store", function() { return Store; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "install", function() { return install; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "mapState", function() { return mapState; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "mapMutations", function() { return mapMutations; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "mapGetters", function() { return mapGetters; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "mapActions", function() { return mapActions; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createNamespacedHelpers", function() { return createNamespacedHelpers; });
+/**
+ * vuex v3.0.1
+ * (c) 2017 Evan You
+ * @license MIT
+ */
+var applyMixin = function (Vue) {
+  var version = Number(Vue.version.split('.')[0]);
+
+  if (version >= 2) {
+    Vue.mixin({ beforeCreate: vuexInit });
+  } else {
+    // override init and inject vuex init procedure
+    // for 1.x backwards compatibility.
+    var _init = Vue.prototype._init;
+    Vue.prototype._init = function (options) {
+      if ( options === void 0 ) options = {};
+
+      options.init = options.init
+        ? [vuexInit].concat(options.init)
+        : vuexInit;
+      _init.call(this, options);
+    };
+  }
+
+  /**
+   * Vuex init hook, injected into each instances init hooks list.
+   */
+
+  function vuexInit () {
+    var options = this.$options;
+    // store injection
+    if (options.store) {
+      this.$store = typeof options.store === 'function'
+        ? options.store()
+        : options.store;
+    } else if (options.parent && options.parent.$store) {
+      this.$store = options.parent.$store;
+    }
+  }
+};
+
+var devtoolHook =
+  typeof window !== 'undefined' &&
+  window.__VUE_DEVTOOLS_GLOBAL_HOOK__;
+
+function devtoolPlugin (store) {
+  if (!devtoolHook) { return }
+
+  store._devtoolHook = devtoolHook;
+
+  devtoolHook.emit('vuex:init', store);
+
+  devtoolHook.on('vuex:travel-to-state', function (targetState) {
+    store.replaceState(targetState);
+  });
+
+  store.subscribe(function (mutation, state) {
+    devtoolHook.emit('vuex:mutation', mutation, state);
+  });
+}
+
+/**
+ * Get the first item that pass the test
+ * by second argument function
+ *
+ * @param {Array} list
+ * @param {Function} f
+ * @return {*}
+ */
+/**
+ * Deep copy the given object considering circular structure.
+ * This function caches all nested objects and its copies.
+ * If it detects circular structure, use cached copy to avoid infinite loop.
+ *
+ * @param {*} obj
+ * @param {Array<Object>} cache
+ * @return {*}
+ */
+
+
+/**
+ * forEach for object
+ */
+function forEachValue (obj, fn) {
+  Object.keys(obj).forEach(function (key) { return fn(obj[key], key); });
+}
+
+function isObject (obj) {
+  return obj !== null && typeof obj === 'object'
+}
+
+function isPromise (val) {
+  return val && typeof val.then === 'function'
+}
+
+function assert (condition, msg) {
+  if (!condition) { throw new Error(("[vuex] " + msg)) }
+}
+
+var Module = function Module (rawModule, runtime) {
+  this.runtime = runtime;
+  this._children = Object.create(null);
+  this._rawModule = rawModule;
+  var rawState = rawModule.state;
+  this.state = (typeof rawState === 'function' ? rawState() : rawState) || {};
+};
+
+var prototypeAccessors$1 = { namespaced: { configurable: true } };
+
+prototypeAccessors$1.namespaced.get = function () {
+  return !!this._rawModule.namespaced
+};
+
+Module.prototype.addChild = function addChild (key, module) {
+  this._children[key] = module;
+};
+
+Module.prototype.removeChild = function removeChild (key) {
+  delete this._children[key];
+};
+
+Module.prototype.getChild = function getChild (key) {
+  return this._children[key]
+};
+
+Module.prototype.update = function update (rawModule) {
+  this._rawModule.namespaced = rawModule.namespaced;
+  if (rawModule.actions) {
+    this._rawModule.actions = rawModule.actions;
+  }
+  if (rawModule.mutations) {
+    this._rawModule.mutations = rawModule.mutations;
+  }
+  if (rawModule.getters) {
+    this._rawModule.getters = rawModule.getters;
+  }
+};
+
+Module.prototype.forEachChild = function forEachChild (fn) {
+  forEachValue(this._children, fn);
+};
+
+Module.prototype.forEachGetter = function forEachGetter (fn) {
+  if (this._rawModule.getters) {
+    forEachValue(this._rawModule.getters, fn);
+  }
+};
+
+Module.prototype.forEachAction = function forEachAction (fn) {
+  if (this._rawModule.actions) {
+    forEachValue(this._rawModule.actions, fn);
+  }
+};
+
+Module.prototype.forEachMutation = function forEachMutation (fn) {
+  if (this._rawModule.mutations) {
+    forEachValue(this._rawModule.mutations, fn);
+  }
+};
+
+Object.defineProperties( Module.prototype, prototypeAccessors$1 );
+
+var ModuleCollection = function ModuleCollection (rawRootModule) {
+  // register root module (Vuex.Store options)
+  this.register([], rawRootModule, false);
+};
+
+ModuleCollection.prototype.get = function get (path) {
+  return path.reduce(function (module, key) {
+    return module.getChild(key)
+  }, this.root)
+};
+
+ModuleCollection.prototype.getNamespace = function getNamespace (path) {
+  var module = this.root;
+  return path.reduce(function (namespace, key) {
+    module = module.getChild(key);
+    return namespace + (module.namespaced ? key + '/' : '')
+  }, '')
+};
+
+ModuleCollection.prototype.update = function update$1 (rawRootModule) {
+  update([], this.root, rawRootModule);
+};
+
+ModuleCollection.prototype.register = function register (path, rawModule, runtime) {
+    var this$1 = this;
+    if ( runtime === void 0 ) runtime = true;
+
+  if (true) {
+    assertRawModule(path, rawModule);
+  }
+
+  var newModule = new Module(rawModule, runtime);
+  if (path.length === 0) {
+    this.root = newModule;
+  } else {
+    var parent = this.get(path.slice(0, -1));
+    parent.addChild(path[path.length - 1], newModule);
+  }
+
+  // register nested modules
+  if (rawModule.modules) {
+    forEachValue(rawModule.modules, function (rawChildModule, key) {
+      this$1.register(path.concat(key), rawChildModule, runtime);
+    });
+  }
+};
+
+ModuleCollection.prototype.unregister = function unregister (path) {
+  var parent = this.get(path.slice(0, -1));
+  var key = path[path.length - 1];
+  if (!parent.getChild(key).runtime) { return }
+
+  parent.removeChild(key);
+};
+
+function update (path, targetModule, newModule) {
+  if (true) {
+    assertRawModule(path, newModule);
+  }
+
+  // update target module
+  targetModule.update(newModule);
+
+  // update nested modules
+  if (newModule.modules) {
+    for (var key in newModule.modules) {
+      if (!targetModule.getChild(key)) {
+        if (true) {
+          console.warn(
+            "[vuex] trying to add a new module '" + key + "' on hot reloading, " +
+            'manual reload is needed'
+          );
+        }
+        return
+      }
+      update(
+        path.concat(key),
+        targetModule.getChild(key),
+        newModule.modules[key]
+      );
+    }
+  }
+}
+
+var functionAssert = {
+  assert: function (value) { return typeof value === 'function'; },
+  expected: 'function'
+};
+
+var objectAssert = {
+  assert: function (value) { return typeof value === 'function' ||
+    (typeof value === 'object' && typeof value.handler === 'function'); },
+  expected: 'function or object with "handler" function'
+};
+
+var assertTypes = {
+  getters: functionAssert,
+  mutations: functionAssert,
+  actions: objectAssert
+};
+
+function assertRawModule (path, rawModule) {
+  Object.keys(assertTypes).forEach(function (key) {
+    if (!rawModule[key]) { return }
+
+    var assertOptions = assertTypes[key];
+
+    forEachValue(rawModule[key], function (value, type) {
+      assert(
+        assertOptions.assert(value),
+        makeAssertionMessage(path, key, type, value, assertOptions.expected)
+      );
+    });
+  });
+}
+
+function makeAssertionMessage (path, key, type, value, expected) {
+  var buf = key + " should be " + expected + " but \"" + key + "." + type + "\"";
+  if (path.length > 0) {
+    buf += " in module \"" + (path.join('.')) + "\"";
+  }
+  buf += " is " + (JSON.stringify(value)) + ".";
+  return buf
+}
+
+var Vue; // bind on install
+
+var Store = function Store (options) {
+  var this$1 = this;
+  if ( options === void 0 ) options = {};
+
+  // Auto install if it is not done yet and `window` has `Vue`.
+  // To allow users to avoid auto-installation in some cases,
+  // this code should be placed here. See #731
+  if (!Vue && typeof window !== 'undefined' && window.Vue) {
+    install(window.Vue);
+  }
+
+  if (true) {
+    assert(Vue, "must call Vue.use(Vuex) before creating a store instance.");
+    assert(typeof Promise !== 'undefined', "vuex requires a Promise polyfill in this browser.");
+    assert(this instanceof Store, "Store must be called with the new operator.");
+  }
+
+  var plugins = options.plugins; if ( plugins === void 0 ) plugins = [];
+  var strict = options.strict; if ( strict === void 0 ) strict = false;
+
+  var state = options.state; if ( state === void 0 ) state = {};
+  if (typeof state === 'function') {
+    state = state() || {};
+  }
+
+  // store internal state
+  this._committing = false;
+  this._actions = Object.create(null);
+  this._actionSubscribers = [];
+  this._mutations = Object.create(null);
+  this._wrappedGetters = Object.create(null);
+  this._modules = new ModuleCollection(options);
+  this._modulesNamespaceMap = Object.create(null);
+  this._subscribers = [];
+  this._watcherVM = new Vue();
+
+  // bind commit and dispatch to self
+  var store = this;
+  var ref = this;
+  var dispatch = ref.dispatch;
+  var commit = ref.commit;
+  this.dispatch = function boundDispatch (type, payload) {
+    return dispatch.call(store, type, payload)
+  };
+  this.commit = function boundCommit (type, payload, options) {
+    return commit.call(store, type, payload, options)
+  };
+
+  // strict mode
+  this.strict = strict;
+
+  // init root module.
+  // this also recursively registers all sub-modules
+  // and collects all module getters inside this._wrappedGetters
+  installModule(this, state, [], this._modules.root);
+
+  // initialize the store vm, which is responsible for the reactivity
+  // (also registers _wrappedGetters as computed properties)
+  resetStoreVM(this, state);
+
+  // apply plugins
+  plugins.forEach(function (plugin) { return plugin(this$1); });
+
+  if (Vue.config.devtools) {
+    devtoolPlugin(this);
+  }
+};
+
+var prototypeAccessors = { state: { configurable: true } };
+
+prototypeAccessors.state.get = function () {
+  return this._vm._data.$$state
+};
+
+prototypeAccessors.state.set = function (v) {
+  if (true) {
+    assert(false, "Use store.replaceState() to explicit replace store state.");
+  }
+};
+
+Store.prototype.commit = function commit (_type, _payload, _options) {
+    var this$1 = this;
+
+  // check object-style commit
+  var ref = unifyObjectStyle(_type, _payload, _options);
+    var type = ref.type;
+    var payload = ref.payload;
+    var options = ref.options;
+
+  var mutation = { type: type, payload: payload };
+  var entry = this._mutations[type];
+  if (!entry) {
+    if (true) {
+      console.error(("[vuex] unknown mutation type: " + type));
+    }
+    return
+  }
+  this._withCommit(function () {
+    entry.forEach(function commitIterator (handler) {
+      handler(payload);
+    });
+  });
+  this._subscribers.forEach(function (sub) { return sub(mutation, this$1.state); });
+
+  if (
+     true &&
+    options && options.silent
+  ) {
+    console.warn(
+      "[vuex] mutation type: " + type + ". Silent option has been removed. " +
+      'Use the filter functionality in the vue-devtools'
+    );
+  }
+};
+
+Store.prototype.dispatch = function dispatch (_type, _payload) {
+    var this$1 = this;
+
+  // check object-style dispatch
+  var ref = unifyObjectStyle(_type, _payload);
+    var type = ref.type;
+    var payload = ref.payload;
+
+  var action = { type: type, payload: payload };
+  var entry = this._actions[type];
+  if (!entry) {
+    if (true) {
+      console.error(("[vuex] unknown action type: " + type));
+    }
+    return
+  }
+
+  this._actionSubscribers.forEach(function (sub) { return sub(action, this$1.state); });
+
+  return entry.length > 1
+    ? Promise.all(entry.map(function (handler) { return handler(payload); }))
+    : entry[0](payload)
+};
+
+Store.prototype.subscribe = function subscribe (fn) {
+  return genericSubscribe(fn, this._subscribers)
+};
+
+Store.prototype.subscribeAction = function subscribeAction (fn) {
+  return genericSubscribe(fn, this._actionSubscribers)
+};
+
+Store.prototype.watch = function watch (getter, cb, options) {
+    var this$1 = this;
+
+  if (true) {
+    assert(typeof getter === 'function', "store.watch only accepts a function.");
+  }
+  return this._watcherVM.$watch(function () { return getter(this$1.state, this$1.getters); }, cb, options)
+};
+
+Store.prototype.replaceState = function replaceState (state) {
+    var this$1 = this;
+
+  this._withCommit(function () {
+    this$1._vm._data.$$state = state;
+  });
+};
+
+Store.prototype.registerModule = function registerModule (path, rawModule, options) {
+    if ( options === void 0 ) options = {};
+
+  if (typeof path === 'string') { path = [path]; }
+
+  if (true) {
+    assert(Array.isArray(path), "module path must be a string or an Array.");
+    assert(path.length > 0, 'cannot register the root module by using registerModule.');
+  }
+
+  this._modules.register(path, rawModule);
+  installModule(this, this.state, path, this._modules.get(path), options.preserveState);
+  // reset store to update getters...
+  resetStoreVM(this, this.state);
+};
+
+Store.prototype.unregisterModule = function unregisterModule (path) {
+    var this$1 = this;
+
+  if (typeof path === 'string') { path = [path]; }
+
+  if (true) {
+    assert(Array.isArray(path), "module path must be a string or an Array.");
+  }
+
+  this._modules.unregister(path);
+  this._withCommit(function () {
+    var parentState = getNestedState(this$1.state, path.slice(0, -1));
+    Vue.delete(parentState, path[path.length - 1]);
+  });
+  resetStore(this);
+};
+
+Store.prototype.hotUpdate = function hotUpdate (newOptions) {
+  this._modules.update(newOptions);
+  resetStore(this, true);
+};
+
+Store.prototype._withCommit = function _withCommit (fn) {
+  var committing = this._committing;
+  this._committing = true;
+  fn();
+  this._committing = committing;
+};
+
+Object.defineProperties( Store.prototype, prototypeAccessors );
+
+function genericSubscribe (fn, subs) {
+  if (subs.indexOf(fn) < 0) {
+    subs.push(fn);
+  }
+  return function () {
+    var i = subs.indexOf(fn);
+    if (i > -1) {
+      subs.splice(i, 1);
+    }
+  }
+}
+
+function resetStore (store, hot) {
+  store._actions = Object.create(null);
+  store._mutations = Object.create(null);
+  store._wrappedGetters = Object.create(null);
+  store._modulesNamespaceMap = Object.create(null);
+  var state = store.state;
+  // init all modules
+  installModule(store, state, [], store._modules.root, true);
+  // reset vm
+  resetStoreVM(store, state, hot);
+}
+
+function resetStoreVM (store, state, hot) {
+  var oldVm = store._vm;
+
+  // bind store public getters
+  store.getters = {};
+  var wrappedGetters = store._wrappedGetters;
+  var computed = {};
+  forEachValue(wrappedGetters, function (fn, key) {
+    // use computed to leverage its lazy-caching mechanism
+    computed[key] = function () { return fn(store); };
+    Object.defineProperty(store.getters, key, {
+      get: function () { return store._vm[key]; },
+      enumerable: true // for local getters
+    });
+  });
+
+  // use a Vue instance to store the state tree
+  // suppress warnings just in case the user has added
+  // some funky global mixins
+  var silent = Vue.config.silent;
+  Vue.config.silent = true;
+  store._vm = new Vue({
+    data: {
+      $$state: state
+    },
+    computed: computed
+  });
+  Vue.config.silent = silent;
+
+  // enable strict mode for new vm
+  if (store.strict) {
+    enableStrictMode(store);
+  }
+
+  if (oldVm) {
+    if (hot) {
+      // dispatch changes in all subscribed watchers
+      // to force getter re-evaluation for hot reloading.
+      store._withCommit(function () {
+        oldVm._data.$$state = null;
+      });
+    }
+    Vue.nextTick(function () { return oldVm.$destroy(); });
+  }
+}
+
+function installModule (store, rootState, path, module, hot) {
+  var isRoot = !path.length;
+  var namespace = store._modules.getNamespace(path);
+
+  // register in namespace map
+  if (module.namespaced) {
+    store._modulesNamespaceMap[namespace] = module;
+  }
+
+  // set state
+  if (!isRoot && !hot) {
+    var parentState = getNestedState(rootState, path.slice(0, -1));
+    var moduleName = path[path.length - 1];
+    store._withCommit(function () {
+      Vue.set(parentState, moduleName, module.state);
+    });
+  }
+
+  var local = module.context = makeLocalContext(store, namespace, path);
+
+  module.forEachMutation(function (mutation, key) {
+    var namespacedType = namespace + key;
+    registerMutation(store, namespacedType, mutation, local);
+  });
+
+  module.forEachAction(function (action, key) {
+    var type = action.root ? key : namespace + key;
+    var handler = action.handler || action;
+    registerAction(store, type, handler, local);
+  });
+
+  module.forEachGetter(function (getter, key) {
+    var namespacedType = namespace + key;
+    registerGetter(store, namespacedType, getter, local);
+  });
+
+  module.forEachChild(function (child, key) {
+    installModule(store, rootState, path.concat(key), child, hot);
+  });
+}
+
+/**
+ * make localized dispatch, commit, getters and state
+ * if there is no namespace, just use root ones
+ */
+function makeLocalContext (store, namespace, path) {
+  var noNamespace = namespace === '';
+
+  var local = {
+    dispatch: noNamespace ? store.dispatch : function (_type, _payload, _options) {
+      var args = unifyObjectStyle(_type, _payload, _options);
+      var payload = args.payload;
+      var options = args.options;
+      var type = args.type;
+
+      if (!options || !options.root) {
+        type = namespace + type;
+        if ( true && !store._actions[type]) {
+          console.error(("[vuex] unknown local action type: " + (args.type) + ", global type: " + type));
+          return
+        }
+      }
+
+      return store.dispatch(type, payload)
+    },
+
+    commit: noNamespace ? store.commit : function (_type, _payload, _options) {
+      var args = unifyObjectStyle(_type, _payload, _options);
+      var payload = args.payload;
+      var options = args.options;
+      var type = args.type;
+
+      if (!options || !options.root) {
+        type = namespace + type;
+        if ( true && !store._mutations[type]) {
+          console.error(("[vuex] unknown local mutation type: " + (args.type) + ", global type: " + type));
+          return
+        }
+      }
+
+      store.commit(type, payload, options);
+    }
+  };
+
+  // getters and state object must be gotten lazily
+  // because they will be changed by vm update
+  Object.defineProperties(local, {
+    getters: {
+      get: noNamespace
+        ? function () { return store.getters; }
+        : function () { return makeLocalGetters(store, namespace); }
+    },
+    state: {
+      get: function () { return getNestedState(store.state, path); }
+    }
+  });
+
+  return local
+}
+
+function makeLocalGetters (store, namespace) {
+  var gettersProxy = {};
+
+  var splitPos = namespace.length;
+  Object.keys(store.getters).forEach(function (type) {
+    // skip if the target getter is not match this namespace
+    if (type.slice(0, splitPos) !== namespace) { return }
+
+    // extract local getter type
+    var localType = type.slice(splitPos);
+
+    // Add a port to the getters proxy.
+    // Define as getter property because
+    // we do not want to evaluate the getters in this time.
+    Object.defineProperty(gettersProxy, localType, {
+      get: function () { return store.getters[type]; },
+      enumerable: true
+    });
+  });
+
+  return gettersProxy
+}
+
+function registerMutation (store, type, handler, local) {
+  var entry = store._mutations[type] || (store._mutations[type] = []);
+  entry.push(function wrappedMutationHandler (payload) {
+    handler.call(store, local.state, payload);
+  });
+}
+
+function registerAction (store, type, handler, local) {
+  var entry = store._actions[type] || (store._actions[type] = []);
+  entry.push(function wrappedActionHandler (payload, cb) {
+    var res = handler.call(store, {
+      dispatch: local.dispatch,
+      commit: local.commit,
+      getters: local.getters,
+      state: local.state,
+      rootGetters: store.getters,
+      rootState: store.state
+    }, payload, cb);
+    if (!isPromise(res)) {
+      res = Promise.resolve(res);
+    }
+    if (store._devtoolHook) {
+      return res.catch(function (err) {
+        store._devtoolHook.emit('vuex:error', err);
+        throw err
+      })
+    } else {
+      return res
+    }
+  });
+}
+
+function registerGetter (store, type, rawGetter, local) {
+  if (store._wrappedGetters[type]) {
+    if (true) {
+      console.error(("[vuex] duplicate getter key: " + type));
+    }
+    return
+  }
+  store._wrappedGetters[type] = function wrappedGetter (store) {
+    return rawGetter(
+      local.state, // local state
+      local.getters, // local getters
+      store.state, // root state
+      store.getters // root getters
+    )
+  };
+}
+
+function enableStrictMode (store) {
+  store._vm.$watch(function () { return this._data.$$state }, function () {
+    if (true) {
+      assert(store._committing, "Do not mutate vuex store state outside mutation handlers.");
+    }
+  }, { deep: true, sync: true });
+}
+
+function getNestedState (state, path) {
+  return path.length
+    ? path.reduce(function (state, key) { return state[key]; }, state)
+    : state
+}
+
+function unifyObjectStyle (type, payload, options) {
+  if (isObject(type) && type.type) {
+    options = payload;
+    payload = type;
+    type = type.type;
+  }
+
+  if (true) {
+    assert(typeof type === 'string', ("Expects string as the type, but found " + (typeof type) + "."));
+  }
+
+  return { type: type, payload: payload, options: options }
+}
+
+function install (_Vue) {
+  if (Vue && _Vue === Vue) {
+    if (true) {
+      console.error(
+        '[vuex] already installed. Vue.use(Vuex) should be called only once.'
+      );
+    }
+    return
+  }
+  Vue = _Vue;
+  applyMixin(Vue);
+}
+
+var mapState = normalizeNamespace(function (namespace, states) {
+  var res = {};
+  normalizeMap(states).forEach(function (ref) {
+    var key = ref.key;
+    var val = ref.val;
+
+    res[key] = function mappedState () {
+      var state = this.$store.state;
+      var getters = this.$store.getters;
+      if (namespace) {
+        var module = getModuleByNamespace(this.$store, 'mapState', namespace);
+        if (!module) {
+          return
+        }
+        state = module.context.state;
+        getters = module.context.getters;
+      }
+      return typeof val === 'function'
+        ? val.call(this, state, getters)
+        : state[val]
+    };
+    // mark vuex getter for devtools
+    res[key].vuex = true;
+  });
+  return res
+});
+
+var mapMutations = normalizeNamespace(function (namespace, mutations) {
+  var res = {};
+  normalizeMap(mutations).forEach(function (ref) {
+    var key = ref.key;
+    var val = ref.val;
+
+    res[key] = function mappedMutation () {
+      var args = [], len = arguments.length;
+      while ( len-- ) args[ len ] = arguments[ len ];
+
+      var commit = this.$store.commit;
+      if (namespace) {
+        var module = getModuleByNamespace(this.$store, 'mapMutations', namespace);
+        if (!module) {
+          return
+        }
+        commit = module.context.commit;
+      }
+      return typeof val === 'function'
+        ? val.apply(this, [commit].concat(args))
+        : commit.apply(this.$store, [val].concat(args))
+    };
+  });
+  return res
+});
+
+var mapGetters = normalizeNamespace(function (namespace, getters) {
+  var res = {};
+  normalizeMap(getters).forEach(function (ref) {
+    var key = ref.key;
+    var val = ref.val;
+
+    val = namespace + val;
+    res[key] = function mappedGetter () {
+      if (namespace && !getModuleByNamespace(this.$store, 'mapGetters', namespace)) {
+        return
+      }
+      if ( true && !(val in this.$store.getters)) {
+        console.error(("[vuex] unknown getter: " + val));
+        return
+      }
+      return this.$store.getters[val]
+    };
+    // mark vuex getter for devtools
+    res[key].vuex = true;
+  });
+  return res
+});
+
+var mapActions = normalizeNamespace(function (namespace, actions) {
+  var res = {};
+  normalizeMap(actions).forEach(function (ref) {
+    var key = ref.key;
+    var val = ref.val;
+
+    res[key] = function mappedAction () {
+      var args = [], len = arguments.length;
+      while ( len-- ) args[ len ] = arguments[ len ];
+
+      var dispatch = this.$store.dispatch;
+      if (namespace) {
+        var module = getModuleByNamespace(this.$store, 'mapActions', namespace);
+        if (!module) {
+          return
+        }
+        dispatch = module.context.dispatch;
+      }
+      return typeof val === 'function'
+        ? val.apply(this, [dispatch].concat(args))
+        : dispatch.apply(this.$store, [val].concat(args))
+    };
+  });
+  return res
+});
+
+var createNamespacedHelpers = function (namespace) { return ({
+  mapState: mapState.bind(null, namespace),
+  mapGetters: mapGetters.bind(null, namespace),
+  mapMutations: mapMutations.bind(null, namespace),
+  mapActions: mapActions.bind(null, namespace)
+}); };
+
+function normalizeMap (map) {
+  return Array.isArray(map)
+    ? map.map(function (key) { return ({ key: key, val: key }); })
+    : Object.keys(map).map(function (key) { return ({ key: key, val: map[key] }); })
+}
+
+function normalizeNamespace (fn) {
+  return function (namespace, map) {
+    if (typeof namespace !== 'string') {
+      map = namespace;
+      namespace = '';
+    } else if (namespace.charAt(namespace.length - 1) !== '/') {
+      namespace += '/';
+    }
+    return fn(namespace, map)
+  }
+}
+
+function getModuleByNamespace (store, helper, namespace) {
+  var module = store._modulesNamespaceMap[namespace];
+  if ( true && !module) {
+    console.error(("[vuex] module namespace not found in " + helper + "(): " + namespace));
+  }
+  return module
+}
+
+var index_esm = {
+  Store: Store,
+  install: install,
+  version: '3.0.1',
+  mapState: mapState,
+  mapMutations: mapMutations,
+  mapGetters: mapGetters,
+  mapActions: mapActions,
+  createNamespacedHelpers: createNamespacedHelpers
+};
+
+
+/* harmony default export */ __webpack_exports__["default"] = (index_esm);
+
+
+/***/ }),
+
+/***/ 15:
+/*!****************************!*\
+  !*** G:/work/马桶福利购/SET.js ***!
+  \****************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
+// 全局设置
+var _default = {
+  baseUrl: "http://h5.gllo.com.cn/Data", //api业务接口域名
+  mainUrl: "http://h5.gllo.com.cn/", //项目域名
+  // 测试环境
+  // wx_appid: 'wx09daee2f47e178aa',    //微信授权 appid  測試公衆號
+  wx_appid: 'wxbb1e69472b847c6e', //代码力量 测试
+  // wx_redirect_url:'http://192.168.1.9:8080',
+  wx_redirect_url: 'http://h5.gllo.com.cn', //微信授权 回调页地址
+
+  versionUrl: '/api/AppVersion/VersionCheck' //app版本检测url   // 1是不更新 2是强制更新 3可选择更新 4//appstore更新
+};exports.default = _default;
+
+/***/ }),
+
+/***/ 16:
+/*!******************************************!*\
+  !*** G:/work/马桶福利购/utils/module/auth.js ***!
+  \******************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
+
+var _interface = _interopRequireDefault(__webpack_require__(/*! ../http/interface */ 12));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} // 用户身份相关接口
+// 我要积分
+var Auth = { // 获取验证码
+  getVerificateCode: function getVerificateCode(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return _interface.default.request({
+      url: '/api/Msg/SendVerificationCode',
+      method: 'POST',
+      data: data
+      // handle:true
+    }, ifLoad);
+  },
+  // 微信api
+  GetWxJsApiConfig: function GetWxJsApiConfig(data) {
+    return _interface.default.request({
+      url: '/api/Authorize/GetJsApiConfig',
+      method: 'POST',
+      data: data
+      // handle:true
+    });
+  },
+  // 登录
+  userLogin: function userLogin(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return _interface.default.request({
+      url: '/api/Authorize/Token',
+      method: 'POST',
+      data: data
+      // handle:true
+    }, ifLoad);
+  },
+  // 快捷登录
+  shortcutToken: function shortcutToken(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return _interface.default.request({
+      url: '/api/Authorize/ShortcutToken',
+      method: 'GET',
+      data: data
+      // handle:true
+    }, ifLoad);
+  },
+  // OpenId登录
+  WxTokenLogin: function WxTokenLogin(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return _interface.default.request({
+      url: '/api/Authorize/WxToken',
+      method: 'POST',
+      data: data
+      // handle:true
+    }, ifLoad);
+  },
+  // 注册用户 
+  userRegiste: function userRegiste(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return _interface.default.request({
+      url: '/api/Authorize/Registe',
+      method: 'POST',
+      data: data
+      // handle:true
+    }, ifLoad);
+  },
+  // 忘记密码
+  findPassword: function findPassword(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return _interface.default.request({
+      url: '/api/Authorize/FindPassword',
+      method: 'POST',
+      data: data
+      // handle:true
+    }, ifLoad);
+  },
+  // 获取用户信息
+  getConsumer: function getConsumer(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return _interface.default.request({
+      url: '/api/Consumer/Get',
+      method: 'GET',
+      data: data
+      // handle:true
+    }, ifLoad);
+  },
+
+  //更新用户信息
+  userInfoUpdate: function userInfoUpdate(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return _interface.default.request({
+      url: '/api/Consumer/PerfectInfo',
+      method: 'POST',
+      data: data
+      // handle:true
+    }, ifLoad);
+  },
+  // 设置支付密码
+  SettingPayPassword: function SettingPayPassword(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return _interface.default.request({
+      url: '/api/Consumer/SettingPayPassword',
+      method: 'POST',
+      data: data
+      // handle:true
+    }, ifLoad);
+  },
+  // 微信绑定手机号
+  BindWxUserMobile: function BindWxUserMobile(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return _interface.default.request({
+      url: '/api/Authorize/BindWxUserMobile',
+      method: 'POST',
+      data: data
+      // handle:true
+    }, ifLoad);
+  },
+
+  // 支付
+  toPayment: function toPayment(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return _interface.default.request({
+      url: '/api/Pay/Payment',
+      method: 'POST',
+      data: data
+      // handle:true
+    }, ifLoad);
+  },
+
+
+  // 	=============商家部分\\\
+
+
+
+  // 获取商家信息
+  GetBusinessInfo: function GetBusinessInfo(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return _interface.default.request({
+      url: '/api/Shop/GetBusinessInfo',
+      method: 'GET',
+      data: data
+      // handle:true
+    }, ifLoad);
+  },
+  // 修改商家信息
+  BusinessEditor: function BusinessEditor(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return _interface.default.request({
+      url: '/api/Shop/BusinessEditor',
+      method: 'POST',
+      data: data
+      // handle:true
+    }, ifLoad);
+  },
+
+
+  //=============== 全局=================
+
+  // 获取全局配置
+  getConfig: function getConfig(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return _interface.default.request({
+      url: '/api/Service/Config',
+      method: 'GET',
+      data: data
+      // handle:true
+    }, ifLoad);
+  },
+
+  // app更新
+  VersionCheck: function VersionCheck(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return _interface.default.request({
+      url: '/api/AppVersion/VersionCheck',
+      method: 'POST',
+      data: data
+      // handle:true
+    }, ifLoad);
+  },
+
+  // 手机号登录
+  MobileToken: function MobileToken(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return _interface.default.request({
+      url: '/api/Authorize/MobileToken',
+      method: 'POST',
+      data: data
+      // handle:true
+    }, ifLoad);
+  } };var _default =
+
+Auth;exports.default = _default;
+
+/***/ }),
+
+/***/ 17:
+/*!**********************************************!*\
+  !*** G:/work/马桶福利购/utils/module/business.js ***!
+  \**********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
+
+var _interface = _interopRequireDefault(__webpack_require__(/*! ../http/interface */ 12));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} // 用户身份相关接口
+var Set = {
+  // 最后一个子订单是否退邮费
+  ifLastSubOrder: function ifLastSubOrder(data) {
+    return _interface.default.request({
+      url: '/api/Order/GetChildIsSucceed',
+      method: 'POST',
+      data: data
+      // handle:true
+    });
+  },
+
+  // 热门推荐
+  GetGoodsList: function GetGoodsList(data) {
+    return _interface.default.request({
+      url: '/api/Project/GetGoodsList',
+      method: 'POST',
+      data: data
+      // handle:true
+    });
+  },
+  // 获取详情
+  GetGoodsInfo: function GetGoodsInfo(data) {
+    return _interface.default.request({
+      url: '/api/Project/GetGoodsInfo',
+      method: 'GET',
+      data: data
+      // handle:true
+    });
+  },
+  // 优店
+  GetMerchantList: function GetMerchantList(data) {
+    return _interface.default.request({
+      url: '/api/Shop/GetMerchantList',
+      method: 'POST',
+      data: data
+      // handle:true
+    });
+  },
+  // 获取店铺详情 及商品
+  GetBusinessProjectList: function GetBusinessProjectList(data) {
+    return _interface.default.request({
+      url: '/api/Shop/GetBusinessProjectList',
+      method: 'POST',
+      data: data
+      // handle:true
+    });
+  },
+  // 获取分类列表
+  GetClassList: function GetClassList(data) {
+    return _interface.default.request({
+      url: '/api/Project/GetClass',
+      method: 'GET',
+      data: data
+      // handle:true
+    });
+  },
+  // 根据分类获取 商品
+  GetGoodsByClassList: function GetGoodsByClassList(data) {
+    return _interface.default.request({
+      url: '/api/Project/GetGoodsByClassList',
+      method: 'POST',
+      data: data
+      // handle:true
+    });
+  },
+  // 获取收货地址
+  GetAddressList: function GetAddressList(data) {
+    return _interface.default.request({
+      url: '/api/Address/GetAddressList',
+      method: 'POST',
+      data: data
+      // handle:true
+    });
+  },
+  // 删除地址
+  addressDel: function addressDel(data) {
+    return _interface.default.request({
+      url: '/api/Address/Del',
+      method: 'GET',
+      data: data
+      // handle:true
+    });
+  },
+  // 设置默认地址
+  DefaultAddress: function DefaultAddress(data) {
+    return _interface.default.request({
+      url: '/api/Address/DefaultAddress',
+      method: 'GET',
+      data: data
+      // handle:true
+    });
+  },
+  // 获取拍品信息
+  GetAuctionProject: function GetAuctionProject(data) {
+    return _interface.default.request({
+      url: '/api/Project/Get',
+      method: 'POST',
+      data: data
+      // handle:true
+    });
+  },
+
+  // 获取充值列表
+  RechargeList: function RechargeList(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return _interface.default.request({
+      url: '/api/Recharge/RechargeList',
+      method: 'POST',
+      data: data
+      // handle:true
+    }, ifLoad);
+  },
+
+  // 生成充值订单
+  Recharge: function Recharge(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return _interface.default.request({
+      url: '/api/Recharge/Recharge',
+      method: 'POST',
+      data: data
+      // handle:true
+    }, ifLoad);
+  },
+  // 新建地址
+  addAddress: function addAddress(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return _interface.default.request({
+      url: '/api/Address/Add',
+      method: 'POST',
+      data: data
+      // handle:true
+    }, ifLoad);
+  },
+  // 确认拍品
+  verifyAuction: function verifyAuction(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return _interface.default.request({
+      url: '/api/Order/Verify',
+      method: 'POST',
+      data: data
+      // handle:true
+    }, ifLoad);
+  },
+
+  // 不要改拍品
+  NoVerifyAuction: function NoVerifyAuction(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return _interface.default.request({
+      url: '/api/Order/NoVerify',
+      method: 'POST',
+      data: data
+      // handle:true
+    }, ifLoad);
+  },
+
+  // 客户获取订单
+  GetOrderList: function GetOrderList(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return _interface.default.request({
+      url: '/api/Order/GetOrderList',
+      method: 'POST',
+      data: data
+      // handle:true
+    }, ifLoad);
+  },
+
+  // 购买加价
+
+  doAuction: function doAuction(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return _interface.default.request({
+      url: '/api/Auction/Auction',
+      method: 'POST',
+      data: data
+      // handle:true
+    }, ifLoad);
+  },
+
+  // 竞价记录
+
+  GetAuctionList: function GetAuctionList(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return _interface.default.request({
+      url: '/api/Auction/GetAuctionList',
+      method: 'POST',
+      data: data
+      // handle:true
+    }, ifLoad);
+  },
+
+  // 发起退货申请
+
+  ApplyRefund: function ApplyRefund(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return _interface.default.request({
+      url: '/api/Refund/Apply',
+      method: 'POST',
+      data: data
+      // handle:true
+    }, ifLoad);
+  },
+
+  // 确认拍品
+  Receiving: function Receiving(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return _interface.default.request({
+      url: '	/api/Order/Receiving',
+      method: 'POST',
+      data: data
+      // handle:true
+    }, ifLoad);
+  },
+  // 获取银行卡列表
+
+  GetBankList: function GetBankList(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return _interface.default.request({
+      url: '/api/Bank/GetBankList',
+      method: 'GET',
+      data: data
+      // handle:true
+    }, ifLoad);
+  },
+
+  // 添加新卡
+  BuilderBank: function BuilderBank(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return _interface.default.request({
+      url: '/api/Bank/BuilderBank',
+      method: 'POST',
+      data: data
+      // handle:true
+    }, ifLoad);
+  },
+
+
+  // 默认银行卡
+  DefaultBank: function DefaultBank(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return _interface.default.request({
+      url: '/api/Bank/DefaultBank',
+      method: 'GET',
+      data: data
+      // handle:true
+    }, ifLoad);
+  },
+
+  // 解绑银行卡
+  RelieveBank: function RelieveBank(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return _interface.default.request({
+      url: '/api/Bank/RelieveBank',
+      method: 'GET',
+      data: data
+      // handle:true
+    }, ifLoad);
+  },
+
+  // 申请提现
+  SubmitCash: function SubmitCash(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return _interface.default.request({
+      url: '/api/Cash/SubmitCash',
+      method: 'POST',
+      data: data
+      // handle:true
+    }, ifLoad);
+  },
+
+  // 实名认证
+  SubmitProve: function SubmitProve(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return _interface.default.request({
+      url: '/api/Consumer/Prove',
+      method: 'POST',
+      data: data
+      // handle:true
+    }, ifLoad);
+  },
+
+  // 问题反馈
+  SubmitComment: function SubmitComment(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return _interface.default.request({
+      url: '/api/Feedback/Submit',
+      method: 'POST',
+      data: data
+      // handle:true
+    }, ifLoad);
+  },
+
+  // 余额明细
+  AccountList: function AccountList(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return _interface.default.request({
+      url: '/api/AccountDetail/GetList',
+      method: 'POST',
+      data: data
+      // handle:true
+    }, ifLoad);
+  },
+
+  // 关注列表
+  GetAttentionList: function GetAttentionList(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return _interface.default.request({
+      url: '/api/Shop/GetAttentionList',
+      method: 'POST',
+      data: data
+      // handle:true
+    }, ifLoad);
+  },
+
+  // 关注店铺
+  Attention: function Attention(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return _interface.default.request({
+      url: '/api/Shop/Attention',
+      method: 'POST',
+      data: data
+      // handle:true
+    }, ifLoad);
+  },
+
+  // 合家慈登陆账户
+  GetHJCConsumer: function GetHJCConsumer(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return _interface.default.request({
+      url: '/api/Recharge/GetHJCConsumer',
+      method: 'POST',
+      data: data
+      // handle:true
+    }, ifLoad);
+  },
+
+  // 合家慈积分转化
+  HJCIntegralRecharge: function HJCIntegralRecharge(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return _interface.default.request({
+      url: '/api/Recharge/HJCIntegralRecharge',
+      method: 'POST',
+      data: data
+      // handle:true
+    }, ifLoad);
+  },
+
+  // 提醒发货
+  Prompt: function Prompt(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return _interface.default.request({
+      url: '/api/Order/Prompt',
+      method: 'GET',
+      data: data
+      // handle:true
+    }, ifLoad);
+  },
+
+
+
+  // 插卡内流信息
+  GetEMS: function GetEMS(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return _interface.default.request({
+      url: '/api/Order/GetEMS',
+      method: 'GET',
+      data: data
+      // handle:true
+    }, ifLoad);
+  },
+  // 获取文档
+  getGuide: function getGuide(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return _interface.default.request({
+      url: '/api/Service/Guide',
+      method: 'GET',
+      data: data
+      // handle:true
+    }, ifLoad);
+  },
+
+  // 加入购物车
+  cardAdd: function cardAdd(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return _interface.default.request({
+      url: '/api/Catr/Add',
+      method: 'POST',
+      data: data
+      // handle:true
+    }, ifLoad);
+  },
+  // 获取购物车列表
+  cardList: function cardList(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return _interface.default.request({
+      url: '/api/Catr/GetList',
+      method: 'POST',
+      data: data
+      // handle:true
+    }, ifLoad);
+  },
+  // 刪除購物車
+  cardDelete: function cardDelete(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return _interface.default.request({
+      url: '/api/Catr/Delect',
+      method: 'POST',
+      data: data
+      // handle:true
+    }, ifLoad);
+  },
+
+
+  // 提交订单
+  CreateOrder: function CreateOrder(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return _interface.default.request({
+      url: '/api/Order/CreateOrder',
+      method: 'POST',
+      data: data
+      // handle:true
+    }, ifLoad);
+  },
+
+  // 删除订单
+
+  CancelOrder: function CancelOrder(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return _interface.default.request({
+      url: '/api/Order/CancelOrder',
+      method: 'POST',
+      data: data
+      // handle:true
+    }, ifLoad);
+  },
+
+  // 计算邮费
+
+  GetEmsPrice: function GetEmsPrice(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return _interface.default.request({
+      url: '/api/Order/GetEmsPrice',
+      method: 'POST',
+      data: data
+      // handle:true
+    }, ifLoad);
+  },
+
+  // 获取退款列表
+
+  GetRefundOrderList: function GetRefundOrderList(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return _interface.default.request({
+      url: '/api/Order/GetRefundOrderList',
+      method: 'POST',
+      data: data
+      // handle:true
+    }, ifLoad);
+  },
+
+  // 获取退款详情
+  GetRefundOrderInfo: function GetRefundOrderInfo(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return _interface.default.request({
+      url: '/api/Order/GetRefundInfo',
+      method: 'POST',
+      data: data
+      // handle:true
+    }, ifLoad);
+  },
+
+
+  // 取消退款申请
+  CancelRefund: function CancelRefund(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return _interface.default.request({
+      url: '/api/Refund/Cancel',
+      method: 'GET',
+      data: data
+      // handle:true
+    }, ifLoad);
+  },
+  // 删除退款申请
+  DelectRefund: function DelectRefund(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return _interface.default.request({
+      url: '/api/Refund/Delect',
+      method: 'GET',
+      data: data
+      // handle:true
+    }, ifLoad);
+  },
+  // 物流确认
+  RefundEms: function RefundEms(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return _interface.default.request({
+      url: '/api/Refund/RefundEms',
+      method: 'POST',
+      data: data
+      // handle:true
+    }, ifLoad);
+  },
+  // 获取着陆页分类商品
+  GetClassHotList: function GetClassHotList(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return _interface.default.request({
+      url: '/api/Project/GetClassHotList',
+      method: 'POST',
+      data: data
+      // handle:true
+    }, ifLoad);
+  },
+
+  // code获取OpenId
+  GetOpenId: function GetOpenId(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return _interface.default.request({
+      url: '/api/Authorize/GetOpenId',
+      method: 'POST',
+      data: data
+      // handle:true
+    }, ifLoad);
+  },
+
+
+  // 模拟下单
+  mockPay: function mockPay(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return _interface.default.request({
+      url: '/api/Pay/getNotify',
+      method: 'GET',
+      data: data
+      // handle:true
+    }, ifLoad);
+  },
+
+
+
+
+  // 	=============商家部分\\\
+
+
+  // 商家 发布拍品/重新发布
+  shopSubmit: function shopSubmit(data) {
+    return _interface.default.request({
+      url: '/api/shop/Submit',
+      method: 'POST',
+      data: data
+      // handle:true
+    });
+  },
+
+  // 商家获取商家订单
+  GetBusinessList: function GetBusinessList(data) {
+    return _interface.default.request({
+      url: '/api/Order/GetBusinessList',
+      method: 'POST',
+      data: data
+      // handle:true
+    });
+  },
+
+
+  // 商家同意退款
+  agreeRefund: function agreeRefund(data) {
+    return _interface.default.request({
+      url: '/api/Order/Refund',
+      method: 'POST',
+      data: data
+      // handle:true
+    });
+  },
+  // 商家获取订单详情
+  getOrderDetail: function getOrderDetail(data) {
+    return _interface.default.request({
+      url: '/api/Order/Get',
+      method: 'POST',
+      data: data
+      // handle:true
+    });
+  },
+
+  // 商家发货
+  merchantDispatch: function merchantDispatch(data) {
+    return _interface.default.request({
+      url: '/api/Order/Dispatch',
+      method: 'POST',
+      data: data
+      // handle:true
+    });
+  },
+
+  // 商家成交纪录列表
+  GetAccomplishList: function GetAccomplishList(data) {
+    return _interface.default.request({
+      url: '/api/Project/GetAccomplishList',
+      method: 'POST',
+      data: data
+      // handle:true
+    });
+  },
+  // 我的拍品
+  GetConsumerList: function GetConsumerList(data) {
+    return _interface.default.request({
+      url: '/api/Project/GetConsumerList',
+      method: 'POST',
+      data: data
+      // handle:true
+    });
+  },
+  // 商品管理
+  GetMerchantProduct: function GetMerchantProduct(data) {
+    return _interface.default.request({
+      url: '/api/Shop/GetList',
+      method: 'POST',
+      data: data
+      // handle:true
+    });
+  },
+  // 商家获取拍品信息
+  merchantProductInfo: function merchantProductInfo(data) {
+    return _interface.default.request({
+      url: '/api/Shop/Get',
+      method: 'GET',
+      data: data
+      // handle:true
+    });
+  },
+
+  // 商家下架商品
+  SoldOut: function SoldOut(data) {
+    return _interface.default.request({
+      url: '/api/Project/SoldOut',
+      method: 'POST',
+      data: data
+      // handle:true
+    });
+  },
+
+  // 商家下架商品
+  GetBusinessAddress: function GetBusinessAddress(data) {
+    return _interface.default.request({
+      url: '/api/Address/GetBusiness',
+      method: 'GET',
+      data: data
+      // handle:true
+    });
+  },
+
+  // 商家营业执照
+  BusinessProve: function BusinessProve(data) {
+    return _interface.default.request({
+      url: '/api/Shop/BusinessProve',
+      method: 'POST',
+      data: data
+      // handle:true
+    });
+  },
+
+
+  // 商家限时购列表
+  LimitActivityGoods: function LimitActivityGoods(data) {
+    return _interface.default.request({
+      url: '/api/LimitActivityGoods/GetGoodsList',
+      method: 'POST',
+      data: data
+      // handle:true
+    });
+  } };var _default =
+
+
+Set;exports.default = _default;
+
+/***/ }),
+
+/***/ 182:
+/*!*****************************************************!*\
+  !*** G:/work/马桶福利购/components/tki-qrcode/qrcode.js ***!
+  \*****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var QRCode = {};
+(function () {
+  /**
+               * 获取单个字符的utf8编码
+               * unicode BMP平面约65535个字符
+               * @param {num} code
+               * return {array}
+               */
+  function unicodeFormat8(code) {
+    // 1 byte
+    var c0, c1, c2;
+    if (code < 128) {
+      return [code];
+      // 2 bytes
+    } else if (code < 2048) {
+      c0 = 192 + (code >> 6);
+      c1 = 128 + (code & 63);
+      return [c0, c1];
+      // 3 bytes
+    } else {
+      c0 = 224 + (code >> 12);
+      c1 = 128 + (code >> 6 & 63);
+      c2 = 128 + (code & 63);
+      return [c0, c1, c2];
+    }
+  }
+  /**
+     * 获取字符串的utf8编码字节串
+     * @param {string} string
+     * @return {array}
+     */
+  function getUTF8Bytes(string) {
+    var utf8codes = [];
+    for (var i = 0; i < string.length; i++) {
+      var code = string.charCodeAt(i);
+      var utf8 = unicodeFormat8(code);
+      for (var j = 0; j < utf8.length; j++) {
+        utf8codes.push(utf8[j]);
+      }
+    }
+    return utf8codes;
+  }
+  /**
+     * 二维码算法实现
+     * @param {string} data              要编码的信息字符串
+     * @param {num} errorCorrectLevel 纠错等级
+     */
+  function QRCodeAlg(data, errorCorrectLevel) {
+    this.typeNumber = -1; //版本
+    this.errorCorrectLevel = errorCorrectLevel;
+    this.modules = null; //二维矩阵，存放最终结果
+    this.moduleCount = 0; //矩阵大小
+    this.dataCache = null; //数据缓存
+    this.rsBlocks = null; //版本数据信息
+    this.totalDataCount = -1; //可使用的数据量
+    this.data = data;
+    this.utf8bytes = getUTF8Bytes(data);
+    this.make();
+  }
+  QRCodeAlg.prototype = {
+    constructor: QRCodeAlg,
+    /**
+                             * 获取二维码矩阵大小
+                             * @return {num} 矩阵大小
+                             */
+    getModuleCount: function getModuleCount() {
+      return this.moduleCount;
+    },
+    /**
+        * 编码
+        */
+    make: function make() {
+      this.getRightType();
+      this.dataCache = this.createData();
+      this.createQrcode();
+    },
+    /**
+        * 设置二位矩阵功能图形
+        * @param  {bool} test 表示是否在寻找最好掩膜阶段
+        * @param  {num} maskPattern 掩膜的版本
+        */
+    makeImpl: function makeImpl(maskPattern) {
+      this.moduleCount = this.typeNumber * 4 + 17;
+      this.modules = new Array(this.moduleCount);
+      for (var row = 0; row < this.moduleCount; row++) {
+        this.modules[row] = new Array(this.moduleCount);
+      }
+      this.setupPositionProbePattern(0, 0);
+      this.setupPositionProbePattern(this.moduleCount - 7, 0);
+      this.setupPositionProbePattern(0, this.moduleCount - 7);
+      this.setupPositionAdjustPattern();
+      this.setupTimingPattern();
+      this.setupTypeInfo(true, maskPattern);
+      if (this.typeNumber >= 7) {
+        this.setupTypeNumber(true);
+      }
+      this.mapData(this.dataCache, maskPattern);
+    },
+    /**
+        * 设置二维码的位置探测图形
+        * @param  {num} row 探测图形的中心横坐标
+        * @param  {num} col 探测图形的中心纵坐标
+        */
+    setupPositionProbePattern: function setupPositionProbePattern(row, col) {
+      for (var r = -1; r <= 7; r++) {
+        if (row + r <= -1 || this.moduleCount <= row + r) continue;
+        for (var c = -1; c <= 7; c++) {
+          if (col + c <= -1 || this.moduleCount <= col + c) continue;
+          if (0 <= r && r <= 6 && (c == 0 || c == 6) || 0 <= c && c <= 6 && (r == 0 || r == 6) || 2 <= r && r <= 4 && 2 <= c && c <= 4) {
+            this.modules[row + r][col + c] = true;
+          } else {
+            this.modules[row + r][col + c] = false;
+          }
+        }
+      }
+    },
+    /**
+        * 创建二维码
+        * @return {[type]} [description]
+        */
+    createQrcode: function createQrcode() {
+      var minLostPoint = 0;
+      var pattern = 0;
+      var bestModules = null;
+      for (var i = 0; i < 8; i++) {
+        this.makeImpl(i);
+        var lostPoint = QRUtil.getLostPoint(this);
+        if (i == 0 || minLostPoint > lostPoint) {
+          minLostPoint = lostPoint;
+          pattern = i;
+          bestModules = this.modules;
+        }
+      }
+      this.modules = bestModules;
+      this.setupTypeInfo(false, pattern);
+      if (this.typeNumber >= 7) {
+        this.setupTypeNumber(false);
+      }
+    },
+    /**
+        * 设置定位图形
+        * @return {[type]} [description]
+        */
+    setupTimingPattern: function setupTimingPattern() {
+      for (var r = 8; r < this.moduleCount - 8; r++) {
+        if (this.modules[r][6] != null) {
+          continue;
+        }
+        this.modules[r][6] = r % 2 == 0;
+        if (this.modules[6][r] != null) {
+          continue;
+        }
+        this.modules[6][r] = r % 2 == 0;
+      }
+    },
+    /**
+        * 设置矫正图形
+        * @return {[type]} [description]
+        */
+    setupPositionAdjustPattern: function setupPositionAdjustPattern() {
+      var pos = QRUtil.getPatternPosition(this.typeNumber);
+      for (var i = 0; i < pos.length; i++) {
+        for (var j = 0; j < pos.length; j++) {
+          var row = pos[i];
+          var col = pos[j];
+          if (this.modules[row][col] != null) {
+            continue;
+          }
+          for (var r = -2; r <= 2; r++) {
+            for (var c = -2; c <= 2; c++) {
+              if (r == -2 || r == 2 || c == -2 || c == 2 || r == 0 && c == 0) {
+                this.modules[row + r][col + c] = true;
+              } else {
+                this.modules[row + r][col + c] = false;
+              }
+            }
+          }
+        }
+      }
+    },
+    /**
+        * 设置版本信息（7以上版本才有）
+        * @param  {bool} test 是否处于判断最佳掩膜阶段
+        * @return {[type]}      [description]
+        */
+    setupTypeNumber: function setupTypeNumber(test) {
+      var bits = QRUtil.getBCHTypeNumber(this.typeNumber);
+      for (var i = 0; i < 18; i++) {
+        var mod = !test && (bits >> i & 1) == 1;
+        this.modules[Math.floor(i / 3)][i % 3 + this.moduleCount - 8 - 3] = mod;
+        this.modules[i % 3 + this.moduleCount - 8 - 3][Math.floor(i / 3)] = mod;
+      }
+    },
+    /**
+        * 设置格式信息（纠错等级和掩膜版本）
+        * @param  {bool} test
+        * @param  {num} maskPattern 掩膜版本
+        * @return {}
+        */
+    setupTypeInfo: function setupTypeInfo(test, maskPattern) {
+      var data = QRErrorCorrectLevel[this.errorCorrectLevel] << 3 | maskPattern;
+      var bits = QRUtil.getBCHTypeInfo(data);
+      // vertical
+      for (var i = 0; i < 15; i++) {
+        var mod = !test && (bits >> i & 1) == 1;
+        if (i < 6) {
+          this.modules[i][8] = mod;
+        } else if (i < 8) {
+          this.modules[i + 1][8] = mod;
+        } else {
+          this.modules[this.moduleCount - 15 + i][8] = mod;
+        }
+        // horizontal
+        var mod = !test && (bits >> i & 1) == 1;
+        if (i < 8) {
+          this.modules[8][this.moduleCount - i - 1] = mod;
+        } else if (i < 9) {
+          this.modules[8][15 - i - 1 + 1] = mod;
+        } else {
+          this.modules[8][15 - i - 1] = mod;
+        }
+      }
+      // fixed module
+      this.modules[this.moduleCount - 8][8] = !test;
+    },
+    /**
+        * 数据编码
+        * @return {[type]} [description]
+        */
+    createData: function createData() {
+      var buffer = new QRBitBuffer();
+      var lengthBits = this.typeNumber > 9 ? 16 : 8;
+      buffer.put(4, 4); //添加模式
+      buffer.put(this.utf8bytes.length, lengthBits);
+      for (var i = 0, l = this.utf8bytes.length; i < l; i++) {
+        buffer.put(this.utf8bytes[i], 8);
+      }
+      if (buffer.length + 4 <= this.totalDataCount * 8) {
+        buffer.put(0, 4);
+      }
+      // padding
+      while (buffer.length % 8 != 0) {
+        buffer.putBit(false);
+      }
+      // padding
+      while (true) {
+        if (buffer.length >= this.totalDataCount * 8) {
+          break;
+        }
+        buffer.put(QRCodeAlg.PAD0, 8);
+        if (buffer.length >= this.totalDataCount * 8) {
+          break;
+        }
+        buffer.put(QRCodeAlg.PAD1, 8);
+      }
+      return this.createBytes(buffer);
+    },
+    /**
+        * 纠错码编码
+        * @param  {buffer} buffer 数据编码
+        * @return {[type]}
+        */
+    createBytes: function createBytes(buffer) {
+      var offset = 0;
+      var maxDcCount = 0;
+      var maxEcCount = 0;
+      var length = this.rsBlock.length / 3;
+      var rsBlocks = new Array();
+      for (var i = 0; i < length; i++) {
+        var count = this.rsBlock[i * 3 + 0];
+        var totalCount = this.rsBlock[i * 3 + 1];
+        var dataCount = this.rsBlock[i * 3 + 2];
+        for (var j = 0; j < count; j++) {
+          rsBlocks.push([dataCount, totalCount]);
+        }
+      }
+      var dcdata = new Array(rsBlocks.length);
+      var ecdata = new Array(rsBlocks.length);
+      for (var r = 0; r < rsBlocks.length; r++) {
+        var dcCount = rsBlocks[r][0];
+        var ecCount = rsBlocks[r][1] - dcCount;
+        maxDcCount = Math.max(maxDcCount, dcCount);
+        maxEcCount = Math.max(maxEcCount, ecCount);
+        dcdata[r] = new Array(dcCount);
+        for (var i = 0; i < dcdata[r].length; i++) {
+          dcdata[r][i] = 0xff & buffer.buffer[i + offset];
+        }
+        offset += dcCount;
+        var rsPoly = QRUtil.getErrorCorrectPolynomial(ecCount);
+        var rawPoly = new QRPolynomial(dcdata[r], rsPoly.getLength() - 1);
+        var modPoly = rawPoly.mod(rsPoly);
+        ecdata[r] = new Array(rsPoly.getLength() - 1);
+        for (var i = 0; i < ecdata[r].length; i++) {
+          var modIndex = i + modPoly.getLength() - ecdata[r].length;
+          ecdata[r][i] = modIndex >= 0 ? modPoly.get(modIndex) : 0;
+        }
+      }
+      var data = new Array(this.totalDataCount);
+      var index = 0;
+      for (var i = 0; i < maxDcCount; i++) {
+        for (var r = 0; r < rsBlocks.length; r++) {
+          if (i < dcdata[r].length) {
+            data[index++] = dcdata[r][i];
+          }
+        }
+      }
+      for (var i = 0; i < maxEcCount; i++) {
+        for (var r = 0; r < rsBlocks.length; r++) {
+          if (i < ecdata[r].length) {
+            data[index++] = ecdata[r][i];
+          }
+        }
+      }
+      return data;
+
+    },
+    /**
+        * 布置模块，构建最终信息
+        * @param  {} data
+        * @param  {} maskPattern
+        * @return {}
+        */
+    mapData: function mapData(data, maskPattern) {
+      var inc = -1;
+      var row = this.moduleCount - 1;
+      var bitIndex = 7;
+      var byteIndex = 0;
+      for (var col = this.moduleCount - 1; col > 0; col -= 2) {
+        if (col == 6) col--;
+        while (true) {
+          for (var c = 0; c < 2; c++) {
+            if (this.modules[row][col - c] == null) {
+              var dark = false;
+              if (byteIndex < data.length) {
+                dark = (data[byteIndex] >>> bitIndex & 1) == 1;
+              }
+              var mask = QRUtil.getMask(maskPattern, row, col - c);
+              if (mask) {
+                dark = !dark;
+              }
+              this.modules[row][col - c] = dark;
+              bitIndex--;
+              if (bitIndex == -1) {
+                byteIndex++;
+                bitIndex = 7;
+              }
+            }
+          }
+          row += inc;
+          if (row < 0 || this.moduleCount <= row) {
+            row -= inc;
+            inc = -inc;
+            break;
+          }
+        }
+      }
+    } };
+
+  /**
+          * 填充字段
+          */
+  QRCodeAlg.PAD0 = 0xEC;
+  QRCodeAlg.PAD1 = 0x11;
+  //---------------------------------------------------------------------
+  // 纠错等级对应的编码
+  //---------------------------------------------------------------------
+  var QRErrorCorrectLevel = [1, 0, 3, 2];
+  //---------------------------------------------------------------------
+  // 掩膜版本
+  //---------------------------------------------------------------------
+  var QRMaskPattern = {
+    PATTERN000: 0,
+    PATTERN001: 1,
+    PATTERN010: 2,
+    PATTERN011: 3,
+    PATTERN100: 4,
+    PATTERN101: 5,
+    PATTERN110: 6,
+    PATTERN111: 7 };
+
+  //---------------------------------------------------------------------
+  // 工具类
+  //---------------------------------------------------------------------
+  var QRUtil = {
+    /*
+                 每个版本矫正图形的位置
+                  */
+    PATTERN_POSITION_TABLE: [
+    [],
+    [6, 18],
+    [6, 22],
+    [6, 26],
+    [6, 30],
+    [6, 34],
+    [6, 22, 38],
+    [6, 24, 42],
+    [6, 26, 46],
+    [6, 28, 50],
+    [6, 30, 54],
+    [6, 32, 58],
+    [6, 34, 62],
+    [6, 26, 46, 66],
+    [6, 26, 48, 70],
+    [6, 26, 50, 74],
+    [6, 30, 54, 78],
+    [6, 30, 56, 82],
+    [6, 30, 58, 86],
+    [6, 34, 62, 90],
+    [6, 28, 50, 72, 94],
+    [6, 26, 50, 74, 98],
+    [6, 30, 54, 78, 102],
+    [6, 28, 54, 80, 106],
+    [6, 32, 58, 84, 110],
+    [6, 30, 58, 86, 114],
+    [6, 34, 62, 90, 118],
+    [6, 26, 50, 74, 98, 122],
+    [6, 30, 54, 78, 102, 126],
+    [6, 26, 52, 78, 104, 130],
+    [6, 30, 56, 82, 108, 134],
+    [6, 34, 60, 86, 112, 138],
+    [6, 30, 58, 86, 114, 142],
+    [6, 34, 62, 90, 118, 146],
+    [6, 30, 54, 78, 102, 126, 150],
+    [6, 24, 50, 76, 102, 128, 154],
+    [6, 28, 54, 80, 106, 132, 158],
+    [6, 32, 58, 84, 110, 136, 162],
+    [6, 26, 54, 82, 110, 138, 166],
+    [6, 30, 58, 86, 114, 142, 170]],
+
+    G15: 1 << 10 | 1 << 8 | 1 << 5 | 1 << 4 | 1 << 2 | 1 << 1 | 1 << 0,
+    G18: 1 << 12 | 1 << 11 | 1 << 10 | 1 << 9 | 1 << 8 | 1 << 5 | 1 << 2 | 1 << 0,
+    G15_MASK: 1 << 14 | 1 << 12 | 1 << 10 | 1 << 4 | 1 << 1,
+    /*
+                                                             BCH编码格式信息
+                                                              */
+    getBCHTypeInfo: function getBCHTypeInfo(data) {
+      var d = data << 10;
+      while (QRUtil.getBCHDigit(d) - QRUtil.getBCHDigit(QRUtil.G15) >= 0) {
+        d ^= QRUtil.G15 << QRUtil.getBCHDigit(d) - QRUtil.getBCHDigit(QRUtil.G15);
+      }
+      return (data << 10 | d) ^ QRUtil.G15_MASK;
+    },
+    /*
+       BCH编码版本信息
+        */
+    getBCHTypeNumber: function getBCHTypeNumber(data) {
+      var d = data << 12;
+      while (QRUtil.getBCHDigit(d) - QRUtil.getBCHDigit(QRUtil.G18) >= 0) {
+        d ^= QRUtil.G18 << QRUtil.getBCHDigit(d) - QRUtil.getBCHDigit(QRUtil.G18);
+      }
+      return data << 12 | d;
+    },
+    /*
+       获取BCH位信息
+        */
+    getBCHDigit: function getBCHDigit(data) {
+      var digit = 0;
+      while (data != 0) {
+        digit++;
+        data >>>= 1;
+      }
+      return digit;
+    },
+    /*
+       获取版本对应的矫正图形位置
+        */
+    getPatternPosition: function getPatternPosition(typeNumber) {
+      return QRUtil.PATTERN_POSITION_TABLE[typeNumber - 1];
+    },
+    /*
+       掩膜算法
+        */
+    getMask: function getMask(maskPattern, i, j) {
+      switch (maskPattern) {
+        case QRMaskPattern.PATTERN000:
+          return (i + j) % 2 == 0;
+        case QRMaskPattern.PATTERN001:
+          return i % 2 == 0;
+        case QRMaskPattern.PATTERN010:
+          return j % 3 == 0;
+        case QRMaskPattern.PATTERN011:
+          return (i + j) % 3 == 0;
+        case QRMaskPattern.PATTERN100:
+          return (Math.floor(i / 2) + Math.floor(j / 3)) % 2 == 0;
+        case QRMaskPattern.PATTERN101:
+          return i * j % 2 + i * j % 3 == 0;
+        case QRMaskPattern.PATTERN110:
+          return (i * j % 2 + i * j % 3) % 2 == 0;
+        case QRMaskPattern.PATTERN111:
+          return (i * j % 3 + (i + j) % 2) % 2 == 0;
+        default:
+          throw new Error("bad maskPattern:" + maskPattern);}
+
+    },
+    /*
+       获取RS的纠错多项式
+        */
+    getErrorCorrectPolynomial: function getErrorCorrectPolynomial(errorCorrectLength) {
+      var a = new QRPolynomial([1], 0);
+      for (var i = 0; i < errorCorrectLength; i++) {
+        a = a.multiply(new QRPolynomial([1, QRMath.gexp(i)], 0));
+      }
+      return a;
+    },
+    /*
+       获取评价
+        */
+    getLostPoint: function getLostPoint(qrCode) {
+      var moduleCount = qrCode.getModuleCount(),
+      lostPoint = 0,
+      darkCount = 0;
+      for (var row = 0; row < moduleCount; row++) {
+        var sameCount = 0;
+        var head = qrCode.modules[row][0];
+        for (var col = 0; col < moduleCount; col++) {
+          var current = qrCode.modules[row][col];
+          //level 3 评价
+          if (col < moduleCount - 6) {
+            if (current && !qrCode.modules[row][col + 1] && qrCode.modules[row][col + 2] && qrCode.modules[row][col + 3] && qrCode.modules[row][col + 4] && !qrCode.modules[row][col + 5] && qrCode.modules[row][col + 6]) {
+              if (col < moduleCount - 10) {
+                if (qrCode.modules[row][col + 7] && qrCode.modules[row][col + 8] && qrCode.modules[row][col + 9] && qrCode.modules[row][col + 10]) {
+                  lostPoint += 40;
+                }
+              } else if (col > 3) {
+                if (qrCode.modules[row][col - 1] && qrCode.modules[row][col - 2] && qrCode.modules[row][col - 3] && qrCode.modules[row][col - 4]) {
+                  lostPoint += 40;
+                }
+              }
+            }
+          }
+          //level 2 评价
+          if (row < moduleCount - 1 && col < moduleCount - 1) {
+            var count = 0;
+            if (current) count++;
+            if (qrCode.modules[row + 1][col]) count++;
+            if (qrCode.modules[row][col + 1]) count++;
+            if (qrCode.modules[row + 1][col + 1]) count++;
+            if (count == 0 || count == 4) {
+              lostPoint += 3;
+            }
+          }
+          //level 1 评价
+          if (head ^ current) {
+            sameCount++;
+          } else {
+            head = current;
+            if (sameCount >= 5) {
+              lostPoint += 3 + sameCount - 5;
+            }
+            sameCount = 1;
+          }
+          //level 4 评价
+          if (current) {
+            darkCount++;
+          }
+        }
+      }
+      for (var col = 0; col < moduleCount; col++) {
+        var sameCount = 0;
+        var head = qrCode.modules[0][col];
+        for (var row = 0; row < moduleCount; row++) {
+          var current = qrCode.modules[row][col];
+          //level 3 评价
+          if (row < moduleCount - 6) {
+            if (current && !qrCode.modules[row + 1][col] && qrCode.modules[row + 2][col] && qrCode.modules[row + 3][col] && qrCode.modules[row + 4][col] && !qrCode.modules[row + 5][col] && qrCode.modules[row + 6][col]) {
+              if (row < moduleCount - 10) {
+                if (qrCode.modules[row + 7][col] && qrCode.modules[row + 8][col] && qrCode.modules[row + 9][col] && qrCode.modules[row + 10][col]) {
+                  lostPoint += 40;
+                }
+              } else if (row > 3) {
+                if (qrCode.modules[row - 1][col] && qrCode.modules[row - 2][col] && qrCode.modules[row - 3][col] && qrCode.modules[row - 4][col]) {
+                  lostPoint += 40;
+                }
+              }
+            }
+          }
+          //level 1 评价
+          if (head ^ current) {
+            sameCount++;
+          } else {
+            head = current;
+            if (sameCount >= 5) {
+              lostPoint += 3 + sameCount - 5;
+            }
+            sameCount = 1;
+          }
+        }
+      }
+      // LEVEL4
+      var ratio = Math.abs(100 * darkCount / moduleCount / moduleCount - 50) / 5;
+      lostPoint += ratio * 10;
+      return lostPoint;
+    } };
+
+
+  //---------------------------------------------------------------------
+  // QRMath使用的数学工具
+  //---------------------------------------------------------------------
+  var QRMath = {
+    /*
+                 将n转化为a^m
+                  */
+    glog: function glog(n) {
+      if (n < 1) {
+        throw new Error("glog(" + n + ")");
+      }
+      return QRMath.LOG_TABLE[n];
+    },
+    /*
+       将a^m转化为n
+        */
+    gexp: function gexp(n) {
+      while (n < 0) {
+        n += 255;
+      }
+      while (n >= 256) {
+        n -= 255;
+      }
+      return QRMath.EXP_TABLE[n];
+    },
+    EXP_TABLE: new Array(256),
+    LOG_TABLE: new Array(256) };
+
+
+  for (var i = 0; i < 8; i++) {
+    QRMath.EXP_TABLE[i] = 1 << i;
+  }
+  for (var i = 8; i < 256; i++) {
+    QRMath.EXP_TABLE[i] = QRMath.EXP_TABLE[i - 4] ^ QRMath.EXP_TABLE[i - 5] ^ QRMath.EXP_TABLE[i - 6] ^ QRMath.EXP_TABLE[i - 8];
+  }
+  for (var i = 0; i < 255; i++) {
+    QRMath.LOG_TABLE[QRMath.EXP_TABLE[i]] = i;
+  }
+  //---------------------------------------------------------------------
+  // QRPolynomial 多项式
+  //---------------------------------------------------------------------
+  /**
+   * 多项式类
+   * @param {Array} num   系数
+   * @param {num} shift a^shift
+   */
+  function QRPolynomial(num, shift) {
+    if (num.length == undefined) {
+      throw new Error(num.length + "/" + shift);
+    }
+    var offset = 0;
+    while (offset < num.length && num[offset] == 0) {
+      offset++;
+    }
+    this.num = new Array(num.length - offset + shift);
+    for (var i = 0; i < num.length - offset; i++) {
+      this.num[i] = num[i + offset];
+    }
+  }
+  QRPolynomial.prototype = {
+    get: function get(index) {
+      return this.num[index];
+    },
+    getLength: function getLength() {
+      return this.num.length;
+    },
+    /**
+        * 多项式乘法
+        * @param  {QRPolynomial} e 被乘多项式
+        * @return {[type]}   [description]
+        */
+    multiply: function multiply(e) {
+      var num = new Array(this.getLength() + e.getLength() - 1);
+      for (var i = 0; i < this.getLength(); i++) {
+        for (var j = 0; j < e.getLength(); j++) {
+          num[i + j] ^= QRMath.gexp(QRMath.glog(this.get(i)) + QRMath.glog(e.get(j)));
+        }
+      }
+      return new QRPolynomial(num, 0);
+    },
+    /**
+        * 多项式模运算
+        * @param  {QRPolynomial} e 模多项式
+        * @return {}
+        */
+    mod: function mod(e) {
+      var tl = this.getLength(),
+      el = e.getLength();
+      if (tl - el < 0) {
+        return this;
+      }
+      var num = new Array(tl);
+      for (var i = 0; i < tl; i++) {
+        num[i] = this.get(i);
+      }
+      while (num.length >= el) {
+        var ratio = QRMath.glog(num[0]) - QRMath.glog(e.get(0));
+
+        for (var i = 0; i < e.getLength(); i++) {
+          num[i] ^= QRMath.gexp(QRMath.glog(e.get(i)) + ratio);
+        }
+        while (num[0] == 0) {
+          num.shift();
+        }
+      }
+      return new QRPolynomial(num, 0);
+    } };
+
+
+  //---------------------------------------------------------------------
+  // RS_BLOCK_TABLE
+  //---------------------------------------------------------------------
+  /*
+  二维码各个版本信息[块数, 每块中的数据块数, 每块中的信息块数]
+   */
+  var RS_BLOCK_TABLE = [
+  // L
+  // M
+  // Q
+  // H
+  // 1
+  [1, 26, 19],
+  [1, 26, 16],
+  [1, 26, 13],
+  [1, 26, 9],
+
+  // 2
+  [1, 44, 34],
+  [1, 44, 28],
+  [1, 44, 22],
+  [1, 44, 16],
+
+  // 3
+  [1, 70, 55],
+  [1, 70, 44],
+  [2, 35, 17],
+  [2, 35, 13],
+
+  // 4
+  [1, 100, 80],
+  [2, 50, 32],
+  [2, 50, 24],
+  [4, 25, 9],
+
+  // 5
+  [1, 134, 108],
+  [2, 67, 43],
+  [2, 33, 15, 2, 34, 16],
+  [2, 33, 11, 2, 34, 12],
+
+  // 6
+  [2, 86, 68],
+  [4, 43, 27],
+  [4, 43, 19],
+  [4, 43, 15],
+
+  // 7
+  [2, 98, 78],
+  [4, 49, 31],
+  [2, 32, 14, 4, 33, 15],
+  [4, 39, 13, 1, 40, 14],
+
+  // 8
+  [2, 121, 97],
+  [2, 60, 38, 2, 61, 39],
+  [4, 40, 18, 2, 41, 19],
+  [4, 40, 14, 2, 41, 15],
+
+  // 9
+  [2, 146, 116],
+  [3, 58, 36, 2, 59, 37],
+  [4, 36, 16, 4, 37, 17],
+  [4, 36, 12, 4, 37, 13],
+
+  // 10
+  [2, 86, 68, 2, 87, 69],
+  [4, 69, 43, 1, 70, 44],
+  [6, 43, 19, 2, 44, 20],
+  [6, 43, 15, 2, 44, 16],
+
+  // 11
+  [4, 101, 81],
+  [1, 80, 50, 4, 81, 51],
+  [4, 50, 22, 4, 51, 23],
+  [3, 36, 12, 8, 37, 13],
+
+  // 12
+  [2, 116, 92, 2, 117, 93],
+  [6, 58, 36, 2, 59, 37],
+  [4, 46, 20, 6, 47, 21],
+  [7, 42, 14, 4, 43, 15],
+
+  // 13
+  [4, 133, 107],
+  [8, 59, 37, 1, 60, 38],
+  [8, 44, 20, 4, 45, 21],
+  [12, 33, 11, 4, 34, 12],
+
+  // 14
+  [3, 145, 115, 1, 146, 116],
+  [4, 64, 40, 5, 65, 41],
+  [11, 36, 16, 5, 37, 17],
+  [11, 36, 12, 5, 37, 13],
+
+  // 15
+  [5, 109, 87, 1, 110, 88],
+  [5, 65, 41, 5, 66, 42],
+  [5, 54, 24, 7, 55, 25],
+  [11, 36, 12],
+
+  // 16
+  [5, 122, 98, 1, 123, 99],
+  [7, 73, 45, 3, 74, 46],
+  [15, 43, 19, 2, 44, 20],
+  [3, 45, 15, 13, 46, 16],
+
+  // 17
+  [1, 135, 107, 5, 136, 108],
+  [10, 74, 46, 1, 75, 47],
+  [1, 50, 22, 15, 51, 23],
+  [2, 42, 14, 17, 43, 15],
+
+  // 18
+  [5, 150, 120, 1, 151, 121],
+  [9, 69, 43, 4, 70, 44],
+  [17, 50, 22, 1, 51, 23],
+  [2, 42, 14, 19, 43, 15],
+
+  // 19
+  [3, 141, 113, 4, 142, 114],
+  [3, 70, 44, 11, 71, 45],
+  [17, 47, 21, 4, 48, 22],
+  [9, 39, 13, 16, 40, 14],
+
+  // 20
+  [3, 135, 107, 5, 136, 108],
+  [3, 67, 41, 13, 68, 42],
+  [15, 54, 24, 5, 55, 25],
+  [15, 43, 15, 10, 44, 16],
+
+  // 21
+  [4, 144, 116, 4, 145, 117],
+  [17, 68, 42],
+  [17, 50, 22, 6, 51, 23],
+  [19, 46, 16, 6, 47, 17],
+
+  // 22
+  [2, 139, 111, 7, 140, 112],
+  [17, 74, 46],
+  [7, 54, 24, 16, 55, 25],
+  [34, 37, 13],
+
+  // 23
+  [4, 151, 121, 5, 152, 122],
+  [4, 75, 47, 14, 76, 48],
+  [11, 54, 24, 14, 55, 25],
+  [16, 45, 15, 14, 46, 16],
+
+  // 24
+  [6, 147, 117, 4, 148, 118],
+  [6, 73, 45, 14, 74, 46],
+  [11, 54, 24, 16, 55, 25],
+  [30, 46, 16, 2, 47, 17],
+
+  // 25
+  [8, 132, 106, 4, 133, 107],
+  [8, 75, 47, 13, 76, 48],
+  [7, 54, 24, 22, 55, 25],
+  [22, 45, 15, 13, 46, 16],
+
+  // 26
+  [10, 142, 114, 2, 143, 115],
+  [19, 74, 46, 4, 75, 47],
+  [28, 50, 22, 6, 51, 23],
+  [33, 46, 16, 4, 47, 17],
+
+  // 27
+  [8, 152, 122, 4, 153, 123],
+  [22, 73, 45, 3, 74, 46],
+  [8, 53, 23, 26, 54, 24],
+  [12, 45, 15, 28, 46, 16],
+
+  // 28
+  [3, 147, 117, 10, 148, 118],
+  [3, 73, 45, 23, 74, 46],
+  [4, 54, 24, 31, 55, 25],
+  [11, 45, 15, 31, 46, 16],
+
+  // 29
+  [7, 146, 116, 7, 147, 117],
+  [21, 73, 45, 7, 74, 46],
+  [1, 53, 23, 37, 54, 24],
+  [19, 45, 15, 26, 46, 16],
+
+  // 30
+  [5, 145, 115, 10, 146, 116],
+  [19, 75, 47, 10, 76, 48],
+  [15, 54, 24, 25, 55, 25],
+  [23, 45, 15, 25, 46, 16],
+
+  // 31
+  [13, 145, 115, 3, 146, 116],
+  [2, 74, 46, 29, 75, 47],
+  [42, 54, 24, 1, 55, 25],
+  [23, 45, 15, 28, 46, 16],
+
+  // 32
+  [17, 145, 115],
+  [10, 74, 46, 23, 75, 47],
+  [10, 54, 24, 35, 55, 25],
+  [19, 45, 15, 35, 46, 16],
+
+  // 33
+  [17, 145, 115, 1, 146, 116],
+  [14, 74, 46, 21, 75, 47],
+  [29, 54, 24, 19, 55, 25],
+  [11, 45, 15, 46, 46, 16],
+
+  // 34
+  [13, 145, 115, 6, 146, 116],
+  [14, 74, 46, 23, 75, 47],
+  [44, 54, 24, 7, 55, 25],
+  [59, 46, 16, 1, 47, 17],
+
+  // 35
+  [12, 151, 121, 7, 152, 122],
+  [12, 75, 47, 26, 76, 48],
+  [39, 54, 24, 14, 55, 25],
+  [22, 45, 15, 41, 46, 16],
+
+  // 36
+  [6, 151, 121, 14, 152, 122],
+  [6, 75, 47, 34, 76, 48],
+  [46, 54, 24, 10, 55, 25],
+  [2, 45, 15, 64, 46, 16],
+
+  // 37
+  [17, 152, 122, 4, 153, 123],
+  [29, 74, 46, 14, 75, 47],
+  [49, 54, 24, 10, 55, 25],
+  [24, 45, 15, 46, 46, 16],
+
+  // 38
+  [4, 152, 122, 18, 153, 123],
+  [13, 74, 46, 32, 75, 47],
+  [48, 54, 24, 14, 55, 25],
+  [42, 45, 15, 32, 46, 16],
+
+  // 39
+  [20, 147, 117, 4, 148, 118],
+  [40, 75, 47, 7, 76, 48],
+  [43, 54, 24, 22, 55, 25],
+  [10, 45, 15, 67, 46, 16],
+
+  // 40
+  [19, 148, 118, 6, 149, 119],
+  [18, 75, 47, 31, 76, 48],
+  [34, 54, 24, 34, 55, 25],
+  [20, 45, 15, 61, 46, 16]];
+
+
+  /**
+                              * 根据数据获取对应版本
+                              * @return {[type]} [description]
+                              */
+  QRCodeAlg.prototype.getRightType = function () {
+    for (var typeNumber = 1; typeNumber < 41; typeNumber++) {
+      var rsBlock = RS_BLOCK_TABLE[(typeNumber - 1) * 4 + this.errorCorrectLevel];
+      if (rsBlock == undefined) {
+        throw new Error("bad rs block @ typeNumber:" + typeNumber + "/errorCorrectLevel:" + this.errorCorrectLevel);
+      }
+      var length = rsBlock.length / 3;
+      var totalDataCount = 0;
+      for (var i = 0; i < length; i++) {
+        var count = rsBlock[i * 3 + 0];
+        var dataCount = rsBlock[i * 3 + 2];
+        totalDataCount += dataCount * count;
+      }
+      var lengthBytes = typeNumber > 9 ? 2 : 1;
+      if (this.utf8bytes.length + lengthBytes < totalDataCount || typeNumber == 40) {
+        this.typeNumber = typeNumber;
+        this.rsBlock = rsBlock;
+        this.totalDataCount = totalDataCount;
+        break;
+      }
+    }
+  };
+
+  //---------------------------------------------------------------------
+  // QRBitBuffer
+  //---------------------------------------------------------------------
+  function QRBitBuffer() {
+    this.buffer = new Array();
+    this.length = 0;
+  }
+  QRBitBuffer.prototype = {
+    get: function get(index) {
+      var bufIndex = Math.floor(index / 8);
+      return this.buffer[bufIndex] >>> 7 - index % 8 & 1;
+    },
+    put: function put(num, length) {
+      for (var i = 0; i < length; i++) {
+        this.putBit(num >>> length - i - 1 & 1);
+      }
+    },
+    putBit: function putBit(bit) {
+      var bufIndex = Math.floor(this.length / 8);
+      if (this.buffer.length <= bufIndex) {
+        this.buffer.push(0);
+      }
+      if (bit) {
+        this.buffer[bufIndex] |= 0x80 >>> this.length % 8;
+      }
+      this.length++;
+    } };
+
+
+
+
+  // xzedit
+  var qrcodeAlgObjCache = [];
+  /**
+                               * 二维码构造函数，主要用于绘制
+                               * @param  {参数列表} opt 传递参数
+                               * @return {}
+                               */
+  QRCode = function QRCode(opt) {
+    //设置默认参数
+    this.options = {
+      text: '',
+      size: 256,
+      correctLevel: 3,
+      background: '#ffffff',
+      foreground: '#000000',
+      pdground: '#000000',
+      image: '',
+      imageSize: 30,
+      canvasId: opt.canvasId,
+      context: opt.context,
+      usingComponents: opt.usingComponents,
+      showLoading: opt.showLoading,
+      loadingText: opt.loadingText };
+
+    if (typeof opt === 'string') {// 只编码ASCII字符串
+      opt = {
+        text: opt };
+
+    }
+    if (opt) {
+      for (var i in opt) {
+        this.options[i] = opt[i];
+      }
+    }
+    //使用QRCodeAlg创建二维码结构
+    var qrCodeAlg = null;
+    for (var i = 0, l = qrcodeAlgObjCache.length; i < l; i++) {
+      if (qrcodeAlgObjCache[i].text == this.options.text && qrcodeAlgObjCache[i].text.correctLevel == this.options.correctLevel) {
+        qrCodeAlg = qrcodeAlgObjCache[i].obj;
+        break;
+      }
+    }
+    if (i == l) {
+      qrCodeAlg = new QRCodeAlg(this.options.text, this.options.correctLevel);
+      qrcodeAlgObjCache.push({
+        text: this.options.text,
+        correctLevel: this.options.correctLevel,
+        obj: qrCodeAlg });
+
+    }
+    /**
+       * 计算矩阵点的前景色
+       * @param {Obj} config
+       * @param {Number} config.row 点x坐标
+       * @param {Number} config.col 点y坐标
+       * @param {Number} config.count 矩阵大小
+       * @param {Number} config.options 组件的options
+       * @return {String}
+       */
+    var getForeGround = function getForeGround(config) {
+      var options = config.options;
+      if (options.pdground && (
+      config.row > 1 && config.row < 5 && config.col > 1 && config.col < 5 ||
+      config.row > config.count - 6 && config.row < config.count - 2 && config.col > 1 && config.col < 5 ||
+      config.row > 1 && config.row < 5 && config.col > config.count - 6 && config.col < config.count - 2))
+      {
+        return options.pdground;
+      }
+      return options.foreground;
+    };
+    // 创建canvas
+    var createCanvas = function createCanvas(options) {
+      if (options.showLoading) {
+        uni.showLoading({
+          title: options.loadingText,
+          mask: true });
+
+      }
+      var ctx = uni.createCanvasContext(options.canvasId, options.context);
+      var count = qrCodeAlg.getModuleCount();
+      var ratioSize = options.size;
+      var ratioImgSize = options.imageSize;
+      //计算每个点的长宽
+      var tileW = (ratioSize / count).toPrecision(4);
+      var tileH = (ratioSize / count).toPrecision(4);
+      //绘制
+      for (var row = 0; row < count; row++) {
+        for (var col = 0; col < count; col++) {
+          var w = Math.ceil((col + 1) * tileW) - Math.floor(col * tileW);
+          var h = Math.ceil((row + 1) * tileW) - Math.floor(row * tileW);
+          var foreground = getForeGround({
+            row: row,
+            col: col,
+            count: count,
+            options: options });
+
+          ctx.setFillStyle(qrCodeAlg.modules[row][col] ? foreground : options.background);
+          ctx.fillRect(Math.round(col * tileW), Math.round(row * tileH), w, h);
+        }
+      }
+      if (options.image) {
+
+
+
+
+        // 画圆角矩形
+        var drawRoundedRect = function drawRoundedRect(ctxi, x, y, width, height, r, lineWidth, fill, stroke) {
+          ctxi.setLineWidth(lineWidth);
+          ctxi.setFillStyle(options.background);
+          ctxi.setStrokeStyle(options.background);
+          ctxi.beginPath(); // draw top and top right corner 
+          ctxi.moveTo(x + r, y);
+          ctxi.arcTo(x + width, y, x + width, y + r, r); // draw right side and bottom right corner 
+          ctxi.arcTo(x + width, y + height, x + width - r, y + height, r); // draw bottom and bottom left corner 
+          ctxi.arcTo(x, y + height, x, y + height - r, r); // draw left and top left corner 
+          ctxi.arcTo(x, y, x + r, y, r);
+          ctxi.closePath();
+          if (fill) {
+            ctxi.fill();
+          }
+          if (stroke) {
+            ctxi.stroke();
+          }
+        };var x = Number(((ratioSize - ratioImgSize) / 2).toFixed(2));var y = Number(((ratioSize - ratioImgSize) / 2).toFixed(2));drawRoundedRect(ctx, x, y, ratioImgSize, ratioImgSize, 2, 6, true, true);ctx.drawImage(options.image, x, y, ratioImgSize, ratioImgSize);
+      }
+      setTimeout(function () {
+        ctx.draw(true, function () {
+          // 保存到临时区域
+          setTimeout(function () {
+            uni.canvasToTempFilePath({
+              width: options.width,
+              height: options.height,
+              destWidth: options.width,
+              destHeight: options.height,
+              canvasId: options.canvasId,
+              quality: Number(1),
+              success: function success(res) {
+                if (options.cbResult) {
+                  // 由于官方还没有统一此接口的输出字段，所以先判定下  支付宝为 res.apFilePath
+                  if (!empty(res.tempFilePath)) {
+                    options.cbResult(res.tempFilePath);
+                  } else if (!empty(res.apFilePath)) {
+                    options.cbResult(res.apFilePath);
+                  } else {
+                    options.cbResult(res.tempFilePath);
+                  }
+                }
+              },
+              fail: function fail(res) {
+                if (options.cbResult) {
+                  options.cbResult(res);
+                }
+              },
+              complete: function complete() {
+                uni.hideLoading();
+              } },
+            options.context);
+          }, options.text.length + 100);
+        });
+      }, options.usingComponents ? 0 : 150);
+    };
+    createCanvas(this.options);
+    // 空判定
+    var empty = function empty(v) {
+      var tp = typeof v,
+      rt = false;
+      if (tp == "number" && String(v) == "") {
+        rt = true;
+      } else if (tp == "undefined") {
+        rt = true;
+      } else if (tp == "object") {
+        if (JSON.stringify(v) == "{}" || JSON.stringify(v) == "[]" || v == null) rt = true;
+      } else if (tp == "string") {
+        if (v == "" || v == "undefined" || v == "null" || v == "{}" || v == "[]") rt = true;
+      } else if (tp == "function") {
+        rt = false;
+      }
+      return rt;
+    };
+  };
+  QRCode.prototype.clear = function (fn) {
+    var ctx = uni.createCanvasContext(this.options.canvasId, this.options.context);
+    ctx.clearRect(0, 0, this.options.size, this.options.size);
+    ctx.draw(false, function () {
+      if (fn) {
+        fn();
+      }
+    });
+  };
+})();var _default =
+
+QRCode;exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
+
+/***/ }),
+
+/***/ 2:
 /*!******************************************************************************************!*\
   !*** ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/mp-vue/dist/mp.runtime.esm.js ***!
   \******************************************************************************************/
@@ -7592,7 +10981,416 @@ internalMixin(Vue);
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../../../../webpack/buildin/global.js */ 3)))
 
 /***/ }),
-/* 3 */
+
+/***/ 20:
+/*!**********************************************************************************************************!*\
+  !*** ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib/runtime/componentNormalizer.js ***!
+  \**********************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return normalizeComponent; });
+/* globals __VUE_SSR_CONTEXT__ */
+
+// IMPORTANT: Do NOT use ES2015 features in this file (except for modules).
+// This module is a runtime utility for cleaner component module output and will
+// be included in the final webpack user bundle.
+
+function normalizeComponent (
+  scriptExports,
+  render,
+  staticRenderFns,
+  functionalTemplate,
+  injectStyles,
+  scopeId,
+  moduleIdentifier, /* server only */
+  shadowMode, /* vue-cli only */
+  components, // fixed by xxxxxx auto components
+  renderjs // fixed by xxxxxx renderjs
+) {
+  // Vue.extend constructor export interop
+  var options = typeof scriptExports === 'function'
+    ? scriptExports.options
+    : scriptExports
+
+  // fixed by xxxxxx auto components
+  if (components) {
+    if (!options.components) {
+      options.components = {}
+    }
+    var hasOwn = Object.prototype.hasOwnProperty
+    for (var name in components) {
+      if (hasOwn.call(components, name) && !hasOwn.call(options.components, name)) {
+        options.components[name] = components[name]
+      }
+    }
+  }
+  // fixed by xxxxxx renderjs
+  if (renderjs) {
+    (renderjs.beforeCreate || (renderjs.beforeCreate = [])).unshift(function() {
+      this[renderjs.__module] = this
+    });
+    (options.mixins || (options.mixins = [])).push(renderjs)
+  }
+
+  // render functions
+  if (render) {
+    options.render = render
+    options.staticRenderFns = staticRenderFns
+    options._compiled = true
+  }
+
+  // functional template
+  if (functionalTemplate) {
+    options.functional = true
+  }
+
+  // scopedId
+  if (scopeId) {
+    options._scopeId = 'data-v-' + scopeId
+  }
+
+  var hook
+  if (moduleIdentifier) { // server build
+    hook = function (context) {
+      // 2.3 injection
+      context =
+        context || // cached call
+        (this.$vnode && this.$vnode.ssrContext) || // stateful
+        (this.parent && this.parent.$vnode && this.parent.$vnode.ssrContext) // functional
+      // 2.2 with runInNewContext: true
+      if (!context && typeof __VUE_SSR_CONTEXT__ !== 'undefined') {
+        context = __VUE_SSR_CONTEXT__
+      }
+      // inject component styles
+      if (injectStyles) {
+        injectStyles.call(this, context)
+      }
+      // register component module identifier for async chunk inferrence
+      if (context && context._registeredComponents) {
+        context._registeredComponents.add(moduleIdentifier)
+      }
+    }
+    // used by ssr in case component is cached and beforeCreate
+    // never gets called
+    options._ssrRegister = hook
+  } else if (injectStyles) {
+    hook = shadowMode
+      ? function () { injectStyles.call(this, this.$root.$options.shadowRoot) }
+      : injectStyles
+  }
+
+  if (hook) {
+    if (options.functional) {
+      // for template-only hot-reload because in that case the render fn doesn't
+      // go through the normalizer
+      options._injectStyles = hook
+      // register for functioal component in vue file
+      var originalRender = options.render
+      options.render = function renderWithStyleInjection (h, context) {
+        hook.call(context)
+        return originalRender(h, context)
+      }
+    } else {
+      // inject component registration as beforeCreate hook
+      var existing = options.beforeCreate
+      options.beforeCreate = existing
+        ? [].concat(existing, hook)
+        : [hook]
+    }
+  }
+
+  return {
+    exports: scriptExports,
+    options: options
+  }
+}
+
+
+/***/ }),
+
+/***/ 21:
+/*!******************************************!*\
+  !*** G:/work/马桶福利购/static/defaultSet.js ***!
+  \******************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var set = {
+  "service_mobile": "059183612095",
+  "rechargeStatus": [{
+    "Value": "0",
+    "Text": "待支付" },
+
+  {
+    "Value": "1",
+    "Text": "已支付" }],
+
+
+  "projectStatus": [{
+    "Value": "0",
+    "Text": "待审核" },
+
+  {
+    "Value": "1",
+    "Text": "已上架" },
+
+  {
+    "Value": "2",
+    "Text": "未通过" },
+
+  {
+    "Value": "9",
+    "Text": "已下架" }],
+
+
+  "payType": [{
+    "Value": "0",
+    "Text": "微信" },
+  {
+    "Value": "1",
+    "Text": "支付宝" },
+  {
+    "Value": "2",
+    "Text": "购物券" }],
+
+  "detailType": [{
+    "Value": "0",
+    "Text": "余额收入明细" },
+  {
+    "Value": "1",
+    "Text": "余额支出明细" },
+  {
+    "Value": "2",
+    "Text": "购物券券收入明细" },
+  {
+    "Value": "3",
+    "Text": "购物券券支出明细" }],
+
+  "orderStatus": [{
+    "Value": "0",
+    "Text": "待付款" },
+  {
+    "Value": "1",
+    "Text": "待发货" },
+  {
+    "Value": "2",
+    "Text": "待收货" },
+  {
+    "Value": "3",
+    "Text": "待评价" },
+  {
+    "Value": "4",
+    "Text": "待退款" },
+  {
+    "Value": "5",
+    "Text": "交易成功" },
+  {
+    "Value": "9",
+    "Text": "交易关闭" }],
+
+  "orderRefund": [],
+  "auditStatus": [{
+    "Value": "0",
+    "Text": "待商家审核" },
+  {
+    "Value": "1",
+    "Text": "待商家收货" },
+  {
+    "Value": "2",
+    "Text": "商家拒绝" },
+  {
+    "Value": "3",
+    "Text": "商家通过审核" },
+  {
+    "Value": "4",
+    "Text": "用户取消退款" },
+  {
+    "Value": "5",
+    "Text": "商家退款成功" }],
+
+  "refundType": [{
+    "Value": "0",
+    "Text": "退款 " },
+  {
+    "Value": "1",
+    "Text": "退货退款" }],
+
+  "refundPayStatus": [{
+    "Value": "0",
+    "Text": "待支付" },
+  {
+    "Value": "1",
+    "Text": "支付成功" },
+  {
+    "Value": "2",
+    "Text": "支付失败" }],
+
+  "refundPayType": [{
+    "Value": "1",
+    "Text": "原路返回" },
+  {
+    "Value": "2",
+    "Text": "线下支付" },
+  {
+    "Value": "3",
+    "Text": "退到预付款" }],
+
+  "classList": [{
+    "class_code": "174a73b64ed840e3889029b3cb917357",
+    "class_name": "感应洁具",
+    "class_logo": "http://h5.gllo.com.cn/upload/shopclasslogo/4F2A13B32488DF889250C2F0A77724AD.png",
+    "class_descript": "感应洁具" },
+  {
+    "class_code": "40df750b4e2149c08698d2a2292275f3",
+    "class_name": "水龙头",
+    "class_logo": "http://h5.gllo.com.cn/upload/shopclasslogo/545B0CA76C593F1A2D2288D85C72677.png",
+    "class_descript": "水龙头" },
+  {
+    "class_code": "58bacbcdc23245e48e3f54edfd70e8b4",
+    "class_name": "马桶",
+    "class_logo": "http://h5.gllo.com.cn/upload/shopclasslogo/9D2F051FAEFD0B26B5CDF8A3D45D1AF.png",
+    "class_descript": "马桶" },
+  {
+    "class_code": "6a5be108765441fea4c3f3342e956d1e",
+    "class_name": "花洒系列",
+    "class_logo": "http://h5.gllo.com.cn/upload/shopclasslogo/D55C1CC49E92B48618E1E870C4814C8F.png",
+    "class_descript": "花洒系列" }],
+
+  "fatherClassList": [{
+    "class_code": "174a73b64ed840e3889029b3cb917357",
+    "class_name": "感应洁具",
+    "class_logo": "http://h5.gllo.com.cn/upload/shopclasslogo/4F2A13B32488DF889250C2F0A77724AD.png",
+    "class_descript": "感应洁具" },
+  {
+    "class_code": "40df750b4e2149c08698d2a2292275f3",
+    "class_name": "水龙头",
+    "class_logo": "http://h5.gllo.com.cn/upload/shopclasslogo/545B0CA76C593F1A2D2288D85C72677.png",
+    "class_descript": "水龙头" },
+  {
+    "class_code": "58bacbcdc23245e48e3f54edfd70e8b4",
+    "class_name": "马桶",
+    "class_logo": "http://h5.gllo.com.cn/upload/shopclasslogo/9D2F051FAEFD0B26B5CDF8A3D45D1AF.png",
+    "class_descript": "马桶" },
+  {
+    "class_code": "6a5be108765441fea4c3f3342e956d1e",
+    "class_name": "花洒系列",
+    "class_logo": "http://h5.gllo.com.cn/upload/shopclasslogo/D55C1CC49E92B48618E1E870C4814C8F.png",
+    "class_descript": "花洒系列" },
+  {
+    "class_code": "257eebee16c2456597ca8534ad4d283b",
+    "class_name": "配件/挂件",
+    "class_logo": "http://h5.gllo.com.cn/upload/shopclasslogo/2C1C7F5EF8FE405A40ADC8C9266D84BF.png",
+    "class_descript": "配件" },
+  {
+    "class_code": "4a24ebc16e6d4ded86081ff77ba9acbe",
+    "class_name": "其他",
+    "class_logo": "",
+    "class_descript": "" }],
+
+  "banerList": [{
+    "Text": "http://h5.gllo.com.cn/upload/cmslinkimage/879686C29035716E179D52E99ECE9FAB.jpg",
+    "Url": "/pages/classify/products/products?type=1",
+    "Value": "龙头专区" },
+  {
+    "Text": "http://h5.gllo.com.cn/upload/cmslinkimage/1FBCF99869ABE49D1EDE857C88FECB8.jpg",
+    "Url": "/pages/classify/products/products?type=3",
+    "Value": "花洒专区" },
+  {
+    "Text": "http://h5.gllo.com.cn/upload/cmslinkimage/16062E891B0BE58D24DAE4CFCD75937.jpg",
+    "Url": "/pages/classify/products/products?type=2",
+    "Value": "智能马桶专区" }],
+
+  "iconList": [{
+    "Value": "4",
+    "Text": "http://h5.gllo.com.cn/upload/cmslinkimage/4E6F28FC8DED157F5BEC9AA8D61CEA6.png" },
+  {
+    "Value": "3",
+    "Text": "http://h5.gllo.com.cn/upload/cmslinkimage/81C9925C9E4D12E6E481973631E3C6C.png" },
+  {
+    "Value": "2",
+    "Text": "http://h5.gllo.com.cn/upload/cmslinkimage/D1FD9EBE70E47F7499107E7471915150.png" },
+  {
+    "Value": "1",
+    "Text": "http://h5.gllo.com.cn/upload/cmslinkimage/38241656FDA8C4F844B265653BAC373.png" }],
+
+  "indexGoodsList": [{
+    "Value": "4cb5889c315540b4aa4e7ec16d166de0",
+    "Text": "http://h5.gllo.com.cn/upload/cmslinkimage/23419D3FCFF41D17E540747DF9FF6.jpg" },
+  {
+    "Value": "722f992f104e4e1f91505ff255b61e00",
+    "Text": "http://h5.gllo.com.cn/upload/cmslinkimage/36BA0B571D368C3394C4437D6C6222.jpg" },
+  {
+    "Value": "bc1f6cefb75d4897ac3df86da02e2be5",
+    "Text": "http://h5.gllo.com.cn/upload/cmslinkimage/77BC59FF848379C3BE525A4D35B79A9D.jpg" },
+  {
+    "Value": "6e13bf0a62c441b596a8df4ae272c457",
+    "Text": "http://h5.gllo.com.cn/upload/cmslinkimage/26BDD6D99914250722CDE99210A9CCB.jpg" }],
+
+  "project_service1": [{
+    "Value": "d4863b21098648a1b5637f402c1af139",
+    "Text": "送货入户",
+    "price": 0.0 },
+  {
+    "Value": "4e858f482ef34c1d92cc7cd6d6207bc9",
+    "Text": "上门安装",
+    "price": 53.35 },
+  {
+    "Value": "5c7f30cfdb7d43af84e63745266901fb",
+    "Text": "送货入户并安装",
+    "price": 76.0 }],
+
+  "project_service2": [{
+    "Value": "c8c2a6efbc5d479c907a6c2e1ecee7e0",
+    "Text": "全面保修二年",
+    "price": 260.0 },
+  {
+    "Value": "b630b784555c49a4a33cb3996a0b5e50",
+    "Text": "全面保修三年",
+    "price": 288.0 }],
+
+  "project_service3": [{
+    "Value": "d9580f1dc11342ce9d3db79dd8ff6208",
+    "Text": "意外保修三年",
+    "price": 212.0 },
+  {
+    "Value": "fcfadfddb8e741d2bc52dfe6eeca878f",
+    "Text": "意外保修二年",
+    "price": 231.0 }],
+
+  "pay_route": [{
+    "Value": "CCB",
+    "Text": "建设银行" },
+  {
+    "Value": "test",
+    "Text": "测试" }],
+
+  "is_refund": [{
+    "Value": "0",
+    "Text": "未退款" },
+  {
+    "Value": "1",
+    "Text": "退款中" },
+  {
+    "Value": "2",
+    "Text": "退款失败" },
+  {
+    "Value": "3",
+    "Text": "退款成功" },
+  {
+    "Value": "4",
+    "Text": "取消退款" }] };var _default =
+
+
+
+set;exports.default = _default;
+
+/***/ }),
+
+/***/ 3:
 /*!***********************************!*\
   !*** (webpack)/buildin/global.js ***!
   \***********************************/
@@ -7622,7 +11420,8 @@ module.exports = g;
 
 
 /***/ }),
-/* 4 */
+
+/***/ 4:
 /*!*********************************************************************************************!*\
   !*** ./node_modules/@vue/babel-preset-app/node_modules/@babel/runtime/regenerator/index.js ***!
   \*********************************************************************************************/
@@ -7632,7 +11431,8 @@ module.exports = g;
 module.exports = __webpack_require__(/*! regenerator-runtime */ 5);
 
 /***/ }),
-/* 5 */
+
+/***/ 5:
 /*!************************************************************!*\
   !*** ./node_modules/regenerator-runtime/runtime-module.js ***!
   \************************************************************/
@@ -7679,7 +11479,8 @@ if (hadRuntime) {
 
 
 /***/ }),
-/* 6 */
+
+/***/ 6:
 /*!*****************************************************!*\
   !*** ./node_modules/regenerator-runtime/runtime.js ***!
   \*****************************************************/
@@ -8410,7 +12211,8 @@ if (hadRuntime) {
 
 
 /***/ }),
-/* 7 */
+
+/***/ 7:
 /*!********************************!*\
   !*** G:/work/马桶福利购/pages.json ***!
   \********************************/
@@ -8419,2696 +12221,7 @@ if (hadRuntime) {
 
 
 
-/***/ }),
-/* 8 */,
-/* 9 */,
-/* 10 */,
-/* 11 */
-/*!*****************************************!*\
-  !*** G:/work/马桶福利购/utils/http/index.js ***!
-  \*****************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _interface = _interopRequireDefault(__webpack_require__(/*! ./interface */ 12));
-
-
-var _auth = _interopRequireDefault(__webpack_require__(/*! ../module/auth.js */ 16));
-var _SET = _interopRequireDefault(__webpack_require__(/*! ../../SET.js */ 15));
-
-var _business = _interopRequireDefault(__webpack_require__(/*! ../module/business.js */ 17));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}
-
-// 集合部分升星
-// import LevelUp from '../module/levelUp.js'
-
-/**
- * 将业务所有接口统一起来便于维护
- * 如果项目很大可以将 url 独立成文件，接口分成不同的模块
- * 
- */
-
-// 单独导出(测试接口) import {test} from '@/common/vmeitime-http/'
-// export const test = (data) => {
-// 	// /* http.config.baseUrl = "http://localhost:8080/api/"
-// 	//设置请求前拦截器 若设置会覆盖全局
-// 	http.interceptor.request = (config) => {
-// 		config.header = {
-// 			"token": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
-// 		}
-// 		console.log('个性化request....');
-// 		// return config
-// 	} 
-// 	//设置请求结束后拦截器
-// 	http.interceptor.response = (response) => {
-// 		console.log('个性化response....')
-// 		//判断返回状态 执行相应操作
-// 		return response; 
-// 	}
-//     return http.request({
-// 		// baseUrl: 'https://unsdaf.net.cn/',
-//         url: 'ajax/echo/text?name=uni-app',
-// 		dataType: 'text',
-//         data,
-//     })
-// }
-// 
-
-
-// 默认全部导出  import api from '@/common/vmeitime-http/'
-var _default = _objectSpread({},
-_auth.default, {},
-_business.default, {
-  // ...LevelUp,
-  baseUrl: _SET.default.baseUrl,
-  mainUrl: _SET.default.mainUrl });
-
-
-// export const baseUrl = 'http://taobao.fjdmll.com'
-exports.default = _default;
-
-/***/ }),
-/* 12 */
-/*!*********************************************!*\
-  !*** G:/work/马桶福利购/utils/http/interface.js ***!
-  \*********************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
-
-
-
-var _index = _interopRequireDefault(__webpack_require__(/*! ../../store/index.js */ 13));
-var _SET = _interopRequireDefault(__webpack_require__(/*! ../../SET.js */ 15));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} /**
-                                                                                                                                                          * 通用uni-app网络请求
-                                                                                                                                                          * 基于 Promise 对象实现更简单的 request 使用方式，支持请求和响应拦截
-                                                                                                                                                          */var _default = { config: { // baseUrl: "https://hp.fjhjc.net/Data",
-    baseUrl: _SET.default.baseUrl,
-
-    // baseUrl: "https://testapi.kuxiong999.com",   //测试连接
-    header: {
-      'Content-Type': 'application/json;charset=UTF-8'
-      // 'Content-Type':'application/x-www-form-urlencoded'
-    },
-    data: {},
-    method: "GET",
-    dataType: "json",
-    /* 如设为json，会对返回的数据做一次 JSON.parse */
-    responseType: "text",
-    success: function success() {},
-    fail: function fail() {},
-    complete: function complete() {
-
-    } },
-
-  interceptor: {
-    request: function request(config, ifLoad) {
-      var value = uni.getStorageSync('hepai_token');
-      // console.log(value)
-      if (value) {
-        config.header.Authorization = value;
-      }
-      return config;
-    },
-    response: function response(_response, ifLoad) {
-      var statusCode = _response.statusCode;
-      var that = this;
-      // console.log(response)
-      // 一般在这里做全局的错误事件处理
-      if (statusCode === 200) {//成功
-        return _response.data;
-      } else if (statusCode === 401) {
-        // if (true) {	
-        if (!_index.default.state.hasLogin) return;
-        uni.showModal({
-          title: ' 洁利来商城提醒您',
-          content: '登陆状态失效,请重新登陆',
-          showCancel: false,
-          success: function success(res) {
-            if (res.confirm) {
-              uni.removeStorageSync('hepai_token');
-              uni.removeStorageSync('user');
-              uni.navigateTo({
-                url: '/pages/role/login/login' });
-
-            }
-          } });
-
-        return '权限失效';
-      } else if (_response.errMsg == "request:fail abort") {
-
-
-
-
-
-
-        var ifLock = uni.getStorageSync('errlock');
-        console.log(ifLock);
-        // uni.setStorageSync('errlock',false)
-        if (!ifLock) {
-          uni.setStorageSync('errlock', true);
-          setTimeout(function () {
-            uni.navigateTo({
-              url: '/pages/errors/errors' });
-
-
-          }, 1000);
-
-        }
-
-
-        return '请检查网络';
-      } else {
-
-        return '未知错误';
-      }
-
-    } },
-
-  request: function request(options, ifLoad) {var _this = this;
-    var that = this;
-    if (!options) {
-      options = {};
-    }
-    options.baseUrl = options.baseUrl || this.config.baseUrl;
-    options.dataType = options.dataType || this.config.dataType;
-    options.url = options.baseUrl + options.url;
-    options.data = options.data || {};
-    options.method = options.method || this.config.method;
-    options.timeout = 10000;
-    // console.log('执行')
-
-    return new Promise(function (resolve, reject) {
-      var _config = null;
-
-      options.complete = function (response) {
-        var statusCode = response.statusCode;
-        // console.log(response)
-        // response.config = _config
-        if (_this.interceptor.response) {
-          // reject('没有权限')
-          var re = _this.interceptor.response(response, ifLoad);
-          // console.log(re)
-          if (re === '权限失效') {
-            reject('权限失效');
-            return;
-          } else if (re === '请检查网络') {
-            reject('请检查网络');
-            return;
-          } else if (re === '未知错误') {
-            reject('未知错误');
-            return;
-          } else {
-            resolve(re);
-          }
-        }
-
-      };
-
-      _config = Object.assign({}, _this.config, options);
-      _config.requestId = new Date().getTime();
-      // console.log(_config)
-      if (_this.interceptor.request) {
-        var re = _this.interceptor.request(_config, ifLoad);
-        _config = re;
-      }
-
-
-      uni.request(_config);
-    });
-  } };
-
-
-
-/**
-        * 请求接口日志记录
-        */exports.default = _default;
-function _reqlog(req) {
-  if (true) {
-    // console.log("【" + req.requestId + "】 地址：" + req.url)
-    if (req.data) {
-      // console.log("【" + req.requestId + "】 请求参数：" + JSON.stringify(req.data))
-    }
-  }
-  //TODO 调接口异步写入日志数据库
-}
-
-/**
-   * 响应接口日志记录
-   */
-function _reslog(res) {
-  var _statusCode = res.statusCode;
-  if (true) {
-    // console.log("【" + res.config.requestId + "】 地址：" + res.config.url)
-    if (res.config.data) {
-
-    } // console.log("【" + res.config.requestId + "】 请求参数：" + JSON.stringify(res.config.data))
-    // console.log("【" + res.config.requestId + "】 响应结果：" + JSON.stringify(res))
-  }
-  //TODO 除了接口服务错误外，其他日志调接口异步写入日志数据库
-  switch (_statusCode) {
-    case 200:
-      break;
-    case 401:
-      break;
-    case 404:
-      break;
-    default:
-      break;}
-
-}
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
-
-/***/ }),
-/* 13 */
-/*!************************************!*\
-  !*** G:/work/马桶福利购/store/index.js ***!
-  \************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ 2));
-var _vuex = _interopRequireDefault(__webpack_require__(/*! vuex */ 14));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _toConsumableArray(arr) {return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread();}function _nonIterableSpread() {throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");}function _unsupportedIterableToArray(o, minLen) {if (!o) return;if (typeof o === "string") return _arrayLikeToArray(o, minLen);var n = Object.prototype.toString.call(o).slice(8, -1);if (n === "Object" && o.constructor) n = o.constructor.name;if (n === "Map" || n === "Set") return Array.from(n);if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);}function _iterableToArray(iter) {if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter);}function _arrayWithoutHoles(arr) {if (Array.isArray(arr)) return _arrayLikeToArray(arr);}function _arrayLikeToArray(arr, len) {if (len == null || len > arr.length) len = arr.length;for (var i = 0, arr2 = new Array(len); i < len; i++) {arr2[i] = arr[i];}return arr2;}function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}
-
-_vue.default.use(_vuex.default);
-
-var store = new _vuex.default.Store({
-  state: {
-    /**
-            * 是否需要强制登录
-            */
-    forcedLogin: false,
-    hasLogin: false,
-    userInfo: {}, //用户微信获得基本信息
-    accountInfo: {}, //账户基本信息
-    merchantInfo: {}, //店铺基本信息
-    levelAccount: {}, //渠道个人信息
-    config: {},
-    currentChannel: 0, //1聚友之家  2粉丝空间 3vip空间
-    cards: {}, //购物车
-    currentOrder: [], //创建订单
-    currentPro: {},
-    currentRoleCode: '' //聚友空间当前的账户身份的 code
-  },
-  mutations: {
-    login: function login(state, userName) {
-      console.log('login_STORE');
-      state.hasLogin = true;
-    },
-    logout: function logout(state) {
-      state.hasLogin = false;
-      state.accountInfo = {}; //账户基本信息
-      state.merchantInfo = {}; //店铺基本信息
-      state.levelAccount = {}; //渠道个人信息
-    },
-    setRoleCode: function setRoleCode(state, info) {
-      // console.log('储存信息1')
-      state.currentRoleCode = info;
-    },
-    setUserInfo: function setUserInfo(state, info) {
-      // console.log('储存信息1')
-      state.userInfo = _objectSpread({}, info);
-    },
-    setAccountInfo: function setAccountInfo(state, info) {
-      // console.log('储存信息2')
-      state.accountInfo = _objectSpread({}, info);
-    },
-    setConfig: function setConfig(state, info) {
-      // console.log('储存信息2')
-      state.config = _objectSpread({}, info);
-    },
-    setMerchantInfo: function setMerchantInfo(state, info) {
-      // console.log('储存信息2')
-      state.merchantInfo = _objectSpread({}, info);
-    },
-    setCurrentChannel: function setCurrentChannel(state, info) {
-      state.currentChannel = info;
-    },
-    setLevelAccountInfo: function setLevelAccountInfo(state, info) {
-      state.levelAccount = info;
-    },
-    addCard: function addCard(state, item) {
-
-      state.cards = Object.assign(state.cards, item);
-      // console.log(state.cards)
-    },
-    creatOrder: function creatOrder(state, items) {
-      state.currentOrder = _toConsumableArray(items);
-      // debugger
-    },
-    completeOrder: function completeOrder(state) {
-      state.currentOrder = new Array();
-    },
-    currenPro: function currenPro(state, items) {
-      state.currentPro = _objectSpread({}, items);
-    } },
-
-  getters: {
-    cardsProduct: function cardsProduct(state) {
-      // console.log(state.cards)
-      // let arr = Object.values(state.cards)  不能用额
-      // let arr = Object.keys(state.cards) 
-      // let res = []
-      // arr.forEach(item=>{
-      // 	res.push(state.cards[item])
-      // })
-      // console.log(res)
-      // return res
-      return state.cards;
-    } } });var _default =
-
-
-
-store;exports.default = _default;
-
-/***/ }),
-/* 14 */
-/*!********************************************!*\
-  !*** ./node_modules/vuex/dist/vuex.esm.js ***!
-  \********************************************/
-/*! exports provided: Store, install, mapState, mapMutations, mapGetters, mapActions, createNamespacedHelpers, default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Store", function() { return Store; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "install", function() { return install; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "mapState", function() { return mapState; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "mapMutations", function() { return mapMutations; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "mapGetters", function() { return mapGetters; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "mapActions", function() { return mapActions; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createNamespacedHelpers", function() { return createNamespacedHelpers; });
-/**
- * vuex v3.0.1
- * (c) 2017 Evan You
- * @license MIT
- */
-var applyMixin = function (Vue) {
-  var version = Number(Vue.version.split('.')[0]);
-
-  if (version >= 2) {
-    Vue.mixin({ beforeCreate: vuexInit });
-  } else {
-    // override init and inject vuex init procedure
-    // for 1.x backwards compatibility.
-    var _init = Vue.prototype._init;
-    Vue.prototype._init = function (options) {
-      if ( options === void 0 ) options = {};
-
-      options.init = options.init
-        ? [vuexInit].concat(options.init)
-        : vuexInit;
-      _init.call(this, options);
-    };
-  }
-
-  /**
-   * Vuex init hook, injected into each instances init hooks list.
-   */
-
-  function vuexInit () {
-    var options = this.$options;
-    // store injection
-    if (options.store) {
-      this.$store = typeof options.store === 'function'
-        ? options.store()
-        : options.store;
-    } else if (options.parent && options.parent.$store) {
-      this.$store = options.parent.$store;
-    }
-  }
-};
-
-var devtoolHook =
-  typeof window !== 'undefined' &&
-  window.__VUE_DEVTOOLS_GLOBAL_HOOK__;
-
-function devtoolPlugin (store) {
-  if (!devtoolHook) { return }
-
-  store._devtoolHook = devtoolHook;
-
-  devtoolHook.emit('vuex:init', store);
-
-  devtoolHook.on('vuex:travel-to-state', function (targetState) {
-    store.replaceState(targetState);
-  });
-
-  store.subscribe(function (mutation, state) {
-    devtoolHook.emit('vuex:mutation', mutation, state);
-  });
-}
-
-/**
- * Get the first item that pass the test
- * by second argument function
- *
- * @param {Array} list
- * @param {Function} f
- * @return {*}
- */
-/**
- * Deep copy the given object considering circular structure.
- * This function caches all nested objects and its copies.
- * If it detects circular structure, use cached copy to avoid infinite loop.
- *
- * @param {*} obj
- * @param {Array<Object>} cache
- * @return {*}
- */
-
-
-/**
- * forEach for object
- */
-function forEachValue (obj, fn) {
-  Object.keys(obj).forEach(function (key) { return fn(obj[key], key); });
-}
-
-function isObject (obj) {
-  return obj !== null && typeof obj === 'object'
-}
-
-function isPromise (val) {
-  return val && typeof val.then === 'function'
-}
-
-function assert (condition, msg) {
-  if (!condition) { throw new Error(("[vuex] " + msg)) }
-}
-
-var Module = function Module (rawModule, runtime) {
-  this.runtime = runtime;
-  this._children = Object.create(null);
-  this._rawModule = rawModule;
-  var rawState = rawModule.state;
-  this.state = (typeof rawState === 'function' ? rawState() : rawState) || {};
-};
-
-var prototypeAccessors$1 = { namespaced: { configurable: true } };
-
-prototypeAccessors$1.namespaced.get = function () {
-  return !!this._rawModule.namespaced
-};
-
-Module.prototype.addChild = function addChild (key, module) {
-  this._children[key] = module;
-};
-
-Module.prototype.removeChild = function removeChild (key) {
-  delete this._children[key];
-};
-
-Module.prototype.getChild = function getChild (key) {
-  return this._children[key]
-};
-
-Module.prototype.update = function update (rawModule) {
-  this._rawModule.namespaced = rawModule.namespaced;
-  if (rawModule.actions) {
-    this._rawModule.actions = rawModule.actions;
-  }
-  if (rawModule.mutations) {
-    this._rawModule.mutations = rawModule.mutations;
-  }
-  if (rawModule.getters) {
-    this._rawModule.getters = rawModule.getters;
-  }
-};
-
-Module.prototype.forEachChild = function forEachChild (fn) {
-  forEachValue(this._children, fn);
-};
-
-Module.prototype.forEachGetter = function forEachGetter (fn) {
-  if (this._rawModule.getters) {
-    forEachValue(this._rawModule.getters, fn);
-  }
-};
-
-Module.prototype.forEachAction = function forEachAction (fn) {
-  if (this._rawModule.actions) {
-    forEachValue(this._rawModule.actions, fn);
-  }
-};
-
-Module.prototype.forEachMutation = function forEachMutation (fn) {
-  if (this._rawModule.mutations) {
-    forEachValue(this._rawModule.mutations, fn);
-  }
-};
-
-Object.defineProperties( Module.prototype, prototypeAccessors$1 );
-
-var ModuleCollection = function ModuleCollection (rawRootModule) {
-  // register root module (Vuex.Store options)
-  this.register([], rawRootModule, false);
-};
-
-ModuleCollection.prototype.get = function get (path) {
-  return path.reduce(function (module, key) {
-    return module.getChild(key)
-  }, this.root)
-};
-
-ModuleCollection.prototype.getNamespace = function getNamespace (path) {
-  var module = this.root;
-  return path.reduce(function (namespace, key) {
-    module = module.getChild(key);
-    return namespace + (module.namespaced ? key + '/' : '')
-  }, '')
-};
-
-ModuleCollection.prototype.update = function update$1 (rawRootModule) {
-  update([], this.root, rawRootModule);
-};
-
-ModuleCollection.prototype.register = function register (path, rawModule, runtime) {
-    var this$1 = this;
-    if ( runtime === void 0 ) runtime = true;
-
-  if (true) {
-    assertRawModule(path, rawModule);
-  }
-
-  var newModule = new Module(rawModule, runtime);
-  if (path.length === 0) {
-    this.root = newModule;
-  } else {
-    var parent = this.get(path.slice(0, -1));
-    parent.addChild(path[path.length - 1], newModule);
-  }
-
-  // register nested modules
-  if (rawModule.modules) {
-    forEachValue(rawModule.modules, function (rawChildModule, key) {
-      this$1.register(path.concat(key), rawChildModule, runtime);
-    });
-  }
-};
-
-ModuleCollection.prototype.unregister = function unregister (path) {
-  var parent = this.get(path.slice(0, -1));
-  var key = path[path.length - 1];
-  if (!parent.getChild(key).runtime) { return }
-
-  parent.removeChild(key);
-};
-
-function update (path, targetModule, newModule) {
-  if (true) {
-    assertRawModule(path, newModule);
-  }
-
-  // update target module
-  targetModule.update(newModule);
-
-  // update nested modules
-  if (newModule.modules) {
-    for (var key in newModule.modules) {
-      if (!targetModule.getChild(key)) {
-        if (true) {
-          console.warn(
-            "[vuex] trying to add a new module '" + key + "' on hot reloading, " +
-            'manual reload is needed'
-          );
-        }
-        return
-      }
-      update(
-        path.concat(key),
-        targetModule.getChild(key),
-        newModule.modules[key]
-      );
-    }
-  }
-}
-
-var functionAssert = {
-  assert: function (value) { return typeof value === 'function'; },
-  expected: 'function'
-};
-
-var objectAssert = {
-  assert: function (value) { return typeof value === 'function' ||
-    (typeof value === 'object' && typeof value.handler === 'function'); },
-  expected: 'function or object with "handler" function'
-};
-
-var assertTypes = {
-  getters: functionAssert,
-  mutations: functionAssert,
-  actions: objectAssert
-};
-
-function assertRawModule (path, rawModule) {
-  Object.keys(assertTypes).forEach(function (key) {
-    if (!rawModule[key]) { return }
-
-    var assertOptions = assertTypes[key];
-
-    forEachValue(rawModule[key], function (value, type) {
-      assert(
-        assertOptions.assert(value),
-        makeAssertionMessage(path, key, type, value, assertOptions.expected)
-      );
-    });
-  });
-}
-
-function makeAssertionMessage (path, key, type, value, expected) {
-  var buf = key + " should be " + expected + " but \"" + key + "." + type + "\"";
-  if (path.length > 0) {
-    buf += " in module \"" + (path.join('.')) + "\"";
-  }
-  buf += " is " + (JSON.stringify(value)) + ".";
-  return buf
-}
-
-var Vue; // bind on install
-
-var Store = function Store (options) {
-  var this$1 = this;
-  if ( options === void 0 ) options = {};
-
-  // Auto install if it is not done yet and `window` has `Vue`.
-  // To allow users to avoid auto-installation in some cases,
-  // this code should be placed here. See #731
-  if (!Vue && typeof window !== 'undefined' && window.Vue) {
-    install(window.Vue);
-  }
-
-  if (true) {
-    assert(Vue, "must call Vue.use(Vuex) before creating a store instance.");
-    assert(typeof Promise !== 'undefined', "vuex requires a Promise polyfill in this browser.");
-    assert(this instanceof Store, "Store must be called with the new operator.");
-  }
-
-  var plugins = options.plugins; if ( plugins === void 0 ) plugins = [];
-  var strict = options.strict; if ( strict === void 0 ) strict = false;
-
-  var state = options.state; if ( state === void 0 ) state = {};
-  if (typeof state === 'function') {
-    state = state() || {};
-  }
-
-  // store internal state
-  this._committing = false;
-  this._actions = Object.create(null);
-  this._actionSubscribers = [];
-  this._mutations = Object.create(null);
-  this._wrappedGetters = Object.create(null);
-  this._modules = new ModuleCollection(options);
-  this._modulesNamespaceMap = Object.create(null);
-  this._subscribers = [];
-  this._watcherVM = new Vue();
-
-  // bind commit and dispatch to self
-  var store = this;
-  var ref = this;
-  var dispatch = ref.dispatch;
-  var commit = ref.commit;
-  this.dispatch = function boundDispatch (type, payload) {
-    return dispatch.call(store, type, payload)
-  };
-  this.commit = function boundCommit (type, payload, options) {
-    return commit.call(store, type, payload, options)
-  };
-
-  // strict mode
-  this.strict = strict;
-
-  // init root module.
-  // this also recursively registers all sub-modules
-  // and collects all module getters inside this._wrappedGetters
-  installModule(this, state, [], this._modules.root);
-
-  // initialize the store vm, which is responsible for the reactivity
-  // (also registers _wrappedGetters as computed properties)
-  resetStoreVM(this, state);
-
-  // apply plugins
-  plugins.forEach(function (plugin) { return plugin(this$1); });
-
-  if (Vue.config.devtools) {
-    devtoolPlugin(this);
-  }
-};
-
-var prototypeAccessors = { state: { configurable: true } };
-
-prototypeAccessors.state.get = function () {
-  return this._vm._data.$$state
-};
-
-prototypeAccessors.state.set = function (v) {
-  if (true) {
-    assert(false, "Use store.replaceState() to explicit replace store state.");
-  }
-};
-
-Store.prototype.commit = function commit (_type, _payload, _options) {
-    var this$1 = this;
-
-  // check object-style commit
-  var ref = unifyObjectStyle(_type, _payload, _options);
-    var type = ref.type;
-    var payload = ref.payload;
-    var options = ref.options;
-
-  var mutation = { type: type, payload: payload };
-  var entry = this._mutations[type];
-  if (!entry) {
-    if (true) {
-      console.error(("[vuex] unknown mutation type: " + type));
-    }
-    return
-  }
-  this._withCommit(function () {
-    entry.forEach(function commitIterator (handler) {
-      handler(payload);
-    });
-  });
-  this._subscribers.forEach(function (sub) { return sub(mutation, this$1.state); });
-
-  if (
-     true &&
-    options && options.silent
-  ) {
-    console.warn(
-      "[vuex] mutation type: " + type + ". Silent option has been removed. " +
-      'Use the filter functionality in the vue-devtools'
-    );
-  }
-};
-
-Store.prototype.dispatch = function dispatch (_type, _payload) {
-    var this$1 = this;
-
-  // check object-style dispatch
-  var ref = unifyObjectStyle(_type, _payload);
-    var type = ref.type;
-    var payload = ref.payload;
-
-  var action = { type: type, payload: payload };
-  var entry = this._actions[type];
-  if (!entry) {
-    if (true) {
-      console.error(("[vuex] unknown action type: " + type));
-    }
-    return
-  }
-
-  this._actionSubscribers.forEach(function (sub) { return sub(action, this$1.state); });
-
-  return entry.length > 1
-    ? Promise.all(entry.map(function (handler) { return handler(payload); }))
-    : entry[0](payload)
-};
-
-Store.prototype.subscribe = function subscribe (fn) {
-  return genericSubscribe(fn, this._subscribers)
-};
-
-Store.prototype.subscribeAction = function subscribeAction (fn) {
-  return genericSubscribe(fn, this._actionSubscribers)
-};
-
-Store.prototype.watch = function watch (getter, cb, options) {
-    var this$1 = this;
-
-  if (true) {
-    assert(typeof getter === 'function', "store.watch only accepts a function.");
-  }
-  return this._watcherVM.$watch(function () { return getter(this$1.state, this$1.getters); }, cb, options)
-};
-
-Store.prototype.replaceState = function replaceState (state) {
-    var this$1 = this;
-
-  this._withCommit(function () {
-    this$1._vm._data.$$state = state;
-  });
-};
-
-Store.prototype.registerModule = function registerModule (path, rawModule, options) {
-    if ( options === void 0 ) options = {};
-
-  if (typeof path === 'string') { path = [path]; }
-
-  if (true) {
-    assert(Array.isArray(path), "module path must be a string or an Array.");
-    assert(path.length > 0, 'cannot register the root module by using registerModule.');
-  }
-
-  this._modules.register(path, rawModule);
-  installModule(this, this.state, path, this._modules.get(path), options.preserveState);
-  // reset store to update getters...
-  resetStoreVM(this, this.state);
-};
-
-Store.prototype.unregisterModule = function unregisterModule (path) {
-    var this$1 = this;
-
-  if (typeof path === 'string') { path = [path]; }
-
-  if (true) {
-    assert(Array.isArray(path), "module path must be a string or an Array.");
-  }
-
-  this._modules.unregister(path);
-  this._withCommit(function () {
-    var parentState = getNestedState(this$1.state, path.slice(0, -1));
-    Vue.delete(parentState, path[path.length - 1]);
-  });
-  resetStore(this);
-};
-
-Store.prototype.hotUpdate = function hotUpdate (newOptions) {
-  this._modules.update(newOptions);
-  resetStore(this, true);
-};
-
-Store.prototype._withCommit = function _withCommit (fn) {
-  var committing = this._committing;
-  this._committing = true;
-  fn();
-  this._committing = committing;
-};
-
-Object.defineProperties( Store.prototype, prototypeAccessors );
-
-function genericSubscribe (fn, subs) {
-  if (subs.indexOf(fn) < 0) {
-    subs.push(fn);
-  }
-  return function () {
-    var i = subs.indexOf(fn);
-    if (i > -1) {
-      subs.splice(i, 1);
-    }
-  }
-}
-
-function resetStore (store, hot) {
-  store._actions = Object.create(null);
-  store._mutations = Object.create(null);
-  store._wrappedGetters = Object.create(null);
-  store._modulesNamespaceMap = Object.create(null);
-  var state = store.state;
-  // init all modules
-  installModule(store, state, [], store._modules.root, true);
-  // reset vm
-  resetStoreVM(store, state, hot);
-}
-
-function resetStoreVM (store, state, hot) {
-  var oldVm = store._vm;
-
-  // bind store public getters
-  store.getters = {};
-  var wrappedGetters = store._wrappedGetters;
-  var computed = {};
-  forEachValue(wrappedGetters, function (fn, key) {
-    // use computed to leverage its lazy-caching mechanism
-    computed[key] = function () { return fn(store); };
-    Object.defineProperty(store.getters, key, {
-      get: function () { return store._vm[key]; },
-      enumerable: true // for local getters
-    });
-  });
-
-  // use a Vue instance to store the state tree
-  // suppress warnings just in case the user has added
-  // some funky global mixins
-  var silent = Vue.config.silent;
-  Vue.config.silent = true;
-  store._vm = new Vue({
-    data: {
-      $$state: state
-    },
-    computed: computed
-  });
-  Vue.config.silent = silent;
-
-  // enable strict mode for new vm
-  if (store.strict) {
-    enableStrictMode(store);
-  }
-
-  if (oldVm) {
-    if (hot) {
-      // dispatch changes in all subscribed watchers
-      // to force getter re-evaluation for hot reloading.
-      store._withCommit(function () {
-        oldVm._data.$$state = null;
-      });
-    }
-    Vue.nextTick(function () { return oldVm.$destroy(); });
-  }
-}
-
-function installModule (store, rootState, path, module, hot) {
-  var isRoot = !path.length;
-  var namespace = store._modules.getNamespace(path);
-
-  // register in namespace map
-  if (module.namespaced) {
-    store._modulesNamespaceMap[namespace] = module;
-  }
-
-  // set state
-  if (!isRoot && !hot) {
-    var parentState = getNestedState(rootState, path.slice(0, -1));
-    var moduleName = path[path.length - 1];
-    store._withCommit(function () {
-      Vue.set(parentState, moduleName, module.state);
-    });
-  }
-
-  var local = module.context = makeLocalContext(store, namespace, path);
-
-  module.forEachMutation(function (mutation, key) {
-    var namespacedType = namespace + key;
-    registerMutation(store, namespacedType, mutation, local);
-  });
-
-  module.forEachAction(function (action, key) {
-    var type = action.root ? key : namespace + key;
-    var handler = action.handler || action;
-    registerAction(store, type, handler, local);
-  });
-
-  module.forEachGetter(function (getter, key) {
-    var namespacedType = namespace + key;
-    registerGetter(store, namespacedType, getter, local);
-  });
-
-  module.forEachChild(function (child, key) {
-    installModule(store, rootState, path.concat(key), child, hot);
-  });
-}
-
-/**
- * make localized dispatch, commit, getters and state
- * if there is no namespace, just use root ones
- */
-function makeLocalContext (store, namespace, path) {
-  var noNamespace = namespace === '';
-
-  var local = {
-    dispatch: noNamespace ? store.dispatch : function (_type, _payload, _options) {
-      var args = unifyObjectStyle(_type, _payload, _options);
-      var payload = args.payload;
-      var options = args.options;
-      var type = args.type;
-
-      if (!options || !options.root) {
-        type = namespace + type;
-        if ( true && !store._actions[type]) {
-          console.error(("[vuex] unknown local action type: " + (args.type) + ", global type: " + type));
-          return
-        }
-      }
-
-      return store.dispatch(type, payload)
-    },
-
-    commit: noNamespace ? store.commit : function (_type, _payload, _options) {
-      var args = unifyObjectStyle(_type, _payload, _options);
-      var payload = args.payload;
-      var options = args.options;
-      var type = args.type;
-
-      if (!options || !options.root) {
-        type = namespace + type;
-        if ( true && !store._mutations[type]) {
-          console.error(("[vuex] unknown local mutation type: " + (args.type) + ", global type: " + type));
-          return
-        }
-      }
-
-      store.commit(type, payload, options);
-    }
-  };
-
-  // getters and state object must be gotten lazily
-  // because they will be changed by vm update
-  Object.defineProperties(local, {
-    getters: {
-      get: noNamespace
-        ? function () { return store.getters; }
-        : function () { return makeLocalGetters(store, namespace); }
-    },
-    state: {
-      get: function () { return getNestedState(store.state, path); }
-    }
-  });
-
-  return local
-}
-
-function makeLocalGetters (store, namespace) {
-  var gettersProxy = {};
-
-  var splitPos = namespace.length;
-  Object.keys(store.getters).forEach(function (type) {
-    // skip if the target getter is not match this namespace
-    if (type.slice(0, splitPos) !== namespace) { return }
-
-    // extract local getter type
-    var localType = type.slice(splitPos);
-
-    // Add a port to the getters proxy.
-    // Define as getter property because
-    // we do not want to evaluate the getters in this time.
-    Object.defineProperty(gettersProxy, localType, {
-      get: function () { return store.getters[type]; },
-      enumerable: true
-    });
-  });
-
-  return gettersProxy
-}
-
-function registerMutation (store, type, handler, local) {
-  var entry = store._mutations[type] || (store._mutations[type] = []);
-  entry.push(function wrappedMutationHandler (payload) {
-    handler.call(store, local.state, payload);
-  });
-}
-
-function registerAction (store, type, handler, local) {
-  var entry = store._actions[type] || (store._actions[type] = []);
-  entry.push(function wrappedActionHandler (payload, cb) {
-    var res = handler.call(store, {
-      dispatch: local.dispatch,
-      commit: local.commit,
-      getters: local.getters,
-      state: local.state,
-      rootGetters: store.getters,
-      rootState: store.state
-    }, payload, cb);
-    if (!isPromise(res)) {
-      res = Promise.resolve(res);
-    }
-    if (store._devtoolHook) {
-      return res.catch(function (err) {
-        store._devtoolHook.emit('vuex:error', err);
-        throw err
-      })
-    } else {
-      return res
-    }
-  });
-}
-
-function registerGetter (store, type, rawGetter, local) {
-  if (store._wrappedGetters[type]) {
-    if (true) {
-      console.error(("[vuex] duplicate getter key: " + type));
-    }
-    return
-  }
-  store._wrappedGetters[type] = function wrappedGetter (store) {
-    return rawGetter(
-      local.state, // local state
-      local.getters, // local getters
-      store.state, // root state
-      store.getters // root getters
-    )
-  };
-}
-
-function enableStrictMode (store) {
-  store._vm.$watch(function () { return this._data.$$state }, function () {
-    if (true) {
-      assert(store._committing, "Do not mutate vuex store state outside mutation handlers.");
-    }
-  }, { deep: true, sync: true });
-}
-
-function getNestedState (state, path) {
-  return path.length
-    ? path.reduce(function (state, key) { return state[key]; }, state)
-    : state
-}
-
-function unifyObjectStyle (type, payload, options) {
-  if (isObject(type) && type.type) {
-    options = payload;
-    payload = type;
-    type = type.type;
-  }
-
-  if (true) {
-    assert(typeof type === 'string', ("Expects string as the type, but found " + (typeof type) + "."));
-  }
-
-  return { type: type, payload: payload, options: options }
-}
-
-function install (_Vue) {
-  if (Vue && _Vue === Vue) {
-    if (true) {
-      console.error(
-        '[vuex] already installed. Vue.use(Vuex) should be called only once.'
-      );
-    }
-    return
-  }
-  Vue = _Vue;
-  applyMixin(Vue);
-}
-
-var mapState = normalizeNamespace(function (namespace, states) {
-  var res = {};
-  normalizeMap(states).forEach(function (ref) {
-    var key = ref.key;
-    var val = ref.val;
-
-    res[key] = function mappedState () {
-      var state = this.$store.state;
-      var getters = this.$store.getters;
-      if (namespace) {
-        var module = getModuleByNamespace(this.$store, 'mapState', namespace);
-        if (!module) {
-          return
-        }
-        state = module.context.state;
-        getters = module.context.getters;
-      }
-      return typeof val === 'function'
-        ? val.call(this, state, getters)
-        : state[val]
-    };
-    // mark vuex getter for devtools
-    res[key].vuex = true;
-  });
-  return res
-});
-
-var mapMutations = normalizeNamespace(function (namespace, mutations) {
-  var res = {};
-  normalizeMap(mutations).forEach(function (ref) {
-    var key = ref.key;
-    var val = ref.val;
-
-    res[key] = function mappedMutation () {
-      var args = [], len = arguments.length;
-      while ( len-- ) args[ len ] = arguments[ len ];
-
-      var commit = this.$store.commit;
-      if (namespace) {
-        var module = getModuleByNamespace(this.$store, 'mapMutations', namespace);
-        if (!module) {
-          return
-        }
-        commit = module.context.commit;
-      }
-      return typeof val === 'function'
-        ? val.apply(this, [commit].concat(args))
-        : commit.apply(this.$store, [val].concat(args))
-    };
-  });
-  return res
-});
-
-var mapGetters = normalizeNamespace(function (namespace, getters) {
-  var res = {};
-  normalizeMap(getters).forEach(function (ref) {
-    var key = ref.key;
-    var val = ref.val;
-
-    val = namespace + val;
-    res[key] = function mappedGetter () {
-      if (namespace && !getModuleByNamespace(this.$store, 'mapGetters', namespace)) {
-        return
-      }
-      if ( true && !(val in this.$store.getters)) {
-        console.error(("[vuex] unknown getter: " + val));
-        return
-      }
-      return this.$store.getters[val]
-    };
-    // mark vuex getter for devtools
-    res[key].vuex = true;
-  });
-  return res
-});
-
-var mapActions = normalizeNamespace(function (namespace, actions) {
-  var res = {};
-  normalizeMap(actions).forEach(function (ref) {
-    var key = ref.key;
-    var val = ref.val;
-
-    res[key] = function mappedAction () {
-      var args = [], len = arguments.length;
-      while ( len-- ) args[ len ] = arguments[ len ];
-
-      var dispatch = this.$store.dispatch;
-      if (namespace) {
-        var module = getModuleByNamespace(this.$store, 'mapActions', namespace);
-        if (!module) {
-          return
-        }
-        dispatch = module.context.dispatch;
-      }
-      return typeof val === 'function'
-        ? val.apply(this, [dispatch].concat(args))
-        : dispatch.apply(this.$store, [val].concat(args))
-    };
-  });
-  return res
-});
-
-var createNamespacedHelpers = function (namespace) { return ({
-  mapState: mapState.bind(null, namespace),
-  mapGetters: mapGetters.bind(null, namespace),
-  mapMutations: mapMutations.bind(null, namespace),
-  mapActions: mapActions.bind(null, namespace)
-}); };
-
-function normalizeMap (map) {
-  return Array.isArray(map)
-    ? map.map(function (key) { return ({ key: key, val: key }); })
-    : Object.keys(map).map(function (key) { return ({ key: key, val: map[key] }); })
-}
-
-function normalizeNamespace (fn) {
-  return function (namespace, map) {
-    if (typeof namespace !== 'string') {
-      map = namespace;
-      namespace = '';
-    } else if (namespace.charAt(namespace.length - 1) !== '/') {
-      namespace += '/';
-    }
-    return fn(namespace, map)
-  }
-}
-
-function getModuleByNamespace (store, helper, namespace) {
-  var module = store._modulesNamespaceMap[namespace];
-  if ( true && !module) {
-    console.error(("[vuex] module namespace not found in " + helper + "(): " + namespace));
-  }
-  return module
-}
-
-var index_esm = {
-  Store: Store,
-  install: install,
-  version: '3.0.1',
-  mapState: mapState,
-  mapMutations: mapMutations,
-  mapGetters: mapGetters,
-  mapActions: mapActions,
-  createNamespacedHelpers: createNamespacedHelpers
-};
-
-
-/* harmony default export */ __webpack_exports__["default"] = (index_esm);
-
-
-/***/ }),
-/* 15 */
-/*!****************************!*\
-  !*** G:/work/马桶福利购/SET.js ***!
-  \****************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
-// 全局设置
-var _default = {
-  baseUrl: "http://h5.gllo.com.cn/Data", //api业务接口域名
-  mainUrl: "http://h5.gllo.com.cn/", //项目域名
-  // 测试环境
-  // wx_appid: 'wx09daee2f47e178aa',    //微信授权 appid  測試公衆號
-  wx_appid: 'wxbb1e69472b847c6e', //代码力量 测试
-  // wx_redirect_url:'http://192.168.1.9:8080',
-  wx_redirect_url: 'http://h5.gllo.com.cn', //微信授权 回调页地址
-
-  versionUrl: '/api/AppVersion/VersionCheck' //app版本检测url   // 1是不更新 2是强制更新 3可选择更新 4//appstore更新
-};exports.default = _default;
-
-/***/ }),
-/* 16 */
-/*!******************************************!*\
-  !*** G:/work/马桶福利购/utils/module/auth.js ***!
-  \******************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
-
-var _interface = _interopRequireDefault(__webpack_require__(/*! ../http/interface */ 12));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} // 用户身份相关接口
-// 我要积分
-var Auth = { // 获取验证码
-  getVerificateCode: function getVerificateCode(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    return _interface.default.request({
-      url: '/api/Msg/SendVerificationCode',
-      method: 'POST',
-      data: data
-      // handle:true
-    }, ifLoad);
-  },
-  // 微信api
-  GetWxJsApiConfig: function GetWxJsApiConfig(data) {
-    return _interface.default.request({
-      url: '/api/Authorize/GetJsApiConfig',
-      method: 'POST',
-      data: data
-      // handle:true
-    });
-  },
-  // 登录
-  userLogin: function userLogin(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    return _interface.default.request({
-      url: '/api/Authorize/Token',
-      method: 'POST',
-      data: data
-      // handle:true
-    }, ifLoad);
-  },
-  // 快捷登录
-  shortcutToken: function shortcutToken(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    return _interface.default.request({
-      url: '/api/Authorize/ShortcutToken',
-      method: 'GET',
-      data: data
-      // handle:true
-    }, ifLoad);
-  },
-  // OpenId登录
-  WxTokenLogin: function WxTokenLogin(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    return _interface.default.request({
-      url: '/api/Authorize/WxToken',
-      method: 'POST',
-      data: data
-      // handle:true
-    }, ifLoad);
-  },
-  // 注册用户 
-  userRegiste: function userRegiste(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    return _interface.default.request({
-      url: '/api/Authorize/Registe',
-      method: 'POST',
-      data: data
-      // handle:true
-    }, ifLoad);
-  },
-  // 忘记密码
-  findPassword: function findPassword(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    return _interface.default.request({
-      url: '/api/Authorize/FindPassword',
-      method: 'POST',
-      data: data
-      // handle:true
-    }, ifLoad);
-  },
-  // 获取用户信息
-  getConsumer: function getConsumer(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    return _interface.default.request({
-      url: '/api/Consumer/Get',
-      method: 'GET',
-      data: data
-      // handle:true
-    }, ifLoad);
-  },
-
-  //更新用户信息
-  userInfoUpdate: function userInfoUpdate(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    return _interface.default.request({
-      url: '/api/Consumer/PerfectInfo',
-      method: 'POST',
-      data: data
-      // handle:true
-    }, ifLoad);
-  },
-  // 设置支付密码
-  SettingPayPassword: function SettingPayPassword(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    return _interface.default.request({
-      url: '/api/Consumer/SettingPayPassword',
-      method: 'POST',
-      data: data
-      // handle:true
-    }, ifLoad);
-  },
-  // 微信绑定手机号
-  BindWxUserMobile: function BindWxUserMobile(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    return _interface.default.request({
-      url: '/api/Authorize/BindWxUserMobile',
-      method: 'POST',
-      data: data
-      // handle:true
-    }, ifLoad);
-  },
-
-  // 支付
-  toPayment: function toPayment(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    return _interface.default.request({
-      url: '/api/Pay/Payment',
-      method: 'POST',
-      data: data
-      // handle:true
-    }, ifLoad);
-  },
-
-
-  // 	=============商家部分\\\
-
-
-
-  // 获取商家信息
-  GetBusinessInfo: function GetBusinessInfo(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    return _interface.default.request({
-      url: '/api/Shop/GetBusinessInfo',
-      method: 'GET',
-      data: data
-      // handle:true
-    }, ifLoad);
-  },
-  // 修改商家信息
-  BusinessEditor: function BusinessEditor(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    return _interface.default.request({
-      url: '/api/Shop/BusinessEditor',
-      method: 'POST',
-      data: data
-      // handle:true
-    }, ifLoad);
-  },
-
-
-  //=============== 全局=================
-
-  // 获取全局配置
-  getConfig: function getConfig(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    return _interface.default.request({
-      url: '/api/Service/Config',
-      method: 'GET',
-      data: data
-      // handle:true
-    }, ifLoad);
-  },
-
-  // app更新
-  VersionCheck: function VersionCheck(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    return _interface.default.request({
-      url: '/api/AppVersion/VersionCheck',
-      method: 'POST',
-      data: data
-      // handle:true
-    }, ifLoad);
-  },
-
-  // 手机号登录
-  MobileToken: function MobileToken(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    return _interface.default.request({
-      url: '/api/Authorize/MobileToken',
-      method: 'POST',
-      data: data
-      // handle:true
-    }, ifLoad);
-  } };var _default =
-
-Auth;exports.default = _default;
-
-/***/ }),
-/* 17 */
-/*!**********************************************!*\
-  !*** G:/work/马桶福利购/utils/module/business.js ***!
-  \**********************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
-
-var _interface = _interopRequireDefault(__webpack_require__(/*! ../http/interface */ 12));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} // 用户身份相关接口
-var Set = {
-  // 最后一个子订单是否退邮费
-  ifLastSubOrder: function ifLastSubOrder(data) {
-    return _interface.default.request({
-      url: '/api/Order/GetChildIsSucceed',
-      method: 'POST',
-      data: data
-      // handle:true
-    });
-  },
-
-  // 热门推荐
-  GetGoodsList: function GetGoodsList(data) {
-    return _interface.default.request({
-      url: '/api/Project/GetGoodsList',
-      method: 'POST',
-      data: data
-      // handle:true
-    });
-  },
-  // 获取详情
-  GetGoodsInfo: function GetGoodsInfo(data) {
-    return _interface.default.request({
-      url: '/api/Project/GetGoodsInfo',
-      method: 'GET',
-      data: data
-      // handle:true
-    });
-  },
-  // 优店
-  GetMerchantList: function GetMerchantList(data) {
-    return _interface.default.request({
-      url: '/api/Shop/GetMerchantList',
-      method: 'POST',
-      data: data
-      // handle:true
-    });
-  },
-  // 获取店铺详情 及商品
-  GetBusinessProjectList: function GetBusinessProjectList(data) {
-    return _interface.default.request({
-      url: '/api/Shop/GetBusinessProjectList',
-      method: 'POST',
-      data: data
-      // handle:true
-    });
-  },
-  // 获取分类列表
-  GetClassList: function GetClassList(data) {
-    return _interface.default.request({
-      url: '/api/Project/GetClass',
-      method: 'GET',
-      data: data
-      // handle:true
-    });
-  },
-  // 根据分类获取 商品
-  GetGoodsByClassList: function GetGoodsByClassList(data) {
-    return _interface.default.request({
-      url: '/api/Project/GetGoodsByClassList',
-      method: 'POST',
-      data: data
-      // handle:true
-    });
-  },
-  // 获取收货地址
-  GetAddressList: function GetAddressList(data) {
-    return _interface.default.request({
-      url: '/api/Address/GetAddressList',
-      method: 'POST',
-      data: data
-      // handle:true
-    });
-  },
-  // 删除地址
-  addressDel: function addressDel(data) {
-    return _interface.default.request({
-      url: '/api/Address/Del',
-      method: 'GET',
-      data: data
-      // handle:true
-    });
-  },
-  // 设置默认地址
-  DefaultAddress: function DefaultAddress(data) {
-    return _interface.default.request({
-      url: '/api/Address/DefaultAddress',
-      method: 'GET',
-      data: data
-      // handle:true
-    });
-  },
-  // 获取拍品信息
-  GetAuctionProject: function GetAuctionProject(data) {
-    return _interface.default.request({
-      url: '/api/Project/Get',
-      method: 'POST',
-      data: data
-      // handle:true
-    });
-  },
-
-  // 获取充值列表
-  RechargeList: function RechargeList(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    return _interface.default.request({
-      url: '/api/Recharge/RechargeList',
-      method: 'POST',
-      data: data
-      // handle:true
-    }, ifLoad);
-  },
-
-  // 生成充值订单
-  Recharge: function Recharge(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    return _interface.default.request({
-      url: '/api/Recharge/Recharge',
-      method: 'POST',
-      data: data
-      // handle:true
-    }, ifLoad);
-  },
-  // 新建地址
-  addAddress: function addAddress(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    return _interface.default.request({
-      url: '/api/Address/Add',
-      method: 'POST',
-      data: data
-      // handle:true
-    }, ifLoad);
-  },
-  // 确认拍品
-  verifyAuction: function verifyAuction(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    return _interface.default.request({
-      url: '/api/Order/Verify',
-      method: 'POST',
-      data: data
-      // handle:true
-    }, ifLoad);
-  },
-
-  // 不要改拍品
-  NoVerifyAuction: function NoVerifyAuction(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    return _interface.default.request({
-      url: '/api/Order/NoVerify',
-      method: 'POST',
-      data: data
-      // handle:true
-    }, ifLoad);
-  },
-
-  // 客户获取订单
-  GetOrderList: function GetOrderList(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    return _interface.default.request({
-      url: '/api/Order/GetOrderList',
-      method: 'POST',
-      data: data
-      // handle:true
-    }, ifLoad);
-  },
-
-  // 购买加价
-
-  doAuction: function doAuction(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    return _interface.default.request({
-      url: '/api/Auction/Auction',
-      method: 'POST',
-      data: data
-      // handle:true
-    }, ifLoad);
-  },
-
-  // 竞价记录
-
-  GetAuctionList: function GetAuctionList(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    return _interface.default.request({
-      url: '/api/Auction/GetAuctionList',
-      method: 'POST',
-      data: data
-      // handle:true
-    }, ifLoad);
-  },
-
-  // 发起退货申请
-
-  ApplyRefund: function ApplyRefund(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    return _interface.default.request({
-      url: '/api/Refund/Apply',
-      method: 'POST',
-      data: data
-      // handle:true
-    }, ifLoad);
-  },
-
-  // 确认拍品
-  Receiving: function Receiving(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    return _interface.default.request({
-      url: '	/api/Order/Receiving',
-      method: 'POST',
-      data: data
-      // handle:true
-    }, ifLoad);
-  },
-  // 获取银行卡列表
-
-  GetBankList: function GetBankList(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    return _interface.default.request({
-      url: '/api/Bank/GetBankList',
-      method: 'GET',
-      data: data
-      // handle:true
-    }, ifLoad);
-  },
-
-  // 添加新卡
-  BuilderBank: function BuilderBank(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    return _interface.default.request({
-      url: '/api/Bank/BuilderBank',
-      method: 'POST',
-      data: data
-      // handle:true
-    }, ifLoad);
-  },
-
-
-  // 默认银行卡
-  DefaultBank: function DefaultBank(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    return _interface.default.request({
-      url: '/api/Bank/DefaultBank',
-      method: 'GET',
-      data: data
-      // handle:true
-    }, ifLoad);
-  },
-
-  // 解绑银行卡
-  RelieveBank: function RelieveBank(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    return _interface.default.request({
-      url: '/api/Bank/RelieveBank',
-      method: 'GET',
-      data: data
-      // handle:true
-    }, ifLoad);
-  },
-
-  // 申请提现
-  SubmitCash: function SubmitCash(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    return _interface.default.request({
-      url: '/api/Cash/SubmitCash',
-      method: 'POST',
-      data: data
-      // handle:true
-    }, ifLoad);
-  },
-
-  // 实名认证
-  SubmitProve: function SubmitProve(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    return _interface.default.request({
-      url: '/api/Consumer/Prove',
-      method: 'POST',
-      data: data
-      // handle:true
-    }, ifLoad);
-  },
-
-  // 问题反馈
-  SubmitComment: function SubmitComment(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    return _interface.default.request({
-      url: '/api/Feedback/Submit',
-      method: 'POST',
-      data: data
-      // handle:true
-    }, ifLoad);
-  },
-
-  // 余额明细
-  AccountList: function AccountList(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    return _interface.default.request({
-      url: '/api/AccountDetail/GetList',
-      method: 'POST',
-      data: data
-      // handle:true
-    }, ifLoad);
-  },
-
-  // 关注列表
-  GetAttentionList: function GetAttentionList(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    return _interface.default.request({
-      url: '/api/Shop/GetAttentionList',
-      method: 'POST',
-      data: data
-      // handle:true
-    }, ifLoad);
-  },
-
-  // 关注店铺
-  Attention: function Attention(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    return _interface.default.request({
-      url: '/api/Shop/Attention',
-      method: 'POST',
-      data: data
-      // handle:true
-    }, ifLoad);
-  },
-
-  // 合家慈登陆账户
-  GetHJCConsumer: function GetHJCConsumer(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    return _interface.default.request({
-      url: '/api/Recharge/GetHJCConsumer',
-      method: 'POST',
-      data: data
-      // handle:true
-    }, ifLoad);
-  },
-
-  // 合家慈积分转化
-  HJCIntegralRecharge: function HJCIntegralRecharge(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    return _interface.default.request({
-      url: '/api/Recharge/HJCIntegralRecharge',
-      method: 'POST',
-      data: data
-      // handle:true
-    }, ifLoad);
-  },
-
-  // 提醒发货
-  Prompt: function Prompt(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    return _interface.default.request({
-      url: '/api/Order/Prompt',
-      method: 'GET',
-      data: data
-      // handle:true
-    }, ifLoad);
-  },
-
-
-
-  // 插卡内流信息
-  GetEMS: function GetEMS(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    return _interface.default.request({
-      url: '/api/Order/GetEMS',
-      method: 'GET',
-      data: data
-      // handle:true
-    }, ifLoad);
-  },
-  // 获取文档
-  getGuide: function getGuide(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    return _interface.default.request({
-      url: '/api/Service/Guide',
-      method: 'GET',
-      data: data
-      // handle:true
-    }, ifLoad);
-  },
-
-  // 加入购物车
-  cardAdd: function cardAdd(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    return _interface.default.request({
-      url: '/api/Catr/Add',
-      method: 'POST',
-      data: data
-      // handle:true
-    }, ifLoad);
-  },
-  // 获取购物车列表
-  cardList: function cardList(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    return _interface.default.request({
-      url: '/api/Catr/GetList',
-      method: 'POST',
-      data: data
-      // handle:true
-    }, ifLoad);
-  },
-  // 刪除購物車
-  cardDelete: function cardDelete(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    return _interface.default.request({
-      url: '/api/Catr/Delect',
-      method: 'POST',
-      data: data
-      // handle:true
-    }, ifLoad);
-  },
-
-
-  // 提交订单
-  CreateOrder: function CreateOrder(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    return _interface.default.request({
-      url: '/api/Order/CreateOrder',
-      method: 'POST',
-      data: data
-      // handle:true
-    }, ifLoad);
-  },
-
-  // 删除订单
-
-  CancelOrder: function CancelOrder(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    return _interface.default.request({
-      url: '/api/Order/CancelOrder',
-      method: 'POST',
-      data: data
-      // handle:true
-    }, ifLoad);
-  },
-
-  // 计算邮费
-
-  GetEmsPrice: function GetEmsPrice(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    return _interface.default.request({
-      url: '/api/Order/GetEmsPrice',
-      method: 'POST',
-      data: data
-      // handle:true
-    }, ifLoad);
-  },
-
-  // 获取退款列表
-
-  GetRefundOrderList: function GetRefundOrderList(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    return _interface.default.request({
-      url: '/api/Order/GetRefundOrderList',
-      method: 'POST',
-      data: data
-      // handle:true
-    }, ifLoad);
-  },
-
-  // 获取退款详情
-  GetRefundOrderInfo: function GetRefundOrderInfo(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    return _interface.default.request({
-      url: '/api/Order/GetRefundInfo',
-      method: 'POST',
-      data: data
-      // handle:true
-    }, ifLoad);
-  },
-
-
-  // 取消退款申请
-  CancelRefund: function CancelRefund(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    return _interface.default.request({
-      url: '/api/Refund/Cancel',
-      method: 'GET',
-      data: data
-      // handle:true
-    }, ifLoad);
-  },
-  // 删除退款申请
-  DelectRefund: function DelectRefund(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    return _interface.default.request({
-      url: '/api/Refund/Delect',
-      method: 'GET',
-      data: data
-      // handle:true
-    }, ifLoad);
-  },
-  // 物流确认
-  RefundEms: function RefundEms(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    return _interface.default.request({
-      url: '/api/Refund/RefundEms',
-      method: 'POST',
-      data: data
-      // handle:true
-    }, ifLoad);
-  },
-  // 获取着陆页分类商品
-  GetClassHotList: function GetClassHotList(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    return _interface.default.request({
-      url: '/api/Project/GetClassHotList',
-      method: 'POST',
-      data: data
-      // handle:true
-    }, ifLoad);
-  },
-
-  // code获取OpenId
-  GetOpenId: function GetOpenId(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    return _interface.default.request({
-      url: '/api/Authorize/GetOpenId',
-      method: 'POST',
-      data: data
-      // handle:true
-    }, ifLoad);
-  },
-
-
-  // 模拟下单
-  mockPay: function mockPay(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    return _interface.default.request({
-      url: '/api/Pay/getNotify',
-      method: 'GET',
-      data: data
-      // handle:true
-    }, ifLoad);
-  },
-
-
-
-
-  // 	=============商家部分\\\
-
-
-  // 商家 发布拍品/重新发布
-  shopSubmit: function shopSubmit(data) {
-    return _interface.default.request({
-      url: '/api/shop/Submit',
-      method: 'POST',
-      data: data
-      // handle:true
-    });
-  },
-
-  // 商家获取商家订单
-  GetBusinessList: function GetBusinessList(data) {
-    return _interface.default.request({
-      url: '/api/Order/GetBusinessList',
-      method: 'POST',
-      data: data
-      // handle:true
-    });
-  },
-
-
-  // 商家同意退款
-  agreeRefund: function agreeRefund(data) {
-    return _interface.default.request({
-      url: '/api/Order/Refund',
-      method: 'POST',
-      data: data
-      // handle:true
-    });
-  },
-  // 商家获取订单详情
-  getOrderDetail: function getOrderDetail(data) {
-    return _interface.default.request({
-      url: '/api/Order/Get',
-      method: 'POST',
-      data: data
-      // handle:true
-    });
-  },
-
-  // 商家发货
-  merchantDispatch: function merchantDispatch(data) {
-    return _interface.default.request({
-      url: '/api/Order/Dispatch',
-      method: 'POST',
-      data: data
-      // handle:true
-    });
-  },
-
-  // 商家成交纪录列表
-  GetAccomplishList: function GetAccomplishList(data) {
-    return _interface.default.request({
-      url: '/api/Project/GetAccomplishList',
-      method: 'POST',
-      data: data
-      // handle:true
-    });
-  },
-  // 我的拍品
-  GetConsumerList: function GetConsumerList(data) {
-    return _interface.default.request({
-      url: '/api/Project/GetConsumerList',
-      method: 'POST',
-      data: data
-      // handle:true
-    });
-  },
-  // 商品管理
-  GetMerchantProduct: function GetMerchantProduct(data) {
-    return _interface.default.request({
-      url: '/api/Shop/GetList',
-      method: 'POST',
-      data: data
-      // handle:true
-    });
-  },
-  // 商家获取拍品信息
-  merchantProductInfo: function merchantProductInfo(data) {
-    return _interface.default.request({
-      url: '/api/Shop/Get',
-      method: 'GET',
-      data: data
-      // handle:true
-    });
-  },
-
-  // 商家下架商品
-  SoldOut: function SoldOut(data) {
-    return _interface.default.request({
-      url: '/api/Project/SoldOut',
-      method: 'POST',
-      data: data
-      // handle:true
-    });
-  },
-
-  // 商家下架商品
-  GetBusinessAddress: function GetBusinessAddress(data) {
-    return _interface.default.request({
-      url: '/api/Address/GetBusiness',
-      method: 'GET',
-      data: data
-      // handle:true
-    });
-  },
-
-  // 商家营业执照
-  BusinessProve: function BusinessProve(data) {
-    return _interface.default.request({
-      url: '/api/Shop/BusinessProve',
-      method: 'POST',
-      data: data
-      // handle:true
-    });
-  },
-
-
-  // 商家限时购列表
-  LimitActivityGoods: function LimitActivityGoods(data) {
-    return _interface.default.request({
-      url: '/api/LimitActivityGoods/GetGoodsList',
-      method: 'POST',
-      data: data
-      // handle:true
-    });
-  } };var _default =
-
-
-Set;exports.default = _default;
-
-/***/ }),
-/* 18 */,
-/* 19 */,
-/* 20 */
-/*!**********************************************************************************************************!*\
-  !*** ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib/runtime/componentNormalizer.js ***!
-  \**********************************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return normalizeComponent; });
-/* globals __VUE_SSR_CONTEXT__ */
-
-// IMPORTANT: Do NOT use ES2015 features in this file (except for modules).
-// This module is a runtime utility for cleaner component module output and will
-// be included in the final webpack user bundle.
-
-function normalizeComponent (
-  scriptExports,
-  render,
-  staticRenderFns,
-  functionalTemplate,
-  injectStyles,
-  scopeId,
-  moduleIdentifier, /* server only */
-  shadowMode, /* vue-cli only */
-  components, // fixed by xxxxxx auto components
-  renderjs // fixed by xxxxxx renderjs
-) {
-  // Vue.extend constructor export interop
-  var options = typeof scriptExports === 'function'
-    ? scriptExports.options
-    : scriptExports
-
-  // fixed by xxxxxx auto components
-  if (components) {
-    if (!options.components) {
-      options.components = {}
-    }
-    var hasOwn = Object.prototype.hasOwnProperty
-    for (var name in components) {
-      if (hasOwn.call(components, name) && !hasOwn.call(options.components, name)) {
-        options.components[name] = components[name]
-      }
-    }
-  }
-  // fixed by xxxxxx renderjs
-  if (renderjs) {
-    (renderjs.beforeCreate || (renderjs.beforeCreate = [])).unshift(function() {
-      this[renderjs.__module] = this
-    });
-    (options.mixins || (options.mixins = [])).push(renderjs)
-  }
-
-  // render functions
-  if (render) {
-    options.render = render
-    options.staticRenderFns = staticRenderFns
-    options._compiled = true
-  }
-
-  // functional template
-  if (functionalTemplate) {
-    options.functional = true
-  }
-
-  // scopedId
-  if (scopeId) {
-    options._scopeId = 'data-v-' + scopeId
-  }
-
-  var hook
-  if (moduleIdentifier) { // server build
-    hook = function (context) {
-      // 2.3 injection
-      context =
-        context || // cached call
-        (this.$vnode && this.$vnode.ssrContext) || // stateful
-        (this.parent && this.parent.$vnode && this.parent.$vnode.ssrContext) // functional
-      // 2.2 with runInNewContext: true
-      if (!context && typeof __VUE_SSR_CONTEXT__ !== 'undefined') {
-        context = __VUE_SSR_CONTEXT__
-      }
-      // inject component styles
-      if (injectStyles) {
-        injectStyles.call(this, context)
-      }
-      // register component module identifier for async chunk inferrence
-      if (context && context._registeredComponents) {
-        context._registeredComponents.add(moduleIdentifier)
-      }
-    }
-    // used by ssr in case component is cached and beforeCreate
-    // never gets called
-    options._ssrRegister = hook
-  } else if (injectStyles) {
-    hook = shadowMode
-      ? function () { injectStyles.call(this, this.$root.$options.shadowRoot) }
-      : injectStyles
-  }
-
-  if (hook) {
-    if (options.functional) {
-      // for template-only hot-reload because in that case the render fn doesn't
-      // go through the normalizer
-      options._injectStyles = hook
-      // register for functioal component in vue file
-      var originalRender = options.render
-      options.render = function renderWithStyleInjection (h, context) {
-        hook.call(context)
-        return originalRender(h, context)
-      }
-    } else {
-      // inject component registration as beforeCreate hook
-      var existing = options.beforeCreate
-      options.beforeCreate = existing
-        ? [].concat(existing, hook)
-        : [hook]
-    }
-  }
-
-  return {
-    exports: scriptExports,
-    options: options
-  }
-}
-
-
-/***/ }),
-/* 21 */
-/*!******************************************!*\
-  !*** G:/work/马桶福利购/static/defaultSet.js ***!
-  \******************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var set = {
-  "service_mobile": "059183612095",
-  "rechargeStatus": [{
-    "Value": "0",
-    "Text": "待支付" },
-
-  {
-    "Value": "1",
-    "Text": "已支付" }],
-
-
-  "projectStatus": [{
-    "Value": "0",
-    "Text": "待审核" },
-
-  {
-    "Value": "1",
-    "Text": "已上架" },
-
-  {
-    "Value": "2",
-    "Text": "未通过" },
-
-  {
-    "Value": "9",
-    "Text": "已下架" }],
-
-
-  "payType": [{
-    "Value": "0",
-    "Text": "微信" },
-  {
-    "Value": "1",
-    "Text": "支付宝" },
-  {
-    "Value": "2",
-    "Text": "购物券" }],
-
-  "detailType": [{
-    "Value": "0",
-    "Text": "余额收入明细" },
-  {
-    "Value": "1",
-    "Text": "余额支出明细" },
-  {
-    "Value": "2",
-    "Text": "购物券券收入明细" },
-  {
-    "Value": "3",
-    "Text": "购物券券支出明细" }],
-
-  "orderStatus": [{
-    "Value": "0",
-    "Text": "待付款" },
-  {
-    "Value": "1",
-    "Text": "待发货" },
-  {
-    "Value": "2",
-    "Text": "待收货" },
-  {
-    "Value": "3",
-    "Text": "待评价" },
-  {
-    "Value": "4",
-    "Text": "待退款" },
-  {
-    "Value": "5",
-    "Text": "交易成功" },
-  {
-    "Value": "9",
-    "Text": "交易关闭" }],
-
-  "orderRefund": [],
-  "auditStatus": [{
-    "Value": "0",
-    "Text": "待商家审核" },
-  {
-    "Value": "1",
-    "Text": "待商家收货" },
-  {
-    "Value": "2",
-    "Text": "商家拒绝" },
-  {
-    "Value": "3",
-    "Text": "商家通过审核" },
-  {
-    "Value": "4",
-    "Text": "用户取消退款" },
-  {
-    "Value": "5",
-    "Text": "商家退款成功" }],
-
-  "refundType": [{
-    "Value": "0",
-    "Text": "退款 " },
-  {
-    "Value": "1",
-    "Text": "退货退款" }],
-
-  "refundPayStatus": [{
-    "Value": "0",
-    "Text": "待支付" },
-  {
-    "Value": "1",
-    "Text": "支付成功" },
-  {
-    "Value": "2",
-    "Text": "支付失败" }],
-
-  "refundPayType": [{
-    "Value": "1",
-    "Text": "原路返回" },
-  {
-    "Value": "2",
-    "Text": "线下支付" },
-  {
-    "Value": "3",
-    "Text": "退到预付款" }],
-
-  "classList": [{
-    "class_code": "174a73b64ed840e3889029b3cb917357",
-    "class_name": "感应洁具",
-    "class_logo": "http://h5.gllo.com.cn/upload/shopclasslogo/4F2A13B32488DF889250C2F0A77724AD.png",
-    "class_descript": "感应洁具" },
-  {
-    "class_code": "40df750b4e2149c08698d2a2292275f3",
-    "class_name": "水龙头",
-    "class_logo": "http://h5.gllo.com.cn/upload/shopclasslogo/545B0CA76C593F1A2D2288D85C72677.png",
-    "class_descript": "水龙头" },
-  {
-    "class_code": "58bacbcdc23245e48e3f54edfd70e8b4",
-    "class_name": "马桶",
-    "class_logo": "http://h5.gllo.com.cn/upload/shopclasslogo/9D2F051FAEFD0B26B5CDF8A3D45D1AF.png",
-    "class_descript": "马桶" },
-  {
-    "class_code": "6a5be108765441fea4c3f3342e956d1e",
-    "class_name": "花洒系列",
-    "class_logo": "http://h5.gllo.com.cn/upload/shopclasslogo/D55C1CC49E92B48618E1E870C4814C8F.png",
-    "class_descript": "花洒系列" }],
-
-  "fatherClassList": [{
-    "class_code": "174a73b64ed840e3889029b3cb917357",
-    "class_name": "感应洁具",
-    "class_logo": "http://h5.gllo.com.cn/upload/shopclasslogo/4F2A13B32488DF889250C2F0A77724AD.png",
-    "class_descript": "感应洁具" },
-  {
-    "class_code": "40df750b4e2149c08698d2a2292275f3",
-    "class_name": "水龙头",
-    "class_logo": "http://h5.gllo.com.cn/upload/shopclasslogo/545B0CA76C593F1A2D2288D85C72677.png",
-    "class_descript": "水龙头" },
-  {
-    "class_code": "58bacbcdc23245e48e3f54edfd70e8b4",
-    "class_name": "马桶",
-    "class_logo": "http://h5.gllo.com.cn/upload/shopclasslogo/9D2F051FAEFD0B26B5CDF8A3D45D1AF.png",
-    "class_descript": "马桶" },
-  {
-    "class_code": "6a5be108765441fea4c3f3342e956d1e",
-    "class_name": "花洒系列",
-    "class_logo": "http://h5.gllo.com.cn/upload/shopclasslogo/D55C1CC49E92B48618E1E870C4814C8F.png",
-    "class_descript": "花洒系列" },
-  {
-    "class_code": "257eebee16c2456597ca8534ad4d283b",
-    "class_name": "配件/挂件",
-    "class_logo": "http://h5.gllo.com.cn/upload/shopclasslogo/2C1C7F5EF8FE405A40ADC8C9266D84BF.png",
-    "class_descript": "配件" },
-  {
-    "class_code": "4a24ebc16e6d4ded86081ff77ba9acbe",
-    "class_name": "其他",
-    "class_logo": "",
-    "class_descript": "" }],
-
-  "banerList": [{
-    "Text": "http://h5.gllo.com.cn/upload/cmslinkimage/879686C29035716E179D52E99ECE9FAB.jpg",
-    "Url": "/pages/classify/products/products?type=1",
-    "Value": "龙头专区" },
-  {
-    "Text": "http://h5.gllo.com.cn/upload/cmslinkimage/1FBCF99869ABE49D1EDE857C88FECB8.jpg",
-    "Url": "/pages/classify/products/products?type=3",
-    "Value": "花洒专区" },
-  {
-    "Text": "http://h5.gllo.com.cn/upload/cmslinkimage/16062E891B0BE58D24DAE4CFCD75937.jpg",
-    "Url": "/pages/classify/products/products?type=2",
-    "Value": "智能马桶专区" }],
-
-  "iconList": [{
-    "Value": "4",
-    "Text": "http://h5.gllo.com.cn/upload/cmslinkimage/4E6F28FC8DED157F5BEC9AA8D61CEA6.png" },
-  {
-    "Value": "3",
-    "Text": "http://h5.gllo.com.cn/upload/cmslinkimage/81C9925C9E4D12E6E481973631E3C6C.png" },
-  {
-    "Value": "2",
-    "Text": "http://h5.gllo.com.cn/upload/cmslinkimage/D1FD9EBE70E47F7499107E7471915150.png" },
-  {
-    "Value": "1",
-    "Text": "http://h5.gllo.com.cn/upload/cmslinkimage/38241656FDA8C4F844B265653BAC373.png" }],
-
-  "indexGoodsList": [{
-    "Value": "4cb5889c315540b4aa4e7ec16d166de0",
-    "Text": "http://h5.gllo.com.cn/upload/cmslinkimage/23419D3FCFF41D17E540747DF9FF6.jpg" },
-  {
-    "Value": "722f992f104e4e1f91505ff255b61e00",
-    "Text": "http://h5.gllo.com.cn/upload/cmslinkimage/36BA0B571D368C3394C4437D6C6222.jpg" },
-  {
-    "Value": "bc1f6cefb75d4897ac3df86da02e2be5",
-    "Text": "http://h5.gllo.com.cn/upload/cmslinkimage/77BC59FF848379C3BE525A4D35B79A9D.jpg" },
-  {
-    "Value": "6e13bf0a62c441b596a8df4ae272c457",
-    "Text": "http://h5.gllo.com.cn/upload/cmslinkimage/26BDD6D99914250722CDE99210A9CCB.jpg" }],
-
-  "project_service1": [{
-    "Value": "d4863b21098648a1b5637f402c1af139",
-    "Text": "送货入户",
-    "price": 0.0 },
-  {
-    "Value": "4e858f482ef34c1d92cc7cd6d6207bc9",
-    "Text": "上门安装",
-    "price": 53.35 },
-  {
-    "Value": "5c7f30cfdb7d43af84e63745266901fb",
-    "Text": "送货入户并安装",
-    "price": 76.0 }],
-
-  "project_service2": [{
-    "Value": "c8c2a6efbc5d479c907a6c2e1ecee7e0",
-    "Text": "全面保修二年",
-    "price": 260.0 },
-  {
-    "Value": "b630b784555c49a4a33cb3996a0b5e50",
-    "Text": "全面保修三年",
-    "price": 288.0 }],
-
-  "project_service3": [{
-    "Value": "d9580f1dc11342ce9d3db79dd8ff6208",
-    "Text": "意外保修三年",
-    "price": 212.0 },
-  {
-    "Value": "fcfadfddb8e741d2bc52dfe6eeca878f",
-    "Text": "意外保修二年",
-    "price": 231.0 }],
-
-  "pay_route": [{
-    "Value": "CCB",
-    "Text": "建设银行" },
-  {
-    "Value": "test",
-    "Text": "测试" }],
-
-  "is_refund": [{
-    "Value": "0",
-    "Text": "未退款" },
-  {
-    "Value": "1",
-    "Text": "退款中" },
-  {
-    "Value": "2",
-    "Text": "退款失败" },
-  {
-    "Value": "3",
-    "Text": "退款成功" },
-  {
-    "Value": "4",
-    "Text": "取消退款" }] };var _default =
-
-
-
-set;exports.default = _default;
-
-/***/ }),
-/* 22 */,
-/* 23 */,
-/* 24 */,
-/* 25 */,
-/* 26 */,
-/* 27 */,
-/* 28 */,
-/* 29 */,
-/* 30 */,
-/* 31 */,
-/* 32 */,
-/* 33 */,
-/* 34 */,
-/* 35 */,
-/* 36 */,
-/* 37 */,
-/* 38 */,
-/* 39 */,
-/* 40 */,
-/* 41 */,
-/* 42 */,
-/* 43 */,
-/* 44 */,
-/* 45 */,
-/* 46 */,
-/* 47 */,
-/* 48 */,
-/* 49 */,
-/* 50 */,
-/* 51 */,
-/* 52 */,
-/* 53 */,
-/* 54 */,
-/* 55 */,
-/* 56 */,
-/* 57 */,
-/* 58 */
-/*!******************************************!*\
-  !*** G:/work/马桶福利购/static/img/dd_df.png ***!
-  \******************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = "data:image/png;base64,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"
-
-/***/ }),
-/* 59 */
-/*!*******************************************!*\
-  !*** G:/work/马桶福利购/static/img/dd_dfh.png ***!
-  \*******************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = "data:image/png;base64,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"
-
-/***/ }),
-/* 60 */
-/*!*******************************************!*\
-  !*** G:/work/马桶福利购/static/img/dd_dsh.png ***!
-  \*******************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = "data:image/png;base64,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"
-
-/***/ }),
-/* 61 */
-/*!******************************************!*\
-  !*** G:/work/马桶福利购/static/img/dd_th.png ***!
-  \******************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = "data:image/png;base64,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"
-
-/***/ }),
-/* 62 */
-/*!******************************************!*\
-  !*** G:/work/马桶福利购/static/img/ic_dz.png ***!
-  \******************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = "data:image/png;base64,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"
-
-/***/ }),
-/* 63 */
-/*!******************************************!*\
-  !*** G:/work/马桶福利购/static/img/ic_bz.png ***!
-  \******************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAAAXNSR0IArs4c6QAABD1JREFUaAXtmE1oXFUUgDOZxDRtgiFWBtNFycJqNwpOfkwyYkp/pmbAjQ1Z1BQnFSyI2kKhLlNoFlUwoLbQQpMSumhLCy1WWgcrEZo2ZJJVF62KBISYIlQ0iZKZTGb8TvpOuAnMZOa9zKuL9+Dl3HPe/fnuuefeczMlJd7jecDzgOcBzwMOPOB30NZR05aWlspAIFAzPT39r5OOSp00ttu2ubn5lWQy+avP53vU0NDQ39nZaduRPrsQdtu1trZuTSQSd2lfZ/QRq66u7hoeHv7LsOVVdHUCTU1Nzy0uLt6B7OXVdKzGz9jeHh8f/2n1t1y6ayEUDAY3An8DGIVPAH1B4TKZzDbeUSYZVls+0pUJtLe3lwFzmfd1CyoN/Lt4u7u0tDSKLWnZa9Lp9Lfsi4OWvqZwZQJzc3NnIIkoDfAfA39F9Hg8ft7v9+/C9qforIJs6K/klBJ9rafoE8CbfUD1KAigfcCfUl0kXk9Qp0JtlCfD4XBC9VyyqJsY+A+B+VoBgB8AfkV4cKS+mEqlRqjzvNSjziPCqnVsbGxS2+WSRVsB4PcB/6Ux+I2qqqoPDL0E+AAb+xY2hZ+l3JEvvPRVlBVobGx8k7D4jv41LEYp75yYmFjOum1tbdXz8/PD2F/jlSeJ5zvYE7efqPn9tZ0Bs3UvWRavxvi+yarzUDYpoTOjbThSy6lzHT1k2TKETjd1vtE6+cp1DSHJssTzTQZ/1gL4vaKiYi8h8ViBCCtZ9UHkbrXh+SPAX1S9ELluISRZlrAZAewlC+Bv5BuEzX0TCO9/jn5UbXj+M+CPqV6oXJcJSJZlYIldTVQJvBomnn80gdjYh5lgv9qAH6LOe8iM2gqVjkMoS5bdvxqejd0F/BcKCPQtTqWDTuClL8cTIMuepZ/lLIvnPyIkriqoSFZoB+E1RHFpxYGO19bW7uP2mTLr2Sk7mgBgx/FqVAcG/gSeP626SPbGqwBfo/iMZf+lsrIyEovF/rF0R8L2HpC7ysLCwgwTkIuaZNBzeP59k8a6+9/D9oJVp6Asa/aVrWx7BfB2mQE/X19fvyLLyqnEf12SzBR+hkm+VUiWzQZt2m2vAPA+TpVFOpM+MnjfD+DSaWKtzm3qtFiDJUlmAv+DOfh6lG2vgAWrcewLhUJVAsSptIHQumTAZ1itA8WAl/Fsr4A0ZhNPIeqkzPOAVy5lm0Uxnk9IZualzvjkvLi0Ae12wyrM4mltvl0LKvH8SU6losHLOLZDSBoDL7fMFQ+TkrP9N2Qf8J+u+FgExdEK8FPIIRKZ3CAX2KRTJKupSCTyR29vb7oIrF6X/0sP5DyFBgcHazgS90Cu/1m5PYlEeXl5LBqNZv3FLuceAP57NmrQbWpzPBgm0BtMm1nOeQoBv8Ws/DTKazHkXAGOwneA7uHVm6Tbc5Bf7AbcHtQbz/OA5wHPA54HPA+45oH/AGO2hfhPWNrHAAAAAElFTkSuQmCC"
-
-/***/ }),
-/* 64 */
-/*!******************************************!*\
-  !*** G:/work/马桶福利购/static/img/ic_sz.png ***!
-  \******************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAAAXNSR0IArs4c6QAABVJJREFUaAXtmE1oXFUUxzP5UmiCRMyiptJoBambKPmalIpBJJtAs9GNWAsmUXAppqgLG6xYjVqQ4kKTCH4h2G4s2SgiEYuZfFFCwSL4UdHShZJNCKQhyfj7P+8Z7kzfm7w3Q0HwXbhz7z33nP/533M/39TUpCmNQBqBNAJpBP7PEchUM/jOzs4D2D9OvoucCCuTyezk8/k/a2trv1hcXPy1Uh6JnPpOID8AiS8hcasvT1oHYwOMoeXl5a+T2kq/ogH09PR07ezsfF8teSOsQTATDy0sLCyZLG5ZH1fR9CCd6erqOkM7iDzOL1L/EPm26cQpsatD72nsHlQgtre3z1AeQp6PY286iWegu7v7SaL/iQO4XldXd5DI/WaASUpm8m6IX8bmFtkxC0fZD58mwahNojwwMLAH8m94NqcrJS8MZ3va8IQtH9aOUyYawOrq6kuAtjnga83Nza/HcVJOx2Fcczptzkc5k6K+2Esom822b21tXdZ6FQJr9djS0tLHRWgVNthTT4H7kcPdqK+vP5jL5a7EgYs9A5B/yyO/wFq1fRDHT1kdYRGQBSnJh3yVNfA6Y80AG/dh1uess8sToUPz8/M5D6dQnZ6ebmZjvoDgCGTuVQfkfqY4z4Z/e3h4eE2y0tTb25uF+A/IA05s6H4G9l2pXml71xkYHx+vhfy7ZgiZz6LIT05OPgL5SxB/hfwANk3KqkumPukYll8KU9gmk0/5tnZUuavCzMzMKMYdDmC9oaHhxTAwEYPkN+T9Yf2SqU86UYNw2OvOvsP5joIL5GUHwHPhNhyeNAQidGpubu6qta3UskFPl1kw/ejpjfME/Xcqqy6Z9KUjXdmo7Sdhy4fJ0DspDtYOK8vexICdAKTVGV5pamp6JwxEax69IPKOfMfIyMiqp/v51NTUVyyLFfT2SdftkxOeTlCVj7W1tREa7eRWcaB8nhyaImeAkd+Bo+fMCqCx2dnZDWv7JXpD1kbveAn5oEsy9Zke5RGvXqjKh3yZQBzExdqlZeQAUDxMDq54ABc588+VGnvtA1b3TisTFUq/D2LBCVXo9CryJZ9OJA7iEprKDSDU4L8mLDeAC5C9LsJEq5tp1IdLaCJaOueDpPP739qNv36fb1OqKV/y6eTiIC6hKXIAfGD8jZP3PKuJ/v7+4Bnhyax63io4nmDD3m5tKyVTn7UpCzaerMb5KOiJg7j4On693m+U1nH4KrKj5FZyO6eDbtjXyEVJNyynyjH095P36bThrD9ua16Rpz6hPhlC6nfZFIG4hvPR7pp/YSMOkSk4tyN76eAZ8QzO33c6642NjfeF3QXeRVYWE/J58qOjo6Pflvrt6+tr29zc/Al58KRm4M/ynPigVM9vRy4hUxocHJyivuLae3DwpvX5pQiJmKLry/26+qQTRl56Dtu+B1acbx/ihnrZaJl2JY85pl53Q3C8Qlqb/KY85mINQAPhzX4WUo+pDiE9p7OUebWrTeBmCFKOskdY4J7jLog89Xx/uy4hU+YJPQZwcBPLkT5CrK/a0n3QGHl90IzFxYw9AH0hMQD/5DjFkdcU11GUnsMoPODkI+7XmDBjD0DKLS0t+qC31+hejryXJa8mOYy9DuOq8xEbMvYeMETWatHfKhx197MfKvprEKx7OKJ/BDt4c4GV+G+VxAPQhmPN6tMvq0Ex5RcpqvpjSzikHBv35v+xJU98v3Zy815gMFFPC6nFTjocuJkP81m5HNvIKSbaAwYuR5AfkmOTVVoKQ1iVkJfPxEvIJ8qrUReVzuvEf69jozvkD/JZHmu/UKYpjUAagTQCaQTSCCSOwD8i3XsnQnS1iQAAAABJRU5ErkJggg=="
-
-/***/ }),
-/* 65 */
-/*!******************************************!*\
-  !*** G:/work/马桶福利购/static/img/ic_kf.png ***!
-  \******************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = "data:image/png;base64,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"
-
 /***/ })
-]]);
+
+}]);
 //# sourceMappingURL=../../.sourcemap/mp-weixin/common/vendor.js.map

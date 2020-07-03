@@ -21,65 +21,61 @@
 				"enablePullDownRefresh": false
 			}
 		},
-		
-		{
-			"path": "pages/cart/cart",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-		},
-		
 		{
 			"path": "pages/user/user",
 			"style": {
-				"navigationBarTitleText": "",
+				"navigationBarTitleText": "我得",
 				"enablePullDownRefresh": false
 			}
 		},{
 			"path": "pages/main/details/details",
 			"style": {
 				"navigationBarTitleText": "商品详情",
-				"navigationBarTextStyle": "white",
-				"app-plus": {
-
-					"bounce": true,
-					"titleNView": {
-
-						"type": "transparent",
-						"backgroundColor": "#039798"
-					}
-				}
-
+				"navigationBarTextStyle": "black",
+				"navigationStyle":"custom"
 			}
 		}
+        ,{
+            "path" : "pages/activity/activity",
+            "style" : {
+				"navigationBarTitleText": "活动",
+				"navigationBarTextStyle": "black"
+			}
+        },{
+            "path" : "pages/h5share/h5share",
+            "style" : {
+				"navigationBarTitleText": "分享",
+				"navigationBarTextStyle": "black"
+			}
+        }
     ],
 	"tabBar": {
 		"color": "#999",
-		"selectedColor": "#039798",
+		"selectedColor": "#FF7809",
 		"backgroundColor": "#ffffff",
 		"list": [{
 				"pagePath": "pages/main/main",
 				"text": "首页",
-				"iconPath": "static/img/tb_sy_wxz.png",
-				"selectedIconPath": "static/img/tb_sy_xz.png"
+				"iconPath": "static/image/tb_sy_wxz.png",
+				"selectedIconPath": "static/image/tb_sy_xz.png"
 			}, {
-				"pagePath": "pages/classify/classifies",
-				"text": "分类",
-				"iconPath": "static/img/tb_fl_wxz.png",
-				"selectedIconPath": "static/img/tb_fl_xz.png"
+				"pagePath": "pages/activity/activity",
+				"text": "活动",
+				"iconPath": "static/image/tb_hd_xz.png",
+				"selectedIconPath": "static/image/tb_gwc_xz.png"
 			},
 			{
 				"pagePath": "pages/user/user",
 				"text": "我的",
-				"iconPath": "static/img/tb_wd_wxz.png",
-				"selectedIconPath": "static/img/tb_wd_xz.png"
+				"iconPath": "static/image/tb_wd_wxz.png",
+				"selectedIconPath": "static/image/tb_wd_xz.png"
 			}
 		]
 	},
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
 		"navigationBarBackgroundColor": "#ffffff",
-		"backgroundColor": "#f8f8f8"
+		"backgroundColor": "#f8f8f8",
+		"animationType":"fade-in"
 	}
 }

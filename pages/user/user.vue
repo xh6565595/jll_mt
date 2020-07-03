@@ -1,151 +1,104 @@
 <template>
 	<view class="pages">
+		<!-- <view class="header flex flex_center">
+			<text class="cm_title">我的</text>
+			<text class="f1"></text>
+		</view> -->
 		<!-- 头部 -->
-		<view class="pageTop">
-			<view class="header flex flex_center">
-				<cu-custom  :isBack="false" >
-					<block slot="backText"><view class="btns flex flex_center"></view></block>
-					<block slot="content"><view class="cm_title f1">我的</view></block>
-					<block slot="right">
-						<!-- <view class="btns flex flex_center" @tap="_href('set')"><text class="iconfont icon-shezhi "></text></view> -->
-					</block>
-				</cu-custom>
+		<view class="pageTop flex  flex_center">
+			<image :src="accountInfo.consumer_head ? accountInfo.consumer_head : '../../static/img/default.jpg'" mode="aspectFill" class="avatar"></image>
+			<view class="f1">
+				<view class="name cm_title f1">asdfdsf</view>
+				<text class="name  f1">asdf</text>
 			</view>
-			<view class="flex top flex_center" @tap="_href('/user/person/person')" v-if="hasLogin">
-					<image  :src="accountInfo.consumer_head ? accountInfo.consumer_head : '../../static/img/default.jpg'" mode="aspectFill" class="avatar"></image>
-					<text class="name cm_title f1">{{ hasLogin?accountInfo.consumer_nick_name:'暂未登录'}}</text>
-					<Icon name="arrowright" :size="20" color="#fff" v-if="hasLogin"> </Icon>
-			</view>
-			<view class="flex top flex_center"  v-else>
-					<image src="../../static/img/default.jpg" mode="aspectFit" class="avatar"></image>
-					<text class="name cm_title f1">{{ hasLogin?accountInfo.consumer_nick_name:'暂未登录'}}</text>
-					<navigator v-if="!hasLogin" class="cz" url="/pages/role/login/login">立即登录</navigator>
-					<!-- <button type="default" @click="_toAuth">立即登录</button> -->
-			</view>
+			<navigator class="tx" url="/pages/role/login/login">提现</navigator>
 		</view>
 		
 		
+		<!-- <view class="shareBox "> -->
+		<navigator url="../h5share/h5share"  class="shareBox ">
+			<image src="../../static/image/wd_yq.png" mode="scaleToFill" class="bg"></image>
+			<!-- <button class="share">去邀请</button> -->
+		</navigator>
+		<!-- </view> -->
 		<!-- 个人信息 -->
 		<view class="accountBox">
-	
-			<view class="boxs bottom  "> 
-				<!-- <view class="boxs"> -->
-					<view class=" flex flex_center">
-						<view class="cm_title f1">我的订单</view>
-						<view class="flex flex_center cm_des" @tap="_href('/features/order/order?current=0')">全部订单<Icon name="arrowright" :size="16"></Icon></view>
-						
-					</view>
-					<view class="flex flex_center flex_between">
-						<view class="menus flex flex_center flex_y " @tap="_href('/features/order/order?current=1')">
-							<img src="../../static/img/dd_df.png"  class="menusPic"></img>
-							<text class="cm_t_24">待付款</text>
-							<view class="tips" v-if="hasLogin && accountInfo.wait_paying_count">{{accountInfo.wait_paying_count}}</view>
-						</view>
-						<!-- <navigator url="../features/order/order" class="menus flex flex_center flex_y"> -->
-						<view class="menus flex flex_center flex_y" @tap="_href('/features/order/order?current=2')">
-							<img src="../../static/img/dd_dfh.png" class="menusPic"></img>
-							<text class="cm_t_24">待发货</text>
-							<view class="tips" v-if="hasLogin && accountInfo.wait_sending_count">{{accountInfo.wait_sending_count}}</view>
-						</view>
-						<!-- </navigator> -->
-						<!-- <navigator url="../features/order/order" class="menus flex flex_center flex_y"> -->
-						<view class="menus flex flex_center flex_y" @tap="_href('/features/order/order?current=3')">
-							<img src="../../static/img/dd_dsh.png" class="menusPic"></img>
-							<text class="cm_t_24">待收货</text>
-							<view class="tips" v-if="hasLogin && accountInfo.wait_receiving_count">{{accountInfo.wait_receiving_count}}</view>
-						</view>
-						<!-- </navigator> -->
-						<!-- <navigator url="../features/order/order" class="menus flex flex_center flex_y"> -->
-						<view class="menus flex flex_center flex_y" @tap="_href('/features/refundList/refundList')">
-							<img src="../../static/img/dd_th.png" class="menusPic"></img>
-							<text class="cm_t_24">退货</text>
-							<view class="tips" v-if="hasLogin && accountInfo.returned_goods_count">{{accountInfo.returned_goods_count}}</view>
-						</view>
-						<!-- </navigator> -->
-						<!-- <navigator url="../features/order/order" class="menus flex flex_center flex_y"> -->
-						
-						<!-- </navigator> -->
-					</view>
-				<!-- </view> -->
-			</view>
-		</view>
-		
-		<!-- 菜单 --> 
-		<view class="menusBox">		
-
-			<view class="boxs">
-				<!-- <view class="cm_title">其他工具</view> -->
-				<view class="" >	
-					<view class="menus flex flex_center " @tap="_href('/features/adress/adress')">
-						<img src="../../static/img/ic_dz.png" class="menusPic"></img>
-						<text class="cm_t_24 f1">收货地址</text>
-						<Icon name="arrowright" :size="20"></Icon>
-					</view>
-					<view class="menus flex flex_center " @tap="_href('/features/comment/comment')">
-						<img src="../../static/img/ic_bz.png" class="menusPic"></img>
-						<text class="cm_t_24 f1">意见反馈</text>
-						<Icon name="arrowright" :size="20"></Icon>
-						
-					</view>
-<!-- 					
-					<view class="menus flex flex_center flex_y"  @tap="_href('/features/hpShare/hpShare')">
-						<img src="../../static/img/fx.png"  class="menusPic"></img>
-						<text class="cm_t_24">分享</text>
-					</view> -->
-					<view class="menus flex flex_center "  @tap="_href('/user/set/set')">
-						<img src="../../static/img/ic_sz.png"  class="menusPic" ></img>
-						<text class="cm_t_24 f1">设置</text><Icon name="arrowright" :size="20"></Icon>
-					</view>
-					<view class="menus flex flex_center " @tap="_kefu">
-						<img src="../../static/img/ic_kf.png"  class="menusPic"></img>
-						<text class="cm_t_24 f1">客服</text><Icon name="arrowright" :size="20" ></Icon>
+				<view class=" flex flex_center">
+					<view class="cm_title f1">我的订单</view>
+					<view class="flex flex_center cm_des" @tap="_href('/features/order/order?current=0')">
+						查看更多
+						<text class="iconfont icon-fanhui3"></text>
 					</view>
 				</view>
-			</view>		
+				<view class="flex flex_center flex_between">
+					<view class="menus flex flex_center flex_y " @tap="_href('/features/order/order?current=1')">
+						<image src="../../static/image/dd_df.png" class="menusPic"></image>
+						<text class="cm_t_24">待付款</text>
+						<view class="tips" v-if="accountInfo.wait_paying_count">{{ accountInfo.wait_paying_count }}</view>
+					</view>
 			
+					<view class="menus flex flex_center flex_y" @tap="_href('/features/order/order?current=2')">
+						<image src="../../static/image/dd_dfh.png" class="menusPic"></image>
+						<text class="cm_t_24">待发货</text>
+						<view class="tips" v-if="accountInfo.wait_sending_count">{{ accountInfo.wait_sending_count }}</view>
+					</view>
+
+					<view class="menus flex flex_center flex_y" @tap="_href('/features/order/order?current=3')">
+						<image src="../../static/image/dd_dsh.png" class="menusPic"></image>
+						<text class="cm_t_24">待收货</text>
+						<view class="tips" v-if="accountInfo.wait_receiving_count">{{ accountInfo.wait_receiving_count }}</view>
+					</view>
+
+					<view class="menus flex flex_center flex_y" @tap="_href('/features/refundList/refundList')">
+						<image src="../../static/image/dd_th.png" class="menusPic"></image>
+						<text class="cm_t_24">退货</text>
+						<view class="tips" v-if="accountInfo.returned_goods_count">{{ accountInfo.returned_goods_count }}</view>
+					</view>
+	
+				</view>
 		</view>
-		
-		<!-- 热门推荐 -->
-		<view class="hot">
-			<view class="cm_title title cm_tex_c">热门推荐</view>
-			<view class="hotItemBar flex flex_around">
-				<block v-for="(item, index) in list" :key="index">
-					<navigator :url="'/pages/main/details/details?code=' + item.project_code" class="proItemsBoxBlock">
-						<view class="picBox">
-							<image
-								@load="imageLoad(index)"
-								@error="loadError(index)"
-								lazy-load="true"
-								:src="item.project_img"
-								mode="aspectFill"
-								class="pre animated"
-								:class="item.load ? 'fadeIn' : ''"
-							></image>
-						</view>
-		
-						<view class="msgBox">
-							<!-- <view class="flex flex_center" style="padding: 6px 0;"> -->
-								
-								<view class=" cm_ellipsis2  " style="line-height: 1.3;">
-									<text class="tags" v-if="item.is_activity == 1">限时抢购</text>
-									{{ item.project_name }}
-								</view>
-							<!-- </view> -->
-							<view class="cm_prize" style="margin-top: 20rpx;">￥{{ item.project_raise_price }}</view>
-							<!-- <view class="cm_prize_delete" style="margin-top: 20rpx;">￥{{ item.project_price }}</view> -->
-							<view class="cm_des" style="margin-top: 20rpx;">{{ item.buy_count  }}人购买</view>
-						</view>
-					</navigator>
-				</block>
+
+		<!-- 菜单 -->
+		<view class="menusBox">
+			<view class="boxs">
+				<!-- <view class="cm_title">其他工具</view> -->
+				<view class="">
+					<view class="menus flex flex_center " @tap="_href('/features/adress/adress')">
+						<image src="../../static/image/wd_mx@2x.png" class="menusPic"></image>
+						<text class="cm_t_24 f1">余额明细</text>
+						<text class="iconfont icon-fanhui3"></text>
+					</view>
+					<view class="menus flex flex_center " @tap="_href('/features/adress/adress')">
+						<image src="../../static/image/wd_dz.png" class="menusPic"></image>
+						<text class="cm_t_24 f1">收货地址</text>
+						<text class="iconfont icon-fanhui3"></text>
+					</view>
+					<view class="menus flex flex_center " @tap="_href('/features/comment/comment')">
+						<image src="../../static/image/wd_fk.png" class="menusPic"></image>
+						<text class="cm_t_24 f1">意见反馈</text>
+						<text class="iconfont icon-fanhui3"></text>
+					</view>
+					<view class="menus flex flex_center " @tap="_href('/user/set/set')">
+						<image src="../../static/image/wd_sz.png" class="menusPic"></image>
+						<text class="cm_t_24 f1">设置</text>
+						<text class="iconfont icon-fanhui3"></text>
+					</view>
+					<view class="menus flex flex_center " @tap="_kefu">
+						<image src="../../static/image/wd_kf.png" class="menusPic"></image>
+						<text class="cm_t_24 f1">客服</text>
+						<text class="iconfont icon-fanhui3"></text>
+					</view>
+				</view>
 			</view>
 		</view>
+
 		<tui-modal :show="modal" @click="handleClick" @cancel="hide" :content="content" :maskClosable="false" color="#333" :size="32"></tui-modal>
 	</view>
 </template>
 
 <script>
 import { mapState, mapMutations } from 'vuex';
-import tuiLoadmore from "@/components/loadmore/loadmore"
+import tuiLoadmore from '@/components/loadmore/loadmore';
 import http from '@/utils/http/index.js';
 
 export default {
@@ -153,14 +106,14 @@ export default {
 		return {
 			// accountInfo: '',
 			kefu: '',
-			modal:false,
-			logining:false,
-			content:'请您先登录',
-			action:'login',
-			loginParams:{
-				  "username":"",
-				    "password":"",
-				    "vilidate":"000000",
+			modal: false,
+			logining: false,
+			content: '请您先登录',
+			action: 'login',
+			loginParams: {
+				username: '',
+				password: '',
+				vilidate: '000000'
 			},
 			formParams: {
 				key: '',
@@ -168,8 +121,8 @@ export default {
 				pageIndex: 1,
 				pageSize: 6
 			},
-			list:[],
-			
+			list: [],
+
 			set: {
 				appid: 'wx09daee2f47e178aa', //测试环境
 				// appid: 'wx450d3b4e0f18461f', //正式环境
@@ -180,7 +133,7 @@ export default {
 	},
 	onLoad() {
 		let that = this;
-		
+
 		// this.autoLogin()
 		// this.GetKefu();
 
@@ -188,41 +141,38 @@ export default {
 		uni.$on('refresh_user', function() {
 			// console.log(1213541)
 			that.loadData();
-			
 		});
-		;
 		that._loadData();
 	},
-	onShow(){
-		this.loadData()
-		
+	onShow() {
+		// this.loadData()
 	},
 	computed: {
-		hasLogin(){
+		hasLogin() {
 			return this.$store.state.hasLogin ? this.$store.state.hasLogin : false;
 		},
-		accountInfo(){
-			return this.$store.state.accountInfo
-		},
+		accountInfo() {
+			return this.$store.state.accountInfo;
+		}
 	},
-	watch:{
-		hasLogin(newValue,oldValue) {
+	watch: {
+		hasLogin(newValue, oldValue) {
 			// console.log(oldValue)
 			// console.log(newValue)
 			this.loadData();
 			// this.loadData();
-		},
+		}
 		// accountInfo(o,n){
 		// 	console.log(o)
 		// 	console.log(n)
 		// },
 	},
-	components:{
-		tuiLoadmore,
+	components: {
+		tuiLoadmore
 	},
 	// 下拉刷新
 	onPullDownRefresh() {
-		if(!this.hasLogin){
+		if (!this.hasLogin) {
 			uni.stopPullDownRefresh();
 			return;
 		}
@@ -231,7 +181,7 @@ export default {
 		});
 	},
 	methods: {
-		_toAuth(){
+		_toAuth() {
 			window.location.href =
 				'https://open.weixin.qq.com/connect/oauth2/authorize?appid=' +
 				this.set.appid +
@@ -255,9 +205,9 @@ export default {
 				} else {
 					that.loadStatus = 'loading';
 				}
-		
+
 				let res = await this.$api.GetGoodsList(this.formParams);
-		
+
 				if (type == 'refresh') {
 					// this.$ui.hideloading()
 				} else {
@@ -280,7 +230,7 @@ export default {
 						}
 					}
 				} else {
-					that.$ui.toast(res.Msg)
+					that.$ui.toast(res.Msg);
 				}
 			} catch (err) {
 				// console.log('请求结果false : ' + err);
@@ -291,24 +241,23 @@ export default {
 			// this.$ui.hideloading();
 			if (callback) callback();
 		},
-		_href(val){
-			
-			if(!this.hasLogin){		
-				this.content = '请您先登录'
-				this.action = 'login'  ///features/authentication/authentication'
-				this.modal = true
+		_href(val) {
+			if (!this.hasLogin) {
+				this.content = '请您先登录';
+				this.action = 'login'; ///features/authentication/authentication'
+				this.modal = true;
 				return;
 			}
-			switch (val){
+			switch (val) {
 				case 'set':
 					uni.navigateTo({
-						url:'/pages/user/set/set'
-					})
+						url: '/pages/user/set/set'
+					});
 					break;
 				default:
 					uni.navigateTo({
-						url:`/pages${val}`
-					})
+						url: `/pages${val}`
+					});
 					break;
 			}
 		},
@@ -318,7 +267,7 @@ export default {
 			let that = this;
 			try {
 				// this.$ui.showloading();
-				
+
 				let res = await this.$api.getConsumer({}, false);
 				// this.$ui.hideloading();
 				// "wait_paying_count": 0,     //订单支付订单数
@@ -332,7 +281,7 @@ export default {
 						// that.accountInfo = res.Data;
 					}
 				} else {
-					that.$ui.toast(res.Msg)
+					that.$ui.toast(res.Msg);
 				}
 				if (callback) callback();
 			} catch (err) {
@@ -342,38 +291,37 @@ export default {
 		handleClick(e) {
 			let index = e.index;
 			if (index === 0) {
-				// this.tui.toast("你点击了取消按钮")			
+				// this.tui.toast("你点击了取消按钮")
 			} else {
 				// this.tui.toast("你点击了确定按钮")
-				
-				switch (this.action){
+
+				switch (this.action) {
 					case 'login':
-					uni.navigateTo({
-						url:'/pages/role/login/login'
-					})	
+						uni.navigateTo({
+							url: '/pages/role/login/login'
+						});
 						break;
 					case 'authentication':
-					uni.navigateTo({
-						url:'/pages/features/authentication/authentication'
-					})	
+						uni.navigateTo({
+							url: '/pages/features/authentication/authentication'
+						});
 						break;
 					case 'payPass':
-					uni.navigateTo({
-						url:'/pages/user/setPayPass/setPayPass'
-					})	
+						uni.navigateTo({
+							url: '/pages/user/setPayPass/setPayPass'
+						});
 						break;
 					default:
 						break;
 				}
-									
 			}
-			this.modal = false
+			this.modal = false;
 		},
 		// 客服
-		_kefu(){
+		_kefu() {
 			// let phone = this.waiter.link_value;
-			const phone = uni.getStorageSync('global_Set_jll').service_mobile
-			let that = this
+			const phone = uni.getStorageSync('global_Set_jll').service_mobile;
+			let that = this;
 			// console.log(phone)
 			uni.showModal({
 				title: '洁利来商城提醒你',
@@ -397,141 +345,136 @@ export default {
 <style scoped lang="scss">
 .pages {
 	min-height: 100vh;
-	.pageTop{
+	padding: 20rpx;
+	// padding-top: 88rpx;
+	background-color: #f8f8f8;
+	.header {
 		width: 100%;
-		background: url(../../static/img/wd_bg.jpg);
-		background-size: contain;
-		background-repeat: no-repeat;
-		height: 260rpx;
-		.header {
-			width: 100%;
-			line-height: 88rpx;
-			font-size: 32rpx;
-			color: #fff;
-			
-			.cm_title {
-				text-align: center;
-				color: #fff;
-			}
-			.btns {
-				width: 88rpx;
-				height: 88rpx;
-				.iconfont {
-					font-size: 44rpx;
-				}
+		line-height: 88rpx;
+		height: 88rpx;
+		font-size: 32rpx;
+		color: #fff;
+		position: fixed;
+		top: 0;
+		left: 0;
+		background: #f8f8f8;
+		padding: 0 30rpx;
+		z-index: 100;
+		.btns {
+			width: 88rpx;
+			height: 88rpx;
+			.iconfont {
+				font-size: 44rpx;
 			}
 		}
-		.top {
-			height: 118rpx;
-			line-height: 118rpx;
-			padding: 40rpx;
-			.avatar {
-				width: 102rpx;
-				height: 102rpx;
-				margin-right: 26rpx;
-				border-radius: 50%;
-				border:2rpx solid #fff;
-				img{
-					// width: 100%;
-				}
-				// box-sizing: content-box;
-			}
-			.name{
-				color: #fff;
-			}
-			.cz {
-				// width: 104rpx;
-				line-height: 54rpx;
-				height: 54rpx;
-				border: none;
-				background: #333;
-				color: #fff;
-				text-align: center;
-				padding: 0 20rpx;
-				font-size: 26rpx;
-				border-radius: 4rpx;
-			}
+	}
+	.pageTop{
+		height: 180rpx;
+		.avatar{
+			width: 100rpx;
+			height: 100rpx;
+			border-radius: 50%;
+			margin-right: 24rpx;
+			border: 4rpx solid #d9d9d9;
+		}
+		.tx{
+			height: 54rpx;
+			line-height: 50rpx;
+			border-radius: 27rpx;
+			border: 2rpx solid #333;
+			padding: 0 32rpx;
+			
+		}
+	}
+	.shareBox{
+		height: 88rpx;
+		line-height: 88rpx;
+		position: relative;
+		margin-bottom: 20rpx;
+		.bg{
+			width: 100%;
+			height: 100%;
+		}
+		.share{
+			color: #333333;
+			font-size: 24rpx;
+			padding: 0 24rpx;
+			position: absolute;
+			right: 24rpx;
+			top: 20rpx;
+			height: 48rpx;
+			line-height: 48rpx;
+			border-radius: 24rpx;
+			background: linear-gradient(45deg, #FAE0C7, #F4C7A4);
 		}
 	}
 	.accountBox {
 		width: 100%;
-		// height: 386rpx;
+		height: 226rpx;
 		position: relative;
-		// padding: 0 20rpx;
-		// background: red;
-		
+		background-color: #fff;
+		border-radius: 12rpx;
+		padding: 20rpx;
 		.content {
 			height: 160rpx;
 		}
-		.bottom{
+		.menus {
 			width: 100%;
-			// height: 210rpx;
-			// border-radius: 12rpx;
-			background: #fff;
-			// position: absolute;
-			// bottom: -105rpx;
-			// left: 20rpx;
-			// margin-top: 40rpx;
-			padding:40rpx 20rpx;
-			// box-shadow:0px 1px 16px rgba(213,213,213,0.5);
-			.menus{
-				width: 100%;
-				
-				position: relative;
-				.menusPic{
-					width: 60rpx;
-					height: 60rpx;
-					margin-bottom: 20rpx;
-					margin-top: 32rpx;
-				}
-				.tips{
-					width: 30rpx;
-					height: 30rpx;
-					color: #fff;
-					background: red;
-					border-radius: 50%;
-					position: absolute;
-					right: 20rpx;
-					top: 20rpx;
-					font-size: 20rpx;
-					text-align: center;
-					line-height: 30rpx;
-				}
+		
+			position: relative;
+			.menusPic {
+				width: 60rpx;
+				height: 60rpx;
+				margin-bottom: 20rpx;
+				margin-top: 32rpx;
+			}
+			.tips {
+				width: 30rpx;
+				height: 30rpx;
+				color: #fff;
+				background: red;
+				border-radius: 50%;
+				position: absolute;
+				right: 20rpx;
+				top: 20rpx;
+				font-size: 20rpx;
+				text-align: center;
+				line-height: 30rpx;
 			}
 		}
 	}
-	.menusBox{
+	.menusBox {
 		// padding: 20rpx;
 		margin-top: 16rpx;
-		.boxs{
-			padding:0rpx 20rpx;
+		.boxs {
+			padding: 0rpx 20rpx;
 			border-radius: 12rpx;
 			background: #fff;
 			margin-bottom: 20rpx;
-			.cm_title{
+			.cm_title {
 				// margin-top: 12rpx;
 			}
-			.menus{
+			.menus {
 				width: 100%;
 				height: 92rpx;
-				.menusPic{
+				.menusPic {
 					width: 48rpx;
 					height: 48rpx;
 					margin-right: 12rpx;
 				}
 			}
-			.menuTextNum{
-				    font-size: 48rpx;
-				    color: #5bc1ab;
-				    margin-bottom: 20rpx;
-				    margin-top: 36rpx;
+			.menuTextNum {
+				font-size: 48rpx;
+				color: #5bc1ab;
+				margin-bottom: 20rpx;
+				margin-top: 36rpx;
 			}
 		}
 	}
-	.shadowLeft{
+	.shadowLeft {
 		// box-shadow:  -4rpx 0 16rpx #eee ;
 		position: relative;
-		&::before{
+		&::before {
 			content: '';
 			width: 30rpx;
 			height: 80rpx;
@@ -542,9 +485,9 @@ export default {
 			overflow: hidden;
 			// border: 1rpx solid red;
 			// background: radial-gradient(0 0,  #333,#fff );
-		    background:-webkit-radial-gradient(center , #dedede 30%, #fff 70% );
+			background: -webkit-radial-gradient(center, #dedede 30%, #fff 70%);
 			// background-size: 90% 60%;
-			background-position:20rpx 0 ;
+			background-position: 20rpx 0;
 			background-repeat: no-repeat;
 		}
 	}
@@ -555,14 +498,14 @@ export default {
 			line-height: 1;
 			margin-bottom: 8rpx;
 			margin-top: 32rpx;
-			font-weight: bolder
+			font-weight: bolder;
 		}
 		.hotItemBar {
 			width: 100%;
 			flex-wrap: wrap;
 			justify-content: space-between;
 			// padding: 0 20rpx;
-	
+
 			.proItemsBox {
 				width: calc((100% - 56rpx) / 2);
 				height: 560rpx;
@@ -570,18 +513,18 @@ export default {
 				border-radius: 14rpx;
 				margin-top: 16rpx;
 				overflow: hidden;
-	
+
 				.picBox {
 					width: 100%;
 					height: 356rpx;
 					position: relative;
-	
+
 					.pre {
 						width: 100%;
 						height: 347rpx;
 						opacity: 0;
 					}
-	
+
 					.timeBox {
 						position: absolute;
 						left: 0;
@@ -594,11 +537,11 @@ export default {
 						text-align: center;
 					}
 				}
-	
+
 				.msgBox {
 					padding: 16rpx;
 					.tags {
-						background: linear-gradient(to right, #EE7E33, #EA3333);;
+						background: linear-gradient(to right, #ee7e33, #ea3333);
 						color: #fff;
 						padding: 0 8rpx;
 						border-radius: 4rpx;
@@ -611,7 +554,7 @@ export default {
 						line-height: 64rpx;
 						justify-content: flex-start;
 					}
-	
+
 					.has {
 						margin-top: 14rpx;
 						padding: 0 16rpx;

@@ -49,53 +49,6 @@
 				</view>
 			</view>
 
-			<!-- <view class="boxs box2"> -->
-			<!-- <view class="flex  flex_center titleBar tui-skeleton-fillet">
-					<view class="f1 cm_title">当前出价</view>
-					<view class="cm_des" @tap="_switch">
-						出价记录
-						<text class="iconfont  icon-arrow-right cm_des"></text>
-					</view>
-				</view> -->
-			<!-- <view class="prizeBox">
-					
-					<view v-if="auction.length > 0">
-						<block v-for="(item, index) in auction" :key="index">
-							<view
-								class="prizeItems flex flex_center  tui-skeleton-rect"
-								:class="item.status == 1 ? 'active' : ''"
-								v-if="index >= 3 ? (showAll == true ? true : false) : true"
-							>
-								<view class="f1 flex flex_center">
-									<image :src="item.consumer_head" mode="aspectFill" class="avatar"></image>
-									<view class="f1" v-if="item.status == 1">
-										<view class="name">{{ item.consumer_name }}</view>
-										<view class="cm_text cm_t_24">
-											若无人出价，将以
-											<text style="color: #E02E24;">{{ item.bidder_price }}元</text>
-											拍下此商品
-										</view>
-									</view>
-									<view class="f1 flex flex_center" v-else>
-										<view class="name f1">{{ item.consumer_name }}</view>
-										<view class="cm_t_24">{{ item.bidder_price }}元</view>
-									</view>
-								</view>
-								<view class="mark">{{ item.status == 1 ? '领先' : '出局' }}</view>
-							</view>
-						</block>
-						<view v-if="auction.length > 4">...</view>
-					</view>
-					<view v-else class="cm_des cm_tex_c">暂未有人出价</view>
-				</view> -->
-			<!-- </view> -->
-			<!-- <view class="boxs box2">
-				<view class="flex flex_center cells" @tap="_phone">
-					<text class="cm_des" style="margin-right: 48rpx;">联系商家</text>
-					<view class="f1"></view>
-					<Icon name="arrowright" color="#999" :size="16"></Icon>
-				</view>
-			</view> -->
 
 			<view class="boxs box4" >
 				<view class="flex flex_center cells" style="margin-top: 20rpx;">
@@ -136,20 +89,7 @@
 					<Icon name="arrowright" color="#999" :size="16"></Icon>
 					<!-- <button class=" jd">进店逛逛</button> -->
 				</view>
-				<!-- <view class="scoreBox flex flex_center">
-					<view class="f1 flex flex_center tui-skeleton-fillet">
-						<text class="">宝贝描述</text>
-						<text class="score">{{ business.sevice_point }}</text>
-					</view>
-					<view class="f1 flex flex_center tui-skeleton-fillet">
-						<text class="">卖家服务</text>
-						<text class="score">{{ business.sevice_point }}</text>
-					</view>
-					<view class="f1 flex flex_center tui-skeleton-fillet">
-						<text class="">物流服务</text>
-						<text class="score">{{ business.sevice_point }}</text>
-					</view>
-				</view> -->
+
 			</view>
 			<!-- {{addPrize}} -->
 
@@ -182,15 +122,7 @@
 			</view>
 		</view>
 		<tui-modal :show="modal" @click="handleClick" @cancel="hide" :content="content" :maskClosable="false" color="#333" :size="32"></tui-modal>
-		<!-- <best-payment-password :title="tigs" :show="payFlag" :value="paymentPwd" digits="6" @cancel="cancelPass" @submit="checkPwd" :forget="false"></best-payment-password> -->
 
-		<!-- 		<xhStoreParams ref="params" 
-			:preImg="banners[0]" 
-			:title="goods.project_name"
-			:prize="goods.project_raise_price" 
-			@creatOrder="creatOrder"
-			@addCard="addCard"
-		></xhStoreParams> -->
 		<xhStoreParamsSKU
 			:platform="platform"
 			ref="params"
@@ -209,27 +141,12 @@
 			:singlePro="goods.parameter_type == 0"
 		></xhStoreParamsSKU>
 
-		<!-- <view class="mask-screen" @tap="_toggleModal" @touchmove.stop.prevent="_none" v-show="showModalStatus">
-			<view class="region-box animated slideInUp" v-show="showModalStatus" @tap.stop="_none">
-				<view class="cm_title cm_tex_c">保障</view>
-				<view class="cm_title">假一赔四</view>
-				<view class="cm_des">正品保障，假一赔四</view>
-				<view class="cm_title">退货运费险</view>
-				<view class="cm_des">卖家投保运费险，负担一定金额退货运费（保单生效已下单显示为准)</view>
-				<view class="cm_title">七天无理由退换</view>
-				<view class="cm_des">满足相应的条件时，消费者可申请“七天无理由退换货”</view>
-				<view class="cm_title">三年质保</view>
-				<view class="cm_des">交易成功15天后的三年内出现质量问题，商家在规定时间内通过免费维修或免费更换商品或免费补寄零配件或补偿质保基金等方式保障消费者权益</view>
-				<button class="btns" @tap="_toggleModal" :style="{ background: '#50AB9F' }">确定</button>
-			</view>
-		</view> -->
 
 		<!-- <view class="back"> -->
 		<image src="../../../static/img/ic_xq_zd.png" mode="aspectFill" class="backBtn animated slideInUp" @tap="_backTop"></image>
 		<!-- </view> -->
-		<view class="asideBar flex flex_center animated slideInUp" @tap="home"><Icon name="home" :size="20" color="#fff"></Icon></view>
+		<!-- <view class="asideBar flex flex_center animated slideInUp" @tap="home"><Icon name="home" :size="20" color="#fff"></Icon></view> -->
 
-		<!-- <view class="asideBar2 flex flex_center animated slideInUp" @tap="cart"><Icon name="cart" :size="20" color="#50AB9F"></Icon></view> -->
 	</view>
 </template>
 

@@ -1166,9 +1166,7 @@ let QRCode = {};
                                 }
                             },
                             complete: function () {
-                                // #ifdef APP-PLUS
-                                plus.nativeUI.closeWaiting();
-                                // #endif
+                                uni.hideLoading();
                             },
                         }, options.context);
                     }, options.text.length + 100);

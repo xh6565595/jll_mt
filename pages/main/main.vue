@@ -1,88 +1,67 @@
 <template>
 	<view class="pages">
-		<!-- #ifdef H5 -->
-		<view class="header flex flex_center" @tap="toSearchPage">
-			<cu-custom :isBack="false">
-				<!-- <block slot="backText"></block> -->
-				<block slot="content">
-					<view class="searchBar f1 flex flex_center">
-						<Icon name="search" :size="20" color="#CBCBCB"></Icon>
-						<div class="f1 cm_des">请输入关键词</div>
-					</view>
-				</block>
-				<block slot="right"><view class="btns flex flex_center">搜索</view></block>
-			</cu-custom>
-		</view>
-		<!-- #endif -->
+	
 		<!-- 菜单 -->
-		<view class="uni-padding-wrap" style="margin-top: 20rpx;">
-			<view class="page-section swiper">
-				<view class="page-section-spacing">
-					<swiper class="swiper" :indicator-dots="true" :autoplay="true">
-						<block v-for="(item, index) in banners" :key="index">
-							<swiper-item @click="_href(item.Url)">
-								<image :src="item.Text" mode="aspectFill" lazy-load="true" class="swiper-item uni-bg-red" style="width: 100%;height: 100%;"></image>
-							</swiper-item>
-						</block>
-					</swiper>
-				</view>
-			</view>
-		</view>
-		<view class="flex menus" style="margin-top: 20rpx;">
-			<block v-for="(item, index) in classList" :key="index">
-				<navigator :url="'/pages/classify/products/products?type=' + index" class="f1 flex flex_center flex_y">
-					<image :src="item.class_logo ? item.class_logo : '../../static/none1_1.jpg'" @error="imageError2(item)" mode="scaleToFill" class="menusIcons"></image>
-					<text class="text">{{ item.class_name }}</text>
-				</navigator>
+		<swiper class="swiper" :indicator-dots="true" :autoplay="true">
+			<block v-for="(item, index) in banners" :key="index">
+				<swiper-item @click="_href(item.Url)">
+					<image :src="item.Text" mode="aspectFill" lazy-load="true" class="swiper-item uni-bg-red" style="width: 100%;height: 100%;"></image>
+				</swiper-item>
 			</block>
-		</view>
-		
-		<!-- <view class="flashSale"> -->
-		<navigator url="/pages/features/flashSale/flashSale" class="flashSale" v-if="ifActivity">
-			<image src="/static/img/flashSale.png" mode="widthFix" class="cover"></image>
-		</navigator>
-		<!-- </view> -->
-		
-		<!-- <view class="box flex flex_center flex_between">
-				<navigator url="/pages/main/choiceness/choiceness" class=" flex flex_center floors">
-					<image src="../../static/img/jx@1.5x.png" mode="scaleToFill" class="floorsPic"></image>
-				</navigator>
-				<navigator url="/pages/main/youDian/youDian" class=" flex flex_center floors">
-					<image src="../../static/img/yd@1.5x.png" mode="scaleToFill" class="floorsPic"></image>
-				</navigator>
-		</view> -->
-		<!-- 热门推荐 -->
+		</swiper>
 		<view class="hot">
-			<view class="cm_title title">热拍商品</view>
-			<view class="hotItemBar flex flex_around">
 				<block v-for="(item, index) in list" :key="index">
-					<navigator :url="'/pages/main/details/details?code=' + item.project_code" class="proItemsBoxBlock">
-						<view class="picBox">
-							<image
-								@load="imageLoad(index)"
-								@error="loadError(index)"
-								lazy-load="true"
-								:src="item.project_img"
-								mode="aspectFill"
-								class="pre animated"
-								:class="item.load ? 'fadeIn' : ''"
-							></image>
-						</view>
-
-						<view class="msgBox">
-							<!-- <view class="flex flex_center" style="padding: 6px 0;"> -->
-
-							<view class=" cm_ellipsis2  " style="line-height: 1.3;">
-								<text class="tags" v-if="item.is_activity == 1">限时抢购</text>
-								{{ item.project_name }}
+					<navigator :url="'/pages/main/details/details?code=' + item.project_code" class="hotItem">
+							<view class="flex flex_center itemHeader">
+								<image
+									@load="imageLoad(index)"
+									@error="loadError(index)"
+									lazy-load="true"
+									:src="item.project_img"
+									mode="aspectFill"
+									class="itemLogo animated"
+									:class="item.load ? 'fadeIn' : ''"
+								></image>
+								<view class="itemTitle cm_title cm_ellipsis">撒旦法撒旦法商店发送到阿萨商店发送到阿萨</view>
+								<text class="cm_des">上市公司·优选品牌</text>
 							</view>
-							<!-- </view> -->
-							<view class="cm_prize" style="margin-top: 20rpx;">￥{{ item.project_raise_price }}</view>
-							<view class="cm_des" style="margin-top: 20rpx;">{{ item.buy_count }}人购买</view>
-						</view>
+							<view class="itemContent">
+								<view class="title cm_ellipsis " >撒旦法商店发撒旦法商店发送到阿萨德阿萨德撒旦法商店发送到阿萨德阿萨德撒旦法商店发送到阿萨德阿萨德送到阿萨德阿萨德</view>
+								<view class="itemPrice" >￥{{ item.project_raise_price }}</view>
+							</view>
+							<view class="picBox flex flex_around">
+								<image
+									@load="imageLoad(index)"
+									@error="loadError(index)"
+									lazy-load="true"
+									:src="item.project_img"
+									mode="aspectFill"
+									class="left animated"
+									:class="item.load ? 'fadeIn' : ''"
+								></image>
+								<view class="f1">
+									<image
+										@load="imageLoad(index)"
+										@error="loadError(index)"
+										lazy-load="true"
+										:src="item.project_img"
+										mode="aspectFill"
+										class="rTop animated"
+										:class="item.load ? 'fadeIn' : ''"
+									></image>
+									<image
+										@load="imageLoad(index)"
+										@error="loadError(index)"
+										lazy-load="true"
+										:src="item.project_img"
+										mode="aspectFill"
+										class="rBot animated"
+										:class="item.load ? 'fadeIn' : ''"
+									></image>
+								</view>
+							</view>
 					</navigator>
 				</block>
-			</view>
 		</view>
 		<LoadMore :status="loadStatus" />
 	</view>
@@ -90,9 +69,8 @@
 
 <script>
 import { mapState } from 'vuex';
-import tuiCountdown from '@/components/countdown/countdown';
 const global_Set_jll = uni.getStorageSync('global_Set_jll');
-// console.log(global_Set_jll.banerList)
+
 export default {
 	data() {
 		return {
@@ -115,67 +93,10 @@ export default {
 		};
 	},
 	components: {
-		tuiCountdown
+		
 	},
 	computed: mapState(['hasLogin']),
-	// 点击搜索框
-	onNavigationBarSearchInputClicked() {
-		// alert(1)
-		uni.hideKeyboard();
-		uni.navigateTo({
-			url: '/pages/main/search/search'
-		});
-	},
-	onNavigationBarSearchInputConfirmed(e) {
-		uni.hideKeyboard();
-		// if (this.searchword && this.searchword != 'undefined') {
-		// 	uni.navigateTo({
-		// 		url: '/pages/main/search/search?keyword=' + this.searchword
-		// 	});
-		// } else {
-		// 	uni.navigateTo({
-		// 		url: '/pages/main/search/search'
-		// 	});
-		// }
-		uni.navigateTo({
-			url: '/pages/main/search/search'
-		});
-	},
-	// 点击搜索框
-	onNavigationBarSearchInputChanged(e) {
-		// console.log("e: " + JSON.stringify(e));
-		// let v = e.text;
-		// // console.log(v)
-
-		// if (v) {
-		// 	this.searchword = v;
-		// }
-		uni.navigateTo({
-			url: '/pages/main/search/search'
-		});
-	},
-	onNavigationBarButtonTap(e) {
-		// console.log(e.index);
-		if (e.index === 0) {
-			// 点击搜素
-			// this.scanSQR();
-			this.$ui.toast('开发中');
-		} else {
-			// 点击搜素
-			// if (this.searchword && this.searchword != 'undefined') {
-			// 	uni.navigateTo({
-			// 		url: '/pages/main/search/search?keyword=' + this.searchword
-			// 	});
-			// } else {
-
-			// 	this.$ui.toast('请输入关键字')
-			// }
-			uni.navigateTo({
-				url: '/pages/main/search/search'
-			});
-		}
-	},
-
+	
 	// 下拉刷新
 	onPullDownRefresh() {
 		this.formParams.pageIndex = 1;
@@ -308,106 +229,82 @@ export default {
 .pages {
 	background: #f4f4f4;
 	padding: 20rpx;
-	padding-top: 88rpx;
-	.uni-padding-wrap {
-		background-color: #f4f4f4;
-		.swiper {
-			border-radius: 12rpx;
-			overflow: hidden;
-			width: 100%;
-			.swiper-item {
-				background: #eee; 
-			}
+	.swiper {
+		border-radius: 8rpx;
+		overflow: hidden;
+		width: 100%;
+		height: 280rpx;
+		background-color: #f8f8f8;
+		.swiper-item {
+			background: #eee; 
 		}
 	}
 
-	.header {
-		width: 100%;
-		line-height: 88rpx;
-		height: 88rpx;
-		font-size: 32rpx;
-		color: #fff;
-		position: fixed;
-		background: #ededed;
-		z-index: 10;
-		left: 0;
-		top: 0;
-		// padding: 0 20rpx;
-		.searchBar {
-			height: 60rpx;
-			line-height: 60rpx;
-			border-radius: 30rpx;
-			background: #fff;
-			padding: 0 40rpx;
-			margin: 0 20rpx;
-		}
-		.btns {
-			width: 88rpx;
-			height: 88rpx;
-			color: #333;
-			.iconfont {
-				font-size: 44rpx;
-			}
-		}
-	}
-	.menus {
-		background: #fff;
-		height: 172rpx;
-		border-radius: 12rpx;
-		.menusIcons {
-			width: 90rpx;
-			height: 90rpx;
-		}
-		.text {
-			margin-top: 14rpx;
-			font-size: 24rpx;
-		}
-	}
-	.flashSale{
-		width: 100%;
-		height: 160rpx;
-		margin-top: 20rpx;
-		img{
-			width: 100%;
-			height: 100%;
-		}
-	}
-	.box {
-		padding: 0 20rpx 20rpx 20rpx;
-		background: #fff;
-		.floors {
-			width: calc(50vw - 28rpx);
-			height: 130rpx;
-			.floorsPic {
-				width: 100%;
-				height: 130rpx;
-			}
-		}
-	}
+	
 	.hot {
 		width: 100%;
-		// padding: 0 20rpx;
-		.title {
-			line-height: 1;
-			margin-bottom: 8rpx;
-			margin-top: 32rpx;
-			font-weight: bolder;
+		.hotItem{
+			margin-top: 20rpx;
+			background: #fff;
+			border-radius: 16rpx;
+			padding: 20rpx;
+			.itemHeader{
+				margin: 12rpx auto;
+				.itemLogo{
+					width: 68rpx;
+					height: 68rpx;
+					border-radius: 50%;
+					margin-right: 16rpx;
+				}
+				.itemTitle{
+					width: 54%;
+					font-weight: 600;
+				}
+			}
+			.itemContent{
+				position: relative;
+				// background-color: red;
+				height: 46rpx;
+				line-height: 46rpx;
+				margin-bottom: 26rpx;
+				.title{
+					width: 80%;
+					height: 46rpx;
+					line-height: 46rpx;
+				}
+				.itemPrice{
+					position: absolute;
+					top: 0;
+					right: -20rpx;
+					height: 46rpx;
+					line-height: 46rpx;
+					color: #fff;
+					background-color: #E93F34;
+					border-radius: 23rpx 0 0 23rpx;
+					padding: 0 16rpx;
+				}
+			}
+			
 		}
-		.hotItemBar {
+		.picBox{
 			width: 100%;
-			flex-wrap: wrap;
-			justify-content: space-between;
-			// padding: 0 20rpx;
-		}
-		.tags {
-			background: linear-gradient(to right, #ee7e33, #ea3333);
-			color: #fff;
-			padding: 0 8rpx;
-			border-radius: 4rpx;
-			font-size: 20rpx;
-			line-height: 28rpx;
-			height: 28rpx;
-			margin-right: 10rpx;
+			.left{
+				width: 442rpx;
+				height: 442rpx;
+				border-radius: 16rpx;
+				margin-right: 16rpx;
+			}
+			.rTop{
+				width: 216rpx;
+				height: 216rpx;
+				border-radius: 16rpx;
+				margin-bottom: 10rpx;
+			}
+			.rBot{
+				width: 216rpx;
+				height: 216rpx;
+				border-radius: 16rpx;
+			}
 		}
 	}
 }

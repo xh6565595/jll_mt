@@ -1,15 +1,14 @@
 <template>
 	<view class="pages flex flex_center flex_y">
-		<image src="../../static/img/logo@1.5x.png" mode="" style="width: 120rpx;height: 120rpx;border-radius:50%;margin-bottom: 40rpx;"></image>
-		<text>洁利来商城欢迎您</text>
-		 <button type="success" class="btns" open-type="getUserInfo" @getuserinfo="getuserinfo">微信登录</button>
+		<image src="../../static/img/logo@1.5x.png" mode="scaleToFill" class="logo" ></image>
+		<text class="name">洁利来商城欢迎您</text>
+		<text class="text">您尚未登录</text>
+		<text class="text">需要获取您的授权之后完成登录</text>
+		<button type="success" class="btns" open-type="getUserInfo" @getuserinfo="getuserinfo">微信登录</button>
 	</view>
 </template>
 
 <script>
-// import autoUpdater from '@/utils/autoUpdater.min.js';
-
-// import cityData from '@/utils/picker.city.js';
 import http from '@/utils/http/index.js';
 export default {
 	data() {
@@ -27,13 +26,6 @@ export default {
 	},
 	onLoad() {
 		
-		// #ifdef APP-PLUS
-			this.checkVersion();
-		// #endif
-		// #ifdef H5
-			this.autoLogin()
-		// #endif
-
 		// uni.authorize({
 		//     scope: 'scope.userLocation',
 		//     success() {
@@ -50,6 +42,9 @@ export default {
 			
 		  }
 		});
+		uni.switchTab({
+			url:'../main/main'
+		})
 	},
 	computed: {
 		hasLogin() {
@@ -71,99 +66,8 @@ export default {
 				url:'../main/main'
 			})
 		},
-		getCity(item, str) {
-			let that = this;
-			item.forEach(t => {
-				if (t.id == str) {
-					// alert(t.name)
-					this.city = t.name;
-					return t.name;
-				} else {
-					if (t.children) {
-						return that.getCity(t.children, str);
-					}
-				}
-			});
-		},
+		
 
-		// 检查更新
-		async checkVersion() {
-			let that = this;
-			let data = { version: this.Version };
-			// alert(0)
-			try {
-				uni.request({
-					url: http.baseUrl + '/api/AppVersion/VersionCheck', //仅为示例，并非真实接口地址。
-					method: 'POST',
-					data: data,
-					header: {
-						'Content-Type': 'application/json'
-						// Authorization: value
-					},
-					success: response => {
-						// alert(2)
-						// console.log(response.data);
-						let statusCode = response.statusCode;
-						if (statusCode == 200 && response.data.Success) {
-							let res = {};
-							res.data = response.data.Data;
-							// 记录app状态
-							if (that.Platform == 'android' && res.data.android_update_type != 1) {
-								that.updatedInfo = {
-									packageUrl: res.data.android_url_net,
-									content: '发现新版本:' + res.data.android_Version + '\n' + res.data.android_update_info ? res.data.android_update_info: ''
-								};
-								// 1是不更新 2是强制更新 3可选择更新 4//appstore更新
-								if (res.data.android_update_type == 2) {
-									that.initUpdated(true);
-								} else if (res.data.android_update_type == 3) {
-									that.initUpdated(false);
-								} else if (res.data.android_update_type == 4) {
-									// 使用appstore更新
-									that.initUpdated(false, true);
-								}
-							} else if (that.Platform == 'ios' && res.data.ios_update_type != 1) {
-								that.updatedInfo = {
-									packageUrl: res.data.ios_url_net,
-									content: '发现新版本' + res.data.ios_Version + '\n' + res.data.ios_update_info ? res.data.ios_update_info: ''
-								};
-								// 1是不更新 2是强制更新 3可选择更新 4//appstore更新
-								if (res.data.ios_update_type == 2) {
-									that.initUpdated(true);
-								} else if (res.data.ios_update_type == 3) {
-									that.initUpdated(false);
-								} else if (res.data.ios_update_type == 4) {
-									// 使用appstore更新
-									that.initUpdated(false, true);
-								}
-							}else{
-								// that.autoLogin();
-							}
-						}else{
-							// that.autoLogin();
-						}
-						that.autoLogin();
-					},
-					fail(err) {
-						// console.log(err);
-						that.autoLogin();
-					}
-				});
-			} catch (e) {
-				that.autoLogin();
-			}
-		},
-		initUpdated(ifForce, browser) {
-			// #ifdef APP-PLUS
-			autoUpdater.init({
-				packageUrl: this.updatedInfo.packageUrl,
-				content: this.updatedInfo.content,
-				browser: browser,
-				ifForce: ifForce
-			});
-			autoUpdater.show(ifForce);
-			// #endif
-		},
 		async autoLogin() {
 			if (this.hasLogin) {
 				return;
@@ -246,9 +150,34 @@ export default {
 <style lang="less" scoped>
 .pages {
 	background: #fff;
-	.btu {
-		padding: 20rpx 40rpx;
-		margin-top: 20rpx;
+	justify-content: flex-start;
+	.logo {
+		width: 130rpx;
+		height: 130rpx;
+		border-radius: 50%;
+		margin: 177rpx auto 28rpx auto;
+	}
+	.name{
+		font-size: 34rpx;
+		font-weight: 600;
+		color: #333;
+		margin-bottom: 70rpx;
+	}
+	.text{
+		color: #999;
+		line-height: 1.2;
+	}
+	.btns{
+		margin-top: 36rpx;
+		width: 346rpx;
+		line-height: 80rpx;
+		height: 80rpx;
+		border-radius:40rpx ;
+		text-align: center;
+		color: #fff;
+		font-size: 32rpx;
+		background-color: #08c163;
+		box-shadow:  0 4rpx 4rpx #08c163;
 	}
 }
 </style>

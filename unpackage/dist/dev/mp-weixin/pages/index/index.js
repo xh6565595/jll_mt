@@ -141,7 +141,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
 var _index = _interopRequireDefault(__webpack_require__(/*! @/utils/http/index.js */ 11));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}var _default =
 {
   data: function data() {
@@ -159,13 +158,6 @@ var _index = _interopRequireDefault(__webpack_require__(/*! @/utils/http/index.j
   },
   onLoad: function onLoad() {
 
-
-
-
-
-
-
-
     // uni.authorize({
     //     scope: 'scope.userLocation',
     //     success() {
@@ -181,6 +173,9 @@ var _index = _interopRequireDefault(__webpack_require__(/*! @/utils/http/index.j
         // 获取code换opid
 
       } });
+
+    uni.switchTab({
+      url: '../main/main' });
 
   },
   computed: {
@@ -203,121 +198,30 @@ var _index = _interopRequireDefault(__webpack_require__(/*! @/utils/http/index.j
         url: '../main/main' });
 
     },
-    getCity: function getCity(item, str) {var _this = this;
-      var that = this;
-      item.forEach(function (t) {
-        if (t.id == str) {
-          // alert(t.name)
-          _this.city = t.name;
-          return t.name;
-        } else {
-          if (t.children) {
-            return that.getCity(t.children, str);
-          }
-        }
-      });
-    },
-
-    // 检查更新
-    checkVersion: function checkVersion() {var _this2 = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {var that, data;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:
-                that = _this2;
-                data = { version: _this2.Version };
-                // alert(0)
-                try {
-                  uni.request({
-                    url: _index.default.baseUrl + '/api/AppVersion/VersionCheck', //仅为示例，并非真实接口地址。
-                    method: 'POST',
-                    data: data,
-                    header: {
-                      'Content-Type': 'application/json'
-                      // Authorization: value
-                    },
-                    success: function success(response) {
-                      // alert(2)
-                      // console.log(response.data);
-                      var statusCode = response.statusCode;
-                      if (statusCode == 200 && response.data.Success) {
-                        var res = {};
-                        res.data = response.data.Data;
-                        // 记录app状态
-                        if (that.Platform == 'android' && res.data.android_update_type != 1) {
-                          that.updatedInfo = {
-                            packageUrl: res.data.android_url_net,
-                            content:  true ? res.data.android_update_info : undefined };
-
-                          // 1是不更新 2是强制更新 3可选择更新 4//appstore更新
-                          if (res.data.android_update_type == 2) {
-                            that.initUpdated(true);
-                          } else if (res.data.android_update_type == 3) {
-                            that.initUpdated(false);
-                          } else if (res.data.android_update_type == 4) {
-                            // 使用appstore更新
-                            that.initUpdated(false, true);
-                          }
-                        } else if (that.Platform == 'ios' && res.data.ios_update_type != 1) {
-                          that.updatedInfo = {
-                            packageUrl: res.data.ios_url_net,
-                            content:  true ? res.data.ios_update_info : undefined };
-
-                          // 1是不更新 2是强制更新 3可选择更新 4//appstore更新
-                          if (res.data.ios_update_type == 2) {
-                            that.initUpdated(true);
-                          } else if (res.data.ios_update_type == 3) {
-                            that.initUpdated(false);
-                          } else if (res.data.ios_update_type == 4) {
-                            // 使用appstore更新
-                            that.initUpdated(false, true);
-                          }
-                        } else {
-                          // that.autoLogin();
-                        }
-                      } else {
-                          // that.autoLogin();
-                        }
-                      that.autoLogin();
-                    },
-                    fail: function fail(err) {
-                      // console.log(err);
-                      that.autoLogin();
-                    } });
-
-                } catch (e) {
-                  that.autoLogin();
-                }case 3:case "end":return _context.stop();}}}, _callee);}))();
-    },
-    initUpdated: function initUpdated(ifForce, browser) {
 
 
-
-
-
-
-
-
-
-    },
-    autoLogin: function autoLogin() {var _this3 = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee2() {var that, user, res;return _regenerator.default.wrap(function _callee2$(_context2) {while (1) {switch (_context2.prev = _context2.next) {case 0:if (!
-                _this3.hasLogin) {_context2.next = 2;break;}return _context2.abrupt("return");case 2:
+    autoLogin: function autoLogin() {var _this = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {var that, user, res;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:if (!
+                _this.hasLogin) {_context.next = 2;break;}return _context.abrupt("return");case 2:
 
 
                 // console.log(666666666666)
-                that = _this3;
+                that = _this;
                 user = uni.getStorageSync('user');
                 // console.log(user)
-                if (!user) {_context2.next = 9;break;}
-                _this3.loginParams.username = user.username;
-                _this3.loginParams.password = user.password;_context2.next = 11;break;case 9:
+                if (!user) {_context.next = 9;break;}
+                _this.loginParams.username = user.username;
+                _this.loginParams.password = user.password;_context.next = 11;break;case 9:
 
                 uni.reLaunch({
-                  url: '/pages/main/main' });return _context2.abrupt("return",
+                  url: '/pages/main/main' });return _context.abrupt("return",
 
-                false);case 11:_context2.prev = 11;_context2.next = 14;return (
-
-
+                false);case 11:_context.prev = 11;_context.next = 14;return (
 
 
 
-                  _this3.$api.userLogin(_this3.loginParams, false));case 14:res = _context2.sent;
+
+
+                  _this.$api.userLogin(_this.loginParams, false));case 14:res = _context.sent;
                 // this.$ui.hideloading()
                 // that.loading = false
                 // console.log(res)
@@ -340,21 +244,21 @@ var _index = _interopRequireDefault(__webpack_require__(/*! @/utils/http/index.j
                   uni.reLaunch({
                     url: '/pages/main/main' });
 
-                }_context2.next = 21;break;case 18:_context2.prev = 18;_context2.t0 = _context2["catch"](11);
+                }_context.next = 21;break;case 18:_context.prev = 18;_context.t0 = _context["catch"](11);
 
                 // console.log('请求结果false : ' + err);
                 uni.reLaunch({
-                  url: '/pages/main/main' });case 21:case "end":return _context2.stop();}}}, _callee2, null, [[11, 18]]);}))();
+                  url: '/pages/main/main' });case 21:case "end":return _context.stop();}}}, _callee, null, [[11, 18]]);}))();
 
 
     },
     // 加载登录账户信息
-    initUser: function initUser(callback) {var _this4 = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee3() {var that, res;return _regenerator.default.wrap(function _callee3$(_context3) {while (1) {switch (_context3.prev = _context3.next) {case 0:
-                that = _this4;_context3.prev = 1;_context3.next = 4;return (
+    initUser: function initUser(callback) {var _this2 = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee2() {var that, res;return _regenerator.default.wrap(function _callee2$(_context2) {while (1) {switch (_context2.prev = _context2.next) {case 0:
+                that = _this2;_context2.prev = 1;_context2.next = 4;return (
 
 
 
-                  _this4.$api.getConsumer({}, false));case 4:res = _context3.sent;
+                  _this2.$api.getConsumer({}, false));case 4:res = _context2.sent;
                 // this.$ui.hideloading();
 
                 // console.log(res)
@@ -366,9 +270,9 @@ var _index = _interopRequireDefault(__webpack_require__(/*! @/utils/http/index.j
                 } else {
                   that.$ui.toast(res.Msg);
                 }
-                if (callback) callback();_context3.next = 12;break;case 9:_context3.prev = 9;_context3.t0 = _context3["catch"](1);
+                if (callback) callback();_context2.next = 12;break;case 9:_context2.prev = 9;_context2.t0 = _context2["catch"](1);
 
-                console.log('请求结果false : ' + _context3.t0);case 12:case "end":return _context3.stop();}}}, _callee3, null, [[1, 9]]);}))();
+                console.log('请求结果false : ' + _context2.t0);case 12:case "end":return _context2.stop();}}}, _callee2, null, [[1, 9]]);}))();
 
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))

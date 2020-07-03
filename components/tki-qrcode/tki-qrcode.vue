@@ -1,8 +1,7 @@
 <template xlang="wxml" minapp="mpvue">
 	<view class="tki-qrcode">
-		
-		<image v-show="show" :src="result" :style="{width:cpSize+'px',height:cpSize+'px'}" />
 		<canvas class="tki-qrcode-canvas" :canvas-id="cid" :style="{width:cpSize+'px',height:cpSize+'px'}" />
+		<image v-show="show" :src="result" :style="{width:cpSize+'px',height:cpSize+'px'}" />
 	</view>
 </template>
 
@@ -119,6 +118,7 @@ export default {
 		_saveCode() {
 			let that = this;
 			if (this.result != "") {
+				alert(that.result)
 				uni.saveImageToPhotosAlbum({
 					filePath: that.result,
 					success: function () {
@@ -176,7 +176,7 @@ export default {
 	computed: {
 		cpSize() {
 			if(this.unit == "rpx"){
-				return uni.rpx2px(this.size)
+				return uni.upx2px(this.size)
 			}else{
 				return this.size
 			}
