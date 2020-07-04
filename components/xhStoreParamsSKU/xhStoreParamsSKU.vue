@@ -24,7 +24,7 @@
 			<!-- <view class="argueBox"> -->
 			<scroll-view scroll-y="true"  class="argueBox">
 					<view v-if="!singlePro">
-						<block v-for="(item, index) in specifications" :key="index">
+						<block v-for="(item, index) in localspecifications" :key="index">
 							<view class="cm_title cm_t_24" style="margin-top:20rpx ;">{{ item.name }}</view>
 							<view class=" flex flex_center" style="justify-content: flex-start;flex-wrap: wrap;">
 								<block v-for="(it, ind) in item.item" :key="ind">
@@ -34,7 +34,7 @@
 										:type="subIndex[index] == ind ? 'warn': 'default'"
 										class="argus "
 										@tap.stop.prevent="skuClick(it, index, $event, ind)"
-										:disabled="it.ishow ? false : true"
+										:disabled="it.ishow?false : true"
 									>
 										<image :src="it.pic" mode="" v-if="it.pic" style="width: 20px;height: 20px;float: left;margin-top: 4px;margin-right: 4px;"></image>
 										{{ it.name }}
@@ -97,11 +97,11 @@
 			</scroll-view>
 				
 			<view class="btnBox flex flex_center">
-				<button class="btns" @tap.stop.prevent="_addCard">加入购物车</button>
+				<!-- <button class="btns" @tap.stop.prevent="_addCard">加入购物车</button>
 				<view class="btns hot flex flex_y flex_center" v-if="ifActive"  @tap.stop.prevent="_creatOrder">
 					<view class="">马上抢</view>
-				</view>
-				<button class="btns" @tap.stop.prevent="_creatOrder" v-else :style="{ background: '#50AB9F' }">立即购买</button>
+				</view> -->
+				<button class="cm_btn" @tap.stop.prevent="_creatOrder" >立即购买</button>
 			</view>
 		</view>
 	</view>
@@ -130,6 +130,8 @@ export default {
 			subIndex: [], //是否选中 因为不确定是多规格还是但规格，所以这里定义数组来判断
 			selectshop: {}, //存放最后选中的商品
 			selectNum: 1, //选中数量
+			
+			localspecifications:[]
 		};
 	},
 	components: {
@@ -306,7 +308,7 @@ export default {
 		}
 	},
 	created() {
-		this.issafariBrowser = /Safari/.test(navigator.userAgent) && !/Chrome/.test(navigator.userAgent);
+		// this.issafariBrowser = false
 		// console.log(issafariBrowser)
 		// this.nowprice = this.defaultprice
 		// this.nowStock = this.defaultstock
@@ -322,7 +324,9 @@ export default {
 		
 		difference(n, o) {
 			if(!n.length)return;
-			this.specifications.map(item => {
+			this.localspecifications = [...this.specifications]
+			// console.log(this.localspecifications)
+			this.localspecifications.map(item => {
 				this.selectArr.push('');
 				this.subIndex.push(-1);
 			});
@@ -403,12 +407,13 @@ export default {
 			// console.time('筛选可选路径需要的时间是');
 			//循环所有属性判断哪些属性可选
 			//当前选中的兄弟节点和已选中属性不需要循环
-			// console.log("a"+clickIndex)
-			for (let i = 0, len = this.specifications.length; i < len; i++) {
+			console.log(this.specifications)
+			
+			for (let i = 0, len = this.localspecifications.length; i < len; i++) {
 				if (i == clickIndex) {
 					continue;
 				}
-				let len2 = this.specifications[i].item.length;
+				let len2 = this.localspecifications[i].item.length;
 				for (let j = 0; j < len2; j++) {
 					// console.log("b"+ this.subIndex[i],j)
 					if (this.subIndex[i] != -1 && j == this.subIndex[i]) {
@@ -416,19 +421,19 @@ export default {
 					}
 					let choosed_copy = [...this.selectArr];
 					// console.log(0,choosed_copy)
-					this.$set(choosed_copy, i, this.specifications[i].item[j].name);
+					this.$set(choosed_copy, i, this.localspecifications[i].item[j].name);
 					// console.log(0,choosed_copy)
 					let choosed_copy2 = choosed_copy.filter(item => item !== '' && typeof item !== 'undefined');
-					
-					// console.log(1,choosed_copy)
+					// console.log(0,this.shopItemInfo)
+					// console.log(1,choosed_copy2)
 					if (this.shopItemInfo.hasOwnProperty(choosed_copy2)) {
-						this.$set(this.specifications[i].item[j], 'ishow', true);
+						this.$set(this.localspecifications[i].item[j], 'ishow', true);
 					} else {
-						this.$set(this.specifications[i].item[j], 'ishow', false);
+						this.$set(this.localspecifications[i].item[j], 'ishow', false);
 					}
 				}
 			}
-			// console.log(this.specifications)
+			console.log(this.localspecifications)
 			// console.timeEnd('筛选可选路径需要的时间是');
 		},
 		checkItem() {
@@ -457,7 +462,7 @@ export default {
 				[[]]
 			);
 			
-			// console.log(this.shopItemInfo)
+			console.log(this.shopItemInfo)
 		},
 		// 创建订单
 		_creatOrder() {

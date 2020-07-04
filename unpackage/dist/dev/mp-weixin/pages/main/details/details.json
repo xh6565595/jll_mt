@@ -5,8 +5,6 @@
   "usingComponents": {
     "tui-skeleton": "/components/tui-skeleton/tui-skeleton",
     "xh-store-params-s-k-u": "/components/xhStoreParamsSKU/xhStoreParamsSKU",
-    "tui-countdown": "/components/countdown/countdown",
-    "count-calc": "/components/uni-countdown",
     "tui-numberbox": "/components/numberbox/numberbox"
   }
 }

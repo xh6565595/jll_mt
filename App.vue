@@ -157,27 +157,70 @@
 	
 	/*每个页面公共css */
 	@import '/static/common/common.css';
-	uni-button {
-		border: none;
+	button {
+		border: none ;
+		border-radius: 50rpx;
 		&:after{
 			border: none
 		}
 	}
+	
+	// 活动的条目
+	.cm_items {
+		align-items: flex-start;
+	}
+	.cm_items .itemLogo {
+		width: 180rpx;
+		height: 180rpx;
+		border-radius: 10rpx;
+		margin-right: 24rpx;
+		background-color: #f9f9f9;
+	}
+	
+	.cm_items .cm_price_box {
+		margin-top: 20rpx;
+	}
+	.cm_items .cm_des {
+		margin-top: 14rpx;
+	}
+	.cm_items .subavatars{
+		width: 50rpx;
+		height: 50rpx;
+		border: 2rpx solid #fff;
+		border-radius: 50%;
+	}
+	.cm_items  .selectTags{
+		padding: 0 24rpx;
+		height: 38rpx;
+		line-height: 38rpx;
+		border-radius: 19rpx;
+		background-color: #FEF2E9;
+		color: #F35B28;
+		font-size: 22rpx;
+	}
+	
+	.cm_items  .cm_item_price{
+		color: #DD3A30;
+		font-weight: 600;
+		margin-top: 24rpx;
+		margin-bottom: 24rpx;
+	}
+	
 	// 普通条目  订单部分
 	.proItemsBox {
 		width: 100%;
-		// height: 384upx;
+		// height: 384rpx;
 		background: #fff;
-		margin-bottom: 16upx;
-		padding: 24upx 20upx;
+		margin-bottom: 16rpx;
+		padding: 24rpx 20rpx;
 		.proItemTop{
-			padding: 0 0 16upx  0 ;
-			margin-bottom: 16upx;
+			padding: 0 0 16rpx  0 ;
+			margin-bottom: 16rpx;
 			.shopLogo{
-				width: 60upx;
-				height: 60upx;
+				width: 60rpx;
+				height: 60rpx;
 				border-radius: 50%;
-				margin-right: 20upx;
+				margin-right: 20rpx;
 			}
 			.status{
 				color: #DD3A30;
@@ -186,54 +229,57 @@
  
 		.picBox {
 			width: 100%;
-			margin-bottom: 20upx;
-			line-height: 90upx;
+			margin-bottom: 20rpx;
+			line-height: 90rpx;
 			align-items: flex-start;
 			.avatar {
-				width: 150upx;
-				height: 150upx;
-				border-radius: 10upx;
-				margin-right: 20upx;
+				width: 180rpx;
+				height: 180rpx;
+				border-radius: 10rpx;
+				margin-right: 20rpx;
 				overflow: hidden;
 	
 				img {
-					width: 150upx;
-					height: 150upx;
+					width: 180rpx;
+					height: 180rpx;
 				}
 			}
 			.stags{
-				font-size: 20upx;
+				font-size: 20rpx;
 			}
 			.name {
-				font-size: 28upx;
-				max-height: 80upx;
+				font-size: 28rpx;
+				max-height: 80rpx;
 				line-height: 1.4;
-				margin-top: 6upx;
+				margin-top: 6rpx;
 			}
-	
+			.special{
+				margin-top: 14rpx;
+				margin-bottom: 32rpx;
+			}
 			.jd {
-				width: 152upx;
-				line-height: 58upx;
-				height: 58upx;
+				width: 152rpx;
+				line-height: 58rpx;
+				height: 58rpx;
 				border: none;
 				background: var(--cl_primary);
 				color: #333;
 				text-align: center;
 				padding: 0;
-				font-size: 26upx;
-				border-radius: 8upx;
+				font-size: 26rpx;
+				border-radius: 8rpx;
 			}
 		}
 	
 		.contentBox {
 			justify-content: flex-end !important;
-			margin-top: 20upx;
-			// padding-top: 24upx;
-			// border-top: 1upx solid #e5e5e5;
+			margin-top: 20rpx;
+			// padding-top: 24rpx;
+			// border-top: 1rpx solid #e5e5e5;
 			
 			.cm_tags {
-				margin-left: 16upx;
-				// font-size: 20upx;
+				margin-left: 16rpx;
+				// font-size: 20rpx;
 			}
 		}
 	
@@ -243,31 +289,31 @@
 	}
 // 块状条目
 	.proItemsBoxBlock {
-		width: calc((100vw - 56upx) / 2);
-		height: 560upx;
+		width: calc((100vw - 56rpx) / 2);
+		height: 560rpx;
 		background: #fff;
-		border-radius: 14upx;
-		margin-top: 16upx;
+		border-radius: 14rpx;
+		margin-top: 16rpx;
 		overflow: hidden;
 	
 		.picBox {
 			width: 100%;
-			height: 356upx;
+			height: 356rpx;
 			position: relative;
-	
+			
 			.pre {
 				width: 100%;
-				height: 347upx;
+				height: 347rpx;
 				opacity: 0;
 			}
-	
+			
 			.timeBox {
 				position: absolute;
 				left: 0;
-				bottom: -4upx;
+				bottom: -4rpx;
 				width: 100%;
-				height: 52upx;
-				line-height: 52upx;
+				height: 52rpx;
+				line-height: 52rpx;
 				background: $uni-color-error;
 				color: #fff;
 				text-align: center;
@@ -275,30 +321,31 @@
 		}
 	
 		.msgBox {
-			padding: 16upx;
+			padding: 16rpx;
+			
 			.tags {
 				background: red;
 				color: #fff;
-				padding: 0 8upx;
-				border-radius: 4upx;
-				font-size: 20upx;
-				line-height: 30upx;
-				height: 30upx;
-				margin-right: 10upx;
-				margin-top: -8upx;
+				padding: 0 8rpx;
+				border-radius: 4rpx;
+				font-size: 20rpx;
+				line-height: 30rpx;
+				height: 30rpx;
+				margin-right: 10rpx;
+				margin-top: -8rpx;
 			}
 			.cm_text {
-				line-height: 64upx;
+				line-height: 64rpx;
 				justify-content: flex-start;
 			}
 	
 			.has {
-				margin-top: 14upx;
-				padding: 0 16upx;
-				line-height: 36upx;
-				height: 36upx;
-				border-radius: 18upx;
-				font-size: 24upx;
+				margin-top: 14rpx;
+				padding: 0 16rpx;
+				line-height: 36rpx;
+				height: 36rpx;
+				border-radius: 18rpx;
+				font-size: 24rpx;
 				background: #f7f7f7;
 			}
 		}
@@ -308,44 +355,44 @@
 		width: 100%;
 		background: #fff;
 		margin-bottom: 0;
-		border-bottom: 1upx solid #eee;	
+		border-bottom: 1rpx solid #eee;	
 	
 		.picBox {
 			width: 100%;
 			background: #F9F9F9;
-			line-height: 90upx;
-			padding: 24upx 20upx;
+			line-height: 90rpx;
+			padding: 24rpx 20rpx;
 			align-items: flex-start;
 			.avatar {
-				width: 150upx;
-				height: 150upx;
-				border-radius: 10upx;
-				margin-right: 20upx;
+				width: 150rpx;
+				height: 150rpx;
+				border-radius: 10rpx;
+				margin-right: 20rpx;
 				overflow: hidden;
 	
 				img {
-					width: 150upx;
-					height: 150upx;
+					width: 150rpx;
+					height: 150rpx;
 				}
 			}
 	
 			.name {
-				margin-bottom: 6upx;
-				font-size: 28upx;
-				max-height: 80upx;
+				margin-bottom: 6rpx;
+				font-size: 28rpx;
+				max-height: 80rpx;
 				line-height: 1.2;
-				margin-top: 6upx;
+				margin-top: 6rpx;
 			}
 		}
 	
 		.contentBox {
 			justify-content: flex-end !important;
-			// margin-top: 20upx;
-			padding-top: 24upx;
-			border-top: 1upx solid #e5e5e5;
+			// margin-top: 20rpx;
+			padding-top: 24rpx;
+			border-top: 1rpx solid #e5e5e5;
 	
 			.cm_tags {
-				margin-left: 16upx;
+				margin-left: 16rpx;
 			}
 		}
 	

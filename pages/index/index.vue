@@ -1,6 +1,6 @@
 <template>
 	<view class="pages flex flex_center flex_y">
-		<image src="../../static/img/logo@1.5x.png" mode="scaleToFill" class="logo" ></image>
+		<image src="../../static/image/logo.png" mode="scaleToFill" class="logo" ></image>
 		<text class="name">洁利来商城欢迎您</text>
 		<text class="text">您尚未登录</text>
 		<text class="text">需要获取您的授权之后完成登录</text>

@@ -13,14 +13,7 @@
 				"enablePullDownRefresh": true
 			}
 		},
-		
-		{
-			"path": "pages/classify/classifies",
-			"style": {
-				"navigationBarTitleText": "分类",
-				"enablePullDownRefresh": false
-			}
-		},
+
 		{
 			"path": "pages/user/user",
 			"style": {
@@ -39,13 +32,28 @@
             "path" : "pages/activity/activity",
             "style" : {
 				"navigationBarTitleText": "活动",
-				"navigationBarTextStyle": "black"
+				"navigationBarTextStyle": "black",
+				"navigationStyle":"custom"
 			}
         },{
             "path" : "pages/h5share/h5share",
             "style" : {
 				"navigationBarTitleText": "分享",
 				"navigationBarTextStyle": "black"
+			}
+        },{
+            "path" : "pages/features/createOrder/createOrder",
+            "style" : {
+				"navigationBarTitleText": "提交订单",
+				"navigationBarTextStyle": "black",
+				"navigationBarBackgroundColor": "#f4f4f4"
+			}
+        },{
+            "path" : "pages/features/order/order",
+            "style" : {
+				"navigationBarTitleText": "订单列表",
+				"navigationBarTextStyle": "black",
+				"navigationBarBackgroundColor": "#fff"
 			}
         }
     ],
@@ -78,4 +86,4 @@
 		"backgroundColor": "#f8f8f8",
 		"animationType":"fade-in"
 	}
-}
+} 

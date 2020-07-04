@@ -20,7 +20,7 @@
 									:src="item.project_img"
 									mode="aspectFill"
 									class="itemLogo animated"
-									:class="item.load ? 'fadeIn' : ''"
+									:class="item.load ? 'fadeIn' : ''" 
 								></image>
 								<view class="itemTitle cm_title cm_ellipsis">撒旦法撒旦法商店发送到阿萨商店发送到阿萨</view>
 								<text class="cm_des">上市公司·优选品牌</text>

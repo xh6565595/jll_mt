@@ -1,5 +1,6 @@
 {
   "navigationBarTitleText": "活动",
   "navigationBarTextStyle": "black",
+  "navigationStyle": "custom",
   "usingComponents": {}
 }

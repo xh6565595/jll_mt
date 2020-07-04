@@ -14,24 +14,9 @@
 				<!-- <button class="btn-primary tui-btn-submit" hover-class="btn-hover" tap="_agreeRefund">立即提交</button> -->
 			</view>
 		</view>
-		<view style="background: #fff;">
-			<cu-custom  :isBack="true"  btnColor="#333" >
-				<block slot="backText">
-					<!-- <view class="action flex flex_center" @tap="_back" :style="{'width':'44px' ,'height':'44px'}"> -->
-						<Icon name="arrowleft" :size="30" color="#333" @tap="_back" ></Icon>
-					<!-- </view> -->
-				</block>
-				<block slot="content">
-					订单管理
-				</block>
-				<!-- <block slot="right">
-					<view class="btns flex flex_center">搜索</view> 
-				</block> -->
-			</cu-custom>	
-		</view>
 	
 		<view class="tabBar">
-			<sun-tab :value.sync="current" @change="objectChange"  @touch="refreshCurrent"  :tabList="tabObjectList" rangeKey="name" activeColor="#039798"></sun-tab>
+			<sun-tab :value.sync="current" @change="objectChange"  @touch="refreshCurrent"  :tabList="tabObjectList" rangeKey="name" activeColor="#FF7647"></sun-tab>
 		</view>
 		<!-- <view class="swiper banners" ></view> -->
 		<swiper class="swiper banners" :indicator-dots="false" :autoplay="false" :current.sync="current" @change="_change" :skip-hidden-item-layout="true" :duration="200">
@@ -67,7 +52,7 @@
 				tabObjectList: [
 					//对象数组赋值
 					{
-						name: '全部订单',
+						name: '全部',
 						value: 0
 					},
 					{

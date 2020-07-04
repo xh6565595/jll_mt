@@ -1,110 +1,92 @@
 <template>
 	<view class="pages">
 		<!-- <view> -->
-			<!-- <tui-skeleton v-if="skeletonShow" backgroundColor="#f9f9f9" skeletonBgColor="#efefef" borderRadius="0rpx"></tui-skeleton> -->
-			<view class="">
-				<view class="addressBox flex flex_center tui-skeleton-rect">
-					<view class="f1 " v-if="currentAddress" @tap="_switchAddress">
-						<view class=" top flex flex_center">
-							<view class="cm_title f1 tui-skeleton-fillet">{{ currentAddress.receiving_user }}</view>
-							<text class=" tui-skeleton-fillet">{{ currentAddress.receiving_mobile }}</text>
-						</view>
-						<view class="adress cm_text tui-skeleton-fillet">{{ currentAddress.detailed_address }}</view>
-					</view>
-					<navigator url="/pages/features/newAdress/newAdress" v-else class="f1 noItems">尚未添加地址,立即添加</navigator>
-					<Icon name="arrowright" :size="16"></Icon>
+		<!-- <tui-skeleton v-if="skeletonShow" backgroundColor="#f9f9f9" skeletonBgColor="#efefef" borderRadius="0rpx"></tui-skeleton> -->
+		<view class="addressBox flex flex_center tui-skeleton-rect">
+			<image src="../../../static/image/xq_dz.png" mode="scaleToFill" style="width: 80rpx;height: 80rpx;margin-right: 24rpx;"></image>
+			<view class="f1 " v-if="currentAddress" @tap="_switchAddress">
+				<view class=" top cm_title">
+					{{ currentAddress.detailed_address }}
 				</view>
-				<view style="margin-top: 16rpx;border-radius: 12rpx;overflow: hidden;">
-					<view class="flex flex_center itemBoxTop" >
-						<image src="http://jllshop.fjdmll.com/upload/head/jjl.png" mode="" class="shopIcon"></image>
-						<view class="cm_title f1">洁利来官方店</view>
-						<!-- <Icon name="arrowright" :size="16"></Icon> -->
-					</view>
-				
-					<block v-for="(item, index) in currentOrder" :key="index">
-						<view class="proItemsBoxgray  tui-skeleton-fillet">						
-							<view style="padding: 20rpx;">
-								<view class="picBox flex  flex_center tui-skeleton-fillet">
-									<image v-if="item.project_img" :src="item.project_img" mode="aspectFill" class="avatar "></image>
-									<view class="f1 " >
-										<view class=" cm_title   name cm_ellipsis2 tui-skeleton-fillet">{{ item.project_name }}</view>
-										<view class="cm_des flex flex_center" style="justify-content: flex-start;" v-if="item.project_parameter_type==1">
-											<tui-tag shape="circle" size="mini" type="gray" class=" stags cm_t_20">{{ item.project_spec.difference }}</tui-tag>
+				<view class="adress cm_text cm_ellipsis tui-skeleton-fillet">{{ currentAddress.receiving_user }} {{ currentAddress.receiving_mobile }}</view>
+			</view>
+			<navigator url="/pages/features/newAdress/newAdress" v-else class="f1 noItems">尚未添加地址,立即添加</navigator>
+			<!-- <Icon name="arrowright" :size="16"></Icon> -->
+			<text class="iconfont icon-fanhui3"></text>
+		</view>
+		<view class="panel">
+			<view class="flex flex_center itemBoxTop">
+				<image src="http://jllshop.fjdmll.com/upload/head/jjl.png" mode="" class="shopIcon"></image>
+				<view class="cm_title f1">洁利来官方店</view>
+				<!-- <Icon name="arrowright" :size="16"></Icon> -->
+			</view>
+			
+			<view class="cm_bdb" style="padding-bottom: 40rpx;">
+				<block v-for="(item, index) in currentOrder" :key="index">
+					<view class="  tui-skeleton-fillet">
+						<!-- <view style="padding: 20rpx;"> -->
+							<view class="cm_items flex  flex_center tui-skeleton-fillet">
+								<image v-if="item.project_img" :src="item.project_img" mode="aspectFill" class="itemLogo "></image>
+								<view class="f1 ">
+									<view class=" cm_title   name cm_ellipsis2 tui-skeleton-fillet">{{ item.project_name }}</view>
+									<view class="cm_des flex flex_center" style="justify-content: flex-start;" v-if="item.project_parameter_type == 1">
+										<tui-tag shape="circle" size="mini" type="gray" class="cm_t_20">{{ item.project_spec.difference }}</tui-tag>
+										<view class="f1"></view>
+										<view class="flex flex_center">
+											<text class="iconfont icon-guanbi"></text>
+											<text>{{ item.project_num }}</text>
 										</view>
-										<view  style="margin-top: 4rpx;" >
-											<view class="cm_des flex flex_center" v-if="item.project_service1.service_code">
-												<view class="f1 cm_t_20" style="color: #E56D00;">{{item.project_service1.service_name}} ￥{{item.project_service1.service_price}}</view>
-												<!-- <view class="">￥{{item.project_service1.service_price}}</view> -->
-											</view>
-											<view class="cm_des flex flex_center" v-if="item.project_service2.service_code">
-												<view class="f1 cm_t_20" style="color: #E56D00;">{{item.project_service2.service_name}} ￥{{item.project_service2.service_price}}</view>
-												<!-- <view class="">￥{{item.project_service2.service_price}}</view> -->
-											</view>
-											<view class="cm_des flex flex_center" v-if="item.project_service3.service_code">
-												<view class="f1 cm_t_20" style="color: #E56D00;">{{item.project_service3.service_name}} ￥{{item.project_service3.service_price}}</view>
-												<!-- <view class="">￥{{item.project_service3.service_price}}</view> -->
-											</view>
+									</view>
+									<view class=" tui-skeleton-fillet flex flex_center">
+										<text class="cm_price  cm_item_price">￥{{ item.project_parameter_type == 1 ? item.project_spec.price : item.project_raise_price }}</text>
+										<view class="f1"></view>
+									</view>
+									<view style="margin-top: 4rpx;">
+										<view v-if="item.project_service1.service_code">
+											<text class=" cm_t_20 selectTags">{{ item.project_service1.service_name }} ￥{{ item.project_service1.service_price }}</text>
+											<!-- <view class="">￥{{item.project_service1.service_price}}</view> -->
 										</view>
-										
-										<view class=" tui-skeleton-fillet flex flex_center" style="margin-top: 10rpx;">
-											<text class="cm_prize cm_t_32">￥{{  item.project_parameter_type==1?item.project_spec.price: item.project_raise_price}}</text>
-											<view class="f1"></view>
-											<view class="cm_des">
-												<Icon name="shut" :size="14" color="#999"></Icon>
-												{{ item.project_num }}
-											</view>
+										<view v-if="item.project_service2.service_code">
+											<text class=" cm_t_20 selectTags">{{ item.project_service2.service_name }} ￥{{ item.project_service2.service_price }}</text>
+											<!-- <view class="">￥{{item.project_service2.service_price}}</view> -->
+										</view>
+										<view v-if="item.project_service3.service_code">
+											<text class=" cm_t_20 selectTags">{{ item.project_service3.service_name }} ￥{{ item.project_service3.service_price }}</text>
+											<!-- <view class="">￥{{item.project_service3.service_price}}</view> -->
 										</view>
 									</view>
 								</view>
 							</view>
-							
-						</view>
-					</block>
-				</view>
-				<view>	
-					<tui-list-view  unlined="all" class="tui-list-view tui-skeleton-fillet lists" >
-						<tui-list-cell :arrow="false" >
-							<view class="tui-list-cell-name f1">商品金额</view>
-							<view class="tui-right">￥{{ allPrize }}</view>
-						</tui-list-cell>
-						<tui-list-cell :arrow="false" >
-							<view class="tui-list-cell-name f1">运费</view>
-							<view class="tui-right">{{ currentAddress?'￥'+allEms:'请先选择收货地址' }}</view>
-						</tui-list-cell>
-						<tui-list-cell :arrow="false" >
-							<view class="tui-list-cell-name f1">服务费用</view>
-							<view class="tui-right">￥{{ servePay}}</view>
-						</tui-list-cell>
-						<tui-list-cell :arrow="false" :last="true">
-							<view class="tui-list-cell-name f1">支付金额</view>
-							<view class="tui-right cm_prize">￥{{ allAccount }}</view>
-						</tui-list-cell>
-						<!-- <tui-list-cell :arrow="false" v-if="currentOrder.project_service1">
-							<view class="tui-list-cell-name f1">{{currentOrder.project_service1.service_name}}</view>
-							<view class="tui-right">￥{{currentOrder.project_service1.service_price}}</view>
-						</tui-list-cell> -->
-						<!-- <tui-list-cell :arrow="false" v-if="currentOrder.project_service2">
-							<view class="tui-list-cell-name f1">{{currentOrder.project_service2.service_name}}</view>
-							<view class="tui-right">￥{{currentOrder.project_service2.service_price}}</view>
-						</tui-list-cell>
-						<tui-list-cell :arrow="false" :last="true" v-if="currentOrder.project_service3">
-							<view class="tui-list-cell-name f1">{{currentOrder.project_service3.service_name}}</view>
-							<view class="tui-right">￥{{currentOrder.project_service3.service_price}}</view>
-						</tui-list-cell> -->
-					</tui-list-view>
-				</view>
+							<view class="cells flex flex_center">
+								<view class="label cm_tex_r">税费</view>
+								<view class="f1 text">￥12</view>
+							</view>
+							<view class="cells flex flex_center">
+								<view class="label cm_tex_r">特色服务</view>
+								<view class="f1 text">￥{{ servePay }}</view>
+							</view>
+						<!-- </view> -->
+					</view>
+				</block>
 			</view>
-			<view class="footer  flex flex_center">
-				<view class=" flex flex_center">
-					<view class=""><text>合计:</text></view>
-					<text class="cm_prize">￥{{ allAccount }}</text>
-				</view>
+
+			<view class=" flex flex_center" style="line-height: 80rpx;height: 80rpx;">
 				<view class="f1"></view>
-				<button class="submit" @tap="submit">提交订单</button>
+				<view class=""><text>共1件，合计:</text></view>
+				<text class="cm_price">￥{{ allAccount }}</text>
 			</view>
+		</view>
+		<view class="footer  flex flex_center">
+			<view class=" flex flex_center">
+				<view class=""><text>合计:</text></view>
+				<text class="cm_price">￥{{ allAccount }}</text>
+			</view>
+			<view class="f1"></view>
+			<button class="submit" @tap="submit">提交订单</button>
+		</view>
 		<!-- </view> -->
 		<tui-modal :show="modal" @click="handleClick" @cancel="hide" :title="title" :content="content" :maskClosable="false" color="#333" :size="32"></tui-modal>
-		<PayPanel ref="payPanel" :oderId="oderId" :amout="allAccount"  @success="success"  @cancel="cancel"></PayPanel> 
+		<PayPanel ref="payPanel" :oderId="oderId" :amout="allAccount" @success="success" @cancel="cancel"></PayPanel>
 	</view>
 </template>
 
@@ -127,12 +109,12 @@ export default {
 			// currentCode:'',
 			formParams: {
 				create_order_type: 0, //下单方式 0-通常下单 1-购物车下单
-				"cart_code":"",
-				"goods_code":"",
-				"skus_code":"",
-				"goods_num":0,
+				cart_code: '',
+				goods_code: '',
+				skus_code: '',
+				goods_num: 0,
 				user_address_code: '',
-				goods_service_code:[]
+				goods_service_code: []
 			},
 			// 支付参数
 			payParams: {
@@ -142,30 +124,26 @@ export default {
 			},
 			title: '洁利来商城提醒您',
 			content: '',
-			allEms:0,  //运费
+			allEms: 0, //运费
 			modal: false,
-			oderId:''
+			oderId: ''
 		};
 	},
 	onLoad(options) {
-		// console.log(333,this.currentOrder); 
+		// console.log(333,this.currentOrder);
 		this.formParams.create_order_type = options.type;
 
-	
 		let that = this;
 		uni.$on('refresh_sureAuction', item => {
 			that.currentAddress = item;
-			that.calcEms()
+			that.calcEms();
 		});
 		uni.$on('refresh_addressList', item => {
 			that.loadAddress();
-		});	
+		});
 		this.loadAddress();
-		
 	},
-	onShow() {
-		
-	},
+	onShow() {},
 	components: {
 		tuiListView,
 		tuiListCell,
@@ -178,63 +156,59 @@ export default {
 		allPrize() {
 			let s = 0;
 			this.currentOrder.forEach(item => {
-				if(item.project_parameter_type==1){
-					s += Number(item.project_spec.price)*item.project_num;
-				}else{
-					s += Number(item.project_raise_price)*item.project_num;
+				if (item.project_parameter_type == 1) {
+					s += Number(item.project_spec.price) * item.project_num;
+				} else {
+					s += Number(item.project_raise_price) * item.project_num;
 				}
-				
-				
 			});
 			return s.toFixed(2);
 		},
 		allAccount() {
-			let s = Number(this.allEms) + Number(this.allPrize) + Number(this.servePay) ;
+			let s = Number(this.allEms) + Number(this.allPrize) + Number(this.servePay);
 			return s.toFixed(2);
 		},
 		// 所有服务费
-		servePay(){
-			let s = 0
-			this.currentOrder.forEach(item=>{
-				if(item.project_service1.service_code){
-					s+=item.project_service1.service_price*item.project_num
+		servePay() {
+			let s = 0;
+			this.currentOrder.forEach(item => {
+				if (item.project_service1.service_code) {
+					s += item.project_service1.service_price * item.project_num;
 				}
-				if(item.project_service2.service_code){
-					s+=item.project_service2.service_price*item.project_num
+				if (item.project_service2.service_code) {
+					s += item.project_service2.service_price * item.project_num;
 				}
-				if(item.project_service3.service_code){
-					s+=item.project_service3.service_price*item.project_num
+				if (item.project_service3.service_code) {
+					s += item.project_service3.service_price * item.project_num;
 				}
-			})
-			return s
-		},
+			});
+			return s;
+		}
 	},
 	methods: {
 		// 计算邮费
-		async calcEms(){
+		async calcEms() {
 			let that = this;
 			try {
-				
-				
-				let d = { pjc:[],prc:[],pjn:[]}
-				this.currentOrder.forEach(item=>{
-					d.pjc.push(item.project_code)
-					d.prc.push(item.project_spec.id)
-					d.pjn.push(item.project_num)
-				})
+				let d = { pjc: [], prc: [], pjn: [] };
+				this.currentOrder.forEach(item => {
+					d.pjc.push(item.project_code);
+					d.prc.push(item.project_spec.id);
+					d.pjn.push(item.project_num);
+				});
 				let data = {
-					"goods_code":d.pjc.join(','),
-					"user_id":d.prc.join(','),
-					"goods_num":d.pjn.join(','),
-					"user_address_code":this.currentAddress.address_code,
-				} 
+					goods_code: d.pjc.join(','),
+					user_id: d.prc.join(','),
+					goods_num: d.pjn.join(','),
+					user_address_code: this.currentAddress.address_code
+				};
 				// debugger
-				this.$ui.showloading()
+				this.$ui.showloading();
 				let res = await this.$api.GetEmsPrice(data);
-				this.$ui.hideloading()
+				this.$ui.hideloading();
 				// console.log(data)
 				if (res.Success) {
-					that.allEms = res.Data
+					that.allEms = res.Data;
 				} else {
 					that.$ui.toast(res.Msg);
 				}
@@ -307,51 +281,49 @@ export default {
 			// this.$ui.toast('暂未开放');
 			// return;
 			try {
-				let d = { pjc:[],prc:[],pjn:[],cart:[]}
-				this.currentOrder.forEach(item=>{
-					d.pjc.push(item.project_code)
-					d.prc.push(item.project_spec.id)
-					d.pjn.push(item.project_num)
-					d.cart.push(item.cart_code)
-				})
-				this.formParams.goods_code=d.pjc.join(',')
-				this.formParams.skus_code=d.prc.join(',')
-				this.formParams.goods_num = d.pjn.join(',')			
+				let d = { pjc: [], prc: [], pjn: [], cart: [] };
+				this.currentOrder.forEach(item => {
+					d.pjc.push(item.project_code);
+					d.prc.push(item.project_spec.id);
+					d.pjn.push(item.project_num);
+					d.cart.push(item.cart_code);
+				});
+				this.formParams.goods_code = d.pjc.join(',');
+				this.formParams.skus_code = d.prc.join(',');
+				this.formParams.goods_num = d.pjn.join(',');
 				this.formParams.user_address_code = this.currentAddress.address_code;
-				if(this.formParams.create_order_type==1){
-					this.formParams.cart_code = d.cart.join(',')
+				if (this.formParams.create_order_type == 1) {
+					this.formParams.cart_code = d.cart.join(',');
 				}
 				// goods_service_code
 				let s = [];
-				
+
 				this.currentOrder.forEach(item => {
-					let a = []
-					a.push(item.project_service1.service_code?item.project_service1.service_code:'')
-					a.push(item.project_service2.service_code?item.project_service2.service_code:'')
-					a.push(item.project_service3.service_code?item.project_service3.service_code:'')
-					s.push(a.join(','))
+					let a = [];
+					a.push(item.project_service1.service_code ? item.project_service1.service_code : '');
+					a.push(item.project_service2.service_code ? item.project_service2.service_code : '');
+					a.push(item.project_service3.service_code ? item.project_service3.service_code : '');
+					s.push(a.join(','));
 				});
-				this.formParams.goods_service_code = s
-				
+				this.formParams.goods_service_code = s;
+
 				// return
 				// this.formParams.project_code = Object.values(s).join(',');
 				this.$ui.showloading('订单生成中');
 				let res = await this.$api.CreateOrder(this.formParams, false);
 				this.$ui.hideloading();
-				console.log(res); 
+				console.log(res);
 				if (res.Success) {
 					that.payParams.order_num = res.Data.order_code;
 					// that.payParams.order_num ='H7280202001140330267942143'
 					that.$ui.toast('订单创建成功');
-					
-		
-					setTimeout(()=>{
-						if(that.formParams.create_order_type==1){
-							uni.$emit('refresh_cart')
-						}						
+
+					setTimeout(() => {
+						if (that.formParams.create_order_type == 1) {
+							uni.$emit('refresh_cart');
+						}
 						that._readyToPay(res.Data.order_code);
-					},500)
-					
+					}, 500);
 				} else {
 					that.$ui.toast(res.Msg);
 					// 重定向到代付款
@@ -365,9 +337,9 @@ export default {
 			}
 		},
 		_readyToPay(ordercode) {
-			this.oderId = ordercode
+			this.oderId = ordercode;
 			let that = this;
-			this.$refs.payPanel._show()
+			this.$refs.payPanel._show();
 			// uni.showActionSheet({
 			// 	itemList: ['微信支付'],
 			// 	success: function(res) {
@@ -385,14 +357,14 @@ export default {
 			// });
 		},
 		// 支付接口
-		success(){
+		success() {
 			// alert(this.formParams)
-			console.log(this.formParams)
+			console.log(this.formParams);
 			uni.redirectTo({
 				url: '/pages/features/order/orderDetail/orderDetail?code=' + this.oderId
 			});
 		},
-		cancel(){
+		cancel() {
 			uni.redirectTo({
 				url: '/pages/features/order/orderDetail/orderDetail?code=' + this.oderId
 			});
@@ -422,20 +394,39 @@ export default {
 			text-align: center;
 		}
 	}
-	.itemBoxTop{
-		padding: 24rpx 20rpx;
-		padding-bottom: 0;
-		
+	.panel{
+		margin-top: 16rpx;
+		border-radius: 12rpx;
+		overflow: hidden;
 		background: #fff;
-		.shopIcon {
-			width: 56rpx;
-			height: 56rpx;
-			border-radius: 50%;
-			margin-right: 14rpx;
-			
+		padding: 20rpx;
+		padding-bottom: 0;
+		.itemBoxTop {
+			padding: 24rpx 20rpx;
+			padding-bottom: 0;
+		
+			background: #fff;
+			.shopIcon {
+				width: 56rpx;
+				height: 56rpx;
+				border-radius: 50%;
+				margin-right: 14rpx;
+			}
+		}
+		.cells {
+			margin-top: 40rpx;
+			.label {
+				width: 180rpx;
+				margin-right: 20rpx;
+			}
+			.text {
+				color: #999;
+			}
 		}
 	}
-	.lists{
+	
+	
+	.lists {
 		margin-top: 16rpx;
 		border-radius: 12rpx;
 		overflow: hidden;

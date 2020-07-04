@@ -154,8 +154,8 @@ Vue.component('LoadMore', LoadMore)
 import tuiButton from '@/components/button/button.vue'
 Vue.component('tuiButton', tuiButton)
 
-import cuCustom from '@/components/cu-custom/cu-custom.vue'
-Vue.component('cu-custom', cuCustom)
+import tuiNav from "@/components/tui-navigation-bar/tui-navigation-bar"
+Vue.component('tuiNav', tuiNav)
 
 import Icon from "@/components/icon/icon"
 Vue.component('Icon', Icon)

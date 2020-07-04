@@ -56,7 +56,9 @@ image {
 .blue {
 	background: blue;
 }
-
+.gray{
+	color: #999;
+}
 
 /* 盒子布局 */
 .flex_y {
@@ -149,7 +151,7 @@ image {
 	content: '';
 	width: 100%;
 	height: 1rpx;
-	background: #f3f3f3;
+	background: #e5e5e5;
 	transform: scaleY(.5);
 	position: absolute;
 	bottom: 0;
@@ -170,7 +172,11 @@ image {
 	top: 0;
 	left: 0;
 }
-
+.cm_delete{
+	font-size: 26rpx;
+	color: #999;
+	text-decoration: line-through;
+}
 /* common样式 */
 
 .cm_box {
@@ -232,26 +238,19 @@ image {
 .cm_blocks {
 	width: 100%;
 }
-/* .cm_items {
-	padding: 20rpx;
-} */
-.cm_items .itemLogo {
-	width: 180rpx;
-	height: 180rpx;
-	border-radius: 10rpx;
-	margin-right: 24rpx;
-	background-color: #f9f9f9;
+
+.cm_back{
+	width: 60rpx;
+	height: 60rpx;
+	border-radius: 50%;
+	background-color: rgba(0,0,0,.4);
+}
+.cm_back .iconfont{
+	color: #fff;
+	font-size: 28rpx;
+	
 }
 
-.cm_items .cm_price_box {
-	margin-top: 20rpx;
-}
-.cm_items .cm_des {
-	margin-top: 14rpx;
-}
-.cm_items .subavatars{
-	width: 50rpx;
-	height: 50rpx;
-	border: 2rpx solid #fff;
-	border-radius: 50%;
-}
+
+
+

@@ -757,7 +757,7 @@ function initData(vueOptions, context) {
     try {
       data = data.call(context); // 支持 Vue.prototype 上挂的数据
     } catch (e) {
-      if (Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
+      if (Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
         console.warn('根据 Vue 的 data 函数初始化小程序 data 失败，请尽量确保 data 函数中不访问 vm 对象，否则可能影响首次数据渲染速度。', data);
       }
     }
@@ -2904,837 +2904,7 @@ var _default = {
 
 /***/ }),
 
-/***/ 16:
-/*!******************************************!*\
-  !*** G:/work/马桶福利购/utils/module/auth.js ***!
-  \******************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
-
-var _interface = _interopRequireDefault(__webpack_require__(/*! ../http/interface */ 12));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} // 用户身份相关接口
-// 我要积分
-var Auth = { // 获取验证码
-  getVerificateCode: function getVerificateCode(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    return _interface.default.request({
-      url: '/api/Msg/SendVerificationCode',
-      method: 'POST',
-      data: data
-      // handle:true
-    }, ifLoad);
-  },
-  // 微信api
-  GetWxJsApiConfig: function GetWxJsApiConfig(data) {
-    return _interface.default.request({
-      url: '/api/Authorize/GetJsApiConfig',
-      method: 'POST',
-      data: data
-      // handle:true
-    });
-  },
-  // 登录
-  userLogin: function userLogin(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    return _interface.default.request({
-      url: '/api/Authorize/Token',
-      method: 'POST',
-      data: data
-      // handle:true
-    }, ifLoad);
-  },
-  // 快捷登录
-  shortcutToken: function shortcutToken(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    return _interface.default.request({
-      url: '/api/Authorize/ShortcutToken',
-      method: 'GET',
-      data: data
-      // handle:true
-    }, ifLoad);
-  },
-  // OpenId登录
-  WxTokenLogin: function WxTokenLogin(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    return _interface.default.request({
-      url: '/api/Authorize/WxToken',
-      method: 'POST',
-      data: data
-      // handle:true
-    }, ifLoad);
-  },
-  // 注册用户 
-  userRegiste: function userRegiste(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    return _interface.default.request({
-      url: '/api/Authorize/Registe',
-      method: 'POST',
-      data: data
-      // handle:true
-    }, ifLoad);
-  },
-  // 忘记密码
-  findPassword: function findPassword(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    return _interface.default.request({
-      url: '/api/Authorize/FindPassword',
-      method: 'POST',
-      data: data
-      // handle:true
-    }, ifLoad);
-  },
-  // 获取用户信息
-  getConsumer: function getConsumer(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    return _interface.default.request({
-      url: '/api/Consumer/Get',
-      method: 'GET',
-      data: data
-      // handle:true
-    }, ifLoad);
-  },
-
-  //更新用户信息
-  userInfoUpdate: function userInfoUpdate(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    return _interface.default.request({
-      url: '/api/Consumer/PerfectInfo',
-      method: 'POST',
-      data: data
-      // handle:true
-    }, ifLoad);
-  },
-  // 设置支付密码
-  SettingPayPassword: function SettingPayPassword(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    return _interface.default.request({
-      url: '/api/Consumer/SettingPayPassword',
-      method: 'POST',
-      data: data
-      // handle:true
-    }, ifLoad);
-  },
-  // 微信绑定手机号
-  BindWxUserMobile: function BindWxUserMobile(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    return _interface.default.request({
-      url: '/api/Authorize/BindWxUserMobile',
-      method: 'POST',
-      data: data
-      // handle:true
-    }, ifLoad);
-  },
-
-  // 支付
-  toPayment: function toPayment(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    return _interface.default.request({
-      url: '/api/Pay/Payment',
-      method: 'POST',
-      data: data
-      // handle:true
-    }, ifLoad);
-  },
-
-
-  // 	=============商家部分\\\
-
-
-
-  // 获取商家信息
-  GetBusinessInfo: function GetBusinessInfo(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    return _interface.default.request({
-      url: '/api/Shop/GetBusinessInfo',
-      method: 'GET',
-      data: data
-      // handle:true
-    }, ifLoad);
-  },
-  // 修改商家信息
-  BusinessEditor: function BusinessEditor(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    return _interface.default.request({
-      url: '/api/Shop/BusinessEditor',
-      method: 'POST',
-      data: data
-      // handle:true
-    }, ifLoad);
-  },
-
-
-  //=============== 全局=================
-
-  // 获取全局配置
-  getConfig: function getConfig(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    return _interface.default.request({
-      url: '/api/Service/Config',
-      method: 'GET',
-      data: data
-      // handle:true
-    }, ifLoad);
-  },
-
-  // app更新
-  VersionCheck: function VersionCheck(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    return _interface.default.request({
-      url: '/api/AppVersion/VersionCheck',
-      method: 'POST',
-      data: data
-      // handle:true
-    }, ifLoad);
-  },
-
-  // 手机号登录
-  MobileToken: function MobileToken(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    return _interface.default.request({
-      url: '/api/Authorize/MobileToken',
-      method: 'POST',
-      data: data
-      // handle:true
-    }, ifLoad);
-  } };var _default =
-
-Auth;exports.default = _default;
-
-/***/ }),
-
-/***/ 17:
-/*!**********************************************!*\
-  !*** G:/work/马桶福利购/utils/module/business.js ***!
-  \**********************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
-
-var _interface = _interopRequireDefault(__webpack_require__(/*! ../http/interface */ 12));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} // 用户身份相关接口
-var Set = {
-  // 最后一个子订单是否退邮费
-  ifLastSubOrder: function ifLastSubOrder(data) {
-    return _interface.default.request({
-      url: '/api/Order/GetChildIsSucceed',
-      method: 'POST',
-      data: data
-      // handle:true
-    });
-  },
-
-  // 热门推荐
-  GetGoodsList: function GetGoodsList(data) {
-    return _interface.default.request({
-      url: '/api/Project/GetGoodsList',
-      method: 'POST',
-      data: data
-      // handle:true
-    });
-  },
-  // 获取详情
-  GetGoodsInfo: function GetGoodsInfo(data) {
-    return _interface.default.request({
-      url: '/api/Project/GetGoodsInfo',
-      method: 'GET',
-      data: data
-      // handle:true
-    });
-  },
-  // 优店
-  GetMerchantList: function GetMerchantList(data) {
-    return _interface.default.request({
-      url: '/api/Shop/GetMerchantList',
-      method: 'POST',
-      data: data
-      // handle:true
-    });
-  },
-  // 获取店铺详情 及商品
-  GetBusinessProjectList: function GetBusinessProjectList(data) {
-    return _interface.default.request({
-      url: '/api/Shop/GetBusinessProjectList',
-      method: 'POST',
-      data: data
-      // handle:true
-    });
-  },
-  // 获取分类列表
-  GetClassList: function GetClassList(data) {
-    return _interface.default.request({
-      url: '/api/Project/GetClass',
-      method: 'GET',
-      data: data
-      // handle:true
-    });
-  },
-  // 根据分类获取 商品
-  GetGoodsByClassList: function GetGoodsByClassList(data) {
-    return _interface.default.request({
-      url: '/api/Project/GetGoodsByClassList',
-      method: 'POST',
-      data: data
-      // handle:true
-    });
-  },
-  // 获取收货地址
-  GetAddressList: function GetAddressList(data) {
-    return _interface.default.request({
-      url: '/api/Address/GetAddressList',
-      method: 'POST',
-      data: data
-      // handle:true
-    });
-  },
-  // 删除地址
-  addressDel: function addressDel(data) {
-    return _interface.default.request({
-      url: '/api/Address/Del',
-      method: 'GET',
-      data: data
-      // handle:true
-    });
-  },
-  // 设置默认地址
-  DefaultAddress: function DefaultAddress(data) {
-    return _interface.default.request({
-      url: '/api/Address/DefaultAddress',
-      method: 'GET',
-      data: data
-      // handle:true
-    });
-  },
-  // 获取拍品信息
-  GetAuctionProject: function GetAuctionProject(data) {
-    return _interface.default.request({
-      url: '/api/Project/Get',
-      method: 'POST',
-      data: data
-      // handle:true
-    });
-  },
-
-  // 获取充值列表
-  RechargeList: function RechargeList(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    return _interface.default.request({
-      url: '/api/Recharge/RechargeList',
-      method: 'POST',
-      data: data
-      // handle:true
-    }, ifLoad);
-  },
-
-  // 生成充值订单
-  Recharge: function Recharge(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    return _interface.default.request({
-      url: '/api/Recharge/Recharge',
-      method: 'POST',
-      data: data
-      // handle:true
-    }, ifLoad);
-  },
-  // 新建地址
-  addAddress: function addAddress(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    return _interface.default.request({
-      url: '/api/Address/Add',
-      method: 'POST',
-      data: data
-      // handle:true
-    }, ifLoad);
-  },
-  // 确认拍品
-  verifyAuction: function verifyAuction(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    return _interface.default.request({
-      url: '/api/Order/Verify',
-      method: 'POST',
-      data: data
-      // handle:true
-    }, ifLoad);
-  },
-
-  // 不要改拍品
-  NoVerifyAuction: function NoVerifyAuction(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    return _interface.default.request({
-      url: '/api/Order/NoVerify',
-      method: 'POST',
-      data: data
-      // handle:true
-    }, ifLoad);
-  },
-
-  // 客户获取订单
-  GetOrderList: function GetOrderList(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    return _interface.default.request({
-      url: '/api/Order/GetOrderList',
-      method: 'POST',
-      data: data
-      // handle:true
-    }, ifLoad);
-  },
-
-  // 购买加价
-
-  doAuction: function doAuction(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    return _interface.default.request({
-      url: '/api/Auction/Auction',
-      method: 'POST',
-      data: data
-      // handle:true
-    }, ifLoad);
-  },
-
-  // 竞价记录
-
-  GetAuctionList: function GetAuctionList(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    return _interface.default.request({
-      url: '/api/Auction/GetAuctionList',
-      method: 'POST',
-      data: data
-      // handle:true
-    }, ifLoad);
-  },
-
-  // 发起退货申请
-
-  ApplyRefund: function ApplyRefund(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    return _interface.default.request({
-      url: '/api/Refund/Apply',
-      method: 'POST',
-      data: data
-      // handle:true
-    }, ifLoad);
-  },
-
-  // 确认拍品
-  Receiving: function Receiving(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    return _interface.default.request({
-      url: '	/api/Order/Receiving',
-      method: 'POST',
-      data: data
-      // handle:true
-    }, ifLoad);
-  },
-  // 获取银行卡列表
-
-  GetBankList: function GetBankList(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    return _interface.default.request({
-      url: '/api/Bank/GetBankList',
-      method: 'GET',
-      data: data
-      // handle:true
-    }, ifLoad);
-  },
-
-  // 添加新卡
-  BuilderBank: function BuilderBank(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    return _interface.default.request({
-      url: '/api/Bank/BuilderBank',
-      method: 'POST',
-      data: data
-      // handle:true
-    }, ifLoad);
-  },
-
-
-  // 默认银行卡
-  DefaultBank: function DefaultBank(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    return _interface.default.request({
-      url: '/api/Bank/DefaultBank',
-      method: 'GET',
-      data: data
-      // handle:true
-    }, ifLoad);
-  },
-
-  // 解绑银行卡
-  RelieveBank: function RelieveBank(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    return _interface.default.request({
-      url: '/api/Bank/RelieveBank',
-      method: 'GET',
-      data: data
-      // handle:true
-    }, ifLoad);
-  },
-
-  // 申请提现
-  SubmitCash: function SubmitCash(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    return _interface.default.request({
-      url: '/api/Cash/SubmitCash',
-      method: 'POST',
-      data: data
-      // handle:true
-    }, ifLoad);
-  },
-
-  // 实名认证
-  SubmitProve: function SubmitProve(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    return _interface.default.request({
-      url: '/api/Consumer/Prove',
-      method: 'POST',
-      data: data
-      // handle:true
-    }, ifLoad);
-  },
-
-  // 问题反馈
-  SubmitComment: function SubmitComment(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    return _interface.default.request({
-      url: '/api/Feedback/Submit',
-      method: 'POST',
-      data: data
-      // handle:true
-    }, ifLoad);
-  },
-
-  // 余额明细
-  AccountList: function AccountList(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    return _interface.default.request({
-      url: '/api/AccountDetail/GetList',
-      method: 'POST',
-      data: data
-      // handle:true
-    }, ifLoad);
-  },
-
-  // 关注列表
-  GetAttentionList: function GetAttentionList(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    return _interface.default.request({
-      url: '/api/Shop/GetAttentionList',
-      method: 'POST',
-      data: data
-      // handle:true
-    }, ifLoad);
-  },
-
-  // 关注店铺
-  Attention: function Attention(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    return _interface.default.request({
-      url: '/api/Shop/Attention',
-      method: 'POST',
-      data: data
-      // handle:true
-    }, ifLoad);
-  },
-
-  // 合家慈登陆账户
-  GetHJCConsumer: function GetHJCConsumer(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    return _interface.default.request({
-      url: '/api/Recharge/GetHJCConsumer',
-      method: 'POST',
-      data: data
-      // handle:true
-    }, ifLoad);
-  },
-
-  // 合家慈积分转化
-  HJCIntegralRecharge: function HJCIntegralRecharge(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    return _interface.default.request({
-      url: '/api/Recharge/HJCIntegralRecharge',
-      method: 'POST',
-      data: data
-      // handle:true
-    }, ifLoad);
-  },
-
-  // 提醒发货
-  Prompt: function Prompt(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    return _interface.default.request({
-      url: '/api/Order/Prompt',
-      method: 'GET',
-      data: data
-      // handle:true
-    }, ifLoad);
-  },
-
-
-
-  // 插卡内流信息
-  GetEMS: function GetEMS(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    return _interface.default.request({
-      url: '/api/Order/GetEMS',
-      method: 'GET',
-      data: data
-      // handle:true
-    }, ifLoad);
-  },
-  // 获取文档
-  getGuide: function getGuide(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    return _interface.default.request({
-      url: '/api/Service/Guide',
-      method: 'GET',
-      data: data
-      // handle:true
-    }, ifLoad);
-  },
-
-  // 加入购物车
-  cardAdd: function cardAdd(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    return _interface.default.request({
-      url: '/api/Catr/Add',
-      method: 'POST',
-      data: data
-      // handle:true
-    }, ifLoad);
-  },
-  // 获取购物车列表
-  cardList: function cardList(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    return _interface.default.request({
-      url: '/api/Catr/GetList',
-      method: 'POST',
-      data: data
-      // handle:true
-    }, ifLoad);
-  },
-  // 刪除購物車
-  cardDelete: function cardDelete(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    return _interface.default.request({
-      url: '/api/Catr/Delect',
-      method: 'POST',
-      data: data
-      // handle:true
-    }, ifLoad);
-  },
-
-
-  // 提交订单
-  CreateOrder: function CreateOrder(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    return _interface.default.request({
-      url: '/api/Order/CreateOrder',
-      method: 'POST',
-      data: data
-      // handle:true
-    }, ifLoad);
-  },
-
-  // 删除订单
-
-  CancelOrder: function CancelOrder(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    return _interface.default.request({
-      url: '/api/Order/CancelOrder',
-      method: 'POST',
-      data: data
-      // handle:true
-    }, ifLoad);
-  },
-
-  // 计算邮费
-
-  GetEmsPrice: function GetEmsPrice(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    return _interface.default.request({
-      url: '/api/Order/GetEmsPrice',
-      method: 'POST',
-      data: data
-      // handle:true
-    }, ifLoad);
-  },
-
-  // 获取退款列表
-
-  GetRefundOrderList: function GetRefundOrderList(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    return _interface.default.request({
-      url: '/api/Order/GetRefundOrderList',
-      method: 'POST',
-      data: data
-      // handle:true
-    }, ifLoad);
-  },
-
-  // 获取退款详情
-  GetRefundOrderInfo: function GetRefundOrderInfo(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    return _interface.default.request({
-      url: '/api/Order/GetRefundInfo',
-      method: 'POST',
-      data: data
-      // handle:true
-    }, ifLoad);
-  },
-
-
-  // 取消退款申请
-  CancelRefund: function CancelRefund(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    return _interface.default.request({
-      url: '/api/Refund/Cancel',
-      method: 'GET',
-      data: data
-      // handle:true
-    }, ifLoad);
-  },
-  // 删除退款申请
-  DelectRefund: function DelectRefund(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    return _interface.default.request({
-      url: '/api/Refund/Delect',
-      method: 'GET',
-      data: data
-      // handle:true
-    }, ifLoad);
-  },
-  // 物流确认
-  RefundEms: function RefundEms(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    return _interface.default.request({
-      url: '/api/Refund/RefundEms',
-      method: 'POST',
-      data: data
-      // handle:true
-    }, ifLoad);
-  },
-  // 获取着陆页分类商品
-  GetClassHotList: function GetClassHotList(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    return _interface.default.request({
-      url: '/api/Project/GetClassHotList',
-      method: 'POST',
-      data: data
-      // handle:true
-    }, ifLoad);
-  },
-
-  // code获取OpenId
-  GetOpenId: function GetOpenId(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    return _interface.default.request({
-      url: '/api/Authorize/GetOpenId',
-      method: 'POST',
-      data: data
-      // handle:true
-    }, ifLoad);
-  },
-
-
-  // 模拟下单
-  mockPay: function mockPay(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    return _interface.default.request({
-      url: '/api/Pay/getNotify',
-      method: 'GET',
-      data: data
-      // handle:true
-    }, ifLoad);
-  },
-
-
-
-
-  // 	=============商家部分\\\
-
-
-  // 商家 发布拍品/重新发布
-  shopSubmit: function shopSubmit(data) {
-    return _interface.default.request({
-      url: '/api/shop/Submit',
-      method: 'POST',
-      data: data
-      // handle:true
-    });
-  },
-
-  // 商家获取商家订单
-  GetBusinessList: function GetBusinessList(data) {
-    return _interface.default.request({
-      url: '/api/Order/GetBusinessList',
-      method: 'POST',
-      data: data
-      // handle:true
-    });
-  },
-
-
-  // 商家同意退款
-  agreeRefund: function agreeRefund(data) {
-    return _interface.default.request({
-      url: '/api/Order/Refund',
-      method: 'POST',
-      data: data
-      // handle:true
-    });
-  },
-  // 商家获取订单详情
-  getOrderDetail: function getOrderDetail(data) {
-    return _interface.default.request({
-      url: '/api/Order/Get',
-      method: 'POST',
-      data: data
-      // handle:true
-    });
-  },
-
-  // 商家发货
-  merchantDispatch: function merchantDispatch(data) {
-    return _interface.default.request({
-      url: '/api/Order/Dispatch',
-      method: 'POST',
-      data: data
-      // handle:true
-    });
-  },
-
-  // 商家成交纪录列表
-  GetAccomplishList: function GetAccomplishList(data) {
-    return _interface.default.request({
-      url: '/api/Project/GetAccomplishList',
-      method: 'POST',
-      data: data
-      // handle:true
-    });
-  },
-  // 我的拍品
-  GetConsumerList: function GetConsumerList(data) {
-    return _interface.default.request({
-      url: '/api/Project/GetConsumerList',
-      method: 'POST',
-      data: data
-      // handle:true
-    });
-  },
-  // 商品管理
-  GetMerchantProduct: function GetMerchantProduct(data) {
-    return _interface.default.request({
-      url: '/api/Shop/GetList',
-      method: 'POST',
-      data: data
-      // handle:true
-    });
-  },
-  // 商家获取拍品信息
-  merchantProductInfo: function merchantProductInfo(data) {
-    return _interface.default.request({
-      url: '/api/Shop/Get',
-      method: 'GET',
-      data: data
-      // handle:true
-    });
-  },
-
-  // 商家下架商品
-  SoldOut: function SoldOut(data) {
-    return _interface.default.request({
-      url: '/api/Project/SoldOut',
-      method: 'POST',
-      data: data
-      // handle:true
-    });
-  },
-
-  // 商家下架商品
-  GetBusinessAddress: function GetBusinessAddress(data) {
-    return _interface.default.request({
-      url: '/api/Address/GetBusiness',
-      method: 'GET',
-      data: data
-      // handle:true
-    });
-  },
-
-  // 商家营业执照
-  BusinessProve: function BusinessProve(data) {
-    return _interface.default.request({
-      url: '/api/Shop/BusinessProve',
-      method: 'POST',
-      data: data
-      // handle:true
-    });
-  },
-
-
-  // 商家限时购列表
-  LimitActivityGoods: function LimitActivityGoods(data) {
-    return _interface.default.request({
-      url: '/api/LimitActivityGoods/GetGoodsList',
-      method: 'POST',
-      data: data
-      // handle:true
-    });
-  } };var _default =
-
-
-Set;exports.default = _default;
-
-/***/ }),
-
-/***/ 182:
+/***/ 154:
 /*!*****************************************************!*\
   !*** G:/work/马桶福利购/components/tki-qrcode/qrcode.js ***!
   \*****************************************************/
@@ -4949,6 +4119,836 @@ Set;exports.default = _default;
 
 QRCode;exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
+
+/***/ }),
+
+/***/ 16:
+/*!******************************************!*\
+  !*** G:/work/马桶福利购/utils/module/auth.js ***!
+  \******************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
+
+var _interface = _interopRequireDefault(__webpack_require__(/*! ../http/interface */ 12));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} // 用户身份相关接口
+// 我要积分
+var Auth = { // 获取验证码
+  getVerificateCode: function getVerificateCode(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return _interface.default.request({
+      url: '/api/Msg/SendVerificationCode',
+      method: 'POST',
+      data: data
+      // handle:true
+    }, ifLoad);
+  },
+  // 微信api
+  GetWxJsApiConfig: function GetWxJsApiConfig(data) {
+    return _interface.default.request({
+      url: '/api/Authorize/GetJsApiConfig',
+      method: 'POST',
+      data: data
+      // handle:true
+    });
+  },
+  // 登录
+  userLogin: function userLogin(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return _interface.default.request({
+      url: '/api/Authorize/Token',
+      method: 'POST',
+      data: data
+      // handle:true
+    }, ifLoad);
+  },
+  // 快捷登录
+  shortcutToken: function shortcutToken(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return _interface.default.request({
+      url: '/api/Authorize/ShortcutToken',
+      method: 'GET',
+      data: data
+      // handle:true
+    }, ifLoad);
+  },
+  // OpenId登录
+  WxTokenLogin: function WxTokenLogin(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return _interface.default.request({
+      url: '/api/Authorize/WxToken',
+      method: 'POST',
+      data: data
+      // handle:true
+    }, ifLoad);
+  },
+  // 注册用户 
+  userRegiste: function userRegiste(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return _interface.default.request({
+      url: '/api/Authorize/Registe',
+      method: 'POST',
+      data: data
+      // handle:true
+    }, ifLoad);
+  },
+  // 忘记密码
+  findPassword: function findPassword(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return _interface.default.request({
+      url: '/api/Authorize/FindPassword',
+      method: 'POST',
+      data: data
+      // handle:true
+    }, ifLoad);
+  },
+  // 获取用户信息
+  getConsumer: function getConsumer(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return _interface.default.request({
+      url: '/api/Consumer/Get',
+      method: 'GET',
+      data: data
+      // handle:true
+    }, ifLoad);
+  },
+
+  //更新用户信息
+  userInfoUpdate: function userInfoUpdate(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return _interface.default.request({
+      url: '/api/Consumer/PerfectInfo',
+      method: 'POST',
+      data: data
+      // handle:true
+    }, ifLoad);
+  },
+  // 设置支付密码
+  SettingPayPassword: function SettingPayPassword(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return _interface.default.request({
+      url: '/api/Consumer/SettingPayPassword',
+      method: 'POST',
+      data: data
+      // handle:true
+    }, ifLoad);
+  },
+  // 微信绑定手机号
+  BindWxUserMobile: function BindWxUserMobile(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return _interface.default.request({
+      url: '/api/Authorize/BindWxUserMobile',
+      method: 'POST',
+      data: data
+      // handle:true
+    }, ifLoad);
+  },
+
+  // 支付
+  toPayment: function toPayment(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return _interface.default.request({
+      url: '/api/Pay/Payment',
+      method: 'POST',
+      data: data
+      // handle:true
+    }, ifLoad);
+  },
+
+
+  // 	=============商家部分\\\
+
+
+
+  // 获取商家信息
+  GetBusinessInfo: function GetBusinessInfo(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return _interface.default.request({
+      url: '/api/Shop/GetBusinessInfo',
+      method: 'GET',
+      data: data
+      // handle:true
+    }, ifLoad);
+  },
+  // 修改商家信息
+  BusinessEditor: function BusinessEditor(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return _interface.default.request({
+      url: '/api/Shop/BusinessEditor',
+      method: 'POST',
+      data: data
+      // handle:true
+    }, ifLoad);
+  },
+
+
+  //=============== 全局=================
+
+  // 获取全局配置
+  getConfig: function getConfig(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return _interface.default.request({
+      url: '/api/Service/Config',
+      method: 'GET',
+      data: data
+      // handle:true
+    }, ifLoad);
+  },
+
+  // app更新
+  VersionCheck: function VersionCheck(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return _interface.default.request({
+      url: '/api/AppVersion/VersionCheck',
+      method: 'POST',
+      data: data
+      // handle:true
+    }, ifLoad);
+  },
+
+  // 手机号登录
+  MobileToken: function MobileToken(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return _interface.default.request({
+      url: '/api/Authorize/MobileToken',
+      method: 'POST',
+      data: data
+      // handle:true
+    }, ifLoad);
+  } };var _default =
+
+Auth;exports.default = _default;
+
+/***/ }),
+
+/***/ 17:
+/*!**********************************************!*\
+  !*** G:/work/马桶福利购/utils/module/business.js ***!
+  \**********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
+
+var _interface = _interopRequireDefault(__webpack_require__(/*! ../http/interface */ 12));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} // 用户身份相关接口
+var Set = {
+  // 最后一个子订单是否退邮费
+  ifLastSubOrder: function ifLastSubOrder(data) {
+    return _interface.default.request({
+      url: '/api/Order/GetChildIsSucceed',
+      method: 'POST',
+      data: data
+      // handle:true
+    });
+  },
+
+  // 热门推荐
+  GetGoodsList: function GetGoodsList(data) {
+    return _interface.default.request({
+      url: '/api/Project/GetGoodsList',
+      method: 'POST',
+      data: data
+      // handle:true
+    });
+  },
+  // 获取详情
+  GetGoodsInfo: function GetGoodsInfo(data) {
+    return _interface.default.request({
+      url: '/api/Project/GetGoodsInfo',
+      method: 'GET',
+      data: data
+      // handle:true
+    });
+  },
+  // 优店
+  GetMerchantList: function GetMerchantList(data) {
+    return _interface.default.request({
+      url: '/api/Shop/GetMerchantList',
+      method: 'POST',
+      data: data
+      // handle:true
+    });
+  },
+  // 获取店铺详情 及商品
+  GetBusinessProjectList: function GetBusinessProjectList(data) {
+    return _interface.default.request({
+      url: '/api/Shop/GetBusinessProjectList',
+      method: 'POST',
+      data: data
+      // handle:true
+    });
+  },
+  // 获取分类列表
+  GetClassList: function GetClassList(data) {
+    return _interface.default.request({
+      url: '/api/Project/GetClass',
+      method: 'GET',
+      data: data
+      // handle:true
+    });
+  },
+  // 根据分类获取 商品
+  GetGoodsByClassList: function GetGoodsByClassList(data) {
+    return _interface.default.request({
+      url: '/api/Project/GetGoodsByClassList',
+      method: 'POST',
+      data: data
+      // handle:true
+    });
+  },
+  // 获取收货地址
+  GetAddressList: function GetAddressList(data) {
+    return _interface.default.request({
+      url: '/api/Address/GetAddressList',
+      method: 'POST',
+      data: data
+      // handle:true
+    });
+  },
+  // 删除地址
+  addressDel: function addressDel(data) {
+    return _interface.default.request({
+      url: '/api/Address/Del',
+      method: 'GET',
+      data: data
+      // handle:true
+    });
+  },
+  // 设置默认地址
+  DefaultAddress: function DefaultAddress(data) {
+    return _interface.default.request({
+      url: '/api/Address/DefaultAddress',
+      method: 'GET',
+      data: data
+      // handle:true
+    });
+  },
+  // 获取拍品信息
+  GetAuctionProject: function GetAuctionProject(data) {
+    return _interface.default.request({
+      url: '/api/Project/Get',
+      method: 'POST',
+      data: data
+      // handle:true
+    });
+  },
+
+  // 获取充值列表
+  RechargeList: function RechargeList(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return _interface.default.request({
+      url: '/api/Recharge/RechargeList',
+      method: 'POST',
+      data: data
+      // handle:true
+    }, ifLoad);
+  },
+
+  // 生成充值订单
+  Recharge: function Recharge(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return _interface.default.request({
+      url: '/api/Recharge/Recharge',
+      method: 'POST',
+      data: data
+      // handle:true
+    }, ifLoad);
+  },
+  // 新建地址
+  addAddress: function addAddress(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return _interface.default.request({
+      url: '/api/Address/Add',
+      method: 'POST',
+      data: data
+      // handle:true
+    }, ifLoad);
+  },
+  // 确认拍品
+  verifyAuction: function verifyAuction(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return _interface.default.request({
+      url: '/api/Order/Verify',
+      method: 'POST',
+      data: data
+      // handle:true
+    }, ifLoad);
+  },
+
+  // 不要改拍品
+  NoVerifyAuction: function NoVerifyAuction(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return _interface.default.request({
+      url: '/api/Order/NoVerify',
+      method: 'POST',
+      data: data
+      // handle:true
+    }, ifLoad);
+  },
+
+  // 客户获取订单
+  GetOrderList: function GetOrderList(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return _interface.default.request({
+      url: '/api/Order/GetOrderList',
+      method: 'POST',
+      data: data
+      // handle:true
+    }, ifLoad);
+  },
+
+  // 购买加价
+
+  doAuction: function doAuction(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return _interface.default.request({
+      url: '/api/Auction/Auction',
+      method: 'POST',
+      data: data
+      // handle:true
+    }, ifLoad);
+  },
+
+  // 竞价记录
+
+  GetAuctionList: function GetAuctionList(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return _interface.default.request({
+      url: '/api/Auction/GetAuctionList',
+      method: 'POST',
+      data: data
+      // handle:true
+    }, ifLoad);
+  },
+
+  // 发起退货申请
+
+  ApplyRefund: function ApplyRefund(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return _interface.default.request({
+      url: '/api/Refund/Apply',
+      method: 'POST',
+      data: data
+      // handle:true
+    }, ifLoad);
+  },
+
+  // 确认拍品
+  Receiving: function Receiving(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return _interface.default.request({
+      url: '	/api/Order/Receiving',
+      method: 'POST',
+      data: data
+      // handle:true
+    }, ifLoad);
+  },
+  // 获取银行卡列表
+
+  GetBankList: function GetBankList(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return _interface.default.request({
+      url: '/api/Bank/GetBankList',
+      method: 'GET',
+      data: data
+      // handle:true
+    }, ifLoad);
+  },
+
+  // 添加新卡
+  BuilderBank: function BuilderBank(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return _interface.default.request({
+      url: '/api/Bank/BuilderBank',
+      method: 'POST',
+      data: data
+      // handle:true
+    }, ifLoad);
+  },
+
+
+  // 默认银行卡
+  DefaultBank: function DefaultBank(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return _interface.default.request({
+      url: '/api/Bank/DefaultBank',
+      method: 'GET',
+      data: data
+      // handle:true
+    }, ifLoad);
+  },
+
+  // 解绑银行卡
+  RelieveBank: function RelieveBank(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return _interface.default.request({
+      url: '/api/Bank/RelieveBank',
+      method: 'GET',
+      data: data
+      // handle:true
+    }, ifLoad);
+  },
+
+  // 申请提现
+  SubmitCash: function SubmitCash(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return _interface.default.request({
+      url: '/api/Cash/SubmitCash',
+      method: 'POST',
+      data: data
+      // handle:true
+    }, ifLoad);
+  },
+
+  // 实名认证
+  SubmitProve: function SubmitProve(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return _interface.default.request({
+      url: '/api/Consumer/Prove',
+      method: 'POST',
+      data: data
+      // handle:true
+    }, ifLoad);
+  },
+
+  // 问题反馈
+  SubmitComment: function SubmitComment(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return _interface.default.request({
+      url: '/api/Feedback/Submit',
+      method: 'POST',
+      data: data
+      // handle:true
+    }, ifLoad);
+  },
+
+  // 余额明细
+  AccountList: function AccountList(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return _interface.default.request({
+      url: '/api/AccountDetail/GetList',
+      method: 'POST',
+      data: data
+      // handle:true
+    }, ifLoad);
+  },
+
+  // 关注列表
+  GetAttentionList: function GetAttentionList(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return _interface.default.request({
+      url: '/api/Shop/GetAttentionList',
+      method: 'POST',
+      data: data
+      // handle:true
+    }, ifLoad);
+  },
+
+  // 关注店铺
+  Attention: function Attention(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return _interface.default.request({
+      url: '/api/Shop/Attention',
+      method: 'POST',
+      data: data
+      // handle:true
+    }, ifLoad);
+  },
+
+  // 合家慈登陆账户
+  GetHJCConsumer: function GetHJCConsumer(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return _interface.default.request({
+      url: '/api/Recharge/GetHJCConsumer',
+      method: 'POST',
+      data: data
+      // handle:true
+    }, ifLoad);
+  },
+
+  // 合家慈积分转化
+  HJCIntegralRecharge: function HJCIntegralRecharge(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return _interface.default.request({
+      url: '/api/Recharge/HJCIntegralRecharge',
+      method: 'POST',
+      data: data
+      // handle:true
+    }, ifLoad);
+  },
+
+  // 提醒发货
+  Prompt: function Prompt(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return _interface.default.request({
+      url: '/api/Order/Prompt',
+      method: 'GET',
+      data: data
+      // handle:true
+    }, ifLoad);
+  },
+
+
+
+  // 插卡内流信息
+  GetEMS: function GetEMS(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return _interface.default.request({
+      url: '/api/Order/GetEMS',
+      method: 'GET',
+      data: data
+      // handle:true
+    }, ifLoad);
+  },
+  // 获取文档
+  getGuide: function getGuide(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return _interface.default.request({
+      url: '/api/Service/Guide',
+      method: 'GET',
+      data: data
+      // handle:true
+    }, ifLoad);
+  },
+
+  // 加入购物车
+  cardAdd: function cardAdd(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return _interface.default.request({
+      url: '/api/Catr/Add',
+      method: 'POST',
+      data: data
+      // handle:true
+    }, ifLoad);
+  },
+  // 获取购物车列表
+  cardList: function cardList(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return _interface.default.request({
+      url: '/api/Catr/GetList',
+      method: 'POST',
+      data: data
+      // handle:true
+    }, ifLoad);
+  },
+  // 刪除購物車
+  cardDelete: function cardDelete(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return _interface.default.request({
+      url: '/api/Catr/Delect',
+      method: 'POST',
+      data: data
+      // handle:true
+    }, ifLoad);
+  },
+
+
+  // 提交订单
+  CreateOrder: function CreateOrder(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return _interface.default.request({
+      url: '/api/Order/CreateOrder',
+      method: 'POST',
+      data: data
+      // handle:true
+    }, ifLoad);
+  },
+
+  // 删除订单
+
+  CancelOrder: function CancelOrder(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return _interface.default.request({
+      url: '/api/Order/CancelOrder',
+      method: 'POST',
+      data: data
+      // handle:true
+    }, ifLoad);
+  },
+
+  // 计算邮费
+
+  GetEmsPrice: function GetEmsPrice(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return _interface.default.request({
+      url: '/api/Order/GetEmsPrice',
+      method: 'POST',
+      data: data
+      // handle:true
+    }, ifLoad);
+  },
+
+  // 获取退款列表
+
+  GetRefundOrderList: function GetRefundOrderList(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return _interface.default.request({
+      url: '/api/Order/GetRefundOrderList',
+      method: 'POST',
+      data: data
+      // handle:true
+    }, ifLoad);
+  },
+
+  // 获取退款详情
+  GetRefundOrderInfo: function GetRefundOrderInfo(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return _interface.default.request({
+      url: '/api/Order/GetRefundInfo',
+      method: 'POST',
+      data: data
+      // handle:true
+    }, ifLoad);
+  },
+
+
+  // 取消退款申请
+  CancelRefund: function CancelRefund(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return _interface.default.request({
+      url: '/api/Refund/Cancel',
+      method: 'GET',
+      data: data
+      // handle:true
+    }, ifLoad);
+  },
+  // 删除退款申请
+  DelectRefund: function DelectRefund(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return _interface.default.request({
+      url: '/api/Refund/Delect',
+      method: 'GET',
+      data: data
+      // handle:true
+    }, ifLoad);
+  },
+  // 物流确认
+  RefundEms: function RefundEms(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return _interface.default.request({
+      url: '/api/Refund/RefundEms',
+      method: 'POST',
+      data: data
+      // handle:true
+    }, ifLoad);
+  },
+  // 获取着陆页分类商品
+  GetClassHotList: function GetClassHotList(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return _interface.default.request({
+      url: '/api/Project/GetClassHotList',
+      method: 'POST',
+      data: data
+      // handle:true
+    }, ifLoad);
+  },
+
+  // code获取OpenId
+  GetOpenId: function GetOpenId(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return _interface.default.request({
+      url: '/api/Authorize/GetOpenId',
+      method: 'POST',
+      data: data
+      // handle:true
+    }, ifLoad);
+  },
+
+
+  // 模拟下单
+  mockPay: function mockPay(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return _interface.default.request({
+      url: '/api/Pay/getNotify',
+      method: 'GET',
+      data: data
+      // handle:true
+    }, ifLoad);
+  },
+
+
+
+
+  // 	=============商家部分\\\
+
+
+  // 商家 发布拍品/重新发布
+  shopSubmit: function shopSubmit(data) {
+    return _interface.default.request({
+      url: '/api/shop/Submit',
+      method: 'POST',
+      data: data
+      // handle:true
+    });
+  },
+
+  // 商家获取商家订单
+  GetBusinessList: function GetBusinessList(data) {
+    return _interface.default.request({
+      url: '/api/Order/GetBusinessList',
+      method: 'POST',
+      data: data
+      // handle:true
+    });
+  },
+
+
+  // 商家同意退款
+  agreeRefund: function agreeRefund(data) {
+    return _interface.default.request({
+      url: '/api/Order/Refund',
+      method: 'POST',
+      data: data
+      // handle:true
+    });
+  },
+  // 商家获取订单详情
+  getOrderDetail: function getOrderDetail(data) {
+    return _interface.default.request({
+      url: '/api/Order/Get',
+      method: 'POST',
+      data: data
+      // handle:true
+    });
+  },
+
+  // 商家发货
+  merchantDispatch: function merchantDispatch(data) {
+    return _interface.default.request({
+      url: '/api/Order/Dispatch',
+      method: 'POST',
+      data: data
+      // handle:true
+    });
+  },
+
+  // 商家成交纪录列表
+  GetAccomplishList: function GetAccomplishList(data) {
+    return _interface.default.request({
+      url: '/api/Project/GetAccomplishList',
+      method: 'POST',
+      data: data
+      // handle:true
+    });
+  },
+  // 我的拍品
+  GetConsumerList: function GetConsumerList(data) {
+    return _interface.default.request({
+      url: '/api/Project/GetConsumerList',
+      method: 'POST',
+      data: data
+      // handle:true
+    });
+  },
+  // 商品管理
+  GetMerchantProduct: function GetMerchantProduct(data) {
+    return _interface.default.request({
+      url: '/api/Shop/GetList',
+      method: 'POST',
+      data: data
+      // handle:true
+    });
+  },
+  // 商家获取拍品信息
+  merchantProductInfo: function merchantProductInfo(data) {
+    return _interface.default.request({
+      url: '/api/Shop/Get',
+      method: 'GET',
+      data: data
+      // handle:true
+    });
+  },
+
+  // 商家下架商品
+  SoldOut: function SoldOut(data) {
+    return _interface.default.request({
+      url: '/api/Project/SoldOut',
+      method: 'POST',
+      data: data
+      // handle:true
+    });
+  },
+
+  // 商家下架商品
+  GetBusinessAddress: function GetBusinessAddress(data) {
+    return _interface.default.request({
+      url: '/api/Address/GetBusiness',
+      method: 'GET',
+      data: data
+      // handle:true
+    });
+  },
+
+  // 商家营业执照
+  BusinessProve: function BusinessProve(data) {
+    return _interface.default.request({
+      url: '/api/Shop/BusinessProve',
+      method: 'POST',
+      data: data
+      // handle:true
+    });
+  },
+
+
+  // 商家限时购列表
+  LimitActivityGoods: function LimitActivityGoods(data) {
+    return _interface.default.request({
+      url: '/api/LimitActivityGoods/GetGoodsList',
+      method: 'POST',
+      data: data
+      // handle:true
+    });
+  } };var _default =
+
+
+Set;exports.default = _default;
 
 /***/ }),
 
@@ -10484,7 +10484,7 @@ function type(obj) {
 
 function flushCallbacks$1(vm) {
     if (vm.__next_tick_callbacks && vm.__next_tick_callbacks.length) {
-        if (Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
+        if (Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
             var mpInstance = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + vm._uid +
                 ']:flushCallbacks[' + vm.__next_tick_callbacks.length + ']');
@@ -10505,14 +10505,14 @@ function nextTick$1(vm, cb) {
     //1.nextTick 之前 已 setData 且 setData 还未回调完成
     //2.nextTick 之前存在 render watcher
     if (!vm.__next_tick_pending && !hasRenderWatcher(vm)) {
-        if(Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG){
+        if(Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG){
             var mpInstance = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + vm._uid +
                 ']:nextVueTick');
         }
         return nextTick(cb, vm)
     }else{
-        if(Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG){
+        if(Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG){
             var mpInstance$1 = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance$1.is || mpInstance$1.route) + '][' + vm._uid +
                 ']:nextMPTick');
@@ -10588,7 +10588,7 @@ var patch = function(oldVnode, vnode) {
     });
     var diffData = this.$shouldDiffData === false ? data : diff(data, mpData);
     if (Object.keys(diffData).length) {
-      if (Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
+      if (Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
         console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + this._uid +
           ']差量更新',
           JSON.stringify(diffData));
@@ -12220,6 +12220,330 @@ if (hadRuntime) {
 /***/ (function(module, exports) {
 
 
+
+/***/ }),
+
+/***/ 76:
+/*!************************************!*\
+  !*** G:/work/马桶福利购/utils/utils.js ***!
+  \************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _SET = _interopRequireDefault(__webpack_require__(/*! ../SET.js */ 15));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+var Utils = {
+  phoneCheck: function phoneCheck(value) {
+    var reg = /^1\d{10}$/;
+    var r = reg.test(value);
+    return r;
+  },
+  passCheck: function passCheck(val) {
+    var patrn = /^(\w){6,20}$/;
+    if (!patrn.exec(val)) return false;
+    return true;
+  },
+  // 银行卡校验
+  bankCardCheck: function bankCardCheck(val) {
+    var patrn = /^([1-9]{1})(\d{15}|\d{18})$/;
+    if (!patrn.test(val)) return false;
+    return true;
+  },
+  // 中文字符
+  chineseCheck: function chineseCheck(val) {
+    var patrn = /^[\u4E00-\u9FA5]{2,4}/;
+
+    if (!patrn.test(val)) return false;
+    return true;
+  },
+  // 银行卡数字加密
+  encryptBankCode: function encryptBankCode(val) {
+
+    var str = val.replace(/\s/g, '');
+    console.log(str);
+    var reg = /^(\d{4})\d+(\d{4})$/;
+    str.replace(reg, "$1 **** **** $2");
+    console.log(str);
+    return str;
+  },
+
+
+  /**
+      * Parse the time to string
+      * @param {(Object|string|number)} time
+      * @param {string} cFormat
+      * @returns {string}
+      */
+  parseTime: function parseTime(time, cFormat) {
+    if (arguments.length === 0) {
+      return null;
+    }
+    var format = cFormat || '{y}-{m}-{d} {h}:{i}:{s}';
+    var date;
+    if (typeof time === 'object') {
+      date = time;
+    } else {
+      if (typeof time === 'string' && /^[0-9]+$/.test(time)) {
+        time = parseInt(time);
+      }
+      if (typeof time === 'number' && time.toString().length === 10) {
+        time = time * 1000;
+      }
+      date = new Date(time);
+    }
+    var formatObj = {
+      y: date.getFullYear(),
+      m: date.getMonth() + 1,
+      d: date.getDate(),
+      h: date.getHours(),
+      i: date.getMinutes(),
+      s: date.getSeconds(),
+      a: date.getDay() };
+
+    var time_str = format.replace(/{(y|m|d|h|i|s|a)+}/g, function (result, key) {
+      var value = formatObj[key];
+      // Note: getDay() returns 0 on Sunday
+      if (key === 'a') {
+        return ['日', '一', '二', '三', '四', '五', '六'][value];
+      }
+      if (result.length > 0 && value < 10) {
+        value = '0' + value;
+      }
+      return value || 0;
+    });
+    return time_str;
+  },
+
+  /**
+      * @param {number} time
+      * @param {string} option
+      * @returns {string}
+      */
+  formatTime: function formatTime(time, option) {
+    if (('' + time).length === 10) {
+      time = parseInt(time) * 1000;
+    } else {
+      time = +time;
+    }
+    var d = new Date(time);
+    var now = Date.now();
+
+    var diff = (now - d) / 1000;
+
+    if (diff < 30) {
+      return '刚刚';
+    } else if (diff < 3600) {
+      // less 1 hour
+      return Math.ceil(diff / 60) + '分钟前';
+    } else if (diff < 3600 * 24) {
+      return Math.ceil(diff / 3600) + '小时前';
+    } else if (diff < 3600 * 24 * 2) {
+      return '1天前';
+    }
+    if (option) {
+      return parseTime(time, option);
+    } else {
+      return (
+        d.getMonth() +
+        1 +
+        '月' +
+        d.getDate() +
+        '日' +
+        d.getHours() +
+        '时' +
+        d.getMinutes() +
+        '分');
+
+    }
+  },
+  /**
+      * @param {string} type
+      * @returns {Date}
+      */
+  getTime: function getTime(type) {
+    if (type === 'start') {
+      return new Date().getTime() - 3600 * 1000 * 24 * 90;
+    } else {
+      return new Date(new Date().toDateString());
+    }
+  },
+
+  // 记录本地足迹
+  // setTrace(item) {
+  // 	let list = uni.getStorageSync('kxTraceList');
+  // 	if (list) {
+  // 		list = JSON.parse(list)
+  // 	} else {
+  // 		list = {}
+  // 	}
+  // 	console.log('存入足迹')
+  // 	// 判断该记录书是否存在
+  // 	let time = new Date().getTime()
+  // 	let id = item.code
+  // 	item.time = time
+  // 	list[id] = item
+  // 	uni.setStorageSync('kxTraceList', JSON.stringify(list));
+  // },
+  // // 获取足迹
+  // getTrace() {
+  // 	let list = uni.getStorageSync('kxTraceList');
+  // 	if (list) {
+  // 		return (JSON.parse(list))
+  // 	} else {
+  // 		return []
+  // 	}
+
+  // },
+  // // 清除所有足迹
+  // clearTrace() {
+  // 	uni.removeStorageSync('kxTraceList');
+  // },
+
+  // 支付宝支付
+  AliPay: function AliPay(strData, callback, failFun) {
+    if (!strData) {
+      uni.showToast({
+        icon: 'none',
+        title: '支付参数无效' });
+
+      return;
+    }
+    uni.requestPayment({
+      provider: "alipay",
+      orderInfo: strData,
+      success: function success(res) {
+        plus.nativeUI.toast('支付成功');
+        if (callback) callback();
+      },
+      fail: function fail(res) {
+        if (failFun) {
+          failFun();
+          return;
+        }
+        uni.showToast({
+          title: '支付失败',
+          icon: "none",
+          duration: 2000,
+          complete: function complete() {
+            uni.redirectTo({
+              url: '/pages/features/order/order?current=1' });
+
+          } });
+
+      } });
+
+  },
+
+  // 微信支付
+  WxPay: function WxPay(orderinfo, callback, failFun) {
+    if (!orderinfo) {
+      uni.showToast({
+        icon: 'none',
+        title: '支付参数无效' });
+
+      return;
+    }
+    // console.log(JSON.stringify(orderinfo));
+    uni.requestPayment({
+      provider: "wxpay",
+      timeStamp: orderinfo.timestamp,
+      nonceStr: orderinfo.noncestr,
+      package: orderinfo.package,
+      signType: "MD5",
+      paySign: orderinfo.paySign,
+      orderInfo: {
+        appid: orderinfo.appid,
+        noncestr: orderinfo.noncestr,
+        package: orderinfo.package,
+        partnerid: orderinfo.mchid,
+        prepayid: orderinfo.prepayid,
+        timestamp: orderinfo.timestamp,
+        sign: orderinfo.sign },
+
+      success: function success(res) {
+        plus.nativeUI.toast('支付成功');
+        if (callback) callback();
+      },
+      fail: function fail(res) {
+        console.log(JSON.stringify(res));
+        if (failFun) {
+          failFun();
+          return;
+        }
+        uni.showToast({
+          title: '支付失败',
+          icon: "none",
+          duration: 2000,
+          complete: function complete() {
+            uni.redirectTo({
+              url: '/pages/features/order/order?current=1' });
+
+          } });
+
+      } });
+
+  },
+  // 判断是否可以指纹解锁
+  // 判断当前机型是否支持指纹
+  checkFinger: function checkFinger() {
+    if (!plus.fingerprint.isSupport()) {
+      plus.nativeUI.toast('此设备不支持指纹识别');
+      // this.supportFinger = false;
+      return false;
+    } else if (!plus.fingerprint.isKeyguardSecure()) {
+      plus.nativeUI.toast('此设备未设置密码锁屏');
+      // this.supportFinger = false;
+      return false;
+    } else if (!plus.fingerprint.isEnrolledFingerprints()) {
+      plus.nativeUI.toast('此设备未录入指纹');
+      // this.supportFinger = false;
+      return false;
+    } else {
+      // this.supportFinger = true;
+      return true;
+    }
+
+  },
+  // 是否微信浏览器
+  is_weixn: function is_weixn() {
+    var ua = navigator.userAgent.toLowerCase();
+    if (ua.match(/MicroMessenger/i) == "micromessenger") {
+      return true;
+    } else {
+      return false;
+    }
+  },
+  // 是否受过权
+  // 返回code
+  ifAuth: function ifAuth(success) {
+    var url = window.location.href;
+    var s = url.match(/code=(.*)&state/);
+    if (s) {
+      // 是授权后的页面,则做opnegid判断 使用code获取pid
+      // return s[1]
+      // 换取oid
+      success(s[1]);
+    } else {
+      // 不是授权的页面，重定向进行授权
+
+      this.wxauth();
+    }
+  },
+
+  // wx授权跳转
+  wx_auth: function wx_auth() {
+    // alert(1)
+    var set = {
+      appid: _SET.default.wx_appid, //测试环境
+      redirect_uri: _SET.default.wx_redirect_url };
+
+    window.location.href = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=' + set.appid + '&redirect_uri=' +
+    set.redirect_uri + '&response_type=code&scope=snsapi_userinfo&state=1#wechat_redirect';
+  } };var _default =
+
+
+Utils;exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ })
 

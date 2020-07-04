@@ -3,6 +3,17 @@
 		<tui-skeleton v-if="skeletonShow" backgroundColor="#f9f9f9" skeletonBgColor="#efefef" borderRadius="0rpx"></tui-skeleton>
 		<view class="pages tui-skeleton">
 			<!-- <view class="uni-padding-wrap"> -->
+			<tuiNav :isCustom="true">
+				<view class="flex flex_center" style="height: 88rpx;">
+					<view  style="height: 88rpx;width: 88rpx;" class="flex flex_center" @tap="_back">
+						<view class="cm_back  flex flex_center">
+							<text class="iconfont icon-fanhui2"></text>
+						</view>
+					</view>
+					
+					<view class="f1"></view>
+				</view>
+			</tuiNav>
 			<view class="page-section swiper tui-skeleton-rect">
 				<!-- <view class="page-section-spacing"> -->
 				<swiper class="swiper" :indicator-dots="true" :autoplay="true">
@@ -11,11 +22,11 @@
 					</block>
 				</swiper>
 				<!-- </view> -->
-				<view class="bar flex flex_y flex_center" v-if="goods.is_activity==1"> 
+				<!-- <view class="bar flex flex_y flex_center" v-if="goods.is_activity==1"> 
 					<view class="acountTit">{{activityInfo.title}}</view>
 					<view  class="acountConten flex  flex_center" style="margin-top: 10rpx;">
 						<view class="price">{{goods.project_raise_price}}</view>
-						<view class="price delete">{{goods.project_price}}</view>
+						<view class="price delete">321312</view>
 						<view class="f1"></view>
 					</view>
 					<view  class="aside flex flex_y flex_center"  >
@@ -26,73 +37,62 @@
 							<text class="f1" style="color: #ED754B;margin-top: 14rpx;"></text>	
 						</view>
 					</view>
-				</view>
+				</view> -->
 			</view>
 
 			<view class="boxs box1">
 				<view class="flex titleBox tui-skeleton-fillet" v-if="goods.is_activity==0">
 					<!-- <text class="cm_text">{{ goods.auction_count == 0 ? '起拍价' : '最新出价' }}</text> -->
 					<text class="cm_prize">￥{{ goods.project_raise_price }}</text>
-					<text class="cm_prize_delete" v-if="goods.parameter_type == 0">￥{{ goods.project_price }}</text>
+					<text class="cm_delete">￥{{ goods.project_price }}</text>
 				</view>
-				<view class="cm_title tui-skeleton-fillet" style="line-height: 40rpx;">
+			<!-- 	<view class="cm_title tui-skeleton-fillet" style="line-height: 40rpx;">
 					<text class="tags" v-if="goods.is_activity == 1">限时抢购</text>
 					{{ goods.project_name }}
-				</view>
+				</view> -->
 				
 				<view class="logoBox flex  flex_center">
-					<image src="../../../static/img/logo.jpg" mode="widthFix" class="logo"></image>
+					<image src="../../../static/image/logo.png" mode="widthFix" class="logo"></image>
 					<view class=" cm_title   name">洁利来</view>
 					<view class="blank"></view>
-					
 					<text class="f1">第一家智能厨卫上市公司</text>
 				</view>
 			</view>
 
 
 			<view class="boxs box4" >
-				<view class="flex flex_center cells" style="margin-top: 20rpx;">
-					<view class="f1 cm_des">发货地</view>
-					<Icon name="position-fill" color="#333" :size="16" style="margin-right: 4rpx;"></Icon>
-					<text class="">{{business.shipments_address.area}}</text>
+				<view class="flex flex_center cells" >
+					<view class=" cm_des " style="width: 20%;">发货</view>
+					<text class="f1">{{business.shipments_address.area}}</text>
 				</view>
 				<view class="flex flex_center cells">
-					<view class="f1 flex flex_center">
-						<image src="../../../static/img/choose.png" mode="widthFix" style="width: 40rpx;height: 40rpx;"></image>
-						<text class="cm_des" style="margin-left: 8rpx;">上市公司</text>
+					<view class=" cm_des " style="width: 20%;">服务</view>
+					<view class=" flex flex_center" style="margin-right: 20rpx;">
+						<image src="../../../static/image/xq_fw.png" mode="widthFix" style="width: 40rpx;height: 40rpx;"></image>
+						<text class="cm_des" style="margin-left: 8rpx;">上门安装</text>
 					</view>
-					<view class="f1 flex flex_center">
-						<image src="../../../static/img/choose.png" mode="widthFix" style="width: 40rpx;height: 40rpx;"></image>
+					<view class=" flex flex_center" style="margin-right: 20rpx;">
+						<image src="../../../static/image/xq_fw.png" mode="widthFix" style="width: 40rpx;height: 40rpx;"></image>
 						<text class="cm_des" style="margin-left: 8rpx;">正品保障</text>
 					</view>
-					<view class="f1 flex flex_center">
-						<image src="../../../static/img/choose.png" mode="widthFix" style="width: 40rpx;height: 40rpx;"></image>
+					<view class=" flex flex_center" style="margin-right: 20rpx;">
+						<image src="../../../static/image/xq_fw.png" mode="widthFix" style="width: 40rpx;height: 40rpx;"></image>
 						<text class="cm_des" style="margin-left: 8rpx;">全国联保</text>
 					</view>
-					<view class="f1 flex flex_center">
-						<image src="../../../static/img/choose.png" mode="widthFix" style="width: 40rpx;height: 40rpx;"></image>
-						<text class="cm_des" style="margin-left: 8rpx;">7天退换</text>
-					</view>
-					<!-- <view class="f1">假一赔十，十年质保</view>
-					<Icon name="arrowright" color="#999" :size="16"></Icon> -->
+					<view class="f1"></view>
 				</view>
 			</view>
 			<view class="boxs box3">
+				<view class="cm_title"></view>
 				<view class="picBox flex  flex_center">
 					<image :src="business.shop_logo" mode="aspectFill" class="avatar tui-skeleton-rect"></image>
 					<view class="f1 tui-skeleton-fillet">
 						<view class=" cm_title   name">{{ business.shop_name }}</view>
-						<!-- <view class="flex cm_t_24 text">4| 累计收益(元) 0</view> -->
 					</view>
-					<navigator  url="/pages/main/main" open-type="switchTab" class="cm_des">进店逛逛</navigator>
-					
-					<Icon name="arrowright" color="#999" :size="16"></Icon>
-					<!-- <button class=" jd">进店逛逛</button> -->
+					<navigator  url="/pages/main/main" open-type="switchTab" class="cm_des">2016-12-25</navigator>
 				</view>
 
 			</view>
-			<!-- {{addPrize}} -->
-
 			<view class="commonTit flex flex_center">
 				<view class="blank"></view>
 				<view class="cm_title">商品详情</view>
@@ -101,30 +101,14 @@
 			<view>
 				<block v-for="(item, index) in details_img" :key="index"><image :src="item" mode="widthFix" style="width: 100%;"></image></block>
 			</view>
-			<view class="footer flex flex _center" v-if="!skeletonShow">
-				<view class="flex  flex_y flex_center mes"  @tap="_phone">
-					<image src="../../../static/img/xq_kf.png" mode="widthFix" style="width: 50rpx;height: 50rpx;"></image>
-					<text class="cm_des " >客服</text>
-				</view>
-				<view class="flex  flex_y flex_center mes"  @tap="cart">
-					<image src="../../../static/img/xq_gwc.png" mode="widthFix" style="width: 50rpx;height: 50rpx;"></image>
-					<text class="cm_des ">购物车</text>
-				</view>
-				<view class="f1 btnBox flex flex_center" style="margin-left: 20rpx;">
-					
-					<button class="btns" @tap="_next" :disabled="goods.project_status != 1">加入购物车</button>
-					<view class="btns hot flex flex_y flex_center" v-if="goods.is_activity==1?true:false" @tap="_next">
-						<view class="cm_t_20">马上抢</view>
-						<view class="" style="margin-top: 8rpx;">折后￥{{goods.project_raise_price}}</view>
-					</view>
-					<button class="btns sure" @tap="_next" v-else :disabled="goods.project_status != 1" >立即购买</button>				
-				</view>
+			<view class="footer flex flex_center" v-if="!skeletonShow">
+				<button class="cm_btn sure"  @tap="_next"  >购买</button>			
 			</view>
 		</view>
 		<tui-modal :show="modal" @click="handleClick" @cancel="hide" :content="content" :maskClosable="false" color="#333" :size="32"></tui-modal>
 
 		<xhStoreParamsSKU
-			:platform="platform"
+			
 			ref="params"
 			:preImg="banners[0]"
 			:title="goods.project_name"
@@ -152,9 +136,9 @@
 
 <script>
 import tuiSkeleton from '@/components/tui-skeleton/tui-skeleton';
-import tuiCountdown from '@/components/countdown/countdown';
+// import tuiCountdown from '@/components/countdown/countdown';
 import tuiNumberbox from '@/components/numberbox/numberbox';
-import CountCalc from '@/components/uni-countdown.vue'
+// import CountCalc from '@/components/uni-countdown.vue'
 const global_Set_jll = uni.getStorageSync('global_Set_jll');
 import xhStoreParamsSKU from '@/components/xhStoreParamsSKU/xhStoreParamsSKU';
 import { mapState, mapMutations } from 'vuex';
@@ -205,9 +189,9 @@ export default {
 	},
 	components: {
 		tuiSkeleton,
-		tuiCountdown,
+		// tuiCountdown,
 		// bestPaymentPassword,
-		CountCalc,
+		// CountCalc,
 		tuiNumberbox,
 		xhStoreParamsSKU
 	},
@@ -216,15 +200,12 @@ export default {
 
 		this._loadData('refresh');
 		let that = this
-		uni.getSystemInfo({
-			success(res) {
-				console.log(111,res)
-				// if(res.platform == 'ios'){
-				// 	that.platform = 'ios'
-				// }
-				that.platform = res.platform
-			}
-		})
+		// uni.getSystemInfo({
+		// 	success(res) {
+		
+		// 		that.platform = res.platform
+		// 	}
+		// })
 		
 	},
 	onUnload() {
@@ -272,6 +253,11 @@ export default {
 		}
 	},
 	methods: {
+		_back(){
+			uni.navigateBack({
+				
+			})
+		},
 		cart(){
 			uni.switchTab({
 				url: '/pages/cart/cart'
@@ -367,7 +353,7 @@ export default {
 		// 购买
 		_buy(data) {
 			console.log(222, data);
-			if (!this.hasLogin) {
+			if (false) {
 				this.content = '请您先登录';
 				this.action = 'login'; ///features/authentication/authentication'
 				this.modal = true;
@@ -568,7 +554,7 @@ export default {
 				top: 0;
 				height: 120rpx;
 				padding: 0 40rpx 0 60rpx;
-				background: url(../../../static/img/right.png) left top/cover no-repeat;
+				// background: url(../../../static/img/right.png) left top/cover no-repeat;
 				color: #ED754B;
 			}
 		}
@@ -713,7 +699,7 @@ export default {
 		}
 	}
 	.box4 {
-		padding: 0 20rpx;
+		padding: 20rpx;
 		.cells {
 			height: 72rpx;
 			line-height: 72rpx;
@@ -787,7 +773,12 @@ export default {
 			
 		}
 		.cm_des{
-			font-size: 20rpx;
+			font-size: 20rpx; 
+		}
+		.sure{
+			margin-top: 0;
+			width: 100%;
+			color: #fff;
 		}
 	}
 }
@@ -878,20 +869,7 @@ export default {
 	right: 40rpx;
 	bottom: 338rpx;
 }
-.btns.sure{
-	background: #50AB9F
-}
-.btns.hot{
-	background-color: #E93F37;
-}
-.btns[disabled="true"]{
-	// color: red;
-	background-color: #d6d293;
-}
-.sure[disabled="true"]{
-	// color: red;
-	background-color: #8aacad;
-}
+
 
 /*底部抽屉样式 start*/
 </style>

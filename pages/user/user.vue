@@ -242,12 +242,12 @@ export default {
 			if (callback) callback();
 		},
 		_href(val) {
-			if (!this.hasLogin) {
-				this.content = '请您先登录';
-				this.action = 'login'; ///features/authentication/authentication'
-				this.modal = true;
-				return;
-			}
+			// if (!this.hasLogin) {
+			// 	this.content = '请您先登录';
+			// 	this.action = 'login'; ///features/authentication/authentication'
+			// 	this.modal = true;
+			// 	return;
+			// }
 			switch (val) {
 				case 'set':
 					uni.navigateTo({

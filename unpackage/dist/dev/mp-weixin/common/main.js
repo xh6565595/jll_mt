@@ -157,20 +157,20 @@ _App.default.mpType = 'app';
 
 
 // 全局组件
-var LoadMore = function LoadMore() {__webpack_require__.e(/*! require.ensure | components/uni-load-more/uni-load-more */ "components/uni-load-more/uni-load-more").then((function () {return resolve(__webpack_require__(/*! @/components/uni-load-more/uni-load-more.vue */ 86));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};
-_vue.default.component('LoadMore', LoadMore);var tuiButton = function tuiButton() {__webpack_require__.e(/*! require.ensure | components/button/button */ "components/button/button").then((function () {return resolve(__webpack_require__(/*! @/components/button/button.vue */ 93));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};
+var LoadMore = function LoadMore() {__webpack_require__.e(/*! require.ensure | components/uni-load-more/uni-load-more */ "components/uni-load-more/uni-load-more").then((function () {return resolve(__webpack_require__(/*! @/components/uni-load-more/uni-load-more.vue */ 79));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};
+_vue.default.component('LoadMore', LoadMore);var tuiButton = function tuiButton() {__webpack_require__.e(/*! require.ensure | components/button/button */ "components/button/button").then((function () {return resolve(__webpack_require__(/*! @/components/button/button.vue */ 86));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};
 
 
-_vue.default.component('tuiButton', tuiButton);var cuCustom = function cuCustom() {__webpack_require__.e(/*! require.ensure | components/cu-custom/cu-custom */ "components/cu-custom/cu-custom").then((function () {return resolve(__webpack_require__(/*! @/components/cu-custom/cu-custom.vue */ 100));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};
+_vue.default.component('tuiButton', tuiButton);var tuiNav = function tuiNav() {__webpack_require__.e(/*! require.ensure | components/tui-navigation-bar/tui-navigation-bar */ "components/tui-navigation-bar/tui-navigation-bar").then((function () {return resolve(__webpack_require__(/*! @/components/tui-navigation-bar/tui-navigation-bar */ 93));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};
 
 
-_vue.default.component('cu-custom', cuCustom);var Icon = function Icon() {__webpack_require__.e(/*! require.ensure | components/icon/icon */ "components/icon/icon").then((function () {return resolve(__webpack_require__(/*! @/components/icon/icon */ 107));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};
+_vue.default.component('tuiNav', tuiNav);var Icon = function Icon() {__webpack_require__.e(/*! require.ensure | components/icon/icon */ "components/icon/icon").then((function () {return resolve(__webpack_require__(/*! @/components/icon/icon */ 100));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};
 
 
-_vue.default.component('Icon', Icon);var tuiModal = function tuiModal() {__webpack_require__.e(/*! require.ensure | components/modal/modal */ "components/modal/modal").then((function () {return resolve(__webpack_require__(/*! @/components/modal/modal */ 114));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};
+_vue.default.component('Icon', Icon);var tuiModal = function tuiModal() {__webpack_require__.e(/*! require.ensure | components/modal/modal */ "components/modal/modal").then((function () {return resolve(__webpack_require__(/*! @/components/modal/modal */ 107));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};
 
 
-_vue.default.component('tuiModal', tuiModal);var tuiTag = function tuiTag() {__webpack_require__.e(/*! require.ensure | components/tag/tag */ "components/tag/tag").then((function () {return resolve(__webpack_require__(/*! @/components/tag/tag */ 121));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};
+_vue.default.component('tuiModal', tuiModal);var tuiTag = function tuiTag() {__webpack_require__.e(/*! require.ensure | components/tag/tag */ "components/tag/tag").then((function () {return resolve(__webpack_require__(/*! @/components/tag/tag */ 114));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};
 
 
 _vue.default.component('tuiTag', tuiTag);

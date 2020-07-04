@@ -4,7 +4,7 @@
 			<view v-if="list.length > 0">
 				<block v-for="(item, index) in list" :key="index">
 					<view class="proItemsBox ">
-						<view class="cm_bdb flex  flex_center proItemTop">
+						<view class=" flex  flex_center proItemTop cm_bdb">
 							<image :src="item.shop_logo" mode="widthFix" class="shopLogo"></image>
 							<view class="f1 cm_tex_l">{{item.shop_name}}</view>
 							<!-- <view class="cm_des">{{ item.create_time }}</view> -->
@@ -14,18 +14,23 @@
 							<navigator :url="'/pages/features/order/orderDetail/orderDetail?code=' + item.order_code" class="picBox flex  flex_center">
 								<!-- <view class="picBox flex  flex_center" >						 -->
 								<image :src="it.skus_img" mode="aspectFill" class="avatar" lazy-load="true"></image>
-								<view class="f1" style="height: 150rpx;">
-									<view class=" cm_title   name cm_ellipsis2 tui-skeleton-fillet">{{ it.order_name }}</view>
-									<view class="cm_des flex flex_center" style="justify-content: flex-start;">
-										<tui-tag shape="circle" size="mini" type="gray" class=" stags">{{ it.skus_name }}</tui-tag>
+								<view class="f1" >
+									<view class="flex _flex_center">
+										<view class="f1 cm_title   name cm_ellipsis2 tui-skeleton-fillet">{{ it.order_name }}</view>
+										<view class="flex flex_center">
+											<text class="iconfont icon-guanbi gray"></text>
+											<text class="gray">1</text>
+										</view>
+									</view>
+									
+									<view class="special flex flex_center" style="justify-content: flex-start;">
+										<!-- <tui-tag shape="circle" size="mini" type="gray" class=" stags">{{ it.skus_name }}</tui-tag> -->
+										<text class="cm_des">{{ it.skus_name }}</text>
 									</view>
 									<view class=" tui-skeleton-fillet flex flex_center" style="margin-top: 10rpx;">
-										<text class="cm_prize cm_t_32">￥{{ it.alone_price }}</text>
+										<text class=" ">￥{{ it.alone_price }}</text>
 										<view class="f1"></view>
-										<view class="cm_des">
-											<Icon name="shut" :size="14" color="#999"></Icon>
-											{{ it.project_num }}
-										</view>
+										
 									</view>
 								</view>
 								<!-- </view> -->
@@ -40,10 +45,10 @@
 							<view class="f1">服务费用：</view>
 							<view class="">{{ '￥'+item.service_total_price }}</view>
 						</view> -->
-						<view class=" tui-skeleton-fillet flex flex_center " style="height: 80rpx;">
+						<view class=" tui-skeleton-fillet flex flex_center cm_bdb " style="height: 80rpx;">
 							<view class="f1"></view>
 							<view class="cm_des">共 {{ item.goods_num }} 件商品</view>
-							<text class=" cm_t_32 " style="margin-left: 24rpx;">合计：￥{{ item.pay_price }}</text>
+							<view class=" cm_t_32  " style="margin-left: 24rpx;">合计：<text class="cm_price">￥{{ item.pay_price }}</text></view>
 						</view>
 						<view class="flex flex_center contentBox ">
 							<view class="f1"></view>

@@ -2,11 +2,11 @@
   "pages": [
     "pages/index/index",
     "pages/main/main",
-    "pages/classify/classifies",
     "pages/user/user",
     "pages/main/details/details",
     "pages/activity/activity",
-    "pages/h5share/h5share"
+    "pages/h5share/h5share",
+    "pages/features/createOrder/createOrder"
   ],
   "subPackages": [],
   "window": {
@@ -48,9 +48,10 @@
   "usingComponents": {
     "load-more": "/components/uni-load-more/uni-load-more",
     "tui-button": "/components/button/button",
-    "cu-custom": "/components/cu-custom/cu-custom",
+    "tui-nav": "/components/tui-navigation-bar/tui-navigation-bar",
     "icon": "/components/icon/icon",
     "tui-modal": "/components/modal/modal",
     "tui-tag": "/components/tag/tag"
-  }
+  },
+  "sitemapLocation": "sitemap56.json"
 }
