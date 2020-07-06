@@ -70,59 +70,50 @@
 <script>
 import { mapState } from 'vuex';
 const global_Set_jll = uni.getStorageSync('global_Set_jll');
-
+import  { baseMixins } from '@/utils/baseMixins.js';
 export default {
 	data() {
 		return {
 			banners: [],
-			list: [],
-			loadStatus: 'more',
+			hasRow:true,
+			
 			formParams: {
 				key: '',
 				type: 4,
 				pageIndex: 1,
 				pageSize: 10
-			},
-			loginParams: {
-				username: '',
-				password: '',
-				vilidate: '000000'
-			},
-			classList: '',
-			ifActivity:global_Set_jll.isLimitActivity
+			}
 		};
 	},
 	components: {
 		
 	},
 	computed: mapState(['hasLogin']),
-	
-	// 下拉刷新
-	onPullDownRefresh() {
-		this.formParams.pageIndex = 1;
-		this.list = [];
-		this._loadData('refresh', () => {
-			uni.stopPullDownRefresh();
-		});
-	},
-	// 上拉加载
-	onReachBottom() {
-		if (this.loadStatus == 'noMore') {
-			return;
-		}
-		this.formParams.pageIndex += 1;
-		this.loadStatus = 'loading';
-		this._loadData('more', () => {
-			// this.loadStatus = 'more'
-		});
-	},
+	mixins:[baseMixins],
+	// // 下拉刷新
+	// onPullDownRefresh() {
+	// 	this.formParams.pageIndex = 1;
+	// 	this.list = [];
+	// 	this._loadData('refresh', () => {
+	// 		uni.stopPullDownRefresh();
+	// 	});
+	// },
+	// // 上拉加载
+	// onReachBottom() {
+	// 	if (this.loadStatus == 'noMore') {
+	// 		return;
+	// 	}
+	// 	this.formParams.pageIndex += 1;
+	// 	this.loadStatus = 'loading';
+	// 	this._loadData('more', () => {
+	// 		// this.loadStatus = 'more'
+	// 	});
+	// },
 	onLoad() {
 		let that = this;
-		// const global_Set_jll = uni.getStorageSyglobal_Set_jll_Set_jll');
 		this.banners = global_Set_jll.banerList;
-		// console.log(this.banners)
-		this.classList = global_Set_jll.classList;
-		this._loadData('refresh');
+		// this.classList = global_Set_jll.classList;
+		// this._loadData('refresh');
 	},
 	onShow() {
 		// this.formParams.pageIndex = 1;

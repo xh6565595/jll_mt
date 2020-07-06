@@ -134,7 +134,7 @@
 		justify-content: center;
 		flex-wrap: wrap;
 		position: relative;
-		background: red;
+		/* background: red; */
 	}
 
 	.flex-box .hide-input {
@@ -150,13 +150,13 @@
 
 	.flex-box .item {
 		position: relative;
-		width: 100rpx;
-		height: 100rpx;
+		width: 80rpx;
+		height: 80rpx;
 		margin-right: 18rpx;
 		font-size: 70rpx;
 		font-weight: bold;
 		color: #333333;
-		line-height: 100rpx;
+		line-height: 80rpx;
 	}
 
 	.flex-box .item:last-child {

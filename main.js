@@ -29,7 +29,7 @@ if(!uni.getStorageSync('global_Set_jll')){
 const UI = {
 	toast: function(text, duration, success) {
 
-		// #ifndef APP-PLUS
+		// #ifdef MP
 		uni.showToast({
 			title: text,
 			icon: success ? 'success' : 'none',
@@ -37,23 +37,21 @@ const UI = {
 		})
 		// #endif
 		// #ifdef APP-PLUS
-
-		if (platform == "android") {
-			plus.nativeUI.toast(text, {
-				style: 'inline',
-				icon: '/static/img/logo.png',
-				iconWidth: '20px',
-				iconHeight: '20px',
-				
-			})
-		} else {
-			plus.nativeUI.toast(text)
-		}
-
+			if (platform == "android") {
+				plus.nativeUI.toast(text, {
+					style: 'inline',
+					icon: '/static/img/logo.png',
+					iconWidth: '20px',
+					iconHeight: '20px',
+					
+				})
+			} else {
+				plus.nativeUI.toast(text)
+			}
 		// #endif
 	},
 	showloading: function(text) {
-		// #ifndef APP-PLUS
+		// #ifdef MP
 		uni.showLoading({
 			title: text
 		})
@@ -68,7 +66,7 @@ const UI = {
 		// #endif
 	},
 	hideloading: function() {
-		// #ifndef APP-PLUS
+		// #ifdef MP
 		uni.hideLoading()
 		// #endif
 		// #ifdef APP-PLUS

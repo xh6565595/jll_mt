@@ -346,9 +346,9 @@ function upx2px(number, newDeviceWidth) {
   result = Math.floor(result + EPS);
   if (result === 0) {
     if (deviceDPR === 1 || !isIOS) {
-      return 1;
+      result = 1;
     } else {
-      return 0.5;
+      result = 0.5;
     }
   }
   return number < 0 ? -result : result;
@@ -421,7 +421,10 @@ var protocols = {
 
 
 var todos = [
-'vibrate'];
+'vibrate',
+'preloadPage',
+'unPreloadPage',
+'loadSubPackage'];
 
 var canIUses = [];
 
@@ -757,7 +760,7 @@ function initData(vueOptions, context) {
     try {
       data = data.call(context); // 支持 Vue.prototype 上挂的数据
     } catch (e) {
-      if (Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
+      if (Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
         console.warn('根据 Vue 的 data 函数初始化小程序 data 失败，请尽量确保 data 函数中不访问 vm 对象，否则可能影响首次数据渲染速度。', data);
       }
     }
@@ -1565,9 +1568,9 @@ uni$1;exports.default = _default;
 /***/ }),
 
 /***/ 11:
-/*!*****************************************!*\
-  !*** G:/work/马桶福利购/utils/http/index.js ***!
-  \*****************************************/
+/*!********************************************!*\
+  !*** E:/mywork/jll_mt/utils/http/index.js ***!
+  \********************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1631,9 +1634,9 @@ exports.default = _default;
 /***/ }),
 
 /***/ 12:
-/*!*********************************************!*\
-  !*** G:/work/马桶福利购/utils/http/interface.js ***!
-  \*********************************************/
+/*!************************************************!*\
+  !*** E:/mywork/jll_mt/utils/http/interface.js ***!
+  \************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1826,16 +1829,16 @@ function _reslog(res) {
 /***/ }),
 
 /***/ 13:
-/*!************************************!*\
-  !*** G:/work/马桶福利购/store/index.js ***!
-  \************************************/
+/*!***************************************!*\
+  !*** E:/mywork/jll_mt/store/index.js ***!
+  \***************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ 2));
-var _vuex = _interopRequireDefault(__webpack_require__(/*! vuex */ 14));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _toConsumableArray(arr) {return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread();}function _nonIterableSpread() {throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");}function _unsupportedIterableToArray(o, minLen) {if (!o) return;if (typeof o === "string") return _arrayLikeToArray(o, minLen);var n = Object.prototype.toString.call(o).slice(8, -1);if (n === "Object" && o.constructor) n = o.constructor.name;if (n === "Map" || n === "Set") return Array.from(n);if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);}function _iterableToArray(iter) {if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter);}function _arrayWithoutHoles(arr) {if (Array.isArray(arr)) return _arrayLikeToArray(arr);}function _arrayLikeToArray(arr, len) {if (len == null || len > arr.length) len = arr.length;for (var i = 0, arr2 = new Array(len); i < len; i++) {arr2[i] = arr[i];}return arr2;}function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}
-
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ 2));
+var _vuex = _interopRequireDefault(__webpack_require__(/*! vuex */ 14));
+var _SET = _interopRequireDefault(__webpack_require__(/*! @/SET.js */ 15));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}
 _vue.default.use(_vuex.default);
 
 var store = new _vuex.default.Store({
@@ -1845,7 +1848,7 @@ var store = new _vuex.default.Store({
             */
     forcedLogin: false,
     hasLogin: false,
-    userInfo: {}, //用户微信获得基本信息
+    userInfo: '', //用户微信获得基本信息
     accountInfo: {}, //账户基本信息
     merchantInfo: {}, //店铺基本信息
     levelAccount: {}, //渠道个人信息
@@ -1859,6 +1862,9 @@ var store = new _vuex.default.Store({
   mutations: {
     login: function login(state, userName) {
       console.log('login_STORE');
+      uni.showToast({
+        title: '登陆成功' });
+
       state.hasLogin = true;
     },
     logout: function logout(state) {
@@ -1867,65 +1873,65 @@ var store = new _vuex.default.Store({
       state.merchantInfo = {}; //店铺基本信息
       state.levelAccount = {}; //渠道个人信息
     },
-    setRoleCode: function setRoleCode(state, info) {
-      // console.log('储存信息1')
-      state.currentRoleCode = info;
-    },
     setUserInfo: function setUserInfo(state, info) {
-      // console.log('储存信息1')
       state.userInfo = _objectSpread({}, info);
     },
     setAccountInfo: function setAccountInfo(state, info) {
       // console.log('储存信息2')
       state.accountInfo = _objectSpread({}, info);
-    },
-    setConfig: function setConfig(state, info) {
-      // console.log('储存信息2')
-      state.config = _objectSpread({}, info);
-    },
-    setMerchantInfo: function setMerchantInfo(state, info) {
-      // console.log('储存信息2')
-      state.merchantInfo = _objectSpread({}, info);
-    },
-    setCurrentChannel: function setCurrentChannel(state, info) {
-      state.currentChannel = info;
-    },
-    setLevelAccountInfo: function setLevelAccountInfo(state, info) {
-      state.levelAccount = info;
-    },
-    addCard: function addCard(state, item) {
-
-      state.cards = Object.assign(state.cards, item);
-      // console.log(state.cards)
-    },
-    creatOrder: function creatOrder(state, items) {
-      state.currentOrder = _toConsumableArray(items);
-      // debugger
-    },
-    completeOrder: function completeOrder(state) {
-      state.currentOrder = new Array();
-    },
-    currenPro: function currenPro(state, items) {
-      state.currentPro = _objectSpread({}, items);
     } },
 
-  getters: {
-    cardsProduct: function cardsProduct(state) {
-      // console.log(state.cards)
-      // let arr = Object.values(state.cards)  不能用额
-      // let arr = Object.keys(state.cards) 
-      // let res = []
-      // arr.forEach(item=>{
-      // 	res.push(state.cards[item])
-      // })
-      // console.log(res)
-      // return res
-      return state.cards;
+
+  getters: {},
+
+
+  actions: {
+    // 用户登录
+    userLogin: function userLogin(_ref, token) {var state = _ref.state,commit = _ref.commit;
+      console.log(token);
+      try {
+        // uni.setStorageSync('access_token', token);
+        // 本地和状态管理器都需要储存登录状态
+        commit('login');
+        var that = this;
+        try {
+          if (token && !state.userInfo) {
+            // console.log(111)
+            uni.request({
+              url: _SET.default.baseUrl + '/api/Consumer/Get', //仅为示例，并非真实接口地址。
+              method: 'get',
+              data: {},
+              header: {
+                'Content-Type': 'application/json',
+                Authorization: token },
+
+              success: function success(res) {
+                // console.log(res)
+                var statusCode = res.statusCode;
+                if (statusCode == 200 && res.data.Success) {
+                  commit('setUserInfo', res.data.Data);
+                }
+              },
+              fail: function fail(err) {
+                uni.switchTab({
+                  url: '/pages/user/user' });
+
+              } });
+
+          }
+        } catch (e) {
+
+        }
+
+      } catch (e) {
+        // error
+      }
     } } });var _default =
 
 
 
 store;exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
 
@@ -2881,9 +2887,9 @@ var index_esm = {
 /***/ }),
 
 /***/ 15:
-/*!****************************!*\
-  !*** G:/work/马桶福利购/SET.js ***!
-  \****************************/
+/*!*******************************!*\
+  !*** E:/mywork/jll_mt/SET.js ***!
+  \*******************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2905,9 +2911,9 @@ var _default = {
 /***/ }),
 
 /***/ 16:
-/*!******************************************!*\
-  !*** G:/work/马桶福利购/utils/module/auth.js ***!
-  \******************************************/
+/*!*********************************************!*\
+  !*** E:/mywork/jll_mt/utils/module/auth.js ***!
+  \*********************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2925,6 +2931,17 @@ var Auth = { // code获取OpenId
       // handle:true
     }, ifLoad);
   },
+  // 微信自动注册
+  WxAutoRegiste: function WxAutoRegiste(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return _interface.default.request({
+      url: '/api/Authorize/WxAutoRegiste',
+      method: 'POST',
+      data: data
+      // handle:true
+    }, ifLoad);
+  },
+
+
   // 获取验证码
   getVerificateCode: function getVerificateCode(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
     return _interface.default.request({
@@ -3098,9 +3115,9 @@ Auth;exports.default = _default;
 /***/ }),
 
 /***/ 17:
-/*!**********************************************!*\
-  !*** G:/work/马桶福利购/utils/module/business.js ***!
-  \**********************************************/
+/*!*************************************************!*\
+  !*** E:/mywork/jll_mt/utils/module/business.js ***!
+  \*************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -4369,12 +4386,10 @@ if (true) {
   };
 
   formatComponentName = function (vm, includeFile) {
-    {
-      if(vm.$scope && vm.$scope.is){
-        return vm.$scope.is
-      }
-    }
     if (vm.$root === vm) {
+      if (vm.$options && vm.$options.__file) { // fixed by xxxxxx
+        return ('') + vm.$options.__file
+      }
       return '<Root>'
     }
     var options = typeof vm === 'function' && vm.cid != null
@@ -4409,7 +4424,7 @@ if (true) {
     if (vm._isVue && vm.$parent) {
       var tree = [];
       var currentRecursiveSequence = 0;
-      while (vm) {
+      while (vm && vm.$options.name !== 'PageBody') {
         if (tree.length > 0) {
           var last = tree[tree.length - 1];
           if (last.constructor === vm.constructor) {
@@ -4421,7 +4436,7 @@ if (true) {
             currentRecursiveSequence = 0;
           }
         }
-        tree.push(vm);
+        !vm.$options.isReserved && tree.push(vm);
         vm = vm.$parent;
       }
       return '\n\nfound in\n\n' + tree
@@ -9267,7 +9282,7 @@ function type(obj) {
 
 function flushCallbacks$1(vm) {
     if (vm.__next_tick_callbacks && vm.__next_tick_callbacks.length) {
-        if (Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
+        if (Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
             var mpInstance = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + vm._uid +
                 ']:flushCallbacks[' + vm.__next_tick_callbacks.length + ']');
@@ -9288,14 +9303,14 @@ function nextTick$1(vm, cb) {
     //1.nextTick 之前 已 setData 且 setData 还未回调完成
     //2.nextTick 之前存在 render watcher
     if (!vm.__next_tick_pending && !hasRenderWatcher(vm)) {
-        if(Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG){
+        if(Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG){
             var mpInstance = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + vm._uid +
                 ']:nextVueTick');
         }
         return nextTick(cb, vm)
     }else{
-        if(Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG){
+        if(Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG){
             var mpInstance$1 = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance$1.is || mpInstance$1.route) + '][' + vm._uid +
                 ']:nextMPTick');
@@ -9371,7 +9386,7 @@ var patch = function(oldVnode, vnode) {
     });
     var diffData = this.$shouldDiffData === false ? data : diff(data, mpData);
     if (Object.keys(diffData).length) {
-      if (Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
+      if (Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
         console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + this._uid +
           ']差量更新',
           JSON.stringify(diffData));
@@ -9541,9 +9556,10 @@ function getTarget(obj, path) {
   return getTarget(obj[key], parts.slice(1).join('.'))
 }
 
-function internalMixin(Vue) {
+function internalMixin(Vue ) {
 
-  Vue.config.errorHandler = function(err) {
+  Vue.config.errorHandler = function(err, vm, info) {
+    Vue.util.warn(("Error in " + info + ": \"" + (err.toString()) + "\""), vm);
     console.error(err);
     /* eslint-disable no-undef */
     var app = getApp();
@@ -9895,9 +9911,9 @@ function normalizeComponent (
 /***/ }),
 
 /***/ 21:
-/*!******************************************!*\
-  !*** G:/work/马桶福利购/static/defaultSet.js ***!
-  \******************************************/
+/*!*********************************************!*\
+  !*** E:/mywork/jll_mt/static/defaultSet.js ***!
+  \*********************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10173,10 +10189,10 @@ set;exports.default = _default;
 
 /***/ }),
 
-/***/ 210:
-/*!*****************************************************!*\
-  !*** G:/work/马桶福利购/components/tki-qrcode/qrcode.js ***!
-  \*****************************************************/
+/***/ 224:
+/*!********************************************************!*\
+  !*** E:/mywork/jll_mt/components/tki-qrcode/qrcode.js ***!
+  \********************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -11391,6 +11407,330 @@ QRCode;exports.default = _default;
 
 /***/ }),
 
+/***/ 28:
+/*!***************************************!*\
+  !*** E:/mywork/jll_mt/utils/utils.js ***!
+  \***************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _SET = _interopRequireDefault(__webpack_require__(/*! ../SET.js */ 15));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+var Utils = {
+  phoneCheck: function phoneCheck(value) {
+    var reg = /^1\d{10}$/;
+    var r = reg.test(value);
+    return r;
+  },
+  passCheck: function passCheck(val) {
+    var patrn = /^(\w){6,20}$/;
+    if (!patrn.exec(val)) return false;
+    return true;
+  },
+  // 银行卡校验
+  bankCardCheck: function bankCardCheck(val) {
+    var patrn = /^([1-9]{1})(\d{15}|\d{18})$/;
+    if (!patrn.test(val)) return false;
+    return true;
+  },
+  // 中文字符
+  chineseCheck: function chineseCheck(val) {
+    var patrn = /^[\u4E00-\u9FA5]{2,4}/;
+
+    if (!patrn.test(val)) return false;
+    return true;
+  },
+  // 银行卡数字加密
+  encryptBankCode: function encryptBankCode(val) {
+
+    var str = val.replace(/\s/g, '');
+    console.log(str);
+    var reg = /^(\d{4})\d+(\d{4})$/;
+    str.replace(reg, "$1 **** **** $2");
+    console.log(str);
+    return str;
+  },
+
+
+  /**
+      * Parse the time to string
+      * @param {(Object|string|number)} time
+      * @param {string} cFormat
+      * @returns {string}
+      */
+  parseTime: function parseTime(time, cFormat) {
+    if (arguments.length === 0) {
+      return null;
+    }
+    var format = cFormat || '{y}-{m}-{d} {h}:{i}:{s}';
+    var date;
+    if (typeof time === 'object') {
+      date = time;
+    } else {
+      if (typeof time === 'string' && /^[0-9]+$/.test(time)) {
+        time = parseInt(time);
+      }
+      if (typeof time === 'number' && time.toString().length === 10) {
+        time = time * 1000;
+      }
+      date = new Date(time);
+    }
+    var formatObj = {
+      y: date.getFullYear(),
+      m: date.getMonth() + 1,
+      d: date.getDate(),
+      h: date.getHours(),
+      i: date.getMinutes(),
+      s: date.getSeconds(),
+      a: date.getDay() };
+
+    var time_str = format.replace(/{(y|m|d|h|i|s|a)+}/g, function (result, key) {
+      var value = formatObj[key];
+      // Note: getDay() returns 0 on Sunday
+      if (key === 'a') {
+        return ['日', '一', '二', '三', '四', '五', '六'][value];
+      }
+      if (result.length > 0 && value < 10) {
+        value = '0' + value;
+      }
+      return value || 0;
+    });
+    return time_str;
+  },
+
+  /**
+      * @param {number} time
+      * @param {string} option
+      * @returns {string}
+      */
+  formatTime: function formatTime(time, option) {
+    if (('' + time).length === 10) {
+      time = parseInt(time) * 1000;
+    } else {
+      time = +time;
+    }
+    var d = new Date(time);
+    var now = Date.now();
+
+    var diff = (now - d) / 1000;
+
+    if (diff < 30) {
+      return '刚刚';
+    } else if (diff < 3600) {
+      // less 1 hour
+      return Math.ceil(diff / 60) + '分钟前';
+    } else if (diff < 3600 * 24) {
+      return Math.ceil(diff / 3600) + '小时前';
+    } else if (diff < 3600 * 24 * 2) {
+      return '1天前';
+    }
+    if (option) {
+      return parseTime(time, option);
+    } else {
+      return (
+        d.getMonth() +
+        1 +
+        '月' +
+        d.getDate() +
+        '日' +
+        d.getHours() +
+        '时' +
+        d.getMinutes() +
+        '分');
+
+    }
+  },
+  /**
+      * @param {string} type
+      * @returns {Date}
+      */
+  getTime: function getTime(type) {
+    if (type === 'start') {
+      return new Date().getTime() - 3600 * 1000 * 24 * 90;
+    } else {
+      return new Date(new Date().toDateString());
+    }
+  },
+
+  // 记录本地足迹
+  // setTrace(item) {
+  // 	let list = uni.getStorageSync('kxTraceList');
+  // 	if (list) {
+  // 		list = JSON.parse(list)
+  // 	} else {
+  // 		list = {}
+  // 	}
+  // 	console.log('存入足迹')
+  // 	// 判断该记录书是否存在
+  // 	let time = new Date().getTime()
+  // 	let id = item.code
+  // 	item.time = time
+  // 	list[id] = item
+  // 	uni.setStorageSync('kxTraceList', JSON.stringify(list));
+  // },
+  // // 获取足迹
+  // getTrace() {
+  // 	let list = uni.getStorageSync('kxTraceList');
+  // 	if (list) {
+  // 		return (JSON.parse(list))
+  // 	} else {
+  // 		return []
+  // 	}
+
+  // },
+  // // 清除所有足迹
+  // clearTrace() {
+  // 	uni.removeStorageSync('kxTraceList');
+  // },
+
+  // 支付宝支付
+  AliPay: function AliPay(strData, callback, failFun) {
+    if (!strData) {
+      uni.showToast({
+        icon: 'none',
+        title: '支付参数无效' });
+
+      return;
+    }
+    uni.requestPayment({
+      provider: "alipay",
+      orderInfo: strData,
+      success: function success(res) {
+        plus.nativeUI.toast('支付成功');
+        if (callback) callback();
+      },
+      fail: function fail(res) {
+        if (failFun) {
+          failFun();
+          return;
+        }
+        uni.showToast({
+          title: '支付失败',
+          icon: "none",
+          duration: 2000,
+          complete: function complete() {
+            uni.redirectTo({
+              url: '/pages/features/order/order?current=1' });
+
+          } });
+
+      } });
+
+  },
+
+  // 微信支付
+  WxPay: function WxPay(orderinfo, callback, failFun) {
+    if (!orderinfo) {
+      uni.showToast({
+        icon: 'none',
+        title: '支付参数无效' });
+
+      return;
+    }
+    // console.log(JSON.stringify(orderinfo));
+    uni.requestPayment({
+      provider: "wxpay",
+      timeStamp: orderinfo.timestamp,
+      nonceStr: orderinfo.noncestr,
+      package: orderinfo.package,
+      signType: "MD5",
+      paySign: orderinfo.paySign,
+      orderInfo: {
+        appid: orderinfo.appid,
+        noncestr: orderinfo.noncestr,
+        package: orderinfo.package,
+        partnerid: orderinfo.mchid,
+        prepayid: orderinfo.prepayid,
+        timestamp: orderinfo.timestamp,
+        sign: orderinfo.sign },
+
+      success: function success(res) {
+        plus.nativeUI.toast('支付成功');
+        if (callback) callback();
+      },
+      fail: function fail(res) {
+        console.log(JSON.stringify(res));
+        if (failFun) {
+          failFun();
+          return;
+        }
+        uni.showToast({
+          title: '支付失败',
+          icon: "none",
+          duration: 2000,
+          complete: function complete() {
+            uni.redirectTo({
+              url: '/pages/features/order/order?current=1' });
+
+          } });
+
+      } });
+
+  },
+  // 判断是否可以指纹解锁
+  // 判断当前机型是否支持指纹
+  checkFinger: function checkFinger() {
+    if (!plus.fingerprint.isSupport()) {
+      plus.nativeUI.toast('此设备不支持指纹识别');
+      // this.supportFinger = false;
+      return false;
+    } else if (!plus.fingerprint.isKeyguardSecure()) {
+      plus.nativeUI.toast('此设备未设置密码锁屏');
+      // this.supportFinger = false;
+      return false;
+    } else if (!plus.fingerprint.isEnrolledFingerprints()) {
+      plus.nativeUI.toast('此设备未录入指纹');
+      // this.supportFinger = false;
+      return false;
+    } else {
+      // this.supportFinger = true;
+      return true;
+    }
+
+  },
+  // 是否微信浏览器
+  is_weixn: function is_weixn() {
+    var ua = navigator.userAgent.toLowerCase();
+    if (ua.match(/MicroMessenger/i) == "micromessenger") {
+      return true;
+    } else {
+      return false;
+    }
+  },
+  // 是否受过权
+  // 返回code
+  ifAuth: function ifAuth(success) {
+    var url = window.location.href;
+    var s = url.match(/code=(.*)&state/);
+    if (s) {
+      // 是授权后的页面,则做opnegid判断 使用code获取pid
+      // return s[1]
+      // 换取oid
+      success(s[1]);
+    } else {
+      // 不是授权的页面，重定向进行授权
+
+      this.wxauth();
+    }
+  },
+
+  // wx授权跳转
+  wx_auth: function wx_auth() {
+    // alert(1)
+    var set = {
+      appid: _SET.default.wx_appid, //测试环境
+      redirect_uri: _SET.default.wx_redirect_url };
+
+    window.location.href = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=' + set.appid + '&redirect_uri=' +
+    set.redirect_uri + '&response_type=code&scope=snsapi_userinfo&state=1#wechat_redirect';
+  } };var _default =
+
+
+Utils;exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
+
+/***/ }),
+
 /***/ 3:
 /*!***********************************!*\
   !*** (webpack)/buildin/global.js ***!
@@ -11419,6 +11759,176 @@ try {
 
 module.exports = g;
 
+
+/***/ }),
+
+/***/ 324:
+/*!********************************************!*\
+  !*** E:/mywork/jll_mt/utils/baseMixins.js ***!
+  \********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.baseMixins = void 0;var _index = _interopRequireDefault(__webpack_require__(/*! @/utils/http/index.js */ 11));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+var baseMixins = {
+  data: function data() {
+    return {
+      baseKey: '/api/Goods/GetCategoryList',
+      hasRow: false,
+      list: [],
+      loadStatus: 'more', // 上拉的状态：more-loading前；loading-loading中；noMore-没有更多了
+      // refreshing: false,
+      pageLoad: false,
+      load: false,
+      token: '',
+      showLoad: false };
+
+  },
+  onLoad: function onLoad() {
+    var that = this;
+    uni.getStorage({
+      key: 'access_token',
+      success: function success(res) {
+        // console.log(res.data);
+        var value = res.data;
+        if (value) {
+          that.token = value;
+          that._loadData('refresh');
+        }
+      },
+      fail: function fail(err) {
+        // that.initSet();
+      } });
+
+  },
+  // 下拉刷新
+  onPullDownRefresh: function onPullDownRefresh() {
+    this.formParams.pageIndex = 1;
+    this.list = [];
+    this._loadData('refresh', function () {
+      uni.stopPullDownRefresh();
+    });
+  },
+  // 上拉加载
+  onReachBottom: function onReachBottom() {
+    if (this.loadStatus == 'noMore') {
+      return;
+    }
+    this.formParams.pageIndex += 1;
+    this.loadStatus = 'loading';
+    this._loadData('add', function () {
+      // this.loadStatus = 'more'
+    });
+  },
+  methods: {
+    // _onRefresh() {
+    // 	this.formParams.pageIndex = 1;
+    // 	this._loadData('refresh');
+    // },
+
+    // _loadMore(tabItem) {
+    // 	// console.log(111)
+    // 	if (this.loadStatus == 2) {
+    // 		return;
+    // 	}
+    // 	this.formParams.pageIndex += 1;
+    // 	this._loadData('add');
+    // },
+    _loadData: function _loadData(type) {
+
+      var that = this;
+      // console.log(that.formParams)
+      if (type == 'add') {
+        // 加载更多
+
+        that.loadStatus = 'loading';
+      } else {
+        // 刷新
+        that.refreshing = true;
+      }
+      if (this.showLoad) {
+        plus.nativeUI.showWaiting();
+      }
+      return new Promise(function (resolve, reject) {
+        uni.request({
+          url: _index.default.baseUrl + that.baseKey, //仅为示例，并非真实接口地址。
+          method: 'POST',
+          data: that.formParams,
+          header: {
+            'Content-Type': 'application/json',
+            Authorization: token },
+
+          timeout: 3000,
+          success: function success(res) {
+            var ress = res.data;
+            // console.log(res)
+            if (ress.result == 1) {
+              if (type == 'add') {
+                // 加载更多
+                if (that.hasRow) {
+                  that.list = that.list.concat(ress.data.rows);
+                  if (ress.data.total && ress.data.total <= that.list.length) {
+                    that.loadStatus = 'noMore';
+                    // 没有数据了
+                  } else {
+                    that.loadStatus = 'more';
+                  }
+                } else {
+                  that.list = that.list.concat(ress.data);
+                  if (ress.total && ress.total <= that.list.length) {
+                    that.loadStatus = 'noMore';
+                    // 没有数据了
+                  } else {
+                    that.loadStatus = 'more';
+                  }
+                }
+              } else {
+                // 刷新
+                if (that.hasRow) {
+                  that.list = ress.data.rows;
+                  if (ress.data.total && ress.data.total <= that.list.length) {
+                    that.loadStatus = 'noMore';
+                    // 没有数据了
+                  } else {
+                    that.loadStatus = 'more';
+                  }
+
+                } else {
+                  that.list = ress.data;
+                  if (ress.total && ress.total <= that.list.length) {
+                    that.loadStatus = 'noMore';
+                    // 没有数据了
+                  } else {
+                    that.loadStatus = 'more';
+                  }
+                }
+
+                that.refreshing = false;
+              }
+
+            } else {
+              that.refreshing = false;
+              uni.showToast({
+                title: '请求失败',
+                icon: 'none' });
+
+            }
+          },
+          fail: function fail(err) {
+            console.log(err);
+            that.refreshing = false;
+            that.loadStatus = 0;
+          },
+          complete: function complete(err) {
+            if (that.showLoad) {
+              plus.nativeUI.closeWaiting();
+            }
+          } });
+
+      });
+    } } };exports.baseMixins = baseMixins;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
 
@@ -12214,9 +12724,9 @@ if (hadRuntime) {
 /***/ }),
 
 /***/ 7:
-/*!********************************!*\
-  !*** G:/work/马桶福利购/pages.json ***!
-  \********************************/
+/*!***********************************!*\
+  !*** E:/mywork/jll_mt/pages.json ***!
+  \***********************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -12224,334 +12734,10 @@ if (hadRuntime) {
 
 /***/ }),
 
-/***/ 76:
-/*!************************************!*\
-  !*** G:/work/马桶福利购/utils/utils.js ***!
-  \************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _SET = _interopRequireDefault(__webpack_require__(/*! ../SET.js */ 15));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
-var Utils = {
-  phoneCheck: function phoneCheck(value) {
-    var reg = /^1\d{10}$/;
-    var r = reg.test(value);
-    return r;
-  },
-  passCheck: function passCheck(val) {
-    var patrn = /^(\w){6,20}$/;
-    if (!patrn.exec(val)) return false;
-    return true;
-  },
-  // 银行卡校验
-  bankCardCheck: function bankCardCheck(val) {
-    var patrn = /^([1-9]{1})(\d{15}|\d{18})$/;
-    if (!patrn.test(val)) return false;
-    return true;
-  },
-  // 中文字符
-  chineseCheck: function chineseCheck(val) {
-    var patrn = /^[\u4E00-\u9FA5]{2,4}/;
-
-    if (!patrn.test(val)) return false;
-    return true;
-  },
-  // 银行卡数字加密
-  encryptBankCode: function encryptBankCode(val) {
-
-    var str = val.replace(/\s/g, '');
-    console.log(str);
-    var reg = /^(\d{4})\d+(\d{4})$/;
-    str.replace(reg, "$1 **** **** $2");
-    console.log(str);
-    return str;
-  },
-
-
-  /**
-      * Parse the time to string
-      * @param {(Object|string|number)} time
-      * @param {string} cFormat
-      * @returns {string}
-      */
-  parseTime: function parseTime(time, cFormat) {
-    if (arguments.length === 0) {
-      return null;
-    }
-    var format = cFormat || '{y}-{m}-{d} {h}:{i}:{s}';
-    var date;
-    if (typeof time === 'object') {
-      date = time;
-    } else {
-      if (typeof time === 'string' && /^[0-9]+$/.test(time)) {
-        time = parseInt(time);
-      }
-      if (typeof time === 'number' && time.toString().length === 10) {
-        time = time * 1000;
-      }
-      date = new Date(time);
-    }
-    var formatObj = {
-      y: date.getFullYear(),
-      m: date.getMonth() + 1,
-      d: date.getDate(),
-      h: date.getHours(),
-      i: date.getMinutes(),
-      s: date.getSeconds(),
-      a: date.getDay() };
-
-    var time_str = format.replace(/{(y|m|d|h|i|s|a)+}/g, function (result, key) {
-      var value = formatObj[key];
-      // Note: getDay() returns 0 on Sunday
-      if (key === 'a') {
-        return ['日', '一', '二', '三', '四', '五', '六'][value];
-      }
-      if (result.length > 0 && value < 10) {
-        value = '0' + value;
-      }
-      return value || 0;
-    });
-    return time_str;
-  },
-
-  /**
-      * @param {number} time
-      * @param {string} option
-      * @returns {string}
-      */
-  formatTime: function formatTime(time, option) {
-    if (('' + time).length === 10) {
-      time = parseInt(time) * 1000;
-    } else {
-      time = +time;
-    }
-    var d = new Date(time);
-    var now = Date.now();
-
-    var diff = (now - d) / 1000;
-
-    if (diff < 30) {
-      return '刚刚';
-    } else if (diff < 3600) {
-      // less 1 hour
-      return Math.ceil(diff / 60) + '分钟前';
-    } else if (diff < 3600 * 24) {
-      return Math.ceil(diff / 3600) + '小时前';
-    } else if (diff < 3600 * 24 * 2) {
-      return '1天前';
-    }
-    if (option) {
-      return parseTime(time, option);
-    } else {
-      return (
-        d.getMonth() +
-        1 +
-        '月' +
-        d.getDate() +
-        '日' +
-        d.getHours() +
-        '时' +
-        d.getMinutes() +
-        '分');
-
-    }
-  },
-  /**
-      * @param {string} type
-      * @returns {Date}
-      */
-  getTime: function getTime(type) {
-    if (type === 'start') {
-      return new Date().getTime() - 3600 * 1000 * 24 * 90;
-    } else {
-      return new Date(new Date().toDateString());
-    }
-  },
-
-  // 记录本地足迹
-  // setTrace(item) {
-  // 	let list = uni.getStorageSync('kxTraceList');
-  // 	if (list) {
-  // 		list = JSON.parse(list)
-  // 	} else {
-  // 		list = {}
-  // 	}
-  // 	console.log('存入足迹')
-  // 	// 判断该记录书是否存在
-  // 	let time = new Date().getTime()
-  // 	let id = item.code
-  // 	item.time = time
-  // 	list[id] = item
-  // 	uni.setStorageSync('kxTraceList', JSON.stringify(list));
-  // },
-  // // 获取足迹
-  // getTrace() {
-  // 	let list = uni.getStorageSync('kxTraceList');
-  // 	if (list) {
-  // 		return (JSON.parse(list))
-  // 	} else {
-  // 		return []
-  // 	}
-
-  // },
-  // // 清除所有足迹
-  // clearTrace() {
-  // 	uni.removeStorageSync('kxTraceList');
-  // },
-
-  // 支付宝支付
-  AliPay: function AliPay(strData, callback, failFun) {
-    if (!strData) {
-      uni.showToast({
-        icon: 'none',
-        title: '支付参数无效' });
-
-      return;
-    }
-    uni.requestPayment({
-      provider: "alipay",
-      orderInfo: strData,
-      success: function success(res) {
-        plus.nativeUI.toast('支付成功');
-        if (callback) callback();
-      },
-      fail: function fail(res) {
-        if (failFun) {
-          failFun();
-          return;
-        }
-        uni.showToast({
-          title: '支付失败',
-          icon: "none",
-          duration: 2000,
-          complete: function complete() {
-            uni.redirectTo({
-              url: '/pages/features/order/order?current=1' });
-
-          } });
-
-      } });
-
-  },
-
-  // 微信支付
-  WxPay: function WxPay(orderinfo, callback, failFun) {
-    if (!orderinfo) {
-      uni.showToast({
-        icon: 'none',
-        title: '支付参数无效' });
-
-      return;
-    }
-    // console.log(JSON.stringify(orderinfo));
-    uni.requestPayment({
-      provider: "wxpay",
-      timeStamp: orderinfo.timestamp,
-      nonceStr: orderinfo.noncestr,
-      package: orderinfo.package,
-      signType: "MD5",
-      paySign: orderinfo.paySign,
-      orderInfo: {
-        appid: orderinfo.appid,
-        noncestr: orderinfo.noncestr,
-        package: orderinfo.package,
-        partnerid: orderinfo.mchid,
-        prepayid: orderinfo.prepayid,
-        timestamp: orderinfo.timestamp,
-        sign: orderinfo.sign },
-
-      success: function success(res) {
-        plus.nativeUI.toast('支付成功');
-        if (callback) callback();
-      },
-      fail: function fail(res) {
-        console.log(JSON.stringify(res));
-        if (failFun) {
-          failFun();
-          return;
-        }
-        uni.showToast({
-          title: '支付失败',
-          icon: "none",
-          duration: 2000,
-          complete: function complete() {
-            uni.redirectTo({
-              url: '/pages/features/order/order?current=1' });
-
-          } });
-
-      } });
-
-  },
-  // 判断是否可以指纹解锁
-  // 判断当前机型是否支持指纹
-  checkFinger: function checkFinger() {
-    if (!plus.fingerprint.isSupport()) {
-      plus.nativeUI.toast('此设备不支持指纹识别');
-      // this.supportFinger = false;
-      return false;
-    } else if (!plus.fingerprint.isKeyguardSecure()) {
-      plus.nativeUI.toast('此设备未设置密码锁屏');
-      // this.supportFinger = false;
-      return false;
-    } else if (!plus.fingerprint.isEnrolledFingerprints()) {
-      plus.nativeUI.toast('此设备未录入指纹');
-      // this.supportFinger = false;
-      return false;
-    } else {
-      // this.supportFinger = true;
-      return true;
-    }
-
-  },
-  // 是否微信浏览器
-  is_weixn: function is_weixn() {
-    var ua = navigator.userAgent.toLowerCase();
-    if (ua.match(/MicroMessenger/i) == "micromessenger") {
-      return true;
-    } else {
-      return false;
-    }
-  },
-  // 是否受过权
-  // 返回code
-  ifAuth: function ifAuth(success) {
-    var url = window.location.href;
-    var s = url.match(/code=(.*)&state/);
-    if (s) {
-      // 是授权后的页面,则做opnegid判断 使用code获取pid
-      // return s[1]
-      // 换取oid
-      success(s[1]);
-    } else {
-      // 不是授权的页面，重定向进行授权
-
-      this.wxauth();
-    }
-  },
-
-  // wx授权跳转
-  wx_auth: function wx_auth() {
-    // alert(1)
-    var set = {
-      appid: _SET.default.wx_appid, //测试环境
-      redirect_uri: _SET.default.wx_redirect_url };
-
-    window.location.href = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=' + set.appid + '&redirect_uri=' +
-    set.redirect_uri + '&response_type=code&scope=snsapi_userinfo&state=1#wechat_redirect';
-  } };var _default =
-
-
-Utils;exports.default = _default;
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
-
-/***/ }),
-
 /***/ 93:
-/*!*************************************************************************!*\
-  !*** G:/work/马桶福利购/js_sdk/junyi-h5-copy/junyi-h5-copy/junyi-h5-copy.js ***!
-  \*************************************************************************/
+/*!****************************************************************************!*\
+  !*** E:/mywork/jll_mt/js_sdk/junyi-h5-copy/junyi-h5-copy/junyi-h5-copy.js ***!
+  \****************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 

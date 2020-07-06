@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-
+import SET from '@/SET.js'
 Vue.use(Vuex)
 
 const store = new Vuex.Store({
@@ -10,7 +10,7 @@ const store = new Vuex.Store({
          */
         forcedLogin: false,
         hasLogin: false,
-		userInfo:{}, //用户微信获得基本信息
+		userInfo:'', //用户微信获得基本信息
 		accountInfo:{}, //账户基本信息
 		merchantInfo:{}, //店铺基本信息
 		levelAccount:{},  //渠道个人信息
@@ -24,6 +24,9 @@ const store = new Vuex.Store({
     mutations: {
         login(state, userName) {
 			console.log('login_STORE')
+			uni.showToast({
+				title:'登陆成功'
+			})
             state.hasLogin = true;
         },
         logout(state) {
@@ -32,61 +35,60 @@ const store = new Vuex.Store({
 			state.merchantInfo = {}; //店铺基本信息
 			state.levelAccount = {}  //渠道个人信息
         },
-		setRoleCode(state,info){
-			// console.log('储存信息1')
-			state.currentRoleCode = info
-		},
 		setUserInfo(state,info){
-			// console.log('储存信息1')
 			state.userInfo = {...info}
 		},
 		setAccountInfo(state,info){
 			// console.log('储存信息2')
 			state.accountInfo = {...info}
 		},
-		setConfig(state,info){
-			// console.log('储存信息2')
-			state.config = {...info}
-		},
-		setMerchantInfo(state,info){
-			// console.log('储存信息2')
-			state.merchantInfo = {...info}
-		},
-		setCurrentChannel(state,info){
-			state.currentChannel = info
-		},
-		setLevelAccountInfo(state,info){
-			state.levelAccount = info
-		},
-		addCard(state,item){
-			
-			state.cards =  Object.assign(state.cards,item)
-			// console.log(state.cards)
-		},
-		creatOrder(state,items){
-			state.currentOrder = [...items]
-			// debugger
-		},
-		completeOrder(state){
-			state.currentOrder = new Array()
-		},
-		currenPro(state,items){
-			state.currentPro = {...items}
-		}
+	
     },
 	getters:{
-		cardsProduct(state){
-			// console.log(state.cards)
-			// let arr = Object.values(state.cards)  不能用额
-			// let arr = Object.keys(state.cards) 
-			// let res = []
-			// arr.forEach(item=>{
-			// 	res.push(state.cards[item])
-			// })
-			// console.log(res)
-			// return res
-			return state.cards
-		}
+		
+	},
+	actions:{
+		// 用户登录
+		userLogin({ state,commit },token){
+			console.log(token)
+			try {
+				// uni.setStorageSync('access_token', token);
+				// 本地和状态管理器都需要储存登录状态
+				commit('login')
+				let that = this;
+				try {
+					if (token && !state.userInfo) {
+						// console.log(111)
+						uni.request({
+							url: SET.baseUrl + '/api/Consumer/Get', //仅为示例，并非真实接口地址。
+							method: 'get',
+							data: {},
+							header: {
+								'Content-Type': 'application/json',
+								Authorization: token
+							},
+							success: res => {
+								// console.log(res)
+								let statusCode = res.statusCode;
+								if (statusCode == 200 && res.data.Success) {
+									commit('setUserInfo', res.data.Data);
+								} 
+							},
+							fail(err) {
+								uni.switchTab({
+									url: '/pages/user/user'
+								});
+							}
+						});
+					}
+				} catch (e) {
+					
+				}
+			
+			} catch (e) { 
+				// error
+			}		
+		},
 	}
 })
 

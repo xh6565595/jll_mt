@@ -10,7 +10,7 @@
     "minified": true
   },
   "compileType": "miniprogram",
-  "libVersion": "2.9.2",
+  "libVersion": "",
   "appid": "wx35c21791caf26593",
   "projectname": "马桶福利购",
   "condition": {

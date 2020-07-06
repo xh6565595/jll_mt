@@ -11,6 +11,17 @@ const Auth = {
 			// handle:true
 		}, ifLoad)
 	},
+	// 微信自动注册
+	WxAutoRegiste: (data, ifLoad = false) => {
+		return http.request({
+			url: '/api/Authorize/WxAutoRegiste', 
+			method: 'POST',
+			data,
+			// handle:true
+		}, ifLoad)
+	},
+	
+	
 	// 获取验证码
 	getVerificateCode: (data, ifLoad = false) => {
 		return http.request({

@@ -7,32 +7,33 @@
 		<button type="success" class="btns" open-type="getUserInfo" @getuserinfo="getuserinfo">微信登录</button>
 		<accredit ref="userBox">
 			<view class="formBox" slot="content">
-				<view class="cm_title cm_tex_c"> 账户绑定</view>
+				<view class="cm_title cm_tex_c title" > 账户绑定</view>
 				<view class=" inputBoxs ">
-					<text class="label  ">手机号码</text>
+					<text class="cm_title label  ">手机号码:</text>
 				</view>
 					
-				<view class=" inputBoxs  flex flex_center">					
+				<view class=" inputBoxs  flex flex_center cm_bdb">					
 					<input class="cm_tex_l f1 inp" type="text"  v-model="formParams.mobile" placeholder="请输入手机号">
 					<view class="yzmBtn" size="mini" hover-class="cm_hover" @tap="_getCode">{{seconds>0?seconds+'s':'发送验证码'}}</view>
 				</view>
 				<view class=" inputBoxs ">
-					<text class="label  ">验证码</text>
+					<text class="cm_title label  ">验证码:</text>
 				</view>
-				<view class=" inputBoxs ">
+				<view class=" ">
 					<!-- <input class="f1" type="number" clearable  v-model="formParams.validate" placeholder="请输入验证码"> -->
-					 <one-input ref="hi" :maxlength="6"></one-input>
+					 <one-input ref="hi" type="box" @finish="finish" @input="input" :maxlength="6"></one-input>
 				</view>
-				<button type="success" class="btns">立即登录</button>
+				<button type="success" class="btns"   @tap="submit">立即登录</button>
 			</view>		
 		</accredit>
 	</view>
 </template>
 
 <script>
-import  accredit from '@/components/accredit/accredit.vue';
+import Utils from '@/utils/utils.js';
 import http from '@/utils/http/index.js';
-import oneInput from '@/components/myp-one/myp-one'
+import oneInput from '@/components/myp-one/myp-one';
+import accredit from '@/components/accredit/accredit';
 export default {
 	data() {
 		return {
@@ -42,12 +43,15 @@ export default {
 			effective:'',
 			formParams:{
 				"openId": "",
+				"vilidate":"",
 				"mobile": "",
 				"invitation":"",   //邀请码
 				"nickname":"",   //微信昵称
 				"headimgurl":"",    //用户头像
 				"share_user_id":"", //userid 分享活动
-			}
+			},
+			seconds:0,
+			time:null
 		};
 	},
 	components:{
@@ -68,6 +72,7 @@ export default {
 		// uni.redirectTo({
 		// 	url:'../main/serverCenter/serverCenter'
 		// })
+		// that.$refs.userBox.showModal()
 	},
 	computed: {
 		hasLogin() {
@@ -78,18 +83,79 @@ export default {
 		}
 	},
 	methods: {
+		// 立即注册
+		async submit(){
+			let that = this
+			// console.log(this.formParams); 
+			if(!this.formParams.vilidate || this.formParams.vilidate.length<6){
+				this.$ui.toast('请输入正确的验证码')
+				return;
+			}
+			
+			try {
+				this.$ui.showloading()
+				let res = await this.$api.WxAutoRegiste(this.formParams, false);
+				console.log(res);
+				this.$ui.hideloading()
+				if (res.Success) {
+					// that.$ui.toast('登陆成功')
+					// that.$store.commit('login');
+					that.$refs.userBox.hideModal()
+					// uni.redirectTo()({
+					// 	url: '/pages/main/main'
+					// });	
+					let opid = res.Data.openId;
+					that.autoLogin(opid)
+					that.$refs.userBox.hideModal()
+					
+				}else{
+					that.$ui.toast(res.Msg?res.Msg:'未知错误')
+					
+					that.reset() 
+				}
+			} catch (err) {
+				that.$ui.toast(err)
+				that.reset()
+			}
+		},
+		// 重置表单
+		reset(){
+			this.$refs.userBox.hideModal();
+			this.seconds = 0
+			this.effective = ''
+			this.formParams.vilidate = ''
+			clearInterval(this.time)
+			this.time = null
+		},
+		// 实时同步
+		input(e){
+			this.formParams.vilidate = e
+		},
+		// 输完验证码码回调
+		finish(e){
+			console.log(this.formParams);
+			this.submit()
+			// this.reset()
+		},
 		// 获取验证码
 		async _getCode() {
 			if (this.effective) return;
 			let self = this;
+			if(!this.formParams.mobile || !Utils.phoneCheck(this.formParams.mobile)){
+				this.$ui.toast('请输入正确的手机号码')
+				return;
+			}
+			// console.log(this.formParams)
 			let data = {
-				mobile:this.myAccount  ,
-				type: 8  //1,注册 2,登录 3,找回 4.银行卡 8-提现
+				mobile:this.formParams.mobile  ,
+				type: 1  //1,注册 2,登录 3,找回 4.银行卡 8-提现
 			};				
 			try{
-				let res = await this.$api.getValidCode(data);
-				console.log(JSON.stringify(res))
-				if (res.result == 1) {
+				this.$ui.showloading()
+				let res = await this.$api.getVerificateCode(data);
+				this.$ui.hideloading()
+				// console.log(JSON.stringify(res))
+				if (res.Success) {
 					uni.showToast({
 					    title: '验证码已发送',
 						position:'bottom'
@@ -97,21 +163,22 @@ export default {
 					
 					self.effective = true;
 					self.seconds = 60;
-					let time = setInterval(()=>{
+					this.time = setInterval(()=>{
 						self.seconds-=1;
 						if(self.seconds==0){
 							self.effective = false;
-							clearInterval(time)
+							clearInterval(this.time)
 						}
 					},1000)
 				} else {
 				    uni.showToast({
 				        icon: 'none',
-				        title: res.data,
+				        title: res.Msg? res.Msg:'未知错误',
 				    });
 				}
 			}catch(err){
 				console.log( '请求结果false : ' + err )
+				
 			}
 		},
 		// 换取opndid
@@ -125,6 +192,7 @@ export default {
 					// oNDKY5B658gwmlw5vZnwEUOdG1io
 					let opid = res.Msg;
 					uni.setStorageSync('jll_opid',opid);
+					that.formParams.openId = opid
 					// that.$refs.userBox.showModal()
 					return {
 						success:true,
@@ -142,12 +210,15 @@ export default {
 				}
 			}
 		},
+		// 获取个人信息
 		getuserinfo(res){
 			let that = this
 			let userInfo = res.detail.userInfo
-			
+			// console.log(userInfo)
+			this.formParams.nickname = userInfo.nickName
+			this.formParams.headimgurl =  userInfo.avatarUrl
 			uni.login({
-			  provider: 'weixin',
+			  provider: 'weixin', 
 			  success:async function (res) {
 				let code =  res.code;
 				// 获取code换opid
@@ -159,20 +230,6 @@ export default {
 				}
 			  }
 			});
-			
-			// uni.chooseAddress({
-			//   success (res) {
-			//     console.log(res)
-			//   }
-			// })
-			// uni.switchTab({
-			// 	url:'../main/main'
-			// })
-		},
-		// 新用户注册
-		async register(opid){
-			
-			
 		},
 		// opid直接登录
 		async autoLogin(opid) {
@@ -183,10 +240,10 @@ export default {
 				let res = await this.$api.WxTokenLogin({openId:opid}, false);
 				this.$ui.hideloading()
 		
-				if (res.Success) {
-					console.log(res)
-					return
-					that.$store.commit('login');
+				if (res.Success) {		
+					// that.$store.commit('login');
+					uni.setStorageSync('access_token',res.Data.hp)
+					that.$store.dispatch('userLogin',res.Data.hp);
 					uni.redirectTo()({
 						url: '/pages/main/main'
 					});	
@@ -264,6 +321,9 @@ export default {
 	}
 	.formBox{
 		width: 100%;
+		.title{
+			color: #08c163;
+		}
 		.inputBoxs {
 			// justify-content: center;
 			align-items: center;
@@ -277,3 +337,4 @@ export default {
 	}
 }
 </style>
+
