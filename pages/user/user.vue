@@ -63,7 +63,7 @@
 			<view class="boxs">
 				<!-- <view class="cm_title">其他工具</view> -->
 				<view class="">
-					<view class="menus flex flex_center " @tap="_href('/features/adress/adress')">
+					<view class="menus flex flex_center " @tap="_href('/features/depositRecord/depositRecord')">
 						<image src="../../static/image/wd_mx@2x.png" class="menusPic"></image>
 						<text class="cm_t_24 f1">余额明细</text>
 						<text class="iconfont icon-fanhui3"></text>
@@ -91,7 +91,7 @@
 				</view>
 			</view>
 		</view>
-
+			<button type="success" class="btns" open-type="contact" >客服</button>
 		<tui-modal :show="modal" @click="handleClick" @cancel="hide" :content="content" :maskClosable="false" color="#333" :size="32"></tui-modal>
 	</view>
 </template>

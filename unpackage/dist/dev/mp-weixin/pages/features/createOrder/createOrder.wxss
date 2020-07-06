@@ -54,8 +54,7 @@
   padding-bottom: 0;
 }
 .pages .panel .itemBoxTop.data-v-13677224 {
-  padding: 24rpx 20rpx;
-  padding-bottom: 0;
+  padding-bottom: 20rpx;
   background: #fff;
 }
 .pages .panel .itemBoxTop .shopIcon.data-v-13677224 {

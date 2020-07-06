@@ -69,6 +69,27 @@
 				"navigationBarTextStyle": "black",
 				"navigationBarBackgroundColor": "#f4f4f4"
 			}
+        },{
+            "path" : "pages/features/depositRecord/depositRecord",
+            "style" : {
+				"navigationBarTitleText": "余额明细",
+				"navigationBarTextStyle": "black",
+				"navigationBarBackgroundColor": "#fff"
+			}
+        },{
+            "path" : "pages/main/serverCenter/serverCenter",
+            "style" : {
+				"navigationBarTitleText": "派单中心",
+				"navigationBarTextStyle": "black",
+				"navigationBarBackgroundColor": "#f4f4f4"
+			}
+        },{
+            "path" : "pages/main/serverDetail/serverDetail",
+            "style" : {
+				"navigationBarTitleText": "派单详情",
+				"navigationBarTextStyle": "black",
+				"navigationBarBackgroundColor": "#f4f4f4"
+			}
         }
     ],
 	"tabBar": {
@@ -97,7 +118,6 @@
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
 		"navigationBarBackgroundColor": "#ffffff",
-		"backgroundColor": "#f8f8f8",
-		"animationType":"fade-in"
+		"backgroundColor": "#f8f8f8"
 	}
 } 

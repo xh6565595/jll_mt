@@ -13,11 +13,18 @@
 				ashow:false 
 			};
 		},
+		props:{
+			autoClose:{
+				type:Boolean,
+				default:false
+			}
+		},
 		methods:{
 			hideModal() {
+				if(!this.autoClose)return;
 				this.ashow = false;
 			},
-			showModel(){
+			showModal(){
 				this.ashow = true;
 			}
 		}
@@ -34,7 +41,7 @@
 		height: 100vh;
 		background: rgba(0,0,0,.6);
 		.dialog{
-			width: 70vw;
+			width: 90vw;
 			padding: 48rpx;
 			background: #fff;
 			border-radius: 30rpx;

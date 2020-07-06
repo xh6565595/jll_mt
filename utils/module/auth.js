@@ -2,6 +2,15 @@
 // 我要积分
 import http from '../http/interface'
 const Auth = {
+	// code获取OpenId
+	GetOpenId: (data, ifLoad = false) => {
+		return http.request({
+			url: '/api/Authorize/GetOpenId', 
+			method: 'POST',
+			data,
+			// handle:true
+		}, ifLoad)
+	},
 	// 获取验证码
 	getVerificateCode: (data, ifLoad = false) => {
 		return http.request({

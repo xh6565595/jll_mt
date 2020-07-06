@@ -2,5 +2,7 @@
   "navigationBarTitleText": "活动",
   "navigationBarTextStyle": "black",
   "navigationStyle": "custom",
-  "usingComponents": {}
+  "usingComponents": {
+    "rule": "/components/rule/rule"
+  }
 }

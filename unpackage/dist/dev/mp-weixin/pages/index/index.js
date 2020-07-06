@@ -92,7 +92,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "recyclableRender", function() { return recyclableRender; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "components", function() { return components; });
-var components
+var components = {
+  accredit: function() {
+    return __webpack_require__.e(/*! import() | components/accredit/accredit */ "components/accredit/accredit").then(__webpack_require__.bind(null, /*! @/components/accredit/accredit.vue */ 316))
+  }
+}
 var render = function() {
   var _vm = this
   var _h = _vm.$createElement
@@ -141,42 +145,65 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var _index = _interopRequireDefault(__webpack_require__(/*! @/utils/http/index.js */ 11));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}var _default =
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var _index = _interopRequireDefault(__webpack_require__(/*! @/utils/http/index.js */ 11));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}var accredit = function accredit() {__webpack_require__.e(/*! require.ensure | components/accredit/accredit */ "components/accredit/accredit").then((function () {return resolve(__webpack_require__(/*! @/components/accredit/accredit.vue */ 316));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var oneInput = function oneInput() {__webpack_require__.e(/*! require.ensure | components/myp-one/myp-one */ "components/myp-one/myp-one").then((function () {return resolve(__webpack_require__(/*! @/components/myp-one/myp-one */ 274));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
+
 {
   data: function data() {
     return {
       loadModal: true,
       updatedInfo: {},
       result: '',
-      loginParams: {
-        username: '',
-        password: '',
-        vilidate: '000000' },
+      effective: '',
+      formParams: {
+        "openId": "",
+        "mobile": "",
+        "invitation": "", //邀请码
+        "nickname": "", //微信昵称
+        "headimgurl": "", //用户头像
+        "share_user_id": "" //userid 分享活动
+      } };
 
-      ifProdVersion: false //是否是正式版本
-    };
   },
+  components: {
+    accredit: accredit,
+    oneInput: oneInput },
+
   onLoad: function onLoad() {
+    var that = this;
+    var opid = uni.getStorageSync('jll_opid');
+    if (opid) {
+      // 已存在账户
+      that.autoLogin(opid);
+    }
 
-    // uni.authorize({
-    //     scope: 'scope.userLocation',
-    //     success() {
-    // 		console.log(111) 
-    //     }
+    // uni.switchTab({
+    // 	url:'../main/main'
+    // }) 
+    // uni.redirectTo({
+    // 	url:'../main/serverCenter/serverCenter'
     // })
-
-    uni.login({
-      provider: 'weixin',
-      success: function success(res) {
-        // console.log(res);
-        var code = res.code;
-        // 获取code换opid
-
-      } });
-
-    uni.switchTab({
-      url: '../main/main' });
-
   },
   computed: {
     hasLogin: function hasLogin() {
@@ -187,78 +214,138 @@ var _index = _interopRequireDefault(__webpack_require__(/*! @/utils/http/index.j
     } },
 
   methods: {
+    // 获取验证码
+    _getCode: function _getCode() {var _this = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {var self, data, res, time;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:if (!
+                _this.effective) {_context.next = 2;break;}return _context.abrupt("return");case 2:
+                self = _this;
+                data = {
+                  mobile: _this.myAccount,
+                  type: 8 //1,注册 2,登录 3,找回 4.银行卡 8-提现
+                };_context.prev = 4;_context.next = 7;return (
+
+                  _this.$api.getValidCode(data));case 7:res = _context.sent;
+                console.log(JSON.stringify(res));
+                if (res.result == 1) {
+                  uni.showToast({
+                    title: '验证码已发送',
+                    position: 'bottom' });
+
+
+                  self.effective = true;
+                  self.seconds = 60;
+                  time = setInterval(function () {
+                    self.seconds -= 1;
+                    if (self.seconds == 0) {
+                      self.effective = false;
+                      clearInterval(time);
+                    }
+                  }, 1000);
+                } else {
+                  uni.showToast({
+                    icon: 'none',
+                    title: res.data });
+
+                }_context.next = 15;break;case 12:_context.prev = 12;_context.t0 = _context["catch"](4);
+
+                console.log('请求结果false : ' + _context.t0);case 15:case "end":return _context.stop();}}}, _callee, null, [[4, 12]]);}))();
+
+    },
+    // 换取opndid
+    getopId: function getopId(code) {var _this2 = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee2() {var that, res, opid;return _regenerator.default.wrap(function _callee2$(_context2) {while (1) {switch (_context2.prev = _context2.next) {case 0:
+                that = _this2;_context2.prev = 1;
+
+                _this2.$ui.showloading();_context2.next = 5;return (
+                  _this2.$api.GetOpenId({ wx_code: code }, false));case 5:res = _context2.sent;
+                _this2.$ui.hideloading();if (!
+                res.Success) {_context2.next = 13;break;}
+                // oNDKY5B658gwmlw5vZnwEUOdG1io
+                opid = res.Msg;
+                uni.setStorageSync('jll_opid', opid);
+                // that.$refs.userBox.showModal()
+                return _context2.abrupt("return", {
+                  success: true,
+                  data: opid });case 13:return _context2.abrupt("return",
+
+
+                {
+                  success: false });case 14:_context2.next = 19;break;case 16:_context2.prev = 16;_context2.t0 = _context2["catch"](1);return _context2.abrupt("return",
+
+
+
+
+                {
+                  success: false });case 19:case "end":return _context2.stop();}}}, _callee2, null, [[1, 16]]);}))();
+
+
+    },
     getuserinfo: function getuserinfo(res) {
-      console.log(res.detail.userInfo);
+      var that = this;
+      var userInfo = res.detail.userInfo;
+
+      uni.login({
+        provider: 'weixin',
+        success: function () {var _success = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee3(res) {var code, r;return _regenerator.default.wrap(function _callee3$(_context3) {while (1) {switch (_context3.prev = _context3.next) {case 0:
+                    code = res.code;
+                    // 获取code换opid
+                    _context3.next = 3;return that.getopId(code);case 3:r = _context3.sent;
+
+                    if (r.success) {
+                      that.$refs.userBox.showModal();
+                      // that.register(r.data)
+                    }case 5:case "end":return _context3.stop();}}}, _callee3);}));function success(_x) {return _success.apply(this, arguments);}return success;}() });
+
+
+
       // uni.chooseAddress({
       //   success (res) {
       //     console.log(res)
       //   }
       // })
-      uni.switchTab({
-        url: '../main/main' });
+      // uni.switchTab({
+      // 	url:'../main/main'
+      // })
+    },
+    // 新用户注册
+    register: function register(opid) {return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee4() {return _regenerator.default.wrap(function _callee4$(_context4) {while (1) {switch (_context4.prev = _context4.next) {case 0:case "end":return _context4.stop();}}}, _callee4);}))();
+
 
     },
+    // opid直接登录
+    autoLogin: function autoLogin(opid) {var _this3 = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee5() {var that, res;return _regenerator.default.wrap(function _callee5$(_context5) {while (1) {switch (_context5.prev = _context5.next) {case 0:
+                that = _this3;_context5.prev = 1;
 
 
-    autoLogin: function autoLogin() {var _this = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {var that, user, res;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:if (!
-                _this.hasLogin) {_context.next = 2;break;}return _context.abrupt("return");case 2:
+                _this3.$ui.showloading();_context5.next = 5;return (
+                  _this3.$api.WxTokenLogin({ openId: opid }, false));case 5:res = _context5.sent;
+                _this3.$ui.hideloading();if (!
+
+                res.Success) {_context5.next = 14;break;}
+                console.log(res);return _context5.abrupt("return");case 14:
 
 
-                // console.log(666666666666)
-                that = _this;
-                user = uni.getStorageSync('user');
-                // console.log(user)
-                if (!user) {_context.next = 9;break;}
-                _this.loginParams.username = user.username;
-                _this.loginParams.password = user.password;_context.next = 11;break;case 9:
+
+
+
+
 
                 uni.reLaunch({
-                  url: '/pages/main/main' });return _context.abrupt("return",
-
-                false);case 11:_context.prev = 11;_context.next = 14;return (
+                  url: '/pages/main/main' });case 15:_context5.next = 20;break;case 17:_context5.prev = 17;_context5.t0 = _context5["catch"](1);
 
 
-
-
-
-                  _this.$api.userLogin(_this.loginParams, false));case 14:res = _context.sent;
-                // this.$ui.hideloading()
-                // that.loading = false
-                // console.log(res)
-                if (res.Success) {
-                  if (res.Data.jykj) uni.setStorageSync('jykj_token', res.Data.jykj);
-                  if (res.Data.fskj) uni.setStorageSync('fskj_token', res.Data.fskj);
-                  if (res.Data.vipkj) uni.setStorageSync('vipkj_token', res.Data.vipkj);
-                  if (res.Data.svipkj) uni.setStorageSync('svipkj_token', res.Data.svipkj);
-                  if (res.Data.hp) uni.setStorageSync('hepai_token', res.Data.hp);
-                  uni.setStorageSync('user', that.loginParams);
-
-                  that.$store.commit('login');
-                  // this.$ui.toast('登陆成功');
-                  uni.reLaunch({
-                    url: '/pages/main/main' });
-
-                  // console.log(res)
-                  that.initUser();
-                } else {
-                  uni.reLaunch({
-                    url: '/pages/main/main' });
-
-                }_context.next = 21;break;case 18:_context.prev = 18;_context.t0 = _context["catch"](11);
 
                 // console.log('请求结果false : ' + err);
                 uni.reLaunch({
-                  url: '/pages/main/main' });case 21:case "end":return _context.stop();}}}, _callee, null, [[11, 18]]);}))();
+                  url: '/pages/main/main' });case 20:case "end":return _context5.stop();}}}, _callee5, null, [[1, 17]]);}))();
 
 
     },
     // 加载登录账户信息
-    initUser: function initUser(callback) {var _this2 = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee2() {var that, res;return _regenerator.default.wrap(function _callee2$(_context2) {while (1) {switch (_context2.prev = _context2.next) {case 0:
-                that = _this2;_context2.prev = 1;_context2.next = 4;return (
+    initUser: function initUser(callback) {var _this4 = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee6() {var that, res;return _regenerator.default.wrap(function _callee6$(_context6) {while (1) {switch (_context6.prev = _context6.next) {case 0:
+                that = _this4;_context6.prev = 1;_context6.next = 4;return (
 
 
 
-                  _this2.$api.getConsumer({}, false));case 4:res = _context2.sent;
+                  _this4.$api.getConsumer({}, false));case 4:res = _context6.sent;
                 // this.$ui.hideloading();
 
                 // console.log(res)
@@ -270,9 +357,9 @@ var _index = _interopRequireDefault(__webpack_require__(/*! @/utils/http/index.j
                 } else {
                   that.$ui.toast(res.Msg);
                 }
-                if (callback) callback();_context2.next = 12;break;case 9:_context2.prev = 9;_context2.t0 = _context2["catch"](1);
+                if (callback) callback();_context6.next = 12;break;case 9:_context6.prev = 9;_context6.t0 = _context6["catch"](1);
 
-                console.log('请求结果false : ' + _context2.t0);case 12:case "end":return _context2.stop();}}}, _callee2, null, [[1, 9]]);}))();
+                console.log('请求结果false : ' + _context6.t0);case 12:case "end":return _context6.stop();}}}, _callee6, null, [[1, 9]]);}))();
 
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))

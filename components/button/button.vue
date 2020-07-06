@@ -188,7 +188,7 @@
 	}
 
 	.tui-primary-hover {
-		background: #048788!important;
+		background:var(--cl_danger);
 		color: #e5e5e5 !important;
 	}
 

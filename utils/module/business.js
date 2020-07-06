@@ -476,15 +476,7 @@ const Set = {
 		}, ifLoad)
 	},
 	
-	// code获取OpenId
-	GetOpenId: (data, ifLoad = false) => {
-		return http.request({
-			url: '/api/Authorize/GetOpenId', 
-			method: 'POST',
-			data,
-			// handle:true
-		}, ifLoad)
-	},
+
 	
 	
 	// 模拟下单

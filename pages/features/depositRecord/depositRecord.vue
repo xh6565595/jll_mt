@@ -2,7 +2,7 @@
 	<view class="pages">
 		<view class="tabBar">
 			<sun-tab :value.sync="current" @change="objectChange" :tabList="type==1?tabObjectList1:tabObjectList2" rangeKey="name"
-			 activeColor="#039798"></sun-tab>
+			 activeColor="#FF7647"></sun-tab>
 		</view>
 		<swiper class="swiper banners" :indicator-dots="false" :autoplay="false" :current.sync="current" @change="_change">
 			<swiper-item class="swiper-item ">

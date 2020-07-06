@@ -1,0 +1,11 @@
+{
+  "navigationBarTitleText": "订单详情",
+  "navigationBarTextStyle": "black",
+  "navigationBarBackgroundColor": "#fff",
+  "usingComponents": {
+    "tui-skeleton": "/components/tui-skeleton/tui-skeleton",
+    "pay-panel": "/components/PayPanel/PayPanel",
+    "tui-list-cell": "/components/list-cell/list-cell",
+    "tui-list-view": "/components/list-view/list-view"
+  }
+}

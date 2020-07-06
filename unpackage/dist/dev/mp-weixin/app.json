@@ -6,14 +6,19 @@
     "pages/main/details/details",
     "pages/activity/activity",
     "pages/h5share/h5share",
-    "pages/features/createOrder/createOrder"
+    "pages/features/createOrder/createOrder",
+    "pages/features/order/order",
+    "pages/features/order/orderDetail/orderDetail",
+    "pages/features/deposit/deposit",
+    "pages/features/depositRecord/depositRecord",
+    "pages/main/serverCenter/serverCenter",
+    "pages/main/serverDetail/serverDetail"
   ],
   "subPackages": [],
   "window": {
     "navigationBarTextStyle": "black",
     "navigationBarBackgroundColor": "#ffffff",
-    "backgroundColor": "#f8f8f8",
-    "animationType": "fade-in"
+    "backgroundColor": "#f8f8f8"
   },
   "tabBar": {
     "color": "#999",
@@ -52,6 +57,5 @@
     "icon": "/components/icon/icon",
     "tui-modal": "/components/modal/modal",
     "tui-tag": "/components/tag/tag"
-  },
-  "sitemapLocation": "sitemap56.json"
+  }
 }

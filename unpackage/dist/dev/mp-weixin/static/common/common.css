@@ -56,7 +56,9 @@ image {
 .blue {
 	background: blue;
 }
-
+.gray{
+	color: #999;
+}
 
 /* 盒子布局 */
 .flex_y {
@@ -249,45 +251,6 @@ image {
 	
 }
 
-.cm_items {
-	align-items: flex-start;
-}
-.cm_items .itemLogo {
-	width: 180rpx;
-	height: 180rpx;
-	border-radius: 10rpx;
-	margin-right: 24rpx;
-	background-color: #f9f9f9;
-}
-
-.cm_items .cm_price_box {
-	margin-top: 20rpx;
-}
-.cm_items .cm_des {
-	margin-top: 14rpx;
-}
-.cm_items .subavatars{
-	width: 50rpx;
-	height: 50rpx;
-	border: 2rpx solid #fff;
-	border-radius: 50%;
-}
-.cm_items  .selectTags{
-	padding: 0 24rpx;
-	height: 38rpx;
-	line-height: 38rpx;
-	border-radius: 19rpx;
-	background-color: #FEF2E9;
-	color: #F35B28;
-	font-size: 22rpx;
-}
-
-.cm_items  .cm_item_price{
-	color: #DD3A30;
-	font-weight: 600;
-	margin-top: 24rpx;
-	margin-bottom: 24rpx;
-}
 
 
 

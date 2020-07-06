@@ -29,7 +29,7 @@ if(!uni.getStorageSync('global_Set_jll')){
 const UI = {
 	toast: function(text, duration, success) {
 
-		// #ifdef H5
+		// #ifndef APP-PLUS
 		uni.showToast({
 			title: text,
 			icon: success ? 'success' : 'none',
@@ -53,7 +53,7 @@ const UI = {
 		// #endif
 	},
 	showloading: function(text) {
-		// #ifdef H5
+		// #ifndef APP-PLUS
 		uni.showLoading({
 			title: text
 		})
@@ -68,7 +68,7 @@ const UI = {
 		// #endif
 	},
 	hideloading: function() {
-		// #ifdef H5
+		// #ifndef APP-PLUS
 		uni.hideLoading()
 		// #endif
 		// #ifdef APP-PLUS
@@ -105,7 +105,7 @@ async function initGlobalSet() {
 				
 				let statusCode = res.statusCode;
 				if (statusCode == 200 && res.data.Success) {
-					console.log(res.data.Data);
+					// console.log(res.data.Data);
 					uni.setStorageSync('global_Set_jll', res.data.Data);
 					let global_Set = res.data.Data
 					createdFilter(global_Set)

@@ -5,46 +5,69 @@
 		<text class="text">您尚未登录</text>
 		<text class="text">需要获取您的授权之后完成登录</text>
 		<button type="success" class="btns" open-type="getUserInfo" @getuserinfo="getuserinfo">微信登录</button>
+		<accredit ref="userBox">
+			<view class="formBox" slot="content">
+				<view class="cm_title cm_tex_c"> 账户绑定</view>
+				<view class=" inputBoxs ">
+					<text class="label  ">手机号码</text>
+				</view>
+					
+				<view class=" inputBoxs  flex flex_center">					
+					<input class="cm_tex_l f1 inp" type="text"  v-model="formParams.mobile" placeholder="请输入手机号">
+					<view class="yzmBtn" size="mini" hover-class="cm_hover" @tap="_getCode">{{seconds>0?seconds+'s':'发送验证码'}}</view>
+				</view>
+				<view class=" inputBoxs ">
+					<text class="label  ">验证码</text>
+				</view>
+				<view class=" inputBoxs ">
+					<!-- <input class="f1" type="number" clearable  v-model="formParams.validate" placeholder="请输入验证码"> -->
+					 <one-input ref="hi" :maxlength="6"></one-input>
+				</view>
+				<button type="success" class="btns">立即登录</button>
+			</view>		
+		</accredit>
 	</view>
 </template>
 
 <script>
+import  accredit from '@/components/accredit/accredit.vue';
 import http from '@/utils/http/index.js';
+import oneInput from '@/components/myp-one/myp-one'
 export default {
 	data() {
 		return {
 			loadModal: true,
 			updatedInfo: {},
 			result: '',
-			loginParams: {
-				username: '',
-				password: '',
-				vilidate: '000000'
-			},
-			ifProdVersion: false //是否是正式版本
+			effective:'',
+			formParams:{
+				"openId": "",
+				"mobile": "",
+				"invitation":"",   //邀请码
+				"nickname":"",   //微信昵称
+				"headimgurl":"",    //用户头像
+				"share_user_id":"", //userid 分享活动
+			}
 		};
 	},
+	components:{
+		accredit,
+		oneInput
+	},
 	onLoad() {
+		let that = this
+		const opid= uni.getStorageSync('jll_opid')
+		if(opid){
+			// 已存在账户
+			that.autoLogin(opid);
+		}
 		
-		// uni.authorize({
-		//     scope: 'scope.userLocation',
-		//     success() {
-		// 		console.log(111) 
-		//     }
+		// uni.switchTab({
+		// 	url:'../main/main'
+		// }) 
+		// uni.redirectTo({
+		// 	url:'../main/serverCenter/serverCenter'
 		// })
-		
-		uni.login({
-		  provider: 'weixin',
-		  success: function (res) {
-		    // console.log(res);
-			let code =  res.code;
-			// 获取code换opid
-			
-		  }
-		});
-		uni.switchTab({
-			url:'../main/main'
-		})
 	},
 	computed: {
 		hasLogin() {
@@ -55,59 +78,119 @@ export default {
 		}
 	},
 	methods: {
+		// 获取验证码
+		async _getCode() {
+			if (this.effective) return;
+			let self = this;
+			let data = {
+				mobile:this.myAccount  ,
+				type: 8  //1,注册 2,登录 3,找回 4.银行卡 8-提现
+			};				
+			try{
+				let res = await this.$api.getValidCode(data);
+				console.log(JSON.stringify(res))
+				if (res.result == 1) {
+					uni.showToast({
+					    title: '验证码已发送',
+						position:'bottom'
+					});
+					
+					self.effective = true;
+					self.seconds = 60;
+					let time = setInterval(()=>{
+						self.seconds-=1;
+						if(self.seconds==0){
+							self.effective = false;
+							clearInterval(time)
+						}
+					},1000)
+				} else {
+				    uni.showToast({
+				        icon: 'none',
+				        title: res.data,
+				    });
+				}
+			}catch(err){
+				console.log( '请求结果false : ' + err )
+			}
+		},
+		// 换取opndid
+		async getopId(code){
+			let that = this
+			try {
+				this.$ui.showloading()
+				let res = await this.$api.GetOpenId({wx_code:code}, false);
+				this.$ui.hideloading()
+				if (res.Success) {
+					// oNDKY5B658gwmlw5vZnwEUOdG1io
+					let opid = res.Msg;
+					uni.setStorageSync('jll_opid',opid);
+					// that.$refs.userBox.showModal()
+					return {
+						success:true,
+						data:opid
+					}
+				}else{
+					return {
+						success:false
+					}
+				}
+			} catch (err) {
+				// console.log('请求结果false : ' + err);
+				return {
+					success:false
+				}
+			}
+		},
 		getuserinfo(res){
-			console.log(res.detail.userInfo)
+			let that = this
+			let userInfo = res.detail.userInfo
+			
+			uni.login({
+			  provider: 'weixin',
+			  success:async function (res) {
+				let code =  res.code;
+				// 获取code换opid
+				const r = await that.getopId(code)	
+				
+				if(r.success){
+					that.$refs.userBox.showModal()
+					// that.register(r.data)
+				}
+			  }
+			});
+			
 			// uni.chooseAddress({
 			//   success (res) {
 			//     console.log(res)
 			//   }
 			// })
-			uni.switchTab({
-				url:'../main/main'
-			})
+			// uni.switchTab({
+			// 	url:'../main/main'
+			// })
 		},
-		
-
-		async autoLogin() {
-			if (this.hasLogin) {
-				return;
-			}
-			// console.log(666666666666)
+		// 新用户注册
+		async register(opid){
+			
+			
+		},
+		// opid直接登录
+		async autoLogin(opid) {
 			let that = this;
-			const user = uni.getStorageSync('user');
-			// console.log(user)
-			if (user) {
-				this.loginParams.username = user.username;
-				this.loginParams.password = user.password;
-			} else {
-				uni.reLaunch({
-					url: '/pages/main/main'
-				});
-				return false;
-			}
 
 			try {
-				// this.$ui.showloading()
-				// that.loading = true
-				let res = await this.$api.userLogin(this.loginParams, false);
-				// this.$ui.hideloading()
-				// that.loading = false
-				// console.log(res)
+				this.$ui.showloading()
+				let res = await this.$api.WxTokenLogin({openId:opid}, false);
+				this.$ui.hideloading()
+		
 				if (res.Success) {
-					if (res.Data.jykj) uni.setStorageSync('jykj_token', res.Data.jykj);
-					if (res.Data.fskj) uni.setStorageSync('fskj_token', res.Data.fskj);
-					if (res.Data.vipkj) uni.setStorageSync('vipkj_token', res.Data.vipkj);
-					if (res.Data.svipkj) uni.setStorageSync('svipkj_token', res.Data.svipkj);
-					if (res.Data.hp) uni.setStorageSync('hepai_token', res.Data.hp);
-					uni.setStorageSync('user',that.loginParams);
-					
+					console.log(res)
+					return
 					that.$store.commit('login');
-					// this.$ui.toast('登陆成功');
-					uni.reLaunch({
+					uni.redirectTo()({
 						url: '/pages/main/main'
 					});	
-					// console.log(res)
-					that.initUser();
+				
 				} else {
 					uni.reLaunch({
 						url: '/pages/main/main'
@@ -178,6 +261,19 @@ export default {
 		font-size: 32rpx;
 		background-color: #08c163;
 		box-shadow:  0 4rpx 4rpx #08c163;
+	}
+	.formBox{
+		width: 100%;
+		.inputBoxs {
+			// justify-content: center;
+			align-items: center;
+			line-height: 86rpx;
+			height: 86rpx;
+		
+			.inp {
+				width: 80%
+			}
+		}
 	}
 }
 </style>

@@ -171,7 +171,7 @@
 	opacity: 0.5;
 }
 .tui-primary-hover {
-	background: #048788!important;
+	background:var(--cl_danger);
 	color: #e5e5e5 !important;
 }
 .tui-primary-outline::after {

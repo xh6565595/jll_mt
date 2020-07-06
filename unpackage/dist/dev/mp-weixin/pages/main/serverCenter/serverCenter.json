@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "派单中心",
+  "navigationBarTextStyle": "black",
+  "navigationBarBackgroundColor": "#f4f4f4",
+  "usingComponents": {
+    "sun-tab": "/components/sun-tab/sun-tab",
+    "tui-tips": "/components/extend/tips/tips"
+  }
+}

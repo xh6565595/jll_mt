@@ -39,10 +39,10 @@ var UI = {
   toast: function toast(text, duration, success) {
 
 
-
-
-
-
+    uni.showToast({
+      title: text,
+      icon: success ? 'success' : 'none',
+      duration: duration || 2000 });
 
 
 
@@ -63,8 +63,8 @@ var UI = {
   },
   showloading: function showloading(text) {
 
-
-
+    uni.showLoading({
+      title: text });
 
 
 
@@ -78,7 +78,7 @@ var UI = {
   },
   hideloading: function hideloading() {
 
-
+    uni.hideLoading();
 
 
 
@@ -131,8 +131,8 @@ function initGlobalSet() {return _initGlobalSet.apply(this, arguments);}
 // 创建全局的过滤器
 function _initGlobalSet() {_initGlobalSet = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {var that;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:that = this;try {uni.request({ url: _index.default.baseUrl + '/api/Service/Config', //仅为示例，并非真实接口地址。
                 method: 'get', data: {}, header: { 'Content-Type': 'application/json' // Authorization: value
-                }, success: function success(res) {var statusCode = res.statusCode;if (statusCode == 200 && res.data.Success) {console.log(res.data.Data);uni.setStorageSync('global_Set_jll', res.data.Data);var global_Set = res.data.Data;createdFilter(global_Set);}}, fail: function fail(err) {console.log(err);} });} catch (e) {that.errorCallback();}case 2:case "end":return _context.stop();}}}, _callee, this);}));return _initGlobalSet.apply(this, arguments);}function createdFilter(set) {var filters = {};Object.keys(set).forEach(function (key) {
-    // console.log(key,set[key])
+                }, success: function success(res) {var statusCode = res.statusCode;if (statusCode == 200 && res.data.Success) {// console.log(res.data.Data);
+                    uni.setStorageSync('global_Set_jll', res.data.Data);var global_Set = res.data.Data;createdFilter(global_Set);}}, fail: function fail(err) {console.log(err);} });} catch (e) {that.errorCallback();}case 2:case "end":return _context.stop();}}}, _callee, this);}));return _initGlobalSet.apply(this, arguments);}function createdFilter(set) {var filters = {};Object.keys(set).forEach(function (key) {// console.log(key,set[key])
     var filter = set[key];
     filters[key + 'Filter'] = function (val) {
       var r;
@@ -157,20 +157,20 @@ _App.default.mpType = 'app';
 
 
 // 全局组件
-var LoadMore = function LoadMore() {__webpack_require__.e(/*! require.ensure | components/uni-load-more/uni-load-more */ "components/uni-load-more/uni-load-more").then((function () {return resolve(__webpack_require__(/*! @/components/uni-load-more/uni-load-more.vue */ 79));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};
-_vue.default.component('LoadMore', LoadMore);var tuiButton = function tuiButton() {__webpack_require__.e(/*! require.ensure | components/button/button */ "components/button/button").then((function () {return resolve(__webpack_require__(/*! @/components/button/button.vue */ 86));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};
+var LoadMore = function LoadMore() {__webpack_require__.e(/*! require.ensure | components/uni-load-more/uni-load-more */ "components/uni-load-more/uni-load-more").then((function () {return resolve(__webpack_require__(/*! @/components/uni-load-more/uni-load-more.vue */ 128));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};
+_vue.default.component('LoadMore', LoadMore);var tuiButton = function tuiButton() {__webpack_require__.e(/*! require.ensure | components/button/button */ "components/button/button").then((function () {return resolve(__webpack_require__(/*! @/components/button/button.vue */ 135));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};
 
 
-_vue.default.component('tuiButton', tuiButton);var tuiNav = function tuiNav() {__webpack_require__.e(/*! require.ensure | components/tui-navigation-bar/tui-navigation-bar */ "components/tui-navigation-bar/tui-navigation-bar").then((function () {return resolve(__webpack_require__(/*! @/components/tui-navigation-bar/tui-navigation-bar */ 93));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};
+_vue.default.component('tuiButton', tuiButton);var tuiNav = function tuiNav() {__webpack_require__.e(/*! require.ensure | components/tui-navigation-bar/tui-navigation-bar */ "components/tui-navigation-bar/tui-navigation-bar").then((function () {return resolve(__webpack_require__(/*! @/components/tui-navigation-bar/tui-navigation-bar */ 142));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};
 
 
-_vue.default.component('tuiNav', tuiNav);var Icon = function Icon() {__webpack_require__.e(/*! require.ensure | components/icon/icon */ "components/icon/icon").then((function () {return resolve(__webpack_require__(/*! @/components/icon/icon */ 100));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};
+_vue.default.component('tuiNav', tuiNav);var Icon = function Icon() {__webpack_require__.e(/*! require.ensure | components/icon/icon */ "components/icon/icon").then((function () {return resolve(__webpack_require__(/*! @/components/icon/icon */ 149));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};
 
 
-_vue.default.component('Icon', Icon);var tuiModal = function tuiModal() {__webpack_require__.e(/*! require.ensure | components/modal/modal */ "components/modal/modal").then((function () {return resolve(__webpack_require__(/*! @/components/modal/modal */ 107));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};
+_vue.default.component('Icon', Icon);var tuiModal = function tuiModal() {__webpack_require__.e(/*! require.ensure | components/modal/modal */ "components/modal/modal").then((function () {return resolve(__webpack_require__(/*! @/components/modal/modal */ 156));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};
 
 
-_vue.default.component('tuiModal', tuiModal);var tuiTag = function tuiTag() {__webpack_require__.e(/*! require.ensure | components/tag/tag */ "components/tag/tag").then((function () {return resolve(__webpack_require__(/*! @/components/tag/tag */ 114));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};
+_vue.default.component('tuiModal', tuiModal);var tuiTag = function tuiTag() {__webpack_require__.e(/*! require.ensure | components/tag/tag */ "components/tag/tag").then((function () {return resolve(__webpack_require__(/*! @/components/tag/tag */ 163));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};
 
 
 _vue.default.component('tuiTag', tuiTag);
