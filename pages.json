@@ -55,6 +55,20 @@
 				"navigationBarTextStyle": "black",
 				"navigationBarBackgroundColor": "#fff"
 			}
+        },{
+            "path" : "pages/features/order/orderDetail/orderDetail",
+            "style" : {
+				"navigationBarTitleText": "订单详情",
+				"navigationBarTextStyle": "black",
+				"navigationBarBackgroundColor": "#fff"
+			}
+        },{
+            "path" : "pages/features/deposit/deposit",
+            "style" : {
+				"navigationBarTitleText": "提现",
+				"navigationBarTextStyle": "black",
+				"navigationBarBackgroundColor": "#f4f4f4"
+			}
         }
     ],
 	"tabBar": {

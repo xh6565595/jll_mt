@@ -402,8 +402,8 @@ export default {
 		padding: 20rpx;
 		padding-bottom: 0;
 		.itemBoxTop {
-			padding: 24rpx 20rpx;
-			padding-bottom: 0;
+			// padding: 24rpx 20rpx;
+			padding-bottom: 20rpx;
 		
 			background: #fff;
 			.shopIcon {

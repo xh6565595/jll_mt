@@ -96,16 +96,30 @@
 				
 			</view>
 		</view>
+		<rule ref="rule"></rule>
+		
+		<!-- <accredit ref="rule">
+			<view slot="content" class="ruleBox">
+				<image src="../../static/img/user/hhr.jpg" mode="scaleToFill" style="width: 200rpx;height: 90rpx;"></image>
+				<view style="color: #666;margin:20rpx auto;font-size: 36rpx;">您收到一条事业合伙人邀请</view>
+				<button type="default" class="bg-gradual-orange tbBtn" @tap="_toAccep">接受邀请</button>
+			</view>
+		</accredit> -->
 	</view>
 </template>
 
 <script>
+	import rule from '@/components/rule/rule.vue';
+	// import accredit from '@/components/accredit/accredit.vue';
 	export default {
 		data() {
 			return {
 				tap:0
 			};
-		}
+		},
+		components: {
+			rule
+		},
 	}
 </script>
 

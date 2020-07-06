@@ -11,7 +11,7 @@
 				<view class="name cm_title f1">asdfdsf</view>
 				<text class="name  f1">asdf</text>
 			</view>
-			<navigator class="tx" url="/pages/role/login/login">提现</navigator>
+			<navigator class="tx" url="/pages/features/deposit/deposit">提现</navigator>
 		</view>
 		
 		
