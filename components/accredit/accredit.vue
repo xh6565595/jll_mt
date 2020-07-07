@@ -17,7 +17,8 @@
 			autoClose:{
 				type:Boolean,
 				default:false
-			}
+			},
+			
 		},
 		methods:{
 			hideModal() {
@@ -41,8 +42,8 @@
 		height: 100vh;
 		background: rgba(0,0,0,.6);
 		.dialog{
-			width: 90vw;
-			padding: 48rpx;
+			// width: 80vw;
+			// padding: 48rpx;
 			background: #fff;
 			border-radius: 30rpx;
 		}

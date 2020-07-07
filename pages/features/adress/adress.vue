@@ -17,7 +17,8 @@
 					</view>
 					<view class="rightBar flex flex_center" @tap="delect(item)">
 						<!-- <image src="../../../static/img/sc.png" mode="scaleToFill" style="width: 48rpx;height: 48rpx;"></image> -->
-						<Icon  name="delete" :size="16" ></Icon>
+						<!-- <Icon  name="delete" :size="16" ></Icon> -->
+						<text class="iconfont icon-guanbi"></text>
 					</view>
 				</view>
 			</block>
@@ -29,8 +30,8 @@
 		<view style="padding:  30rpx;">
 			<navigator url="/pages/features/newAdress/newAdress">
 				<tui-button type="primary" shape="circle" :disabled="false" :loading="loading">
-					<view class="flex flex_center cm_title" style="width: 100%;height:100%;color: #fff;">新建地址 <Icon name="plus" color="#fff"
-						 :size="16"></Icon>
+					<view class="flex flex_center cm_title" style="width: 100%;height:100%;color: #fff;">
+						新建地址 <text class="iconfont icon-biji" style="color: #fff;"></text>
 					</view>
 				</tui-button>
 			</navigator>

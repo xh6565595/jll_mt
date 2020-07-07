@@ -21,35 +21,14 @@
 						<swiper-item><image :src="item" mode="aspectFill" lazy-load="true" class="swiper-item uni-bg-red" style="width: 100%;height: 100%;"></image></swiper-item>
 					</block>
 				</swiper>
-				<!-- </view> -->
-				<!-- <view class="bar flex flex_y flex_center" v-if="goods.is_activity==1"> 
-					<view class="acountTit">{{activityInfo.title}}</view>
-					<view  class="acountConten flex  flex_center" style="margin-top: 10rpx;">
-						<view class="price">{{goods.project_raise_price}}</view>
-						<view class="price delete">321312</view>
-						<view class="f1"></view>
-					</view>
-					<view  class="aside flex flex_y flex_center"  >
-						<view>距折扣结束</view>
-						<view>
-							<CountCalc color="#fff" background-color="#D8442E" border-color="#D8442E" splitorColor="#ED754B" :show-colon="true"  :show-day="false" v-if="restTimeValied"
-							 :hour="restTimeValied.h" :minute="restTimeValied.m" :day="restTimeValied.d" :second="restTimeValied.s"  />
-							<text class="f1" style="color: #ED754B;margin-top: 14rpx;"></text>	
-						</view>
-					</view>
-				</view> -->
 			</view>
 
 			<view class="boxs box1">
 				<view class="flex titleBox tui-skeleton-fillet" v-if="goods.is_activity==0">
-					<!-- <text class="cm_text">{{ goods.auction_count == 0 ? '起拍价' : '最新出价' }}</text> -->
 					<text class="cm_prize">￥{{ goods.project_raise_price }}</text>
 					<text class="cm_delete">￥{{ goods.project_price }}</text>
 				</view>
-			<!-- 	<view class="cm_title tui-skeleton-fillet" style="line-height: 40rpx;">
-					<text class="tags" v-if="goods.is_activity == 1">限时抢购</text>
-					{{ goods.project_name }}
-				</view> -->
+
 				
 				<view class="logoBox flex  flex_center">
 					<image src="../../../static/image/logo.png" mode="widthFix" class="logo"></image>
@@ -83,15 +62,15 @@
 				</view>
 			</view>
 			<view class="boxs box3">
-				<view class="cm_title"></view>
-				<view class="picBox flex  flex_center">
+				<!-- <view class="picBox flex  flex_center"> -->
+				<navigator  url="/pages/main/main" open-type="switchTab" class="picBox flex  flex_center">
 					<image :src="business.shop_logo" mode="aspectFill" class="avatar tui-skeleton-rect"></image>
 					<view class="f1 tui-skeleton-fillet">
 						<view class=" cm_title   name">{{ business.shop_name }}</view>
-					</view>
-					<navigator  url="/pages/main/main" open-type="switchTab" class="cm_des">2016-12-25</navigator>
-				</view>
-
+					</view>	
+					<text class="cm_des iconfont icon-fanhui3"></text>
+				</navigator>
+				<!-- </view> -->
 			</view>
 			<view class="commonTit flex flex_center">
 				<view class="blank"></view>
@@ -352,13 +331,7 @@ export default {
 		},
 		// 购买
 		_buy(data) {
-			console.log(222, data);
-			if (false) {
-				this.content = '请您先登录';
-				this.action = 'login'; ///features/authentication/authentication'
-				this.modal = true;
-				return;
-			} else {
+			
 				let d = {
 					id: data.id ? data.id : '',
 					difference: data.difference ? data.difference.join(',') : '',
@@ -386,48 +359,9 @@ export default {
 				uni.navigateTo({
 					url: '/pages/features/createOrder/createOrder?type=0'
 				});
-				// }
-			}
 		},
 
-		// 加入购物车
-		async _addCard(data) {
-			console.log(111, data);
-			// if(!data.id){
-			// 	this.$ui.toast('请选择规格')
-			// 	return
-			// }
-			let that = this;
-			let agr = {
-				// project_code:
-				project_code: this.formParams.project_code,
-				parameter_code: data.id ? data.id : '', //商品id
-				project_num: data.selectNum,
-				project_service1: data.goods_service_code.serve1.service_code,
-				project_service2: data.goods_service_code.serve2.service_code,
-				project_service3: data.goods_service_code.serve3.service_code
-			};
-			// console.log(agr)
-			try {
-				// this.$ui.showloading();
-				let res = await this.$api.cardAdd(agr);
-				// this.$ui.hideloading();
-				if (res.Success) {
-					// uni.$emit('refresh_user');
-					uni.$emit('refresh_cart');
-					that.$ui.toast('已成功添加至购物车');
-					// setTimeout(function() {
-					// 	uni.redirectTo({
-					// 		url: '/pages/features/auction/auction?current=1'
-					// 	});
-					// }, 1000);
-				} else {
-					that.$ui.toast(res.Msg);
-				}
-			} catch (err) {
-				console.log('请求结果false : ' + err);
-			}
-		},
+		
 
 		// 取消支付
 		cancelPass() {

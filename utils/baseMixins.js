@@ -2,8 +2,8 @@ import http from '@/utils/http/index.js';
 export const baseMixins = {
 	data() {
 		return {
-			baseKey: '/api/Goods/GetCategoryList',
-			hasRow: false,
+			baseKey: 'GetGoodsList',
+			hasRow: '',
 			list: [],
 			loadStatus: 'more', // 上拉的状态：more-loading前；loading-loading中；noMore-没有更多了
 			// refreshing: false,
@@ -14,147 +14,91 @@ export const baseMixins = {
 		}
 	},
 	onLoad() {
-		let that = this
-		uni.getStorage({
-			key: 'access_token',
-			success: function(res) {
-				// console.log(res.data);
-				let value = res.data;
-				if (value) {
-					that.token = value;
-					that._loadData('refresh')
-				}
-			},
-			fail: function(err) {
-				// that.initSet();
-			}
-		});
+		this._loadData('refresh')
 	},
 	// 下拉刷新
 	onPullDownRefresh() {
 		this.formParams.pageIndex = 1;
 		this.list = [];
-		this._loadData('refresh', () => {
-			uni.stopPullDownRefresh();
-		});
+		this._loadData('refresh');
 	},
 	// 上拉加载
 	onReachBottom() {
+		console.log(this.loadStatus)
 		if (this.loadStatus == 'noMore') {
 			return;
 		}
 		this.formParams.pageIndex += 1;
 		this.loadStatus = 'loading';
-		this._loadData('add', () => {
-			// this.loadStatus = 'more'
-		});
+		this._loadData('add');
 	},
 	methods: {
-		// _onRefresh() {
-		// 	this.formParams.pageIndex = 1;
-		// 	this._loadData('refresh');
-		// },
-
-		// _loadMore(tabItem) {
-		// 	// console.log(111)
-		// 	if (this.loadStatus == 2) {
-		// 		return;
-		// 	}
-		// 	this.formParams.pageIndex += 1;
-		// 	this._loadData('add');
-		// },
-		_loadData(type) {
-
+		loadDataComplete(){
+			
+		},
+		async _loadData(type) {
 			let that = this;
-			// console.log(that.formParams)
-			if (type == 'add') {
-				// 加载更多
-				
-				that.loadStatus = 'loading';
-			} else {
-				// 刷新
-				that.refreshing = true
-			}
-			if (this.showLoad) {
-				plus.nativeUI.showWaiting()
-			}
-			return new Promise((resolve, reject) => {
-				uni.request({
-					url: http.baseUrl + that.baseKey, //仅为示例，并非真实接口地址。
-					method: 'POST',
-					data: that.formParams,
-					header: {
-						'Content-Type': 'application/json',
-						Authorization: token
-					},
-					timeout: 3000,
-					success: res => {
-						let ress = res.data;
-						// console.log(res)
-						if (ress.result == 1) {
-							if (type == 'add') {
-								// 加载更多
-								if (that.hasRow) {
-									that.list = that.list.concat(ress.data.rows);
-									if (ress.data.total && ress.data.total <= that.list.length) {
-										that.loadStatus = 'noMore';
-										// 没有数据了
-									} else {
-										that.loadStatus = 'more';
-									}
-								} else {
-									that.list = that.list.concat(ress.data);
-									if (ress.total && ress.total <= that.list.length) {
-										that.loadStatus = 'noMore';
-										// 没有数据了
-									} else {
-										that.loadStatus = 'more';
-									}
-								}
+			try {
+				let res = await http[this.baseKey](that.formParams)
+				// console.log(res);
+				if (type == 'add') {
+					that.loadStatus = 'loading';
+				} else {
+					uni.stopPullDownRefresh();
+				}
+				if (res.Success) {
+					if (type == 'add') {
+						// 加载更多
+						if (that.hasRow) {
+							that.list = that.list.concat(res.Data[that.hasRow]);
+							if (res.Data[that.hasRow].length < that.formParams.pageSize) {
+								that.loadStatus = 'noMore';
+								// console.log(that.loadStatus )
+								// 没有数据了
 							} else {
-								// 刷新
-								if (that.hasRow) {
-									that.list = ress.data.rows;
-									if (ress.data.total && ress.data.total <= that.list.length) {
-										that.loadStatus = 'noMore';
-										// 没有数据了
-									} else {
-										that.loadStatus = 'more';
-									}
-
-								} else {
-									that.list = ress.data
-									if (ress.total && ress.total <= that.list.length) {
-										that.loadStatus ='noMore';
-										// 没有数据了
-									} else {
-										that.loadStatus = 'more';
-									}
-								}
-
-								that.refreshing = false
+								that.loadStatus = 'more';
+							}
+						} else {
+							that.list = that.list.concat(res.Data);
+							if (res.Data.length < that.formParams.pageSize) {
+								that.loadStatus = 'noMore';
+								// 没有数据了
+							} else {
+								that.loadStatus = 'more';
+							}
+						}
+					} else {
+						// 刷新
+						if (that.hasRow) {
+							that.list = res.Data[that.hasRow];
+							if (res.Data[that.hasRow].length < that.formParams.pageSize) {
+								that.loadStatus = 'noMore';
+								// 没有数据了
+							} else {
+								that.loadStatus = 'more';
 							}
 
 						} else {
-							that.refreshing = false
-							uni.showToast({
-								title: '请求失败',
-								icon: 'none'
-							});
+							that.list = res.Data
+							if (res.Data.length < that.formParams.pageSize) {
+								that.loadStatus = 'noMore';
+								// 没有数据了
+							} else {
+								that.loadStatus = 'more';
+							}
 						}
-					},
-					fail: err => {
-						console.log(err)
 						that.refreshing = false
-						that.loadStatus = 0;
-					},
-					complete(err) {
-						if (that.showLoad) {
-							plus.nativeUI.closeWaiting()
-						}
 					}
-				});
-			})
+					that.loadDataComplete(true)
+				} else {
+					that.$ui.toast(res.Msg);
+					that.loadDataComplete(false)
+				}
+			} catch (err) {
+				console.log('请求结果false : ' + err);
+				that.loadStatus = 'more';
+				that.loadDataComplete(false)
+			}
 		}
 	}
 

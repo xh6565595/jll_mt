@@ -27,7 +27,7 @@ export default {
 	},
 	interceptor: {
 		request: function(config, ifLoad) {
-			const value = uni.getStorageSync('hepai_token');
+			const value = uni.getStorageSync('access_token');
 			// console.log(value)
 			if (value) {
 				config.header.Authorization = value

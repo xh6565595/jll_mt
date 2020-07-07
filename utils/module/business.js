@@ -2,17 +2,16 @@
 
 import http from '../http/interface'
 const Set = {
-	// 最后一个子订单是否退邮费
-	ifLastSubOrder:(data) => {
+	// 获取活动订单推荐
+	GetShareOrderList:(data) => {
 	    return http.request({
-	        url: '/api/Order/GetChildIsSucceed',
+	        url: '/api/Order/GetShareOrderList',
 	        method: 'POST', 
 	        data,
 			// handle:true
 	    })
 	},	
-	
-	// 热门推荐
+	// 首页热门推荐
 	GetGoodsList:(data) => {
 	    return http.request({
 	        url: '/api/Project/GetGoodsList',

@@ -91,7 +91,7 @@
 					<view class=" cells flex flex_center">
 						<text class="cm_title cm_t_24">数量:</text>
 						<view class="f1"></view>
-						<tuiNumberbox :min="1" :value="selectNum" @change="change"></tuiNumberbox>
+						<tuiNumberbox :min="1" disabled :value="selectNum" @change="change"></tuiNumberbox>
 					</view>
 				<!-- </view> -->
 			</scroll-view>

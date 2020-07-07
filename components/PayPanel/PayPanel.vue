@@ -5,9 +5,9 @@
 			<view style="margin-bottom: 60rpx;">
 				<view class="cm_bdb" v-if="payList.indexOf('CCB') > -1">
 					<view class="cells flex flex_center " @click="_choose(3)">
-						<image src="./js.png" mode="" class="icons"></image>
+						<image src="/static/image/js.png" mode="scaleToFill" class="icons"></image>
 						<view class="f1 cm_title">建设银行卡支付</view>
-						<image src="./xz.png" mode="" class="icons" v-if="formParams.pay_type == 3"></image>
+						<image src="/static/image/xz.png" mode="scaleToFill" class="icons" v-if="formParams.pay_type == 3"></image>
 						<text class="wxz" v-else></text>
 					</view>
 					<view v-if="formParams.pay_type == 3" class="animated fadeIn">
@@ -30,23 +30,28 @@
 						<!-- </view> -->
 					</view>
 				</view>
-
-				<view class="cells flex flex_center cm_bdb" @click="_choose(2)" v-if="payList.indexOf('wx') > -1">
-					<image src="./wx.png" mode="" class="icons"></image>
+				<view class="cells flex flex_center cm_bdb" @click="_choose(4)" v-if="payList.indexOf('SYK') > -1">
+					<image src="/static/image/wx.png" mode="scaleToFill" class="icons"></image>
 					<view class="f1 cm_title">微信支付</view>
-					<image src="./xz.png" mode="" class="icons" v-if="formParams.pay_type == 2"></image>
+					<image src="/static/image/xz.png" mode="scaleToFill" class="icons" v-if="formParams.pay_type == 4"></image>
+					<text class="wxz" v-else></text>
+				</view>
+				<view class="cells flex flex_center cm_bdb" @click="_choose(2)" v-if="payList.indexOf('wx') > -1">
+					<image src="/static/image/wx.png" mode="scaleToFill" class="icons"></image>
+					<view class="f1 cm_title">微信支付</view>
+					<image src="/static/image/xz.png" mode="scaleToFill" class="icons" v-if="formParams.pay_type == 2"></image>
 					<text class="wxz" v-else></text>
 				</view>
 				<view class="cells flex flex_center" @click="_choose(1)" v-if="payList.indexOf('Alipay') > -1">
-					<image src="./zf.png" mode="" class="icons"></image>
+					<image src="/static/image/zf.png" mode="scaleToFill" class="icons"></image>
 					<view class="f1 cm_title">支付宝支付</view>
-					<image src="./xz.png" mode="" class="icons" v-if="formParams.pay_type == 1"></image>
+					<image src="/static/image/xz.png" mode="scaleToFill" class="icons" v-if="formParams.pay_type == 1"></image>
 					<text class="wxz" v-else></text>
 				</view>
 			</view>
-			<view class="flex flex_center">
-				<tui-button type="primary" class="sbtn" :plain="true" shape="circle" :loading="loading" @tap="_hide">取消</tui-button>
-				<tui-button type="primary" class="sbtn" shape="circle" :loading="loading" @tap="_submit">提交</tui-button>
+			<view class="flex flex_center" >
+				<button type="primary" class="f1 sbtn cm_btn_plain" :plain="true" shape="circle" :loading="loading" @tap="_hide">取消</button>
+				<button type="primary" class="f1 cm_btn sbtn"  shape="circle" :loading="loading" @tap="_submit">提交</button>
 			</view>
 		</view>
 	</view>
@@ -78,7 +83,7 @@ export default {
 				}
 			],
 			formParams: {
-				pay_type: 3, //1-支付宝 2-微信 3-CBB(建行支付)
+				pay_type: 4, //1-支付宝 2-微信 3-CBB(建行支付)
 				order_num: '', //订单号
 				install_num: '' //分期数
 			},
@@ -142,12 +147,12 @@ export default {
 				uni.showToast('开发中')
 				this._pay(1)
 			}else if(this.formParams.pay_type==2){
-				uni.showToast('开发中')
+				// uni.showToast('开发中')
 				this._pay(2)
 			}else if(this.formParams.pay_type==3){
 				//建行支付
 				this._pay(3)
-			}else{
+			}else if(this.formParams.pay_type==4){
 				this._pay(4)
 			}
 		},
@@ -179,7 +184,7 @@ export default {
 					if (k == 1) {
 						// 支付宝支付
 						that._toAliPay(res.Data);
-					} else if (k == 2) {
+					} else if (k == 2 || k==4) {
 						// 微信支付
 						that._toWXPay(res.Data);
 					} else if (k == 3) {
@@ -200,40 +205,36 @@ export default {
 		async _toWXPay(data) {
 			let that = this;
 				try {
-					// #ifdef H5
-						let url = window.location.href
-					// #endif
 
-
-					let res = await this.$api.GetWxJsApiConfig({url:url}, true)
+					let res = await this.$api.GetWxJsApiConfig({}, true)
 					// alert(JSON.stringify(res))
 					if (res.Success) {
-						// console.log(res);
+						console.log(res);
 						let set = res.Data;
-						jweixin.config({
-							debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
-							appId: set.appId, // 必填，公众号的唯一标识
-							timestamp: set.timestamp, // 必填，生成签名的时间戳
-							nonceStr: set.noncestr, // 必填，生成签名的随机串
-							signature: set.signature, // 必填，签名
-							jsApiList:[
-								'onMenuShareAppMessage',
-								'onMenuShareTimeline',
-								'onMenuShareQQ',
-								'onMenuShareQZone',
-								'onMenuShareWeibo',
-								'chooseWXPay'
-							] // 必填，需要使用的JS接口列表
-						});
+						// jweixin.config({
+						// 	debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+						// 	appId: set.appId, // 必填，公众号的唯一标识
+						// 	timestamp: set.timestamp, // 必填，生成签名的时间戳
+						// 	nonceStr: set.noncestr, // 必填，生成签名的随机串
+						// 	signature: set.signature, // 必填，签名
+						// 	jsApiList:[
+						// 		'onMenuShareAppMessage',
+						// 		'onMenuShareTimeline',
+						// 		'onMenuShareQQ',
+						// 		'onMenuShareQZone',
+						// 		'onMenuShareWeibo',
+						// 		'chooseWXPay'
+						// 	] // 必填，需要使用的JS接口列表
+						// });
 
-						jweixin.ready(function() {
-							// 我自己的pid
-							that.wsPay(data)
-						});
-						jweixin.error(function(res){
-							// config信息验证失败会执行error函数，如签名过期导致验证失败，具体错误信息可以打开config的debug模式查看，也可以在返回的res参数中查看，对于SPA可以在这里更新签名。
-							console.log(JSON.stringify(res))
-						});
+						// jweixin.ready(function() {
+						// 	// 我自己的pid
+						that.wsPay(set)
+						// });
+						// jweixin.error(function(res){
+						// 	// config信息验证失败会执行error函数，如签名过期导致验证失败，具体错误信息可以打开config的debug模式查看，也可以在返回的res参数中查看，对于SPA可以在这里更新签名。
+						// 	console.log(JSON.stringify(res))
+						// });
 					} else {
 
 					}
@@ -245,38 +246,25 @@ export default {
 			// 微信支付
 			async wsPay(data){
 				let that = this
-				jweixin.chooseWXPay({
-					timestamp: data.timeStamp, // 支付签名时间戳，注意微信jssdk中的所有使用timestamp字段均为小写。但最新版的支付后台生成签名使用的timeStamp字段名需大写其中的S字符
-					nonceStr: data.nonceStr, // 支付签名随机串，不长于 32 位
-					package: data.package, // 统一支付接口返回的prepay_id参数值，提交格式如：prepay_id=\*\*\*）
-					signType: data.signType, // 签名方式，默认为'SHA1'，使用新版支付需传入'MD5'
-					paySign: data.paySign, // 支付签名
-					success: function (res) {
-					// 支付成功后的回调函数
-						// console.log(res)
-						// alert(JSON.stringify(res));
-						// 清楚购物车
-						// that.$store.commit('clearCard',()=>{})
-
-						uni.redirectTo({
-							url:'/pages/success/success'
-						})
-					}
+				
+				uni.requestPayment({
+				    provider: 'wxpay',
+				    timeStamp:  data.timeStamp,
+				    nonceStr:  data.nonceStr,
+				    package:  data.package,
+				    signType:  data.signType,
+				    paySign:  data.paySign,
+				    success: function (res) {
+				        console.log('success:' + JSON.stringify(res));
+								uni.redirectTo({
+									url:'/pages/success/success'
+								})
+				    },
+				    fail: function (err) {
+				        console.log('fail:' + JSON.stringify(err));
+				    }
 				});
-			},
-		_toAliPay(str) {
-			// let that = this;
-			// Utils.AliPay(str, () => {
-			// 	// that.$refs.successModal.show();
-			// 	// that.$store.commit('refresh_account');
-			// 	// uni.$emit('refresh_user');
-			// 	// uni.$emit('refresh_order');
-			// 	// uni.redirectTo({
-			// 	// 	url: '/pages/features/success/success?form=orderDetail'
-			// 	// });
-			// 	that.$emit('success')
-			// });
-		}
+			}
 	}
 };
 </script>
@@ -352,9 +340,11 @@ export default {
 	}
 	.sbtn {
 		// transform: scale(.8);
-		height: 70rpx;
-		line-height: 70rpx;
+		display: block;
+		// height: 60rpx!important;
+		// line-height: 60rpx!important;
 		margin: 0 20rpx;
+		
 	}
 }
 </style>

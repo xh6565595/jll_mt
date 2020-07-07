@@ -6,13 +6,16 @@
     "pages/main/details/details",
     "pages/activity/activity",
     "pages/h5share/h5share",
+    "pages/user/share/share",
     "pages/features/createOrder/createOrder",
     "pages/features/order/order",
     "pages/features/order/orderDetail/orderDetail",
     "pages/features/deposit/deposit",
     "pages/features/depositRecord/depositRecord",
     "pages/main/serverCenter/serverCenter",
-    "pages/main/serverDetail/serverDetail"
+    "pages/main/serverDetail/serverDetail",
+    "pages/features/adress/adress",
+    "pages/features/newAdress/newAdress"
   ],
   "subPackages": [],
   "window": {
@@ -57,5 +60,6 @@
     "icon": "/components/icon/icon",
     "tui-modal": "/components/modal/modal",
     "tui-tag": "/components/tag/tag"
-  }
+  },
+  "sitemapLocation": "sitemap97.json"
 }

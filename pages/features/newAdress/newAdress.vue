@@ -27,15 +27,15 @@
 						<view class="f1 flex flex_center">
 							<text class="text  ">{{text[0]?text[0]:'请选择'}}</text>
 							<!-- <image src="../../static/images/index/icon_right.png" class="img30 pdr20"></image> -->
-							<Icon name="arrowright" :size="16"></Icon>
+							<text clas></text>
 						</view>
 						<view class="f1 flex flex_center">
 							<text class="text  ">{{text[1]?text[1]:'请选择'}}</text>
-							<Icon name="arrowright" :size="16"></Icon>
+							<text class="iconfont icon-fanhui3"></text>
 						</view>
 						<view class="f1 flex flex_center">
 							<text class="text ">{{text[2]?text[2]:'请选择'}}</text>
-							<Icon name="arrowright" :size="16"></Icon>
+							<text class="iconfont icon-fanhui3"></text>
 						</view>
 					</view>
 				</tui-list-cell>

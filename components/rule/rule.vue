@@ -3,7 +3,7 @@
 		<view class="dialog">
 			<view class="cm_title">活动规则</view>
 			<scroll-view scroll-y="true" class="contentBox" >
-				<view style="width: 100rpx;height: 6000rpx;background-color: red;">sdafsdafds</view>
+				<view style="width: 100rpx">sdafsdafds</view>
 			</scroll-view>
 			<view class="footer flex flex_center">
 				<button type="default" class="cm_btn" @tap="hideModal">知道了</button>
@@ -17,7 +17,7 @@
 	export default {
 		data() {
 			return {
-				ashow:true 
+				ashow:false 
 			};
 		},
 		methods:{

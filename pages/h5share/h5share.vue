@@ -8,7 +8,7 @@
 			<!-- <view class="headTip">邀请码</view> -->
 			<view class="fxmBox">
 				<image src="../../static/image/yq_tt.png" mode="widthFix" class="bg"></image>
-				<view class="cm_title title">邀请码：HMJHJHH: {{ accountInfo.consumer_nick_name }}</view>
+				<view class="cm_title title">邀请码：{{ userInfo.consumer_nick_name }}</view>
 			</view>
 
 			<view class="sqrBox">
@@ -17,7 +17,7 @@
 			<view class="bBox ">
 				<button type="primary" class="btns" shape="circle" :disabled="false" :loading="loading1" @click="_save">保存二维码</button>
 				<!-- <a :href="share[0].imgBase">qqq</a> -->
-				<button type="primary" class="btns" shape="circle" :disabled="false" :loading="loading2" @click="_copy">复制推广链接</button>
+				<button type="primary" class="btns" shape="circle" :disabled="false" open-type="share" :loading="loading2" @click="_share">分享推广链接</button>
 			</view>
 
 			<!-- 	<view v-if="QrSrcL" class="modalBox flex_y flex flex_center animated bounceInUp">
@@ -64,7 +64,21 @@ export default {
 		levelAccount() {
 			// console.log( this.$store.state.levelAccount)
 			return this.$store.state.levelAccount;
+		},
+		userInfo() {
+			return this.$store.state.userInfo;
 		}
+	},
+	onShareAppMessage(res){
+		if (res.from === 'button') {// 来自页面内分享按钮
+		      console.log(res.target)
+		    }
+		    return {
+				  title: '分享好友，马桶免费拿',
+				  path: `/pages/index/index?code=${this.userInfo.invitation_code}`,
+				  
+				  
+		    }
 	},
 	components: {
 		tkiQrcode,
@@ -72,6 +86,9 @@ export default {
 	},
 	onLoad() {},
 	methods: {
+		_share(){
+			
+		},
 		// 生成海报
 		_createPoster() {
 			if (this.loading) return;

@@ -321,6 +321,7 @@ export default {
 	}
 	.formBox{
 		width: 100%;
+		padding: 48rpx;
 		.title{
 			color: #08c163;
 		}

@@ -23,7 +23,7 @@ const store = new Vuex.Store({
 	},
     mutations: {
         login(state, userName) {
-			console.log('login_STORE')
+			// console.log('login_STORE')
 			uni.showToast({
 				title:'登陆成功'
 			})
@@ -42,7 +42,13 @@ const store = new Vuex.Store({
 			// console.log('储存信息2')
 			state.accountInfo = {...info}
 		},
-	
+		creatOrder(state,items){
+			state.currentOrder = [...items]
+			// debugger
+		},
+		completeOrder(state){
+			state.currentOrder = new Array()
+		},
     },
 	getters:{
 		
@@ -50,7 +56,7 @@ const store = new Vuex.Store({
 	actions:{
 		// 用户登录
 		userLogin({ state,commit },token){
-			console.log(token)
+			// console.log(token)
 			try {
 				// uni.setStorageSync('access_token', token);
 				// 本地和状态管理器都需要储存登录状态
@@ -88,6 +94,37 @@ const store = new Vuex.Store({
 			} catch (e) { 
 				// error
 			}		
+		},
+		//刷新用户数据
+		refreshUser({ state,commit },callback){
+			const value = uni.getStorageSync('access_token');
+			uni.request({
+				url: SET.baseUrl + '/api/Consumer/Get', //仅为示例，并非真实接口地址。
+				method: 'get',
+				data: {},
+				header: {
+					'Content-Type': 'application/json',
+					Authorization: value
+				},
+				success: res => {
+					let statusCode = res.statusCode;
+					if (statusCode == 200 && res.data.result == 1) {
+						commit('setUserInfo', res.data.data);
+					} else{
+						uni.switchTab({
+							url: '/pages/user/user'
+						});
+					}
+				},
+				fail(err) {
+					uni.switchTab({
+						url: '/pages/user/user'
+					});
+				},
+				complete(){
+					if(callback)callback()
+				}
+			});
 		},
 	}
 })

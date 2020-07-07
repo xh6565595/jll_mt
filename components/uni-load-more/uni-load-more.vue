@@ -58,9 +58,9 @@
 	}
 </script>
 
-<style>
+<style scoped lang="scss">
 	@charset "UTF-8";
-
+	
 	.uni-load-more {
 		display: flex;
 		flex-direction: row;

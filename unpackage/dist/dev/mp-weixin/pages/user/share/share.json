@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "分享",
+  "navigationBarTextStyle": "black",
+  "usingComponents": {
+    "tki-qrcode": "/components/tki-qrcode/tki-qrcode"
+  }
+}

@@ -1,7 +1,7 @@
 <template>
 	<view class="pages">
 		<view class="tabBar">
-			<sun-tab :value.sync="current" @change="objectChange" :tabList="type==1?tabObjectList1:tabObjectList2" rangeKey="name"
+			<sun-tab :value.sync="current" @change="objectChange" :tabList="tabObjectList" rangeKey="name"
 			 activeColor="#FF7647"></sun-tab>
 		</view>
 		<swiper class="swiper banners" :indicator-dots="false" :autoplay="false" :current.sync="current" @change="_change">
@@ -12,8 +12,8 @@
 				<itemList :detail_type="detailType2" ref="list2" @agreeRefund="agreeRefund"></itemList>
 			</swiper-item>
 		</swiper>
-		<tui-modal :show="modal" @click="handleClick" @cancel="hide" content="确定该退款订单么？" :maskClosable="false" color="#333"
-		 :size="32"></tui-modal>
+		<!-- <tui-modal :show="modal" @click="handleClick" @cancel="hide" content="确定该退款订单么？" :maskClosable="false" color="#333"
+		 :size="32"></tui-modal> -->
 
 	</view>
 </template>
@@ -28,19 +28,7 @@
 	export default {
 		data() {
 			return {
-
-				tabObjectList1: [
-					//对象数组赋值
-					{
-						name: '转入',
-						value: 0
-					},
-					{
-						name: '转出',
-						value: 1
-					}
-				],
-				tabObjectList2: [
+				tabObjectList: [
 					//对象数组赋值
 					{
 						name: '收入',

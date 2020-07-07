@@ -6,17 +6,17 @@
 		</view> -->
 		<!-- 头部 -->
 		<view class="pageTop flex  flex_center">
-			<image :src="accountInfo.consumer_head ? accountInfo.consumer_head : '../../static/img/default.jpg'" mode="aspectFill" class="avatar"></image>
+			<image :src="userInfo.consumer_head?userInfo.consumer_head : '../../static/img/default.jpg'" mode="aspectFill" class="avatar"></image>
 			<view class="f1">
-				<view class="name cm_title f1">asdfdsf</view>
-				<text class="name  f1">asdf</text>
+				<view class="name cm_title f1">{{userInfo.consumer_nick_name}}</view>
+				<text class="name  f1">余额：{{userInfo.consumer_blance}}</text>
 			</view>
 			<navigator class="tx" url="/pages/features/deposit/deposit">提现</navigator>
 		</view>
 		
 		
 		<!-- <view class="shareBox "> -->
-		<navigator url="../h5share/h5share"  class="shareBox ">
+		<navigator url="./share/share"  class="shareBox ">
 			<image src="../../static/image/wd_yq.png" mode="scaleToFill" class="bg"></image>
 			<!-- <button class="share">去邀请</button> -->
 		</navigator>
@@ -34,25 +34,25 @@
 					<view class="menus flex flex_center flex_y " @tap="_href('/features/order/order?current=1')">
 						<image src="../../static/image/dd_df.png" class="menusPic"></image>
 						<text class="cm_t_24">待付款</text>
-						<view class="tips" v-if="accountInfo.wait_paying_count">{{ accountInfo.wait_paying_count }}</view>
+						<view class="tips" v-if="userInfo.wait_paying_count">{{ userInfo.wait_paying_count }}</view>
 					</view>
 			
 					<view class="menus flex flex_center flex_y" @tap="_href('/features/order/order?current=2')">
 						<image src="../../static/image/dd_dfh.png" class="menusPic"></image>
 						<text class="cm_t_24">待发货</text>
-						<view class="tips" v-if="accountInfo.wait_sending_count">{{ accountInfo.wait_sending_count }}</view>
+						<view class="tips" v-if="userInfo.wait_sending_count">{{ userInfo.wait_sending_count }}</view>
 					</view>
 
 					<view class="menus flex flex_center flex_y" @tap="_href('/features/order/order?current=3')">
 						<image src="../../static/image/dd_dsh.png" class="menusPic"></image>
 						<text class="cm_t_24">待收货</text>
-						<view class="tips" v-if="accountInfo.wait_receiving_count">{{ accountInfo.wait_receiving_count }}</view>
+						<view class="tips" v-if="userInfo.wait_receiving_count">{{ userInfo.wait_receiving_count }}</view>
 					</view>
 
 					<view class="menus flex flex_center flex_y" @tap="_href('/features/refundList/refundList')">
 						<image src="../../static/image/dd_th.png" class="menusPic"></image>
 						<text class="cm_t_24">退货</text>
-						<view class="tips" v-if="accountInfo.returned_goods_count">{{ accountInfo.returned_goods_count }}</view>
+						<view class="tips" v-if="userInfo.returned_goods_count">{{ userInfo.returned_goods_count }}</view>
 					</view>
 	
 				</view>
@@ -78,12 +78,12 @@
 						<text class="cm_t_24 f1">意见反馈</text>
 						<text class="iconfont icon-fanhui3"></text>
 					</view>
-					<view class="menus flex flex_center " @tap="_href('/user/set/set')">
+					<!-- <view class="menus flex flex_center " @tap="_href('/user/set/set')">
 						<image src="../../static/image/wd_sz.png" class="menusPic"></image>
 						<text class="cm_t_24 f1">设置</text>
 						<text class="iconfont icon-fanhui3"></text>
-					</view>
-					<view class="menus flex flex_center " @tap="_kefu">
+					</view> -->
+					<view class="menus flex flex_center " @tap="_kefuMenu">
 						<image src="../../static/image/wd_kf.png" class="menusPic"></image>
 						<text class="cm_t_24 f1">客服</text>
 						<text class="iconfont icon-fanhui3"></text>
@@ -91,16 +91,26 @@
 				</view>
 			</view>
 		</view>
-			<button type="success" class="btns" open-type="contact" >客服</button>
+		<!-- <button type="success" class="btns" open-type="contact" >客服</button> -->
 		<tui-modal :show="modal" @click="handleClick" @cancel="hide" :content="content" :maskClosable="false" color="#333" :size="32"></tui-modal>
+		<accredit ref="kf" :autoClose="true">
+			<view slot='content' class="fkContent">
+				<image src="../../static/image/kfbg.jpg" mode="widthFix" class="bg" ></image>
+				<view style="padding: 50rpx;">
+					<view class="gray" style="line-height: 2;">我们将会全心全意为您提供满意周到的咨询服</view>
+					<button type="text" class="cm_btn" hover-class="cm_hover_m" open-type="contact">和他聊聊</button>
+					<button type="text" class="cm_btn_plain" hover-class="cm_hover_m" @tap="_kefu">拨打客服热线</button>
+				</view>
+				<image src="../../static/image/close.png" mode="widthFix" class="closeBtn" ></image>
+			</view>
+		</accredit>
 	</view>
 </template>
 
 <script>
 import { mapState, mapMutations } from 'vuex';
-import tuiLoadmore from '@/components/loadmore/loadmore';
 import http from '@/utils/http/index.js';
-
+import accredit from "@/components/accredit/accredit"
 export default {
 	data() {
 		return {
@@ -120,14 +130,6 @@ export default {
 				type: 4,
 				pageIndex: 1,
 				pageSize: 6
-			},
-			list: [],
-
-			set: {
-				appid: 'wx09daee2f47e178aa', //测试环境
-				// appid: 'wx450d3b4e0f18461f', //正式环境
-				redirect_uri: 'http://192.168.1.8:8081/pages/user/user'
-				// redirect_uri: http.mainUrl + 'index.html'
 			}
 		};
 	},
@@ -138,14 +140,13 @@ export default {
 		// this.GetKefu();
 
 		// 注册刷新事件
-		uni.$on('refresh_user', function() {
-			// console.log(1213541)
-			that.loadData();
-		});
-		that._loadData();
+		// uni.$on('refresh_user', function() {
+		// 	that.loadData();
+		// });
+		
 	},
 	onShow() {
-		// this.loadData()
+		this._loadData();
 	},
 	computed: {
 		hasLogin() {
@@ -153,42 +154,24 @@ export default {
 		},
 		accountInfo() {
 			return this.$store.state.accountInfo;
+		},
+		userInfo() {
+			return this.$store.state.userInfo;
 		}
 	},
 	watch: {
-		hasLogin(newValue, oldValue) {
-			// console.log(oldValue)
-			// console.log(newValue)
-			this.loadData();
-			// this.loadData();
-		}
-		// accountInfo(o,n){
-		// 	console.log(o)
-		// 	console.log(n)
-		// },
+		// refreshUser(){
+			
+		// }
 	},
 	components: {
-		tuiLoadmore
 	},
 	// 下拉刷新
 	onPullDownRefresh() {
-		if (!this.hasLogin) {
-			uni.stopPullDownRefresh();
-			return;
-		}
-		this.loadData(() => {
-			uni.stopPullDownRefresh();
-		});
+		this._loadData();
 	},
 	methods: {
-		_toAuth() {
-			window.location.href =
-				'https://open.weixin.qq.com/connect/oauth2/authorize?appid=' +
-				this.set.appid +
-				'&redirect_uri=' +
-				this.set.redirect_uri +
-				'&response_type=code&scope=snsapi_userinfo&state=1#wechat_redirect';
-		},
+		
 		imageLoad(index) {
 			this.$set(this.list[index], 'load', true);
 		},
@@ -196,58 +179,8 @@ export default {
 			// console.log('图片未找到');
 			this.list[index].goods_picture = '/static/img/noPic.jpg';
 		},
-		// 热门推荐
-		async _loadData(type, callback) {
-			let that = this;
-			try {
-				if (type == 'refresh') {
-					that.loadStatus = 'loading';
-				} else {
-					that.loadStatus = 'loading';
-				}
-
-				let res = await this.$api.GetGoodsList(this.formParams);
-
-				if (type == 'refresh') {
-					// this.$ui.hideloading()
-				} else {
-					// that.loadStatus = 'loading'
-				}
-				if (res.Success) {
-					if (type == 'refresh') {
-						// 刷新
-						that.loadStatus = 'more';
-						that.list = res.Data.Rows;
-					} else {
-						// console.log(res.Data.Rows.length);
-						// 更多
-						if (res.Data.Rows.length == 0) {
-							that.loadStatus = 'noMore';
-						} else {
-							let arr = that.list.concat(res.Data.Rows);
-							that.list = arr;
-							that.loadStatus = 'more';
-						}
-					}
-				} else {
-					that.$ui.toast(res.Msg);
-				}
-			} catch (err) {
-				// console.log('请求结果false : ' + err);
-				that.loadStatus = 'more';
-				if (callback) callback();
-			}
-			// this.loadModal = false;
-			// this.$ui.hideloading();
-			if (callback) callback();
-		},
+	
 		_href(val) {
-			// if (!this.hasLogin) {
-			// 	this.content = '请您先登录';
-			// 	this.action = 'login'; ///features/authentication/authentication'
-			// 	this.modal = true;
-			// 	return;
-			// }
 			switch (val) {
 				case 'set':
 					uni.navigateTo({
@@ -262,31 +195,10 @@ export default {
 			}
 		},
 		// 加载个人信息
-		async loadData(callback) {
-			// alert(1)
-			let that = this;
-			try {
-				// this.$ui.showloading();
-
-				let res = await this.$api.getConsumer({}, false);
-				// this.$ui.hideloading();
-				// "wait_paying_count": 0,     //订单支付订单数
-				//         "wait_sending_count": 0,    //等待发货订单数
-				//         "wait_receiving_count": 0,  //等待收货订单数
-				//         "returned_goods_count": 0,  //等待收货订单数
-				// console.log(res)
-				if (res.Success) {
-					if (res.Data) {
-						that.$store.commit('setAccountInfo', res.Data);
-						// that.accountInfo = res.Data;
-					}
-				} else {
-					that.$ui.toast(res.Msg);
-				}
-				if (callback) callback();
-			} catch (err) {
-				console.log('请求结果false : ' + err);
-			}
+		async _loadData(callback) {
+			this.$store.dispatch('refreshUser',()=>{
+				uni.stopPullDownRefresh()
+			})
 		},
 		handleClick(e) {
 			let index = e.index;
@@ -317,12 +229,19 @@ export default {
 			}
 			this.modal = false;
 		},
+		_close(){
+			this.$refs.kf.hideModal()
+		},
+		// 显示客服弹窗
+		_kefuMenu(){
+			this.$refs.kf.showModal()
+		},
 		// 客服
 		_kefu() {
 			// let phone = this.waiter.link_value;
 			const phone = uni.getStorageSync('global_Set_jll').service_mobile;
 			let that = this;
-			// console.log(phone)
+			this.$refs.kf.hideModal()
 			uni.showModal({
 				title: '洁利来商城提醒你',
 				content: '立即致电官方客服？',
@@ -566,6 +485,32 @@ export default {
 					}
 				}
 			}
+		}
+	}
+	.fkContent{
+		position: relative;
+		width: 80vw;
+		.bg{
+			border-radius: 30rpx 30rpx 0 0 ;
+			width: 100%;
+			height: 252rpx;
+		}
+		.cm_btn{
+			margin-top: 50rpx;
+			background:  #43B6B2;
+		}
+		.cm_btn_plain{
+			margin-top: 10rpx;
+			color:  #333;
+			border: none;
+		}
+		.closeBtn{
+			width: 48rpx;
+			position: absolute;
+			left: 50%;
+			margin-left: -24rpx;
+			bottom: -86rpx;
+			z-index: 100;
 		}
 	}
 }

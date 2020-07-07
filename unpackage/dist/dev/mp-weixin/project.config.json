@@ -10,8 +10,8 @@
     "minified": true
   },
   "compileType": "miniprogram",
-  "libVersion": "",
-  "appid": "wx35c21791caf26593",
+  "libVersion": "2.9.2",
+  "appid": "wx7e46ba8e959d25d9",
   "projectname": "马桶福利购",
   "condition": {
     "search": {

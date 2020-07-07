@@ -41,29 +41,30 @@
 										<text class="cm_price  cm_item_price">￥{{ item.project_parameter_type == 1 ? item.project_spec.price : item.project_raise_price }}</text>
 										<view class="f1"></view>
 									</view>
-									<view style="margin-top: 4rpx;">
+									<!-- <view style="margin-top: 4rpx;">
 										<view v-if="item.project_service1.service_code">
 											<text class=" cm_t_20 selectTags">{{ item.project_service1.service_name }} ￥{{ item.project_service1.service_price }}</text>
-											<!-- <view class="">￥{{item.project_service1.service_price}}</view> -->
 										</view>
 										<view v-if="item.project_service2.service_code">
 											<text class=" cm_t_20 selectTags">{{ item.project_service2.service_name }} ￥{{ item.project_service2.service_price }}</text>
-											<!-- <view class="">￥{{item.project_service2.service_price}}</view> -->
 										</view>
 										<view v-if="item.project_service3.service_code">
 											<text class=" cm_t_20 selectTags">{{ item.project_service3.service_name }} ￥{{ item.project_service3.service_price }}</text>
-											<!-- <view class="">￥{{item.project_service3.service_price}}</view> -->
 										</view>
-									</view>
+									</view> -->
 								</view>
 							</view>
 							<view class="cells flex flex_center">
+								<view class="label cm_tex_r">运费</view>
+								<view class="f1 text">{{ currentAddress?'￥'+allEms:'请先选择收货地址' }}</view>
+							</view>
+							<view class="cells flex flex_center">
 								<view class="label cm_tex_r">税费</view>
-								<view class="f1 text">￥12</view>
+								<view class="f1 text">￥{{shui}}</view>
 							</view>
 							<view class="cells flex flex_center">
 								<view class="label cm_tex_r">特色服务</view>
-								<view class="f1 text">￥{{ servePay }}</view>
+								<view class="f1 text">￥{{ servePay}}</view>
 							</view>
 						<!-- </view> -->
 					</view>
@@ -94,10 +95,10 @@
 import tuiSkeleton from '@/components/tui-skeleton/tui-skeleton';
 import tuiListView from '@/components/list-view/list-view';
 import tuiListCell from '@/components/list-cell/list-cell';
-import tuiNumberbox from '@/components/numberbox/numberbox';
 import PayPanel from '@/components/PayPanel/PayPanel';
 import Utils from '@/utils/utils.js';
 import { mapState } from 'vuex';
+const global_Set_jll = uni.getStorageSync('global_Set_jll');
 
 export default {
 	data() {
@@ -130,7 +131,7 @@ export default {
 		};
 	},
 	onLoad(options) {
-		// console.log(333,this.currentOrder);
+		console.log(333,this.currentOrder);
 		this.formParams.create_order_type = options.type;
 
 		let that = this;
@@ -147,7 +148,6 @@ export default {
 	components: {
 		tuiListView,
 		tuiListCell,
-		tuiNumberbox,
 		tuiSkeleton,
 		PayPanel
 	},
@@ -165,8 +165,12 @@ export default {
 			return s.toFixed(2);
 		},
 		allAccount() {
-			let s = Number(this.allEms) + Number(this.allPrize) + Number(this.servePay);
+			let s = Number(this.allEms) + Number(this.allPrize) + Number(this.servePay)  + Number(this.shui);
 			return s.toFixed(2);
+		},
+		// 税费计算
+		shui(){
+			return (this.allPrize*global_Set_jll.taxes_ratio).toFixed(2)
 		},
 		// 所有服务费
 		servePay() {

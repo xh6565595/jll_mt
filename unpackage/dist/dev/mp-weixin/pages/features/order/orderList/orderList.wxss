@@ -24,13 +24,13 @@
 /* 垂直间距 */
 /* 透明度 */
 /* 文章场景相关 */
-.page.data-v-557e7f6f {
+.page.data-v-142934d2 {
   width: 100%;
   height: calc(100vh - 160rpx);
   overflow-y: scroll;
   padding: 20rpx;
 }
-.page .proItemsBox.data-v-557e7f6f {
+.page .proItemsBox.data-v-142934d2 {
   border-radius: 16rpx;
   overflow: hidden;
 }

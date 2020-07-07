@@ -17,8 +17,8 @@
 		{
 			"path": "pages/user/user",
 			"style": {
-				"navigationBarTitleText": "我得",
-				"enablePullDownRefresh": false
+				"navigationBarTitleText": "我的",
+				"enablePullDownRefresh": true
 			}
 		},{
 			"path": "pages/main/details/details",
@@ -37,6 +37,12 @@
 			}
         },{
             "path" : "pages/h5share/h5share",
+            "style" : {
+				"navigationBarTitleText": "分享",
+				"navigationBarTextStyle": "black"
+			}
+        },{
+            "path" : "pages/user/share/share",
             "style" : {
 				"navigationBarTitleText": "分享",
 				"navigationBarTextStyle": "black"
@@ -90,7 +96,21 @@
 				"navigationBarTextStyle": "black",
 				"navigationBarBackgroundColor": "#f4f4f4"
 			}
-        }
+        }, {
+			"path": "pages/features/adress/adress",
+			"style": {
+				"navigationBarTitleText": "收货地址",
+				"navigationBarTextStyle": "black",
+				"navigationBarBackgroundColor": "#fff"
+			} 
+		}, {
+			"path": "pages/features/newAdress/newAdress",
+			"style": {
+				"navigationBarTitleText": "新建地址",
+				"navigationBarTextStyle": "black",
+				"navigationBarBackgroundColor": "#fff"
+			}
+		}
     ],
 	"tabBar": {
 		"color": "#999",
