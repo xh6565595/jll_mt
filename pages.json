@@ -36,12 +36,6 @@
 				"navigationStyle":"custom"
 			}
         },{
-            "path" : "pages/h5share/h5share",
-            "style" : {
-				"navigationBarTitleText": "分享",
-				"navigationBarTextStyle": "black"
-			}
-        },{
             "path" : "pages/user/share/share",
             "style" : {
 				"navigationBarTitleText": "分享",
@@ -107,6 +101,20 @@
 			"path": "pages/features/newAdress/newAdress",
 			"style": {
 				"navigationBarTitleText": "新建地址",
+				"navigationBarTextStyle": "black",
+				"navigationBarBackgroundColor": "#fff"
+			}
+		}, {
+			"path": "pages/user/withdrawal/withdrawal",
+			"style": {
+				"navigationBarTitleText": "提现设置",
+				"navigationBarTextStyle": "black",
+				"navigationBarBackgroundColor": "#fff"
+			}
+		}, {
+			"path": "pages/features/comment/comment",
+			"style": {
+				"navigationBarTitleText": "意见反馈",
 				"navigationBarTextStyle": "black",
 				"navigationBarBackgroundColor": "#fff"
 			}

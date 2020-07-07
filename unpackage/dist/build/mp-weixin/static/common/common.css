@@ -1,0 +1,256 @@
+/* 自定同意常用样式 */
+/* 基于ColorUi开发 */
+body {
+	--cl_title: #333;
+	--cl_text: #999;
+	--cl_desc: #666;
+	--cl_border: #dedede;
+	--cl_theme: linear-gradient(45deg, #EC6633, #EA4533);
+	--cl_primary: #FF7647;
+	--cl_hover: #EC6633;
+	--cl_danger: #D12020;
+	background: #f5f5f5;
+}
+
+.pages {
+	width: 100vw;
+	min-height: 100vh;
+	background: #f8f8f8;
+	/* background: #eee; */
+}
+
+/* #FF7047 */
+view,
+text,
+scroll-view,
+swiper,
+button,
+input,
+textarea,
+label,
+navigator,
+image {
+	box-sizing: border-box;
+	font-size: 28rpx;
+	line-height: 1;
+	border: none;
+}
+
+.flex {
+	display: -webkit-flex;
+	display: flex;
+}
+
+.red {
+	background: red;
+}
+
+.green {
+	background: green;
+}
+
+.pink {
+	background: pink;
+}
+
+.blue {
+	background: blue;
+}
+.gray{
+	color: #999;
+}
+
+/* 盒子布局 */
+.flex_y {
+	flex-direction: column;
+	align-items: center;
+}
+
+.flex_wrap {
+	flex-wrap: wrap;
+}
+
+.flex_center {
+	justify-content: center;
+	align-items: center;
+}
+
+.flex_start {
+	justify-content: flex-start;
+}
+
+.flex_between {
+	justify-content: space-between;
+}
+
+.flex_around {
+	justify-content: space-around;
+}
+
+.f2 {
+	flex: 2;
+}
+
+.f1 {
+	flex: 1
+}
+
+
+/* 字号 */
+.cm_t_20 {
+	font-size: 20rpx;
+}
+
+.cm_t_24 {
+	font-size: 24rpx;
+}
+
+.cm_t_28 {
+	font-size: 27rpx;
+}
+
+.cm_t_32 {
+	font-size: 32rpx;
+}
+
+.cm_tex_c {
+	text-align: center;
+}
+
+.cm_tex_l {
+	text-align: left;
+}
+
+.cm_tex_r {
+	text-align: right;
+}
+
+.cover {
+	width: 100%;
+	height: 100%;
+}
+
+.cm_ellipsis {
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+}
+
+.cm_ellipsis2 {
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 2;
+	overflow: hidden;
+}
+
+.cm_bdb {
+	position: relative;
+}
+
+.cm_bdb::before {
+	content: '';
+	width: 100%;
+	height: 1rpx;
+	background: #e5e5e5;
+	transform: scaleY(.5);
+	position: absolute;
+	bottom: 0;
+	left: 0;
+}
+
+.cm_bdt {
+	position: relative;
+}
+
+.cm_bdt::before {
+	content: '';
+	width: 100%;
+	height: 1rpx;
+	background: #f3f3f3;
+	transform: scaleY(.5);
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+.cm_delete{
+	font-size: 26rpx;
+	color: #999;
+	text-decoration: line-through;
+}
+/* common样式 */
+
+.cm_box {
+	box-sizing: border-box;
+	border-radius: 20rpx;
+	background: #fff;
+	overflow: hidden;
+	padding: 20rpx;
+}
+
+.cm_title {
+	/* font-weight: bolder; */
+	font-size: 28rpx;
+	line-height: 42rpx;
+	color: #333;
+	font-weight: 600;
+}
+
+.cm_text {
+	font-size: 24rpx;
+	color: #666;
+}
+
+.cm_des {
+	font-size: 26rpx;
+	color: #999;
+}
+
+.cm_btn {
+	width: 100%;
+	height: 80rpx;
+	text-align: center;
+	line-height: 80rpx;
+	margin: 0 auto;
+	border-radius: 40rpx;
+	background: var(--cl_theme);
+	color: #fff;
+	font-size: 30rpx;
+}
+.cm_btn_plain {
+	width: 100%;
+	height: 80rpx;
+	text-align: center;
+	line-height: 80rpx;
+	margin: 0 auto;
+	border-radius: 40rpx;
+	background: #fff;
+	color:var(--cl_primary);
+	font-size: 30rpx;
+	border:1rpx solid var(--cl_primary)
+}
+
+.cm_price {
+	color: #DD3A30;
+	font-size: 32rpx;
+	font-weight: 600;
+}
+
+.cm_blocks {
+	width: 100%;
+}
+
+.cm_back{
+	width: 60rpx;
+	height: 60rpx;
+	border-radius: 50%;
+	background-color: rgba(0,0,0,.4);
+}
+.cm_back .iconfont{
+	color: #fff;
+	font-size: 28rpx;
+	
+}
+
+
+
+

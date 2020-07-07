@@ -1,12 +1,12 @@
 <template>
 	<view class="pages">
-		<!-- <text class="rTip">活动规则</text> -->
+		
 		<view class="fixed">
 			<tuiNav :isCustom="true" :isFixed="false" backgroundColor="#fff">
 				<view class="flex flex_center header">
-					<view><text class="lTip">活动规则</text></view>
+					<view><text class="lTip" @tap="_showRule">活动规则</text></view>
 					<view class="f1 cm_tex_c">活动</view>
-					<view><text class="rTip"></text></view>
+					<view><text class="rTip" ></text></view>
 				</view>
 			</tuiNav>
 			<view class="tabsBox flex flex_center">
@@ -80,16 +80,7 @@
 		<LoadMore :status="loadStatus" />
 		
 		
-		
 		<rule ref="rule"></rule>
-
-		<!-- <accredit ref="rule">
-			<view slot="content" class="ruleBox">
-				<image src="../../static/img/user/hhr.jpg" mode="scaleToFill" style="width: 200rpx;height: 90rpx;"></image>
-				<view style="color: #666;margin:20rpx auto;font-size: 36rpx;">您收到一条事业合伙人邀请</view>
-				<button type="default" class="bg-gradual-orange tbBtn" @tap="_toAccep">接受邀请</button>
-			</view>
-		</accredit> -->
 	</view>
 </template>
 
@@ -117,6 +108,9 @@ export default {
 		rule
 	},
 	methods: {
+		_showRule(){
+			this.$refs.rule.showModal()
+		},
 		_switch(k) {
 			this.tap = k;
 			this.formParams.order_status = k;

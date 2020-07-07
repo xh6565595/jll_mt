@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "订单列表",
+  "navigationBarTextStyle": "black",
+  "navigationBarBackgroundColor": "#fff",
+  "usingComponents": {
+    "sun-tab": "/components/sun-tab/sun-tab",
+    "order-list": "/pages/features/order/orderList/orderList"
+  }
+}

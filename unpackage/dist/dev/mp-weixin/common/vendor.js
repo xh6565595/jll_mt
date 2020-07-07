@@ -346,9 +346,9 @@ function upx2px(number, newDeviceWidth) {
   result = Math.floor(result + EPS);
   if (result === 0) {
     if (deviceDPR === 1 || !isIOS) {
-      return 1;
+      result = 1;
     } else {
-      return 0.5;
+      result = 0.5;
     }
   }
   return number < 0 ? -result : result;
@@ -421,7 +421,10 @@ var protocols = {
 
 
 var todos = [
-'vibrate'];
+'vibrate',
+'preloadPage',
+'unPreloadPage',
+'loadSubPackage'];
 
 var canIUses = [];
 
@@ -1564,10 +1567,39 @@ uni$1;exports.default = _default;
 
 /***/ }),
 
+/***/ 104:
+/*!****************************************************************************!*\
+  !*** E:/mywork/jll_mt/js_sdk/junyi-h5-copy/junyi-h5-copy/junyi-h5-copy.js ***!
+  \****************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = h5Copy;function h5Copy(content) {
+
+  if (!document.queryCommandSupported('copy')) {
+    // 不支持
+    return false;
+  }
+
+  var textarea = document.createElement("textarea");
+  textarea.value = content;
+  textarea.readOnly = "readOnly";
+  document.body.appendChild(textarea);
+  textarea.select(); // 选择对象
+  textarea.setSelectionRange(0, content.length); //核心
+  var result = document.execCommand("copy"); // 执行浏览器复制命令
+  textarea.remove();
+  return result;
+
+}
+
+/***/ }),
+
 /***/ 11:
-/*!*****************************************!*\
-  !*** G:/work/马桶福利购/utils/http/index.js ***!
-  \*****************************************/
+/*!********************************************!*\
+  !*** E:/mywork/jll_mt/utils/http/index.js ***!
+  \********************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1630,39 +1662,10 @@ exports.default = _default;
 
 /***/ }),
 
-/***/ 112:
-/*!*************************************************************************!*\
-  !*** G:/work/马桶福利购/js_sdk/junyi-h5-copy/junyi-h5-copy/junyi-h5-copy.js ***!
-  \*************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = h5Copy;function h5Copy(content) {
-
-  if (!document.queryCommandSupported('copy')) {
-    // 不支持
-    return false;
-  }
-
-  var textarea = document.createElement("textarea");
-  textarea.value = content;
-  textarea.readOnly = "readOnly";
-  document.body.appendChild(textarea);
-  textarea.select(); // 选择对象
-  textarea.setSelectionRange(0, content.length); //核心
-  var result = document.execCommand("copy"); // 执行浏览器复制命令
-  textarea.remove();
-  return result;
-
-}
-
-/***/ }),
-
 /***/ 12:
-/*!*********************************************!*\
-  !*** G:/work/马桶福利购/utils/http/interface.js ***!
-  \*********************************************/
+/*!************************************************!*\
+  !*** E:/mywork/jll_mt/utils/http/interface.js ***!
+  \************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1855,9 +1858,9 @@ function _reslog(res) {
 /***/ }),
 
 /***/ 13:
-/*!************************************!*\
-  !*** G:/work/马桶福利购/store/index.js ***!
-  \************************************/
+/*!***************************************!*\
+  !*** E:/mywork/jll_mt/store/index.js ***!
+  \***************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2950,9 +2953,9 @@ var index_esm = {
 /***/ }),
 
 /***/ 15:
-/*!****************************!*\
-  !*** G:/work/马桶福利购/SET.js ***!
-  \****************************/
+/*!*******************************!*\
+  !*** E:/mywork/jll_mt/SET.js ***!
+  \*******************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2973,214 +2976,10 @@ var _default = {
 
 /***/ }),
 
-/***/ 16:
-/*!******************************************!*\
-  !*** G:/work/马桶福利购/utils/module/auth.js ***!
-  \******************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
-
-var _interface = _interopRequireDefault(__webpack_require__(/*! ../http/interface */ 12));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} // 用户身份相关接口
-// 我要积分
-var Auth = { // code获取OpenId
-  GetOpenId: function GetOpenId(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    return _interface.default.request({
-      url: '/api/Authorize/GetOpenId',
-      method: 'POST',
-      data: data
-      // handle:true
-    }, ifLoad);
-  },
-  // 微信自动注册
-  WxAutoRegiste: function WxAutoRegiste(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    return _interface.default.request({
-      url: '/api/Authorize/WxAutoRegiste',
-      method: 'POST',
-      data: data
-      // handle:true
-    }, ifLoad);
-  },
-
-
-  // 获取验证码
-  getVerificateCode: function getVerificateCode(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    return _interface.default.request({
-      url: '/api/Msg/SendVerificationCode',
-      method: 'POST',
-      data: data
-      // handle:true
-    }, ifLoad);
-  },
-  // 微信api
-  GetWxJsApiConfig: function GetWxJsApiConfig(data) {
-    return _interface.default.request({
-      url: '/api/Authorize/GetJsApiConfig',
-      method: 'POST',
-      data: data
-      // handle:true
-    });
-  },
-  // 登录
-  userLogin: function userLogin(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    return _interface.default.request({
-      url: '/api/Authorize/Token',
-      method: 'POST',
-      data: data
-      // handle:true
-    }, ifLoad);
-  },
-  // 快捷登录
-  shortcutToken: function shortcutToken(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    return _interface.default.request({
-      url: '/api/Authorize/ShortcutToken',
-      method: 'GET',
-      data: data
-      // handle:true
-    }, ifLoad);
-  },
-  // OpenId登录
-  WxTokenLogin: function WxTokenLogin(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    return _interface.default.request({
-      url: '/api/Authorize/WxToken',
-      method: 'POST',
-      data: data
-      // handle:true
-    }, ifLoad);
-  },
-  // 注册用户 
-  userRegiste: function userRegiste(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    return _interface.default.request({
-      url: '/api/Authorize/Registe',
-      method: 'POST',
-      data: data
-      // handle:true
-    }, ifLoad);
-  },
-  // 忘记密码
-  findPassword: function findPassword(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    return _interface.default.request({
-      url: '/api/Authorize/FindPassword',
-      method: 'POST',
-      data: data
-      // handle:true
-    }, ifLoad);
-  },
-  // 获取用户信息
-  getConsumer: function getConsumer(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    return _interface.default.request({
-      url: '/api/Consumer/Get',
-      method: 'GET',
-      data: data
-      // handle:true
-    }, ifLoad);
-  },
-
-  //更新用户信息
-  userInfoUpdate: function userInfoUpdate(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    return _interface.default.request({
-      url: '/api/Consumer/PerfectInfo',
-      method: 'POST',
-      data: data
-      // handle:true
-    }, ifLoad);
-  },
-  // 设置支付密码
-  SettingPayPassword: function SettingPayPassword(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    return _interface.default.request({
-      url: '/api/Consumer/SettingPayPassword',
-      method: 'POST',
-      data: data
-      // handle:true
-    }, ifLoad);
-  },
-  // 微信绑定手机号
-  BindWxUserMobile: function BindWxUserMobile(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    return _interface.default.request({
-      url: '/api/Authorize/BindWxUserMobile',
-      method: 'POST',
-      data: data
-      // handle:true
-    }, ifLoad);
-  },
-
-  // 支付
-  toPayment: function toPayment(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    return _interface.default.request({
-      url: '/api/Pay/Payment',
-      method: 'POST',
-      data: data
-      // handle:true
-    }, ifLoad);
-  },
-
-
-  // 	=============商家部分\\\
-
-
-
-  // 获取商家信息
-  GetBusinessInfo: function GetBusinessInfo(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    return _interface.default.request({
-      url: '/api/Shop/GetBusinessInfo',
-      method: 'GET',
-      data: data
-      // handle:true
-    }, ifLoad);
-  },
-  // 修改商家信息
-  BusinessEditor: function BusinessEditor(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    return _interface.default.request({
-      url: '/api/Shop/BusinessEditor',
-      method: 'POST',
-      data: data
-      // handle:true
-    }, ifLoad);
-  },
-
-
-  //=============== 全局=================
-
-  // 获取全局配置
-  getConfig: function getConfig(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    return _interface.default.request({
-      url: '/api/Service/Config',
-      method: 'GET',
-      data: data
-      // handle:true
-    }, ifLoad);
-  },
-
-  // app更新
-  VersionCheck: function VersionCheck(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    return _interface.default.request({
-      url: '/api/AppVersion/VersionCheck',
-      method: 'POST',
-      data: data
-      // handle:true
-    }, ifLoad);
-  },
-
-  // 手机号登录
-  MobileToken: function MobileToken(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    return _interface.default.request({
-      url: '/api/Authorize/MobileToken',
-      method: 'POST',
-      data: data
-      // handle:true
-    }, ifLoad);
-  } };var _default =
-
-Auth;exports.default = _default;
-
-/***/ }),
-
-/***/ 161:
-/*!******************************************!*\
-  !*** G:/work/马桶福利购/utils/picker.city.js ***!
-  \******************************************/
+/***/ 153:
+/*!*********************************************!*\
+  !*** E:/mywork/jll_mt/utils/picker.city.js ***!
+  \*********************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -17618,10 +17417,10 @@ data = data;exports.default = _default;
 
 /***/ }),
 
-/***/ 162:
-/*!****************************************************************!*\
-  !*** G:/work/马桶福利购/js_sdk/graceui-dataChecker/graceChecker.js ***!
-  \****************************************************************/
+/***/ 154:
+/*!*******************************************************************!*\
+  !*** E:/mywork/jll_mt/js_sdk/graceui-dataChecker/graceChecker.js ***!
+  \*******************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -17734,10 +17533,214 @@ obj = obj;exports.default = _default;
 
 /***/ }),
 
+/***/ 16:
+/*!*********************************************!*\
+  !*** E:/mywork/jll_mt/utils/module/auth.js ***!
+  \*********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
+
+var _interface = _interopRequireDefault(__webpack_require__(/*! ../http/interface */ 12));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} // 用户身份相关接口
+// 我要积分
+var Auth = { // code获取OpenId
+  GetOpenId: function GetOpenId(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return _interface.default.request({
+      url: '/api/Authorize/GetOpenId',
+      method: 'POST',
+      data: data
+      // handle:true
+    }, ifLoad);
+  },
+  // 微信自动注册
+  WxAutoRegiste: function WxAutoRegiste(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return _interface.default.request({
+      url: '/api/Authorize/WxAutoRegiste',
+      method: 'POST',
+      data: data
+      // handle:true
+    }, ifLoad);
+  },
+
+
+  // 获取验证码
+  getVerificateCode: function getVerificateCode(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return _interface.default.request({
+      url: '/api/Msg/SendVerificationCode',
+      method: 'POST',
+      data: data
+      // handle:true
+    }, ifLoad);
+  },
+  // 微信api
+  GetWxJsApiConfig: function GetWxJsApiConfig(data) {
+    return _interface.default.request({
+      url: '/api/Authorize/GetJsApiConfig',
+      method: 'POST',
+      data: data
+      // handle:true
+    });
+  },
+  // 登录
+  userLogin: function userLogin(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return _interface.default.request({
+      url: '/api/Authorize/Token',
+      method: 'POST',
+      data: data
+      // handle:true
+    }, ifLoad);
+  },
+  // 快捷登录
+  shortcutToken: function shortcutToken(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return _interface.default.request({
+      url: '/api/Authorize/ShortcutToken',
+      method: 'GET',
+      data: data
+      // handle:true
+    }, ifLoad);
+  },
+  // OpenId登录
+  WxTokenLogin: function WxTokenLogin(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return _interface.default.request({
+      url: '/api/Authorize/WxToken',
+      method: 'POST',
+      data: data
+      // handle:true
+    }, ifLoad);
+  },
+  // 注册用户 
+  userRegiste: function userRegiste(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return _interface.default.request({
+      url: '/api/Authorize/Registe',
+      method: 'POST',
+      data: data
+      // handle:true
+    }, ifLoad);
+  },
+  // 忘记密码
+  findPassword: function findPassword(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return _interface.default.request({
+      url: '/api/Authorize/FindPassword',
+      method: 'POST',
+      data: data
+      // handle:true
+    }, ifLoad);
+  },
+  // 获取用户信息
+  getConsumer: function getConsumer(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return _interface.default.request({
+      url: '/api/Consumer/Get',
+      method: 'GET',
+      data: data
+      // handle:true
+    }, ifLoad);
+  },
+
+  //更新用户信息
+  userInfoUpdate: function userInfoUpdate(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return _interface.default.request({
+      url: '/api/Consumer/PerfectInfo',
+      method: 'POST',
+      data: data
+      // handle:true
+    }, ifLoad);
+  },
+  // 设置支付密码
+  SettingPayPassword: function SettingPayPassword(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return _interface.default.request({
+      url: '/api/Consumer/SettingPayPassword',
+      method: 'POST',
+      data: data
+      // handle:true
+    }, ifLoad);
+  },
+  // 微信绑定手机号
+  BindWxUserMobile: function BindWxUserMobile(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return _interface.default.request({
+      url: '/api/Authorize/BindWxUserMobile',
+      method: 'POST',
+      data: data
+      // handle:true
+    }, ifLoad);
+  },
+
+  // 支付
+  toPayment: function toPayment(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return _interface.default.request({
+      url: '/api/Pay/Payment',
+      method: 'POST',
+      data: data
+      // handle:true
+    }, ifLoad);
+  },
+
+
+  // 	=============商家部分\\\
+
+
+
+  // 获取商家信息
+  GetBusinessInfo: function GetBusinessInfo(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return _interface.default.request({
+      url: '/api/Shop/GetBusinessInfo',
+      method: 'GET',
+      data: data
+      // handle:true
+    }, ifLoad);
+  },
+  // 修改商家信息
+  BusinessEditor: function BusinessEditor(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return _interface.default.request({
+      url: '/api/Shop/BusinessEditor',
+      method: 'POST',
+      data: data
+      // handle:true
+    }, ifLoad);
+  },
+
+
+  //=============== 全局=================
+
+  // 获取全局配置
+  getConfig: function getConfig(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return _interface.default.request({
+      url: '/api/Service/Config',
+      method: 'GET',
+      data: data
+      // handle:true
+    }, ifLoad);
+  },
+
+  // app更新
+  VersionCheck: function VersionCheck(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return _interface.default.request({
+      url: '/api/AppVersion/VersionCheck',
+      method: 'POST',
+      data: data
+      // handle:true
+    }, ifLoad);
+  },
+
+  // 手机号登录
+  MobileToken: function MobileToken(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return _interface.default.request({
+      url: '/api/Authorize/MobileToken',
+      method: 'POST',
+      data: data
+      // handle:true
+    }, ifLoad);
+  } };var _default =
+
+Auth;exports.default = _default;
+
+/***/ }),
+
 /***/ 17:
-/*!**********************************************!*\
-  !*** G:/work/马桶福利购/utils/module/business.js ***!
-  \**********************************************/
+/*!*************************************************!*\
+  !*** E:/mywork/jll_mt/utils/module/business.js ***!
+  \*************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -19005,12 +19008,10 @@ if (true) {
   };
 
   formatComponentName = function (vm, includeFile) {
-    {
-      if(vm.$scope && vm.$scope.is){
-        return vm.$scope.is
-      }
-    }
     if (vm.$root === vm) {
+      if (vm.$options && vm.$options.__file) { // fixed by xxxxxx
+        return ('') + vm.$options.__file
+      }
       return '<Root>'
     }
     var options = typeof vm === 'function' && vm.cid != null
@@ -19045,7 +19046,7 @@ if (true) {
     if (vm._isVue && vm.$parent) {
       var tree = [];
       var currentRecursiveSequence = 0;
-      while (vm) {
+      while (vm && vm.$options.name !== 'PageBody') {
         if (tree.length > 0) {
           var last = tree[tree.length - 1];
           if (last.constructor === vm.constructor) {
@@ -19057,7 +19058,7 @@ if (true) {
             currentRecursiveSequence = 0;
           }
         }
-        tree.push(vm);
+        !vm.$options.isReserved && tree.push(vm);
         vm = vm.$parent;
       }
       return '\n\nfound in\n\n' + tree
@@ -24177,9 +24178,10 @@ function getTarget(obj, path) {
   return getTarget(obj[key], parts.slice(1).join('.'))
 }
 
-function internalMixin(Vue) {
+function internalMixin(Vue ) {
 
-  Vue.config.errorHandler = function(err) {
+  Vue.config.errorHandler = function(err, vm, info) {
+    Vue.util.warn(("Error in " + info + ": \"" + (err.toString()) + "\""), vm);
     console.error(err);
     /* eslint-disable no-undef */
     var app = getApp();
@@ -24531,9 +24533,9 @@ function normalizeComponent (
 /***/ }),
 
 /***/ 21:
-/*!******************************************!*\
-  !*** G:/work/马桶福利购/static/defaultSet.js ***!
-  \******************************************/
+/*!*********************************************!*\
+  !*** E:/mywork/jll_mt/static/defaultSet.js ***!
+  \*********************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -24809,10 +24811,10 @@ set;exports.default = _default;
 
 /***/ }),
 
-/***/ 247:
-/*!*****************************************************!*\
-  !*** G:/work/马桶福利购/components/tki-qrcode/qrcode.js ***!
-  \*****************************************************/
+/***/ 239:
+/*!********************************************************!*\
+  !*** E:/mywork/jll_mt/components/tki-qrcode/qrcode.js ***!
+  \********************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -26028,9 +26030,9 @@ QRCode;exports.default = _default;
 /***/ }),
 
 /***/ 28:
-/*!************************************!*\
-  !*** G:/work/马桶福利购/utils/utils.js ***!
-  \************************************/
+/*!***************************************!*\
+  !*** E:/mywork/jll_mt/utils/utils.js ***!
+  \***************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -26383,9 +26385,9 @@ module.exports = g;
 /***/ }),
 
 /***/ 37:
-/*!*****************************************!*\
-  !*** G:/work/马桶福利购/utils/baseMixins.js ***!
-  \*****************************************/
+/*!********************************************!*\
+  !*** E:/mywork/jll_mt/utils/baseMixins.js ***!
+  \********************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -27288,9 +27290,9 @@ if (hadRuntime) {
 /***/ }),
 
 /***/ 7:
-/*!********************************!*\
-  !*** G:/work/马桶福利购/pages.json ***!
-  \********************************/
+/*!***********************************!*\
+  !*** E:/mywork/jll_mt/pages.json ***!
+  \***********************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -27298,10 +27300,10 @@ if (hadRuntime) {
 
 /***/ }),
 
-/***/ 85:
-/*!*************************************************!*\
-  !*** G:/work/马桶福利购/utils/QS-SharePoster/app.js ***!
-  \*************************************************/
+/***/ 77:
+/*!****************************************************!*\
+  !*** E:/mywork/jll_mt/utils/QS-SharePoster/app.js ***!
+  \****************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -27868,16 +27870,16 @@ module.exports = _app;
 
 /***/ }),
 
-/***/ 86:
-/*!************************************************************!*\
-  !*** G:/work/马桶福利购/utils/QS-SharePoster/QS-SharePoster.js ***!
-  \************************************************************/
+/***/ 78:
+/*!***************************************************************!*\
+  !*** E:/mywork/jll_mt/utils/QS-SharePoster/QS-SharePoster.js ***!
+  \***************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@vue/babel-preset-app/node_modules/@babel/runtime/regenerator */ 4));var _app2 = _interopRequireDefault(__webpack_require__(/*! ./app.js */ 85));
-var _QRCodeAlg = _interopRequireDefault(__webpack_require__(/*! ./QRCodeAlg.js */ 87));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _toConsumableArray(arr) {return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread();}function _nonIterableSpread() {throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");}function _unsupportedIterableToArray(o, minLen) {if (!o) return;if (typeof o === "string") return _arrayLikeToArray(o, minLen);var n = Object.prototype.toString.call(o).slice(8, -1);if (n === "Object" && o.constructor) n = o.constructor.name;if (n === "Map" || n === "Set") return Array.from(n);if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);}function _iterableToArray(iter) {if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter);}function _arrayWithoutHoles(arr) {if (Array.isArray(arr)) return _arrayLikeToArray(arr);}function _arrayLikeToArray(arr, len) {if (len == null || len > arr.length) len = arr.length;for (var i = 0, arr2 = new Array(len); i < len; i++) {arr2[i] = arr[i];}return arr2;}function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}
+/* WEBPACK VAR INJECTION */(function(uni) {var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@vue/babel-preset-app/node_modules/@babel/runtime/regenerator */ 4));var _app2 = _interopRequireDefault(__webpack_require__(/*! ./app.js */ 77));
+var _QRCodeAlg = _interopRequireDefault(__webpack_require__(/*! ./QRCodeAlg.js */ 79));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _toConsumableArray(arr) {return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread();}function _nonIterableSpread() {throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");}function _unsupportedIterableToArray(o, minLen) {if (!o) return;if (typeof o === "string") return _arrayLikeToArray(o, minLen);var n = Object.prototype.toString.call(o).slice(8, -1);if (n === "Object" && o.constructor) n = o.constructor.name;if (n === "Map" || n === "Set") return Array.from(n);if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);}function _iterableToArray(iter) {if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter);}function _arrayWithoutHoles(arr) {if (Array.isArray(arr)) return _arrayLikeToArray(arr);}function _arrayLikeToArray(arr, len) {if (len == null || len > arr.length) len = arr.length;for (var i = 0, arr2 = new Array(len); i < len; i++) {arr2[i] = arr[i];}return arr2;}function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}
 var ShreUserPosterBackgroundKey = 'ShrePosterBackground_'; // 背景图片缓存名称前缀
 var idKey = 'QSSHAREPOSTER_IDKEY'; //drawArray自动生成的idkey
 var isMp = false;
@@ -29180,10 +29182,10 @@ module.exports = {
 
 /***/ }),
 
-/***/ 87:
-/*!*******************************************************!*\
-  !*** G:/work/马桶福利购/utils/QS-SharePoster/QRCodeAlg.js ***!
-  \*******************************************************/
+/***/ 79:
+/*!**********************************************************!*\
+  !*** E:/mywork/jll_mt/utils/QS-SharePoster/QRCodeAlg.js ***!
+  \**********************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 

@@ -3,7 +3,10 @@
 		<view class="dialog">
 			<view class="cm_title">活动规则</view>
 			<scroll-view scroll-y="true" class="contentBox" >
-				<view style="width: 100rpx">sdafsdafds</view>
+				<view style="width: 100%">
+					  <rich-text v-if="text" :nodes="text"></rich-text>
+					  <text>{{text}}</text>
+				</view>
 			</scroll-view>
 			<view class="footer flex flex_center">
 				<button type="default" class="cm_btn" @tap="hideModal">知道了</button>
@@ -14,17 +17,23 @@
 </template>
 
 <script>
+	const global_Set_jll = uni.getStorageSync('global_Set_jll');
 	export default {
 		data() {
 			return {
-				ashow:false 
+				ashow:true ,
+				text:''
 			};
+		},
+		onLoad(){
+			this.text = global_Set_jll.activity_constraint
+			
 		},
 		methods:{
 			hideModal() {
 				this.ashow = false;
 			},
-			showModel(){
+			showModal(){
 				this.ashow = true;
 			}
 		}

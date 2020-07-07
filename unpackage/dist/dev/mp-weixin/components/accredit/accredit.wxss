@@ -24,7 +24,7 @@
 /* 垂直间距 */
 /* 透明度 */
 /* 文章场景相关 */
-.modal.data-v-1dce9a8c {
+.modal.data-v-4c97b864 {
   position: fixed;
   left: 0;
   top: 0;
@@ -33,7 +33,7 @@
   height: 100vh;
   background: rgba(0, 0, 0, 0.6);
 }
-.modal .dialog.data-v-1dce9a8c {
+.modal .dialog.data-v-4c97b864 {
   background: #fff;
   border-radius: 30rpx;
 }
