@@ -6,13 +6,36 @@
 	"setting": {
 		"urlCheck": false,
 		"es6": true,
+		"enhance": false,
 		"postcss": true,
-		"minified": true
+		"preloadBackgroundData": false,
+		"minified": true,
+		"newFeature": false,
+		"coverView": true,
+		"nodeModules": false,
+		"autoAudits": false,
+		"showShadowRootInWxmlPanel": true,
+		"scopeDataCheck": false,
+		"uglifyFileName": false,
+		"checkInvalidKey": true,
+		"checkSiteMap": true,
+		"uploadWithSourceMap": true,
+		"compileHotReLoad": false,
+		"babelSetting": {
+			"ignore": [],
+			"disablePlugins": [],
+			"outputPath": ""
+		},
+		"useIsolateContext": true,
+		"useCompilerModule": true,
+		"userConfirmedUseCompilerModuleSwitch": false
 	},
 	"compileType": "miniprogram",
-	"libVersion": "",
+	"libVersion": "2.9.2",
 	"appid": "wx7e46ba8e959d25d9",
 	"projectname": "马桶福利购",
+	"simulatorType": "wechat",
+	"simulatorPluginLibVersion": {},
 	"condition": {
 		"search": {
 			"current": -1,

@@ -16,10 +16,13 @@
 				<view class="cm_title f1 ">收款账号</view>
 				<navigator url="/pages/user/withdrawal/withdrawal" style="color: #FF7047;font-size: 26rpx;">修改信息</navigator>
 			</view>
-			<view class="flex flex_center picBox ">
+			<view class="flex flex_center picBox " v-if="userInfo.alipay_account">
 				<image src="../../../static/image/tx_zfb.png" mode="scaleToFill" class="action" style="margin-right: 20rpx;"></image>
-				<view class="f1 ">支付宝（2015662）</view>
+				<view class="f1 ">支付宝（{{userInfo.alipay_account}}）</view>
 				<text class="iconfont icon-fanhui3"></text>
+			</view>
+			<view class="flex flex_center picBox " v-else>
+				<text class="f1 ">暂未添加提现账户</text>
 			</view>
 		</view>
 		<view class="box">
@@ -34,7 +37,7 @@
 			<view class="flex flex_center cells">
 				<view class="f1 gray">
 					可提现金额：
-					<text style="color: red;">1420</text>
+					<text style="color: red;">{{maxAccount}}</text>
 				</view>
 				<text @tap="allIn">全部提现</text>
 			</view>
@@ -42,35 +45,38 @@
 		<view class="box">
 			<view class="flex inputBoxs ">
 				<text class="label  ">手机号码</text>
-				<!-- <input class=" cm_tex_r f1 inp" >{{myAccount}}</input> -->
-				<input class="cm_tex_r f1 inp" type="text" :disabled="true" v-model="myAccount" placeholder="请输入手机号" />
+				<input class=" cm_tex_r f1 inp" >{{myAccount | encrypt}}</input>
+				<!-- <input class="cm_tex_r f1 inp" type="text" :disabled="true" v-model="myAccount" placeholder="请输入手机号" /> -->
 			</view>
 			<view class="flex inputBoxs ">
 				<text class="label f1">验证码</text>
-				<input class="f1" type="number" clearable v-model="formParams.validate" placeholder="请输入验证码" />
+				<input class="f1" type="number" clearable v-model="formParams.vilidate" placeholder="请输入验证码" />
 				<view class="yzmBtn" size="mini" hover-class="cm_hover" @tap="_getCode">{{ seconds > 0 ? seconds + 's' : '发送验证码' }}</view>
 			</view>
 		</view>
 
 		<button class="cm_btn submitbtn" @tap="_submit">提交</button>
-		<!-- <Success ref="successModal" title="提现成功" des="请及时确认账户余额" btn="知道了" ></Success> -->
+		<Success ref="successModal" title="提现成功" des="请及时确认账户余额" btn="知道了" ></Success>
 		<!-- <best-payment-password title="设置输入密码" :show="payFlag" :value="paymentPwd" digits="6" @cancel="cancelPass" @submit="checkPwd" :forget="false"></best-payment-password> -->
 	</view>
 </template>
 
 <script>
 import { mapState } from 'vuex';
-// import bestPaymentPassword from '@/components/best-payment-password/best-payment-password.vue';
+import Success from '@/components/success.vue'
 export default {
 	data() {
 		return {
 			bankList: [],
 			formParams: {
-				apply_money: '',
-				// cash_card:'',
-				validate: '',
-				pay_password: '',
-				alipay_account: ''
+				// apply_money: '',
+				// // cash_card:'',
+				// vilidate: '',
+				// pay_password: '',
+				// alipay_account: '',
+				apply_money:'',
+				cash_type:0 ,//提现类型  0-支付宝 1-微信
+				vilidate:''
 			},
 			currentBank: '',
 			maxAccount: 0,
@@ -95,68 +101,47 @@ export default {
 	},
 	onShow() {
 		console.log(this.userInfo);
-		this.maxAccount = this.accountInfo.agent_blance; //储存最大可使用金额
-		this.myAccount = this.userInfo.mobile;
-
-		this.formParams.alipay_account = this.userInfo.alipay_account;
+		// this.maxAccount = this.accountInfo.agent_blance; //储存最大可使用金额
+		this.maxAccount = this.userInfo.consumer_blance
+		this.myAccount = this.userInfo.consumer_full_mobile;
+		// this.formParams.alipay_account = this.userInfo.alipay_account;
+		// this.alipay_account = this.userInfo.alipay_account;
 		let hasPayPass = uni.getStorageSync('hasPayPass');
-		// if (!hasPayPass ) {
-		// 	uni.showModal({
-		// 		title: '酷熊提醒您',
-		// 		content: '请先前往设置支付密码',
-		// 		// showCancel:false,
-		// 		success: function(res) {
-		// 			if (res.confirm) {
-		// 				uni.redirectTo({
-		// 					url: '/pages/user/setPayPass/setPayPass'
-		// 				});
-		// 			} else if (res.cancel) {
-		// 				console.log('用户点击取消');
-		// 				uni.navigateBack({
-
-		// 				})
-		// 			}
-		// 		}
-		// 	});
-		// 	return false;
-		// }
+	
 		// // 必须设置支付宝号
-		// if (!this.userInfo.alipay_account ) {
-		// 	uni.showModal({
-		// 		title: '酷熊提醒您',
-		// 		content: '请先设置支付宝收款账户',
-		// 		// showCancel:false,
-		// 		success: function(res) {
-		// 			if (res.confirm) {
-		// 				uni.navigateTo({
-		// 					url:'/pages/user/withdrawal/withdrawal'
-		// 				})
-		// 			} else if (res.cancel) {
-		// 				console.log('用户点击取消');
-		// 				uni.navigateBack({
+		if (!this.userInfo.alipay_account ) {
+			uni.showModal({
+				title: '酷熊提醒您',
+				content: '请先设置支付宝收款账户',
+				// showCancel:false,
+				success: function(res) {
+					if (res.confirm) {
+						uni.navigateTo({
+							url:'/pages/user/withdrawal/withdrawal'
+						})
+					} else if (res.cancel) {
+						console.log('用户点击取消');
+						uni.navigateBack({
 
-		// 				})
-		// 			}
-		// 		}
-		// 	});
-		// 	return false;
-		// }
+						})
+					}
+				}
+			});
+			return false;
+		}
 	},
 	computed: {
 		...mapState(['hasLogin', 'userInfo', 'accountInfo'])
 	},
 	watch: {
-		bankRefreshHandle(newValue, oldValue) {
-			this._getList();
-		}
 	},
 	components: {
-		// bestPaymentPassword
+		Success
 	},
 	filters: {
 		encrypt(val) {
 			let s = val.slice(4, -3);
-			let str = val.replace(s, '**** **** ****');
+			let str = val.replace(s, '****');
 			return str;
 		}
 	},
@@ -166,29 +151,7 @@ export default {
 		allIn() {
 			this.formParams.apply_money = this.maxAccount;
 		},
-		// 取消支付
-		cancelPass() {
-			uni.showToast({
-				icon: 'none',
-				title: '取消兑换'
-			});
 
-			this.payFlag = false;
-		},
-		// 确认密码
-		checkPwd(e) {
-			if (!e) {
-				uni.showToast({
-					icon: 'none',
-					title: '取消兑换'
-				});
-				return;
-			}
-			this.formParams.pay_password = e;
-			this.validatePass(e);
-
-			this.payFlag = false;
-		},
 		_closeKeyBoard() {
 			// 关闭软键盘
 			// if(that.Plaform == 'ios'){
@@ -203,12 +166,12 @@ export default {
 			let self = this;
 			let data = {
 				mobile: this.myAccount,
-				type: 8 //1,注册 2,登录 3,找回 4.银行卡 8-提现
+				type: 7//
 			};
 			try {
-				let res = await this.$api.getValidCode(data);
+				let res = await this.$api.getVerificateCode(data);
 				console.log(JSON.stringify(res));
-				if (res.result == 1) {
+				if (res.Success) {
 					uni.showToast({
 						title: '验证码已发送',
 						position: 'bottom'
@@ -261,62 +224,7 @@ export default {
 				this.time = '';
 			}, 500);
 		},
-		_valide() {},
-		// 加载名下银行卡
-		// async _loadBanks() {
-		// 	let that = this
-		// 	try{
-		// 		plus.nativeUI.showWaiting('请稍后...')
-		// 		let res = await this.$api.userGetBankList();
-		// 		plus.nativeUI.closeWaiting()
-		// 		// console.log(JSON.stringify(res))
-		// 		if (res.result == 1) {
-
-		// 			if(res.data.rows.length==0){
-		// 				// 没有银行卡 前往添加
-		// 				uni.showModal({
-		// 					title: '提示',
-		// 					content: '当前没有银行卡，立即前往添加？',
-		// 					showCancel:false,
-		// 					success: function (res) {
-		// 						if (res.confirm) {
-		// 							// console.log('用户点击确定');
-		// 							uni.redirectTo({
-		// 								url:'/pages/user/newBankCard/newBankCard'
-		// 							})
-		// 						} else if (res.cancel) {
-		// 							console.log('用户点击取消');
-		// 							uni.navigateBack({})
-		// 						}
-		// 					}
-		// 				});
-		// 				that.bankList = [];
-		// 			}else{
-		// 				that.bankList = res.data.rows;
-		// 				that.currentBank = this.bankList[0].card_bank
-		// 				that.currentBackText = this.bankList[0].card_num
-		// 				that.formParams.cash_card = this.bankList[0].card_code
-		// 			}
-
-		// 		} else {
-		// 		    uni.showToast({
-		// 		        icon: 'none',
-		// 		        title: res.msg?res.msg:'银行卡获取失败',
-		// 		    });
-		// 		}
-		// 	}catch(err){
-		// 		console.log( '请求结果false : ' + err )
-		// 	}
-
-		// },
-		// 时间选择
-		PickerChange(e) {
-			// console.log(JSON.stringify(e.detail))
-			let k = e.detail.value;
-			this.currentBank = this.bankList[k].card_bank;
-			this.currentBackText = this.bankList[k].card_num;
-			this.formParams.cash_card = this.bankList[k].card_code;
-		},
+	
 		// 提交
 		_submit() {
 			let money = this.formParams.apply_money;
@@ -328,7 +236,7 @@ export default {
 				});
 				return;
 			}
-			if (!this.formParams.validate) {
+			if (!this.formParams.vilidate) {
 				uni.showToast({
 					icon: 'none',
 					title: '请输入验证码'
@@ -349,43 +257,45 @@ export default {
 				return;
 			}
 			// this.show = false
-			this.payFlag = true;
-
-			// console.log(JSON.stringify(this.formParams))
+			// this.payFlag = true;
+			
+			console.log(this.formParams);
+			this.vilidatePass()
 		},
-		async validatePass(pass) {
+		async vilidatePass() {
 			let that = this;
 			try {
-				plus.nativeUI.showWaiting('处理中,请稍后...');
-				let res = await this.$api.userSubmitCash(this.formParams);
-				plus.nativeUI.closeWaiting();
-				if (res.result == 1) {
-					uni.$emit('refresh_user');
+				this.$ui.showloading()
+				let res = await this.$api.SubmitCash(this.formParams);
+				this.$ui.hideloading()
+				if (res.Success) {
+					// uni.$emit('refresh_user');
+					that.$store.dispatch('refreshUser')
 					that.$refs.successModal.show();
 				} else {
-					// uni.showToast({
-					//     icon: 'none',
-					//     title: res.msg?res.msg:'操作失败，请联系客服',
-					// });
-
-					uni.showModal({
-						title: '密码错误',
-						content: '立即否重置密码？',
-						confirmText: '立即重置',
-						success: function(res) {
-							if (res.confirm) {
-								uni.navigateTo({
-									url: '/pages/role/updatedPayPass/updatedPayPass'
-								});
-							} else if (res.cancel) {
-								console.log('用户点击取消');
-							}
-						}
+					uni.showToast({
+					    icon: 'none',
+					    title: res.Msg?res.Msg:'操作失败，请联系客服',
 					});
+
+					// uni.showModal({
+					// 	title: '密码错误',
+					// 	content: '立即否重置密码？',
+					// 	confirmText: '立即重置',
+					// 	success: function(res) {
+					// 		if (res.confirm) {
+					// 			uni.navigateTo({
+					// 				url: '/pages/role/updatedPayPass/updatedPayPass'
+					// 			});
+					// 		} else if (res.cancel) {
+					// 			console.log('用户点击取消');
+					// 		}
+					// 	}
+					// });
 				}
 			} catch (err) {
 				console.log('请求结果false : ' + err);
-				plus.nativeUI.closeWaiting();
+				this.$ui.hideloading()
 			}
 		}
 	}

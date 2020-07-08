@@ -25,7 +25,7 @@
 		</view>
 		<!-- <view v-else class="cm_tex_c" style="line-height: 160rpx;">您还没有地址</view> -->
 		<view v-else class="flex flex_center" style="width: 100%;height: 30vh; padding-top: 30rpx;" >
-			<tui-tips :fixed="false" imgUrl="/static/img/toast/k_dz@1.5x.png">您还没有地址信息</tui-tips>
+			<tui-tips :fixed="false" imgUrl="/static/img/toast/img_nodata.png">您还没有地址信息</tui-tips>
 		</view>
 		<view style="padding:  30rpx;">
 			<navigator url="/pages/features/newAdress/newAdress">

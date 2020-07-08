@@ -16,7 +16,9 @@
     "pages/features/adress/adress",
     "pages/features/newAdress/newAdress",
     "pages/user/withdrawal/withdrawal",
-    "pages/features/comment/comment"
+    "pages/features/comment/comment",
+    "pages/success/success",
+    "pages/features/ems/ems"
   ],
   "subPackages": [],
   "window": {
@@ -61,6 +63,5 @@
     "icon": "/components/icon/icon",
     "tui-modal": "/components/modal/modal",
     "tui-tag": "/components/tag/tag"
-  },
-  "sitemapLocation": "sitemap76.json"
+  }
 }

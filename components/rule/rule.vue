@@ -25,9 +25,10 @@
 				text:''
 			};
 		},
-		onLoad(){
+		created(){
+			// console.log(111)
 			this.text = global_Set_jll.activity_constraint
-			
+			// console.log(this.text)
 		},
 		methods:{
 			hideModal() {

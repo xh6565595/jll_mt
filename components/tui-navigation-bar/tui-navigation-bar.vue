@@ -37,7 +37,7 @@ export default {
 		//是否设置不透明度
 		isOpcity: {
 			type: Boolean,
-			default: true
+			default: false
 		},
 		//滚动条滚动距离
 		scrollTop: {

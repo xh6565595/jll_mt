@@ -5,16 +5,16 @@
 		<view class="box">
 			<view class="flex inputBoxs ">
 				<text class="label f1">真实姓名</text>
-				<input type="text" class="inp " v-model="formParams.full_name" placeholder="请输入真实姓名" />
+				<input type="text" class="inp " v-model="formParams.consumer_name" placeholder="请输入真实姓名" />
 			</view>
 			<view class="flex inputBoxs ">
 				<text class="label f1">支付宝账户</text>
 				<input type="text" class="inp " v-model="formParams.alipay_account" placeholder="请输入支付宝账户" />
 			</view>
-			<view class="flex inputBoxs ">
+		<!-- 	<view class="flex inputBoxs ">
 				<text class="label f1">微信账户</text>
 				<input type="text" class="inp " v-model="formParams.alipay_account" placeholder="请输入微信账户" />
-			</view>
+			</view> -->
 		</view>
 		<button class="cm_btn submitbtn" @tap="_updateUserInfo">{{ text }}</button>
 	</view>
@@ -31,8 +31,9 @@ export default {
 			// bankList: banks,
 			formParams: {
 				// "nike_name": "",
-				full_name: '',
-				alipay_account: ''
+				consumer_name:'',
+				alipay_account:'',
+				weixin_account:''
 				// "weixin_account": ""
 			},
 			loadModal: false,
@@ -46,7 +47,7 @@ export default {
 	},
 	onLoad() {
 		if (this.userInfo.alipay_account) {
-			this.formParams.full_name = this.userInfo.user_name;
+			this.formParams.consumer_name = this.userInfo.consumer_name;
 			this.formParams.alipay_account = this.userInfo.alipay_account;
 			this.text = '修改';
 		}
@@ -55,7 +56,7 @@ export default {
 		async _updateUserInfo() {
 			// console.log(this.formParams)
 			uni.hideKeyboard();
-			if (!this.formParams.full_name) {
+			if (!this.formParams.consumer_name) {
 				uni.showToast({
 					icon: 'none',
 					title: '请输入真实姓名'
@@ -71,15 +72,16 @@ export default {
 			}
 			let that = this;
 			try {
-				plus.nativeUI.showWaiting('处理中,请稍后...');
-				let res = await this.$api.userInfoUpdate(this.formParams);
-				plus.nativeUI.closeWaiting();
-				if (res.result == 1) {
+				this.$ui.showloading()
+				let res = await this.$api.PerfectPayInfo(this.formParams);
+				this.$ui.hideloading()
+				if (res.Success) {
 					// console.log(": " + JSON.stringify(res));
 					uni.showToast({
 						title: '修改成功'
 					});
-					uni.$emit('refresh_user');
+					// uni.$emit('refresh_user');
+					this.$store.dispatch('refreshUser')
 
 					setTimeout(() => {
 						uni.navigateBack();

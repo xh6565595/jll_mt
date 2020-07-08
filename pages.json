@@ -118,6 +118,20 @@
 				"navigationBarTextStyle": "black",
 				"navigationBarBackgroundColor": "#fff"
 			}
+		}, {
+			"path": "pages/success/success",
+			"style": {
+				"navigationBarTitleText": "支付成功",
+				"navigationBarTextStyle": "black",
+				"navigationBarBackgroundColor": "#fff"
+			}
+		}, {
+			"path": "pages/features/ems/ems",
+			"style": {
+				"navigationBarTitleText": "物流信息",
+				"navigationBarTextStyle": "black",
+				"navigationBarBackgroundColor": "#fff"
+			}
 		}
     ],
 	"tabBar": {

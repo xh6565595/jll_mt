@@ -346,9 +346,9 @@ function upx2px(number, newDeviceWidth) {
   result = Math.floor(result + EPS);
   if (result === 0) {
     if (deviceDPR === 1 || !isIOS) {
-      result = 1;
+      return 1;
     } else {
-      result = 0.5;
+      return 0.5;
     }
   }
   return number < 0 ? -result : result;
@@ -421,10 +421,7 @@ var protocols = {
 
 
 var todos = [
-'vibrate',
-'preloadPage',
-'unPreloadPage',
-'loadSubPackage'];
+'vibrate'];
 
 var canIUses = [];
 
@@ -1568,9 +1565,9 @@ uni$1;exports.default = _default;
 /***/ }),
 
 /***/ 104:
-/*!****************************************************************************!*\
-  !*** E:/mywork/jll_mt/js_sdk/junyi-h5-copy/junyi-h5-copy/junyi-h5-copy.js ***!
-  \****************************************************************************/
+/*!*************************************************************************!*\
+  !*** G:/work/马桶福利购/js_sdk/junyi-h5-copy/junyi-h5-copy/junyi-h5-copy.js ***!
+  \*************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1597,9 +1594,9 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ }),
 
 /***/ 11:
-/*!********************************************!*\
-  !*** E:/mywork/jll_mt/utils/http/index.js ***!
-  \********************************************/
+/*!*****************************************!*\
+  !*** G:/work/马桶福利购/utils/http/index.js ***!
+  \*****************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1663,9 +1660,9 @@ exports.default = _default;
 /***/ }),
 
 /***/ 12:
-/*!************************************************!*\
-  !*** E:/mywork/jll_mt/utils/http/interface.js ***!
-  \************************************************/
+/*!*********************************************!*\
+  !*** G:/work/马桶福利购/utils/http/interface.js ***!
+  \*********************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1858,9 +1855,9 @@ function _reslog(res) {
 /***/ }),
 
 /***/ 13:
-/*!***************************************!*\
-  !*** E:/mywork/jll_mt/store/index.js ***!
-  \***************************************/
+/*!************************************!*\
+  !*** G:/work/马桶福利购/store/index.js ***!
+  \************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1903,6 +1900,7 @@ var store = new _vuex.default.Store({
       state.levelAccount = {}; //渠道个人信息
     },
     setUserInfo: function setUserInfo(state, info) {
+      // console.log(info)
       state.userInfo = _objectSpread({}, info);
     },
     setAccountInfo: function setAccountInfo(state, info) {
@@ -1922,7 +1920,7 @@ var store = new _vuex.default.Store({
 
   actions: {
     // 用户登录
-    userLogin: function userLogin(_ref, token) {var state = _ref.state,commit = _ref.commit;
+    userLogin: function userLogin(_ref, token, callback) {var state = _ref.state,commit = _ref.commit;
       // console.log(token)
       try {
         // uni.setStorageSync('access_token', token);
@@ -1946,8 +1944,10 @@ var store = new _vuex.default.Store({
                 if (statusCode == 200 && res.data.Success) {
                   commit('setUserInfo', res.data.Data);
                 }
+                if (callback) callback(true, res);
               },
               fail: function fail(err) {
+                if (callback) callback(false, res);
                 uni.switchTab({
                   url: '/pages/user/user' });
 
@@ -1975,8 +1975,8 @@ var store = new _vuex.default.Store({
 
         success: function success(res) {
           var statusCode = res.statusCode;
-          if (statusCode == 200 && res.data.result == 1) {
-            commit('setUserInfo', res.data.data);
+          if (statusCode == 200 && res.data.Success) {
+            commit('setUserInfo', res.data.Data);
           } else {
             uni.switchTab({
               url: '/pages/user/user' });
@@ -2953,9 +2953,9 @@ var index_esm = {
 /***/ }),
 
 /***/ 15:
-/*!*******************************!*\
-  !*** E:/mywork/jll_mt/SET.js ***!
-  \*******************************/
+/*!****************************!*\
+  !*** G:/work/马桶福利购/SET.js ***!
+  \****************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2977,9 +2977,9 @@ var _default = {
 /***/ }),
 
 /***/ 153:
-/*!*********************************************!*\
-  !*** E:/mywork/jll_mt/utils/picker.city.js ***!
-  \*********************************************/
+/*!******************************************!*\
+  !*** G:/work/马桶福利购/utils/picker.city.js ***!
+  \******************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -17418,9 +17418,9 @@ data = data;exports.default = _default;
 /***/ }),
 
 /***/ 154:
-/*!*******************************************************************!*\
-  !*** E:/mywork/jll_mt/js_sdk/graceui-dataChecker/graceChecker.js ***!
-  \*******************************************************************/
+/*!****************************************************************!*\
+  !*** G:/work/马桶福利购/js_sdk/graceui-dataChecker/graceChecker.js ***!
+  \****************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -17534,9 +17534,9 @@ obj = obj;exports.default = _default;
 /***/ }),
 
 /***/ 16:
-/*!*********************************************!*\
-  !*** E:/mywork/jll_mt/utils/module/auth.js ***!
-  \*********************************************/
+/*!******************************************!*\
+  !*** G:/work/马桶福利购/utils/module/auth.js ***!
+  \******************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -17639,9 +17639,9 @@ var Auth = { // code获取OpenId
   },
 
   //更新用户信息
-  userInfoUpdate: function userInfoUpdate(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+  PerfectPayInfo: function PerfectPayInfo(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
     return _interface.default.request({
-      url: '/api/Consumer/PerfectInfo',
+      url: '/api/Consumer/PerfectPayInfo',
       method: 'POST',
       data: data
       // handle:true
@@ -17676,7 +17676,15 @@ var Auth = { // code获取OpenId
     }, ifLoad);
   },
 
-
+  // 提现
+  SubmitCash: function SubmitCash(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return _interface.default.request({
+      url: '/api/Cash/SubmitCash',
+      method: 'POST',
+      data: data
+      // handle:true
+    }, ifLoad);
+  },
   // 	=============商家部分\\\
 
 
@@ -17738,9 +17746,9 @@ Auth;exports.default = _default;
 /***/ }),
 
 /***/ 17:
-/*!*************************************************!*\
-  !*** E:/mywork/jll_mt/utils/module/business.js ***!
-  \*************************************************/
+/*!**********************************************!*\
+  !*** G:/work/马桶福利购/utils/module/business.js ***!
+  \**********************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -17749,6 +17757,16 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 var _interface = _interopRequireDefault(__webpack_require__(/*! ../http/interface */ 12));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} // 用户身份相关接口
 var Set = {
+
+  // 延迟发货
+  Delayed: function Delayed(data) {
+    return _interface.default.request({
+      url: '/api/Order/Delayed',
+      method: 'POST',
+      data: data
+      // handle:true
+    });
+  },
   // 获取活动订单推荐
   GetShareOrderList: function GetShareOrderList(data) {
     return _interface.default.request({
@@ -17992,14 +18010,14 @@ var Set = {
   },
 
   // 申请提现
-  SubmitCash: function SubmitCash(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    return _interface.default.request({
-      url: '/api/Cash/SubmitCash',
-      method: 'POST',
-      data: data
-      // handle:true
-    }, ifLoad);
-  },
+  // SubmitCash: (data, ifLoad = false) => {
+  // 	return http.request({
+  // 		url: '/api/Cash/SubmitCash',
+  // 		method: 'POST',
+  // 		data,
+  // 		// handle:true
+  // 	}, ifLoad)
+  // },
 
   // 实名认证
   SubmitProve: function SubmitProve(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
@@ -19008,10 +19026,12 @@ if (true) {
   };
 
   formatComponentName = function (vm, includeFile) {
-    if (vm.$root === vm) {
-      if (vm.$options && vm.$options.__file) { // fixed by xxxxxx
-        return ('') + vm.$options.__file
+    {
+      if(vm.$scope && vm.$scope.is){
+        return vm.$scope.is
       }
+    }
+    if (vm.$root === vm) {
       return '<Root>'
     }
     var options = typeof vm === 'function' && vm.cid != null
@@ -19046,7 +19066,7 @@ if (true) {
     if (vm._isVue && vm.$parent) {
       var tree = [];
       var currentRecursiveSequence = 0;
-      while (vm && vm.$options.name !== 'PageBody') {
+      while (vm) {
         if (tree.length > 0) {
           var last = tree[tree.length - 1];
           if (last.constructor === vm.constructor) {
@@ -19058,7 +19078,7 @@ if (true) {
             currentRecursiveSequence = 0;
           }
         }
-        !vm.$options.isReserved && tree.push(vm);
+        tree.push(vm);
         vm = vm.$parent;
       }
       return '\n\nfound in\n\n' + tree
@@ -24178,10 +24198,9 @@ function getTarget(obj, path) {
   return getTarget(obj[key], parts.slice(1).join('.'))
 }
 
-function internalMixin(Vue ) {
+function internalMixin(Vue) {
 
-  Vue.config.errorHandler = function(err, vm, info) {
-    Vue.util.warn(("Error in " + info + ": \"" + (err.toString()) + "\""), vm);
+  Vue.config.errorHandler = function(err) {
     console.error(err);
     /* eslint-disable no-undef */
     var app = getApp();
@@ -24533,9 +24552,9 @@ function normalizeComponent (
 /***/ }),
 
 /***/ 21:
-/*!*********************************************!*\
-  !*** E:/mywork/jll_mt/static/defaultSet.js ***!
-  \*********************************************/
+/*!******************************************!*\
+  !*** G:/work/马桶福利购/static/defaultSet.js ***!
+  \******************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -24811,10 +24830,10 @@ set;exports.default = _default;
 
 /***/ }),
 
-/***/ 239:
-/*!********************************************************!*\
-  !*** E:/mywork/jll_mt/components/tki-qrcode/qrcode.js ***!
-  \********************************************************/
+/***/ 270:
+/*!*****************************************************!*\
+  !*** G:/work/马桶福利购/components/tki-qrcode/qrcode.js ***!
+  \*****************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -26030,9 +26049,9 @@ QRCode;exports.default = _default;
 /***/ }),
 
 /***/ 28:
-/*!***************************************!*\
-  !*** E:/mywork/jll_mt/utils/utils.js ***!
-  \***************************************/
+/*!************************************!*\
+  !*** G:/work/马桶福利购/utils/utils.js ***!
+  \************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -26385,9 +26404,9 @@ module.exports = g;
 /***/ }),
 
 /***/ 37:
-/*!********************************************!*\
-  !*** E:/mywork/jll_mt/utils/baseMixins.js ***!
-  \********************************************/
+/*!*****************************************!*\
+  !*** G:/work/马桶福利购/utils/baseMixins.js ***!
+  \*****************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -27290,9 +27309,9 @@ if (hadRuntime) {
 /***/ }),
 
 /***/ 7:
-/*!***********************************!*\
-  !*** E:/mywork/jll_mt/pages.json ***!
-  \***********************************/
+/*!********************************!*\
+  !*** G:/work/马桶福利购/pages.json ***!
+  \********************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -27301,9 +27320,9 @@ if (hadRuntime) {
 /***/ }),
 
 /***/ 77:
-/*!****************************************************!*\
-  !*** E:/mywork/jll_mt/utils/QS-SharePoster/app.js ***!
-  \****************************************************/
+/*!*************************************************!*\
+  !*** G:/work/马桶福利购/utils/QS-SharePoster/app.js ***!
+  \*************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -27871,9 +27890,9 @@ module.exports = _app;
 /***/ }),
 
 /***/ 78:
-/*!***************************************************************!*\
-  !*** E:/mywork/jll_mt/utils/QS-SharePoster/QS-SharePoster.js ***!
-  \***************************************************************/
+/*!************************************************************!*\
+  !*** G:/work/马桶福利购/utils/QS-SharePoster/QS-SharePoster.js ***!
+  \************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -29183,9 +29202,9 @@ module.exports = {
 /***/ }),
 
 /***/ 79:
-/*!**********************************************************!*\
-  !*** E:/mywork/jll_mt/utils/QS-SharePoster/QRCodeAlg.js ***!
-  \**********************************************************/
+/*!*******************************************************!*\
+  !*** G:/work/马桶福利购/utils/QS-SharePoster/QRCodeAlg.js ***!
+  \*******************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 

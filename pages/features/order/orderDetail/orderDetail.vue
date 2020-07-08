@@ -2,27 +2,33 @@
 	<view>
 		<tui-skeleton v-if="skeletonShow" backgroundColor="#f9f9f9" skeletonBgColor="#efefef" borderRadius="0rpx"></tui-skeleton>
 		<view class="pages tui-skeleton">
-			<view class="bgbox ">
-				<view>{{ item.order_status | orderStatusFilter }}</view>
-				<text style="font-size: 24rpx;font-weight: 400;">{{ statusText }}</text>
+			<view class="bgbox flex flex_center ">
+				<view class="f1">
+					<view style="font-size: 36rpx;font-weight: 600;line-height: 2;">{{ item.order_status | orderStatusFilter }}</view>
+					<text style="font-size: 24rpx;font-weight: 400;">{{ statusText }}</text>
+				</view>
+				<!-- <button class="yanchi" @tap="yanchi" v-if="item.order_status == 1">延迟发货</button> -->
+				<picker mode="date" :value="date" :start="startDate" :end="endDate" @change="bindDateChange">
+					<button class="yanchi" v-if="item.order_status == 1">延迟发货</button>
+				</picker>
 			</view>
 
-			<view class="proItemsBox  ">
+			<view class="proItemsBox  " v-if="item.order_status == 5">
 				<view class="cm_title">服务码</view>
 				<view class="flex flex_center  tui-skeleton-fillet numsBox">
-					<view class="  tui-skeleton-rect nums">6</view>
-					<view class="  tui-skeleton-rect nums">3</view>
-					<view class="  tui-skeleton-rect nums">4</view>
-					<view class="  tui-skeleton-rect nums">5</view>
+					<view class="  tui-skeleton-rect nums">{{ item.service_code[0] }}</view>
+					<view class="  tui-skeleton-rect nums">{{ item.service_code[1] }}</view>
+					<view class="  tui-skeleton-rect nums">{{ item.service_code[2] }}</view>
+					<view class="  tui-skeleton-rect nums">{{ item.service_code[3] }}</view>
 				</view>
 				<view class="fwTip">等待马桶安装完后，请出示服务码给安装师傅</view>
 			</view>
 
-			<view class="proItemsBox  " style="padding: 0">
+			<view class="proItemsBox  " style="padding: 0" v-if="item.order_status == 5">
 				<view class="cm_title t tui-skeleton-fillet flex flex_center">
 					<text>安装人员信息</text>
 					<text class="f1"></text>
-					<button class="cm_tags " size="mini" @tap="_copy(item.order_code)">拨打电话</button>
+					<button class=" " size="mini" @tap="_call(item.order_code)">拨打电话</button>
 				</view>
 				<view class="  tui-skeleton-fillet">
 					<tui-list-cell :hover="false">
@@ -53,21 +59,7 @@
 			</view>
 
 			<view class="proItemsBox addressBox ">
-				<view class="flex flex_center address tui-skeleton-fillet ">
-					<image src="../../../../static/image/xq_dz.png" mode="scaleToFill" class="icon"></image>
-					<view class="f1  tui-skeleton-rect ">
-						<view style="margin-bottom: 20rpx;">{{ item.buy_address }}</view>
-						<view class="flex flex_center">
-							<text class="cm_text ">{{ item.buy_name }}</text>
-							<text class="cm_text ">{{ item.buy_phone }}</text>
-							<view class="f1"></view>
-						</view>
-					</view>
-				</view>
-				<view class="flex flex-center">
-					<view style="width: 100rpx;"></view>
-					<view class="f1" style="height: 1rpx;background: #eee;"></view>
-				</view>
+
 				<view class="flex flex_center address tui-skeleton-fillet">
 					<image src="../../../../static/image/xq_wl.png" mode="scaleToFill" class="icon"></image>
 					<view class="f1  tui-skeleton-rect">
@@ -125,8 +117,12 @@
 								</view>
 							</view>
 							<view class="cells flex flex_center">
+								<view class="label cm_tex_r">运费</view>
+								<view class="f1 text">￥{{ item.is_ems }}</view>
+							</view>
+							<view class="cells flex flex_center">
 								<view class="label cm_tex_r">税费</view>
-								<view class="f1 text">￥12</view>
+								<view class="f1 text">￥{{ item.taxes_price }}</view>
 							</view>
 							<view class="cells flex flex_center">
 								<view class="label cm_tex_r">特色服务</view>
@@ -139,7 +135,7 @@
 				<view class=" flex flex_center" style="line-height: 80rpx;height: 80rpx;">
 					<view class="f1"></view>
 					<view class=""><text>共1件，合计:</text></view>
-					<text class="">￥{{ item.pay_price }}</text>
+					<text class="cm_price">￥{{ item.pay_price }}</text>
 				</view>
 			</view>
 			<view class="proItemsBox  " @click="_call">
@@ -148,7 +144,9 @@
 					<text>联系卖家</text>
 				</view>
 			</view>
-
+			<!-- <picker @change="bindPickerChange" :value="1" mode="date">
+			                        <view class="uni-input">123</view>
+			                    </picker> -->
 			<view class="proItemsBox  " style="padding: 0">
 				<view class="cm_title t tui-skeleton-fillet flex flex_center">
 					<text>订单的详情</text>
@@ -162,16 +160,34 @@
 							<view class="tui-input f1 cm_tex_r">{{ item.order_code }}</view>
 						</view>
 					</tui-list-cell>
-					<tui-list-cell :hover="false">
+					<tui-list-cell :hover="false" v-if="item.order_status == 0 ">
 						<view class="tui-line-cell flex flex_center tui-cell-last">
-							<view class="tui-title cm_text">创建时间</view>
-							<view class="tui-input f1 cm_tex_r">{{ item.create_time }}</view>
+							<view class="tui-title cm_text">创建时间'</view>
+							<view class="tui-input f1 cm_tex_r">{{item.create_time}}</view>
+						</view>
+					</tui-list-cell>
+					<tui-list-cell :hover="false" v-else-if="item.order_status == 5">
+						<view class="tui-line-cell flex flex_center tui-cell-last">
+							<view class="tui-title cm_text">完成时间</view>
+							<view class="tui-input f1 cm_tex_r">{{item.finish_date }}</view>
+						</view>
+					</tui-list-cell>
+					<tui-list-cell :hover="false" v-else-if="item.order_status == 2">
+						<view class="tui-line-cell flex flex_center tui-cell-last">
+							<view class="tui-title cm_text">发货时间</view>
+							<view class="tui-input f1 cm_tex_r">{{item.dispatch_date }}</view>
+						</view>
+					</tui-list-cell>
+					<tui-list-cell :hover="false" v-else>
+						<view class="tui-line-cell flex flex_center tui-cell-last">
+							<view class="tui-title cm_text">支付时间</view>
+							<view class="tui-input f1 cm_tex_r">{{item.pay_date }} </view>
 						</view>
 					</tui-list-cell>
 					<tui-list-cell :hover="false" v-if="item.order_status != 0">
 						<view class="tui-line-cell flex flex_center tui-cell-last">
 							<view class="tui-title cm_text">支付方式</view>
-							<view class="tui-input f1 cm_tex_r">{{ item.payType | payTypeFilter }}</view>
+							<view class="tui-input f1 cm_tex_r">{{ item.pay_type | payTypeFilter }}</view>
 						</view>
 					</tui-list-cell>
 					<tui-list-cell :hover="false" :last="true" v-if="item.ems_code">
@@ -220,7 +236,10 @@ export default {
 				pay_source: 0, //0-定额充值 1-聚友手续费 2-粉丝手续费 3-VIP手续费
 				order_num: '' //订单号
 			},
-			skeletonShow: true
+			skeletonShow: true,
+			showPickerStatus: false,
+			// 延迟时间
+			date: ''
 		};
 	},
 	onLoad(options) {
@@ -262,6 +281,12 @@ export default {
 					break;
 			}
 			return t;
+		},
+		startDate() {
+			return this.getDate('start');
+		},
+		endDate() {
+			return this.getDate('end');
 		}
 	},
 	components: {
@@ -271,6 +296,61 @@ export default {
 		PayPanel
 	},
 	methods: {
+		getDate(type) {
+			const date = new Date();
+			let year = date.getFullYear();
+			let month = date.getMonth() + 1;
+			let day = date.getDate();
+
+			if (type === 'start') {
+				year = year - 60;
+			} else if (type === 'end') {
+				year = year + 1;
+			}
+			month = month > 9 ? month : '0' + month;
+			day = day > 9 ? day : '0' + day;
+			return `${year}-${month}-${day}`;
+		},
+		bindDateChange(e) {
+			let that = this
+			let d = e.detail.value;
+			uni.showModal({
+				title: '洁利来提醒您',
+				content: '你将延迟该订单的发货时间',
+				success(res) {
+					if (res.confirm) {
+						console.log('用户点击确定');
+						that._beLast(d)
+					} else if (res.cancel) {
+						console.log('用户点击取消');
+					}
+				}
+			});
+		},
+		// 延迟发货
+		async _beLast(d){
+			let that = this;
+			try {
+				// this.$ui.showloading();
+				let data = {
+					"order_code":this.formParams.order_code,
+					"delay_ems_time":d,
+				};
+				let res = await this.$api.Delayed(data, false);
+				// this.$ui.hideloading();
+				if (res.Success) {
+					that.$ui.toast('延迟发货成功');
+					setTimeout(() => {
+						that.loadData();
+					}, 1000);
+				} else {
+					that.$ui.toast(res.Msg);
+				}
+				if (callback) callback();
+			} catch (err) {
+				console.log('请求结果false : ' + err);
+			}
+		},
 		// 发起退款
 		async sure(code) {
 			let that = this;
@@ -304,7 +384,7 @@ export default {
 				let res = await this.$api.Prompt(data);
 				this.$ui.hideloading();
 				if (res.Success) {
-					that.$ui.toast('提醒发货成功');
+					that.$ui.toast('提醒发货成功'); 
 					that.refresh();
 				} else {
 					that.$ui.toast(res.Msg);
@@ -326,25 +406,26 @@ export default {
 		},
 		_copy(str) {
 			// alert(str)
-			// uni.setClipboardData({
-			// 	data: str,
-			// 	success: function() {
-			// 		// console.log('success');
-			// 		uni.showToast( '复制成功')
-			// 	}
-			// });
-			let content = str; // 复制内容，必须字符串，数字需要转换为字符串
-			const result = h5Copy(content);
-			if (result === false) {
-				uni.showToast({
-					title: '不支持'
-				});
-			} else {
-				uni.showToast({
-					title: '复制成功',
-					icon: 'none'
-				});
-			}
+			uni.setClipboardData({
+				data: str,
+				success: function() {
+					// console.log('success');
+					// uni.showToast( '复制成功')
+					this.$ui.toast('复制成功')
+				}
+			});
+			// let content = str; // 复制内容，必须字符串，数字需要转换为字符串
+			// const result = h5Copy(content);
+			// if (result === false) {
+			// 	uni.showToast({
+			// 		title: '不支持'
+			// 	});
+			// } else {
+			// 	uni.showToast({
+			// 		title: '复制成功',
+			// 		icon: 'none'
+			// 	});
+			// }
 		},
 		_refundDetail(item) {
 			console.log(111, item);
@@ -473,10 +554,17 @@ export default {
 		z-index: 0;
 		width: 100%;
 		height: 260rpx;
-		// line-height: 300rpx;
-
 		padding: 20rpx 40rpx;
-		padding-top: 60rpx;
+		padding-bottom: 100rpx;
+		.yanchi {
+			height: 58rpx;
+			line-height: 56rpx;
+			border-radius: 29rpx;
+			border: 1rpx solid #fff;
+			text-align: center;
+			color: #fff;
+			background-color: transparent;
+		}
 		&.text-red {
 			color: red;
 		}
@@ -512,7 +600,6 @@ export default {
 			border-radius: 8rpx;
 			padding: 0 20rpx;
 		}
-		
 	}
 	.addressBox {
 		// margin-top: 160rpx;
@@ -520,7 +607,7 @@ export default {
 		position: relative;
 		text-align: left;
 		padding: 0 20rpx;
-		.address{
+		.address {
 			height: 140rpx;
 			line-height: 140rpx;
 		}
@@ -606,6 +693,79 @@ export default {
 		.btns {
 			margin-left: 20rpx;
 		}
+	}
+	.tui-mask-screen {
+		position: fixed;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		background: rgba(0, 0, 0, 0.6);
+		z-index: 99996;
+		transition: all 0.3s ease-in-out;
+		opacity: 0;
+		visibility: hidden;
+	}
+
+	.tui-mask-show {
+		opacity: 1;
+		visibility: visible;
+	}
+
+	.tui-picker-box {
+		width: 100%;
+		position: fixed;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		z-index: 99999;
+		visibility: hidden;
+		transform: translate3d(0, 100%, 0);
+		transform-origin: center;
+		transition: all 0.3s ease-in-out;
+		min-height: 20rpx;
+		background: #fff;
+	}
+
+	.tui-pickerbox-show {
+		transform: translate3d(0, 0, 0);
+		visibility: visible;
+	}
+
+	.picker-header {
+		width: 100%;
+		height: 90rpx;
+		padding: 0 46rpx;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		box-sizing: border-box;
+		font-size: 32rpx;
+		background: #fff;
+	}
+
+	.list-item::after {
+		left: 0;
+	}
+
+	.btn-cancle {
+		padding: 20rpx;
+		color: #888;
+	}
+
+	.btn-sure {
+		padding: 20rpx;
+		color: #5677fc;
+	}
+
+	.picker-view {
+		width: 100%;
+		height: 260px;
+	}
+
+	.item {
+		line-height: 50px;
+		text-align: center;
 	}
 }
 </style>

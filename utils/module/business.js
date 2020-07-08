@@ -2,6 +2,16 @@
 
 import http from '../http/interface'
 const Set = {
+	
+	// 延迟发货
+	Delayed:(data) => {
+	    return http.request({
+	        url: '/api/Order/Delayed',
+	        method: 'POST', 
+	        data,
+			// handle:true
+	    })
+	},
 	// 获取活动订单推荐
 	GetShareOrderList:(data) => {
 	    return http.request({
@@ -245,14 +255,14 @@ const Set = {
 	},
 	
 	// 申请提现
-	SubmitCash: (data, ifLoad = false) => {
-		return http.request({
-			url: '/api/Cash/SubmitCash',
-			method: 'POST',
-			data,
-			// handle:true
-		}, ifLoad)
-	},
+	// SubmitCash: (data, ifLoad = false) => {
+	// 	return http.request({
+	// 		url: '/api/Cash/SubmitCash',
+	// 		method: 'POST',
+	// 		data,
+	// 		// handle:true
+	// 	}, ifLoad)
+	// },
 
 	// 实名认证
 	SubmitProve: (data, ifLoad = false) => {

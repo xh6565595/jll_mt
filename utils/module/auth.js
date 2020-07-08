@@ -96,9 +96,9 @@ const Auth = {
 	},
 	
 	//更新用户信息
-	userInfoUpdate: (data, ifLoad = false) => {
+	PerfectPayInfo: (data, ifLoad = false) => {
 		return http.request({
-			url: '/api/Consumer/PerfectInfo',
+			url: '/api/Consumer/PerfectPayInfo',
 			method: 'POST',
 			data,
 			// handle:true
@@ -133,7 +133,15 @@ const Auth = {
 		}, ifLoad)
 	},
 	
-	
+	// 提现
+	SubmitCash: (data, ifLoad = false) => {
+		return http.request({
+			url: '/api/Cash/SubmitCash',
+			method: 'POST',
+			data,
+			// handle:true
+		}, ifLoad)
+	},
 // 	=============商家部分\\\
 
 

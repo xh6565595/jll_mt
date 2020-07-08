@@ -49,9 +49,9 @@
 					<text class="wxz" v-else></text>
 				</view>
 			</view>
-			<view class="flex flex_center" >
+			<view class="flex flex_center">
 				<button type="primary" class="f1 sbtn cm_btn_plain" :plain="true" shape="circle" :loading="loading" @tap="_hide">取消</button>
-				<button type="primary" class="f1 cm_btn sbtn"  shape="circle" :loading="loading" @tap="_submit">提交</button>
+				<button type="primary" class="f1 cm_btn sbtn" shape="circle" :loading="loading" @tap="_submit">提交</button>
 			</view>
 		</view>
 	</view>
@@ -59,7 +59,7 @@
 
 <script>
 import Utils from '@/utils/utils.js';
-const global_Set_jll = uni.getStorageSync('global_Set_jll')
+const global_Set_jll = uni.getStorageSync('global_Set_jll');
 // const jweixin = require('jweixin-module')
 export default {
 	data() {
@@ -68,7 +68,7 @@ export default {
 			agrs: [
 				{
 					price: 100, //每期金额
-					num:6, //期数
+					num: 6, //期数
 					charge: 2 //每期手续费
 				},
 				{
@@ -83,12 +83,12 @@ export default {
 				}
 			],
 			formParams: {
-				pay_type: 4, //1-支付宝 2-微信 3-CBB(建行支付)
-				order_num: '', //订单号
-				install_num: '' //分期数
+				 "pay_type":"4",   ////1-支付宝 2-微信 3-CBB(建行支付)
+				 "order_num":"",   //订单号
+				 "install_num":"",  //分期数
 			},
 			panelshow: false,
-			payList:[]
+			payList: []
 		};
 	},
 	props: {
@@ -103,11 +103,10 @@ export default {
 			default: ''
 		}
 	},
-	created(){
-
-		global_Set_jll.pay_route.forEach(item=>{
-			this.payList.push(item.Value)
-		})
+	created() {
+		global_Set_jll.pay_route.forEach(item => {
+			this.payList.push(item.Value);
+		});
 		// console.log(this.payList)
 	},
 	watch: {
@@ -135,25 +134,25 @@ export default {
 		},
 		_hide() {
 			this.panelshow = false;
-			this.$emit('cancel')
+			this.$emit('cancel');
 			// this._href();
 		},
 		_choose(k) {
-			this.formParams.pay_type=k
+			this.formParams.pay_type = k;
 		},
 		// 提交支付
 		async _submit() {
-			if(this.formParams.pay_type==1){
-				uni.showToast('开发中')
-				this._pay(1)
-			}else if(this.formParams.pay_type==2){
+			if (this.formParams.pay_type == 1) {
+				uni.showToast('开发中');
+				this._pay(1);
+			} else if (this.formParams.pay_type == 2) {
 				// uni.showToast('开发中')
-				this._pay(2)
-			}else if(this.formParams.pay_type==3){
+				this._pay(2);
+			} else if (this.formParams.pay_type == 3) {
 				//建行支付
-				this._pay(3)
-			}else if(this.formParams.pay_type==4){
-				this._pay(4)
+				this._pay(3);
+			} else if (this.formParams.pay_type == 4) {
+				this._pay(4);
 			}
 		},
 		_href() {
@@ -169,8 +168,9 @@ export default {
 			// return;
 			try {
 				that.loading1 = true;
-				 console.log(this.formParams)
+				console.log(this.formParams);
 				let res = await this.$api.toPayment(this.formParams);
+				console.log(res);
 				// let data = {
 				// 	ORDERID:this.formParams.order_num,
 				// 	PAYMENT:0.01,
@@ -178,20 +178,25 @@ export default {
 				// 	ACCDATE:20200415
 				// }
 				// let res = await this.$api.mockPay(data)
-
+				
 				that.loading1 = false;
 				if (res.Success) {
+					let data = res.Data.js_prepay_info
+					let b =  `{${data}}`;
+					    b = b.replace(/'/g,'"')
+					    // console.log(b)
+					let config =JSON.parse(b)
 					if (k == 1) {
 						// 支付宝支付
-						that._toAliPay(res.Data);
-					} else if (k == 2 || k==4) {
-						// 微信支付
-						that._toWXPay(res.Data);
+						that._toAliPay(config);
+					} else if (k == 2 || k == 4) {
+						// 微信支付 小程序
+						that._wxPay(config);
 					} else if (k == 3) {
 						// 建行
-						window.location.href = res.Data;
+						window.location.href = data;
 					}
-					that.$emit('success')
+					that.$emit('success');
 					// that._href()
 				} else {
 					that.$ui.toast(res.Msg);
@@ -202,69 +207,29 @@ export default {
 
 			if (callback) callback();
 		},
-		async _toWXPay(data) {
+
+		// 微信支付
+		async _wxPay(data) {
 			let that = this;
-				try {
-
-					let res = await this.$api.GetWxJsApiConfig({}, true)
-					// alert(JSON.stringify(res))
-					if (res.Success) {
-						console.log(res);
-						let set = res.Data;
-						// jweixin.config({
-						// 	debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
-						// 	appId: set.appId, // 必填，公众号的唯一标识
-						// 	timestamp: set.timestamp, // 必填，生成签名的时间戳
-						// 	nonceStr: set.noncestr, // 必填，生成签名的随机串
-						// 	signature: set.signature, // 必填，签名
-						// 	jsApiList:[
-						// 		'onMenuShareAppMessage',
-						// 		'onMenuShareTimeline',
-						// 		'onMenuShareQQ',
-						// 		'onMenuShareQZone',
-						// 		'onMenuShareWeibo',
-						// 		'chooseWXPay'
-						// 	] // 必填，需要使用的JS接口列表
-						// });
-
-						// jweixin.ready(function() {
-						// 	// 我自己的pid
-						that.wsPay(set)
-						// });
-						// jweixin.error(function(res){
-						// 	// config信息验证失败会执行error函数，如签名过期导致验证失败，具体错误信息可以打开config的debug模式查看，也可以在返回的res参数中查看，对于SPA可以在这里更新签名。
-						// 	console.log(JSON.stringify(res))
-						// });
-					} else {
-
-					}
-				} catch (err) {
-					console.log('请求结果false : ' + err)
-
+			console.log(data)
+			uni.requestPayment({
+				provider: 'wxpay',
+				timeStamp: data.timeStamp,
+				nonceStr: data.nonceStr,
+				package: data.package,
+				signType: data.signType,
+				paySign: data.paySign,
+				success: function(res) {
+					console.log('success:' + JSON.stringify(res));
+					uni.redirectTo({
+						url: '/pages/success/success'
+					});
+				},
+				fail: function(err) {
+					console.log('fail:' + JSON.stringify(err));
 				}
-			},
-			// 微信支付
-			async wsPay(data){
-				let that = this
-				
-				uni.requestPayment({
-				    provider: 'wxpay',
-				    timeStamp:  data.timeStamp,
-				    nonceStr:  data.nonceStr,
-				    package:  data.package,
-				    signType:  data.signType,
-				    paySign:  data.paySign,
-				    success: function (res) {
-				        console.log('success:' + JSON.stringify(res));
-								uni.redirectTo({
-									url:'/pages/success/success'
-								})
-				    },
-				    fail: function (err) {
-				        console.log('fail:' + JSON.stringify(err));
-				    }
-				});
-			}
+			});
+		}
 	}
 };
 </script>
@@ -344,7 +309,6 @@ export default {
 		// height: 60rpx!important;
 		// line-height: 60rpx!important;
 		margin: 0 20rpx;
-		
 	}
 }
 </style>

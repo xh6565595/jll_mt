@@ -324,7 +324,7 @@ export default {
 
 					setTimeout(() => {
 						if (that.formParams.create_order_type == 1) {
-							uni.$emit('refresh_cart');
+							// uni.$emit('refresh_cart');
 						}
 						that._readyToPay(res.Data.order_code);
 					}, 500);

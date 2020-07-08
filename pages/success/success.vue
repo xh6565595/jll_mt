@@ -2,7 +2,7 @@
 	<view class="pages">
 		<view class="blank"></view>
 		
-		<image src="../../static/img/success.png" mode="aspectFill" class="logo"></image>
+		<image src="/static/image/xq_fw.png" mode="widthFix" class="logo"></image>
 		<view class="cm_title">支付成功</view>
 		<!-- <view class="cm_text">您已经购买成功，前往我的订单查看</view> -->
 	<!-- 	<view class="flex flex_center">
@@ -46,10 +46,10 @@
 				})
 			},
 			yes(){
-				// uni.redirectTo({
-				// 	url:'/pages/features/order/order'
-				// })
-				window.location.href = SET.mainUrl + '#/pages/user/user'
+				uni.redirectTo({
+					url:'/pages/features/order/order'
+				})
+				
 			}
 		}
 	}
@@ -60,8 +60,8 @@
 		background: #fff;
 		text-align: center;
 		.logo{
-			width: 280rpx;
-			height:220rpx;
+			width: 200rpx;
+			height:200rpx;
 			margin-top: 200rpx;
 		}
 		.blank{

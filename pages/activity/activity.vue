@@ -1,12 +1,11 @@
 <template>
 	<view class="pages">
-		
 		<view class="fixed">
 			<tuiNav :isCustom="true" :isFixed="false" backgroundColor="#fff">
 				<view class="flex flex_center header">
 					<view><text class="lTip" @tap="_showRule">活动规则</text></view>
 					<view class="f1 cm_tex_c">活动</view>
-					<view><text class="rTip" ></text></view>
+					<view><text class="rTip"></text></view>
 				</view>
 			</tuiNav>
 			<view class="tabsBox flex flex_center">
@@ -14,17 +13,17 @@
 				<view class="f1 tabs" :class="{ active: tap == 1 }" hover-class="cm_hover" @tap="_switch(1)">已完成</view>
 			</view>
 		</view>
-		
+
 		<view class="hot">
-			<block v-for="(item, index) in list" :key="index">		
+			<block v-for="(item, index) in list" :key="index">
 				<view class="inItem" v-if="tap == 0">
 					<view class="cm_items flex flex_center">
 						<image :src="item.project_list[0].skus_img" mode="aspectFill" class="itemLogo"></image>
 						<view class="f1">
-							<view class="cm_title cm_ellipsis2">{{item.project_list[0].order_name}}</view>
-							<view class="cm_des">{{item.project_list[0].skus_name}}</view>
+							<view class="cm_title cm_ellipsis2">{{ item.project_list[0].order_name }}</view>
+							<view class="cm_des">{{ item.project_list[0].skus_name }}</view>
 							<view class="flex flex_center cm_price_box">
-								<view class="cm_price">￥{{item.project_list[0].price}}</view>
+								<view class="cm_price">￥{{ item.project_list[0].price }}</view>
 								<view class="f1"></view>
 								<view class="flex flex_center">
 									<image :src="item.project_list[0].order_project_service1" mode="aspectFill" class="subavatars"></image>
@@ -35,36 +34,35 @@
 						</view>
 					</view>
 					<view class="cm_title title">免单进度</view>
-					<view class="text">
-						{{item.user_list.schedule_msg}}		
-					</view>
+					<view class="text">{{ item.user_list.schedule_msg }}</view>
 					<view class="flex  flex_center flex_between">
-						<view class="submenber"><image src="../../components/PayPanel/wx.png" mode="aspectFill" class="avatar"></image></view>
-						<view class="submenber"><image src="../../components/PayPanel/wx.png" mode="aspectFill" class="avatar"></image></view>
-						<view class="submenber"><image src="../../components/PayPanel/wx.png" mode="aspectFill" class="avatar"></image></view>
+						<view class="submenber"><image src="../../static/image/dd_dfh.png" mode="aspectFill" class="avatar"></image></view>
+						<view class="submenber"><image src="../../static/image/dd_dfh.png" mode="aspectFill" class="avatar"></image></view>
+						<view class="submenber"><image src="../../static/image/dd_dfh.png" mode="aspectFill" class="avatar"></image></view>
 					</view>
-					<button type="text" class="cm_btn" hover-class="cm_hover_m">邀请好友购买</button>
-					<button type="text" class="cm_btn_plain" hover-class="cm_hover_m">自己购买</button>
+					<button type="text" class="cm_btn" hover-class="cm_hover_m"  @tap="_hrefSahre(item.project_list[0])">邀请好友购买</button>
+
+					<button type="text" class="cm_btn_plain" hover-class="cm_hover_m" @tap="_href(item.project_list[0])">自己购买</button>
 				</view>
-				
+
 				<view class="doneItem" v-else>
 					<view class="flex flex_cente header cm_bdb">
 						<view class="f1 cm_title">免单成功</view>
-						<text class="cm_text">{{item.pay_date}}</text>
+						<text class="cm_text">{{ item.pay_date }}</text>
 					</view>
 					<view class="cm_items flex flex_center">
 						<image src="../../static/image/logo.png" mode="aspectFill" class="itemLogo"></image>
 						<view class="f1">
 							<view class="flex flex_center">
-								<view class="f1 cm_title cm_ellipsis2">{{item.project_list[0].order_name}}</view>
+								<view class="f1 cm_title cm_ellipsis2">{{ item.project_list[0].order_name }}</view>
 								<view class="flex flex_center">
 									<text class="iconfont icon-guanbi gray"></text>
 									<text class="gray">1</text>
 								</view>
 							</view>
-				
+
 							<view class="flex flex_center cm_price_box">
-								<view class="cm_price">￥{{item.pay_price}}</view>
+								<view class="cm_price">￥{{ item.pay_price }}</view>
 								<view class="f1"></view>
 								<view class="flex flex_center">
 									<image src="../../static/image/logo.png" mode="aspectFill" class="subavatars"></image>
@@ -78,9 +76,24 @@
 			</block>
 		</view>
 		<LoadMore :status="loadStatus" />
-		
-		
-		<rule ref="rule"></rule>
+		<accredit ref="share" :autoClose="true">
+			<view slot='content' class="shareBox">			
+				<view  class="flex flexd_center">
+					<image :src="goods.image " mode="aspectFill" class="itemLogo" ></image>
+					<view class="f1">
+						<view class="cm_title cm_ellipsis2">{{ goods.title }}</view>
+						<view class="flex flex_center"  style="margin: 20rpx 0;">
+							
+							<view class="cm_des f1">{{ goods.sub_title }}</view>
+							<view class="cm_price">￥{{ goods.price }}</view>
+						</view>
+						
+						
+					</view>
+				</view>
+				<button type="text" class="cm_btn" hover-class="cm_hover_m" open-type="share">立即分享给好友</button>
+			</view>
+		</accredit>
 	</view>
 </template>
 
@@ -97,24 +110,75 @@ export default {
 			banners: [],
 			hasRow: 'ListInfo',
 			formParams: {
-				order_status:0, //0-拼单中 1-已完成
+				order_status: 0, //0-拼单中 1-已完成
 				pageIndex: 1,
 				pageSize: 10
-			}
+			},
+			shareMsg: '',
+			goods:{
+				title:'',
+				sub_title:'',
+				image:'',
+				price:''
+			},
+			modal:false
 		};
 	},
 	mixins: [baseMixins],
+	computed: mapState(['userInfo']),
 	components: {
 		rule
 	},
+	onLoad() {
+		this.shareMsg = {
+			title: `分享好友，马桶免费拿`,
+			query: `code=${this.userInfo.invitation_code}`,
+			imageUrl: '/static/share.jpg'
+		};
+	},
+	onShareAppMessage(res) {
+		if (res.from === 'button') {
+			// 来自页面内分享按钮
+			return {
+				title: this.goods.title,
+				query: `code=${this.goods.code}`,
+				imageUrl: this.goods.image
+			}
+		}else{
+			return this.shareMsg;
+		}
+		
+	},
 	methods: {
-		_showRule(){
-			this.$refs.rule.showModal()
+		handleClick(){
+			
+		},
+		_hrefSahre(item) {
+			let code = item.project_code;
+			
+			this.goods = {
+				title:item.order_name,
+				sub_title:item.skus_name,
+				image:item.skus_img,
+				price:item.price,
+				code:item.project_code
+			}
+			
+			this.$refs.share.showModal()
+		},
+		_href(item) {
+			let code = item.project_code;
+			uni.navigateTo({
+				url: `/pages/main/details/details?code=` + code
+			});
+		},
+		_showRule() {
+			this.$refs.rule.showModal();
 		},
 		_switch(k) {
 			this.tap = k;
 			this.formParams.order_status = k;
-			this._loadData('refresh')
+			this._loadData('refresh');
 		}
 	}
 };
@@ -123,7 +187,7 @@ export default {
 <style lang="scss" scoped>
 .pages {
 	padding: 20rpx;
-	padding-top: 268rpx;
+	padding-top: 250rpx;
 	.fixed {
 		width: 100%;
 		position: fixed;
@@ -234,6 +298,18 @@ export default {
 		}
 		.cm_items {
 			margin-top: 20rpx;
+		}
+	}
+	.shareBox{
+		width: 80vw;
+		background-color: #fff;
+		border-radius: 30rpx;
+		padding: 40rpx;
+		.itemLogo{
+			width: 100rpx;
+			height: 100rpx ;
+			border-radius: 50%;
+			margin-right: 20rpx;
 		}
 	}
 }

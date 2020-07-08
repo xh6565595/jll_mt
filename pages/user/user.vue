@@ -16,7 +16,8 @@
 		
 		
 		<!-- <view class="shareBox "> -->
-		<navigator url="./share/share"  class="shareBox ">
+		<!-- 推广者显示 -->
+		<navigator url="./share/share"  class="shareBox " v-if="userInfo.consumer_type==2">
 			<image src="../../static/image/wd_yq.png" mode="scaleToFill" class="bg"></image>
 			<!-- <button class="share">去邀请</button> -->
 		</navigator>
@@ -49,10 +50,10 @@
 						<view class="tips" v-if="userInfo.wait_receiving_count">{{ userInfo.wait_receiving_count }}</view>
 					</view>
 
-					<view class="menus flex flex_center flex_y" @tap="_href('/features/refundList/refundList')">
+					<view class="menus flex flex_center flex_y" @tap="_href('/features/order/order?current=4')">
 						<image src="../../static/image/dd_th.png" class="menusPic"></image>
-						<text class="cm_t_24">退货</text>
-						<view class="tips" v-if="userInfo.returned_goods_count">{{ userInfo.returned_goods_count }}</view>
+						<text class="cm_t_24">已签收</text>
+						<!-- <view class="tips" v-if="userInfo.returned_goods_count">{{ userInfo.returned_goods_count }}</view> -->
 					</view>
 	
 				</view>

@@ -36,6 +36,7 @@ const store = new Vuex.Store({
 			state.levelAccount = {}  //渠道个人信息
         },
 		setUserInfo(state,info){
+			// console.log(info)
 			state.userInfo = {...info}
 		},
 		setAccountInfo(state,info){
@@ -55,7 +56,7 @@ const store = new Vuex.Store({
 	},
 	actions:{
 		// 用户登录
-		userLogin({ state,commit },token){
+		userLogin({ state,commit },token,callback){
 			// console.log(token)
 			try {
 				// uni.setStorageSync('access_token', token);
@@ -79,8 +80,10 @@ const store = new Vuex.Store({
 								if (statusCode == 200 && res.data.Success) {
 									commit('setUserInfo', res.data.Data);
 								} 
+								if(callback)callback(true,res)
 							},
 							fail(err) {
+								if(callback)callback(false,res)
 								uni.switchTab({
 									url: '/pages/user/user'
 								});
@@ -108,8 +111,8 @@ const store = new Vuex.Store({
 				},
 				success: res => {
 					let statusCode = res.statusCode;
-					if (statusCode == 200 && res.data.result == 1) {
-						commit('setUserInfo', res.data.data);
+					if (statusCode == 200 && res.data.Success) {
+						commit('setUserInfo', res.data.Data);
 					} else{
 						uni.switchTab({
 							url: '/pages/user/user'

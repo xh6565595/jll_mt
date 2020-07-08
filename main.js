@@ -29,7 +29,7 @@ if(!uni.getStorageSync('global_Set_jll')){
 const UI = {
 	toast: function(text, duration, success) {
 
-		// #ifdef MP
+		// #ifdef H5 || MP-WEIXIN
 		uni.showToast({
 			title: text,
 			icon: success ? 'success' : 'none',
@@ -51,7 +51,7 @@ const UI = {
 		// #endif
 	},
 	showloading: function(text) {
-		// #ifdef MP
+		// #ifdef H5 || MP-WEIXIN
 		uni.showLoading({
 			title: text
 		})
@@ -66,7 +66,7 @@ const UI = {
 		// #endif
 	},
 	hideloading: function() {
-		// #ifdef MP
+		// #ifdef H5 || MP-WEIXIN
 		uni.hideLoading()
 		// #endif
 		// #ifdef APP-PLUS
@@ -182,7 +182,7 @@ uni.getSystemInfo({
 			Vue.prototype.CustomBar = e.statusBarHeight + 45;
 		};
 		// #endif
-		// #ifdef H5
+		// #ifdef H5 || MP-WEIXIN
 			Vue.prototype.CustomBar = 44;
 		// #endif
 	}

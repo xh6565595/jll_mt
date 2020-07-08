@@ -60,12 +60,23 @@ export default {
 	},
 	onLoad() {
 		let that = this
-		const opid= uni.getStorageSync('jll_opid')
-		if(opid){
-			// 已存在账户
-			that.autoLogin(opid);
-		}
-		
+		// const opid= uni.getStorageSync('jll_opid')
+		// if(opid){
+		// 	// 已存在账户
+		// 	that.autoLogin(opid);
+		// }
+		uni.login({
+		  provider: 'weixin', 
+		  success:async function (res) {
+			let code =  res.code;
+			// 获取code换opid
+			const r = await that.getopId(code)	
+			
+			if(r.success){
+				
+			}
+		  }
+		});
 		// uni.switchTab({
 		// 	url:'../main/main'
 		// }) 
@@ -95,7 +106,7 @@ export default {
 			try {
 				this.$ui.showloading()
 				let res = await this.$api.WxAutoRegiste(this.formParams, false);
-				console.log(res);
+				// console.log(res);
 				this.$ui.hideloading()
 				if (res.Success) {
 					// that.$ui.toast('登陆成功')
@@ -106,7 +117,7 @@ export default {
 					// });	
 					let opid = res.Data.openId;
 					that.autoLogin(opid)
-					that.$refs.userBox.hideModal()
+					// that.$refs.userBox.hideModal()
 					
 				}else{
 					that.$ui.toast(res.Msg?res.Msg:'未知错误')
@@ -126,6 +137,7 @@ export default {
 			this.formParams.vilidate = ''
 			clearInterval(this.time)
 			this.time = null
+			this.$refs.hi.set('')
 		},
 		// 实时同步
 		input(e){
@@ -194,6 +206,8 @@ export default {
 					uni.setStorageSync('jll_opid',opid);
 					that.formParams.openId = opid
 					// that.$refs.userBox.showModal()
+					// 自动登录一次
+					that.autoLogin(opid)
 					return {
 						success:true,
 						data:opid
@@ -217,19 +231,20 @@ export default {
 			// console.log(userInfo)
 			this.formParams.nickname = userInfo.nickName
 			this.formParams.headimgurl =  userInfo.avatarUrl
-			uni.login({
-			  provider: 'weixin', 
-			  success:async function (res) {
-				let code =  res.code;
-				// 获取code换opid
-				const r = await that.getopId(code)	
+			that.$refs.userBox.showModal();
+			// uni.login({
+			//   provider: 'weixin', 
+			//   success:async function (res) {
+			// 	let code =  res.code;
+			// 	// 获取code换opid
+			// 	// const r = await that.getopId(code)	
 				
-				if(r.success){
-					that.$refs.userBox.showModal()
-					// that.register(r.data)
-				}
-			  }
-			});
+			// 	if(r.success){
+			// 		that.$refs.userBox.showModal()
+			// 		// that.register(r.data)
+			// 	}
+			//   }
+			// });
 		},
 		// opid直接登录
 		async autoLogin(opid) {
@@ -243,21 +258,35 @@ export default {
 				if (res.Success) {		
 					// that.$store.commit('login');
 					uni.setStorageSync('access_token',res.Data.hp)
-					that.$store.dispatch('userLogin',res.Data.hp);
-					uni.redirectTo()({
-						url: '/pages/main/main'
-					});	
+					// that.$store.dispatch('userLogin',res.Data.hp,(r)=>{
+					// 	console.log(r)
+					// 	uni.redirectTo({
+					// 		url: '/pages/main/main'
+					// 	});	
+					// });
+					that.initUser()
 				
 				} else {
-					uni.reLaunch({
-						url: '/pages/main/main'
-					});
+					// that.initUser()
+					// uni.showModal({
+					// 	showCancel:false,
+					// 	title:'登录失效',
+					// 	content:res.Msg?res.Msg:'未知错误'
+					// })
+					this.$ui.toast(res.Msg)
+					// debugger
+						// uni.switchTab({ 
+						// 	url: '/pages/main/main'
+						// });	
 				}
 			} catch (err) {
 				// console.log('请求结果false : ' + err);
-				uni.reLaunch({
-					url: '/pages/main/main'
-				});
+				// uni.redirectTo({
+				// 	url: '/pages/main/main'
+				// });
+				// uni.redirectTo({
+				// 	url: '/pages/main/main'
+				// });	
 			}
 		},
 		// 加载登录账户信息
@@ -267,13 +296,22 @@ export default {
 				// this.$ui.showloading();
 
 				let res = await this.$api.getConsumer({}, false);
-				// this.$ui.hideloading();
 
-				// console.log(res)
 				if (res.Success) {
 					if (res.Data) {
 						that.$store.commit('setAccountInfo', res.Data);
-						that.userAccount = res.Data;
+						that.$store.commit('login');
+						if(res.Data.consumer_type==3){
+							// 安装员
+							uni.redirectTo({
+								url: '/pages/main/serverCenter/serverCenter'
+							});
+						}else{
+							// 推广者 消费者 3是安装
+							uni.switchTab({
+								url: '/pages/main/main'
+							});
+						}
 					}
 				} else {
 					that.$ui.toast(res.Msg);
