@@ -2,15 +2,20 @@
 	<view>
 		<tui-skeleton v-if="skeletonShow" backgroundColor="#f9f9f9" skeletonBgColor="#efefef" borderRadius="0rpx"></tui-skeleton>
 		<view class="pages tui-skeleton">
+			
 			<view class="bgbox flex flex_center ">
 				<view class="f1">
 					<view style="font-size: 36rpx;font-weight: 600;line-height: 2;">{{ item.order_status | orderStatusFilter }}</view>
 					<text style="font-size: 24rpx;font-weight: 400;">{{ statusText }}</text>
 				</view>
 				<!-- <button class="yanchi" @tap="yanchi" v-if="item.order_status == 1">延迟发货</button> -->
-				<picker mode="date" :value="date" :start="startDate" :end="endDate" @change="bindDateChange">
-					<button class="yanchi" v-if="item.order_status == 1">延迟发货</button>
-				</picker>
+				<view class="flex flex_y" style="align-items: flex-end" v-if="item.order_status == 1">
+					<picker mode="date" :value="date" :start="startDate" :end="endDate" @change="bindDateChange">
+						<button class="yanchi" >延迟发货</button>
+					</picker>
+					
+				</view>
+				
 			</view>
 
 			<view class="proItemsBox  " v-if="item.order_status == 5">
@@ -43,7 +48,7 @@
 							<view class="tui-input f1 cm_tex_r">{{ item.create_time }}</view>
 						</view>
 					</tui-list-cell>
-					<tui-list-cell :hover="false" v-if="item.order_status != 0">
+					<!-- <tui-list-cell :hover="false" v-if="item.order_status != 0">
 						<view class="tui-line-cell flex flex_center tui-cell-last">
 							<view class="tui-title cm_text">支付方式</view>
 							<view class="tui-input f1 cm_tex_r">{{ item.payType | payTypeFilter }}</view>
@@ -54,7 +59,7 @@
 							<view class="tui-title cm_text">快递单号</view>
 							<view class="tui-input f1 cm_tex_r">{{ item.ems_code }}</view>
 						</view>
-					</tui-list-cell>
+					</tui-list-cell> -->
 				</view>
 			</view>
 
@@ -198,7 +203,7 @@
 					</tui-list-cell>
 				</view>
 			</view>
-
+			<text class="footerMark" v-if="item.order_status == 1 && item.delay_ems_time">该订单已延迟至{{ item.delay_ems_time }}发货</text>
 			<view class="footer flex flex_center" v-if="item.order_status != 5">
 				<view class="f1"></view>
 				<tui-button type="primary" class="btns" size="small" shape="circle" @tap="_readyToPay" v-if="item.order_status == 0">立即付款</tui-button>
@@ -283,9 +288,11 @@ export default {
 			return t;
 		},
 		startDate() {
+			console.log(this.getDate('start'))
 			return this.getDate('start');
 		},
 		endDate() {
+			console.log(this.getDate('end'))
 			return this.getDate('end');
 		}
 	},
@@ -303,12 +310,18 @@ export default {
 			let day = date.getDate();
 
 			if (type === 'start') {
-				year = year - 60;
+				year = year
+				// if(this.item.delay_ems_time){
+				// 	return this.item.delay_ems_time
+				// }else{
+				// 	year = year
+				// }
 			} else if (type === 'end') {
-				year = year + 1;
+				year = year + 2;
 			}
 			month = month > 9 ? month : '0' + month;
 			day = day > 9 ? day : '0' + day;
+			
 			return `${year}-${month}-${day}`;
 		},
 		bindDateChange(e) {
@@ -540,7 +553,7 @@ export default {
 	padding: 20rpx;
 	position: relative;
 	padding-top: 160rpx;
-	padding-bottom: 90rpx;
+	padding-bottom: 130rpx;
 	.bgbox {
 		font-size: 40rpx;
 		text-align: left;
@@ -679,6 +692,19 @@ export default {
 		width: 110rpx;
 		margin-right: 20rpx;
 		text-align: left;
+	}
+	.footerMark{
+		position: fixed;
+		left: 0;
+		bottom: 100rpx;
+		height: 50rpx;
+		line-height: 50rpx;
+		width: 100%;
+		padding: 0 20rpx;
+		z-index: 100;
+		background-color: #FFFDEF;
+		color: #FC872D;
+		text-align: center;
 	}
 	.footer {
 		position: fixed;

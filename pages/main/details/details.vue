@@ -3,7 +3,7 @@
 		<tui-skeleton v-if="skeletonShow" backgroundColor="#f9f9f9" skeletonBgColor="#efefef" borderRadius="0rpx"></tui-skeleton>
 		<view class="pages tui-skeleton">
 			<!-- <view class="uni-padding-wrap"> -->
-			<tuiNav :isCustom="true">
+			<tuiNav :isCustom="true"  backgroundColor="#fff">
 				<view class="flex flex_center" style="height: 88rpx;">
 					<view  style="height: 88rpx;width: 88rpx;" class="flex flex_center" @tap="_back">
 						<view class="cm_back  flex flex_center">
@@ -22,15 +22,15 @@
 					</block>
 				</swiper>
 			</view>
-
-			<view class="boxs box1">
+			
+			<view class="boxs box1 ">
 				<view class="flex titleBox tui-skeleton-fillet" v-if="goods.is_activity==0">
 					<text class="cm_prize">￥{{ goods.project_raise_price }}</text>
 					<text class="cm_delete">￥{{ goods.project_price }}</text>
 				</view>
 
 				
-				<view class="logoBox flex  flex_center">
+				<view class="logoBox flex  flex_center tui-skeleton-fillet">
 					<image src="../../../static/image/logo.png" mode="widthFix" class="logo"></image>
 					<view class=" cm_title   name">洁利来</view>
 					<view class="blank"></view>
@@ -39,12 +39,12 @@
 			</view>
 
 
-			<view class="boxs box4" >
-				<view class="flex flex_center cells" >
+			<view class="boxs box4 " >
+				<view class="flex flex_center cells tui-skeleton-fillet" >
 					<view class=" cm_des " style="width: 20%;">发货</view>
 					<text class="f1">{{business.shipments_address.area}}</text>
 				</view>
-				<view class="flex flex_center cells">
+				<view class="flex flex_center cells tui-skeleton-fillet">
 					<view class=" cm_des " style="width: 20%;">服务</view>
 					<view class=" flex flex_center" style="margin-right: 20rpx;">
 						<image src="../../../static/image/xq_fw.png" mode="widthFix" style="width: 40rpx;height: 40rpx;"></image>
@@ -61,7 +61,7 @@
 					<view class="f1"></view>
 				</view>
 			</view>
-			<view class="boxs box3">
+			<view class="boxs box3 tui-skeleton-rect ">
 				<!-- <view class="picBox flex  flex_center"> -->
 				<navigator  url="/pages/main/main" open-type="switchTab" class="picBox flex  flex_center">
 					<image :src="business.shop_logo" mode="aspectFill" class="avatar tui-skeleton-rect"></image>
@@ -72,7 +72,7 @@
 				</navigator>
 				<!-- </view> -->
 			</view>
-			<view class="commonTit flex flex_center">
+			<view class="commonTit flex flex_center tui-skeleton-fillet">
 				<view class="blank"></view>
 				<view class="cm_title">商品详情</view>
 				<view class="blank"></view>

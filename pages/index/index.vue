@@ -71,10 +71,7 @@ export default {
 			let code =  res.code;
 			// 获取code换opid
 			const r = await that.getopId(code)	
-			
-			if(r.success){
-				
-			}
+
 		  }
 		});
 		// uni.switchTab({
@@ -105,6 +102,7 @@ export default {
 			
 			try {
 				this.$ui.showloading()
+				
 				let res = await this.$api.WxAutoRegiste(this.formParams, false);
 				// console.log(res);
 				this.$ui.hideloading()
@@ -197,9 +195,9 @@ export default {
 		async getopId(code){
 			let that = this
 			try {
-				this.$ui.showloading()
+				// this.$ui.showloading()
 				let res = await this.$api.GetOpenId({wx_code:code}, false);
-				this.$ui.hideloading()
+				// this.$ui.hideloading()
 				if (res.Success) {
 					// oNDKY5B658gwmlw5vZnwEUOdG1io
 					let opid = res.Msg;
@@ -299,19 +297,22 @@ export default {
 
 				if (res.Success) {
 					if (res.Data) {
-						that.$store.commit('setAccountInfo', res.Data);
+						that.$store.commit('setUserInfo', res.Data);
 						that.$store.commit('login');
-						if(res.Data.consumer_type==3){
-							// 安装员
-							uni.redirectTo({
-								url: '/pages/main/serverCenter/serverCenter'
-							});
-						}else{
-							// 推广者 消费者 3是安装
-							uni.switchTab({
-								url: '/pages/main/main'
-							});
-						}
+						setTimeout(()=>{
+							if(res.Data.consumer_type==3){
+								// 安装员
+								uni.redirectTo({
+									url: '/pages/main/serverCenter/serverCenter'
+								});
+							}else{
+								// 推广者 消费者 3是安装
+								uni.switchTab({
+									url: '/pages/main/main'
+								});
+							}
+						},500)
+						
 					}
 				} else {
 					that.$ui.toast(res.Msg);

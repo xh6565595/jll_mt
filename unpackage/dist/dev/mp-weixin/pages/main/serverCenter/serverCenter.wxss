@@ -24,63 +24,74 @@
 /* 垂直间距 */
 /* 透明度 */
 /* 文章场景相关 */
-.pages.data-v-ef1c878c {
+.pages.data-v-8ee8fbdc {
   padding-top: 326rpx;
 }
-.pages .header.data-v-ef1c878c {
+.pages .header.data-v-8ee8fbdc {
   position: fixed;
   left: 0;
   top: 0;
 }
-.pages .header .mshBar.data-v-ef1c878c {
+.pages .header .mshBar.data-v-8ee8fbdc {
   height: 74rpx;
   line-height: 74rpx;
   background: #FFEDE2;
   color: #EC6D43;
   padding: 0 30rpx;
 }
-.pages .header .marchantBox.data-v-ef1c878c {
+.pages .header .marchantBox.data-v-8ee8fbdc {
   height: 180rpx;
   padding: 0 40rpx;
   background-color: #fff;
   width: 100%;
 }
-.pages .header .marchantBox .avatar.data-v-ef1c878c {
+.pages .header .marchantBox .avatar.data-v-8ee8fbdc {
   width: 120rpx;
   height: 120rpx;
   border-radius: 50%;
   margin-right: 30rpx;
 }
-.pages .tabBar.data-v-ef1c878c {
+.pages .tabBar.data-v-8ee8fbdc {
   line-height: 72rpx;
   height: 72rpx;
   background: #fff;
   overflow: hidden;
+  width: 100vw;
 }
-.pages .orderBox.data-v-ef1c878c {
+.pages .orderBox.data-v-8ee8fbdc {
   padding: 20rpx;
 }
-.pages .orderBox .orderItems.data-v-ef1c878c {
+.pages .orderBox .orderItems.data-v-8ee8fbdc {
   border-radius: 12rpx;
   background: #fff;
   padding: 0 30rpx;
   margin-bottom: 16rpx;
 }
-.pages .orderBox .orderItems .top.data-v-ef1c878c {
+.pages .orderBox .orderItems .top.data-v-8ee8fbdc {
   height: 82rpx;
   line-height: 82rpx;
 }
-.pages .orderBox .orderItems .top .status.data-v-ef1c878c {
+.pages .orderBox .orderItems .top .status.data-v-8ee8fbdc {
   color: #DD3A30;
 }
-.pages .orderBox .orderItems .content.data-v-ef1c878c {
+.pages .orderBox .orderItems .content.data-v-8ee8fbdc {
   padding: 20rpx 0;
   line-height: 2;
 }
-.pages .orderBox .orderItems .content .cm_title.data-v-ef1c878c {
+.pages .orderBox .orderItems .content .cm_title.data-v-8ee8fbdc {
   line-height: 2;
 }
-.pages .orderBox .orderItems .content .text.data-v-ef1c878c {
+.pages .orderBox .orderItems .content .text.data-v-8ee8fbdc {
   line-height: 1.4;
+}
+.pages .msgTap.data-v-8ee8fbdc {
+  width: 100rpx;
+  height: 100rpx;
+  background-color: var(--cl_primary);
+  border-radius: 50%;
+  position: fixed;
+  bottom: 60rpx;
+  right: 60rpx;
+  box-shadow: 0 0 8rpx #2E2E2E;
 }
 

@@ -3,16 +3,16 @@
 		<view class="header">
 			<view class="mshBar flex flex_center">
 				<view class="f1 cm_ellipsis">阿范德萨发斯蒂芬是的发送大发送到发送到发送到发送地方上的</view>
-				<text class="text">查看全部</text>
-				<text class="iconfont icon-fanhui3 text"></text>
+				<!-- <text class="text">查看全部</text>
+				<text class="iconfont icon-fanhui3 text"></text> -->
 			</view>
 			<!-- <view class="marchantBox"> -->
 				<view class="marchantBox flex flex_center">
-					<image src="../../../static/img/shar.png" mode="aspectFill" class="avatar"></image>
+					<image :src="userInfo.consumer_head" mode="aspectFill" class="avatar"></image>
 					<view class="f1">
-						<view style="line-height: 1.2;">士大夫</view>
-						<view style="line-height: 1.2;">工号：123421</view>
-						<view style="line-height: 1.2;">所属服务商：1士大夫地方</view>
+						<view style="line-height: 1.5;" class="cm_title">{{userInfo.consumer_name}}</view>
+						<view style="line-height: 1.2;" class="cm_text ">工号：{{userInfo.invitation_code}}</view>
+						<view style="line-height: 1.2;" class="cm_text">所属服务商：{{userInfo.consumer_name}}</view>
 					</view>
 				</view>
 			<!-- </view> -->
@@ -59,20 +59,24 @@
 		</view> -->
 		<tui-modal :show="modal" @click="handleClick" @cancel="hide" content="确定该退款订单么？" :maskClosable="false" color="#333"
 		 :size="32"></tui-modal>
-
+		<!-- <tuiFab bgColor="#FF7647"></tuiFab> -->
+		<view class="msgTap flex flex_center" hover-class="cm_hover_m">
+				<text class="iconfont icon-xiaoxi" style="font-size: 32rpx;color: #fff;"></text>
+		</view>
 	</view>
 </template>
 
 <script>
+	
 	import {
 		mapState
 	} from 'vuex';
 		import tuiTips from "@/components/extend/tips/tips"
 	import sunTab from '@/components/sun-tab/sun-tab.vue';
+	import tuiFab from '@/components/tui-fab/tui-fab';
 	export default {
 		data() {
 			return {
-
 				tabObjectList: [
 					//对象数组赋值
 					{
@@ -92,23 +96,17 @@
 				currentCode: '' //当前操作的条目code
 			};
 		},
-		computed: mapState(['hasLogin']),
+		computed: mapState(['hasLogin','userInfo']),
 		components: {
 			sunTab,
-			tuiTips
+			tuiTips,
+			tuiFab
 		},
 		onLoad(options) {
 			// alert(options.type)
 			this.type = options.type
-				
-			// type==1 余额  type==2 购物券明细
-			if(this.type==2){
-				this.detailType1 = 2
-				this.detailType2 = 3
-				uni.setNavigationBarTitle({
-					title:'购物券明细'
-				})
-			}
+			console.log(this.userInfo)
+	
 		},
 
 		methods: {
@@ -155,6 +153,7 @@
 			height: 72rpx;
 			background: #fff;
 			overflow: hidden;
+			width: 100vw;
 		}
 
 		.orderBox{
@@ -182,6 +181,16 @@
 					}
 				}
 			}
+		}
+		.msgTap{
+			width: 100rpx;
+			height: 100rpx;
+			background-color: var(--cl_primary);
+			border-radius: 50%;
+			position: fixed;
+			bottom: 60rpx;
+			right: 60rpx;
+			box-shadow: 0 0 8rpx #2E2E2E;
 		}
 	}
 </style>

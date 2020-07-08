@@ -1,6 +1,6 @@
 <template>
 	<view class="pages">
-		<view class="fixed">
+		<view class="fixed" style="background-color: #fff;">
 			<tuiNav :isCustom="true" :isFixed="false" backgroundColor="#fff">
 				<view class="flex flex_center header">
 					<view><text class="lTip" @tap="_showRule">活动规则</text></view>
@@ -187,7 +187,7 @@ export default {
 <style lang="scss" scoped>
 .pages {
 	padding: 20rpx;
-	padding-top: 250rpx;
+	padding-top: 260rpx;
 	.fixed {
 		width: 100%;
 		position: fixed;

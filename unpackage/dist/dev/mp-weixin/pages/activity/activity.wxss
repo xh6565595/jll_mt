@@ -24,25 +24,25 @@
 /* 垂直间距 */
 /* 透明度 */
 /* 文章场景相关 */
-.pages.data-v-4aefcc3e {
+.pages.data-v-00316766 {
   padding: 20rpx;
-  padding-top: 250rpx;
+  padding-top: 260rpx;
 }
-.pages .fixed.data-v-4aefcc3e {
+.pages .fixed.data-v-00316766 {
   width: 100%;
   position: fixed;
   left: 0;
   top: 0;
   z-index: 10;
 }
-.pages .header.data-v-4aefcc3e {
+.pages .header.data-v-00316766 {
   width: 100%;
   height: 88rpx;
   line-height: 88rpx;
   position: relative;
   background-color: #fff;
 }
-.pages .header .lTip.data-v-4aefcc3e {
+.pages .header .lTip.data-v-00316766 {
   height: 54rpx;
   line-height: 54rpx;
   position: absolute;
@@ -53,24 +53,24 @@
   left: 0;
   top: 17rpx;
 }
-.pages .header .rTip.data-v-4aefcc3e {
+.pages .header .rTip.data-v-00316766 {
   height: 54rpx;
   line-height: 54rpx;
   position: absolute;
   right: 0;
   top: 17rpx;
 }
-.pages .tabsBox.data-v-4aefcc3e {
+.pages .tabsBox.data-v-00316766 {
   height: 80rpx;
   line-height: 80rpx;
   background-color: #fff;
 }
-.pages .tabsBox .tabs.data-v-4aefcc3e {
+.pages .tabsBox .tabs.data-v-00316766 {
   text-align: center;
   line-height: 80rpx;
   position: relative;
 }
-.pages .tabsBox .active.data-v-4aefcc3e::after {
+.pages .tabsBox .active.data-v-00316766::after {
   content: '';
   position: absolute;
   width: 28rpx;
@@ -81,65 +81,65 @@
   margin-left: -14rpx;
   bottom: 12rpx;
 }
-.pages .inItem.data-v-4aefcc3e {
+.pages .inItem.data-v-00316766 {
   background-color: #fff;
   padding: 20rpx;
   margin-bottom: 20rpx;
 }
-.pages .inItem .title.data-v-4aefcc3e {
+.pages .inItem .title.data-v-00316766 {
   margin-top: 70rpx;
   text-align: center;
 }
-.pages .inItem .text.data-v-4aefcc3e {
+.pages .inItem .text.data-v-00316766 {
   margin-top: 40rpx;
   margin-bottom: 40rpx;
   text-align: center;
 }
-.pages .inItem .cred.data-v-4aefcc3e {
+.pages .inItem .cred.data-v-00316766 {
   color: red;
 }
-.pages .inItem .submenber.data-v-4aefcc3e {
+.pages .inItem .submenber.data-v-00316766 {
   width: 120rpx;
   height: 120rpx;
   border-radius: 60rpx;
   overflow: hidden;
 }
-.pages .inItem .submenber .avatar.data-v-4aefcc3e {
+.pages .inItem .submenber .avatar.data-v-00316766 {
   width: 100%;
   height: 100%;
   background-color: #f2f2f2;
 }
-.pages .inItem .cm_btn.data-v-4aefcc3e {
+.pages .inItem .cm_btn.data-v-00316766 {
   margin-top: 72rpx;
 }
-.pages .inItem .cm_btn_plain.data-v-4aefcc3e {
+.pages .inItem .cm_btn_plain.data-v-00316766 {
   margin-top: 20rpx;
   background-color: #fff;
   border: none;
 }
-.pages .doneItem.data-v-4aefcc3e {
+.pages .doneItem.data-v-00316766 {
   background-color: #fff;
   padding: 20rpx;
   margin-bottom: 20rpx;
 }
-.pages .doneItem .header.data-v-4aefcc3e {
+.pages .doneItem .header.data-v-00316766 {
   padding-top: 12rpx;
   padding-bottom: 24rpx;
   line-height: 1;
 }
-.pages .doneItem .header .cm_title.data-v-4aefcc3e {
+.pages .doneItem .header .cm_title.data-v-00316766 {
   line-height: 1;
 }
-.pages .doneItem .cm_items.data-v-4aefcc3e {
+.pages .doneItem .cm_items.data-v-00316766 {
   margin-top: 20rpx;
 }
-.pages .shareBox.data-v-4aefcc3e {
+.pages .shareBox.data-v-00316766 {
   width: 80vw;
   background-color: #fff;
   border-radius: 30rpx;
   padding: 40rpx;
 }
-.pages .shareBox .itemLogo.data-v-4aefcc3e {
+.pages .shareBox .itemLogo.data-v-00316766 {
   width: 100rpx;
   height: 100rpx;
   border-radius: 50%;

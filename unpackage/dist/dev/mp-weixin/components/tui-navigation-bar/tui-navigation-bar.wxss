@@ -1,17 +1,17 @@
 
-.tui-navigation-bar.data-v-0830ca8c {
+.tui-navigation-bar.data-v-254ee738 {
 	width: 100%;
 }
-.tui-navbar-fixed.data-v-0830ca8c {
+.tui-navbar-fixed.data-v-254ee738 {
 	position: fixed;
 	left: 0;
 	top: 0;
 	z-index: 9998;
 }
-.tui-status-bar.data-v-0830ca8c {
+.tui-status-bar.data-v-254ee738 {
 	width: 100%;
 }
-.tui-navigation_bar-title.data-v-0830ca8c {
+.tui-navigation_bar-title.data-v-254ee738 {
 	width: 100%;
 	font-size: 17px;
 	line-height: 17px;
@@ -29,7 +29,7 @@
 	-webkit-justify-content: center;
 	        justify-content: center;
 }
-.tui-bar-line.data-v-0830ca8c::after {
+.tui-bar-line.data-v-254ee738::after {
 	content: '';
 	position: absolute;
 	border-bottom: 1rpx solid #eaeef1;

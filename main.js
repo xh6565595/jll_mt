@@ -52,9 +52,9 @@ const UI = {
 	},
 	showloading: function(text) {
 		// #ifdef H5 || MP-WEIXIN
-		uni.showLoading({
-			title: text
-		})
+				uni.showLoading({
+					title: text?test:''
+				})
 		// #endif
 		// #ifdef APP-PLUS
 		plus.nativeUI.showWaiting(text = '请稍后...', {
