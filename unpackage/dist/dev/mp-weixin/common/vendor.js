@@ -346,9 +346,9 @@ function upx2px(number, newDeviceWidth) {
   result = Math.floor(result + EPS);
   if (result === 0) {
     if (deviceDPR === 1 || !isIOS) {
-      result = 1;
+      return 1;
     } else {
-      result = 0.5;
+      return 0.5;
     }
   }
   return number < 0 ? -result : result;
@@ -421,10 +421,7 @@ var protocols = {
 
 
 var todos = [
-'vibrate',
-'preloadPage',
-'unPreloadPage',
-'loadSubPackage'];
+'vibrate'];
 
 var canIUses = [];
 
@@ -760,7 +757,7 @@ function initData(vueOptions, context) {
     try {
       data = data.call(context); // 支持 Vue.prototype 上挂的数据
     } catch (e) {
-      if (Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
+      if (Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
         console.warn('根据 Vue 的 data 函数初始化小程序 data 失败，请尽量确保 data 函数中不访问 vm 对象，否则可能影响首次数据渲染速度。', data);
       }
     }
@@ -1568,9 +1565,9 @@ uni$1;exports.default = _default;
 /***/ }),
 
 /***/ 104:
-/*!****************************************************************************!*\
-  !*** E:/mywork/jll_mt/js_sdk/junyi-h5-copy/junyi-h5-copy/junyi-h5-copy.js ***!
-  \****************************************************************************/
+/*!*************************************************************************!*\
+  !*** G:/work/马桶福利购/js_sdk/junyi-h5-copy/junyi-h5-copy/junyi-h5-copy.js ***!
+  \*************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1597,9 +1594,9 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ }),
 
 /***/ 11:
-/*!********************************************!*\
-  !*** E:/mywork/jll_mt/utils/http/index.js ***!
-  \********************************************/
+/*!*****************************************!*\
+  !*** G:/work/马桶福利购/utils/http/index.js ***!
+  \*****************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1663,9 +1660,9 @@ exports.default = _default;
 /***/ }),
 
 /***/ 12:
-/*!************************************************!*\
-  !*** E:/mywork/jll_mt/utils/http/interface.js ***!
-  \************************************************/
+/*!*********************************************!*\
+  !*** G:/work/马桶福利购/utils/http/interface.js ***!
+  \*********************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1858,9 +1855,9 @@ function _reslog(res) {
 /***/ }),
 
 /***/ 13:
-/*!***************************************!*\
-  !*** E:/mywork/jll_mt/store/index.js ***!
-  \***************************************/
+/*!************************************!*\
+  !*** G:/work/马桶福利购/store/index.js ***!
+  \************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1885,7 +1882,8 @@ var store = new _vuex.default.Store({
     currentChannel: 0, //1聚友之家  2粉丝空间 3vip空间
     cards: {}, //购物车
     currentOrder: [], //创建订单
-    currentPro: {},
+    sharePro: '', //是否需要立即跳转制定商品
+    shareUser: '', //是否需要立即跳转制定商品
     currentRoleCode: '' //聚友空间当前的账户身份的 code
   },
   mutations: {
@@ -1916,6 +1914,15 @@ var store = new _vuex.default.Store({
     },
     completeOrder: function completeOrder(state) {
       state.currentOrder = new Array();
+    },
+    setShare: function setShare(state, info) {
+      state.sharePro = info.proCode;
+      state.shareUser = info.userId;
+    },
+    removeShare: function removeShare(state, info) {
+      state.sharePro = '';
+      state.shareUser = '';
+
     } },
 
   getters: {},
@@ -2956,9 +2963,9 @@ var index_esm = {
 /***/ }),
 
 /***/ 15:
-/*!*******************************!*\
-  !*** E:/mywork/jll_mt/SET.js ***!
-  \*******************************/
+/*!****************************!*\
+  !*** G:/work/马桶福利购/SET.js ***!
+  \****************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2980,9 +2987,9 @@ var _default = {
 /***/ }),
 
 /***/ 153:
-/*!*********************************************!*\
-  !*** E:/mywork/jll_mt/utils/picker.city.js ***!
-  \*********************************************/
+/*!******************************************!*\
+  !*** G:/work/马桶福利购/utils/picker.city.js ***!
+  \******************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -17421,9 +17428,9 @@ data = data;exports.default = _default;
 /***/ }),
 
 /***/ 154:
-/*!*******************************************************************!*\
-  !*** E:/mywork/jll_mt/js_sdk/graceui-dataChecker/graceChecker.js ***!
-  \*******************************************************************/
+/*!****************************************************************!*\
+  !*** G:/work/马桶福利购/js_sdk/graceui-dataChecker/graceChecker.js ***!
+  \****************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -17537,9 +17544,9 @@ obj = obj;exports.default = _default;
 /***/ }),
 
 /***/ 16:
-/*!*********************************************!*\
-  !*** E:/mywork/jll_mt/utils/module/auth.js ***!
-  \*********************************************/
+/*!******************************************!*\
+  !*** G:/work/马桶福利购/utils/module/auth.js ***!
+  \******************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -17749,9 +17756,9 @@ Auth;exports.default = _default;
 /***/ }),
 
 /***/ 17:
-/*!*************************************************!*\
-  !*** E:/mywork/jll_mt/utils/module/business.js ***!
-  \*************************************************/
+/*!**********************************************!*\
+  !*** G:/work/马桶福利购/utils/module/business.js ***!
+  \**********************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -17760,7 +17767,51 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 var _interface = _interopRequireDefault(__webpack_require__(/*! ../http/interface */ 12));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} // 用户身份相关接口
 var Set = {
-
+  // 确认安装
+  OrderInstall: function OrderInstall(data) {
+    return _interface.default.request({
+      url: '/api/Order/OrderInstall',
+      method: 'POST',
+      data: data
+      // handle:true
+    });
+  },
+  // 消息详情
+  GetCmsDetail: function GetCmsDetail(data) {
+    return _interface.default.request({
+      url: '/api/Msg/GetCms',
+      method: 'GET',
+      data: data
+      // handle:true
+    });
+  },
+  // 消息列表
+  GetCmsList: function GetCmsList(data) {
+    return _interface.default.request({
+      url: '/api/Msg/GetCmsList',
+      method: 'POST',
+      data: data
+      // handle:true
+    });
+  },
+  // 订单派发详情
+  GetUserTaskDetail: function GetUserTaskDetail(data) {
+    return _interface.default.request({
+      url: '/api/UserTask/Get',
+      method: 'GET',
+      data: data
+      // handle:true
+    });
+  },
+  // 订单派发
+  GetUserTaskList: function GetUserTaskList(data) {
+    return _interface.default.request({
+      url: '/api/UserTask/GetList',
+      method: 'POST',
+      data: data
+      // handle:true
+    });
+  },
   // 延迟发货
   Delayed: function Delayed(data) {
     return _interface.default.request({
@@ -19029,10 +19080,12 @@ if (true) {
   };
 
   formatComponentName = function (vm, includeFile) {
-    if (vm.$root === vm) {
-      if (vm.$options && vm.$options.__file) { // fixed by xxxxxx
-        return ('') + vm.$options.__file
+    {
+      if(vm.$scope && vm.$scope.is){
+        return vm.$scope.is
       }
+    }
+    if (vm.$root === vm) {
       return '<Root>'
     }
     var options = typeof vm === 'function' && vm.cid != null
@@ -19067,7 +19120,7 @@ if (true) {
     if (vm._isVue && vm.$parent) {
       var tree = [];
       var currentRecursiveSequence = 0;
-      while (vm && vm.$options.name !== 'PageBody') {
+      while (vm) {
         if (tree.length > 0) {
           var last = tree[tree.length - 1];
           if (last.constructor === vm.constructor) {
@@ -19079,7 +19132,7 @@ if (true) {
             currentRecursiveSequence = 0;
           }
         }
-        !vm.$options.isReserved && tree.push(vm);
+        tree.push(vm);
         vm = vm.$parent;
       }
       return '\n\nfound in\n\n' + tree
@@ -23925,7 +23978,7 @@ function type(obj) {
 
 function flushCallbacks$1(vm) {
     if (vm.__next_tick_callbacks && vm.__next_tick_callbacks.length) {
-        if (Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
+        if (Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
             var mpInstance = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + vm._uid +
                 ']:flushCallbacks[' + vm.__next_tick_callbacks.length + ']');
@@ -23946,14 +23999,14 @@ function nextTick$1(vm, cb) {
     //1.nextTick 之前 已 setData 且 setData 还未回调完成
     //2.nextTick 之前存在 render watcher
     if (!vm.__next_tick_pending && !hasRenderWatcher(vm)) {
-        if(Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG){
+        if(Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG){
             var mpInstance = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + vm._uid +
                 ']:nextVueTick');
         }
         return nextTick(cb, vm)
     }else{
-        if(Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG){
+        if(Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG){
             var mpInstance$1 = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance$1.is || mpInstance$1.route) + '][' + vm._uid +
                 ']:nextMPTick');
@@ -24029,7 +24082,7 @@ var patch = function(oldVnode, vnode) {
     });
     var diffData = this.$shouldDiffData === false ? data : diff(data, mpData);
     if (Object.keys(diffData).length) {
-      if (Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
+      if (Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
         console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + this._uid +
           ']差量更新',
           JSON.stringify(diffData));
@@ -24199,10 +24252,9 @@ function getTarget(obj, path) {
   return getTarget(obj[key], parts.slice(1).join('.'))
 }
 
-function internalMixin(Vue ) {
+function internalMixin(Vue) {
 
-  Vue.config.errorHandler = function(err, vm, info) {
-    Vue.util.warn(("Error in " + info + ": \"" + (err.toString()) + "\""), vm);
+  Vue.config.errorHandler = function(err) {
     console.error(err);
     /* eslint-disable no-undef */
     var app = getApp();
@@ -24554,9 +24606,9 @@ function normalizeComponent (
 /***/ }),
 
 /***/ 21:
-/*!*********************************************!*\
-  !*** E:/mywork/jll_mt/static/defaultSet.js ***!
-  \*********************************************/
+/*!******************************************!*\
+  !*** G:/work/马桶福利购/static/defaultSet.js ***!
+  \******************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -24832,10 +24884,334 @@ set;exports.default = _default;
 
 /***/ }),
 
-/***/ 271:
-/*!********************************************************!*\
-  !*** E:/mywork/jll_mt/components/tki-qrcode/qrcode.js ***!
-  \********************************************************/
+/***/ 28:
+/*!************************************!*\
+  !*** G:/work/马桶福利购/utils/utils.js ***!
+  \************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _SET = _interopRequireDefault(__webpack_require__(/*! ../SET.js */ 15));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+var Utils = {
+  phoneCheck: function phoneCheck(value) {
+    var reg = /^1\d{10}$/;
+    var r = reg.test(value);
+    return r;
+  },
+  passCheck: function passCheck(val) {
+    var patrn = /^(\w){6,20}$/;
+    if (!patrn.exec(val)) return false;
+    return true;
+  },
+  // 银行卡校验
+  bankCardCheck: function bankCardCheck(val) {
+    var patrn = /^([1-9]{1})(\d{15}|\d{18})$/;
+    if (!patrn.test(val)) return false;
+    return true;
+  },
+  // 中文字符
+  chineseCheck: function chineseCheck(val) {
+    var patrn = /^[\u4E00-\u9FA5]{2,4}/;
+
+    if (!patrn.test(val)) return false;
+    return true;
+  },
+  // 银行卡数字加密
+  encryptBankCode: function encryptBankCode(val) {
+
+    var str = val.replace(/\s/g, '');
+    console.log(str);
+    var reg = /^(\d{4})\d+(\d{4})$/;
+    str.replace(reg, "$1 **** **** $2");
+    console.log(str);
+    return str;
+  },
+
+
+  /**
+      * Parse the time to string
+      * @param {(Object|string|number)} time
+      * @param {string} cFormat
+      * @returns {string}
+      */
+  parseTime: function parseTime(time, cFormat) {
+    if (arguments.length === 0) {
+      return null;
+    }
+    var format = cFormat || '{y}-{m}-{d} {h}:{i}:{s}';
+    var date;
+    if (typeof time === 'object') {
+      date = time;
+    } else {
+      if (typeof time === 'string' && /^[0-9]+$/.test(time)) {
+        time = parseInt(time);
+      }
+      if (typeof time === 'number' && time.toString().length === 10) {
+        time = time * 1000;
+      }
+      date = new Date(time);
+    }
+    var formatObj = {
+      y: date.getFullYear(),
+      m: date.getMonth() + 1,
+      d: date.getDate(),
+      h: date.getHours(),
+      i: date.getMinutes(),
+      s: date.getSeconds(),
+      a: date.getDay() };
+
+    var time_str = format.replace(/{(y|m|d|h|i|s|a)+}/g, function (result, key) {
+      var value = formatObj[key];
+      // Note: getDay() returns 0 on Sunday
+      if (key === 'a') {
+        return ['日', '一', '二', '三', '四', '五', '六'][value];
+      }
+      if (result.length > 0 && value < 10) {
+        value = '0' + value;
+      }
+      return value || 0;
+    });
+    return time_str;
+  },
+
+  /**
+      * @param {number} time
+      * @param {string} option
+      * @returns {string}
+      */
+  formatTime: function formatTime(time, option) {
+    if (('' + time).length === 10) {
+      time = parseInt(time) * 1000;
+    } else {
+      time = +time;
+    }
+    var d = new Date(time);
+    var now = Date.now();
+
+    var diff = (now - d) / 1000;
+
+    if (diff < 30) {
+      return '刚刚';
+    } else if (diff < 3600) {
+      // less 1 hour
+      return Math.ceil(diff / 60) + '分钟前';
+    } else if (diff < 3600 * 24) {
+      return Math.ceil(diff / 3600) + '小时前';
+    } else if (diff < 3600 * 24 * 2) {
+      return '1天前';
+    }
+    if (option) {
+      return parseTime(time, option);
+    } else {
+      return (
+        d.getMonth() +
+        1 +
+        '月' +
+        d.getDate() +
+        '日' +
+        d.getHours() +
+        '时' +
+        d.getMinutes() +
+        '分');
+
+    }
+  },
+  /**
+      * @param {string} type
+      * @returns {Date}
+      */
+  getTime: function getTime(type) {
+    if (type === 'start') {
+      return new Date().getTime() - 3600 * 1000 * 24 * 90;
+    } else {
+      return new Date(new Date().toDateString());
+    }
+  },
+
+  // 记录本地足迹
+  // setTrace(item) {
+  // 	let list = uni.getStorageSync('kxTraceList');
+  // 	if (list) {
+  // 		list = JSON.parse(list)
+  // 	} else {
+  // 		list = {}
+  // 	}
+  // 	console.log('存入足迹')
+  // 	// 判断该记录书是否存在
+  // 	let time = new Date().getTime()
+  // 	let id = item.code
+  // 	item.time = time
+  // 	list[id] = item
+  // 	uni.setStorageSync('kxTraceList', JSON.stringify(list));
+  // },
+  // // 获取足迹
+  // getTrace() {
+  // 	let list = uni.getStorageSync('kxTraceList');
+  // 	if (list) {
+  // 		return (JSON.parse(list))
+  // 	} else {
+  // 		return []
+  // 	}
+
+  // },
+  // // 清除所有足迹
+  // clearTrace() {
+  // 	uni.removeStorageSync('kxTraceList');
+  // },
+
+  // 支付宝支付
+  AliPay: function AliPay(strData, callback, failFun) {
+    if (!strData) {
+      uni.showToast({
+        icon: 'none',
+        title: '支付参数无效' });
+
+      return;
+    }
+    uni.requestPayment({
+      provider: "alipay",
+      orderInfo: strData,
+      success: function success(res) {
+        plus.nativeUI.toast('支付成功');
+        if (callback) callback();
+      },
+      fail: function fail(res) {
+        if (failFun) {
+          failFun();
+          return;
+        }
+        uni.showToast({
+          title: '支付失败',
+          icon: "none",
+          duration: 2000,
+          complete: function complete() {
+            uni.redirectTo({
+              url: '/pages/features/order/order?current=1' });
+
+          } });
+
+      } });
+
+  },
+
+  // 微信支付
+  WxPay: function WxPay(orderinfo, callback, failFun) {
+    if (!orderinfo) {
+      uni.showToast({
+        icon: 'none',
+        title: '支付参数无效' });
+
+      return;
+    }
+    // console.log(JSON.stringify(orderinfo));
+    uni.requestPayment({
+      provider: "wxpay",
+      timeStamp: orderinfo.timestamp,
+      nonceStr: orderinfo.noncestr,
+      package: orderinfo.package,
+      signType: "MD5",
+      paySign: orderinfo.paySign,
+      orderInfo: {
+        appid: orderinfo.appid,
+        noncestr: orderinfo.noncestr,
+        package: orderinfo.package,
+        partnerid: orderinfo.mchid,
+        prepayid: orderinfo.prepayid,
+        timestamp: orderinfo.timestamp,
+        sign: orderinfo.sign },
+
+      success: function success(res) {
+        plus.nativeUI.toast('支付成功');
+        if (callback) callback();
+      },
+      fail: function fail(res) {
+        console.log(JSON.stringify(res));
+        if (failFun) {
+          failFun();
+          return;
+        }
+        uni.showToast({
+          title: '支付失败',
+          icon: "none",
+          duration: 2000,
+          complete: function complete() {
+            uni.redirectTo({
+              url: '/pages/features/order/order?current=1' });
+
+          } });
+
+      } });
+
+  },
+  // 判断是否可以指纹解锁
+  // 判断当前机型是否支持指纹
+  checkFinger: function checkFinger() {
+    if (!plus.fingerprint.isSupport()) {
+      plus.nativeUI.toast('此设备不支持指纹识别');
+      // this.supportFinger = false;
+      return false;
+    } else if (!plus.fingerprint.isKeyguardSecure()) {
+      plus.nativeUI.toast('此设备未设置密码锁屏');
+      // this.supportFinger = false;
+      return false;
+    } else if (!plus.fingerprint.isEnrolledFingerprints()) {
+      plus.nativeUI.toast('此设备未录入指纹');
+      // this.supportFinger = false;
+      return false;
+    } else {
+      // this.supportFinger = true;
+      return true;
+    }
+
+  },
+  // 是否微信浏览器
+  is_weixn: function is_weixn() {
+    var ua = navigator.userAgent.toLowerCase();
+    if (ua.match(/MicroMessenger/i) == "micromessenger") {
+      return true;
+    } else {
+      return false;
+    }
+  },
+  // 是否受过权
+  // 返回code
+  ifAuth: function ifAuth(success) {
+    var url = window.location.href;
+    var s = url.match(/code=(.*)&state/);
+    if (s) {
+      // 是授权后的页面,则做opnegid判断 使用code获取pid
+      // return s[1]
+      // 换取oid
+      success(s[1]);
+    } else {
+      // 不是授权的页面，重定向进行授权
+
+      this.wxauth();
+    }
+  },
+
+  // wx授权跳转
+  wx_auth: function wx_auth() {
+    // alert(1)
+    var set = {
+      appid: _SET.default.wx_appid, //测试环境
+      redirect_uri: _SET.default.wx_redirect_url };
+
+    window.location.href = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=' + set.appid + '&redirect_uri=' +
+    set.redirect_uri + '&response_type=code&scope=snsapi_userinfo&state=1#wechat_redirect';
+  } };var _default =
+
+
+Utils;exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
+
+/***/ }),
+
+/***/ 287:
+/*!*****************************************************!*\
+  !*** G:/work/马桶福利购/components/tki-qrcode/qrcode.js ***!
+  \*****************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -26050,330 +26426,6 @@ QRCode;exports.default = _default;
 
 /***/ }),
 
-/***/ 28:
-/*!***************************************!*\
-  !*** E:/mywork/jll_mt/utils/utils.js ***!
-  \***************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _SET = _interopRequireDefault(__webpack_require__(/*! ../SET.js */ 15));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
-var Utils = {
-  phoneCheck: function phoneCheck(value) {
-    var reg = /^1\d{10}$/;
-    var r = reg.test(value);
-    return r;
-  },
-  passCheck: function passCheck(val) {
-    var patrn = /^(\w){6,20}$/;
-    if (!patrn.exec(val)) return false;
-    return true;
-  },
-  // 银行卡校验
-  bankCardCheck: function bankCardCheck(val) {
-    var patrn = /^([1-9]{1})(\d{15}|\d{18})$/;
-    if (!patrn.test(val)) return false;
-    return true;
-  },
-  // 中文字符
-  chineseCheck: function chineseCheck(val) {
-    var patrn = /^[\u4E00-\u9FA5]{2,4}/;
-
-    if (!patrn.test(val)) return false;
-    return true;
-  },
-  // 银行卡数字加密
-  encryptBankCode: function encryptBankCode(val) {
-
-    var str = val.replace(/\s/g, '');
-    console.log(str);
-    var reg = /^(\d{4})\d+(\d{4})$/;
-    str.replace(reg, "$1 **** **** $2");
-    console.log(str);
-    return str;
-  },
-
-
-  /**
-      * Parse the time to string
-      * @param {(Object|string|number)} time
-      * @param {string} cFormat
-      * @returns {string}
-      */
-  parseTime: function parseTime(time, cFormat) {
-    if (arguments.length === 0) {
-      return null;
-    }
-    var format = cFormat || '{y}-{m}-{d} {h}:{i}:{s}';
-    var date;
-    if (typeof time === 'object') {
-      date = time;
-    } else {
-      if (typeof time === 'string' && /^[0-9]+$/.test(time)) {
-        time = parseInt(time);
-      }
-      if (typeof time === 'number' && time.toString().length === 10) {
-        time = time * 1000;
-      }
-      date = new Date(time);
-    }
-    var formatObj = {
-      y: date.getFullYear(),
-      m: date.getMonth() + 1,
-      d: date.getDate(),
-      h: date.getHours(),
-      i: date.getMinutes(),
-      s: date.getSeconds(),
-      a: date.getDay() };
-
-    var time_str = format.replace(/{(y|m|d|h|i|s|a)+}/g, function (result, key) {
-      var value = formatObj[key];
-      // Note: getDay() returns 0 on Sunday
-      if (key === 'a') {
-        return ['日', '一', '二', '三', '四', '五', '六'][value];
-      }
-      if (result.length > 0 && value < 10) {
-        value = '0' + value;
-      }
-      return value || 0;
-    });
-    return time_str;
-  },
-
-  /**
-      * @param {number} time
-      * @param {string} option
-      * @returns {string}
-      */
-  formatTime: function formatTime(time, option) {
-    if (('' + time).length === 10) {
-      time = parseInt(time) * 1000;
-    } else {
-      time = +time;
-    }
-    var d = new Date(time);
-    var now = Date.now();
-
-    var diff = (now - d) / 1000;
-
-    if (diff < 30) {
-      return '刚刚';
-    } else if (diff < 3600) {
-      // less 1 hour
-      return Math.ceil(diff / 60) + '分钟前';
-    } else if (diff < 3600 * 24) {
-      return Math.ceil(diff / 3600) + '小时前';
-    } else if (diff < 3600 * 24 * 2) {
-      return '1天前';
-    }
-    if (option) {
-      return parseTime(time, option);
-    } else {
-      return (
-        d.getMonth() +
-        1 +
-        '月' +
-        d.getDate() +
-        '日' +
-        d.getHours() +
-        '时' +
-        d.getMinutes() +
-        '分');
-
-    }
-  },
-  /**
-      * @param {string} type
-      * @returns {Date}
-      */
-  getTime: function getTime(type) {
-    if (type === 'start') {
-      return new Date().getTime() - 3600 * 1000 * 24 * 90;
-    } else {
-      return new Date(new Date().toDateString());
-    }
-  },
-
-  // 记录本地足迹
-  // setTrace(item) {
-  // 	let list = uni.getStorageSync('kxTraceList');
-  // 	if (list) {
-  // 		list = JSON.parse(list)
-  // 	} else {
-  // 		list = {}
-  // 	}
-  // 	console.log('存入足迹')
-  // 	// 判断该记录书是否存在
-  // 	let time = new Date().getTime()
-  // 	let id = item.code
-  // 	item.time = time
-  // 	list[id] = item
-  // 	uni.setStorageSync('kxTraceList', JSON.stringify(list));
-  // },
-  // // 获取足迹
-  // getTrace() {
-  // 	let list = uni.getStorageSync('kxTraceList');
-  // 	if (list) {
-  // 		return (JSON.parse(list))
-  // 	} else {
-  // 		return []
-  // 	}
-
-  // },
-  // // 清除所有足迹
-  // clearTrace() {
-  // 	uni.removeStorageSync('kxTraceList');
-  // },
-
-  // 支付宝支付
-  AliPay: function AliPay(strData, callback, failFun) {
-    if (!strData) {
-      uni.showToast({
-        icon: 'none',
-        title: '支付参数无效' });
-
-      return;
-    }
-    uni.requestPayment({
-      provider: "alipay",
-      orderInfo: strData,
-      success: function success(res) {
-        plus.nativeUI.toast('支付成功');
-        if (callback) callback();
-      },
-      fail: function fail(res) {
-        if (failFun) {
-          failFun();
-          return;
-        }
-        uni.showToast({
-          title: '支付失败',
-          icon: "none",
-          duration: 2000,
-          complete: function complete() {
-            uni.redirectTo({
-              url: '/pages/features/order/order?current=1' });
-
-          } });
-
-      } });
-
-  },
-
-  // 微信支付
-  WxPay: function WxPay(orderinfo, callback, failFun) {
-    if (!orderinfo) {
-      uni.showToast({
-        icon: 'none',
-        title: '支付参数无效' });
-
-      return;
-    }
-    // console.log(JSON.stringify(orderinfo));
-    uni.requestPayment({
-      provider: "wxpay",
-      timeStamp: orderinfo.timestamp,
-      nonceStr: orderinfo.noncestr,
-      package: orderinfo.package,
-      signType: "MD5",
-      paySign: orderinfo.paySign,
-      orderInfo: {
-        appid: orderinfo.appid,
-        noncestr: orderinfo.noncestr,
-        package: orderinfo.package,
-        partnerid: orderinfo.mchid,
-        prepayid: orderinfo.prepayid,
-        timestamp: orderinfo.timestamp,
-        sign: orderinfo.sign },
-
-      success: function success(res) {
-        plus.nativeUI.toast('支付成功');
-        if (callback) callback();
-      },
-      fail: function fail(res) {
-        console.log(JSON.stringify(res));
-        if (failFun) {
-          failFun();
-          return;
-        }
-        uni.showToast({
-          title: '支付失败',
-          icon: "none",
-          duration: 2000,
-          complete: function complete() {
-            uni.redirectTo({
-              url: '/pages/features/order/order?current=1' });
-
-          } });
-
-      } });
-
-  },
-  // 判断是否可以指纹解锁
-  // 判断当前机型是否支持指纹
-  checkFinger: function checkFinger() {
-    if (!plus.fingerprint.isSupport()) {
-      plus.nativeUI.toast('此设备不支持指纹识别');
-      // this.supportFinger = false;
-      return false;
-    } else if (!plus.fingerprint.isKeyguardSecure()) {
-      plus.nativeUI.toast('此设备未设置密码锁屏');
-      // this.supportFinger = false;
-      return false;
-    } else if (!plus.fingerprint.isEnrolledFingerprints()) {
-      plus.nativeUI.toast('此设备未录入指纹');
-      // this.supportFinger = false;
-      return false;
-    } else {
-      // this.supportFinger = true;
-      return true;
-    }
-
-  },
-  // 是否微信浏览器
-  is_weixn: function is_weixn() {
-    var ua = navigator.userAgent.toLowerCase();
-    if (ua.match(/MicroMessenger/i) == "micromessenger") {
-      return true;
-    } else {
-      return false;
-    }
-  },
-  // 是否受过权
-  // 返回code
-  ifAuth: function ifAuth(success) {
-    var url = window.location.href;
-    var s = url.match(/code=(.*)&state/);
-    if (s) {
-      // 是授权后的页面,则做opnegid判断 使用code获取pid
-      // return s[1]
-      // 换取oid
-      success(s[1]);
-    } else {
-      // 不是授权的页面，重定向进行授权
-
-      this.wxauth();
-    }
-  },
-
-  // wx授权跳转
-  wx_auth: function wx_auth() {
-    // alert(1)
-    var set = {
-      appid: _SET.default.wx_appid, //测试环境
-      redirect_uri: _SET.default.wx_redirect_url };
-
-    window.location.href = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=' + set.appid + '&redirect_uri=' +
-    set.redirect_uri + '&response_type=code&scope=snsapi_userinfo&state=1#wechat_redirect';
-  } };var _default =
-
-
-Utils;exports.default = _default;
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
-
-/***/ }),
-
 /***/ 3:
 /*!***********************************!*\
   !*** (webpack)/buildin/global.js ***!
@@ -26406,9 +26458,9 @@ module.exports = g;
 /***/ }),
 
 /***/ 37:
-/*!********************************************!*\
-  !*** E:/mywork/jll_mt/utils/baseMixins.js ***!
-  \********************************************/
+/*!*****************************************!*\
+  !*** G:/work/马桶福利购/utils/baseMixins.js ***!
+  \*****************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -27311,9 +27363,9 @@ if (hadRuntime) {
 /***/ }),
 
 /***/ 7:
-/*!***********************************!*\
-  !*** E:/mywork/jll_mt/pages.json ***!
-  \***********************************/
+/*!********************************!*\
+  !*** G:/work/马桶福利购/pages.json ***!
+  \********************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -27322,9 +27374,9 @@ if (hadRuntime) {
 /***/ }),
 
 /***/ 77:
-/*!****************************************************!*\
-  !*** E:/mywork/jll_mt/utils/QS-SharePoster/app.js ***!
-  \****************************************************/
+/*!*************************************************!*\
+  !*** G:/work/马桶福利购/utils/QS-SharePoster/app.js ***!
+  \*************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -27892,9 +27944,9 @@ module.exports = _app;
 /***/ }),
 
 /***/ 78:
-/*!***************************************************************!*\
-  !*** E:/mywork/jll_mt/utils/QS-SharePoster/QS-SharePoster.js ***!
-  \***************************************************************/
+/*!************************************************************!*\
+  !*** G:/work/马桶福利购/utils/QS-SharePoster/QS-SharePoster.js ***!
+  \************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -29204,9 +29256,9 @@ module.exports = {
 /***/ }),
 
 /***/ 79:
-/*!**********************************************************!*\
-  !*** E:/mywork/jll_mt/utils/QS-SharePoster/QRCodeAlg.js ***!
-  \**********************************************************/
+/*!*******************************************************!*\
+  !*** G:/work/马桶福利购/utils/QS-SharePoster/QRCodeAlg.js ***!
+  \*******************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 

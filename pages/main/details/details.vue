@@ -24,17 +24,19 @@
 			</view>
 			
 			<view class="boxs box1 ">
+				
+				<view class="cm_title">{{goods.project_name }}</view>
 				<view class="flex titleBox tui-skeleton-fillet" v-if="goods.is_activity==0">
 					<text class="cm_prize">￥{{ goods.project_raise_price }}</text>
 					<text class="cm_delete">￥{{ goods.project_price }}</text>
 				</view>
-
+					
 				
 				<view class="logoBox flex  flex_center tui-skeleton-fillet">
 					<image src="../../../static/image/logo.png" mode="widthFix" class="logo"></image>
 					<view class=" cm_title   name">洁利来</view>
 					<view class="blank"></view>
-					<text class="f1">第一家智能厨卫上市公司</text>
+					<text class="f1">上市公司</text>
 				</view>
 			</view>
 
@@ -79,6 +81,10 @@
 			</view>
 			<view>
 				<block v-for="(item, index) in details_img" :key="index"><image :src="item" mode="widthFix" style="width: 100%;"></image></block>
+			</view>
+			<view class="shareTip flex flex_center" v-if="shareActive && share_consumer_info.consumer_code">
+				<image :src="share_consumer_info.consumer_head" mode="scaleToFill" style="width: 64rpx;height: 64rpx;border-radius: 50%;margin-right: 20rpx;"></image>
+				<view class="f1">{{share_consumer_info.consumer_name}}</view>
 			</view>
 			<view class="footer flex flex_center" v-if="!skeletonShow">
 				<button class="cm_btn sure"  @tap="_next"  >购买</button>			
@@ -135,7 +141,8 @@ export default {
 			auction: '',
 			skeletonShow: true,
 			formParams: {
-				project_code: ''
+				project_code: '',
+				share_user_id:''
 			},
 			phoneNum: global_Set_jll.service_mobile,
 			showAll: false,
@@ -155,7 +162,9 @@ export default {
 			service3: '',
 			endTime:'',
 			platform:'android',
-			activityInfo:''   //限时购信息
+			share_consumer_info:'',
+			activityInfo:'' ,  //限时购信息
+			shareActive:false
 		};
 	},
 	watch: {
@@ -176,7 +185,12 @@ export default {
 	},
 	onLoad(options) {
 		this.formParams.project_code = options.code;
-
+		this.formParams.share_user_id = this.shareUser;
+		
+		if(options.code == this.sharePro){
+			this.shareActive = true //是分享活动商品
+		}
+		
 		this._loadData('refresh');
 		let that = this
 		// uni.getSystemInfo({
@@ -191,14 +205,10 @@ export default {
 		// alert(2)
 		clearInterval(this.time);
 		this.time = null;
+	
 	},
 	computed: {
-		hasLogin() {
-			return this.$store.state.hasLogin ? this.$store.state.hasLogin : false;
-		},
-		accountInfo() {
-			return this.$store.state.accountInfo;
-		},
+		...mapState(['shareUser','sharePro']),
 		restTimeValied() {
 			let t = this.endTime
 			console.log(t)
@@ -227,7 +237,7 @@ export default {
 				m: parseInt(minutesRound),
 				s: parseInt(secondsRound)
 			}
-			console.log(obj);
+			// console.log(obj);
 			return obj
 		}
 	},
@@ -308,7 +318,7 @@ export default {
 					that.service1 = res.Data.projectService1;
 					that.service2 = res.Data.projectService2;
 					that.service3 = res.Data.projectService3;
-
+					that.share_consumer_info = res.Data.share_consumer_info;
 					that.skuList = res.Data.skuList;
 					that.specifications = res.Data.specList;
 					if(that.goods.is_activity==1){
@@ -356,9 +366,14 @@ export default {
 					project_service3: data.goods_service_code.serve3
 				};
 				this.$store.commit('creatOrder', [cardData]);
+				let url = '/pages/features/createOrder/createOrder?type=0'
+				if(this.shareActive){
+					url+=`&shareUser=${this.shareUser}`
+				}
+				// debugger
 				uni.navigateTo({
-					url: '/pages/features/createOrder/createOrder?type=0'
-				});
+					url: url
+				});  
 		},
 
 		
@@ -438,7 +453,7 @@ export default {
 
 <style lang="scss" scoped>
 .pages {
-	padding-bottom: 100rpx;
+	padding-bottom: 180rpx;
 	.swiper {
 		height: 774rpx;
 		position: relative;
@@ -714,6 +729,16 @@ export default {
 			width: 100%;
 			color: #fff;
 		}
+	}
+	.shareTip{
+		width: 100%;
+		height: 88rpx;
+		line-height: 88rpx;
+		background: #FFEDE2;
+		position: fixed;
+		left: 0;
+		bottom: 100rpx;
+		padding: 0 24rpx;
 	}
 }
 .mask-screen {

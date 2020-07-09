@@ -12,10 +12,8 @@
 				<view class="flex flex_y" style="align-items: flex-end" v-if="item.order_status == 1">
 					<picker mode="date" :value="date" :start="startDate" :end="endDate" @change="bindDateChange">
 						<button class="yanchi" >延迟发货</button>
-					</picker>
-					
-				</view>
-				
+					</picker>				
+				</view>			
 			</view>
 
 			<view class="proItemsBox  " v-if="item.order_status == 5">
@@ -29,44 +27,38 @@
 				<view class="fwTip">等待马桶安装完后，请出示服务码给安装师傅</view>
 			</view>
 
-			<view class="proItemsBox  " style="padding: 0" v-if="item.order_status == 5">
+			<view class="proItemsBox  " style="padding: 0" v-if="item.order_status == 5&&item.service_info">
 				<view class="cm_title t tui-skeleton-fillet flex flex_center">
 					<text>安装人员信息</text>
 					<text class="f1"></text>
-					<button class=" " size="mini" @tap="_call(item.order_code)">拨打电话</button>
+					<button class=" " size="mini" @tap="_call(item.service_info.consumer_mobile)">拨打电话</button>
 				</view>
-				<view class="  tui-skeleton-fillet">
-					<tui-list-cell :hover="false">
-						<view class="tui-line-cell flex flex_center tui-cell-last">
-							<view class="tui-title cm_text">联系人</view>
-							<view class="tui-input f1 cm_tex_r">{{ item.order_code }}</view>
-						</view>
-					</tui-list-cell>
-					<tui-list-cell :hover="false">
-						<view class="tui-line-cell flex flex_center tui-cell-last">
-							<view class="tui-title cm_text">联系方式</view>
-							<view class="tui-input f1 cm_tex_r">{{ item.create_time }}</view>
-						</view>
-					</tui-list-cell>
-					<!-- <tui-list-cell :hover="false" v-if="item.order_status != 0">
-						<view class="tui-line-cell flex flex_center tui-cell-last">
-							<view class="tui-title cm_text">支付方式</view>
-							<view class="tui-input f1 cm_tex_r">{{ item.payType | payTypeFilter }}</view>
-						</view>
-					</tui-list-cell>
-					<tui-list-cell :hover="false" :last="true" v-if="item.ems_code">
-						<view class="tui-line-cell flex flex_center tui-cell-last">
-							<view class="tui-title cm_text">快递单号</view>
-							<view class="tui-input f1 cm_tex_r">{{ item.ems_code }}</view>
-						</view>
-					</tui-list-cell> -->
+				<view class="flex  flex_center" style="padding: 0 30rpx;">
+					<image :src="item.service_info.consumer_head" mode="" style="width: 80rpx;height: 80rpx;border-radius: 50%;margin-right: 20rpx;"></image>
+					<view class="f1">
+						<view class="  cm_title">{{ item.service_info.consumer_nick_name }}</view>
+						<view class="  cm_des">{{ item.service_info.consumer_mobile }}</view>
+					</view>
 				</view>
+				<tui-list-cell :hover="false">
+					<view class="tui-line-cell flex flex_center tui-cell-last">
+						<view class="tui-title cm_text">服务商:</view>
+						<view class="tui-input f1 cm_tex_r">{{ item.service_info.service_name }}</view>
+					</view>
+				</tui-list-cell>
+				<!-- <tui-list-cell :hover="false">
+					<view class="tui-line-cell flex flex_center tui-cell-last">
+						<view class="tui-title cm_text">服务商热线:</view>
+						<view class="tui-input f1 cm_tex_r">{{ item.service_info.consumer_nick_name }}</view>
+					</view>
+				</tui-list-cell> -->
+				
 			</view>
 
 			<view class="proItemsBox addressBox ">
 
 				<view class="flex flex_center address tui-skeleton-fillet">
-					<image src="../../../../static/image/xq_wl.png" mode="scaleToFill" class="icon"></image>
+					<image src="/static/image/logo.png" mode="scaleToFill" class="icon"></image>
 					<view class="f1  tui-skeleton-rect">
 						<view style="margin-bottom: 20rpx;">{{ item.buy_address }}</view>
 						<view class="flex flex_center">
@@ -487,7 +479,8 @@ export default {
 			try {
 				// this.$ui.showloading();
 				let data = {
-					order_code: this.formParams.order_code
+					order_code: this.formParams.order_code,
+					share_user_id:''
 				};
 				let res = await this.$api.getOrderDetail(data, false);
 				// this.$ui.hideloading();

@@ -31,9 +31,9 @@
 		"userConfirmedUseCompilerModuleSwitch": false
 	},
 	"compileType": "miniprogram",
-	"libVersion": "",
-	"appid": "wx35c21791caf26593",
-	"projectname": "%E9%A9%AC%E6%A1%B6%E7%A6%8F%E5%88%A9%E8%B4%AD",
+	"libVersion": "2.9.2",
+	"appid": "wx7e46ba8e959d25d9",
+	"projectname": "马桶福利购",
 	"simulatorType": "wechat",
 	"simulatorPluginLibVersion": {},
 	"condition": {

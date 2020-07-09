@@ -58,13 +58,25 @@ export default {
 		accredit,
 		oneInput
 	},
-	onLoad() {
+	onLoad(options) {
 		let that = this
 		// const opid= uni.getStorageSync('jll_opid')
 		// if(opid){
 		// 	// 已存在账户
 		// 	that.autoLogin(opid);
 		// }
+		console.log('index',options)
+		let proCode = options.pcode;   //商品code
+		let userId = options.ucode   //人物code
+		
+		// 记录信息
+		if(proCode && userId){
+			this.$store.commit('setShare',{proCode:proCode,userId:userId})
+		}
+		
+		
+		
+		
 		uni.login({
 		  provider: 'weixin', 
 		  success:async function (res) {

@@ -40,7 +40,7 @@
 						<view class="submenber"><image src="../../static/image/dd_dfh.png" mode="aspectFill" class="avatar"></image></view>
 						<view class="submenber"><image src="../../static/image/dd_dfh.png" mode="aspectFill" class="avatar"></image></view>
 					</view>
-					<button type="text" class="cm_btn" hover-class="cm_hover_m"  @tap="_hrefSahre(item.project_list[0])">邀请好友购买</button>
+					<button type="text" class="cm_btn" hover-class="cm_hover_m"  @tap="_hrefSahre(item)">邀请好友购买</button>
 
 					<button type="text" class="cm_btn_plain" hover-class="cm_hover_m" @tap="_href(item.project_list[0])">自己购买</button>
 				</view>
@@ -76,18 +76,19 @@
 			</block>
 		</view>
 		<LoadMore :status="loadStatus" />
+		<rule ref="rule"></rule>
 		<accredit ref="share" :autoClose="true">
 			<view slot='content' class="shareBox">			
 				<view  class="flex flexd_center">
 					<image :src="goods.image " mode="aspectFill" class="itemLogo" ></image>
 					<view class="f1">
 						<view class="cm_title cm_ellipsis2">{{ goods.title }}</view>
-						<view class="flex flex_center"  style="margin: 20rpx 0;">
+						<view class="flex flex_center"  style="margin: 10rpx 0;">
 							
 							<view class="cm_des f1">{{ goods.sub_title }}</view>
-							<view class="cm_price">￥{{ goods.price }}</view>
+							
 						</view>
-						
+						<view class="cm_price" style="margin-bottom: 20rpx;">￥{{ goods.price }}</view>
 						
 					</view>
 				</view>
@@ -130,9 +131,10 @@ export default {
 		rule
 	},
 	onLoad() {
+		
 		this.shareMsg = {
 			title: `分享好友，马桶免费拿`,
-			query: `code=${this.userInfo.invitation_code}`,
+			path: `/pages/index/index`,
 			imageUrl: '/static/share.jpg'
 		};
 	},
@@ -141,7 +143,7 @@ export default {
 			// 来自页面内分享按钮
 			return {
 				title: this.goods.title,
-				query: `code=${this.goods.code}`,
+				path: `/pages/index/index?pcode=${this.goods.code}&ucode=${this.goods.user}`,
 				imageUrl: this.goods.image
 			}
 		}else{
@@ -153,17 +155,20 @@ export default {
 		handleClick(){
 			
 		},
-		_hrefSahre(item) {
+		_hrefSahre(obj) {
+			let item = obj.project_list[0]
 			let code = item.project_code;
+			let usercode = this.userInfo.consumer_code
 			
 			this.goods = {
 				title:item.order_name,
 				sub_title:item.skus_name,
 				image:item.skus_img,
 				price:item.price,
-				code:item.project_code
+				code:code,
+				user:usercode
 			}
-			
+			console.log(this.goods)
 			this.$refs.share.showModal()
 		},
 		_href(item) {

@@ -2,7 +2,51 @@
 
 import http from '../http/interface'
 const Set = {
-	
+	// 确认安装
+	OrderInstall:(data) => {
+	    return http.request({
+	        url: '/api/Order/OrderInstall',
+	        method: 'POST', 
+	        data,
+			// handle:true
+	    })
+	},
+	// 消息详情
+	GetCmsDetail:(data) => {
+	    return http.request({
+	        url: '/api/Msg/GetCms',
+	        method: 'GET', 
+	        data,
+			// handle:true
+	    })
+	},
+	// 消息列表
+	GetCmsList:(data) => {
+	    return http.request({
+	        url: '/api/Msg/GetCmsList',
+	        method: 'POST', 
+	        data,
+			// handle:true
+	    })
+	},
+	// 订单派发详情
+	GetUserTaskDetail:(data) => {
+	    return http.request({
+	        url: '/api/UserTask/Get',
+	        method: 'GET', 
+	        data,
+			// handle:true
+	    })
+	},
+	// 订单派发
+	GetUserTaskList:(data) => {
+	    return http.request({
+	        url: '/api/UserTask/GetList',
+	        method: 'POST', 
+	        data,
+			// handle:true
+	    })
+	},
 	// 延迟发货
 	Delayed:(data) => {
 	    return http.request({

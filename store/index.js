@@ -18,7 +18,8 @@ const store = new Vuex.Store({
 		currentChannel:0,   //1聚友之家  2粉丝空间 3vip空间
 		cards:{} , //购物车
 		currentOrder:[]   ,//创建订单
-		currentPro:{},
+		sharePro:'',  //是否需要立即跳转制定商品
+		shareUser:'',  //是否需要立即跳转制定商品
 		currentRoleCode:''  //聚友空间当前的账户身份的 code
 	},
     mutations: {
@@ -50,6 +51,15 @@ const store = new Vuex.Store({
 		completeOrder(state){
 			state.currentOrder = new Array()
 		},
+		setShare(state,info){
+			state.sharePro = info.proCode
+			state.shareUser = info.userId
+		},
+		removeShare(state,info){
+			state.sharePro = ''
+			state.shareUser = ''
+			
+		}
     },
 	getters:{
 		

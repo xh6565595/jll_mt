@@ -77,13 +77,19 @@ export default {
 		};
 	},
 	components: {},
-	computed: mapState(['hasLogin']),
+	computed: mapState(['shareUser','sharePro']),
 	mixins: [baseMixins],
 	onLoad() {
 		let that = this;
 		this.banners = global_Set_jll.banerList;
 		// this.classList = global_Set_jll.classList;
 		// this._loadData('refresh');
+		if(this.sharePro ){
+			uni.navigateTo({
+				url:'/pages/main/details/details?code=' + this.sharePro
+			})
+		}
+		
 	},
 	onShow() {
 		// this.formParams.pageIndex = 1;

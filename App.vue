@@ -3,13 +3,18 @@
 	// const jweixin = require('jweixin-module');
 	
 	export default {
-		onLaunch: function() {
+		onLaunch: function(options) {
 			console.log('App Launch');
 			// this.initUser()
 			// if(this.is_weixn){
 			// 	this._iniWxJdk();
 			// }
+			console.log('app',options)
 			
+			uni.showShareMenu({ 
+			  withShareTicket: true,
+			  menus: ['shareAppMessage', 'shareTimeline']
+			})
 		},
 		onShow: function() {
 			console.log('App Show');
@@ -17,6 +22,7 @@
 		onHide: function() {
 			console.log('App Hide');
 		},
+		
 		methods:{
 			// 是否微信浏览器
 			// is_weixn() {

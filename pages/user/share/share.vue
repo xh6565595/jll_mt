@@ -81,7 +81,7 @@ export default {
 	onLoad() {
 		// this.version = plus.runtime.version;
 		this.usrMsg = this.userInfo
-		this.shareUrl =  `https://gllo.kuxiong999.com/miniprogram?code=${this.userInfo.invitation_code}`
+		this.shareUrl =  `https://gllo.kuxiong999.com/miniprogram?icode=${this.userInfo.invitation_code}`
 	},
 	components: { tkiQrcode },
 	methods: {

@@ -1,4 +1,4 @@
-.cu-modal.data-v-45e3b718 {
+.cu-modal.data-v-2280a980 {
   position: fixed;
   left: 0;
   top: 0;
@@ -7,20 +7,20 @@
   background: rgba(0, 0, 0, 0.6);
   z-index: 100;
 }
-.cu-modal .cu-dialog.data-v-45e3b718 {
+.cu-modal .cu-dialog.data-v-2280a980 {
   width: 80vw;
   padding: 40rpx;
   background-color: #fff;
   text-align: center;
   border-radius: 30rpx;
 }
-.cu-modal .cu-dialog .cm_modal_successPic.data-v-45e3b718 {
+.cu-modal .cu-dialog .cm_modal_successPic.data-v-2280a980 {
   width: 148rpx;
   height: 148rpx;
   margin-bottom: 40rpx;
   margin-top: 50rpx;
 }
-.cu-modal .cu-dialog .cm_modal_title.data-v-45e3b718 {
+.cu-modal .cu-dialog .cm_modal_title.data-v-2280a980 {
   font-size: 36rpx;
   color: var(--cl_primary);
   line-height: 36rpx;
@@ -30,14 +30,14 @@
   margin-bottom: 20rpx;
   width: 100%;
 }
-.cu-modal .cu-dialog .cm_modal_des.data-v-45e3b718 {
+.cu-modal .cu-dialog .cm_modal_des.data-v-2280a980 {
   font-size: 28rpx;
   color: var(--cl_text);
   line-height: 28rpx;
   text-align: center;
   margin-bottom: 66rpx;
 }
-.cu-modal .cu-dialog .cm_modal_btn.data-v-45e3b718 {
+.cu-modal .cu-dialog .cm_modal_btn.data-v-2280a980 {
   width: 300rpx;
   height: 80rpx;
   line-height: 80rpx;

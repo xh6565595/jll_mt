@@ -18,7 +18,9 @@
     "pages/user/withdrawal/withdrawal",
     "pages/features/comment/comment",
     "pages/success/success",
-    "pages/features/ems/ems"
+    "pages/features/ems/ems",
+    "pages/sisMsg/sisMsg",
+    "pages/sisMsg/msg/msg"
   ],
   "subPackages": [],
   "window": {
@@ -63,5 +65,6 @@
     "icon": "/components/icon/icon",
     "tui-modal": "/components/modal/modal",
     "tui-tag": "/components/tag/tag"
-  }
+  },
+  "sitemapLocation": "sitemap13.json"
 }

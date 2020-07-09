@@ -5,17 +5,17 @@
 	font-weight: normal;
 	font-style: normal;
 }
-.tui-fab-icon.data-v-7363f78a {
+.tui-fab-icon.data-v-75bd43b2 {
 	font-family: "tuifab" !important;
 	font-style: normal;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 	padding: 10rpx;
 }
-.tui-icon-plus.data-v-7363f78a:before {
+.tui-icon-plus.data-v-75bd43b2:before {
 	content: "\e613";
 }
-.tui-fab-box.data-v-7363f78a {
+.tui-fab-box.data-v-75bd43b2 {
 	display: -webkit-box;
 	display: -webkit-flex;
 	display: flex;
@@ -29,12 +29,12 @@
 	position: fixed;
 	z-index: 99997;
 }
-.tui-fab-right.data-v-7363f78a {
+.tui-fab-right.data-v-75bd43b2 {
 	-webkit-box-align: end;
 	-webkit-align-items: flex-end;
 	        align-items: flex-end;
 }
-.tui-fab-btn.data-v-7363f78a {
+.tui-fab-btn.data-v-75bd43b2 {
 	-webkit-transform: scale(0);
 	        transform: scale(0);
 	-webkit-transition: all 0.2s ease-in-out;
@@ -42,11 +42,11 @@
 	opacity: 0;
 	visibility: hidden;
 }
-.tui-fab-hidden.data-v-7363f78a {
+.tui-fab-hidden.data-v-75bd43b2 {
 	height: 0;
 	width: 0;
 }
-.tui-fab-item-box.data-v-7363f78a {
+.tui-fab-item-box.data-v-75bd43b2 {
 	display: -webkit-box;
 	display: -webkit-flex;
 	display: flex;
@@ -58,29 +58,29 @@
 	        justify-content: flex-end;
 	padding-bottom: 40rpx;
 }
-.tui-fab-item-left.data-v-7363f78a {
+.tui-fab-item-left.data-v-75bd43b2 {
 	-webkit-box-orient: horizontal;
 	-webkit-box-direction: reverse;
 	-webkit-flex-flow: row-reverse;
 	        flex-flow: row-reverse;
 }
-.tui-fab-title.data-v-7363f78a {
+.tui-fab-title.data-v-75bd43b2 {
 	width: 90%;
 	text-align: center;
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
 }
-.tui-text-left.data-v-7363f78a {
+.tui-text-left.data-v-75bd43b2 {
 	padding-left: 28rpx;
 }
-.tui-text-right.data-v-7363f78a {
+.tui-text-right.data-v-75bd43b2 {
 	padding-right: 28rpx;
 }
-.tui-fab-img.data-v-7363f78a {
+.tui-fab-img.data-v-75bd43b2 {
 	display: block;
 }
-.tui-fab-item.data-v-7363f78a {
+.tui-fab-item.data-v-75bd43b2 {
 	display: -webkit-box;
 	display: -webkit-flex;
 	display: flex;
@@ -94,14 +94,14 @@
 	-webkit-transition: all 0.2s linear;
 	transition: all 0.2s linear;
 }
-.tui-radius.data-v-7363f78a {
+.tui-radius.data-v-75bd43b2 {
 	border-radius: 50%;
 }
-.tui-active.data-v-7363f78a {
+.tui-active.data-v-75bd43b2 {
 	-webkit-transform: rotate(135deg);
 	        transform: rotate(135deg);
 }
-.tui-fab-mask.data-v-7363f78a {
+.tui-fab-mask.data-v-75bd43b2 {
 	position: fixed;
 	top: 0;
 	left: 0;
@@ -114,7 +114,7 @@
 	opacity: 0;
 	visibility: hidden;
 }
-.tui-visible.data-v-7363f78a {
+.tui-visible.data-v-75bd43b2 {
 	visibility: visible;
 	opacity: 1;
 	-webkit-transform: scale(1);

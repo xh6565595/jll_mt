@@ -3,6 +3,7 @@
   "navigationBarTextStyle": "black",
   "navigationStyle": "custom",
   "usingComponents": {
-    "rule": "/components/rule/rule"
+    "rule": "/components/rule/rule",
+    "accredit": "/components/accredit/accredit"
   }
 }

@@ -16,7 +16,11 @@
     "pages/features/adress/adress",
     "pages/features/newAdress/newAdress",
     "pages/user/withdrawal/withdrawal",
-    "pages/features/comment/comment"
+    "pages/features/comment/comment",
+    "pages/success/success",
+    "pages/features/ems/ems",
+    "pages/sisMsg/sisMsg",
+    "pages/sisMsg/msg/msg"
   ],
   "subPackages": [],
   "window": {

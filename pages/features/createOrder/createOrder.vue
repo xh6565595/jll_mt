@@ -114,6 +114,7 @@ export default {
 				goods_code: '',
 				skus_code: '',
 				goods_num: 0,
+				share_order_code:'',
 				user_address_code: '',
 				goods_service_code: []
 			},
@@ -131,9 +132,12 @@ export default {
 		};
 	},
 	onLoad(options) {
-		console.log(333,this.currentOrder);
 		this.formParams.create_order_type = options.type;
-
+		this.formParams.share_order_code = options.shareUser;
+		console.log(this.formParams)
+		// if(this.shareUser){
+		// 	this.formParams.share_order_code = this.shareUser
+		// }
 		let that = this;
 		uni.$on('refresh_sureAuction', item => {
 			that.currentAddress = item;
@@ -152,7 +156,7 @@ export default {
 		PayPanel
 	},
 	computed: {
-		...mapState(['currentOrder']),
+		...mapState(['currentOrder','shareUser','sharePro']),
 		allPrize() {
 			let s = 0;
 			this.currentOrder.forEach(item => {
@@ -301,7 +305,7 @@ export default {
 				}
 				// goods_service_code
 				let s = [];
-
+				// debugger
 				this.currentOrder.forEach(item => {
 					let a = [];
 					a.push(item.project_service1.service_code ? item.project_service1.service_code : '');
@@ -310,22 +314,21 @@ export default {
 					s.push(a.join(','));
 				});
 				this.formParams.goods_service_code = s;
-
+				// debugger	
 				// return
 				// this.formParams.project_code = Object.values(s).join(',');
 				this.$ui.showloading('订单生成中');
-				let res = await this.$api.CreateOrder(this.formParams, false);
+				let res = await this.$api.CreateOrder(this.formParams);
 				this.$ui.hideloading();
-				console.log(res);
+				// console.log(res);
+				// debugger
 				if (res.Success) {
 					that.payParams.order_num = res.Data.order_code;
 					// that.payParams.order_num ='H7280202001140330267942143'
 					that.$ui.toast('订单创建成功');
-
+						
 					setTimeout(() => {
-						if (that.formParams.create_order_type == 1) {
-							// uni.$emit('refresh_cart');
-						}
+
 						that._readyToPay(res.Data.order_code);
 					}, 500);
 				} else {
@@ -336,6 +339,7 @@ export default {
 					});
 				}
 				// if (callback) callback();
+				
 			} catch (err) {
 				console.log('请求结果false : ' + err);
 			}

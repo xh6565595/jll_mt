@@ -1,5 +1,5 @@
 <template>
-	<view class="uni-load-more">
+	<view class="uni-load-more flex flex_center">
 		<view v-show="status === 'loading' && showIcon" class="uni-load-more__img">
 			<view class="load1">
 				<view :style="{background:color}" />

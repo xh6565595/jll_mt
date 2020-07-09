@@ -1,0 +1,16 @@
+.pages.data-v-30d4b3c4 {
+  position: relative;
+  background: #f5f5f5;
+  padding: 20rpx;
+  /* 自定义的导航头部 */
+}
+.pages .mainBox .msgItems.data-v-30d4b3c4 {
+  border-radius: 20rpx;
+  background: #fff;
+  padding: 20rpx;
+  margin-bottom: 20rpx;
+}
+.pages .mainBox .msgItems.data-v-30d4b3c4:first-child {
+  margin-top: 0;
+}
+

@@ -1,0 +1,1 @@
+<view class="pages data-v-59bfa5ae"><view class="cm_title cm_tex_c data-v-59bfa5ae">{{item.msg_title}}</view><view class="cm_des cm_tex_c data-v-59bfa5ae">{{item.msg_time}}</view><block wx:if="{{item.msg_content}}"><rich-text nodes="{{item.msg_content}}" class="data-v-59bfa5ae"></rich-text></block></view>
