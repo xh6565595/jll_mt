@@ -45,20 +45,19 @@
 							<view class="f1">服务费用：</view>
 							<view class="">{{ '￥'+item.service_total_price }}</view>
 						</view> -->
-						<view class=" tui-skeleton-fillet flex flex_center cm_bdb " style="height: 80rpx;">
+						<view class=" tui-skeleton-fillet flex flex_center  " >
 							<view class="f1"></view>
 							<view class="cm_des">共 {{ item.goods_num }} 件商品</view>
 							<view class=" cm_t_32  " style="margin-left: 24rpx;">合计：<text class="cm_price">￥{{ item.pay_price }}</text></view>
 						</view>
-						<view class="flex flex_center contentBox ">
+						<!-- <view class="flex flex_center contentBox ">
 							<view class="f1"></view>
 							<button class="cm_tags primary" size="mini" v-if="item.order_status == 0" @tap="_href(item.order_code)">立即付款</button>
 							<button class="cm_tags" size="mini" v-if="item.order_status == 0" @tap="_cancel(item.order_code)">取消订单</button>
 							<button class="cm_tags primary" size="mini" v-if="item.order_status == 1" @tap="prompt(item.order_code)">提醒发货</button>
 							<button class="cm_tags primary" size="mini" v-if="item.order_status == 2" @tap="sure(item.order_code)">确认收货</button>
 							<button class="cm_tags primary" size="mini" v-if="item.order_status == 2" @tap="scan(item.order_code)">查看物流</button> 
-							<!-- <button class="cm_tags" v-if="item.order_status!=5 && item.order_status!=9&& item.order_status!=0" @tap="refund(item)" >退货退款</button> -->
-						</view>
+						</view> -->
 					</view>
 				</block>
 				<LoadMore :status="loadStatus" />

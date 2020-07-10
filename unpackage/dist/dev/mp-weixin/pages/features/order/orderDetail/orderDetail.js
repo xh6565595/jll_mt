@@ -41,6 +41,9 @@ var components = {
   },
   PayPanel: function() {
     return __webpack_require__.e(/*! import() | components/PayPanel/PayPanel */ "components/PayPanel/PayPanel").then(__webpack_require__.bind(null, /*! @/components/PayPanel/PayPanel.vue */ 290))
+  },
+  accredit: function() {
+    return __webpack_require__.e(/*! import() | components/accredit/accredit */ "components/accredit/accredit").then(__webpack_require__.bind(null, /*! @/components/accredit/accredit.vue */ 46))
   }
 }
 var render = function() {
@@ -94,6 +97,15 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@vue/babel-preset-app/node_modules/@babel/runtime/regenerator */ 4));
+
+
+
+
+
+
+
+
+
 
 
 
@@ -390,6 +402,31 @@ var _junyiH5Copy = _interopRequireDefault(__webpack_require__(/*! @/js_sdk/junyi
     PayPanel: PayPanel },
 
   methods: {
+    // 显示客服弹窗
+    _kefuMenu: function _kefuMenu() {
+      this.$refs.kf.showModal();
+    },
+    // 客服
+    _kefu: function _kefu() {
+      // let phone = this.waiter.link_value;
+      var phone = uni.getStorageSync('global_Set_jll').service_mobile;
+      var that = this;
+      this.$refs.kf.hideModal();
+      uni.showModal({
+        title: 'GLLO健康智能马桶提醒你',
+        content: '立即致电官方客服？',
+        success: function success(res) {
+          that.show = false;
+          if (res.confirm) {
+            uni.makePhoneCall({
+              phoneNumber: phone //仅为示例
+            });
+          } else if (res.cancel) {
+            console.log('用户点击取消');
+          }
+        } });
+
+    },
     getDate: function getDate(type) {
       var date = new Date();
       var year = date.getFullYear();
@@ -415,7 +452,7 @@ var _junyiH5Copy = _interopRequireDefault(__webpack_require__(/*! @/js_sdk/junyi
       var that = this;
       var d = e.detail.value;
       uni.showModal({
-        title: '洁利来提醒您',
+        title: 'GLLO健康智能马桶提醒您',
         content: '你将延迟该订单的发货时间',
         success: function success(res) {
           if (res.confirm) {
@@ -528,7 +565,6 @@ var _junyiH5Copy = _interopRequireDefault(__webpack_require__(/*! @/js_sdk/junyi
       // }
     },
     _refundDetail: function _refundDetail(item) {
-      console.log(111, item);
       uni.navigateTo({
         url: '/pages/features/refundDetail/refundDetail?code=' + item.refund_code });
 

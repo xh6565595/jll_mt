@@ -17,7 +17,7 @@
 		
 		<!-- <view class="shareBox "> -->
 		<!-- 推广者显示 -->
-		<navigator url="./share/share"  class="shareBox " v-if="userInfo.consumer_type==2">
+		<navigator url="./share/share"  class="shareBox " >
 			<image src="../../static/image/wd_yq.png" mode="scaleToFill" class="bg"></image>
 			<!-- <button class="share">去邀请</button> -->
 		</navigator>
@@ -244,7 +244,7 @@ export default {
 			let that = this;
 			this.$refs.kf.hideModal()
 			uni.showModal({
-				title: '洁利来商城提醒你',
+				title: 'GLLO健康智能马桶提醒你',
 				content: '立即致电官方客服？',
 				success: function(res) {
 					that.show = false;

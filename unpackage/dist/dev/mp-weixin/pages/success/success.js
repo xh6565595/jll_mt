@@ -178,8 +178,8 @@ var _default = { data: function data() {return { from: '' };}, onLoad: function 
 
     },
     yes: function yes() {
-      uni.redirectTo({
-        url: '/pages/features/order/order' });
+      uni.switchTab({
+        url: '/pages/activity/activity' });
 
 
     } } };exports.default = _default;

@@ -190,9 +190,11 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 var _vuex = __webpack_require__(/*! vuex */ 14);
 
 var _baseMixins = __webpack_require__(/*! @/utils/baseMixins.js */ 37); //
+//
 //
 //
 //
@@ -256,10 +258,15 @@ var global_Set_jll = uni.getStorageSync('global_Set_jll');var _default = { data:
     if (this.sharePro) {uni.navigateTo({ url: '/pages/main/details/details?code=' + this.sharePro });}}, onShow: function onShow() {// this.formParams.pageIndex = 1;
     // this.list = [];
     // this._loadData('refresh');
-  }, methods: { _href: function _href(url) {uni.navigateTo({ url: url });}, imageLoad: function imageLoad(index) {this.$set(this.list[index], 'load', true);}, loadError: function loadError(index) {// console.log('图片未找到');
+  }, methods: { _dy: function _dy() {wx.requestSubscribeMessage({ tmplIds: ['C1X2iAOlZq-A5ofwquTDuSW82fil3pe5GW5SnhjI_so', 'pA_K72jyOPZMKqI5zSVWuVFKCSeJFpjqIbfgQTEABZo'], success: function success(res) {console.log(111);}, fail: function fail(err) {console.log(err);} });}, _href: function _href(url) {uni.navigateTo({ url: url });}, imageLoad: function imageLoad(index) {this.$set(this.list[index], 'load', true);}, loadError: function loadError(index) {// console.log('图片未找到');
       this.list[index].goods_picture = '/static/img/noPic.jpg';}, loadDataComplete: function loadDataComplete(bool) {if (bool) {// 成功
         this.list.map(function (item) {// console.log(typeof(item.project_img))
-          if (typeof item.project_img == 'string') {item.project_img = item.project_img ? item.project_img.split(',') : [];}});}} } };exports.default = _default;
+          if (typeof item.project_img == 'string') {item.project_img = item.project_img ? item.project_img.split(',') : [];}
+
+        });
+
+      }
+    } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),

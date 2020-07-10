@@ -189,6 +189,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
 var _utils = _interopRequireDefault(__webpack_require__(/*! @/utils/utils.js */ 28));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}
 var global_Set_jll = uni.getStorageSync('global_Set_jll');
 // const jweixin = require('jweixin-module')
@@ -216,8 +218,9 @@ var _default = {
       formParams: {
         "pay_type": "4", ////1-支付宝 2-微信 3-CBB(建行支付)
         "order_num": "", //订单号
-        "install_num": "" //分期数
-      },
+        "install_num": "", //分期数
+        "formId": '' },
+
       panelshow: false,
       payList: [] };
 
@@ -272,7 +275,12 @@ var _default = {
       this.formParams.pay_type = k;
     },
     // 提交支付
-    _submit: function _submit() {var _this2 = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:
+    _submit: function _submit(e) {var _this2 = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {var formId;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:
+                // console.log(e.detail.formId);		
+                formId = e.detail.formId;
+                // debugger
+                // console.log(formId)
+                _this2.formParams.formId = e.detail.formId;
                 if (_this2.formParams.pay_type == 1) {
                   uni.showToast('开发中');
                   _this2._pay(1);
@@ -284,7 +292,7 @@ var _default = {
                   _this2._pay(3);
                 } else if (_this2.formParams.pay_type == 4) {
                   _this2._pay(4);
-                }case 1:case "end":return _context.stop();}}}, _callee);}))();
+                }case 3:case "end":return _context.stop();}}}, _callee);}))();
     },
     _href: function _href() {
       uni.redirectTo({
@@ -299,9 +307,9 @@ var _default = {
                 // return;
                 _context2.prev = 1;
                 that.loading1 = true;
-                console.log(_this3.formParams);_context2.next = 6;return (
-                  _this3.$api.toPayment(_this3.formParams));case 6:res = _context2.sent;
-                console.log(res);
+                // console.log(this.formParams);
+                _context2.next = 5;return _this3.$api.toPayment(_this3.formParams);case 5:res = _context2.sent;
+                // console.log(res);
                 // let data = {
                 // 	ORDERID:this.formParams.order_num,
                 // 	PAYMENT:0.01,
@@ -327,22 +335,22 @@ var _default = {
                     // 建行
                     window.location.href = data;
                   }
-                  that.$emit('success');
+                  // that.$emit('success');
                   // that._href()
                 } else {
                   that.$ui.toast(res.Msg);
-                }_context2.next = 15;break;case 12:_context2.prev = 12;_context2.t0 = _context2["catch"](1);
+                }_context2.next = 13;break;case 10:_context2.prev = 10;_context2.t0 = _context2["catch"](1);
 
-                console.log('请求结果false : ' + _context2.t0);case 15:
+                console.log('请求结果false : ' + _context2.t0);case 13:
 
 
-                if (callback) callback();case 16:case "end":return _context2.stop();}}}, _callee2, null, [[1, 12]]);}))();
+                if (callback) callback();case 14:case "end":return _context2.stop();}}}, _callee2, null, [[1, 10]]);}))();
     },
 
     // 微信支付
     _wxPay: function _wxPay(data) {var _this4 = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee3() {var that;return _regenerator.default.wrap(function _callee3$(_context3) {while (1) {switch (_context3.prev = _context3.next) {case 0:
                 that = _this4;
-                console.log(data);
+                // console.log(data)
                 uni.requestPayment({
                   provider: 'wxpay',
                   timeStamp: data.timeStamp,
@@ -351,14 +359,15 @@ var _default = {
                   signType: data.signType,
                   paySign: data.paySign,
                   success: function success(res) {
-                    console.log('success:' + JSON.stringify(res));
+                    // console.log('success:' + JSON.stringify(res));
                     uni.redirectTo({
                       url: '/pages/success/success' });
 
+                    that.$emit('success');
                   },
                   fail: function fail(err) {
                     console.log('fail:' + JSON.stringify(err));
-                  } });case 3:case "end":return _context3.stop();}}}, _callee3);}))();
+                  } });case 2:case "end":return _context3.stop();}}}, _callee3);}))();
 
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))

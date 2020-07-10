@@ -20,7 +20,8 @@
     "pages/success/success",
     "pages/features/ems/ems",
     "pages/sisMsg/sisMsg",
-    "pages/sisMsg/msg/msg"
+    "pages/sisMsg/msg/msg",
+    "pages/activity/activityDetail/activityDetail"
   ],
   "subPackages": [],
   "window": {

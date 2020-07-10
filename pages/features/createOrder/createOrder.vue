@@ -124,7 +124,7 @@ export default {
 				pay_source: 0, //0-定额充值 1-聚友手续费 2-粉丝手续费 3-VIP手续费
 				order_num: '' //订单号
 			},
-			title: '洁利来商城提醒您',
+			title: 'GLLO健康智能马桶',
 			content: '',
 			allEms: 0, //运费
 			modal: false,
@@ -133,7 +133,7 @@ export default {
 	},
 	onLoad(options) {
 		this.formParams.create_order_type = options.type;
-		this.formParams.share_order_code = options.shareUser;
+		this.formParams.share_order_code = options.shareOrder;
 		console.log(this.formParams)
 		// if(this.shareUser){
 		// 	this.formParams.share_order_code = this.shareUser
@@ -369,7 +369,7 @@ export default {
 			// alert(this.formParams)
 			console.log(this.formParams);
 			uni.redirectTo({
-				url: '/pages/features/order/orderDetail/orderDetail?code=' + this.oderId
+				url: '/pages/activity/activity'
 			});
 		},
 		cancel() {

@@ -16,7 +16,13 @@
 
 		<view class="hot">
 			<block v-for="(item, index) in list" :key="index">
-				<view class="inItem" v-if="tap == 0">
+				<view class="inItem animated fadeIn" v-if="tap == 0">
+					<view class="flex  flex_center cm_bdb " style="padding-bottom: 20rpx;margin-bottom: 20rpx;">
+						<view>进行中</view>
+						<view class="f1 cm_tex_r">
+							活动时间：{{item.create_time}}
+						</view>
+					</view>
 					<view class="cm_items flex flex_center">
 						<image :src="item.project_list[0].skus_img" mode="aspectFill" class="itemLogo"></image>
 						<view class="f1">
@@ -36,16 +42,16 @@
 					<view class="cm_title title">免单进度</view>
 					<view class="text">{{ item.user_list.schedule_msg }}</view>
 					<view class="flex  flex_center flex_between">
-						<view class="submenber"><image src="../../static/image/dd_dfh.png" mode="aspectFill" class="avatar"></image></view>
-						<view class="submenber"><image src="../../static/image/dd_dfh.png" mode="aspectFill" class="avatar"></image></view>
-						<view class="submenber"><image src="../../static/image/dd_dfh.png" mode="aspectFill" class="avatar"></image></view>
+						<view class="submenber"><image :src="item.user_list.list[0].consumer_head?item.user_list.list[0].consumer_head:'/static/image/hd_yq.png'" mode="aspectFill" class="avatar"></image></view>
+						<view class="submenber"><image :src="item.user_list.list[1].consumer_head?item.user_list.list[1].consumer_head:'/static/image/hd_yq.png'" mode="aspectFill" class="avatar"></image></view>
+						<view class="submenber"><image :src="item.user_list.list[2].consumer_head?item.user_list.list[2].consumer_head:'/static/image/hd_yq.png'" mode="aspectFill" class="avatar"></image></view>
 					</view>
 					<button type="text" class="cm_btn" hover-class="cm_hover_m"  @tap="_hrefSahre(item)">邀请好友购买</button>
 
-					<button type="text" class="cm_btn_plain" hover-class="cm_hover_m" @tap="_href(item.project_list[0])">自己购买</button>
+					<button type="text" class="cm_btn_plain" hover-class="cm_hover_m" @tap="_href(item)">自己购买</button>
 				</view>
 
-				<view class="doneItem" v-else>
+				<view class="doneItem  animated fadeIn" v-else @tap="_detail(item)">
 					<view class="flex flex_cente header cm_bdb">
 						<view class="f1 cm_title">免单成功</view>
 						<text class="cm_text">{{ item.pay_date }}</text>
@@ -65,9 +71,9 @@
 								<view class="cm_price">￥{{ item.pay_price }}</view>
 								<view class="f1"></view>
 								<view class="flex flex_center">
-									<image src="../../static/image/logo.png" mode="aspectFill" class="subavatars"></image>
-									<image src="../../static/image/logo.png" style="margin-left: -20rpx;" mode="aspectFill" class="subavatars"></image>
-									<image src="../../static/image/logo.png" style="margin-left: -20rpx;" mode="aspectFill" class="subavatars"></image>
+									<image :src="item.user_list.list[0].consumer_head?item.user_list.list[0].consumer_head:'/static/image/hd_yq.png'" mode="aspectFill" class="subavatars"></image>
+									<image :src="item.user_list.list[1].consumer_head?item.user_list.list[1].consumer_head:'/static/image/hd_yq.png'" style="margin-left: -20rpx;" mode="aspectFill" class="subavatars"></image>
+									<image :src="item.user_list.list[2].consumer_head?item.user_list.list[2].consumer_head:'/static/image/hd_yq.png'" style="margin-left: -20rpx;" mode="aspectFill" class="subavatars"></image>
 								</view>
 							</view>
 						</view>
@@ -130,20 +136,22 @@ export default {
 	components: {
 		rule
 	},
-	onLoad() {
-		
+	onLoad() {		
 		this.shareMsg = {
 			title: `分享好友，马桶免费拿`,
 			path: `/pages/index/index`,
 			imageUrl: '/static/share.jpg'
 		};
 	},
+	onShow(){
+		this._loadData('refresh')
+	},
 	onShareAppMessage(res) {
 		if (res.from === 'button') {
 			// 来自页面内分享按钮
 			return {
 				title: this.goods.title,
-				path: `/pages/index/index?pcode=${this.goods.code}&ucode=${this.goods.user}`,
+				path: `/pages/index/index?pcode=${this.goods.code}&ucode=${this.goods.user}&ocode=${this.goods.order}`,
 				imageUrl: this.goods.image
 			}
 		}else{
@@ -152,6 +160,12 @@ export default {
 		
 	},
 	methods: {
+		_detail(item){
+			let code = item.order_code
+			uni.navigateTo({
+				url: `./activityDetail/activityDetail?code=` + code
+			});
+		},
 		handleClick(){
 			
 		},
@@ -166,15 +180,18 @@ export default {
 				image:item.skus_img,
 				price:item.price,
 				code:code,
-				user:usercode
+				user:usercode,
+				order:obj.order_code
 			}
-			console.log(this.goods)
+			// console.log(this.goods)
 			this.$refs.share.showModal()
 		},
-		_href(item) {
+		_href(obj) {
+			let item = obj.project_list[0]
 			let code = item.project_code;
+			
 			uni.navigateTo({
-				url: `/pages/main/details/details?code=` + code
+				url: `/pages/main/details/details?type=self&order=${obj.order_code}&code=` + code
 			});
 		},
 		_showRule() {
@@ -183,6 +200,7 @@ export default {
 		_switch(k) {
 			this.tap = k;
 			this.formParams.order_status = k;
+			this.list = []
 			this._loadData('refresh');
 		}
 	}

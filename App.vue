@@ -122,10 +122,10 @@
 							// 我自己的pid
 							// let parentId = that.accountInfo.invitation_code
 							let options = {
-								title: 'GLLO洁利来官方商城', // 分享标题
+								title: 'GLLO健康智能马桶', // 分享标题
 								link: http.mainUrl + 'index.html', // 分享链接，记得使用绝对路径，不能用document.URL
 								imgUrl: 'http://h5.gllo.com.cn/upload/head/jjl.png', // 分享图标
-								desc: 'GLLO洁利来官方商城', // 分享描述
+								desc: 'GLLO健康智能马桶', // 分享描述
 								success: function() {
 									console.info('分享成功！');
 								},

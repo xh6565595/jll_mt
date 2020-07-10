@@ -10,7 +10,7 @@
 			<view class="btns cm_btn" @tap="_toMain">返回首页</view>
 		</view> -->
 		<view style="padding: 0 100rpx;">
-			<tui-button type="primary" shape="circle" :disabled="false" :loading="loading" @tap="yes">完成</tui-button>
+			<tui-button type="primary" shape="circle" :disabled="false" :loading="loading" @tap="yes">已完成</tui-button>
 		</view>
 		
 	</view>
@@ -46,8 +46,8 @@
 				})
 			},
 			yes(){
-				uni.redirectTo({
-					url:'/pages/features/order/order'
+				uni.switchTab({
+					url:'/pages/activity/activity'
 				})
 				
 			}

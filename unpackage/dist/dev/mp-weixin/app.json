@@ -20,7 +20,8 @@
     "pages/success/success",
     "pages/features/ems/ems",
     "pages/sisMsg/sisMsg",
-    "pages/sisMsg/msg/msg"
+    "pages/sisMsg/msg/msg",
+    "pages/activity/activityDetail/activityDetail"
   ],
   "subPackages": [],
   "window": {
@@ -65,6 +66,5 @@
     "icon": "/components/icon/icon",
     "tui-modal": "/components/modal/modal",
     "tui-tag": "/components/tag/tag"
-  },
-  "sitemapLocation": "sitemap13.json"
+  }
 }

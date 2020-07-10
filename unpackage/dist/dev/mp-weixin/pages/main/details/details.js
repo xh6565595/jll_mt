@@ -303,7 +303,9 @@ var _default = {
       platform: 'android',
       share_consumer_info: '',
       activityInfo: '', //限时购信息
-      shareActive: false };
+      shareActive: false,
+      selfBuy: false,
+      selfOrder: '' };
 
   },
   watch: {
@@ -325,11 +327,18 @@ var _default = {
   onLoad: function onLoad(options) {
     this.formParams.project_code = options.code;
     this.formParams.share_user_id = this.shareUser;
-
+    this.selfOrder = options.order;
     if (options.code == this.sharePro) {
       this.shareActive = true; //是分享活动商品
     }
+    if (options.type == 'self' && options.order) {
+      this.shareActive = true;
+      this.selfBuy = true;
+      this.formParams.project_code = options.code;
+      this.formParams.share_user_id = this.shareUser;
 
+      // debugger
+    }
     this._loadData('refresh');
     var that = this;
     // uni.getSystemInfo({
@@ -347,7 +356,7 @@ var _default = {
 
   },
   computed: _objectSpread({},
-  (0, _vuex.mapState)(['shareUser', 'sharePro']), {
+  (0, _vuex.mapState)(['shareUser', 'sharePro', 'shareOrder', 'userInfo']), {
     restTimeValied: function restTimeValied() {
       var t = this.endTime;
       console.log(t);
@@ -507,7 +516,12 @@ var _default = {
       this.$store.commit('creatOrder', [cardData]);
       var url = '/pages/features/createOrder/createOrder?type=0';
       if (this.shareActive) {
-        url += "&shareUser=".concat(this.shareUser);
+        if (this.selfBuy) {
+          url += "&shareOrder=".concat(this.selfOrder);
+        } else {
+          url += "&shareOrder=".concat(this.shareOrder);
+        }
+
       }
       // debugger
       uni.navigateTo({

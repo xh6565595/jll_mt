@@ -149,6 +149,14 @@
             	"navigationBarBackgroundColor": "#fff"
             }
         }
+        ,{
+            "path" : "pages/activity/activityDetail/activityDetail",
+            "style": {
+            	"navigationBarTitleText": "详情",
+            	"navigationBarTextStyle": "black",
+            	"navigationBarBackgroundColor": "#fff"
+            }
+        }
     ],
 	"tabBar": {
 		"color": "#999",

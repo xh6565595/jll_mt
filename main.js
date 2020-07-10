@@ -53,7 +53,8 @@ const UI = {
 	showloading: function(text) {
 		// #ifdef H5 || MP-WEIXIN
 				uni.showLoading({
-					title: text?text:''
+					title: text?text:'',
+					mask:true
 				})
 		// #endif
 		// #ifdef APP-PLUS

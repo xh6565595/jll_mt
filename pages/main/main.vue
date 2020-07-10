@@ -8,6 +8,7 @@
 				</swiper-item>
 			</block>
 		</swiper>
+		<!-- <button class="btns" type="success" @tap="_dy">订阅消息</button> -->
 		<view class="hot">
 			<block v-for="(item, index) in list" :key="index">
 				<navigator :url="'/pages/main/details/details?code=' + item.project_code" class="hotItem">
@@ -97,7 +98,17 @@ export default {
 		// this._loadData('refresh');
 	},
 	methods: {
-
+		_dy(){
+			wx.requestSubscribeMessage({
+			  tmplIds: ['C1X2iAOlZq-A5ofwquTDuSW82fil3pe5GW5SnhjI_so','pA_K72jyOPZMKqI5zSVWuVFKCSeJFpjqIbfgQTEABZo'],
+			  success (res) { 
+				  console.log(111)
+			  },
+			  fail(err){
+				  console.log(err) 
+			  }
+			})
+		},
 		_href(url) {
 			uni.navigateTo({
 				url: url

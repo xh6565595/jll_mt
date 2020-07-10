@@ -380,7 +380,7 @@ var _accredit = _interopRequireDefault(__webpack_require__(/*! @/components/accr
       var that = this;
       this.$refs.kf.hideModal();
       uni.showModal({
-        title: '洁利来商城提醒你',
+        title: 'GLLO健康智能马桶提醒你',
         content: '立即致电官方客服？',
         success: function success(res) {
           that.show = false;

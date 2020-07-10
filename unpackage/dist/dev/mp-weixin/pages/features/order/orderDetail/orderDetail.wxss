@@ -28,7 +28,7 @@
   padding: 20rpx;
   position: relative;
   padding-top: 160rpx;
-  padding-bottom: 130rpx;
+  padding-bottom: 160rpx;
 }
 .pages .bgbox.data-v-2468703d {
   font-size: 40rpx;
@@ -87,6 +87,14 @@
   color: #e53131;
   border-radius: 8rpx;
   padding: 0 20rpx;
+}
+.pages .proItemsBox .smallBtn.data-v-2468703d {
+  height: 50rpx;
+  line-height: 50rpx;
+  border-radius: 25rpx;
+  padding: 0 10rpx;
+  font-size: 24rpx;
+  margin-left: 10rpx;
 }
 .pages .addressBox.data-v-2468703d {
   z-index: 1;

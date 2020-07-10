@@ -45,16 +45,13 @@
 						<view class="tui-title cm_text">服务商:</view>
 						<view class="tui-input f1 cm_tex_r">{{ item.service_info.service_name }}</view>
 					</view>
-				</tui-list-cell>
-				<!-- <tui-list-cell :hover="false">
-					<view class="tui-line-cell flex flex_center tui-cell-last">
-						<view class="tui-title cm_text">服务商热线:</view>
-						<view class="tui-input f1 cm_tex_r">{{ item.service_info.consumer_nick_name }}</view>
-					</view>
-				</tui-list-cell> -->
-				
+				</tui-list-cell>				
 			</view>
-
+			<view class="proItemsBox flex flex_center" v-else-if="item.order_status == 5">
+				<text>我已收货</text>
+				<view class="f1"></view>
+				<view class=""  @tap="_kefuMenu">联系客服</view>
+			</view>
 			<view class="proItemsBox addressBox ">
 
 				<view class="flex flex_center address tui-skeleton-fillet">
@@ -113,9 +110,9 @@
 									</view>
 								</view>
 							</view>
-							<view class="cells flex flex_center">
+							<view class="cells flex flex_center" >
 								<view class="label cm_tex_r">运费</view>
-								<view class="f1 text">￥{{ item.is_ems }}</view>
+								<view class="f1 text">{{ item.is_ems?'￥'+item.is_ems:'包邮' }}</view>
 							</view>
 							<view class="cells flex flex_center">
 								<view class="label cm_tex_r">税费</view>
@@ -146,15 +143,16 @@
 			                    </picker> -->
 			<view class="proItemsBox  " style="padding: 0">
 				<view class="cm_title t tui-skeleton-fillet flex flex_center">
-					<text>订单的详情</text>
+					<text>订单详情</text>
 					<text class="f1"></text>
-					<button class="cm_tags " size="mini" @tap="_copy(item.order_code)">复制</button>
+					
 				</view>
 				<view class="  tui-skeleton-fillet">
 					<tui-list-cell :hover="false">
 						<view class="tui-line-cell flex flex_center tui-cell-last">
-							<view class="tui-title cm_text">订单编号</view>
+							<view class="tui-title cm_text">订单号</view>
 							<view class="tui-input f1 cm_tex_r">{{ item.order_code }}</view>
+							<button class="cm_tags smallBtn" size="mini" @tap="_copy(item.order_code)">复制</button>
 						</view>
 					</tui-list-cell>
 					<tui-list-cell :hover="false" v-if="item.order_status == 0 ">
@@ -206,6 +204,17 @@
 			</view>
 		</view>
 		<PayPanel ref="payPanel" :oderId="oderId" :amout="item.pay_price" @success="success" @cancel="cancel"></PayPanel>
+		<accredit ref="kf" :autoClose="true">
+			<view slot='content' class="fkContent">
+				<image src="/static/image/kfbg.jpg" mode="widthFix" class="bg" ></image>
+				<view style="padding: 50rpx;">
+					<view class="gray" style="line-height: 2;">我们将会全心全意为您提供满意周到的咨询服</view>
+					<button type="text" class="cm_btn" hover-class="cm_hover_m" open-type="contact">和他聊聊</button>
+					<button type="text" class="cm_btn_plain" hover-class="cm_hover_m" @tap="_kefu">拨打客服热线</button>
+				</view>
+				<image src="/static/image/close.png" mode="widthFix" class="closeBtn" ></image>
+			</view>
+		</accredit>
 	</view>
 </template>
 
@@ -295,6 +304,31 @@ export default {
 		PayPanel
 	},
 	methods: {
+		// 显示客服弹窗
+		_kefuMenu(){
+			this.$refs.kf.showModal()
+		},
+		// 客服
+		_kefu() {
+			// let phone = this.waiter.link_value;
+			const phone = uni.getStorageSync('global_Set_jll').service_mobile;
+			let that = this;
+			this.$refs.kf.hideModal()
+			uni.showModal({
+				title: 'GLLO健康智能马桶提醒你',
+				content: '立即致电官方客服？',
+				success: function(res) {
+					that.show = false;
+					if (res.confirm) {
+						uni.makePhoneCall({
+							phoneNumber: phone //仅为示例
+						});
+					} else if (res.cancel) {
+						console.log('用户点击取消');
+					}
+				}
+			});
+		},
 		getDate(type) {
 			const date = new Date();
 			let year = date.getFullYear();
@@ -320,7 +354,7 @@ export default {
 			let that = this
 			let d = e.detail.value;
 			uni.showModal({
-				title: '洁利来提醒您',
+				title: 'GLLO健康智能马桶提醒您',
 				content: '你将延迟该订单的发货时间',
 				success(res) {
 					if (res.confirm) {
@@ -433,7 +467,6 @@ export default {
 			// }
 		},
 		_refundDetail(item) {
-			console.log(111, item);
 			uni.navigateTo({
 				url: '/pages/features/refundDetail/refundDetail?code=' + item.refund_code
 			});
@@ -546,7 +579,7 @@ export default {
 	padding: 20rpx;
 	position: relative;
 	padding-top: 160rpx;
-	padding-bottom: 130rpx;
+	padding-bottom: 160rpx;
 	.bgbox {
 		font-size: 40rpx;
 		text-align: left;
@@ -605,6 +638,14 @@ export default {
 			color: #e53131;
 			border-radius: 8rpx;
 			padding: 0 20rpx;
+		}
+		.smallBtn{
+			height: 50rpx ;
+			line-height: 50rpx;
+			border-radius: 25rpx;
+			padding: 0 10rpx;
+			font-size: 24rpx;
+			margin-left: 10rpx;
 		}
 	}
 	.addressBox {

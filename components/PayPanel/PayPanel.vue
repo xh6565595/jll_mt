@@ -49,10 +49,12 @@
 					<text class="wxz" v-else></text>
 				</view>
 			</view>
-			<view class="flex flex_center">
-				<button type="primary" class="f1 sbtn cm_btn_plain" :plain="true" shape="circle" :loading="loading" @tap="_hide">取消</button>
-				<button type="primary" class="f1 cm_btn sbtn" shape="circle" :loading="loading" @tap="_submit">提交</button>
-			</view>
+			<form  report-submit="true" @submit="_submit">
+				<view class="flex flex_center">		
+					<button type="primary" class="f1 sbtn cm_btn_plain" :plain="true" shape="circle" :loading="loading" @tap="_hide">取消</button>
+					<button type="primary" class="f1 cm_btn sbtn" shape="circle" :loading="loading"  form-type='submit' >提交</button>
+				</view>
+			</form>
 		</view>
 	</view>
 </template>
@@ -86,6 +88,7 @@ export default {
 				 "pay_type":"4",   ////1-支付宝 2-微信 3-CBB(建行支付)
 				 "order_num":"",   //订单号
 				 "install_num":"",  //分期数
+				 "formId":''
 			},
 			panelshow: false,
 			payList: []
@@ -141,7 +144,12 @@ export default {
 			this.formParams.pay_type = k;
 		},
 		// 提交支付
-		async _submit() {
+		async _submit(e) {
+			// console.log(e.detail.formId);		
+			let formId = e.detail.formId
+			// debugger
+			// console.log(formId)
+			this.formParams.formId = e.detail.formId
 			if (this.formParams.pay_type == 1) {
 				uni.showToast('开发中');
 				this._pay(1);
@@ -168,9 +176,9 @@ export default {
 			// return;
 			try {
 				that.loading1 = true;
-				console.log(this.formParams);
+				// console.log(this.formParams);
 				let res = await this.$api.toPayment(this.formParams);
-				console.log(res);
+				// console.log(res);
 				// let data = {
 				// 	ORDERID:this.formParams.order_num,
 				// 	PAYMENT:0.01,
@@ -196,7 +204,7 @@ export default {
 						// 建行
 						window.location.href = data;
 					}
-					that.$emit('success');
+					// that.$emit('success');
 					// that._href()
 				} else {
 					that.$ui.toast(res.Msg);
@@ -211,7 +219,7 @@ export default {
 		// 微信支付
 		async _wxPay(data) {
 			let that = this;
-			console.log(data)
+			// console.log(data)
 			uni.requestPayment({
 				provider: 'wxpay',
 				timeStamp: data.timeStamp,
@@ -220,10 +228,11 @@ export default {
 				signType: data.signType,
 				paySign: data.paySign,
 				success: function(res) {
-					console.log('success:' + JSON.stringify(res));
+					// console.log('success:' + JSON.stringify(res));
 					uni.redirectTo({
 						url: '/pages/success/success'
 					});
+					that.$emit('success');
 				},
 				fail: function(err) {
 					console.log('fail:' + JSON.stringify(err));

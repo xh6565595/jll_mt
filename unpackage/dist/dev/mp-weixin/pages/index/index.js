@@ -166,6 +166,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 var _utils = _interopRequireDefault(__webpack_require__(/*! @/utils/utils.js */ 28));
 var _index = _interopRequireDefault(__webpack_require__(/*! @/utils/http/index.js */ 11));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}var oneInput = function oneInput() {__webpack_require__.e(/*! require.ensure | components/myp-one/myp-one */ "components/myp-one/myp-one").then((function () {return resolve(__webpack_require__(/*! @/components/myp-one/myp-one */ 247));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var accredit = function accredit() {__webpack_require__.e(/*! require.ensure | components/accredit/accredit */ "components/accredit/accredit").then((function () {return resolve(__webpack_require__(/*! @/components/accredit/accredit */ 46));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
 
@@ -187,7 +188,8 @@ var _index = _interopRequireDefault(__webpack_require__(/*! @/utils/http/index.j
         "share_user_id": "" //userid 分享活动
       },
       seconds: 0,
-      time: null };
+      time: null,
+      iviCode: '' };
 
   },
   components: {
@@ -196,18 +198,25 @@ var _index = _interopRequireDefault(__webpack_require__(/*! @/utils/http/index.j
 
   onLoad: function onLoad(options) {
     var that = this;
-    // const opid= uni.getStorageSync('jll_opid')
-    // if(opid){
-    // 	// 已存在账户
-    // 	that.autoLogin(opid);
-    // }
-    console.log('index', options);
+
+
+    // console.log('index',options)
     var proCode = options.pcode; //商品code
     var userId = options.ucode; //人物code
+    var odrCode = options.ocode; //人物code
 
+
+
+    this.iviCode = options.icode;
+    console.log('odrCode', proCode);
+    console.log('userId', userId);
+    console.log('odrCode', odrCode);
+    console.log('iviCode', this.iviCode);
+    this.formParams.invitation = this.iviCode;
+    this.formParams.share_user_id = options.ucode;
     // 记录信息
-    if (proCode && userId) {
-      this.$store.commit('setShare', { proCode: proCode, userId: userId });
+    if (proCode && userId && odrCode) {
+      this.$store.commit('setShare', { proCode: proCode, userId: userId, orderCode: odrCode });
     }
 
 
@@ -239,6 +248,17 @@ var _index = _interopRequireDefault(__webpack_require__(/*! @/utils/http/index.j
     } },
 
   methods: {
+    _dy: function _dy() {
+      wx.requestSubscribeMessage({
+        tmplIds: ['C1X2iAOlZq-A5ofwquTDuSW82fil3pe5GW5SnhjI_so', 'pA_K72jyOPZMKqI5zSVWuVFKCSeJFpjqIbfgQTEABZo'],
+        success: function success(res) {
+          console.log(111);
+        },
+        fail: function fail(err) {
+          console.log(err);
+        } });
+
+    },
     // 立即注册
     submit: function submit() {var _this = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee2() {var that, res, opid;return _regenerator.default.wrap(function _callee2$(_context2) {while (1) {switch (_context2.prev = _context2.next) {case 0:
                 that = _this;
@@ -266,7 +286,9 @@ var _index = _interopRequireDefault(__webpack_require__(/*! @/utils/http/index.j
                   // that.$refs.userBox.hideModal()
 
                 } else {
-                  that.$ui.toast(res.Msg ? res.Msg : '未知错误');
+                  if (res.Msg) {
+                    _this.$ui.toast(res.Msg);
+                  }
 
                   that.reset();
                 }_context2.next = 17;break;case 13:_context2.prev = 13;_context2.t0 = _context2["catch"](4);
@@ -374,7 +396,7 @@ var _index = _interopRequireDefault(__webpack_require__(/*! @/utils/http/index.j
     getuserinfo: function getuserinfo(res) {
       var that = this;
       var userInfo = res.detail.userInfo;
-      // console.log(userInfo)
+      console.log(res);
       this.formParams.nickname = userInfo.nickName;
       this.formParams.headimgurl = userInfo.avatarUrl;
       that.$refs.userBox.showModal();
@@ -419,7 +441,10 @@ var _index = _interopRequireDefault(__webpack_require__(/*! @/utils/http/index.j
                   // 	title:'登录失效',
                   // 	content:res.Msg?res.Msg:'未知错误'
                   // })
-                  _this4.$ui.toast(res.Msg);
+                  if (res.Msg && res.Msg != '用户不存在') {
+                    _this4.$ui.toast(res.Msg);
+                  }
+
                   // debugger
                   // uni.switchTab({ 
                   // 	url: '/pages/main/main'

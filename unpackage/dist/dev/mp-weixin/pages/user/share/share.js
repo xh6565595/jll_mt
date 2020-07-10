@@ -213,7 +213,7 @@ var _QSSharePoster = __webpack_require__(/*! @/utils/QS-SharePoster/QS-SharePost
   onLoad: function onLoad() {
     // this.version = plus.runtime.version;
     this.usrMsg = this.userInfo;
-    this.shareUrl = "https://gllo.kuxiong999.com/miniprogram?icode=".concat(this.userInfo.invitation_code);
+    this.shareUrl = "https://gllo.kuxiong999.com/miniGLLO?icode=".concat(this.userInfo.invitation_code);
   },
   components: { tkiQrcode: tkiQrcode },
   methods: {
@@ -289,7 +289,6 @@ var _QSSharePoster = __webpack_require__(/*! @/utils/QS-SharePoster/QS-SharePost
 
                         {
                           type: 'text',
-                          // fontStyle: 'italic',
                           text: '邀请人：' + that.userInfo.invitation_code,
                           size: 23,
                           color: '#333',
@@ -303,7 +302,7 @@ var _QSSharePoster = __webpack_require__(/*! @/utils/QS-SharePoster/QS-SharePost
                               dy: bgObj.height * 0.35 };
 
                           },
-                          serialNum: 0 },
+                          serialNum: 0 }
 
                         // {
                         // 	type: 'custom',
@@ -332,25 +331,25 @@ var _QSSharePoster = __webpack_require__(/*! @/utils/QS-SharePoster/QS-SharePost
                         // 		};
                         // 	}
                         // },
-                        {
-                          type: 'text',
-                          // fontStyle: 'italic',
-                          text: '邀请码：' + that.usrMsg.invite_code,
-                          size: 24,
-                          color: '#fff',
-                          alpha: 1,
-                          textAlign: 'top',
-                          textBaseline: 'middle',
-                          infoCallBack: function infoCallBack(textLength) {
-                            _app2.default.log('index页面的text的infocallback ，textlength:' + textLength);
-                            return {
-                              dx: bgObj.width / 2,
-                              dy: bgObj.height * 0.69 + 18 };
-
-                          },
-                          serialNum: 0 }]);
-
-
+                        // {
+                        // 	type: 'text',
+                        // 	// fontStyle: 'italic',
+                        // 	text: '邀请码：' + that.userInfo.invite_code,
+                        // 	size: 24,
+                        // 	color: '#fff',
+                        // 	alpha: 1,
+                        // 	textAlign: 'top',
+                        // 	textBaseline: 'middle',
+                        // 	infoCallBack(textLength) {
+                        // 		_app.log('index页面的text的infocallback ，textlength:' + textLength);
+                        // 		return {
+                        // 			dx: bgObj.width / 2,
+                        // 			dy: bgObj.height * 0.69 + 18
+                        // 		};
+                        // 	},
+                        // 	serialNum: 0
+                        // }
+                        ]);
                       });
                     },
                     setCanvasWH: function setCanvasWH(_ref2) {var bgObj = _ref2.bgObj,type = _ref2.type,bgScale = _ref2.bgScale;

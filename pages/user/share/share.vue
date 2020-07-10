@@ -81,7 +81,7 @@ export default {
 	onLoad() {
 		// this.version = plus.runtime.version;
 		this.usrMsg = this.userInfo
-		this.shareUrl =  `https://gllo.kuxiong999.com/miniprogram?icode=${this.userInfo.invitation_code}`
+		this.shareUrl =  `https://gllo.kuxiong999.com/miniGLLO?icode=${this.userInfo.invitation_code}`
 	},
 	components: { tkiQrcode },
 	methods: {
@@ -157,7 +157,6 @@ export default {
 
 								{
 									type: 'text',
-									// fontStyle: 'italic',
 									text: '邀请人：' + that.userInfo.invitation_code,
 									size: 23,
 									color: '#333',
@@ -200,24 +199,24 @@ export default {
 								// 		};
 								// 	}
 								// },
-								{
-									type: 'text',
-									// fontStyle: 'italic',
-									text: '邀请码：' + that.usrMsg.invite_code,
-									size: 24,
-									color: '#fff',
-									alpha: 1,
-									textAlign: 'top',
-									textBaseline: 'middle',
-									infoCallBack(textLength) {
-										_app.log('index页面的text的infocallback ，textlength:' + textLength);
-										return {
-											dx: bgObj.width / 2,
-											dy: bgObj.height * 0.69 + 18
-										};
-									},
-									serialNum: 0
-								}
+								// {
+								// 	type: 'text',
+								// 	// fontStyle: 'italic',
+								// 	text: '邀请码：' + that.userInfo.invite_code,
+								// 	size: 24,
+								// 	color: '#fff',
+								// 	alpha: 1,
+								// 	textAlign: 'top',
+								// 	textBaseline: 'middle',
+								// 	infoCallBack(textLength) {
+								// 		_app.log('index页面的text的infocallback ，textlength:' + textLength);
+								// 		return {
+								// 			dx: bgObj.width / 2,
+								// 			dy: bgObj.height * 0.69 + 18
+								// 		};
+								// 	},
+								// 	serialNum: 0
+								// }
 							]);
 						});
 					},
@@ -418,7 +417,8 @@ export default {
 		width: 100vw;
 		height: 1198rpx;
 		position: relative;
-		padding-top: 440rpx;
+		padding-top: 60vw;
+		position: relative;
 		.bg {
 			width: 100vw;
 			height: auto;

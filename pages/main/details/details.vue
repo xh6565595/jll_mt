@@ -25,7 +25,7 @@
 			
 			<view class="boxs box1 ">
 				
-				<view class="cm_title">{{goods.project_name }}</view>
+				<view class="cm_title" style="margin-bottom: 20rpx;">{{goods.project_name }}</view>
 				<view class="flex titleBox tui-skeleton-fillet" v-if="goods.is_activity==0">
 					<text class="cm_prize">￥{{ goods.project_raise_price }}</text>
 					<text class="cm_delete">￥{{ goods.project_price }}</text>
@@ -82,9 +82,9 @@
 			<view>
 				<block v-for="(item, index) in details_img" :key="index"><image :src="item" mode="widthFix" style="width: 100%;"></image></block>
 			</view>
-			<view class="shareTip flex flex_center" v-if="shareActive && share_consumer_info.consumer_code">
-				<image :src="share_consumer_info.consumer_head" mode="scaleToFill" style="width: 64rpx;height: 64rpx;border-radius: 50%;margin-right: 20rpx;"></image>
-				<view class="f1">{{share_consumer_info.consumer_name}}</view>
+			<view class="shareTip flex flex_center" v-if="shareActive">
+				<image :src="selfBuy?userInfo.consumer_head:share_consumer_info.consumer_head" mode="scaleToFill" style="width: 64rpx;height: 64rpx;border-radius: 50%;margin-right: 20rpx;"></image>
+				<view class="f1">{{selfBuy?userInfo.consumer_nick_name:share_consumer_info.consumer_name}}</view>
 			</view>
 			<view class="footer flex flex_center" v-if="!skeletonShow">
 				<button class="cm_btn sure"  @tap="_next"  >购买</button>			
@@ -164,7 +164,9 @@ export default {
 			platform:'android',
 			share_consumer_info:'',
 			activityInfo:'' ,  //限时购信息
-			shareActive:false
+			shareActive:false,
+			selfBuy:false,
+			selfOrder:''
 		};
 	},
 	watch: {
@@ -186,11 +188,18 @@ export default {
 	onLoad(options) {
 		this.formParams.project_code = options.code;
 		this.formParams.share_user_id = this.shareUser;
-		
+		this.selfOrder = options.order
 		if(options.code == this.sharePro){
 			this.shareActive = true //是分享活动商品
 		}
-		
+		if(options.type=='self'&& options.order ){
+			this.shareActive = true;
+			this.selfBuy = true
+			this.formParams.project_code = options.code;
+			this.formParams.share_user_id = this.shareUser;
+			
+			// debugger
+		}
 		this._loadData('refresh');
 		let that = this
 		// uni.getSystemInfo({
@@ -205,10 +214,10 @@ export default {
 		// alert(2)
 		clearInterval(this.time);
 		this.time = null;
-	
+		
 	},
 	computed: {
-		...mapState(['shareUser','sharePro']),
+		...mapState(['shareUser','sharePro','shareOrder','userInfo']),
 		restTimeValied() {
 			let t = this.endTime
 			console.log(t)
@@ -368,7 +377,12 @@ export default {
 				this.$store.commit('creatOrder', [cardData]);
 				let url = '/pages/features/createOrder/createOrder?type=0'
 				if(this.shareActive){
-					url+=`&shareUser=${this.shareUser}`
+					if(this.selfBuy){
+						url+=`&shareOrder=${this.selfOrder}`
+					}else{
+						url+=`&shareOrder=${this.shareOrder}`
+					}
+					
 				}
 				// debugger
 				uni.navigateTo({

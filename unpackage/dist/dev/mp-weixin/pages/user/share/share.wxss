@@ -51,7 +51,8 @@
   width: 100vw;
   height: 1198rpx;
   position: relative;
-  padding-top: 440rpx;
+  padding-top: 60vw;
+  position: relative;
 }
 .pages .content .bg.data-v-89d2bee8 {
   width: 100vw;

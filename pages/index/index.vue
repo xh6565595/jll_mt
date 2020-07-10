@@ -1,10 +1,11 @@
 <template>
 	<view class="pages flex flex_center flex_y">
 		<image src="../../static/image/logo.png" mode="scaleToFill" class="logo" ></image>
-		<text class="name">洁利来商城欢迎您</text>
+		<text class="name">GLLO健康智能马桶</text>
 		<text class="text">您尚未登录</text>
 		<text class="text">需要获取您的授权之后完成登录</text>
 		<button type="success" class="btns" open-type="getUserInfo" @getuserinfo="getuserinfo">微信登录</button>
+		
 		<accredit ref="userBox">
 			<view class="formBox" slot="content">
 				<view class="cm_title cm_tex_c title" > 账户绑定</view>
@@ -23,7 +24,7 @@
 					<!-- <input class="f1" type="number" clearable  v-model="formParams.validate" placeholder="请输入验证码"> -->
 					 <one-input ref="hi" type="box" @finish="finish" @input="input" :maxlength="6"></one-input>
 				</view>
-				<button type="success" class="btns"   @tap="submit">立即登录</button>
+				<button type="success" class="btns"   @tap="submit">立即登录</button>		
 			</view>		
 		</accredit>
 	</view>
@@ -51,7 +52,8 @@ export default {
 				"share_user_id":"", //userid 分享活动
 			},
 			seconds:0,
-			time:null
+			time:null,
+			iviCode:''
 		};
 	},
 	components:{
@@ -60,18 +62,25 @@ export default {
 	},
 	onLoad(options) {
 		let that = this
-		// const opid= uni.getStorageSync('jll_opid')
-		// if(opid){
-		// 	// 已存在账户
-		// 	that.autoLogin(opid);
-		// }
-		console.log('index',options)
+
+
+		// console.log('index',options)
 		let proCode = options.pcode;   //商品code
 		let userId = options.ucode   //人物code
+		let odrCode = options.ocode   //人物code
 		
+		
+		
+		this.iviCode = options.icode
+		console.log('odrCode',proCode)
+		console.log('userId',userId)
+		console.log('odrCode',odrCode)
+		console.log('iviCode',this.iviCode)
+		this.formParams.invitation = this.iviCode
+		this.formParams.share_user_id =  options.ucode 
 		// 记录信息
-		if(proCode && userId){
-			this.$store.commit('setShare',{proCode:proCode,userId:userId})
+		if(proCode && userId && odrCode){
+			this.$store.commit('setShare',{proCode:proCode,userId:userId,orderCode:odrCode})
 		}
 		
 		
@@ -103,6 +112,17 @@ export default {
 		}
 	},
 	methods: {
+		_dy(){
+			wx.requestSubscribeMessage({
+			  tmplIds: ['C1X2iAOlZq-A5ofwquTDuSW82fil3pe5GW5SnhjI_so','pA_K72jyOPZMKqI5zSVWuVFKCSeJFpjqIbfgQTEABZo'],
+			  success (res) { 
+				  console.log(111)
+			  },
+			  fail(err){
+				  console.log(err) 
+			  }
+			})
+		},
 		// 立即注册
 		async submit(){
 			let that = this
@@ -130,7 +150,9 @@ export default {
 					// that.$refs.userBox.hideModal()
 					
 				}else{
-					that.$ui.toast(res.Msg?res.Msg:'未知错误')
+					if(res.Msg){
+						this.$ui.toast(res.Msg)
+					}
 					
 					that.reset() 
 				}
@@ -213,7 +235,7 @@ export default {
 				if (res.Success) {
 					// oNDKY5B658gwmlw5vZnwEUOdG1io
 					let opid = res.Msg;
-					uni.setStorageSync('jll_opid',opid);
+					uni.setStorageSync('jll_opid',opid);  
 					that.formParams.openId = opid
 					// that.$refs.userBox.showModal()
 					// 自动登录一次
@@ -238,7 +260,7 @@ export default {
 		getuserinfo(res){
 			let that = this
 			let userInfo = res.detail.userInfo
-			// console.log(userInfo)
+			console.log(res)
 			this.formParams.nickname = userInfo.nickName
 			this.formParams.headimgurl =  userInfo.avatarUrl
 			that.$refs.userBox.showModal();
@@ -283,7 +305,10 @@ export default {
 					// 	title:'登录失效',
 					// 	content:res.Msg?res.Msg:'未知错误'
 					// })
-					this.$ui.toast(res.Msg)
+					if(res.Msg && res.Msg!='用户不存在' ){
+						this.$ui.toast(res.Msg)
+					}
+					
 					// debugger
 						// uni.switchTab({ 
 						// 	url: '/pages/main/main'
