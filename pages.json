@@ -157,6 +157,14 @@
             	"navigationBarBackgroundColor": "#fff"
             }
         }
+        ,{
+            "path" : "pages/login/login",
+            "style": {
+            	"navigationBarTitleText": "登录",
+            	"navigationBarTextStyle": "black",
+            	"navigationBarBackgroundColor": "#fff"
+            }
+        }
     ],
 	"tabBar": {
 		"color": "#999",

@@ -1,6 +1,6 @@
 <template>
 	<view class="pages">
-		<image class="bg" :src="'../../../static/defaultshare1.jpg'" mode="aspectFill"></image>
+		<image class="bg" :src="'../../../static/defaultshare1.jpg'" mode="widthFix"></image>
 		<view class="content">
 			<!-- <view class="headTip">邀请码</view> -->
 			<view class="fxmBox">
@@ -14,7 +14,7 @@
 			<view class="bBox ">
 				<button type="primary" class="btns" shape="circle" :disabled="false" :loading="loading1" @click="shareFc">保存二维码</button>
 				<!-- <a :href="share[0].imgBase">qqq</a> -->
-				<button type="primary" class="btns" shape="circle" :disabled="false" open-type="share" :loading="loading2" @click="_share">分享推广链接</button>
+				<button type="primary" class="btns" shape="circle" :disabled="false" open-type="share" :loading="loading2">分享推广链接</button>
 			</view>
 			<view id="hidden" style="display: none;"></view>
 		</view>
@@ -74,14 +74,14 @@ export default {
 		    }
 		    return {
 				  title: '分享好友，马桶免费拿',
-				  query: `code=${this.userInfo.invitation_code}`,
+				  path: `/pages/index/index?icode=${this.userInfo.invitation_code}`,
 				  imageUrl:'/static/share.jpg'		  
 		    }
 	},
 	onLoad() {
 		// this.version = plus.runtime.version;
 		this.usrMsg = this.userInfo
-		this.shareUrl =  `https://gllo.kuxiong999.com/miniGLLO?icode=${this.userInfo.invitation_code}`
+		this.shareUrl =  `https://gllo.kuxiong999.com/gllo?icode=${this.userInfo.invitation_code}`
 	},
 	components: { tkiQrcode },
 	methods: {
@@ -361,25 +361,25 @@ export default {
 			// 		} else {
 			// 			this.type = 0;
 			// 		}
-			let that = this;
-			uni.share({
-				provider: this.providerList[tapIndex].id,
-				scene: this.providerList[tapIndex].type && this.providerList[tapIndex].type == 'WXSenceTimeline' ? 'WXSenceTimeline' : 'WXSceneSession',
-				type: 2,
-				title: '酷熊优购',
-				summary: '邀您下载酷熊APP，让您淘宝天猫购物省钱',
-				imageUrl: that.poster.finalPath,
-				href: this.shareUrl,
-				success: res => {
-					//console.log('success:' + JSON.stringify(res));
-				},
-				fail: e => {
-					uni.showModal({
-						content: e.errMsg,
-						showCancel: false
-					});
-				}
-			});
+			// let that = this;
+			// uni.share({
+			// 	provider: this.providerList[tapIndex].id,
+			// 	scene: this.providerList[tapIndex].type && this.providerList[tapIndex].type == 'WXSenceTimeline' ? 'WXSenceTimeline' : 'WXSceneSession',
+			// 	type: 2,
+			// 	title: '酷熊优购',
+			// 	summary: '邀您下载酷熊APP，让您淘宝天猫购物省钱',
+			// 	imageUrl: that.poster.finalPath,
+			// 	href: this.shareUrl,
+			// 	success: res => {
+			// 		//console.log('success:' + JSON.stringify(res));
+			// 	},
+			// 	fail: e => {
+			// 		uni.showModal({
+			// 			content: e.errMsg,
+			// 			showCancel: false
+			// 		});
+			// 	}
+			// });
 			// 	}
 			// });
 		},
@@ -433,7 +433,7 @@ export default {
 			position: absolute;
 			left: 50%;
 			margin-left: -207rpx;
-			top:310rpx;
+			top:40.5vw;
 			.bg{
 				position: static;
 				width: 100%;

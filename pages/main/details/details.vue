@@ -217,7 +217,7 @@ export default {
 		
 	},
 	computed: {
-		...mapState(['shareUser','sharePro','shareOrder','userInfo']),
+		...mapState(['shareUser','sharePro','shareOrder','userInfo','hasLogin']),
 		restTimeValied() {
 			let t = this.endTime
 			console.log(t)
@@ -252,9 +252,9 @@ export default {
 	},
 	methods: {
 		_back(){
-			uni.navigateBack({
-				
-			})
+			uni.switchTab({
+				url: '/pages/main/main'
+			});
 		},
 		cart(){
 			uni.switchTab({
@@ -300,12 +300,12 @@ export default {
 		},
 		// 显示参数框
 		_next() {
-			// if (!this.hasLogin) {
-			// 	this.content = '请您先登录';
-			// 	this.action = 'login'; ///features/authentication/authentication'
-			// 	this.modal = true;
-			// 	return;
-			// }
+			if(!this.hasLogin){
+				uni.navigateTo({
+					url:'/pages/login/login'
+				})
+				return;
+			}
 			this.$refs.params.show();
 		},
 		// 关闭

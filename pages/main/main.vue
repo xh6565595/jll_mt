@@ -8,7 +8,6 @@
 				</swiper-item>
 			</block>
 		</swiper>
-		<!-- <button class="btns" type="success" @tap="_dy">订阅消息</button> -->
 		<view class="hot">
 			<block v-for="(item, index) in list" :key="index">
 				<navigator :url="'/pages/main/details/details?code=' + item.project_code" class="hotItem">
@@ -67,8 +66,7 @@ export default {
 		return {
 			baseKey: 'GetGoodsList',
 			banners: [],
-			hasRow: 'Rows',
-			
+			hasRow: 'Rows',		
 			formParams: {
 				key: '',
 				type: '1',
@@ -78,37 +76,24 @@ export default {
 		};
 	},
 	components: {},
-	computed: mapState(['shareUser','sharePro']),
+	computed: mapState(['shareUser','sharePro','hasLogin']),
 	mixins: [baseMixins],
 	onLoad() {
 		let that = this;
 		this.banners = global_Set_jll.banerList;
 		// this.classList = global_Set_jll.classList;
 		// this._loadData('refresh');
-		if(this.sharePro ){
-			uni.navigateTo({
-				url:'/pages/main/details/details?code=' + this.sharePro
-			})
-		}
 		
 	},
 	onShow() {
-		// this.formParams.pageIndex = 1;
-		// this.list = [];
-		// this._loadData('refresh');
+		if(!this.hasLogin){
+			uni.navigateTo({
+				url:'/pages/login/login'
+			})
+		}
 	},
 	methods: {
-		_dy(){
-			wx.requestSubscribeMessage({
-			  tmplIds: ['C1X2iAOlZq-A5ofwquTDuSW82fil3pe5GW5SnhjI_so','pA_K72jyOPZMKqI5zSVWuVFKCSeJFpjqIbfgQTEABZo'],
-			  success (res) { 
-				  console.log(111)
-			  },
-			  fail(err){
-				  console.log(err) 
-			  }
-			})
-		},
+		
 		_href(url) {
 			uni.navigateTo({
 				url: url

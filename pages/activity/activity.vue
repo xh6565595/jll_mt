@@ -1,6 +1,6 @@
 <template>
-	<view class="pages">
-		<view class="fixed" style="background-color: #fff;">
+	<view class="pages" :style="{'padding-top':topHeight+'rpx'}">
+		<view class="fixed" >
 			<tuiNav :isCustom="true" :isFixed="false" backgroundColor="#fff">
 				<view class="flex flex_center header">
 					<view><text class="lTip" @tap="_showRule">活动规则</text></view>
@@ -57,7 +57,7 @@
 						<text class="cm_text">{{ item.pay_date }}</text>
 					</view>
 					<view class="cm_items flex flex_center">
-						<image src="../../static/image/logo.png" mode="aspectFill" class="itemLogo"></image>
+						<image :src="item.project_list[0].skus_img" mode="aspectFill" class="itemLogo"></image>
 						<view class="f1">
 							<view class="flex flex_center">
 								<view class="f1 cm_title cm_ellipsis2">{{ item.project_list[0].order_name }}</view>
@@ -128,11 +128,12 @@ export default {
 				image:'',
 				price:''
 			},
-			modal:false
+			modal:false,
+			topHeight:144
 		};
 	},
 	mixins: [baseMixins],
-	computed: mapState(['userInfo']),
+	computed: mapState(['userInfo','hasLogin']),
 	components: {
 		rule
 	},
@@ -142,9 +143,23 @@ export default {
 			path: `/pages/index/index`,
 			imageUrl: '/static/share.jpg'
 		};
+		
+		uni.getSystemInfo({
+			success: res => {
+				
+				this.topHeight = 2*(res.statusBarHeight+44) + 80+20
+			}
+		});
 	},
 	onShow(){
-		this._loadData('refresh')
+			if(!this.hasLogin){
+				uni.navigateTo({
+					url:'/pages/login/login'
+				})
+			}else{
+				this._loadData('refresh')
+			}
+	
 	},
 	onShareAppMessage(res) {
 		if (res.from === 'button') {
@@ -210,13 +225,14 @@ export default {
 <style lang="scss" scoped>
 .pages {
 	padding: 20rpx;
-	padding-top: 260rpx;
+	// padding-top: 260rpx;
 	.fixed {
 		width: 100%;
 		position: fixed;
 		left: 0;
 		top: 0;
 		z-index: 10;
+		background-color: #fff;
 	}
 
 	.header {

@@ -24,23 +24,23 @@
 /* 垂直间距 */
 /* 透明度 */
 /* 文章场景相关 */
-.pages .box.data-v-0862aa6c {
+.pages .box.data-v-1937f378 {
   width: 100%;
 }
-.pages .box .formBox.data-v-0862aa6c {
+.pages .box .formBox.data-v-1937f378 {
   width: 100%;
   background: #fff;
   margin-top: 20rpx;
 }
-.pages .box .formBox .tui-line-cell.data-v-0862aa6c {
+.pages .box .formBox .tui-line-cell.data-v-1937f378 {
   width: 100%;
 }
-.pages .box .formBox .tui-title.data-v-0862aa6c {
+.pages .box .formBox .tui-title.data-v-1937f378 {
   width: 200rpx;
   margin-right: 20rpx;
   text-align: left;
 }
-.tui-mask-screen.data-v-0862aa6c {
+.tui-mask-screen.data-v-1937f378 {
   position: fixed;
   top: 0;
   left: 0;
@@ -53,11 +53,11 @@
   opacity: 0;
   visibility: hidden;
 }
-.tui-mask-show.data-v-0862aa6c {
+.tui-mask-show.data-v-1937f378 {
   opacity: 1;
   visibility: visible;
 }
-.tui-picker-box.data-v-0862aa6c {
+.tui-picker-box.data-v-1937f378 {
   width: 100%;
   position: fixed;
   left: 0;
@@ -74,12 +74,12 @@
   min-height: 20rpx;
   background: #fff;
 }
-.tui-pickerbox-show.data-v-0862aa6c {
+.tui-pickerbox-show.data-v-1937f378 {
   -webkit-transform: translate3d(0, 0, 0);
           transform: translate3d(0, 0, 0);
   visibility: visible;
 }
-.picker-header.data-v-0862aa6c {
+.picker-header.data-v-1937f378 {
   width: 100%;
   height: 90rpx;
   padding: 0 46rpx;
@@ -96,22 +96,22 @@
   font-size: 32rpx;
   background: #fff;
 }
-.list-item.data-v-0862aa6c::after {
+.list-item.data-v-1937f378::after {
   left: 0;
 }
-.btn-cancle.data-v-0862aa6c {
+.btn-cancle.data-v-1937f378 {
   padding: 20rpx;
   color: #888;
 }
-.btn-sure.data-v-0862aa6c {
+.btn-sure.data-v-1937f378 {
   padding: 20rpx;
   color: #5677fc;
 }
-.picker-view.data-v-0862aa6c {
+.picker-view.data-v-1937f378 {
   width: 100%;
   height: 260px;
 }
-.item.data-v-0862aa6c {
+.item.data-v-1937f378 {
   line-height: 50px;
   text-align: center;
 }

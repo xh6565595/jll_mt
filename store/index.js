@@ -21,6 +21,7 @@ const store = new Vuex.Store({
 		sharePro:'',  //是否需要立即跳转制定商品
 		shareUser:'',  //是否需要立即跳转制定商品
 		shareOrder:'',
+		iviCode:'', //邀请码
 		currentRoleCode:''  //聚友空间当前的账户身份的 code
 	},
     mutations: {
@@ -56,11 +57,13 @@ const store = new Vuex.Store({
 			state.sharePro = info.proCode
 			state.shareUser = info.userId
 			state.shareOrder = info.orderCode
+			state.iviCode = info.iviCode
 		},
 		removeShare(state,info){
 			state.sharePro = ''
 			state.shareUser = ''
-			state.shareOrder = ''			
+			state.shareOrder = ''		
+			state.iviCode = ''
 		}
     },
 	getters:{

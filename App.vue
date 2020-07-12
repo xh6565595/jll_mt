@@ -10,11 +10,7 @@
 			// 	this._iniWxJdk();
 			// }
 			console.log('app',options)
-			
-			uni.showShareMenu({ 
-			  withShareTicket: true,
-			  menus: ['shareAppMessage', 'shareTimeline']
-			})
+
 		},
 		onShow: function() {
 			console.log('App Show');

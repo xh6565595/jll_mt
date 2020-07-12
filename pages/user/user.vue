@@ -5,7 +5,7 @@
 			<text class="f1"></text>
 		</view> -->
 		<!-- 头部 -->
-		<view class="pageTop flex  flex_center">
+		<view class="pageTop flex  flex_center" v-if="hasLogin">
 			<image :src="userInfo.consumer_head?userInfo.consumer_head : '../../static/img/default.jpg'" mode="aspectFill" class="avatar"></image>
 			<view class="f1">
 				<view class="name cm_title f1">{{userInfo.consumer_nick_name}}</view>
@@ -13,13 +13,20 @@
 			</view>
 			<navigator class="tx" url="/pages/features/deposit/deposit">提现</navigator>
 		</view>
+		<view class="pageTop flex  flex_center"  v-else>
+			<image src="../../static/img/default.jpg" mode="aspectFill" class="avatar"></image>
+			<view class="f1">
+				<view class="name cm_title f1">暂未登录</view>
+			</view>
+		</view>
+		
 		
 		
 		<!-- <view class="shareBox "> -->
 		<!-- 推广者显示 -->
+		<!-- <navigator url="./share/share"  class="shareBox "  v-if="hasLogin && userInfo.consumer_type==3"> -->
 		<navigator url="./share/share"  class="shareBox " >
 			<image src="../../static/image/wd_yq.png" mode="scaleToFill" class="bg"></image>
-			<!-- <button class="share">去邀请</button> -->
 		</navigator>
 		<!-- </view> -->
 		<!-- 个人信息 -->
@@ -35,19 +42,19 @@
 					<view class="menus flex flex_center flex_y " @tap="_href('/features/order/order?current=1')">
 						<image src="../../static/image/dd_df.png" class="menusPic"></image>
 						<text class="cm_t_24">待付款</text>
-						<view class="tips" v-if="userInfo.wait_paying_count">{{ userInfo.wait_paying_count }}</view>
+						<view class="tips" v-if="hasLogin && userInfo.wait_paying_count">{{ userInfo.wait_paying_count }}</view>
 					</view>
 			
 					<view class="menus flex flex_center flex_y" @tap="_href('/features/order/order?current=2')">
 						<image src="../../static/image/dd_dfh.png" class="menusPic"></image>
 						<text class="cm_t_24">待发货</text>
-						<view class="tips" v-if="userInfo.wait_sending_count">{{ userInfo.wait_sending_count }}</view>
+						<view class="tips" v-if="hasLogin && userInfo.wait_sending_count">{{ userInfo.wait_sending_count }}</view>
 					</view>
 
 					<view class="menus flex flex_center flex_y" @tap="_href('/features/order/order?current=3')">
 						<image src="../../static/image/dd_dsh.png" class="menusPic"></image>
 						<text class="cm_t_24">待收货</text>
-						<view class="tips" v-if="userInfo.wait_receiving_count">{{ userInfo.wait_receiving_count }}</view>
+						<view class="tips" v-if="hasLogin && userInfo.wait_receiving_count">{{ userInfo.wait_receiving_count }}</view>
 					</view>
 
 					<view class="menus flex flex_center flex_y" @tap="_href('/features/order/order?current=4')">
@@ -79,11 +86,6 @@
 						<text class="cm_t_24 f1">意见反馈</text>
 						<text class="iconfont icon-fanhui3"></text>
 					</view>
-					<!-- <view class="menus flex flex_center " @tap="_href('/user/set/set')">
-						<image src="../../static/image/wd_sz.png" class="menusPic"></image>
-						<text class="cm_t_24 f1">设置</text>
-						<text class="iconfont icon-fanhui3"></text>
-					</view> -->
 					<view class="menus flex flex_center " @tap="_kefuMenu">
 						<image src="../../static/image/wd_kf.png" class="menusPic"></image>
 						<text class="cm_t_24 f1">客服</text>
@@ -147,19 +149,15 @@ export default {
 		
 	},
 	onShow() {
-		this._loadData();
-	},
-	computed: {
-		hasLogin() {
-			return this.$store.state.hasLogin ? this.$store.state.hasLogin : false;
-		},
-		accountInfo() {
-			return this.$store.state.accountInfo;
-		},
-		userInfo() {
-			return this.$store.state.userInfo;
+		if(!this.hasLogin){
+			uni.navigateTo({
+				url:'/pages/login/login'
+			})
+		}else{
+			this._loadData('refresh')
 		}
 	},
+	computed: mapState(['userInfo','hasLogin']),
 	watch: {
 		// refreshUser(){
 			
@@ -182,6 +180,12 @@ export default {
 		},
 	
 		_href(val) {
+			if(!this.hasLogin){
+				uni.navigateTo({
+					url:'/pages/login/login'
+				})
+				return
+			}
 			switch (val) {
 				case 'set':
 					uni.navigateTo({

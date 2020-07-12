@@ -16,6 +16,7 @@ export const baseMixins = {
 	onLoad() {
 		this._loadData('refresh')
 	},
+	
 	// 下拉刷新
 	onPullDownRefresh() {
 		this.formParams.pageIndex = 1;

@@ -24,23 +24,23 @@
 /* 垂直间距 */
 /* 透明度 */
 /* 文章场景相关 */
-.pages.data-v-79db9aec {
+.pages.data-v-7e9be678 {
   padding: 20rpx;
 }
-.pages .box.data-v-79db9aec {
+.pages .box.data-v-7e9be678 {
   box-sizing: border-box;
   padding: 20rpx;
   background: #fff;
   border-radius: 20rpx;
   margin: 30rpx auto;
 }
-.pages .box .htit.data-v-79db9aec {
+.pages .box .htit.data-v-7e9be678 {
   margin: 120rpx 0;
   font-size: 44rpx;
   font-weight: 600;
   color: #333;
 }
-.pages .box .inputBoxs.data-v-79db9aec {
+.pages .box .inputBoxs.data-v-7e9be678 {
   -webkit-box-pack: center;
   -webkit-justify-content: center;
           justify-content: center;
@@ -50,19 +50,19 @@
   line-height: 86rpx;
   height: 86rpx;
 }
-.pages .box .inputBoxs .label.data-v-79db9aec {
+.pages .box .inputBoxs .label.data-v-7e9be678 {
   width: 30%;
 }
-.pages .box .inputBoxs .inp.data-v-79db9aec {
+.pages .box .inputBoxs .inp.data-v-7e9be678 {
   width: 70%;
 }
-.pages .box .bd.data-v-79db9aec {
+.pages .box .bd.data-v-7e9be678 {
   border-bottom: 1rpx solid #eee;
 }
-.pages .mark.data-v-79db9aec {
+.pages .mark.data-v-7e9be678 {
   color: red;
 }
-.pages .submitbtn.data-v-79db9aec {
+.pages .submitbtn.data-v-7e9be678 {
   margin: 60rpx auto 100rpx auto;
 }
 

@@ -24,25 +24,25 @@
 /* 垂直间距 */
 /* 透明度 */
 /* 文章场景相关 */
-.pages.data-v-2efbcc34 {
+.pages.data-v-d77f41e4 {
   background: #fff;
   text-align: center;
 }
-.pages .logo.data-v-2efbcc34 {
+.pages .logo.data-v-d77f41e4 {
   width: 200rpx;
   height: 200rpx;
   margin-top: 200rpx;
 }
-.pages .blank.data-v-2efbcc34 {
+.pages .blank.data-v-d77f41e4 {
   width: 100%;
   height: 16rpx;
   background: #f8f8f8;
 }
-.pages .cm_title.data-v-2efbcc34 {
+.pages .cm_title.data-v-d77f41e4 {
   margin-top: 56rpx;
   margin-bottom: 32rpx;
 }
-.pages .btns.data-v-2efbcc34 {
+.pages .btns.data-v-d77f41e4 {
   width: 290rpx;
   margin: 96rpx 15rpx;
 }

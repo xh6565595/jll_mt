@@ -21,8 +21,8 @@
 					
 				</view>
 			</view>
-			<!-- <view class="argueBox"> -->
-			<scroll-view scroll-y="true"  class="argueBox">
+			<view class="argueBox">
+			<!-- <scroll-view scroll-y="true"  class="argueBox"> -->
 					<view v-if="!singlePro">
 						<block v-for="(item, index) in localspecifications" :key="index">
 							<view class="cm_title cm_t_24" style="margin-top:20rpx ;">{{ item.name }}</view>
@@ -93,8 +93,8 @@
 						<view class="f1"></view>
 						<tuiNumberbox :min="1" disabled :value="selectNum" @change="change"></tuiNumberbox>
 					</view>
-				<!-- </view> -->
-			</scroll-view>
+				</view>
+			<!-- </scroll-view> -->
 				
 			<view class="btnBox flex flex_center">
 				<!-- <button class="btns" @tap.stop.prevent="_addCard">加入购物车</button>

@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "登录",
+  "navigationBarTextStyle": "black",
+  "navigationBarBackgroundColor": "#fff",
+  "usingComponents": {
+    "accredit": "/components/accredit/accredit",
+    "one-input": "/components/myp-one/myp-one"
+  }
+}
