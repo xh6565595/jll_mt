@@ -13,12 +13,14 @@
 			</view>
 			<navigator class="tx" url="/pages/features/deposit/deposit">提现</navigator>
 		</view>
-		<view class="pageTop flex  flex_center"  v-else>
+		<!-- <view class="pageTop flex  flex_center"  v-else > -->
+		<navigator url="../login/login"  class="pageTop flex  flex_center" v-else >
 			<image src="../../static/img/default.jpg" mode="aspectFill" class="avatar"></image>
 			<view class="f1">
 				<view class="name cm_title f1">暂未登录</view>
 			</view>
-		</view>
+		</navigator>
+		<!-- </view> -->
 		
 		
 		
@@ -149,11 +151,7 @@ export default {
 		
 	},
 	onShow() {
-		if(!this.hasLogin){
-			uni.navigateTo({
-				url:'/pages/login/login'
-			})
-		}else{
+		if(this.hasLogin){	
 			this._loadData('refresh')
 		}
 	},

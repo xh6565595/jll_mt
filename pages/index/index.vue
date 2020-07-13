@@ -130,8 +130,8 @@ export default {
 							url: '/pages/main/details/details?code='+ that.shareData.proCode
 						});
 					}else{
-						uni.redirectTo({
-							url:'/pages/login/login'
+						uni.switchTab({
+							url:'/pages/main/main'
 						})	
 					}			
 				}

@@ -86,11 +86,11 @@ export default {
 		
 	},
 	onShow() {
-		if(!this.hasLogin){
-			uni.navigateTo({
-				url:'/pages/login/login'
-			})
-		}
+		// if(!this.hasLogin){
+		// 	uni.navigateTo({
+		// 		url:'/pages/login/login'
+		// 	})
+		// }
 	},
 	methods: {
 		

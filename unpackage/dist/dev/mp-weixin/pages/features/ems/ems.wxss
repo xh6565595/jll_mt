@@ -24,32 +24,32 @@
 /* 垂直间距 */
 /* 透明度 */
 /* 文章场景相关 */
-.pages .emsCompany.data-v-860f4054 {
+.pages .emsCompany.data-v-edfa80a4 {
   padding: 20rpx;
   height: 160rpx;
   width: 100%;
   margin-top: 16rpx;
   background: #fff;
 }
-.pages .emsCompany .logo.data-v-860f4054 {
+.pages .emsCompany .logo.data-v-edfa80a4 {
   margin-right: 30rpx;
   border-radius: 50%;
 }
-.pages .tui-order-header.data-v-860f4054 {
+.pages .tui-order-header.data-v-edfa80a4 {
   padding: 30rpx;
   box-sizing: border-box;
   background: #fff;
   margin-top: 16rpx;
 }
-.pages .tui-text.data-v-860f4054 {
+.pages .tui-text.data-v-edfa80a4 {
   font-size: 28rpx;
   color: #333;
   padding: 4rpx;
 }
-.pages .tui-bold.data-v-860f4054 {
+.pages .tui-bold.data-v-edfa80a4 {
   font-weight: bold;
 }
-.pages .tui-node.data-v-860f4054 {
+.pages .tui-node.data-v-edfa80a4 {
   height: 44rpx;
   width: 44rpx;
   border-radius: 50%;
@@ -65,29 +65,29 @@
   color: #fff;
   padding-top: 0;
 }
-.pages .tui-node-small.data-v-860f4054 {
+.pages .tui-node-small.data-v-edfa80a4 {
   height: 16rpx !important;
   width: 16rpx !important;
 }
-.pages .tui-order-tracking.data-v-860f4054 {
+.pages .tui-order-tracking.data-v-edfa80a4 {
   padding: 30rpx 30rpx 30rpx 40rpx;
   background: #fff;
   margin-top: 16rpx;
   box-sizing: border-box;
 }
-.pages .tui-order-title.data-v-860f4054 {
+.pages .tui-order-title.data-v-edfa80a4 {
   color: #333;
   font-weight: bold;
   font-size: 32rpx;
   font-family: "microsoft yahei";
 }
-.pages .tui-order-desc.data-v-860f4054 {
+.pages .tui-order-desc.data-v-edfa80a4 {
   font-size: 28rpx;
   color: #999;
   padding: 12rpx 0;
   line-height: 1.2;
 }
-.pages .tui-ptop.data-v-860f4054 {
+.pages .tui-ptop.data-v-edfa80a4 {
   display: -webkit-box;
   display: -webkit-flex;
   display: flex;
@@ -96,16 +96,16 @@
           justify-content: flex-start;
   line-height: 28rpx;
 }
-.pages .tui-order-time.data-v-860f4054 {
+.pages .tui-order-time.data-v-edfa80a4 {
   font-size: 24rpx;
 }
-.pages .tui-gray.data-v-860f4054 {
+.pages .tui-gray.data-v-edfa80a4 {
   color: #848484 !important;
 }
-.pages .tui-light-gray.data-v-860f4054 {
+.pages .tui-light-gray.data-v-edfa80a4 {
   color: #888 !important;
 }
-.pages .tui-primary.data-v-860f4054 {
+.pages .tui-primary.data-v-edfa80a4 {
   color: #5677fc;
 }
 

@@ -1,87 +1,93 @@
 <template>
-	<view class="pages" :style="{'padding-top':topHeight+'rpx'}">
-		<view class="fixed" >
-			<tuiNav :isCustom="true" :isFixed="false" backgroundColor="#fff">
-				<view class="flex flex_center header">
-					<view><text class="lTip" @tap="_showRule">活动规则</text></view>
-					<view class="f1 cm_tex_c">活动</view>
-					<view><text class="rTip"></text></view>
+	<view>
+		<view class="pages" v-if="hasLogin" :style="{'padding-top':topHeight+'rpx'}">
+			<view class="fixed" >
+				<tuiNav :isCustom="true" :isFixed="false" backgroundColor="#fff">
+					<view class="flex flex_center header">
+						<view><text class="lTip" @tap="_showRule">活动规则</text></view>
+						<view class="f1 cm_tex_c">活动</view>
+						<view><text class="rTip"></text></view>
+					</view>
+				</tuiNav>
+				<view class="tabsBox flex flex_center">
+					<view class="f1 tabs" :class="{ active: tap == 0 }" hover-class="cm_hover" @tap="_switch(0)">进行中</view>
+					<view class="f1 tabs" :class="{ active: tap == 1 }" hover-class="cm_hover" @tap="_switch(1)">已完成</view>
 				</view>
-			</tuiNav>
-			<view class="tabsBox flex flex_center">
-				<view class="f1 tabs" :class="{ active: tap == 0 }" hover-class="cm_hover" @tap="_switch(0)">进行中</view>
-				<view class="f1 tabs" :class="{ active: tap == 1 }" hover-class="cm_hover" @tap="_switch(1)">已完成</view>
 			</view>
+		
+			<view class="hot">
+				<block v-for="(item, index) in list" :key="index">
+					<view class="inItem animated fadeIn" v-if="tap == 0">
+						<view class="flex  flex_center cm_bdb " style="padding-bottom: 20rpx;margin-bottom: 20rpx;">
+							<view>进行中</view>
+							<view class="f1 cm_tex_r">
+								活动时间：{{item.create_time}}
+							</view>
+						</view>
+						<view class="cm_items flex flex_center">
+							<image :src="item.project_list[0].skus_img" mode="aspectFill" class="itemLogo"></image>
+							<view class="f1">
+								<view class="cm_title cm_ellipsis2">{{ item.project_list[0].order_name }}</view>
+								<view class="cm_des">{{ item.project_list[0].skus_name }}</view>
+								<view class="flex flex_center cm_price_box">
+									<view class="cm_price">￥{{ item.project_list[0].price }}</view>
+									<view class="f1"></view>
+									<view class="flex flex_center">
+										<image :src="item.project_list[0].order_project_service1" mode="aspectFill" class="subavatars"></image>
+										<image :src="item.user_list[0].order_project_service2" mode="aspectFill" class="subavatars"></image>
+										<image :src="item.user_list[0].order_project_service3" mode="aspectFill" class="subavatars"></image>
+									</view>
+								</view>
+							</view>
+						</view>
+						<view class="cm_title title">免单进度</view>
+						<view class="text">{{ item.user_list.schedule_msg }}</view>
+						<view class="flex  flex_center flex_between">
+							<view class="submenber"><image :src="item.user_list.list[0].consumer_head?item.user_list.list[0].consumer_head:'/static/image/hd_yq.png'" mode="aspectFill" class="avatar"></image></view>
+							<view class="submenber"><image :src="item.user_list.list[1].consumer_head?item.user_list.list[1].consumer_head:'/static/image/hd_yq.png'" mode="aspectFill" class="avatar"></image></view>
+							<view class="submenber"><image :src="item.user_list.list[2].consumer_head?item.user_list.list[2].consumer_head:'/static/image/hd_yq.png'" mode="aspectFill" class="avatar"></image></view>
+						</view>
+						<button type="text" class="cm_btn" hover-class="cm_hover_m"  @tap="_hrefSahre(item)">邀请好友购买</button>
+		
+						<button type="text" class="cm_btn_plain" hover-class="cm_hover_m" @tap="_href(item)">自己购买</button>
+					</view>
+		
+					<view class="doneItem  animated fadeIn" v-else @tap="_detail(item)">
+						<view class="flex flex_cente header cm_bdb">
+							<view class="f1 cm_title">免单成功</view>
+							<text class="cm_text">{{ item.pay_date }}</text>
+						</view>
+						<view class="cm_items flex flex_center">
+							<image :src="item.project_list[0].skus_img" mode="aspectFill" class="itemLogo"></image>
+							<view class="f1">
+								<view class="flex flex_center">
+									<view class="f1 cm_title cm_ellipsis2">{{ item.project_list[0].order_name }}</view>
+									<view class="flex flex_center">
+										<text class="iconfont icon-guanbi gray"></text>
+										<text class="gray">1</text>
+									</view>
+								</view>
+		
+								<view class="flex flex_center cm_price_box">
+									<view class="cm_price">￥{{ item.pay_price }}</view>
+									<view class="f1"></view>
+									<view class="flex flex_center">
+										<image :src="item.user_list.list[0].consumer_head?item.user_list.list[0].consumer_head:'/static/image/hd_yq.png'" mode="aspectFill" class="subavatars"></image>
+										<image :src="item.user_list.list[1].consumer_head?item.user_list.list[1].consumer_head:'/static/image/hd_yq.png'" style="margin-left: -20rpx;" mode="aspectFill" class="subavatars"></image>
+										<image :src="item.user_list.list[2].consumer_head?item.user_list.list[2].consumer_head:'/static/image/hd_yq.png'" style="margin-left: -20rpx;" mode="aspectFill" class="subavatars"></image>
+									</view>
+								</view>
+							</view>
+						</view>
+					</view>
+				</block>
+			</view>
+			<LoadMore :status="loadStatus" />		
 		</view>
-
-		<view class="hot">
-			<block v-for="(item, index) in list" :key="index">
-				<view class="inItem animated fadeIn" v-if="tap == 0">
-					<view class="flex  flex_center cm_bdb " style="padding-bottom: 20rpx;margin-bottom: 20rpx;">
-						<view>进行中</view>
-						<view class="f1 cm_tex_r">
-							活动时间：{{item.create_time}}
-						</view>
-					</view>
-					<view class="cm_items flex flex_center">
-						<image :src="item.project_list[0].skus_img" mode="aspectFill" class="itemLogo"></image>
-						<view class="f1">
-							<view class="cm_title cm_ellipsis2">{{ item.project_list[0].order_name }}</view>
-							<view class="cm_des">{{ item.project_list[0].skus_name }}</view>
-							<view class="flex flex_center cm_price_box">
-								<view class="cm_price">￥{{ item.project_list[0].price }}</view>
-								<view class="f1"></view>
-								<view class="flex flex_center">
-									<image :src="item.project_list[0].order_project_service1" mode="aspectFill" class="subavatars"></image>
-									<image :src="item.user_list[0].order_project_service2" mode="aspectFill" class="subavatars"></image>
-									<image :src="item.user_list[0].order_project_service3" mode="aspectFill" class="subavatars"></image>
-								</view>
-							</view>
-						</view>
-					</view>
-					<view class="cm_title title">免单进度</view>
-					<view class="text">{{ item.user_list.schedule_msg }}</view>
-					<view class="flex  flex_center flex_between">
-						<view class="submenber"><image :src="item.user_list.list[0].consumer_head?item.user_list.list[0].consumer_head:'/static/image/hd_yq.png'" mode="aspectFill" class="avatar"></image></view>
-						<view class="submenber"><image :src="item.user_list.list[1].consumer_head?item.user_list.list[1].consumer_head:'/static/image/hd_yq.png'" mode="aspectFill" class="avatar"></image></view>
-						<view class="submenber"><image :src="item.user_list.list[2].consumer_head?item.user_list.list[2].consumer_head:'/static/image/hd_yq.png'" mode="aspectFill" class="avatar"></image></view>
-					</view>
-					<button type="text" class="cm_btn" hover-class="cm_hover_m"  @tap="_hrefSahre(item)">邀请好友购买</button>
-
-					<button type="text" class="cm_btn_plain" hover-class="cm_hover_m" @tap="_href(item)">自己购买</button>
-				</view>
-
-				<view class="doneItem  animated fadeIn" v-else @tap="_detail(item)">
-					<view class="flex flex_cente header cm_bdb">
-						<view class="f1 cm_title">免单成功</view>
-						<text class="cm_text">{{ item.pay_date }}</text>
-					</view>
-					<view class="cm_items flex flex_center">
-						<image :src="item.project_list[0].skus_img" mode="aspectFill" class="itemLogo"></image>
-						<view class="f1">
-							<view class="flex flex_center">
-								<view class="f1 cm_title cm_ellipsis2">{{ item.project_list[0].order_name }}</view>
-								<view class="flex flex_center">
-									<text class="iconfont icon-guanbi gray"></text>
-									<text class="gray">1</text>
-								</view>
-							</view>
-
-							<view class="flex flex_center cm_price_box">
-								<view class="cm_price">￥{{ item.pay_price }}</view>
-								<view class="f1"></view>
-								<view class="flex flex_center">
-									<image :src="item.user_list.list[0].consumer_head?item.user_list.list[0].consumer_head:'/static/image/hd_yq.png'" mode="aspectFill" class="subavatars"></image>
-									<image :src="item.user_list.list[1].consumer_head?item.user_list.list[1].consumer_head:'/static/image/hd_yq.png'" style="margin-left: -20rpx;" mode="aspectFill" class="subavatars"></image>
-									<image :src="item.user_list.list[2].consumer_head?item.user_list.list[2].consumer_head:'/static/image/hd_yq.png'" style="margin-left: -20rpx;" mode="aspectFill" class="subavatars"></image>
-								</view>
-							</view>
-						</view>
-					</view>
-				</view>
-			</block>
+		<view class="flex  flex_y flex_center" style="width: 100vw;height: 100vh;background-color: #fff;" v-else>
+			<text>暂未登录</text>
+			<navigator url="../login/login" class="cm_btn" style="width:256rpx;margin-top: 40rpx;">立即登录</navigator>
 		</view>
-		<LoadMore :status="loadStatus" />
 		<rule ref="rule"></rule>
 		<accredit ref="share" :autoClose="true">
 			<view slot='content' class="shareBox">			
@@ -89,10 +95,8 @@
 					<image :src="goods.image " mode="aspectFill" class="itemLogo" ></image>
 					<view class="f1">
 						<view class="cm_title cm_ellipsis2">{{ goods.title }}</view>
-						<view class="flex flex_center"  style="margin: 10rpx 0;">
-							
-							<view class="cm_des f1">{{ goods.sub_title }}</view>
-							
+						<view class="flex flex_center"  style="margin: 10rpx 0;">						
+							<view class="cm_des f1">{{ goods.sub_title }}</view>					
 						</view>
 						<view class="cm_price" style="margin-bottom: 20rpx;">￥{{ goods.price }}</view>
 						
@@ -102,6 +106,7 @@
 			</view>
 		</accredit>
 	</view>
+	
 </template>
 
 <script>
@@ -137,6 +142,7 @@ export default {
 	components: {
 		rule
 	},
+	
 	onLoad() {		
 		this.shareMsg = {
 			title: `分享好友，马桶免费拿`,
@@ -152,14 +158,9 @@ export default {
 		});
 	},
 	onShow(){
-			if(!this.hasLogin){
-				uni.navigateTo({
-					url:'/pages/login/login'
-				})
-			}else{
+			if(this.hasLogin){	
 				this._loadData('refresh')
-			}
-	
+			}	
 	},
 	onShareAppMessage(res) {
 		if (res.from === 'button') {
@@ -339,7 +340,9 @@ export default {
 			margin-top: 20rpx;
 		}
 	}
-	.shareBox{
+	
+}
+.shareBox{
 		width: 80vw;
 		background-color: #fff;
 		border-radius: 30rpx;
@@ -351,5 +354,4 @@ export default {
 			margin-right: 20rpx;
 		}
 	}
-}
 </style>

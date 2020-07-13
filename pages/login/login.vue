@@ -248,7 +248,7 @@ export default {
 						setTimeout(()=>{
 							if(res.Data.consumer_type==3){
 								// 安装员
-								uni.redirectTo({
+								uni.reLaunch({
 									url: '/pages/main/serverCenter/serverCenter'
 								});
 							}else{
