@@ -33,7 +33,7 @@
 				<OrderList  order_status="3" @refund="refund" @cancel="cancel" @sure="sure" ref="list3"></OrderList>
 			</swiper-item>
 			<swiper-item class="swiper-item ">
-				<OrderList  order_status="4" @refund="refund" @cancel="cancel" @sure="sure" ref="list4"></OrderList>
+				<OrderList  order_status="5" @refund="refund" @cancel="cancel" @sure="sure" ref="list4"></OrderList>
 			</swiper-item>
 		</swiper>
 		<tui-modal :show="modal" @click="handleClick" @cancel="hide" :content="content" :maskClosable="false" color="#333" :size="32"></tui-modal>
@@ -69,7 +69,7 @@
 					},
 					{
 						name: '已签收',
-						value: 4
+						value:5
 					},
 					
 				],

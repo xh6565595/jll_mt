@@ -229,6 +229,14 @@
   vertical-align: middle; */
   line-height: 24rpx;
 }
+.tui-tag-mini {
+  padding: 5rpx 10rpx;
+  font-size: 20rpx;
+  border-radius: 15rpx;
+  /* display: inline-block;
+  vertical-align: middle; */
+  line-height:30rpx;
+}
 .tui-tag-outline {
   position: relative;
   background: none;

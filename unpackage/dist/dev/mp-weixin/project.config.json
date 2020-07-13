@@ -31,7 +31,7 @@
 		"userConfirmedUseCompilerModuleSwitch": false
 	},
 	"compileType": "miniprogram",
-	"libVersion": "",
+	"libVersion": "2.9.2",
 	"appid": "wx1ac814537fda15b6",
 	"projectname": "马桶福利购",
 	"simulatorType": "wechat",
@@ -45,29 +45,13 @@
 			"current": -1,
 			"list": []
 		},
-		"plugin": {
-			"current": -1,
-			"list": []
-		},
 		"game": {
-			"current": -1,
-			"list": []
-		},
-		"gamePlugin": {
 			"current": -1,
 			"list": []
 		},
 		"miniprogram": {
 			"current": -1,
-			"list": [
-				{
-					"id": -1,
-					"name": "pages/index/index",
-					"pathName": "pages/index/index",
-					"query": "ucode=8cca06793dbf4afc98c25aad955f072e&ocode=J72202007100434319381118&pcode=19640960f2364ca1a4dabf6b88264d78",
-					"scene": null
-				}
-			]
+			"list": []
 		}
 	}
 }

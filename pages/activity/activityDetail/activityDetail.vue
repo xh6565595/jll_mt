@@ -2,58 +2,9 @@
 	<view>
 		<tui-skeleton v-if="skeletonShow" backgroundColor="#f9f9f9" skeletonBgColor="#efefef" borderRadius="0rpx"></tui-skeleton>
 		<view class="pages tui-skeleton">	
-			<!-- <view class="bgbox flex flex_center ">
-				<view class="f1">
-					<view style="font-size: 36rpx;font-weight: 600;line-height: 2;">{{ item.order_status | orderStatusFilter }}</view>
-					<text style="font-size: 24rpx;font-weight: 400;">{{ statusText }}</text>
-				</view>
-				<view class="flex flex_y" style="align-items: flex-end" v-if="item.order_status == 1">
-					<picker mode="date" :value="date" :start="startDate" :end="endDate" @change="bindDateChange">
-						<button class="yanchi" >延迟发货</button>
-					</picker>				
-				</view>			
-			</view> -->
+			
 
-			<view class="proItemsBox  " v-if="item.order_status == 5">
-				<view class="cm_title">服务码</view>
-				<view class="flex flex_center  tui-skeleton-fillet numsBox">
-					<view class="  tui-skeleton-rect nums">{{ item.service_code[0] }}</view>
-					<view class="  tui-skeleton-rect nums">{{ item.service_code[1] }}</view>
-					<view class="  tui-skeleton-rect nums">{{ item.service_code[2] }}</view>
-					<view class="  tui-skeleton-rect nums">{{ item.service_code[3] }}</view>
-				</view>
-				<view class="fwTip">等待马桶安装完后，请出示服务码给安装师傅</view>
-			</view>
-
-			<view class="proItemsBox  " style="padding: 0" v-if="item.order_status == 5&&item.service_info">
-				<view class="cm_title t tui-skeleton-fillet flex flex_center">
-					<text>安装人员信息</text>
-					<text class="f1"></text>
-					<button class=" " size="mini" @tap="_call(item.service_info.consumer_mobile)">拨打电话</button>
-				</view>
-				<view class="flex  flex_center" style="padding: 0 30rpx;">
-					<image :src="item.service_info.consumer_head" mode="" style="width: 80rpx;height: 80rpx;border-radius: 50%;margin-right: 20rpx;"></image>
-					<view class="f1">
-						<view class="  cm_title">{{ item.service_info.consumer_nick_name }}</view>
-						<view class="  cm_des">{{ item.service_info.consumer_mobile }}</view>
-					</view>
-				</view>
-				<tui-list-cell :hover="false">
-					<view class="tui-line-cell flex flex_center tui-cell-last">
-						<view class="tui-title cm_text">服务商:</view>
-						<view class="tui-input f1 cm_tex_r">{{ item.service_info.service_name }}</view>
-					</view>
-				</tui-list-cell>
-				<!-- <tui-list-cell :hover="false">
-					<view class="tui-line-cell flex flex_center tui-cell-last">
-						<view class="tui-title cm_text">服务商热线:</view>
-						<view class="tui-input f1 cm_tex_r">{{ item.service_info.consumer_nick_name }}</view>
-					</view>
-				</tui-list-cell> -->
-				
-			</view>
-
-			<view class="proItemsBox addressBox ">
+			<!-- <view class="proItemsBox addressBox ">
 
 				<view class="flex flex_center address tui-skeleton-fillet">
 					<image src="/static/image/logo.png" mode="scaleToFill" class="icon"></image>
@@ -66,19 +17,17 @@
 						</view>
 					</view>
 				</view>
-			</view>
+			</view> -->
 
 			<view class="panel">
-				<view class="flex flex_center itemBoxTop">
+			<!-- 	<view class="flex flex_center itemBoxTop">
 					<image src="http://jllshop.fjdmll.com/upload/head/jjl.png" mode="" class="shopIcon"></image>
 					<view class="cm_title f1">洁利来官方店</view>
-					<!-- <Icon name="arrowright" :size="16"></Icon> -->
-				</view>
+				</view> -->
 
 				<view class="cm_bdb" style="padding-bottom: 40rpx;">
 					<block v-for="(it, index) in item.project_list" :key="index">
 						<view class="  tui-skeleton-fillet">
-							<!-- <view style="padding: 20rpx;"> -->
 							<view class="cm_items flex  flex_center tui-skeleton-fillet">
 								<image v-if="it.skus_img" :src="it.skus_img" mode="aspectFill" class="itemLogo "></image>
 								<view class="f1 ">
@@ -111,87 +60,62 @@
 									</view>
 								</view>
 							</view>
-							<view class="cells flex flex_center" >
-								<view class="label cm_tex_r">运费</view>
-								<view class="f1 text">{{ item.is_ems?'￥'+item.is_ems:'包邮' }}</view>
-							</view>
-							<view class="cells flex flex_center">
-								<view class="label cm_tex_r">税费</view>
-								<view class="f1 text">￥{{ item.taxes_price }}</view>
-							</view>
-							<view class="cells flex flex_center">
-								<view class="label cm_tex_r">特色服务</view>
-								<view class="f1 text">￥{{ item.service_total_price }}</view>
-							</view>
-							<!-- </view> -->
+							
 						</view>
 					</block>
-				</view>
-				<view class=" flex flex_center" style="line-height: 80rpx;height: 80rpx;">
-					<view class="f1"></view>
-					<view class=""><text>共1件，合计:</text></view>
-					<text class="cm_price">￥{{ item.pay_price }}</text>
-				</view>
-			</view>
-			<view class="proItemsBox  " @click="_call">
-				<view class="flex flex_center">
-					<image src="../../../../static/img/phone.png" mode="widthFix" class="call"></image>
-					<text>联系卖家</text>
+					<view class="cells flex flex_center cm_bdb" style="padding-bottom: 20rpx;" >
+						<view class=" ">免单成功</view>
+						<view class="f1 text cm_tex_r">{{ eventInfo.event_time }}</view>
+					</view>
+					<view class="flex flex_center flex_between" style="margin-top: 40rpx;padding: 0 50rpx;">
+						<view class="submenber"><image :src="eventInfo.consumer_list[0].consumer_head?eventInfo.consumer_list[0].consumer_head:'/static/image/hd_yq.png'" mode="aspectFill" class="avatar"></image></view>
+						<view class="submenber"><image :src="eventInfo.consumer_list[1].consumer_head?eventInfo.consumer_list[1].consumer_head:'/static/image/hd_yq.png'" mode="aspectFill" class="avatar"></image></view>
+						<view class="submenber"><image :src="eventInfo.consumer_list[2].consumer_head?eventInfo.consumer_list[2].consumer_head:'/static/image/hd_yq.png'" mode="aspectFill" class="avatar"></image></view>
+					</view>
 				</view>
 			</view>
-			<!-- <picker @change="bindPickerChange" :value="1" mode="date">
-			                        <view class="uni-input">123</view>
-			                    </picker> -->
+			<view class="proItemsBox  flex flex_center" >
+				<text class="cm_title ">购买时间</text>
+				<view class="f1"></view>
+				<text class="gray">{{item.pay_date}}</text>
+			</view>
+
 			<view class="proItemsBox  " style="padding: 0">
 				<view class="cm_title t tui-skeleton-fillet flex flex_center">
-					<text>订单详情</text>
+					<text>返还详情</text>
 					<text class="f1"></text>
 					
 				</view>
 				<view class="  tui-skeleton-fillet">
+
+					<tui-list-cell :hover="false" >
+						<view class="tui-line-cell flex flex_center tui-cell-last">
+							<view class="tui-title cm_text">支付金额</view>
+							<view class="tui-input f1 ">￥{{item.pay_price}}</view>
+							
+						</view>
+					</tui-list-cell>
+					<tui-list-cell :hover="false" >
+						<view class="tui-line-cell flex flex_center tui-cell-last">
+							<view class="tui-title cm_text">安装费</view>
+							<view class="tui-input f1 ">￥{{item.service_total_price }}</view>
+							<text style="color: #DD3A30;">不可退</text>
+						</view>
+					</tui-list-cell>
 					<tui-list-cell :hover="false">
 						<view class="tui-line-cell flex flex_center tui-cell-last">
-							<view class="tui-title cm_text">订单号</view>
-							<view class="tui-input f1 cm_tex_r">{{ item.order_code }}</view>
-							<button class="cm_tags smallBtn" size="mini" @tap="_copy(item.order_code)">复制</button>
+							<view class="tui-title cm_text">税费</view>
+							<view class="tui-input f1 ">￥{{item.taxes_price }}</view>
+							<text style="color: #DD3A30;">不可退</text>
 						</view>
 					</tui-list-cell>
-					<tui-list-cell :hover="false" v-if="item.order_status == 0 ">
+					<tui-list-cell :hover="false" >
 						<view class="tui-line-cell flex flex_center tui-cell-last">
-							<view class="tui-title cm_text">创建时间'</view>
-							<view class="tui-input f1 cm_tex_r">{{item.create_time}}</view>
+							<view class="tui-title cm_text">退还金额</view>
+							<view class="tui-input f1 ">￥{{item.return_price }} </view>
 						</view>
 					</tui-list-cell>
-					<tui-list-cell :hover="false" v-else-if="item.order_status == 5">
-						<view class="tui-line-cell flex flex_center tui-cell-last">
-							<view class="tui-title cm_text">完成时间</view>
-							<view class="tui-input f1 cm_tex_r">{{item.finish_date }}</view>
-						</view>
-					</tui-list-cell>
-					<tui-list-cell :hover="false" v-else-if="item.order_status == 2">
-						<view class="tui-line-cell flex flex_center tui-cell-last">
-							<view class="tui-title cm_text">发货时间</view>
-							<view class="tui-input f1 cm_tex_r">{{item.dispatch_date }}</view>
-						</view>
-					</tui-list-cell>
-					<tui-list-cell :hover="false" v-else>
-						<view class="tui-line-cell flex flex_center tui-cell-last">
-							<view class="tui-title cm_text">支付时间</view>
-							<view class="tui-input f1 cm_tex_r">{{item.pay_date }} </view>
-						</view>
-					</tui-list-cell>
-					<tui-list-cell :hover="false" v-if="item.order_status != 0">
-						<view class="tui-line-cell flex flex_center tui-cell-last">
-							<view class="tui-title cm_text">支付方式</view>
-							<view class="tui-input f1 cm_tex_r">{{ item.pay_type | payTypeFilter }}</view>
-						</view>
-					</tui-list-cell>
-					<tui-list-cell :hover="false" :last="true" v-if="item.ems_code">
-						<view class="tui-line-cell flex flex_center tui-cell-last">
-							<view class="tui-title cm_text">快递单号</view>
-							<view class="tui-input f1 cm_tex_r">{{ item.ems_code }}</view>
-						</view>
-					</tui-list-cell>
+					
 				</view>
 			</view>
 		</view>
@@ -225,7 +149,8 @@ export default {
 			skeletonShow: true,
 			showPickerStatus: false,
 			// 延迟时间
-			date: ''
+			date: '',
+			eventInfo:''
 		};
 	},
 	onLoad(options) {
@@ -479,6 +404,7 @@ export default {
 						that.item = res.Data;
 						that.formParams.ems_code = res.Data.ems_code;
 						that.oderId = res.Data.order_code;
+						that.eventInfo = res.Data.event_info;
 						// alert(that.oderId)
 					}
 					that.skeletonShow = false;
@@ -651,6 +577,17 @@ export default {
 			}
 			.text {
 				color: #999;
+			}
+		}
+		.submenber {
+			width: 120rpx;
+			height: 120rpx;
+			border-radius: 60rpx;
+			overflow: hidden;
+			.avatar {
+				width: 100%;
+				height: 100%;
+				background-color: #f2f2f2;
 			}
 		}
 	}

@@ -16,7 +16,7 @@
 				</view>			
 			</view>
 
-			<view class="proItemsBox  " v-if="item.order_status == 5">
+			<view class="proItemsBox  " v-if="item.order_status == 5&&item.service_info.consumer_code">
 				<view class="cm_title">服务码</view>
 				<view class="flex flex_center  tui-skeleton-fillet numsBox">
 					<view class="  tui-skeleton-rect nums">{{ item.service_code[0] }}</view>
@@ -27,7 +27,7 @@
 				<view class="fwTip">等待马桶安装完后，请出示服务码给安装师傅</view>
 			</view>
 
-			<view class="proItemsBox  " style="padding: 0" v-if="item.order_status == 5&&item.service_info">
+			<view class="proItemsBox  " style="padding: 0" v-if="item.order_status == 5&&item.service_info.consumer_code">
 				<view class="cm_title t tui-skeleton-fillet flex flex_center">
 					<text>安装人员信息</text>
 					<text class="f1"></text>
@@ -47,8 +47,8 @@
 					</view>
 				</tui-list-cell>				
 			</view>
-			<view class="proItemsBox flex flex_center" v-else-if="item.order_status == 5">
-				<text>我已收货</text>
+			<view class="proItemsBox flex flex_center dazBox" v-else-if="item.order_status == 5">
+				<text>待安装</text>
 				<view class="f1"></view>
 				<view class=""  @tap="_kefuMenu">联系客服</view>
 			</view>
@@ -224,7 +224,10 @@ import tuiListView from '@/components/list-view/list-view';
 import tuiListCell from '@/components/list-cell/list-cell';
 import Utils from '@/utils/utils.js';
 import PayPanel from '@/components/PayPanel/PayPanel';
-import h5Copy from '@/js_sdk/junyi-h5-copy/junyi-h5-copy/junyi-h5-copy.js';
+import accredit from '@/components/accredit/accredit';
+// import h5Copy from '@/js_sdk/junyi-h5-copy/junyi-h5-copy/junyi-h5-copy.js';
+
+
 export default {
 	data() {
 		return {
@@ -301,7 +304,8 @@ export default {
 		tuiListCell,
 		tuiSkeleton,
 		tuiListView,
-		PayPanel
+		PayPanel,
+		accredit
 	},
 	methods: {
 		// 显示客服弹窗
@@ -648,6 +652,10 @@ export default {
 			margin-left: 10rpx;
 		}
 	}
+	.dazBox{
+		background: #FFEDE2;
+		color: #DF5000;
+	}
 	.addressBox {
 		// margin-top: 160rpx;
 		z-index: 1;
@@ -827,5 +835,32 @@ export default {
 		line-height: 50px;
 		text-align: center;
 	}
+	
 }
+.fkContent{
+		position: relative;
+		width: 80vw;
+		.bg{
+			border-radius: 30rpx 30rpx 0 0 ;
+			width: 100%;
+			height: 252rpx;
+		}
+		.cm_btn{
+			margin-top: 50rpx;
+			background:  #43B6B2;
+		}
+		.cm_btn_plain{
+			margin-top: 10rpx;
+			color:  #333;
+			border: none;
+		}
+		.closeBtn{
+			width: 48rpx;
+			position: absolute;
+			left: 50%;
+			margin-left: -24rpx;
+			bottom: -86rpx;
+			z-index: 100;
+		}
+	}
 </style>

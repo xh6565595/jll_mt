@@ -1,5 +1,5 @@
 
-@-webkit-keyframes twinkling-data-v-466038c0 {
+@-webkit-keyframes twinkling-data-v-48b984e8 {
 0% {
 		opacity: 0.2;
 }
@@ -10,7 +10,7 @@
 		opacity: 0.2;
 }
 }
-@keyframes twinkling-data-v-466038c0 {
+@keyframes twinkling-data-v-48b984e8 {
 0% {
 		opacity: 0.2;
 }
@@ -21,10 +21,10 @@
 		opacity: 0.2;
 }
 }
-.code-box.data-v-466038c0 {
+.code-box.data-v-48b984e8 {
 	text-align: center;
 }
-.flex-box.data-v-466038c0 {
+.flex-box.data-v-48b984e8 {
 	display: -webkit-box;
 	display: -webkit-flex;
 	display: flex;
@@ -36,7 +36,7 @@
 	position: relative;
 	/* background: red; */
 }
-.flex-box .hide-input.data-v-466038c0 {
+.flex-box .hide-input.data-v-48b984e8 {
 	position: absolute;
 	top: 0;
 	left: -100%;
@@ -46,7 +46,7 @@
 	z-index: 9;
 	opacity: 1;
 }
-.flex-box .item.data-v-466038c0 {
+.flex-box .item.data-v-48b984e8 {
 	position: relative;
 	width: 80rpx;
 	height: 80rpx;
@@ -56,28 +56,28 @@
 	color: #333333;
 	line-height: 80rpx;
 }
-.flex-box .item.data-v-466038c0:last-child {
+.flex-box .item.data-v-48b984e8:last-child {
 	margin-right: 0;
 }
-.flex-box .middle.data-v-466038c0 {
+.flex-box .middle.data-v-48b984e8 {
 	border: none;
 }
-.flex-box .box.data-v-466038c0 {
+.flex-box .box.data-v-48b984e8 {
 	box-sizing: border-box;
 	border: 2rpx solid #cccccc;
 	border-radius: 6rpx;
 }
-.flex-box .bottom.data-v-466038c0 {
+.flex-box .bottom.data-v-48b984e8 {
 	box-sizing: border-box;
 	border-bottom: 8rpx solid #212121;
 }
-.flex-box .active.data-v-466038c0 {
+.flex-box .active.data-v-48b984e8 {
 	border-color: #00C777;
 }
-.flex-box .active .line.data-v-466038c0 {
+.flex-box .active .line.data-v-48b984e8 {
 	display: block;
 }
-.flex-box .line.data-v-466038c0 {
+.flex-box .line.data-v-48b984e8 {
 	display: none;
 	position: absolute;
 	left: 50%;
@@ -87,14 +87,14 @@
 	width: 2rpx;
 	height: 40rpx;
 	background: #333333;
-	-webkit-animation: twinkling-data-v-466038c0 1s infinite ease;
-	        animation: twinkling-data-v-466038c0 1s infinite ease;
+	-webkit-animation: twinkling-data-v-48b984e8 1s infinite ease;
+	        animation: twinkling-data-v-48b984e8 1s infinite ease;
 }
-.flex-box .dot.data-v-466038c0 {
+.flex-box .dot.data-v-48b984e8 {
 	font-size: 80rpx;
 	line-height: 40rpx;
 }
-.flex-box .bottom-line.data-v-466038c0 {
+.flex-box .bottom-line.data-v-48b984e8 {
 	height: 4px;
 	background: #000000;
 	width: 80%;

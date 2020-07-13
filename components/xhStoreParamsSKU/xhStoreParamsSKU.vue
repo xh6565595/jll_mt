@@ -10,7 +10,7 @@
 					<view class="cm_title">{{ title }}</view>
 					<view class="flex flex_center" style="justify-content: flex-start;height: 40rpx;">
 						<block v-for="(its, inds) in selectArr" :key="inds">
-							<tui-tag shape="circle" size="mini" type="gray" class=" stags">{{ its }}</tui-tag>
+							<tui-tag shape="circle" size="mini" type="gray" class="stags">{{ its }}</tui-tag>
 						</block>
 					</view>
 					<view class="flex flex_center" style="justify-content: flex-start;">
@@ -571,9 +571,9 @@ export default {
 		box-sizing: border-box;
 		border-radius: 20rpx 20rpx 0 0 ; 
 		.stags {
-			margin: 16rpx 10rpx 6rpx 10rpx;
-			padding: 0 10rpx;
-			font-size: 18rpx;
+			margin: 16rpx 10rpx 6rpx 0;
+			padding: 0 20rpx;
+			font-size: 20rpx;
 		}
 		.cm_price {
 			margin-right: 20rpx;
