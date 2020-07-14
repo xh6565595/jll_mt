@@ -111,7 +111,7 @@ export default {
 		// // 必须设置支付宝号
 		if (!this.userInfo.alipay_account ) {
 			uni.showModal({
-				title: '酷熊提醒您',
+				title: '洁利来智能马桶提醒您',
 				content: '请先设置支付宝收款账户',
 				// showCancel:false,
 				success: function(res) {

@@ -346,9 +346,9 @@ function upx2px(number, newDeviceWidth) {
   result = Math.floor(result + EPS);
   if (result === 0) {
     if (deviceDPR === 1 || !isIOS) {
-      result = 1;
+      return 1;
     } else {
-      result = 0.5;
+      return 0.5;
     }
   }
   return number < 0 ? -result : result;
@@ -421,10 +421,7 @@ var protocols = {
 
 
 var todos = [
-'vibrate',
-'preloadPage',
-'unPreloadPage',
-'loadSubPackage'];
+'vibrate'];
 
 var canIUses = [];
 
@@ -760,7 +757,7 @@ function initData(vueOptions, context) {
     try {
       data = data.call(context); // 支持 Vue.prototype 上挂的数据
     } catch (e) {
-      if (Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
+      if (Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
         console.warn('根据 Vue 的 data 函数初始化小程序 data 失败，请尽量确保 data 函数中不访问 vm 对象，否则可能影响首次数据渲染速度。', data);
       }
     }
@@ -1567,10 +1564,39 @@ uni$1;exports.default = _default;
 
 /***/ }),
 
+/***/ 104:
+/*!*************************************************************************!*\
+  !*** G:/work/马桶福利购/js_sdk/junyi-h5-copy/junyi-h5-copy/junyi-h5-copy.js ***!
+  \*************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = h5Copy;function h5Copy(content) {
+
+  if (!document.queryCommandSupported('copy')) {
+    // 不支持
+    return false;
+  }
+
+  var textarea = document.createElement("textarea");
+  textarea.value = content;
+  textarea.readOnly = "readOnly";
+  document.body.appendChild(textarea);
+  textarea.select(); // 选择对象
+  textarea.setSelectionRange(0, content.length); //核心
+  var result = document.execCommand("copy"); // 执行浏览器复制命令
+  textarea.remove();
+  return result;
+
+}
+
+/***/ }),
+
 /***/ 11:
-/*!********************************************!*\
-  !*** E:/mywork/jll_mt/utils/http/index.js ***!
-  \********************************************/
+/*!*****************************************!*\
+  !*** G:/work/马桶福利购/utils/http/index.js ***!
+  \*****************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1634,9 +1660,9 @@ exports.default = _default;
 /***/ }),
 
 /***/ 12:
-/*!************************************************!*\
-  !*** E:/mywork/jll_mt/utils/http/interface.js ***!
-  \************************************************/
+/*!*********************************************!*\
+  !*** G:/work/马桶福利购/utils/http/interface.js ***!
+  \*********************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1829,9 +1855,9 @@ function _reslog(res) {
 /***/ }),
 
 /***/ 13:
-/*!***************************************!*\
-  !*** E:/mywork/jll_mt/store/index.js ***!
-  \***************************************/
+/*!************************************!*\
+  !*** G:/work/马桶福利购/store/index.js ***!
+  \************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2942,9 +2968,9 @@ var index_esm = {
 /***/ }),
 
 /***/ 15:
-/*!*******************************!*\
-  !*** E:/mywork/jll_mt/SET.js ***!
-  \*******************************/
+/*!****************************!*\
+  !*** G:/work/马桶福利购/SET.js ***!
+  \****************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2965,10 +2991,10 @@ var _default = {
 
 /***/ }),
 
-/***/ 152:
-/*!*********************************************!*\
-  !*** E:/mywork/jll_mt/utils/picker.city.js ***!
-  \*********************************************/
+/***/ 153:
+/*!******************************************!*\
+  !*** G:/work/马桶福利购/utils/picker.city.js ***!
+  \******************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -17406,10 +17432,10 @@ data = data;exports.default = _default;
 
 /***/ }),
 
-/***/ 153:
-/*!*******************************************************************!*\
-  !*** E:/mywork/jll_mt/js_sdk/graceui-dataChecker/graceChecker.js ***!
-  \*******************************************************************/
+/***/ 154:
+/*!****************************************************************!*\
+  !*** G:/work/马桶福利购/js_sdk/graceui-dataChecker/graceChecker.js ***!
+  \****************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -17523,9 +17549,9 @@ obj = obj;exports.default = _default;
 /***/ }),
 
 /***/ 16:
-/*!*********************************************!*\
-  !*** E:/mywork/jll_mt/utils/module/auth.js ***!
-  \*********************************************/
+/*!******************************************!*\
+  !*** G:/work/马桶福利购/utils/module/auth.js ***!
+  \******************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -17735,9 +17761,9 @@ Auth;exports.default = _default;
 /***/ }),
 
 /***/ 17:
-/*!*************************************************!*\
-  !*** E:/mywork/jll_mt/utils/module/business.js ***!
-  \*************************************************/
+/*!**********************************************!*\
+  !*** G:/work/马桶福利购/utils/module/business.js ***!
+  \**********************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -19059,10 +19085,12 @@ if (true) {
   };
 
   formatComponentName = function (vm, includeFile) {
-    if (vm.$root === vm) {
-      if (vm.$options && vm.$options.__file) { // fixed by xxxxxx
-        return ('') + vm.$options.__file
+    {
+      if(vm.$scope && vm.$scope.is){
+        return vm.$scope.is
       }
+    }
+    if (vm.$root === vm) {
       return '<Root>'
     }
     var options = typeof vm === 'function' && vm.cid != null
@@ -19097,7 +19125,7 @@ if (true) {
     if (vm._isVue && vm.$parent) {
       var tree = [];
       var currentRecursiveSequence = 0;
-      while (vm && vm.$options.name !== 'PageBody') {
+      while (vm) {
         if (tree.length > 0) {
           var last = tree[tree.length - 1];
           if (last.constructor === vm.constructor) {
@@ -19109,7 +19137,7 @@ if (true) {
             currentRecursiveSequence = 0;
           }
         }
-        !vm.$options.isReserved && tree.push(vm);
+        tree.push(vm);
         vm = vm.$parent;
       }
       return '\n\nfound in\n\n' + tree
@@ -23955,7 +23983,7 @@ function type(obj) {
 
 function flushCallbacks$1(vm) {
     if (vm.__next_tick_callbacks && vm.__next_tick_callbacks.length) {
-        if (Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
+        if (Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
             var mpInstance = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + vm._uid +
                 ']:flushCallbacks[' + vm.__next_tick_callbacks.length + ']');
@@ -23976,14 +24004,14 @@ function nextTick$1(vm, cb) {
     //1.nextTick 之前 已 setData 且 setData 还未回调完成
     //2.nextTick 之前存在 render watcher
     if (!vm.__next_tick_pending && !hasRenderWatcher(vm)) {
-        if(Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG){
+        if(Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG){
             var mpInstance = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + vm._uid +
                 ']:nextVueTick');
         }
         return nextTick(cb, vm)
     }else{
-        if(Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG){
+        if(Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG){
             var mpInstance$1 = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance$1.is || mpInstance$1.route) + '][' + vm._uid +
                 ']:nextMPTick');
@@ -24059,7 +24087,7 @@ var patch = function(oldVnode, vnode) {
     });
     var diffData = this.$shouldDiffData === false ? data : diff(data, mpData);
     if (Object.keys(diffData).length) {
-      if (Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
+      if (Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
         console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + this._uid +
           ']差量更新',
           JSON.stringify(diffData));
@@ -24229,10 +24257,9 @@ function getTarget(obj, path) {
   return getTarget(obj[key], parts.slice(1).join('.'))
 }
 
-function internalMixin(Vue ) {
+function internalMixin(Vue) {
 
-  Vue.config.errorHandler = function(err, vm, info) {
-    Vue.util.warn(("Error in " + info + ": \"" + (err.toString()) + "\""), vm);
+  Vue.config.errorHandler = function(err) {
     console.error(err);
     /* eslint-disable no-undef */
     var app = getApp();
@@ -24584,9 +24611,9 @@ function normalizeComponent (
 /***/ }),
 
 /***/ 21:
-/*!*********************************************!*\
-  !*** E:/mywork/jll_mt/static/defaultSet.js ***!
-  \*********************************************/
+/*!******************************************!*\
+  !*** G:/work/马桶福利购/static/defaultSet.js ***!
+  \******************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -24858,39 +24885,10 @@ set;exports.default = _default;
 
 /***/ }),
 
-/***/ 210:
-/*!****************************************************************************!*\
-  !*** E:/mywork/jll_mt/js_sdk/junyi-h5-copy/junyi-h5-copy/junyi-h5-copy.js ***!
-  \****************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = h5Copy;function h5Copy(content) {
-
-  if (!document.queryCommandSupported('copy')) {
-    // 不支持
-    return false;
-  }
-
-  var textarea = document.createElement("textarea");
-  textarea.value = content;
-  textarea.readOnly = "readOnly";
-  document.body.appendChild(textarea);
-  textarea.select(); // 选择对象
-  textarea.setSelectionRange(0, content.length); //核心
-  var result = document.execCommand("copy"); // 执行浏览器复制命令
-  textarea.remove();
-  return result;
-
-}
-
-/***/ }),
-
 /***/ 28:
-/*!***************************************!*\
-  !*** E:/mywork/jll_mt/utils/utils.js ***!
-  \***************************************/
+/*!************************************!*\
+  !*** G:/work/马桶福利购/utils/utils.js ***!
+  \************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -25212,9 +25210,9 @@ Utils;exports.default = _default;
 /***/ }),
 
 /***/ 296:
-/*!********************************************************!*\
-  !*** E:/mywork/jll_mt/components/tki-qrcode/qrcode.js ***!
-  \********************************************************/
+/*!*****************************************************!*\
+  !*** G:/work/马桶福利购/components/tki-qrcode/qrcode.js ***!
+  \*****************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -26461,9 +26459,9 @@ module.exports = g;
 /***/ }),
 
 /***/ 37:
-/*!********************************************!*\
-  !*** E:/mywork/jll_mt/utils/baseMixins.js ***!
-  \********************************************/
+/*!*****************************************!*\
+  !*** G:/work/马桶福利购/utils/baseMixins.js ***!
+  \*****************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -27367,9 +27365,9 @@ if (hadRuntime) {
 /***/ }),
 
 /***/ 7:
-/*!***********************************!*\
-  !*** E:/mywork/jll_mt/pages.json ***!
-  \***********************************/
+/*!********************************!*\
+  !*** G:/work/马桶福利购/pages.json ***!
+  \********************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -27378,9 +27376,9 @@ if (hadRuntime) {
 /***/ }),
 
 /***/ 77:
-/*!****************************************************!*\
-  !*** E:/mywork/jll_mt/utils/QS-SharePoster/app.js ***!
-  \****************************************************/
+/*!*************************************************!*\
+  !*** G:/work/马桶福利购/utils/QS-SharePoster/app.js ***!
+  \*************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -27948,9 +27946,9 @@ module.exports = _app;
 /***/ }),
 
 /***/ 78:
-/*!***************************************************************!*\
-  !*** E:/mywork/jll_mt/utils/QS-SharePoster/QS-SharePoster.js ***!
-  \***************************************************************/
+/*!************************************************************!*\
+  !*** G:/work/马桶福利购/utils/QS-SharePoster/QS-SharePoster.js ***!
+  \************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -29260,9 +29258,9 @@ module.exports = {
 /***/ }),
 
 /***/ 79:
-/*!**********************************************************!*\
-  !*** E:/mywork/jll_mt/utils/QS-SharePoster/QRCodeAlg.js ***!
-  \**********************************************************/
+/*!*******************************************************!*\
+  !*** G:/work/马桶福利购/utils/QS-SharePoster/QRCodeAlg.js ***!
+  \*******************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 

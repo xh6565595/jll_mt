@@ -347,7 +347,7 @@ export default {
 		_readyToPay(ordercode) {
 			this.oderId = ordercode;
 			let that = this;
-			this.$refs.payPanel._show();
+			this.$refs.payPanel._show(ordercode);
 			// uni.showActionSheet({
 			// 	itemList: ['微信支付'],
 			// 	success: function(res) {

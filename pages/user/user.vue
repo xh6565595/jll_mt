@@ -26,7 +26,7 @@
 		
 		<!-- <view class="shareBox "> -->
 		<!-- 推广者显示 -->
-		<navigator url="./share/share"  class="shareBox "  v-if="hasLogin && userInfo.consumer_type==3">
+		<navigator url="./share/share"  class="shareBox "  v-if="hasLogin && userInfo.consumer_type==2">
 		<!-- <navigator url="./share/share"  class="shareBox " > -->
 			<image src="../../static/image/wd_yq.png" mode="scaleToFill" class="bg"></image>
 		</navigator>

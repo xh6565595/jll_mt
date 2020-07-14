@@ -27,7 +27,7 @@
 				<view class="fwTip">等待马桶安装完后，请出示服务码给安装师傅</view>
 			</view>
 
-			<view class="proItemsBox  " style="padding: 0" v-if="item.order_status == 5&&item.service_info">
+			<view class="proItemsBox  " style="padding: 0" v-if="item.order_status == 5&&item.service_info.consumer_code!=null">
 				<view class="cm_title t tui-skeleton-fillet flex flex_center">
 					<text>安装人员信息</text>
 					<text class="f1"></text>
@@ -55,7 +55,7 @@
 			<view class="proItemsBox addressBox ">
 
 				<view class="flex flex_center address tui-skeleton-fillet">
-					<image src="/static/image/logo.png" mode="scaleToFill" class="icon"></image>
+					<image src="/static/image/xq_dz.png" mode="scaleToFill" class="icon"></image>
 					<view class="f1  tui-skeleton-rect">
 						<view style="margin-bottom: 20rpx;">{{ item.buy_address }}</view>
 						<view class="flex flex_center">
@@ -69,7 +69,7 @@
 
 			<view class="panel">
 				<view class="flex flex_center itemBoxTop">
-					<image src="http://jllshop.fjdmll.com/upload/head/jjl.png" mode="" class="shopIcon"></image>
+					<image src="/static/image/logo.png" mode="" class="shopIcon"></image>
 					<view class="cm_title f1">洁利来官方店</view>
 					<!-- <Icon name="arrowright" :size="16"></Icon> -->
 				</view>
@@ -157,7 +157,7 @@
 					</tui-list-cell>
 					<tui-list-cell :hover="false" v-if="item.order_status == 0 ">
 						<view class="tui-line-cell flex flex_center tui-cell-last">
-							<view class="tui-title cm_text">创建时间'</view>
+							<view class="tui-title cm_text">创建时间</view>
 							<view class="tui-input f1 cm_tex_r">{{item.create_time}}</view>
 						</view>
 					</tui-list-cell>
@@ -193,7 +193,7 @@
 					</tui-list-cell>
 				</view>
 			</view>
-			<text class="footerMark" v-if="item.order_status == 1 && item.delay_ems_time">该订单已延迟至{{ item.delay_ems_time }}发货</text>
+			<text class="footerMark" v-if="item.order_status == 1 && item.delay_ems_time">发货时间：{{ item.delay_ems_time }}</text>
 			<view class="footer flex flex_center" v-if="item.order_status != 5">
 				<view class="f1"></view>
 				<tui-button type="primary" class="btns" size="small" shape="circle" @tap="_readyToPay" v-if="item.order_status == 0">立即付款</tui-button>
@@ -537,7 +537,7 @@ export default {
 		},
 		_readyToPay() {
 			let that = this;
-			this.$refs.payPanel._show();
+			this.$refs.payPanel._show(that.formParams.order_code);
 		},
 
 		// 取消订单

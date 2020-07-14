@@ -36,7 +36,7 @@
 			<view class="box" @click="_call" style="padding: 20rpx;">
 					<view class="flex flex_center">
 						<image src="../../../static/img/phone.png" mode="widthFix" class="call"></image>
-						<text>联系卖家</text>
+						<text>联系买家</text>
 					</view>
 			</view>
 			
@@ -153,6 +153,10 @@
 			async _readyTo(){
 				if(this.formParams.service_code.length!=4){
 					this.$ui.toast('请输入正确的服务码')
+					return ;
+				}
+				if(!this.formParams.task_service_img){
+					this.$ui.toast('请上传安装结果图片')
 					return ;
 				}
 				let that = this;

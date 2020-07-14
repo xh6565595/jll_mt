@@ -65,7 +65,7 @@ export default {
 			iviCode:options.icode,
 		}
 		if(that.shareData.proCode && that.shareData.userId && that.shareData.odrCode){
-			that.$store.commit('setShare',{proCode:that.shareData.proCode,userId:that.shareData.userId,orderCode:that.shareData.odrCode,iviCode:that.shareData.icode})
+			that.$store.commit('setShare',{proCode:that.shareData.proCode,userId:that.shareData.userId,orderCode:that.shareData.odrCode,iviCode:that.shareData.iviCode})
 		}
 		
 		
@@ -155,7 +155,7 @@ export default {
 									url: '/pages/main/serverCenter/serverCenter'
 								});
 							}else{
-								// 推广者 消费者 3是安装
+								//  消费者 3是安装 2推广者
 								// 记录信息
 								if(that.shareData.proCode && that.shareData.userId && that.shareData.odrCode){
 									uni.navigateTo({

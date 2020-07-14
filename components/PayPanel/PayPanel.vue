@@ -132,8 +132,10 @@ export default {
 				item.price = (n / item.num).toFixed(2);
 			});
 		},
-		_show() {
-			this.panelshow = true;
+		_show(ordercode) {
+			// this.panelshow = true;
+			this.formParams.order_num = ordercode;
+			this._pay(4);
 		},
 		_hide() {
 			this.panelshow = false;
@@ -149,19 +151,19 @@ export default {
 			let formId = e.detail.formId
 			// debugger
 			// console.log(formId)
-			this.formParams.formId = e.detail.formId
-			if (this.formParams.pay_type == 1) {
-				uni.showToast('开发中');
-				this._pay(1);
-			} else if (this.formParams.pay_type == 2) {
-				// uni.showToast('开发中')
-				this._pay(2);
-			} else if (this.formParams.pay_type == 3) {
-				//建行支付
-				this._pay(3);
-			} else if (this.formParams.pay_type == 4) {
-				this._pay(4);
-			}
+			// this.formParams.formId = e.detail.formId
+			// if (this.formParams.pay_type == 1) {
+			// 	uni.showToast('开发中');
+			// 	this._pay(1);
+			// } else if (this.formParams.pay_type == 2) {
+			// 	// uni.showToast('开发中')
+			// 	this._pay(2);
+			// } else if (this.formParams.pay_type == 3) {
+			// 	//建行支付
+			// 	this._pay(3);
+			// } else if (this.formParams.pay_type == 4) {
+			// 	this._pay(4);
+			// }
 		},
 		_href() {
 			uni.redirectTo({
@@ -175,10 +177,9 @@ export default {
 			// console.log(this.formParams)
 			// return;
 			try {
-				that.loading1 = true;
-				// console.log(this.formParams);
+				that.$ui.showloading();
 				let res = await this.$api.toPayment(this.formParams);
-				// console.log(res);
+				that.$ui.hideloading();
 				// let data = {
 				// 	ORDERID:this.formParams.order_num,
 				// 	PAYMENT:0.01,
@@ -186,8 +187,7 @@ export default {
 				// 	ACCDATE:20200415
 				// }
 				// let res = await this.$api.mockPay(data)
-				
-				that.loading1 = false;
+			
 				if (res.Success) {
 					let data = res.Data.js_prepay_info
 					let b =  `{${data}}`;
@@ -228,14 +228,48 @@ export default {
 				signType: data.signType,
 				paySign: data.paySign,
 				success: function(res) {
-					// console.log('success:' + JSON.stringify(res));
+					// uni.requestSubscribeMessage({
+					//   tmplIds: ['x3Xk4Y60B4XI0PnJEhd1ASoj7lvNyQCnGn-jRWA1ObE'],
+					//   success (res) { 
+					// 	  console.log(res)
+					//   },
+					//   fail(err){
+					// 	   console.log(err)
+					//   },
+					//   complete(res){
+					// 	   uni.redirectTo({
+					// 	   	url: '/pages/success/success'
+					// 	   });
+					// 	   that.$emit('success');
+					//   }
+					// })
 					uni.redirectTo({
 						url: '/pages/success/success'
 					});
 					that.$emit('success');
 				},
 				fail: function(err) {
-					console.log('fail:' + JSON.stringify(err));
+					// console.log('fail:' + JSON.stringify(err));
+					// uni.requestSubscribeMessage({
+					//   tmplIds: ['x3Xk4Y60B4XI0PnJEhd1ASoj7lvNyQCnGn-jRWA1ObE'],
+					//   success (res) { 
+					// 	  console.log(res)
+					//   },
+					//   fail(err){
+					// 	   console.log(err)
+					//   },
+					//   complete(res){
+					// 	  uni.redirectTo({
+					// 	  	url:'/pages/features/order/order?current=1'
+					// 	  })
+					//   }
+					// })
+						  uni.redirectTo({
+						  	url:'/pages/features/order/order?current=1'
+						  })
+				},
+				complete(){
+					
 				}
 			});
 		}

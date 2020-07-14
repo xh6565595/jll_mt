@@ -80,7 +80,7 @@ export default {
 			currentCode: '' //当前操作的条目code
 		};
 	},
-	computed: mapState(['userInfo']),
+	computed: mapState(['userInfo','hasLogin']),
 	onPullDownRefresh() {
 		this.formParams.pageIndex = 1;
 		this.list = [];
@@ -109,7 +109,12 @@ export default {
 			that._loadData('refresh');
 		})
 	},
-
+	onShow(){
+		if(this.hasLogin){
+			this._loadData('refresh');
+		}
+		
+	},
 	methods: {
 		_msg(){
 			uni.navigateTo({

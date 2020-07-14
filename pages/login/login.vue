@@ -14,7 +14,7 @@
 				</view>
 					
 				<view class=" inputBoxs  flex flex_center cm_bdb">					
-					<input class="cm_tex_l f1 inp" type="text"  v-model="formParams.mobile" placeholder="请输入手机号">
+					<input class="cm_tex_l f1 inp" type="number"  v-model="formParams.mobile" placeholder="请输入手机号">
 					<view class="yzmBtn" size="mini" hover-class="cm_hover" @tap="_getCode">{{seconds>0?seconds+'s':'发送验证码'}}</view>
 				</view>
 				<view class=" inputBoxs ">

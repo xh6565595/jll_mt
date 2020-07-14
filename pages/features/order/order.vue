@@ -101,6 +101,9 @@
 				that._refresh()
 			})
 		},
+		onShow(){
+			that._refresh()
+		},
 		// 下拉刷新
 		onPullDownRefresh() {	
 			let k = this.current;
