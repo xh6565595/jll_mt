@@ -10,7 +10,7 @@
 					<view class="cm_title">{{ title }}</view>
 					<view class="flex flex_center" style="justify-content: flex-start;height: 40rpx;">
 						<block v-for="(its, inds) in selectArr" :key="inds">
-							<tui-tag shape="circle" size="mini" type="gray" class="stags">{{ its }}</tui-tag>
+							<tui-tag shape="circle" size="mini" type="gray" class="stags" v-if="its">{{ its }}</tui-tag>
 						</block>
 					</view>
 					<view class="flex flex_center" style="justify-content: flex-start;">

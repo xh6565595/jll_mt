@@ -64,13 +64,13 @@ export default {
 		this.formParams.invitation = this.iviCode
 		this.formParams.share_user_id = this.shareUser
 		this.formParams.openId = jll_opid
-		if( this.iviCode){
-			un.showModal({
-				title:'发现邀请码',
-				content:this.iviCode,
-				showCancel:false
-			})
-		}
+		// if( this.iviCode){
+		// 	uni.showModal({
+		// 		title:'发现邀请码',
+		// 		content:this.iviCode,
+		// 		showCancel:true
+		// 	})
+		// }
 	},
 	computed:  mapState(['shareUser','iviCode']),
 	methods: {
@@ -130,6 +130,7 @@ export default {
 		// 输完验证码码回调
 		finish(e){
 			console.log(this.formParams);
+			// debugger
 			this.submit()
 			// this.reset()
 		},

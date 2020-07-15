@@ -26482,7 +26482,7 @@ var baseMixins = {
 
   },
   onLoad: function onLoad() {
-    this._loadData('refresh');
+
   },
 
   // 下拉刷新

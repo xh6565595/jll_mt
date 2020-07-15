@@ -253,7 +253,7 @@ var _baseMixins = __webpack_require__(/*! @/utils/baseMixins.js */ 37); //
 //
 var global_Set_jll = uni.getStorageSync('global_Set_jll');var _default = { data: function data() {return { baseKey: 'GetGoodsList', banners: [], hasRow: 'Rows', formParams: { key: '', type: '1', pageIndex: 1, pageSize: 10 } };}, components: {}, computed: (0, _vuex.mapState)(['shareUser', 'sharePro', 'hasLogin']), mixins: [_baseMixins.baseMixins], onLoad: function onLoad() {var that = this;this.banners = global_Set_jll.banerList; // this.classList = global_Set_jll.classList;
     // this._loadData('refresh');
-  }, onShow: function onShow() {// if(!this.hasLogin){
+    this._loadData('refresh');}, onShow: function onShow() {// if(!this.hasLogin){
     // 	uni.navigateTo({
     // 		url:'/pages/login/login'
     // 	})

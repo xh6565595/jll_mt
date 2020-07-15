@@ -294,12 +294,8 @@ var _index = _interopRequireDefault(__webpack_require__(/*! @/utils/http/index.j
 var _default =
 {
   onLaunch: function onLaunch(options) {
-    console.log('App Launch');
-    // this.initUser()
-    // if(this.is_weixn){
-    // 	this._iniWxJdk();
-    // }
-    console.log('app', options);
+    console.log('App Launch', options);
+
 
   },
   onShow: function onShow() {

@@ -290,7 +290,7 @@ var _QSSharePoster = __webpack_require__(/*! @/utils/QS-SharePoster/QS-SharePost
                         {
                           type: 'text',
                           text: '邀请人：' + that.userInfo.invitation_code,
-                          size: 23,
+                          size: 28,
                           color: '#333',
                           alpha: 1,
                           textAlign: 'center',

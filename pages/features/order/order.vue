@@ -102,7 +102,7 @@
 			})
 		},
 		onShow(){
-			that._refresh()
+			this._refresh()
 		},
 		// 下拉刷新
 		onPullDownRefresh() {	

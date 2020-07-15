@@ -4,12 +4,8 @@
 	
 	export default {
 		onLaunch: function(options) {
-			console.log('App Launch');
-			// this.initUser()
-			// if(this.is_weixn){
-			// 	this._iniWxJdk();
-			// }
-			console.log('app',options)
+			console.log('App Launch',options);
+	
 
 		},
 		onShow: function() {

@@ -57,14 +57,30 @@ export default {
 
 	onLoad(options) {
 		let that = this
-
-		this.shareData = {
-			proCode:options.pcode,  //商品code
-			userId:options.ucode ,  //人物code
-			odrCode:options.ocode ,  //人物code
-			iviCode:options.icode,
+	
+		// this.$ui.toast(JSON.stringify(options.q))
+		// uni.showModal({
+		// 	title:'洁利来智能马桶',
+		// 	content:JSON.stringify(options.q)
+		// })
+		// return 
+		// let a = 'gllo.kuxiong999.com/gllo?icode=efafsdf'
+		
+		// console.log(url);
+		let icode = ''
+		if(options.q){
+			let  url = decodeURIComponent(options.q);
+			icode = url.split('icode=')[1]
 		}
-		if(that.shareData.proCode && that.shareData.userId && that.shareData.odrCode){
+		console.log(icode);
+		this.shareData = {
+			proCode:options.pcode?options.pcode:'',  //商品code
+			userId:options.ucode?options.ucode:'' ,  //人物code
+			odrCode:options.ocode?options.ocode:'' ,  //人物code
+			iviCode:icode?icode:'',
+		}
+		// console.log(this.shareData );
+		if(that.shareData.proCode || that.shareData.userId || that.shareData.odrCode || that.shareData.iviCode){
 			that.$store.commit('setShare',{proCode:that.shareData.proCode,userId:that.shareData.userId,orderCode:that.shareData.odrCode,iviCode:that.shareData.iviCode})
 		}
 		

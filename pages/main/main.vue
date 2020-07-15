@@ -83,7 +83,7 @@ export default {
 		this.banners = global_Set_jll.banerList;
 		// this.classList = global_Set_jll.classList;
 		// this._loadData('refresh');
-		
+		this._loadData('refresh')
 	},
 	onShow() {
 		// if(!this.hasLogin){

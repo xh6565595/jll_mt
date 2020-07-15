@@ -238,7 +238,7 @@ __webpack_require__.r(__webpack_exports__);
     });
   },
   onShow: function onShow() {
-    that._refresh();
+    this._refresh();
   },
   // 下拉刷新
   onPullDownRefresh: function onPullDownRefresh() {
