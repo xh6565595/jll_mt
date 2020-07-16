@@ -5,7 +5,6 @@
   "usingComponents": {
     "tui-skeleton": "/components/tui-skeleton/tui-skeleton",
     "tui-list-cell": "/components/list-cell/list-cell",
-    "tui-list-view": "/components/list-view/list-view",
-    "pay-panel": "/components/PayPanel/PayPanel"
+    "tui-list-view": "/components/list-view/list-view"
   }
 }

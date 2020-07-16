@@ -5,7 +5,7 @@
 			<scroll-view scroll-y="true" class="contentBox" >
 				<view style="width: 100%">
 					  <rich-text v-if="text" :nodes="text"></rich-text>
-					  <text>{{text}}</text>
+					  <!-- <text>{{text}}</text> -->
 				</view>
 			</scroll-view>
 			<view class="footer flex flex_center">

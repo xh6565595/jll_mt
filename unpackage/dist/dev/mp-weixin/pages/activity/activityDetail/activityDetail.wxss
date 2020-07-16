@@ -28,6 +28,17 @@
   padding: 20rpx;
   position: relative;
 }
+.pages .submenber.data-v-0b974960 {
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 60rpx;
+  overflow: hidden;
+}
+.pages .submenber .avatar.data-v-0b974960 {
+  width: 100%;
+  height: 100%;
+  background-color: #f2f2f2;
+}
 .pages .bgbox.data-v-0b974960 {
   font-size: 40rpx;
   text-align: left;
@@ -178,8 +189,8 @@
   width: 100%;
   padding: 0 20rpx;
   z-index: 100;
-  background-color: #FFFDEF;
-  color: #FC872D;
+  background-color: #fffdef;
+  color: #fc872d;
   text-align: center;
 }
 .pages .footer.data-v-0b974960 {

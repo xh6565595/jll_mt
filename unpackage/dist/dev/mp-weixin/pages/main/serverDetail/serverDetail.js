@@ -93,6 +93,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "recyclableRender", function() { return recyclableRender; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "components", function() { return components; });
 var components = {
+  tuiSkeleton: function() {
+    return __webpack_require__.e(/*! import() | components/tui-skeleton/tui-skeleton */ "components/tui-skeleton/tui-skeleton").then(__webpack_require__.bind(null, /*! @/components/tui-skeleton/tui-skeleton.vue */ 263))
+  },
   tuiUpload: function() {
     return __webpack_require__.e(/*! import() | components/tui-upload/tui-upload */ "components/tui-upload/tui-upload").then(__webpack_require__.bind(null, /*! @/components/tui-upload/tui-upload.vue */ 362))
   }
@@ -199,8 +202,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
-
 var _vuex = __webpack_require__(/*! vuex */ 14);
 
 
@@ -227,7 +228,8 @@ var _index = _interopRequireDefault(__webpack_require__(/*! @/utils/http/index.j
       sumPrice: 0,
       max: 0,
       hasEms: 0,
-      code: ''
+      code: '',
+      skeletonShow: true
       // orderCode:''
     };
   },

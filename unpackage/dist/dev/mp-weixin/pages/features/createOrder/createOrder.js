@@ -305,7 +305,7 @@ var global_Set_jll = uni.getStorageSync('global_Set_jll');var _default =
       return s.toFixed(2);
     },
     allAccount: function allAccount() {
-      var s = Number(this.allEms) + Number(this.allPrize) + Number(this.servePay) + Number(this.shui);
+      var s = Number(this.allPrize);
       return s.toFixed(2);
     },
     // 税费计算

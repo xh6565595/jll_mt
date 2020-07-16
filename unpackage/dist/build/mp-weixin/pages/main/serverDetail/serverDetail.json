@@ -3,6 +3,7 @@
   "navigationBarTextStyle": "black",
   "navigationBarBackgroundColor": "#f4f4f4",
   "usingComponents": {
+    "tui-skeleton": "/components/tui-skeleton/tui-skeleton",
     "tui-upload": "/components/tui-upload/tui-upload",
     "tui-list-cell": "/components/list-cell/list-cell",
     "tui-list-view": "/components/list-view/list-view",

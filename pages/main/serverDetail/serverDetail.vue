@@ -1,65 +1,63 @@
 <!-- 退款选项 -->
 
 <template>
-	<view class="pages">
-		<!-- <view class="mshBar flex flex_center">
-			<view class="f1 cm_ellipsis">阿范德萨发斯蒂芬是的发送大发送到发送到发送到发送地方上的</view>
-			<text class="text">查看全部</text>
-			<text class="iconfont icon-fanhui3 text"></text>
-		</view> -->
-		<view class="content">
-			<view class="orderBox">
-				<view class="orderItems">
-				<!-- <navigator url="../serverDetail/serverDetail" class="orderItems"> -->
-					<view class="flex flex_center cm_bdb top">
-						<view class="f1">
-							上门服务时间：{{item.task_service_time}}
+	<view>
+		<tui-skeleton v-if="skeletonShow" backgroundColor="#f9f9f9" skeletonBgColor="#efefef" borderRadius="0rpx"></tui-skeleton>
+		<view class="pages tui-skeleton">
+			<view class="content">
+				<view class="orderBox">
+					<view class="orderItems">
+					<!-- <navigator url="../serverDetail/serverDetail" class="orderItems"> -->
+						<view class="flex flex_center cm_bdb top">
+							<view class="f1">
+								上门服务时间：{{item.task_service_time}}
+							</view>
+							<text class="status ">{{item.task_service_status==1?'已完成':'待安装'}}</text>
+						</view>	
+						<view class="content cm_bdb">
+							<view class="cm_title">服务地址</view>
+							<view class="text">联系人：{{item.buy_name}}</view>
+							<view class="text">联系方式：{{item.buy_phone}}</view>
+							<view class="text">订单号：{{item.order_code}}</view>
+							<view class="text">服务地址：{{item.buy_address}}</view>
 						</view>
-						<text class="status ">{{item.task_service_status==1?'已完成':'待安装'}}</text>
-					</view>	
-					<view class="content cm_bdb">
-						<view class="cm_title">服务地址</view>
-						<view class="text">联系人：{{item.buy_name}}</view>
-						<view class="text">联系方式：{{item.buy_phone}}</view>
-						<view class="text">订单号：{{item.order_code}}</view>
-						<view class="text">服务地址：{{item.buy_address}}</view>
-					</view>
-					<view class="flex flex_center cm_bdb top">
-						<view class="f1">
-							安装费用
-						</view>
-						<text class="cm_price ">￥{{item.install_price}}</text>
-					</view>	
-				<!-- </navigator> -->
-				</view>
-			</view>
-			<view class="box" @click="_call" style="padding: 20rpx;">
-					<view class="flex flex_center">
-						<image src="../../../static/img/phone.png" mode="widthFix" class="call"></image>
-						<text>联系买家</text>
-					</view>
-			</view>
-			
-			<view class="box"  style="padding: 20rpx;" v-if="item.task_service_status==0">
-				<view class="cm_title">填写服务码</view>
-				<view class="container flex flex_center">
-					 <one-input ref="hi" type="box" @input="input" :maxlength="4"></one-input>
-				</view>		
-			</view>
-			
-			<view class="box" style="padding: 20rpx;" v-if="item.task_service_status==0">
-				<view class="cm_title">上传图片</view>
-				<view class="container">			
-					<view class="tui-box-upload">
-						<tui-upload :serverUrl="serverUrl" :value="oringinImg"  fileKeyName="problem" @complete="result" @remove="remove"></tui-upload>
+						<view class="flex flex_center cm_bdb top">
+							<view class="f1">
+								安装费用
+							</view>
+							<text class="cm_price ">￥{{item.install_price}}</text>
+						</view>	
+					<!-- </navigator> -->
 					</view>
 				</view>
-				<view class=" cm_des" style="padding: 20rpx ;padding-top: 0;">最多上传3张</view>
+				<view class="box" @click="_call" style="padding: 20rpx;">
+						<view class="flex flex_center">
+							<image src="../../../static/img/phone.png" mode="widthFix" class="call"></image>
+							<text>联系买家</text>
+						</view>
+				</view>
+				
+				<view class="box"  style="padding: 20rpx;" v-if="item.task_service_status==0">
+					<view class="cm_title">填写服务码</view>
+					<view class="container flex flex_center">
+						 <one-input ref="hi" type="box" @input="input" :maxlength="4"></one-input>
+					</view>		
+				</view>
+				
+				<view class="box" style="padding: 20rpx;" v-if="item.task_service_status==0">
+					<view class="cm_title">上传图片</view>
+					<view class="container">			
+						<view class="tui-box-upload">
+							<tui-upload :serverUrl="serverUrl" :value="oringinImg"  fileKeyName="problem" @complete="result" @remove="remove"></tui-upload>
+						</view>
+					</view>
+					<view class=" cm_des" style="padding: 20rpx ;padding-top: 0;">最多上传3张</view>
+				</view>
+				
+				<view class=" tui-skeleton-fillet" style="margin-top: 72rpx;padding: 0 20rpx;" v-if="item.task_service_status==0">
+				<tui-button type="primary" shape="circle" :loading="loading" @tap="_readyTo">提交</tui-button>
 			</view>
-			
-			<view class=" tui-skeleton-fillet" style="margin-top: 72rpx;padding: 0 20rpx;" v-if="item.task_service_status==0">
-			<tui-button type="primary" shape="circle" :loading="loading" @tap="_readyTo">提交</tui-button>
-		</view>
+			</view>
 		</view>
 	</view>
 </template>
@@ -92,6 +90,7 @@
 				max:0,
 				hasEms:0,
 				code:'',
+				skeletonShow:true
 				// orderCode:''
 			};
 		},

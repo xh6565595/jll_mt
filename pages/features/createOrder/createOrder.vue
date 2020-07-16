@@ -16,7 +16,7 @@
 		</view>
 		<view class="panel">
 			<view class="flex flex_center itemBoxTop">
-				<image src="http://jllshop.fjdmll.com/upload/head/jjl.png" mode="" class="shopIcon"></image>
+				<image :src="business.shop_logo" mode="" class="shopIcon"></image>
 				<view class="cm_title f1">洁利来官方店</view>
 				<!-- <Icon name="arrowright" :size="16"></Icon> -->
 			</view>
@@ -54,15 +54,15 @@
 									</view> -->
 								</view>
 							</view>
-							<view class="cells flex flex_center">
+							<!-- <view class="cells flex flex_center">
 								<view class="label cm_tex_r">运费</view>
 								<view class="f1 text">{{ currentAddress?'￥'+allEms:'请先选择收货地址' }}</view>
-							</view>
+							</view> -->
 							<view class="cells flex flex_center">
 								<view class="label cm_tex_r">税费</view>
 								<view class="f1 text">￥{{shui}}</view>
 							</view>
-							<view class="cells flex flex_center">
+							<view class="cells flex flex_center" v-if="servePay">
 								<view class="label cm_tex_r">特色服务</view>
 								<view class="f1 text">￥{{ servePay}}</view>
 							</view>
@@ -169,7 +169,7 @@ export default {
 			return s.toFixed(2);
 		},
 		allAccount() {
-			let s = Number(this.allEms) + Number(this.allPrize) + Number(this.servePay)  + Number(this.shui);
+			let s = Number(this.allPrize) 
 			return s.toFixed(2);
 		},
 		// 税费计算

@@ -101,16 +101,6 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  var f0 = _vm._f("payTypeFilter")(_vm.item.pay_type)
-
-  _vm.$mp.data = Object.assign(
-    {},
-    {
-      $root: {
-        f0: f0
-      }
-    }
-  )
 }
 var recyclableRender = false
 var staticRenderFns = []
@@ -306,33 +296,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-var _utils = _interopRequireDefault(__webpack_require__(/*! @/utils/utils.js */ 28));
-
-var _junyiH5Copy = _interopRequireDefault(__webpack_require__(/*! @/js_sdk/junyi-h5-copy/junyi-h5-copy/junyi-h5-copy.js */ 104));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}var tuiSkeleton = function tuiSkeleton() {__webpack_require__.e(/*! require.ensure | components/tui-skeleton/tui-skeleton */ "components/tui-skeleton/tui-skeleton").then((function () {return resolve(__webpack_require__(/*! @/components/tui-skeleton/tui-skeleton */ 263));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var tuiListView = function tuiListView() {__webpack_require__.e(/*! require.ensure | components/list-view/list-view */ "components/list-view/list-view").then((function () {return resolve(__webpack_require__(/*! @/components/list-view/list-view */ 306));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var tuiListCell = function tuiListCell() {__webpack_require__.e(/*! require.ensure | components/list-cell/list-cell */ "components/list-cell/list-cell").then((function () {return resolve(__webpack_require__(/*! @/components/list-cell/list-cell */ 313));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var PayPanel = function PayPanel() {__webpack_require__.e(/*! require.ensure | components/PayPanel/PayPanel */ "components/PayPanel/PayPanel").then((function () {return resolve(__webpack_require__(/*! @/components/PayPanel/PayPanel */ 299));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
+var _utils = _interopRequireDefault(__webpack_require__(/*! @/utils/utils.js */ 28));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}var tuiSkeleton = function tuiSkeleton() {__webpack_require__.e(/*! require.ensure | components/tui-skeleton/tui-skeleton */ "components/tui-skeleton/tui-skeleton").then((function () {return resolve(__webpack_require__(/*! @/components/tui-skeleton/tui-skeleton */ 263));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var tuiListView = function tuiListView() {__webpack_require__.e(/*! require.ensure | components/list-view/list-view */ "components/list-view/list-view").then((function () {return resolve(__webpack_require__(/*! @/components/list-view/list-view */ 306));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var tuiListCell = function tuiListCell() {__webpack_require__.e(/*! require.ensure | components/list-cell/list-cell */ "components/list-cell/list-cell").then((function () {return resolve(__webpack_require__(/*! @/components/list-cell/list-cell */ 313));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};
+var global_Set_jll = uni.getStorageSync('global_Set_jll');var _default =
 {
   data: function data() {
     return {
@@ -353,13 +318,18 @@ var _junyiH5Copy = _interopRequireDefault(__webpack_require__(/*! @/js_sdk/junyi
       skeletonShow: true,
       showPickerStatus: false,
       // 延迟时间
-      date: '' };
+      date: '',
+      eventInfo: '',
+      is_taxes: 0,
+      is_inster: 0 };
 
   },
   onLoad: function onLoad(options) {
     this.formParams.order_code = options.code;
     this.payParams.order_num = options.code;
 
+    this.is_taxes = global_Set_jll.is_taxes;
+    this.is_inster = global_Set_jll.is_inster;
     var that = this;
     uni.$on('refresh_orderDetail', function () {
       that.loadData();
@@ -408,8 +378,7 @@ var _junyiH5Copy = _interopRequireDefault(__webpack_require__(/*! @/js_sdk/junyi
   components: {
     tuiListCell: tuiListCell,
     tuiSkeleton: tuiSkeleton,
-    tuiListView: tuiListView,
-    PayPanel: PayPanel },
+    tuiListView: tuiListView },
 
   methods: {
     getDate: function getDate(type) {
@@ -455,8 +424,8 @@ var _junyiH5Copy = _interopRequireDefault(__webpack_require__(/*! @/js_sdk/junyi
 
                 // this.$ui.showloading();
                 data = {
-                  "order_code": _this.formParams.order_code,
-                  "delay_ems_time": d };_context.next = 5;return (
+                  order_code: _this.formParams.order_code,
+                  delay_ems_time: d };_context.next = 5;return (
 
                   _this.$api.Delayed(data, false));case 5:res = _context.sent;
                 // this.$ui.hideloading();
@@ -598,7 +567,7 @@ var _junyiH5Copy = _interopRequireDefault(__webpack_require__(/*! @/js_sdk/junyi
                   order_code: _this4.formParams.order_code,
                   share_user_id: '' };_context4.next = 5;return (
 
-                  _this4.$api.getOrderDetail(data, false));case 5:res = _context4.sent;
+                  _this4.$api.GetShareOrderInfo(data, false));case 5:res = _context4.sent;
                 // this.$ui.hideloading();
 
                 // console.log(res)
@@ -607,7 +576,7 @@ var _junyiH5Copy = _interopRequireDefault(__webpack_require__(/*! @/js_sdk/junyi
                     that.item = res.Data;
                     that.formParams.ems_code = res.Data.ems_code;
                     that.oderId = res.Data.order_code;
-                    // alert(that.oderId)
+                    that.eventInfo = res.Data.user_list.list;
                   }
                   that.skeletonShow = false;
                 } else {

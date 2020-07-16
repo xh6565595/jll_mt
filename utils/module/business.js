@@ -2,6 +2,17 @@
 
 import http from '../http/interface'
 const Set = {
+	
+	
+	// 活动订单商品详情
+	GetShareOrderInfo:(data) => {
+	    return http.request({
+	        url: '/api/Order/GetShareOrderInfo',
+	        method: 'get', 
+	        data,
+			// handle:true
+	    })
+	},
 	// 确认安装
 	OrderInstall:(data) => {
 	    return http.request({
