@@ -1,7 +1,7 @@
 <template>
 	<view>
 		<tui-skeleton v-if="skeletonShow" backgroundColor="#f9f9f9" skeletonBgColor="#efefef" borderRadius="0rpx"></tui-skeleton>
-		<view class="pages tui-skeleton">
+		<view class="pages tui-skeleton" :style="{'padding-bottom':ifx?'180rpx':'150rpx'}">
 			
 			<view class="bgbox flex flex_center ">
 				<view class="f1">
@@ -11,7 +11,7 @@
 				<!-- <button class="yanchi" @tap="yanchi" v-if="item.order_status == 1">延迟发货</button> -->
 				<view class="flex flex_y" style="align-items: flex-end" v-if="item.order_status == 1">
 					<picker mode="date" :value="date" :start="startDate" :end="endDate" @change="bindDateChange">
-						<button class="yanchi" >延迟发货</button>
+						<button class="yanchi" >我要延迟发货</button>
 					</picker>				
 				</view>			
 			</view>
@@ -115,11 +115,11 @@
 								<view class="f1 text">{{ item.is_ems?'￥'+item.is_ems:'包邮' }}</view>
 							</view>
 							<view class="cells flex flex_center">
-								<view class="label cm_tex_r">税费</view>
+								<view class="label cm_tex_r">税费({{tex}}%)</view>
 								<view class="f1 text">￥{{ item.taxes_price }}</view>
 							</view>
-							<view class="cells flex flex_center">
-								<view class="label cm_tex_r">特色服务</view>
+							<view class="cells flex flex_center" v-if="is_inster">
+								<view class="label cm_tex_r" >安装费用</view>
 								<view class="f1 text">￥{{ item.service_total_price }}</view>
 							</view>
 							<!-- </view> -->
@@ -193,15 +193,18 @@
 					</tui-list-cell>
 				</view>
 			</view>
-			<text class="footerMark" v-if="item.order_status == 1 && item.delay_ems_time">发货时间：{{ item.delay_ems_time }}</text>
-			<view class="footer flex flex_center" v-if="item.order_status != 5">
-				<view class="f1"></view>
-				<tui-button type="primary" class="btns" size="small" shape="circle" @tap="_readyToPay" v-if="item.order_status == 0">立即付款</tui-button>
-				<tui-button type="primary" class="btns" size="small" plain shape="circle" @tap="cancelOrder" v-if="item.order_status == 0">取消订单</tui-button>
-				<tui-button type="primary" class="btns" size="small" shape="circle" v-if="item.order_status == 1" @tap="prompt(item.order_code)">提醒发货</tui-button>
-				<tui-button type="primary" class="btns" size="small" shape="circle" v-if="item.order_status == 2" @tap="sure(item.order_code)">确认收货</tui-button>
-				<tui-button type="primary" class="btns" size="small" shape="circle" plain v-if="item.order_status == 2" @tap="scan(item.order_code)">查看物流</tui-button>
+			<view class="footerBox" :style="{'padding-bottom':ifx?'40rpx':''}">
+				<text class="footerMark" v-if="item.order_status == 1 && item.delay_ems_time">发货时间：{{ item.delay_ems_time }}</text>
+				<view class="footer flex flex_center" v-if="item.order_status != 5" >
+					<view class="f1"></view>
+					<tui-button type="primary" class="btns" size="small" shape="circle" @tap="_readyToPay" v-if="item.order_status == 0">立即付款</tui-button>
+					<tui-button type="primary" class="btns" size="small" plain shape="circle" @tap="cancelOrder" v-if="item.order_status == 0">取消订单</tui-button>
+					<tui-button type="primary" class="btns" size="small" shape="circle" v-if="item.order_status == 1" @tap="prompt(item.order_code)">提醒发货</tui-button>
+					<tui-button type="primary" class="btns" size="small" shape="circle" v-if="item.order_status == 2" @tap="sure(item.order_code)">确认收货</tui-button>
+					<tui-button type="primary" class="btns" size="small" shape="circle" plain v-if="item.order_status == 2" @tap="scan(item.order_code)">查看物流</tui-button>
+				</view>			
 			</view>
+			
 		</view>
 		<PayPanel ref="payPanel" :oderId="oderId" :amout="item.pay_price" @success="success" @cancel="cancel"></PayPanel>
 		<accredit ref="kf" :autoClose="true">
@@ -224,7 +227,9 @@ import tuiListView from '@/components/list-view/list-view';
 import tuiListCell from '@/components/list-cell/list-cell';
 import Utils from '@/utils/utils.js';
 import PayPanel from '@/components/PayPanel/PayPanel';
-import h5Copy from '@/js_sdk/junyi-h5-copy/junyi-h5-copy/junyi-h5-copy.js';
+import { mapState } from 'vuex';
+// import h5Copy from '@/js_sdk/junyi-h5-copy/junyi-h5-copy/junyi-h5-copy.js';
+const global_Set_jll = uni.getStorageSync('global_Set_jll');
 export default {
 	data() {
 		return {
@@ -244,14 +249,17 @@ export default {
 			},
 			skeletonShow: true,
 			showPickerStatus: false,
+			is_inster:0,
 			// 延迟时间
-			date: ''
+			date: '',
+			tex:0
 		};
 	},
 	onLoad(options) {
 		this.formParams.order_code = options.code;
 		this.payParams.order_num = options.code;
-
+		this.tex = global_Set_jll.taxes_ratio*100
+		this.is_inster = global_Set_jll.is_inster
 		let that = this;
 		uni.$on('refresh_orderDetail', () => {
 			that.loadData();
@@ -261,6 +269,7 @@ export default {
 		this.loadData();
 	},
 	computed: {
+		...mapState(['ifx']),
 		statusText() {
 			let t = '';
 			switch (parseInt(this.item.order_status)) {
@@ -408,6 +417,7 @@ export default {
 				} else {
 					that.$ui.toast(res.Msg);
 				}
+				uni.pageScrollTo({scrollTop: 0,duration: 300});
 				if (callback) callback();
 			} catch (err) {
 				console.log('请求结果false : ' + err);
@@ -579,7 +589,7 @@ export default {
 	padding: 20rpx;
 	position: relative;
 	padding-top: 160rpx;
-	padding-bottom: 160rpx;
+	// padding-bottom: 160rpx;
 	.bgbox {
 		font-size: 40rpx;
 		text-align: left;
@@ -599,7 +609,7 @@ export default {
 			height: 58rpx;
 			line-height: 56rpx;
 			border-radius: 29rpx;
-			border: 1rpx solid #fff;
+			border: 2rpx solid #fff;
 			text-align: center;
 			color: #fff;
 			background-color: transparent;
@@ -727,33 +737,35 @@ export default {
 		margin-right: 20rpx;
 		text-align: left;
 	}
-	.footerMark{
+	.footerBox{
 		position: fixed;
-		left: 0;
-		bottom: 100rpx;
-		height: 50rpx;
-		line-height: 50rpx;
-		width: 100%;
-		padding: 0 20rpx;
-		z-index: 100;
-		background-color: #FFFDEF;
-		color: #FC872D;
-		text-align: center;
-	}
-	.footer {
-		position: fixed;
+		width: 100vw;
 		left: 0;
 		bottom: 0;
-		height: 100rpx;
-		background: #fff;
-		border-top: 1rpx solid #f2f2f2;
-		width: 100%;
-		padding: 0 20rpx;
 		z-index: 100;
-		.btns {
-			margin-left: 20rpx;
+		background-color: #fff;
+		.footerMark{
+			width: 100vw;
+			height: 50rpx;
+			line-height: 50rpx;
+			width: 100%;
+			padding: 0 20rpx;
+			background-color: #FFFDEF;
+			color: #FC872D;
+			text-align: center;
+		}
+		.footer {
+			height: 100rpx;
+			background: #fff;
+			width: 100%;
+			padding: 0 20rpx;
+			z-index: 100;
+			.btns {
+				margin-left: 20rpx;
+			}
 		}
 	}
+	
 	.tui-mask-screen {
 		position: fixed;
 		top: 0;

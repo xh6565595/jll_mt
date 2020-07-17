@@ -1564,35 +1564,6 @@ uni$1;exports.default = _default;
 
 /***/ }),
 
-/***/ 104:
-/*!*************************************************************************!*\
-  !*** G:/work/马桶福利购/js_sdk/junyi-h5-copy/junyi-h5-copy/junyi-h5-copy.js ***!
-  \*************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = h5Copy;function h5Copy(content) {
-
-  if (!document.queryCommandSupported('copy')) {
-    // 不支持
-    return false;
-  }
-
-  var textarea = document.createElement("textarea");
-  textarea.value = content;
-  textarea.readOnly = "readOnly";
-  document.body.appendChild(textarea);
-  textarea.select(); // 选择对象
-  textarea.setSelectionRange(0, content.length); //核心
-  var result = document.execCommand("copy"); // 执行浏览器复制命令
-  textarea.remove();
-  return result;
-
-}
-
-/***/ }),
-
 /***/ 11:
 /*!*****************************************!*\
   !*** G:/work/马桶福利购/utils/http/index.js ***!
@@ -1886,7 +1857,8 @@ var store = new _vuex.default.Store({
     shareUser: '', //是否需要立即跳转制定商品
     shareOrder: '',
     iviCode: '', //邀请码
-    currentRoleCode: '' //聚友空间当前的账户身份的 code
+    currentRoleCode: '', //聚友空间当前的账户身份的 code
+    ifx: false //是否是苹果x
   },
   mutations: {
     login: function login(state, userName) {
@@ -1928,6 +1900,9 @@ var store = new _vuex.default.Store({
       state.shareUser = '';
       state.shareOrder = '';
       state.iviCode = '';
+    },
+    setPhoneX: function setPhoneX(state, info) {
+      state.ifx = true;
     } },
 
   getters: {},
@@ -2991,7 +2966,7 @@ var _default = {
 
 /***/ }),
 
-/***/ 153:
+/***/ 152:
 /*!******************************************!*\
   !*** G:/work/马桶福利购/utils/picker.city.js ***!
   \******************************************/
@@ -17432,7 +17407,7 @@ data = data;exports.default = _default;
 
 /***/ }),
 
-/***/ 154:
+/***/ 153:
 /*!****************************************************************!*\
   !*** G:/work/马桶福利购/js_sdk/graceui-dataChecker/graceChecker.js ***!
   \****************************************************************/
@@ -25220,7 +25195,38 @@ Utils;exports.default = _default;
 
 /***/ }),
 
-/***/ 296:
+/***/ 3:
+/*!***********************************!*\
+  !*** (webpack)/buildin/global.js ***!
+  \***********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+var g;
+
+// This works in non-strict mode
+g = (function() {
+	return this;
+})();
+
+try {
+	// This works if eval is allowed (see CSP)
+	g = g || new Function("return this")();
+} catch (e) {
+	// This works if the window reference is available
+	if (typeof window === "object") g = window;
+}
+
+// g can still be undefined, but nothing to do about it...
+// We return undefined, instead of nothing here, so it's
+// easier to handle this case. if(!global) { ...}
+
+module.exports = g;
+
+
+/***/ }),
+
+/***/ 302:
 /*!*****************************************************!*\
   !*** G:/work/马桶福利购/components/tki-qrcode/qrcode.js ***!
   \*****************************************************/
@@ -26435,37 +26441,6 @@ Utils;exports.default = _default;
 
 QRCode;exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
-
-/***/ }),
-
-/***/ 3:
-/*!***********************************!*\
-  !*** (webpack)/buildin/global.js ***!
-  \***********************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-var g;
-
-// This works in non-strict mode
-g = (function() {
-	return this;
-})();
-
-try {
-	// This works if eval is allowed (see CSP)
-	g = g || new Function("return this")();
-} catch (e) {
-	// This works if the window reference is available
-	if (typeof window === "object") g = window;
-}
-
-// g can still be undefined, but nothing to do about it...
-// We return undefined, instead of nothing here, so it's
-// easier to handle this case. if(!global) { ...}
-
-module.exports = g;
-
 
 /***/ }),
 

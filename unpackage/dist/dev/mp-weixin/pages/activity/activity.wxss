@@ -24,9 +24,6 @@
 /* 垂直间距 */
 /* 透明度 */
 /* 文章场景相关 */
-.pages.data-v-4aefcc3e {
-  padding: 20rpx;
-}
 .pages .fixed.data-v-4aefcc3e {
   width: 100%;
   position: fixed;
@@ -133,6 +130,9 @@
 .pages .doneItem .cm_items.data-v-4aefcc3e {
   margin-top: 20rpx;
 }
+.hot.data-v-4aefcc3e {
+  padding: 20rpx;
+}
 .shareBox.data-v-4aefcc3e {
   width: 80vw;
   background-color: #fff;
@@ -144,5 +144,51 @@
   height: 100rpx;
   border-radius: 50%;
   margin-right: 20rpx;
+}
+.firstLunch.data-v-4aefcc3e {
+  width: 100vw;
+  min-height: 100%;
+  background-color: #fd8e3e;
+  z-index: 100;
+  padding-bottom: 50rpx;
+}
+.firstLunch .firstLunchTop.data-v-4aefcc3e {
+  width: 100%;
+}
+.firstLunch .upBox.data-v-4aefcc3e {
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+          justify-content: space-between;
+  padding: 72rpx 80rpx;
+}
+.firstLunch .upBox .subs.data-v-4aefcc3e {
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 50%;
+  border: 4rpx dashed #fff;
+  text-align: center;
+  line-height: 120rpx;
+  color: #fff;
+  font-size: 40rpx;
+}
+.firstLunch .nowbtn.data-v-4aefcc3e {
+  width: 650rpx;
+  height: 86rpx;
+  line-height: 86rpx;
+  border-radius: 43px;
+  background: -webkit-linear-gradient(bottom, #FEF7BE, #E9B249);
+  background: linear-gradient(0deg, #FEF7BE, #E9B249);
+  color: #4F2006;
+  text-align: center;
+  font-size: 30rpx;
+}
+.firstLunch .richBox.data-v-4aefcc3e {
+  margin-top: 80rpx;
+  padding: 0 40rpx;
+}
+.firstLunch .block.data-v-4aefcc3e {
+  width: 100vw;
+  height: 176rpx;
+  background: #3bbff7;
 }
 

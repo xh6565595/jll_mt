@@ -115,7 +115,7 @@
 					</tui-list-cell>
 					<tui-list-cell :hover="false">
 						<view class="tui-line-cell flex flex_center tui-cell-last">
-							<view class="tui-title cm_text">税费</view>
+							<view class="tui-title cm_text">税费({{tex}}%)</view>
 							<view class="tui-input f1 cm_tex_l">￥{{ item.taxes_price }}</view>		
 							<text style="color:#DD3A30" v-if="is_taxes">不可退</text>
 						</view>
@@ -185,7 +185,8 @@ export default {
 			date: '',
 			eventInfo:'',
 			is_taxes:0,
-			is_inster:0
+			is_inster:0,
+			tex:0
 		};
 	},
 	onLoad(options) {
@@ -194,6 +195,7 @@ export default {
 		
 		this.is_taxes = global_Set_jll.is_taxes
 		this.is_inster = global_Set_jll.is_inster
+		this.tex = global_Set_jll.taxes_ratio*100
 		let that = this;
 		uni.$on('refresh_orderDetail', () => {
 			that.loadData();

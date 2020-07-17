@@ -22,7 +22,8 @@ const store = new Vuex.Store({
 		shareUser:'',  //是否需要立即跳转制定商品
 		shareOrder:'',
 		iviCode:'', //邀请码
-		currentRoleCode:''  //聚友空间当前的账户身份的 code
+		currentRoleCode:'',  //聚友空间当前的账户身份的 code
+		ifx:false    //是否是苹果x
 	},
     mutations: {
         login(state, userName) {
@@ -64,6 +65,9 @@ const store = new Vuex.Store({
 			state.shareUser = ''
 			state.shareOrder = ''		
 			state.iviCode = ''
+		},
+		setPhoneX(state,info){
+			state.ifx = true
 		}
     },
 	getters:{

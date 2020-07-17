@@ -93,6 +93,11 @@
 						<text class="cm_t_24 f1">客服</text>
 						<text class="iconfont icon-fanhui3"></text>
 					</view>
+					<view class="menus flex flex_center " @tap="_clear">
+						<image src="../../static/image/wd_sz.png" class="menusPic"></image>
+						<text class="cm_t_24 f1">清除缓存</text>
+						<text class="iconfont icon-fanhui3"></text>
+					</view>
 				</view>
 			</view>
 		</view>
@@ -168,7 +173,10 @@ export default {
 		this._loadData();
 	},
 	methods: {
-		
+		_clear(){
+			uni.removeStorageSync('access_token')
+			this.$ui.toast('清除')
+		},
 		imageLoad(index) {
 			this.$set(this.list[index], 'load', true);
 		},

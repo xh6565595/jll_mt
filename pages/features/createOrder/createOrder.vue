@@ -1,5 +1,5 @@
 <template>
-	<view class="pages">
+	<view class="pages"  :style="{'padding-bottom':ifx?'40rpx':''}">
 		<!-- <view> -->
 		<!-- <tui-skeleton v-if="skeletonShow" backgroundColor="#f9f9f9" skeletonBgColor="#efefef" borderRadius="0rpx"></tui-skeleton> -->
 		<view class="addressBox flex flex_center tui-skeleton-rect">
@@ -52,14 +52,14 @@
 											<text class=" cm_t_20 selectTags">{{ item.project_service3.service_name }} ￥{{ item.project_service3.service_price }}</text>
 										</view>
 									</view> -->
-								</view>
+								</view> 
 							</view>
 							<!-- <view class="cells flex flex_center">
 								<view class="label cm_tex_r">运费</view>
 								<view class="f1 text">{{ currentAddress?'￥'+allEms:'请先选择收货地址' }}</view>
 							</view> -->
 							<view class="cells flex flex_center">
-								<view class="label cm_tex_r">税费</view>
+								<view class="label cm_tex_r">税费({{tex}}%)</view>
 								<view class="f1 text">￥{{shui}}</view>
 							</view>
 							<view class="cells flex flex_center" v-if="servePay">
@@ -77,14 +77,17 @@
 				<text class="cm_price">￥{{ allAccount }}</text>
 			</view>
 		</view>
-		<view class="footer  flex flex_center">
-			<view class=" flex flex_center">
-				<view class=""><text>合计:</text></view>
-				<text class="cm_price">￥{{ allAccount }}</text>
+		<view class="footerBox" :style="{'padding-bottom':ifx?'40rpx':''}">
+			<view class="footer  flex flex_center"  >
+				<view class=" flex flex_center">
+					<view class=""><text>合计:</text></view>
+					<text class="cm_price">￥{{ allAccount }}</text>
+				</view>
+				<view class="f1"></view>
+				<button class="submit" @tap="submit">提交订单</button>
 			</view>
-			<view class="f1"></view>
-			<button class="submit" @tap="submit">提交订单</button>
 		</view>
+		
 		<!-- </view> -->
 		<tui-modal :show="modal" @click="handleClick" @cancel="hide" :title="title" :content="content" :maskClosable="false" color="#333" :size="32"></tui-modal>
 		<PayPanel ref="payPanel" :oderId="oderId" :amout="allAccount" @success="success" @cancel="cancel"></PayPanel>
@@ -128,13 +131,15 @@ export default {
 			content: '',
 			allEms: 0, //运费
 			modal: false,
-			oderId: ''
+			oderId: '',
+			tex:0
 		};
 	},
 	onLoad(options) {
 		this.formParams.create_order_type = options.type;
 		this.formParams.share_order_code = options.shareOrder;
 		console.log(this.formParams)
+		this.tex = global_Set_jll.taxes_ratio*100
 		// if(this.shareUser){
 		// 	this.formParams.share_order_code = this.shareUser
 		// }
@@ -156,7 +161,7 @@ export default {
 		PayPanel
 	},
 	computed: {
-		...mapState(['currentOrder','shareUser','sharePro']),
+		...mapState(['currentOrder','shareUser','sharePro','ifx']),
 		allPrize() {
 			let s = 0;
 			this.currentOrder.forEach(item => {
@@ -439,24 +444,28 @@ export default {
 		border-radius: 12rpx;
 		overflow: hidden;
 	}
-	.footer {
+	.footerBox{
 		position: fixed;
-		width: 100%;
-		height: 100rpx;
+		width: 100vw;
 		left: 0;
 		bottom: 0;
-		background: #fff;
 		z-index: 200;
-		padding: 0 30rpx;
-		.submit {
-			padding: 0 40rpx;
-			line-height: 68rpx;
-			height: 68rpx;
-			border-radius: 34rpx;
-			background: #da1a0f;
-			color: #fff;
-			margin-left: 40rpx;
+		background: #fff;		
+		.footer {
+			height: 100rpx;		
+			background: #fff;			
+			padding: 0 30rpx;
+			.submit {
+				padding: 0 40rpx;
+				line-height: 68rpx;
+				height: 68rpx;
+				border-radius: 34rpx;
+				background: #da1a0f;
+				color: #fff;
+				margin-left: 40rpx;
+			}
 		}
 	}
+	
 }
 </style>

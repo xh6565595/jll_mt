@@ -25,7 +25,12 @@
 			"style": {
 				"navigationBarTitleText": "商品详情",
 				"navigationBarTextStyle": "black",
-				"navigationStyle":"custom"
+				"navigationStyle":"custom",
+				"mp-weixin": {
+				      "usingComponents": {
+				        "txv-video": "plugin://myPlugin/txv-video"
+				      }
+				    }
 			}
 		}
         ,{

@@ -4,6 +4,7 @@
   "navigationStyle": "custom",
   "usingComponents": {
     "rule": "/components/rule/rule",
-    "accredit": "/components/accredit/accredit"
+    "accredit": "/components/accredit/accredit",
+    "tui-tips": "/components/extend/tips/tips"
   }
 }

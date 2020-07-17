@@ -78,17 +78,20 @@
   border-radius: 12rpx;
   overflow: hidden;
 }
-.pages .footer.data-v-13677224 {
+.pages .footerBox.data-v-13677224 {
   position: fixed;
-  width: 100%;
-  height: 100rpx;
+  width: 100vw;
   left: 0;
   bottom: 0;
-  background: #fff;
   z-index: 200;
+  background: #fff;
+}
+.pages .footerBox .footer.data-v-13677224 {
+  height: 100rpx;
+  background: #fff;
   padding: 0 30rpx;
 }
-.pages .footer .submit.data-v-13677224 {
+.pages .footerBox .footer .submit.data-v-13677224 {
   padding: 0 40rpx;
   line-height: 68rpx;
   height: 68rpx;

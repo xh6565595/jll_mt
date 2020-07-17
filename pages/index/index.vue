@@ -58,19 +58,12 @@ export default {
 	onLoad(options) {
 		let that = this
 	
-		// this.$ui.toast(JSON.stringify(options.q))
-		// uni.showModal({
-		// 	title:'洁利来智能马桶',
-		// 	content:JSON.stringify(options.q)
-		// })
-		// return 
-		// let a = 'gllo.kuxiong999.com/gllo?icode=efafsdf'
-		
-		// console.log(url);
 		let icode = ''
 		if(options.q){
 			let  url = decodeURIComponent(options.q);
 			icode = url.split('icode=')[1]
+		}else if(options.icode){
+			icode = options.icode
 		}
 		console.log(icode);
 		this.shareData = {
@@ -142,7 +135,7 @@ export default {
 						this.$ui.toast(res.Msg)
 					}
 					if(that.shareData.proCode && that.shareData.userId && that.shareData.odrCode){
-						uni.navigateTo({
+						uni.redirectTo({
 							url: '/pages/main/details/details?code='+ that.shareData.proCode
 						});
 					}else{
@@ -174,7 +167,7 @@ export default {
 								//  消费者 3是安装 2推广者
 								// 记录信息
 								if(that.shareData.proCode && that.shareData.userId && that.shareData.odrCode){
-									uni.navigateTo({
+									uni.redirectTo({
 										url: '/pages/main/details/details?code='+ that.shareData.proCode
 									});
 								}else{

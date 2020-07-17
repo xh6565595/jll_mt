@@ -156,20 +156,20 @@ _App.default.mpType = 'app';
 
 
 // 全局组件
-var LoadMore = function LoadMore() {__webpack_require__.e(/*! require.ensure | components/uni-load-more/uni-load-more */ "components/uni-load-more/uni-load-more").then((function () {return resolve(__webpack_require__(/*! @/components/uni-load-more/uni-load-more.vue */ 221));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};
-_vue.default.component('LoadMore', LoadMore);var tuiButton = function tuiButton() {__webpack_require__.e(/*! require.ensure | components/button/button */ "components/button/button").then((function () {return resolve(__webpack_require__(/*! @/components/button/button.vue */ 228));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};
+var LoadMore = function LoadMore() {__webpack_require__.e(/*! require.ensure | components/uni-load-more/uni-load-more */ "components/uni-load-more/uni-load-more").then((function () {return resolve(__webpack_require__(/*! @/components/uni-load-more/uni-load-more.vue */ 220));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};
+_vue.default.component('LoadMore', LoadMore);var tuiButton = function tuiButton() {__webpack_require__.e(/*! require.ensure | components/button/button */ "components/button/button").then((function () {return resolve(__webpack_require__(/*! @/components/button/button.vue */ 227));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};
 
 
-_vue.default.component('tuiButton', tuiButton);var tuiNav = function tuiNav() {__webpack_require__.e(/*! require.ensure | components/tui-navigation-bar/tui-navigation-bar */ "components/tui-navigation-bar/tui-navigation-bar").then((function () {return resolve(__webpack_require__(/*! @/components/tui-navigation-bar/tui-navigation-bar */ 235));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};
+_vue.default.component('tuiButton', tuiButton);var tuiNav = function tuiNav() {__webpack_require__.e(/*! require.ensure | components/tui-navigation-bar/tui-navigation-bar */ "components/tui-navigation-bar/tui-navigation-bar").then((function () {return resolve(__webpack_require__(/*! @/components/tui-navigation-bar/tui-navigation-bar */ 234));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};
 
 
-_vue.default.component('tuiNav', tuiNav);var Icon = function Icon() {__webpack_require__.e(/*! require.ensure | components/icon/icon */ "components/icon/icon").then((function () {return resolve(__webpack_require__(/*! @/components/icon/icon */ 242));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};
+_vue.default.component('tuiNav', tuiNav);var Icon = function Icon() {__webpack_require__.e(/*! require.ensure | components/icon/icon */ "components/icon/icon").then((function () {return resolve(__webpack_require__(/*! @/components/icon/icon */ 241));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};
 
 
-_vue.default.component('Icon', Icon);var tuiModal = function tuiModal() {__webpack_require__.e(/*! require.ensure | components/modal/modal */ "components/modal/modal").then((function () {return resolve(__webpack_require__(/*! @/components/modal/modal */ 249));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};
+_vue.default.component('Icon', Icon);var tuiModal = function tuiModal() {__webpack_require__.e(/*! require.ensure | components/modal/modal */ "components/modal/modal").then((function () {return resolve(__webpack_require__(/*! @/components/modal/modal */ 248));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};
 
 
-_vue.default.component('tuiModal', tuiModal);var tuiTag = function tuiTag() {__webpack_require__.e(/*! require.ensure | components/tag/tag */ "components/tag/tag").then((function () {return resolve(__webpack_require__(/*! @/components/tag/tag */ 256));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};
+_vue.default.component('tuiModal', tuiModal);var tuiTag = function tuiTag() {__webpack_require__.e(/*! require.ensure | components/tag/tag */ "components/tag/tag").then((function () {return resolve(__webpack_require__(/*! @/components/tag/tag */ 255));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};
 
 
 _vue.default.component('tuiTag', tuiTag);
@@ -294,8 +294,18 @@ var _index = _interopRequireDefault(__webpack_require__(/*! @/utils/http/index.j
 var _default =
 {
   onLaunch: function onLaunch(options) {
-    console.log('App Launch', options);
+    // console.log('App Launch', options);
+    uni.removeStorageSync('access_token');
 
+    var that = this;
+    uni.getSystemInfo({
+      success: function success(res) {
+        // console.log('手机信息res'+res.model)
+        var modelmes = res.model;
+        if (modelmes.search('iPhone X') != -1) {
+          that.$store.commit('setPhoneX', true);
+        }
+      } });
 
   },
   onShow: function onShow() {
@@ -341,7 +351,6 @@ var _default =
                   that.initUser();
                 } else {
                 }_context.next = 18;break;case 16:_context.prev = 16;_context.t0 = _context["catch"](9);case 18:case "end":return _context.stop();}}}, _callee, null, [[9, 16]]);}))();
-
 
     },
     // 加载登录账户信息

@@ -167,10 +167,10 @@
 					this.text = [provice, city, district];
 					console.log(cityData[value[0]].children[value[1]].children[value[2]])
 					let  area = cityData[value[0]].children[value[1]].children[value[2]].id
-					 // console.log(area)
+					 console.log(provice,city,district)
 					
 					this.formParams.area = area
-					this.addressDetail = ''
+					this.addressDetail = provice+','+city+','+district
 					this.showPickerStatus = false
 				}
 				// console.log(111,value)

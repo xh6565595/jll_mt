@@ -3,6 +3,7 @@
   "navigationBarTextStyle": "black",
   "navigationBarBackgroundColor": "#fff",
   "usingComponents": {
+    "tui-skeleton": "/components/tui-skeleton/tui-skeleton",
     "tui-tips": "/components/extend/tips/tips"
   }
 }

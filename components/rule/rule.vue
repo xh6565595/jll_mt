@@ -66,7 +66,7 @@
 			.contentBox{
 				width: 100%;
 				height: 50vh;
-				background-color: #f1f1f1;
+				background-color: #fff;
 				
 			}
 			.footer{

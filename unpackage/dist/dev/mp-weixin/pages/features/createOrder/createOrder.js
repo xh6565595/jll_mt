@@ -94,7 +94,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "components", function() { return components; });
 var components = {
   PayPanel: function() {
-    return __webpack_require__.e(/*! import() | components/PayPanel/PayPanel */ "components/PayPanel/PayPanel").then(__webpack_require__.bind(null, /*! @/components/PayPanel/PayPanel.vue */ 299))
+    return __webpack_require__.e(/*! import() | components/PayPanel/PayPanel */ "components/PayPanel/PayPanel").then(__webpack_require__.bind(null, /*! @/components/PayPanel/PayPanel.vue */ 305))
   }
 }
 var render = function() {
@@ -232,8 +232,11 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+
 var _utils = _interopRequireDefault(__webpack_require__(/*! @/utils/utils.js */ 28));
-var _vuex = __webpack_require__(/*! vuex */ 14);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var tuiSkeleton = function tuiSkeleton() {__webpack_require__.e(/*! require.ensure | components/tui-skeleton/tui-skeleton */ "components/tui-skeleton/tui-skeleton").then((function () {return resolve(__webpack_require__(/*! @/components/tui-skeleton/tui-skeleton */ 263));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var tuiListView = function tuiListView() {__webpack_require__.e(/*! require.ensure | components/list-view/list-view */ "components/list-view/list-view").then((function () {return resolve(__webpack_require__(/*! @/components/list-view/list-view */ 306));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var tuiListCell = function tuiListCell() {__webpack_require__.e(/*! require.ensure | components/list-cell/list-cell */ "components/list-cell/list-cell").then((function () {return resolve(__webpack_require__(/*! @/components/list-cell/list-cell */ 313));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var PayPanel = function PayPanel() {__webpack_require__.e(/*! require.ensure | components/PayPanel/PayPanel */ "components/PayPanel/PayPanel").then((function () {return resolve(__webpack_require__(/*! @/components/PayPanel/PayPanel */ 299));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};
+var _vuex = __webpack_require__(/*! vuex */ 14);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var tuiSkeleton = function tuiSkeleton() {__webpack_require__.e(/*! require.ensure | components/tui-skeleton/tui-skeleton */ "components/tui-skeleton/tui-skeleton").then((function () {return resolve(__webpack_require__(/*! @/components/tui-skeleton/tui-skeleton */ 262));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var tuiListView = function tuiListView() {__webpack_require__.e(/*! require.ensure | components/list-view/list-view */ "components/list-view/list-view").then((function () {return resolve(__webpack_require__(/*! @/components/list-view/list-view */ 312));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var tuiListCell = function tuiListCell() {__webpack_require__.e(/*! require.ensure | components/list-cell/list-cell */ "components/list-cell/list-cell").then((function () {return resolve(__webpack_require__(/*! @/components/list-cell/list-cell */ 319));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var PayPanel = function PayPanel() {__webpack_require__.e(/*! require.ensure | components/PayPanel/PayPanel */ "components/PayPanel/PayPanel").then((function () {return resolve(__webpack_require__(/*! @/components/PayPanel/PayPanel */ 305));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};
 var global_Set_jll = uni.getStorageSync('global_Set_jll');var _default =
 
 {
@@ -264,13 +267,15 @@ var global_Set_jll = uni.getStorageSync('global_Set_jll');var _default =
       content: '',
       allEms: 0, //运费
       modal: false,
-      oderId: '' };
+      oderId: '',
+      tex: 0 };
 
   },
   onLoad: function onLoad(options) {
     this.formParams.create_order_type = options.type;
     this.formParams.share_order_code = options.shareOrder;
     console.log(this.formParams);
+    this.tex = global_Set_jll.taxes_ratio * 100;
     // if(this.shareUser){
     // 	this.formParams.share_order_code = this.shareUser
     // }
@@ -292,7 +297,7 @@ var global_Set_jll = uni.getStorageSync('global_Set_jll');var _default =
     PayPanel: PayPanel },
 
   computed: _objectSpread({},
-  (0, _vuex.mapState)(['currentOrder', 'shareUser', 'sharePro']), {
+  (0, _vuex.mapState)(['currentOrder', 'shareUser', 'sharePro', 'ifx']), {
     allPrize: function allPrize() {
       var s = 0;
       this.currentOrder.forEach(function (item) {

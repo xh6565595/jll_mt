@@ -72,7 +72,7 @@ export default {
 		// 	})
 		// }
 	},
-	computed:  mapState(['shareUser','iviCode']),
+	computed:  mapState(['shareUser','iviCode','sharePro','shareOrder','userInfo','hasLogin']),
 	methods: {
 
 		// 立即注册
@@ -254,9 +254,18 @@ export default {
 								});
 							}else{
 								// 推广者 消费者 3是安装
-								uni.switchTab({
-									url: '/pages/main/main'
-								});
+								// uni.switchTab({
+								// 	url: '/pages/main/main'
+								// });
+								if(that.shareUser && that.sharePro && that.shareOrder){
+									uni.redirectTo({
+										url: '/pages/main/details/details?code='+ that.sharePro
+									});
+								}else{
+									uni.switchTab({
+										url: '/pages/main/main'
+									});
+								}	
 							}
 						},500)
 						

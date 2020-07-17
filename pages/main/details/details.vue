@@ -27,8 +27,8 @@
 				
 				<view class="cm_title" style="margin-bottom: 20rpx;">{{goods.project_name }}</view>
 				<view class="flex titleBox tui-skeleton-fillet" v-if="goods.is_activity==0">
-					<text class="cm_prize">￥{{ goods.project_raise_price }}</text>
-					<text class="cm_delete">￥{{ goods.project_price }}</text>
+					<text class="cm_prize">￥{{ goods.project_raise_price }} </text>
+					<text class="cm_delete" style="margin-left: 20rpx;"> 原价￥{{ goods.project_price }}</text>
 				</view>
 					
 				
@@ -36,7 +36,7 @@
 					<image src="../../../static/image/logo.png" mode="widthFix" class="logo"></image>
 					<view class=" cm_title   name">洁利来</view>
 					<view class="blank"></view>
-					<text class="f1">上市公司</text>
+					<text class="f1">股票代码：832734</text>
 				</view>
 			</view>
 
@@ -74,6 +74,12 @@
 				</navigator>
 				<!-- </view> -->
 			</view>
+			<!-- <video :src="goods.project_video" controls class="video" v-if="goods.project_video"></video> -->
+			<txv-video 
+			  vid="e0354z3cqjp"   
+			  playerid="e0354z3cqjp"    
+			  :autoplay="true" 
+			></txv-video> 
 			<view class="commonTit flex flex_center tui-skeleton-fillet">
 				<view class="blank"></view>
 				<view class="cm_title">商品详情</view>
@@ -82,12 +88,14 @@
 			<view>
 				<block v-for="(item, index) in details_img" :key="index"><image :src="item" mode="widthFix" style="width: 100%;"></image></block>
 			</view>
-			<view class="shareTip flex flex_center" v-if="shareActive">
-				<image :src="selfBuy?userInfo.consumer_head:share_consumer_info.consumer_head" mode="scaleToFill" style="width: 64rpx;height: 64rpx;border-radius: 50%;margin-right: 20rpx;"></image>
-				<view class="f1">{{selfBuy?userInfo.consumer_nick_name:share_consumer_info.consumer_name}}</view>
-			</view>
-			<view class="footer flex flex_center" v-if="!skeletonShow">
-				<button class="cm_btn sure"  @tap="_next"  >购买</button>			
+			<view class="footerBox"  :style="{'padding-bottom':ifx?'40rpx':''}">						
+				<view class="shareTip flex flex_center" v-if="shareActive">
+					<image :src="selfBuy?userInfo.consumer_head:share_consumer_info.consumer_head" mode="scaleToFill" style="width: 64rpx;height: 64rpx;border-radius: 50%;margin-right: 20rpx;"></image>
+					<view class="f1">{{selfBuy?userInfo.consumer_nick_name:share_consumer_info.consumer_name}}</view>
+				</view>
+				<view class="footer flex flex_center" v-if="!skeletonShow"  >
+					<button class="cm_btn sure"  @tap="_next"  >购买</button>			
+				</view>
 			</view>
 		</view>
 		<tui-modal :show="modal" @click="handleClick" @cancel="hide" :content="content" :maskClosable="false" color="#333" :size="32"></tui-modal>
@@ -202,12 +210,6 @@ export default {
 		}
 		this._loadData('refresh');
 		let that = this
-		// uni.getSystemInfo({
-		// 	success(res) {
-		
-		// 		that.platform = res.platform
-		// 	}
-		// })
 		
 	},
 	onUnload() {
@@ -217,7 +219,7 @@ export default {
 		
 	},
 	computed: {
-		...mapState(['shareUser','sharePro','shareOrder','userInfo','hasLogin']),
+		...mapState(['shareUser','sharePro','shareOrder','userInfo','hasLogin','ifx']),
 		restTimeValied() {
 			let t = this.endTime
 			console.log(t)
@@ -467,7 +469,7 @@ export default {
 
 <style lang="scss" scoped>
 .pages {
-	padding-bottom: 180rpx;
+	padding-bottom: 200rpx;
 	.swiper {
 		height: 774rpx;
 		position: relative;
@@ -712,6 +714,9 @@ export default {
 			}
 		}
 	}
+	.video{
+		width: 100vw;
+	}
 	.commonTit {
 		width: 100%;
 		height: 80rpx;
@@ -723,37 +728,41 @@ export default {
 			margin: 0 12rpx;
 		}
 	}
-	.footer {
-		width: 100%;
-		height: 100rpx;
-		background: #fff;
+	.footerBox{
 		position: fixed;
 		left: 0;
 		bottom: 0;
-		padding: 0 24rpx;
-		.mes{
-			width: 100rpx;
-			
-		}
-		.cm_des{
-			font-size: 20rpx; 
-		}
-		.sure{
-			margin-top: 0;
+		background: #fff;
+		// z-index: 100;
+		width: 100vw;
+		.footer {
 			width: 100%;
-			color: #fff;
+			height: 100rpx;
+			background: #fff;
+			
+			padding: 0 24rpx;
+			.mes{
+				width: 100rpx;
+				
+			}
+			.cm_des{
+				font-size: 20rpx; 
+			}
+			.sure{
+				margin-top: 0;
+				width: 100%;
+				color: #fff;
+			}
+		}
+		.shareTip{
+			width: 100%;
+			height: 88rpx;
+			line-height: 88rpx;
+			background: #FFEDE2;
+			padding: 0 24rpx;
 		}
 	}
-	.shareTip{
-		width: 100%;
-		height: 88rpx;
-		line-height: 88rpx;
-		background: #FFEDE2;
-		position: fixed;
-		left: 0;
-		bottom: 100rpx;
-		padding: 0 24rpx;
-	}
+	
 }
 .mask-screen {
 	width: 100%;
@@ -816,7 +825,7 @@ export default {
 .backBtn {
 	position: fixed;
 	right: 40rpx;
-	bottom: 138rpx;
+	bottom: 158rpx;
 	width: 90rpx;
 	height: 90rpx;
 	border-radius: 50%;
