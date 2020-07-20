@@ -61,7 +61,7 @@
     }
   },
   "plugins": {
-    "myPlugin": {
+    "tencentvideo": {
       "version": "1.2.4",
       "provider": "wxa75efa648b60994b"
     }
@@ -73,6 +73,5 @@
     "icon": "/components/icon/icon",
     "tui-modal": "/components/modal/modal",
     "tui-tag": "/components/tag/tag"
-  },
-  "sitemapLocation": "sitemap32.json"
+  }
 }

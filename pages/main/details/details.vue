@@ -76,8 +76,8 @@
 			</view>
 			<!-- <video :src="goods.project_video" controls class="video" v-if="goods.project_video"></video> -->
 			<txv-video 
-			  vid="e0354z3cqjp"   
-			  playerid="e0354z3cqjp"    
+			  vid="x0972m45dcx"   
+			  playerid="x0972m45dcx"    
 			  :autoplay="true" 
 			></txv-video> 
 			<view class="commonTit flex flex_center tui-skeleton-fillet">

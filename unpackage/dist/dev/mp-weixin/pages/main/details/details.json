@@ -5,7 +5,7 @@
   "usingComponents": {
     "tui-skeleton": "/components/tui-skeleton/tui-skeleton",
     "xh-store-params-s-k-u": "/components/xhStoreParamsSKU/xhStoreParamsSKU",
-    "txv-video": "plugin://myPlugin/txv-video",
+    "txv-video": "plugin://tencentvideo/video",
     "tui-numberbox": "/components/numberbox/numberbox"
   }
 }

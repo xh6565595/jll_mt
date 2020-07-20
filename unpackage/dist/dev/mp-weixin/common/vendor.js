@@ -346,9 +346,9 @@ function upx2px(number, newDeviceWidth) {
   result = Math.floor(result + EPS);
   if (result === 0) {
     if (deviceDPR === 1 || !isIOS) {
-      return 1;
+      result = 1;
     } else {
-      return 0.5;
+      result = 0.5;
     }
   }
   return number < 0 ? -result : result;
@@ -421,7 +421,10 @@ var protocols = {
 
 
 var todos = [
-'vibrate'];
+'vibrate',
+'preloadPage',
+'unPreloadPage',
+'loadSubPackage'];
 
 var canIUses = [];
 
@@ -1565,9 +1568,9 @@ uni$1;exports.default = _default;
 /***/ }),
 
 /***/ 11:
-/*!*****************************************!*\
-  !*** G:/work/马桶福利购/utils/http/index.js ***!
-  \*****************************************/
+/*!********************************************!*\
+  !*** E:/mywork/jll_mt/utils/http/index.js ***!
+  \********************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1631,9 +1634,9 @@ exports.default = _default;
 /***/ }),
 
 /***/ 12:
-/*!*********************************************!*\
-  !*** G:/work/马桶福利购/utils/http/interface.js ***!
-  \*********************************************/
+/*!************************************************!*\
+  !*** E:/mywork/jll_mt/utils/http/interface.js ***!
+  \************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1826,9 +1829,9 @@ function _reslog(res) {
 /***/ }),
 
 /***/ 13:
-/*!************************************!*\
-  !*** G:/work/马桶福利购/store/index.js ***!
-  \************************************/
+/*!***************************************!*\
+  !*** E:/mywork/jll_mt/store/index.js ***!
+  \***************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2943,9 +2946,9 @@ var index_esm = {
 /***/ }),
 
 /***/ 15:
-/*!****************************!*\
-  !*** G:/work/马桶福利购/SET.js ***!
-  \****************************/
+/*!*******************************!*\
+  !*** E:/mywork/jll_mt/SET.js ***!
+  \*******************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2967,9 +2970,9 @@ var _default = {
 /***/ }),
 
 /***/ 152:
-/*!******************************************!*\
-  !*** G:/work/马桶福利购/utils/picker.city.js ***!
-  \******************************************/
+/*!*********************************************!*\
+  !*** E:/mywork/jll_mt/utils/picker.city.js ***!
+  \*********************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -17408,9 +17411,9 @@ data = data;exports.default = _default;
 /***/ }),
 
 /***/ 153:
-/*!****************************************************************!*\
-  !*** G:/work/马桶福利购/js_sdk/graceui-dataChecker/graceChecker.js ***!
-  \****************************************************************/
+/*!*******************************************************************!*\
+  !*** E:/mywork/jll_mt/js_sdk/graceui-dataChecker/graceChecker.js ***!
+  \*******************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -17524,9 +17527,9 @@ obj = obj;exports.default = _default;
 /***/ }),
 
 /***/ 16:
-/*!******************************************!*\
-  !*** G:/work/马桶福利购/utils/module/auth.js ***!
-  \******************************************/
+/*!*********************************************!*\
+  !*** E:/mywork/jll_mt/utils/module/auth.js ***!
+  \*********************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -17736,9 +17739,9 @@ Auth;exports.default = _default;
 /***/ }),
 
 /***/ 17:
-/*!**********************************************!*\
-  !*** G:/work/马桶福利购/utils/module/business.js ***!
-  \**********************************************/
+/*!*************************************************!*\
+  !*** E:/mywork/jll_mt/utils/module/business.js ***!
+  \*************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -19071,12 +19074,10 @@ if (true) {
   };
 
   formatComponentName = function (vm, includeFile) {
-    {
-      if(vm.$scope && vm.$scope.is){
-        return vm.$scope.is
-      }
-    }
     if (vm.$root === vm) {
+      if (vm.$options && vm.$options.__file) { // fixed by xxxxxx
+        return ('') + vm.$options.__file
+      }
       return '<Root>'
     }
     var options = typeof vm === 'function' && vm.cid != null
@@ -19111,7 +19112,7 @@ if (true) {
     if (vm._isVue && vm.$parent) {
       var tree = [];
       var currentRecursiveSequence = 0;
-      while (vm) {
+      while (vm && vm.$options.name !== 'PageBody') {
         if (tree.length > 0) {
           var last = tree[tree.length - 1];
           if (last.constructor === vm.constructor) {
@@ -19123,7 +19124,7 @@ if (true) {
             currentRecursiveSequence = 0;
           }
         }
-        tree.push(vm);
+        !vm.$options.isReserved && tree.push(vm);
         vm = vm.$parent;
       }
       return '\n\nfound in\n\n' + tree
@@ -24243,9 +24244,10 @@ function getTarget(obj, path) {
   return getTarget(obj[key], parts.slice(1).join('.'))
 }
 
-function internalMixin(Vue) {
+function internalMixin(Vue ) {
 
-  Vue.config.errorHandler = function(err) {
+  Vue.config.errorHandler = function(err, vm, info) {
+    Vue.util.warn(("Error in " + info + ": \"" + (err.toString()) + "\""), vm);
     console.error(err);
     /* eslint-disable no-undef */
     var app = getApp();
@@ -24597,9 +24599,9 @@ function normalizeComponent (
 /***/ }),
 
 /***/ 21:
-/*!******************************************!*\
-  !*** G:/work/马桶福利购/static/defaultSet.js ***!
-  \******************************************/
+/*!*********************************************!*\
+  !*** E:/mywork/jll_mt/static/defaultSet.js ***!
+  \*********************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -24872,9 +24874,9 @@ set;exports.default = _default;
 /***/ }),
 
 /***/ 28:
-/*!************************************!*\
-  !*** G:/work/马桶福利购/utils/utils.js ***!
-  \************************************/
+/*!***************************************!*\
+  !*** E:/mywork/jll_mt/utils/utils.js ***!
+  \***************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -25227,9 +25229,9 @@ module.exports = g;
 /***/ }),
 
 /***/ 302:
-/*!*****************************************************!*\
-  !*** G:/work/马桶福利购/components/tki-qrcode/qrcode.js ***!
-  \*****************************************************/
+/*!********************************************************!*\
+  !*** E:/mywork/jll_mt/components/tki-qrcode/qrcode.js ***!
+  \********************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -26445,9 +26447,9 @@ QRCode;exports.default = _default;
 /***/ }),
 
 /***/ 37:
-/*!*****************************************!*\
-  !*** G:/work/马桶福利购/utils/baseMixins.js ***!
-  \*****************************************/
+/*!********************************************!*\
+  !*** E:/mywork/jll_mt/utils/baseMixins.js ***!
+  \********************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -27351,9 +27353,9 @@ if (hadRuntime) {
 /***/ }),
 
 /***/ 7:
-/*!********************************!*\
-  !*** G:/work/马桶福利购/pages.json ***!
-  \********************************/
+/*!***********************************!*\
+  !*** E:/mywork/jll_mt/pages.json ***!
+  \***********************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -27362,9 +27364,9 @@ if (hadRuntime) {
 /***/ }),
 
 /***/ 77:
-/*!*************************************************!*\
-  !*** G:/work/马桶福利购/utils/QS-SharePoster/app.js ***!
-  \*************************************************/
+/*!****************************************************!*\
+  !*** E:/mywork/jll_mt/utils/QS-SharePoster/app.js ***!
+  \****************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -27932,9 +27934,9 @@ module.exports = _app;
 /***/ }),
 
 /***/ 78:
-/*!************************************************************!*\
-  !*** G:/work/马桶福利购/utils/QS-SharePoster/QS-SharePoster.js ***!
-  \************************************************************/
+/*!***************************************************************!*\
+  !*** E:/mywork/jll_mt/utils/QS-SharePoster/QS-SharePoster.js ***!
+  \***************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -29244,9 +29246,9 @@ module.exports = {
 /***/ }),
 
 /***/ 79:
-/*!*******************************************************!*\
-  !*** G:/work/马桶福利购/utils/QS-SharePoster/QRCodeAlg.js ***!
-  \*******************************************************/
+/*!**********************************************************!*\
+  !*** E:/mywork/jll_mt/utils/QS-SharePoster/QRCodeAlg.js ***!
+  \**********************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 

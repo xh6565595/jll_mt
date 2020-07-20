@@ -28,7 +28,7 @@
 				"navigationStyle":"custom",
 				"mp-weixin": {
 				      "usingComponents": {
-				        "txv-video": "plugin://myPlugin/txv-video"
+				        "txv-video": "plugin://tencentvideo/video"
 				      }
 				    }
 			}

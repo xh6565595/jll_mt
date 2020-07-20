@@ -1,7 +1,7 @@
-.pages .box.data-v-5424c404 {
+.pages .box.data-v-76e6a5d6 {
   padding: 20rpx;
 }
-.pages .box .textBox.data-v-5424c404 {
+.pages .box .textBox.data-v-76e6a5d6 {
   width: 100%;
   min-height: 400rpx;
   background: #fff;
@@ -10,7 +10,7 @@
   margin-bottom: 60rpx;
   position: relative;
 }
-.pages .box .textBox .nums.data-v-5424c404 {
+.pages .box .textBox .nums.data-v-76e6a5d6 {
   position: absolute;
   right: 40rpx;
   bottom: 40rpx;

@@ -24,44 +24,44 @@
 /* 垂直间距 */
 /* 透明度 */
 /* 文章场景相关 */
-.page.data-v-9cd8ffc4 {
+.page.data-v-161c5014 {
   width: 100%;
   height: calc(100vh - 72rpx);
   overflow-y: scroll;
 }
-.page .blank.data-v-9cd8ffc4 {
+.page .blank.data-v-161c5014 {
   width: 100%;
   height: 16rpx;
   background: #f8f8f8;
 }
-.page .proItemsBox.data-v-9cd8ffc4 {
+.page .proItemsBox.data-v-161c5014 {
   width: 100%;
   background: #fff;
   padding: 0  20rpx;
 }
-.page .proItemsBox .content.data-v-9cd8ffc4 {
+.page .proItemsBox .content.data-v-161c5014 {
   padding: 20rpx 0;
 }
-.page .proItemsBox .content .name.data-v-9cd8ffc4 {
+.page .proItemsBox .content .name.data-v-161c5014 {
   margin-bottom: 16rpx;
   font-size: 28rpx;
   max-height: 80rpx;
   line-height: 1;
   margin-top: 12rpx;
 }
-.page .proItemsBox .content .text.data-v-9cd8ffc4 {
+.page .proItemsBox .content .text.data-v-161c5014 {
   line-height: 1;
   height: 58rpx;
   border: none;
   color: #999;
   font-size: 26rpx;
 }
-.page .proItemsBox .content .cm_prize.data-v-9cd8ffc4 {
+.page .proItemsBox .content .cm_prize.data-v-161c5014 {
   font-size: 32rpx;
   color: #E02E24;
   font-weight: 600;
 }
-.page .proItemsBox.data-v-9cd8ffc4:last-child {
+.page .proItemsBox.data-v-161c5014:last-child {
   margin-bottom: 0;
 }
 
