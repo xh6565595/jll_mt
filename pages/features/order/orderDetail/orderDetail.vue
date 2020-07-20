@@ -1,7 +1,7 @@
 <template>
 	<view>
 		<tui-skeleton v-if="skeletonShow" backgroundColor="#f9f9f9" skeletonBgColor="#efefef" borderRadius="0rpx"></tui-skeleton>
-		<view class="pages tui-skeleton" :style="{'padding-bottom':ifx?'180rpx':'150rpx'}">
+		<view class="pages tui-skeleton" :style="{'padding-bottom':ifx?'200rpx':'150rpx'}">
 			
 			<view class="bgbox flex flex_center ">
 				<view class="f1">
@@ -193,18 +193,53 @@
 					</tui-list-cell>
 				</view>
 			</view>
+			<view class="proItemsBox  " style="padding: 0" v-if="ifInvoice">
+				<view class="cm_title t tui-skeleton-fillet flex flex_center">
+					<text>发票信息</text>
+					<text class="f1"></text>
+				</view>
+				<view class="  tui-skeleton-fillet">			
+					<tui-list-cell :hover="false" >
+						<view class="tui-line-cell flex flex_center tui-cell-last">
+							<view class="tui-title cm_text">个人/公司</view>
+							<view class="tui-input f1 cm_tex_r">{{ invoiceMsg.invoice_title }}</view>
+						
+						</view>
+					</tui-list-cell>
+					<tui-list-cell :hover="false" v-if="invoiceMsg.apply_type==0">
+						<view class="tui-line-cell flex flex_center tui-cell-last">
+							<view class="tui-title cm_text">税号</view>
+							<view class="tui-input f1 cm_tex_r">{{ invoiceMsg.invoice_number }}</view>					
+						</view>
+					</tui-list-cell>
+					<tui-list-cell :hover="false"  v-if="invoiceMsg.invoice_type==0">
+						<view class="tui-line-cell flex flex_center tui-cell-last">
+							<view class="tui-title cm_text">邮寄地址</view>
+							<view class="tui-input f1 cm_tex_r">{{ invoiceMsg.detailed_address }}</view>
+						
+						</view>
+					</tui-list-cell>
+					<tui-list-cell :hover="false" v-if="invoiceMsg.invoice_type==1">
+						<view class="tui-line-cell flex flex_center tui-cell-last">
+							<view class="tui-title cm_text">电子邮箱</view>
+							<view class="tui-input f1 cm_tex_r">{{ invoiceMsg.mail }}</view>					
+						</view>
+					</tui-list-cell>
+				</view>
+			</view>
+			
 			<view class="footerBox" :style="{'padding-bottom':ifx?'40rpx':''}">
 				<text class="footerMark" v-if="item.order_status == 1 && item.delay_ems_time">发货时间：{{ item.delay_ems_time }}</text>
 				<view class="footer flex flex_center" v-if="item.order_status != 5" >
 					<view class="f1"></view>
+					<tui-button type="primary" class="btns" size="small" shape="circle" @tap="_invoice" v-if="item.order_status!= 0 && !ifInvoice ">开具发票</tui-button>
 					<tui-button type="primary" class="btns" size="small" shape="circle" @tap="_readyToPay" v-if="item.order_status == 0">立即付款</tui-button>
 					<tui-button type="primary" class="btns" size="small" plain shape="circle" @tap="cancelOrder" v-if="item.order_status == 0">取消订单</tui-button>
 					<tui-button type="primary" class="btns" size="small" shape="circle" v-if="item.order_status == 1" @tap="prompt(item.order_code)">提醒发货</tui-button>
 					<tui-button type="primary" class="btns" size="small" shape="circle" v-if="item.order_status == 2" @tap="sure(item.order_code)">确认收货</tui-button>
 					<tui-button type="primary" class="btns" size="small" shape="circle" plain v-if="item.order_status == 2" @tap="scan(item.order_code)">查看物流</tui-button>
 				</view>			
-			</view>
-			
+			</view>		
 		</view>
 		<PayPanel ref="payPanel" :oderId="oderId" :amout="item.pay_price" @success="success" @cancel="cancel"></PayPanel>
 		<accredit ref="kf" :autoClose="true">
@@ -252,7 +287,9 @@ export default {
 			is_inster:0,
 			// 延迟时间
 			date: '',
-			tex:0
+			tex:0,
+			ifInvoice:false,
+			invoiceMsg:''  //开票信息
 		};
 	},
 	onLoad(options) {
@@ -263,10 +300,12 @@ export default {
 		let that = this;
 		uni.$on('refresh_orderDetail', () => {
 			that.loadData();
+			that.loadInvoice();
 		});
 	},
 	onShow() {
 		this.loadData();
+		this.loadInvoice();
 	},
 	computed: {
 		...mapState(['ifx']),
@@ -313,6 +352,31 @@ export default {
 		PayPanel
 	},
 	methods: {
+		// 是否开票
+		async loadInvoice(){
+			let that = this;
+			try {
+				// this.$ui.showloading();
+				let data = {
+					order_code: this.formParams.order_code
+				};
+				let res = await this.$api.IsInvoice(data, false);
+	
+				that.ifInvoice = res.Success
+				if (res.Success) {
+					that.invoiceMsg = res.Data
+				} else {
+					// that.$ui.toast(res.Msg);
+				}
+			} catch (err) {
+				console.log('请求结果false : ' + err); 
+			}
+		},
+		_invoice(){
+			uni.navigateTo({
+				url:'/pages/features/invoice/invoice?order='+ this.formParams.order_code +'&account=' + this.item.pay_price 
+			})
+		},
 		// 显示客服弹窗
 		_kefuMenu(){
 			this.$refs.kf.showModal()

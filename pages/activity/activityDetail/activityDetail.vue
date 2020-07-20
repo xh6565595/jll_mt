@@ -128,30 +128,7 @@
 					</tui-list-cell>
 				</view>
 			</view>
-			<!-- <view class="proItemsBox  " style="padding: 0">
-				<view class="cm_title t tui-skeleton-fillet flex flex_center">
-					<text>发票信息</text>
-					<text class="f1"></text>
-				</view>
-				<view class="  tui-skeleton-fillet">
 			
-					<tui-list-cell :hover="false" >
-						<view class="tui-line-cell flex flex_center tui-cell-last">
-							<view class="tui-title cm_text">个人/公司</view>
-							<view class="tui-input f1 cm_tex_l">￥{{ item.project_list[0].service_total_price }}</view>
-						
-						</view>
-					</tui-list-cell>
-					<tui-list-cell :hover="false">
-						<view class="tui-line-cell flex flex_center tui-cell-last">
-							<view class="tui-title cm_text">税号</view>
-							<view class="tui-input f1 cm_tex_l">{{ item.taxes_price }}</view>		
-				
-						</view>
-					</tui-list-cell>
-				</view>
-			</view> -->
-			<tui-button type="primary" shape="circle" :loading="loading" @tap="_readyTo">申请发票</tui-button>
 		</view>
 	</view>
 </template>

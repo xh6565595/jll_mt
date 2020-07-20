@@ -24,31 +24,31 @@
 /* 垂直间距 */
 /* 透明度 */
 /* 文章场景相关 */
-.pages .cardItems.data-v-dc77b9d4 {
+.pages .cardItems.data-v-62fb053e {
   background: #fff;
   margin-top: 16rpx;
 }
-.pages .cardItems .leftBar.data-v-dc77b9d4 {
+.pages .cardItems .leftBar.data-v-62fb053e {
   width: 92rpx;
   height: 92rpx;
 }
-.pages .cardItems .leftBar .noDefault.data-v-dc77b9d4 {
+.pages .cardItems .leftBar .noDefault.data-v-62fb053e {
   width: 32rpx;
   height: 32rpx;
   border-radius: 50%;
   border: 1rpx solid #999999;
 }
-.pages .cardItems .rightBar.data-v-dc77b9d4 {
+.pages .cardItems .rightBar.data-v-62fb053e {
   width: 92rpx;
   height: 92rpx;
 }
-.pages .cardItems .content.data-v-dc77b9d4 {
+.pages .cardItems .content.data-v-62fb053e {
   padding: 34rpx 0;
 }
-.pages .cardItems .content .top.data-v-dc77b9d4 {
+.pages .cardItems .content .top.data-v-62fb053e {
   margin-bottom: 20rpx;
 }
-.pages .cardItems .content .cm_des.data-v-dc77b9d4 {
+.pages .cardItems .content .cm_des.data-v-62fb053e {
   line-height: 1.2;
 }
 

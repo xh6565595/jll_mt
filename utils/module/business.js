@@ -2,8 +2,24 @@
 
 import http from '../http/interface'
 const Set = {
-	
-	
+	//订单开具发票
+	ApplyInvoice:(data) => {
+	    return http.request({
+	        url: '/api/Invoice/Apply',
+	        method: 'POST', 
+	        data,
+			// handle:true
+	    })
+	},
+	//订单是否开具发票
+	IsInvoice:(data) => {
+	    return http.request({
+	        url: '/api/Invoice/Get',
+	        method: 'get', 
+	        data,
+			// handle:true
+	    })
+	},
 	// 活动订单商品详情
 	GetShareOrderInfo:(data) => {
 	    return http.request({

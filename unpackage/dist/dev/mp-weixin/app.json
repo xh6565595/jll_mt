@@ -22,7 +22,8 @@
     "pages/sisMsg/sisMsg",
     "pages/sisMsg/msg/msg",
     "pages/activity/activityDetail/activityDetail",
-    "pages/login/login"
+    "pages/login/login",
+    "pages/features/invoice/invoice"
   ],
   "subPackages": [],
   "window": {
@@ -58,12 +59,6 @@
   "permission": {
     "scope.userLocation": {
       "desc": "试图访问您的位置，用来为你提供准确的信息"
-    }
-  },
-  "plugins": {
-    "tencentvideo": {
-      "version": "1.2.4",
-      "provider": "wxa75efa648b60994b"
     }
   },
   "usingComponents": {

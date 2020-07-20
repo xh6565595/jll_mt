@@ -24,54 +24,54 @@
 /* 垂直间距 */
 /* 透明度 */
 /* 文章场景相关 */
-.pages.data-v-52f690a6 {
+.pages.data-v-7e734d7e {
   background: #f4f4f4;
   padding: 20rpx;
 }
-.pages .swiper.data-v-52f690a6 {
+.pages .swiper.data-v-7e734d7e {
   border-radius: 8rpx;
   overflow: hidden;
   width: 100%;
   height: 388rpx;
   background-color: #f8f8f8;
 }
-.pages .swiper .swiper-item.data-v-52f690a6 {
+.pages .swiper .swiper-item.data-v-7e734d7e {
   background: #eee;
 }
-.pages .hot.data-v-52f690a6 {
+.pages .hot.data-v-7e734d7e {
   width: 100%;
 }
-.pages .hot .hotItem.data-v-52f690a6 {
+.pages .hot .hotItem.data-v-7e734d7e {
   margin-top: 20rpx;
   background: #fff;
   border-radius: 16rpx;
   padding: 20rpx;
 }
-.pages .hot .hotItem .itemHeader.data-v-52f690a6 {
+.pages .hot .hotItem .itemHeader.data-v-7e734d7e {
   margin: 12rpx auto;
 }
-.pages .hot .hotItem .itemHeader .itemLogo.data-v-52f690a6 {
+.pages .hot .hotItem .itemHeader .itemLogo.data-v-7e734d7e {
   width: 68rpx;
   height: 68rpx;
   border-radius: 50%;
   margin-right: 16rpx;
 }
-.pages .hot .hotItem .itemHeader .itemTitle.data-v-52f690a6 {
+.pages .hot .hotItem .itemHeader .itemTitle.data-v-7e734d7e {
   width: 54%;
   font-weight: 600;
 }
-.pages .hot .hotItem .itemContent.data-v-52f690a6 {
+.pages .hot .hotItem .itemContent.data-v-7e734d7e {
   position: relative;
   height: 46rpx;
   line-height: 46rpx;
   margin-bottom: 26rpx;
 }
-.pages .hot .hotItem .itemContent .title.data-v-52f690a6 {
+.pages .hot .hotItem .itemContent .title.data-v-7e734d7e {
   width: 80%;
   height: 46rpx;
   line-height: 46rpx;
 }
-.pages .hot .hotItem .itemContent .itemPrice.data-v-52f690a6 {
+.pages .hot .hotItem .itemContent .itemPrice.data-v-7e734d7e {
   position: absolute;
   top: 0;
   right: -20rpx;
@@ -82,22 +82,22 @@
   border-radius: 23rpx 0 0 23rpx;
   padding: 0 16rpx;
 }
-.pages .hot .picBox.data-v-52f690a6 {
+.pages .hot .picBox.data-v-7e734d7e {
   width: 100%;
 }
-.pages .hot .picBox .left.data-v-52f690a6 {
+.pages .hot .picBox .left.data-v-7e734d7e {
   width: 442rpx;
   height: 442rpx;
   border-radius: 16rpx;
   margin-right: 16rpx;
 }
-.pages .hot .picBox .rTop.data-v-52f690a6 {
+.pages .hot .picBox .rTop.data-v-7e734d7e {
   width: 216rpx;
   height: 216rpx;
   border-radius: 16rpx;
   margin-bottom: 10rpx;
 }
-.pages .hot .picBox .rBot.data-v-52f690a6 {
+.pages .hot .picBox .rBot.data-v-7e734d7e {
   width: 216rpx;
   height: 216rpx;
   border-radius: 16rpx;

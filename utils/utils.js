@@ -1,5 +1,10 @@
 import SET from '../SET.js'
 const Utils = {
+	emailCheck(value) {
+		const reg = /^\w+@[a-z0-9]+\.[a-z]+$/i
+		const r = reg.test(value)
+		return r
+	},
 	phoneCheck(value) {
 		const reg = /^1\d{10}$/
 		const r = reg.test(value)

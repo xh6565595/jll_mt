@@ -3,35 +3,48 @@
 		<tui-skeleton v-if="skeletonShow" backgroundColor="#f9f9f9" skeletonBgColor="#efefef" borderRadius="0rpx"></tui-skeleton>
 		<view class="pages tui-skeleton">
 			<!-- <view class="uni-padding-wrap"> -->
-			<tuiNav :isCustom="true"  backgroundColor="#fff">
+			<tuiNav :isCustom="true" backgroundColor="#fff">
 				<view class="flex flex_center" style="height: 88rpx;">
-					<view  style="height: 88rpx;width: 88rpx;" class="flex flex_center" @tap="_back">
-						<view class="cm_back  flex flex_center">
-							<text class="iconfont icon-fanhui2"></text>
-						</view>
+					<view style="height: 88rpx;width: 88rpx;" class="flex flex_center" @tap="_back">
+						<view class="cm_back  flex flex_center"><text class="iconfont icon-fanhui2"></text></view>
 					</view>
-					
+
 					<view class="f1"></view>
 				</view>
 			</tuiNav>
+			<video 
+				v-if="goods.project_video"
+				src="http://down.kuxiong999.com/9933.mp4"
+				id="proVideo"
+				controls 
+				:direction ="0"
+				class="videoBox"
+				@fullscreenchange="_fullscreenchange"
+			></video>
 			<view class="page-section swiper tui-skeleton-rect">
 				<!-- <view class="page-section-spacing"> -->
-				<swiper class="swiper" :indicator-dots="true" :autoplay="true">
+				<swiper class="swiper" :indicator-dots="true" :autoplay="false">
+					<swiper-item v-if="goods.project_video">
+						<view class="flex  flex_center" style="width: 100%;height: 100%;">
+							<image :src="banners[0]" mode="aspectFill" style="width: 100%;height: 100%;"> </image>
+							<view class="flex  flex_center swiperBg" >
+								<image src="../../../static/image/bf.png" mode="widthFix" @tap="videoToggle" style="width: 200rpx;height: 200rpx;"></image>
+							</view>							
+						</view>
+					</swiper-item>
 					<block v-for="(item, index) in banners" :key="index">
-						<swiper-item><image :src="item" mode="aspectFill" lazy-load="true" class="swiper-item uni-bg-red" style="width: 100%;height: 100%;"></image></swiper-item>
+						<swiper-item ><image :src="item" mode="aspectFill" lazy-load="true" class="swiper-item uni-bg-red" style="width: 100%;height: 100%;"></image></swiper-item>
 					</block>
 				</swiper>
 			</view>
-			
+
 			<view class="boxs box1 ">
-				
-				<view class="cm_title" style="margin-bottom: 20rpx;">{{goods.project_name }}</view>
-				<view class="flex titleBox tui-skeleton-fillet" v-if="goods.is_activity==0">
-					<text class="cm_prize">￥{{ goods.project_raise_price }} </text>
-					<text class="cm_delete" style="margin-left: 20rpx;"> 原价￥{{ goods.project_price }}</text>
+				<view class="cm_title" style="margin-bottom: 20rpx;">{{ goods.project_name }}</view>
+				<view class="flex titleBox tui-skeleton-fillet" v-if="goods.is_activity == 0">
+					<text class="cm_prize">￥{{ goods.project_raise_price }}</text>
+					<text class="cm_delete" style="margin-left: 20rpx;">原价￥{{ goods.project_price }}</text>
 				</view>
-					
-				
+
 				<view class="logoBox flex  flex_center tui-skeleton-fillet">
 					<image src="../../../static/image/logo.png" mode="widthFix" class="logo"></image>
 					<view class=" cm_title   name">洁利来</view>
@@ -40,11 +53,10 @@
 				</view>
 			</view>
 
-
-			<view class="boxs box4 " >
-				<view class="flex flex_center cells tui-skeleton-fillet" >
+			<view class="boxs box4 ">
+				<view class="flex flex_center cells tui-skeleton-fillet">
 					<view class=" cm_des " style="width: 20%;">发货</view>
-					<text class="f1">{{business.shipments_address.area}}</text>
+					<text class="f1">{{ business.shipments_address.area }}</text>
 				</view>
 				<view class="flex flex_center cells tui-skeleton-fillet">
 					<view class=" cm_des " style="width: 20%;">服务</view>
@@ -65,21 +77,17 @@
 			</view>
 			<view class="boxs box3 tui-skeleton-rect ">
 				<!-- <view class="picBox flex  flex_center"> -->
-				<navigator  url="/pages/main/main" open-type="switchTab" class="picBox flex  flex_center">
+				<navigator url="/pages/main/main" open-type="switchTab" class="picBox flex  flex_center">
 					<image :src="business.shop_logo" mode="aspectFill" class="avatar tui-skeleton-rect"></image>
 					<view class="f1 tui-skeleton-fillet">
 						<view class=" cm_title   name">{{ business.shop_name }}</view>
-					</view>	
+					</view>
 					<text class="cm_des iconfont icon-fanhui3"></text>
 				</navigator>
 				<!-- </view> -->
 			</view>
 			<!-- <video :src="goods.project_video" controls class="video" v-if="goods.project_video"></video> -->
-			<txv-video 
-			  vid="x0972m45dcx"   
-			  playerid="x0972m45dcx"    
-			  :autoplay="true" 
-			></txv-video> 
+
 			<view class="commonTit flex flex_center tui-skeleton-fillet">
 				<view class="blank"></view>
 				<view class="cm_title">商品详情</view>
@@ -88,20 +96,32 @@
 			<view>
 				<block v-for="(item, index) in details_img" :key="index"><image :src="item" mode="widthFix" style="width: 100%;"></image></block>
 			</view>
-			<view class="footerBox"  :style="{'padding-bottom':ifx?'40rpx':''}">						
+			<view class="footerBox" :style="{ 'padding-bottom': ifx ? '40rpx' : '' }">
 				<view class="shareTip flex flex_center" v-if="shareActive">
-					<image :src="selfBuy?userInfo.consumer_head:share_consumer_info.consumer_head" mode="scaleToFill" style="width: 64rpx;height: 64rpx;border-radius: 50%;margin-right: 20rpx;"></image>
-					<view class="f1">{{selfBuy?userInfo.consumer_nick_name:share_consumer_info.consumer_name}}</view>
+					<image
+						:src="selfBuy ? userInfo.consumer_head : share_consumer_info.consumer_head"
+						mode="scaleToFill"
+						style="width: 64rpx;height: 64rpx;border-radius: 50%;margin-right: 20rpx;"
+					></image>
+					<view class="f1">{{ selfBuy ? userInfo.consumer_nick_name : share_consumer_info.consumer_name }}</view>
 				</view>
-				<view class="footer flex flex_center" v-if="!skeletonShow"  >
-					<button class="cm_btn sure"  @tap="_next"  >购买</button>			
-				</view>
+				<view class="footer flex flex_center" v-if="!skeletonShow"><button class="cm_btn sure" @tap="_next">购买</button></view>
 			</view>
 		</view>
 		<tui-modal :show="modal" @click="handleClick" @cancel="hide" :content="content" :maskClosable="false" color="#333" :size="32"></tui-modal>
-
+	<!-- 	<view v-if="videoShow" style="width: 100vw;height:100vh;background: rgba(0,0,0,0.6);left:0;top:0;position:fixed;z-index: 100;">
+			<txv-video
+				poster="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1595225914239&di=0209c0ec09478b31a4ab399bc8141e68&imgtype=0&src=http%3A%2F%2Fm.new35.com%2FUploads%2Fimage%2F20180309%2F5aa22fd9a53b2.jpg"
+				poster-for-crawler="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1595225914239&di=0209c0ec09478b31a4ab399bc8141e68&imgtype=0&src=http%3A%2F%2Fm.new35.com%2FUploads%2Fimage%2F20180309%2F5aa22fd9a53b2.jpg"
+				vid="x0972m45dcx"
+				width="100%"
+				height="100%"
+				:usePoster="true"
+				playerid="x0972m45dcx"
+				:autoplay="true"
+			></txv-video>
+		</view> -->
 		<xhStoreParamsSKU
-			
 			ref="params"
 			:preImg="banners[0]"
 			:title="goods.project_name"
@@ -112,18 +132,16 @@
 			:service1="service1"
 			:service2="service2"
 			:service3="service3"
-			:ifActive="goods.is_activity==1?true:false"
+			:ifActive="goods.is_activity == 1 ? true : false"
 			@creatOrder="creatOrder"
 			@addCard="addCard"
 			:singlePro="goods.parameter_type == 0"
 		></xhStoreParamsSKU>
 
-
 		<!-- <view class="back"> -->
 		<image src="../../../static/img/ic_xq_zd.png" mode="aspectFill" class="backBtn animated slideInUp" @tap="_backTop"></image>
 		<!-- </view> -->
 		<!-- <view class="asideBar flex flex_center animated slideInUp" @tap="home"><Icon name="home" :size="20" color="#fff"></Icon></view> -->
-
 	</view>
 </template>
 
@@ -142,7 +160,7 @@ export default {
 			list: [],
 			index: 1,
 			business: {
-				shipments_address:''
+				shipments_address: ''
 			},
 			goods: '',
 			banners: [],
@@ -150,7 +168,7 @@ export default {
 			skeletonShow: true,
 			formParams: {
 				project_code: '',
-				share_user_id:''
+				share_user_id: ''
 			},
 			phoneNum: global_Set_jll.service_mobile,
 			showAll: false,
@@ -168,13 +186,15 @@ export default {
 			service1: '',
 			service2: '',
 			service3: '',
-			endTime:'',
-			platform:'android',
-			share_consumer_info:'',
-			activityInfo:'' ,  //限时购信息
-			shareActive:false,
-			selfBuy:false,
-			selfOrder:''
+			endTime: '',
+			platform: 'android',
+			share_consumer_info: '',
+			activityInfo: '', //限时购信息
+			shareActive: false,
+			selfBuy: false,
+			selfOrder: '',
+			videoShow:false,
+			videoContext:''
 		};
 	},
 	watch: {
@@ -196,72 +216,85 @@ export default {
 	onLoad(options) {
 		this.formParams.project_code = options.code;
 		this.formParams.share_user_id = this.shareUser;
-		this.selfOrder = options.order
-		if(options.code == this.sharePro){
-			this.shareActive = true //是分享活动商品
+		this.selfOrder = options.order;
+		if (options.code == this.sharePro) {
+			this.shareActive = true; //是分享活动商品
 		}
-		if(options.type=='self'&& options.order ){
+		if (options.type == 'self' && options.order) {
 			this.shareActive = true;
-			this.selfBuy = true
+			this.selfBuy = true;
 			this.formParams.project_code = options.code;
 			this.formParams.share_user_id = this.shareUser;
-			
+
 			// debugger
 		}
 		this._loadData('refresh');
-		let that = this
+		let that = this;
+		
 		
 	},
 	onUnload() {
 		// alert(2)
 		clearInterval(this.time);
 		this.time = null;
-		
 	},
 	computed: {
-		...mapState(['shareUser','sharePro','shareOrder','userInfo','hasLogin','ifx']),
+		...mapState(['shareUser', 'sharePro', 'shareOrder', 'userInfo', 'hasLogin', 'ifx']),
 		restTimeValied() {
-			let t = this.endTime
-			console.log(t)
+			let t = this.endTime;
+			console.log(t);
 			if (!t) {
-				return false
-			}		
-			let s = new Date(t).getTime()
-			
+				return false;
+			}
+			let s = new Date(t).getTime();
+
 			let n = new Date().getTime();
-			console.log(s)
+			console.log(s);
 			let date = s - n;
-		
+
 			let days = date / 1000 / 60 / 60 / 24;
 			let daysRound = Math.floor(days);
-			let hours = date / 1000 / 60 / 60 - (24 * daysRound);
+			let hours = date / 1000 / 60 / 60 - 24 * daysRound;
 			let hoursRound = Math.floor(hours);
-			let minutes = date / 1000 / 60 - (24 * 60 * daysRound) - (60 * hoursRound);
+			let minutes = date / 1000 / 60 - 24 * 60 * daysRound - 60 * hoursRound;
 			let minutesRound = Math.floor(minutes);
-			let seconds = date / 1000 - (24 * 60 * 60 * daysRound) - (60 * 60 * hoursRound) - (60 * minutesRound);
+			let seconds = date / 1000 - 24 * 60 * 60 * daysRound - 60 * 60 * hoursRound - 60 * minutesRound;
 			let secondsRound = Math.floor(seconds);
-			let time = "倒计时" + (daysRound + "天" + hoursRound + "时" + minutesRound + "分" + secondsRound + "秒");
-		
+			let time = '倒计时' + (daysRound + '天' + hoursRound + '时' + minutesRound + '分' + secondsRound + '秒');
+
 			let obj = {
-				d:parseInt(daysRound),
+				d: parseInt(daysRound),
 				h: parseInt(hoursRound),
 				m: parseInt(minutesRound),
 				s: parseInt(secondsRound)
-			}
+			};
 			// console.log(obj);
-			return obj
+			return obj;
 		}
 	},
 	methods: {
-		_back(){
+		_fullscreenchange(event){
+			console.log(event.detail )
+			let iffull = event.detail.fullScreen
+			if(iffull){
+				this.videoContext.play()
+			}else{
+				this.videoContext.pause()
+			}
+		},
+		videoToggle(){
+			// this.videoShow = true
+			this.videoContext.requestFullScreen()
+		},
+		_back() {
 			uni.switchTab({
 				url: '/pages/main/main'
 			});
 		},
-		cart(){
+		cart() {
 			uni.switchTab({
 				url: '/pages/cart/cart'
-			})
+			});
 		},
 		home() {
 			uni.switchTab({
@@ -302,10 +335,10 @@ export default {
 		},
 		// 显示参数框
 		_next() {
-			if(!this.hasLogin){
+			if (!this.hasLogin) {
 				uni.navigateTo({
-					url:'/pages/login/login'
-				})
+					url: '/pages/login/login'
+				});
 				return;
 			}
 			this.$refs.params.show();
@@ -323,6 +356,11 @@ export default {
 				if (res.Success) {
 					that.business = res.Data.business;
 					that.goods = res.Data.goods;
+					if(that.goods.project_video){
+						that.videoContext = uni.createVideoContext('proVideo')
+					}
+					
+					
 					that.auction = res.Data.auction;
 					that.banners = res.Data.goods.project_img.split(',');
 					that.details_img = res.Data.goods.details_img.split(',');
@@ -332,10 +370,10 @@ export default {
 					that.share_consumer_info = res.Data.share_consumer_info;
 					that.skuList = res.Data.skuList;
 					that.specifications = res.Data.specList;
-					if(that.goods.is_activity==1){
+					if (that.goods.is_activity == 1) {
 						that.activityInfo = res.Data.activityInfo;
-						that.endTime = res.Data.activityInfo.end_date
-					}				
+						that.endTime = res.Data.activityInfo.end_date;
+					}
 					// setTimeout(() => {
 					if (that.skeletonShow) {
 						that.skeletonShow = false;
@@ -352,47 +390,43 @@ export default {
 		},
 		// 购买
 		_buy(data) {
-			
-				let d = {
-					id: data.id ? data.id : '',
-					difference: data.difference ? data.difference.join(',') : '',
-					price: data.sellprice ? data.sellprice : '',
-					origin: data.origin ? data.origin : '',
-					stock: data.stock ? data.stock : ''
-				};
-				let cardData = {
-					shop_name: this.business.shop_name,
-					shop_logo: this.business.shop_logo,
-					project_code: this.formParams.project_code,
-					project_name: this.goods.project_name,
-					project_img: this.banners[0],
-					is_ems: this.goods.is_ems,
-					project_parameter_type: this.goods.parameter_type,
-					project_spec: d,
-					project_price: this.goods.project_price,
-					project_raise_price: this.goods.project_raise_price,
-					project_num: data.selectNum,
-					project_service1: data.goods_service_code.serve1,
-					project_service2: data.goods_service_code.serve2,
-					project_service3: data.goods_service_code.serve3
-				};
-				this.$store.commit('creatOrder', [cardData]);
-				let url = '/pages/features/createOrder/createOrder?type=0'
-				if(this.shareActive){
-					if(this.selfBuy){
-						url+=`&shareOrder=${this.selfOrder}`
-					}else{
-						url+=`&shareOrder=${this.shareOrder}`
-					}
-					
+			let d = {
+				id: data.id ? data.id : '',
+				difference: data.difference ? data.difference.join(',') : '',
+				price: data.sellprice ? data.sellprice : '',
+				origin: data.origin ? data.origin : '',
+				stock: data.stock ? data.stock : ''
+			};
+			let cardData = {
+				shop_name: this.business.shop_name,
+				shop_logo: this.business.shop_logo,
+				project_code: this.formParams.project_code,
+				project_name: this.goods.project_name,
+				project_img: this.banners[0],
+				is_ems: this.goods.is_ems,
+				project_parameter_type: this.goods.parameter_type,
+				project_spec: d,
+				project_price: this.goods.project_price,
+				project_raise_price: this.goods.project_raise_price,
+				project_num: data.selectNum,
+				project_service1: data.goods_service_code.serve1,
+				project_service2: data.goods_service_code.serve2,
+				project_service3: data.goods_service_code.serve3
+			};
+			this.$store.commit('creatOrder', [cardData]);
+			let url = '/pages/features/createOrder/createOrder?type=0';
+			if (this.shareActive) {
+				if (this.selfBuy) {
+					url += `&shareOrder=${this.selfOrder}`;
+				} else {
+					url += `&shareOrder=${this.shareOrder}`;
 				}
-				// debugger
-				uni.navigateTo({
-					url: url
-				});  
+			}
+			// debugger
+			uni.navigateTo({
+				url: url
+			});
 		},
-
-		
 
 		// 取消支付
 		cancelPass() {
@@ -435,34 +469,7 @@ export default {
 			}
 			this.modal = false;
 		}
-		// 参与加价
-		// async _addPrize(e) {
-		// 	let that = this;
-		// 	let data = {
-		// 		project_code: this.formParams.project_code,
-		// 		project_price: this.goods.project_price,
-		// 		pay_password: e
-		// 	};
-		// 	// console.log(data)
-		// 	try {
-		// 		this.$ui.showloading();
-		// 		let res = await this.$api.doAuction(data);
-		// 		this.$ui.hideloading();
-		// 		if (res.Success) {
-		// 			that.$ui.toast('加价成功');
-		// 			uni.$emit('refresh_main');
-		// 			setTimeout(function() {
-		// 				uni.redirectTo({
-		// 					url: '/pages/features/auction/auction?current=1'
-		// 				});
-		// 			}, 1000);
-		// 		} else {
-		// 			that.$ui.toast(res.Msg);
-		// 		}
-		// 	} catch (err) {
-		// 		console.log('请求结果false : ' + err);
-		// 	}
-		// }
+
 	}
 };
 </script>
@@ -470,57 +477,72 @@ export default {
 <style lang="scss" scoped>
 .pages {
 	padding-bottom: 200rpx;
+	.videoBox{
+		width: 100%;
+		height:774rpx;
+		position: absolute;
+		left:-999;
+		top: -999;
+		z-index: -1;
+	}
 	.swiper {
 		height: 774rpx;
 		position: relative;
-		.bar{
+		.swiperBg{
+			width: 100%;
+			height: 100%;
+			position: absolute;
+			left: 0;
+			top: 0;
+			z-index: 0;
+			background-color: rgba(0,0,0,0.2);
+		}
+		.bar {
 			position: absolute;
 			width: 100%;
 			height: 120rpx;
 			// line-height: 120rpx;
-			background: #DD3A30;
+			background: #dd3a30;
 			color: #fff;
-			left:0;
-			bottom:0;
+			left: 0;
+			bottom: 0;
 			z-index: 10;
 			padding: 0 20rpx;
 			box-sizing: border-box;
 			border: none;
-			.acountTit{
+			.acountTit {
 				width: 100%;
-				
 			}
-			.acountConten{
+			.acountConten {
 				width: 100%;
-				.price{
+				.price {
 					font-size: 36rpx;
 					position: relative;
 					text-indent: 20rpx;
-					margin-right: 20rpx;					
-					&::after{
+					margin-right: 20rpx;
+					&::after {
 						content: '￥';
 						position: absolute;
 						left: -26rpx;
 						font-size: 20rpx;
 						bottom: 0;
 						color: #fff;
-				
 					}
 				}
-				.delete{
+				.delete {
 					margin-top: 4rpx;
 					font-size: 24rpx;
-					text-decoration: line-through ;
+					text-decoration: line-through;
 				}
 			}
-			.aside{
+			.aside {
 				position: absolute;
 				right: 0;
 				top: 0;
 				height: 120rpx;
 				padding: 0 40rpx 0 60rpx;
 				// background: url(../../../static/img/right.png) left top/cover no-repeat;
-				color: #ED754B;
+				color: #ed754b;
 			}
 		}
 	}
@@ -560,7 +582,7 @@ export default {
 			line-height: 1.2;
 			font-size: 30rpx;
 			.tags {
-				background: linear-gradient(to right, #EE7E33, #EA3333);;
+				background: linear-gradient(to right, #ee7e33, #ea3333);
 				color: #fff;
 				padding: 0 8rpx;
 				border-radius: 4rpx;
@@ -589,28 +611,28 @@ export default {
 				margin: 0 24rpx;
 			}
 		}
-		.logoBox{
+		.logoBox {
 			height: 80rpx;
 			line-height: 80rpx;
 			border-radius: 6rpx;
-			background: #F2E5DA;
+			background: #f2e5da;
 			color: #642704;
 			padding: 0 20rpx;
 			margin-top: 20rpx;
-			.logo{
+			.logo {
 				width: 56rpx;
 				height: 56rpx;
 				border-radius: 50%;
 				margin-right: 20rpx;
 			}
-			.name{
+			.name {
 				color: #642704;
 			}
-			.blank{
+			.blank {
 				width: 4rpx;
 				height: 24rpx;
-				background:  #642704;
-				margin: 0  20rpx;
+				background: #642704;
+				margin: 0 20rpx;
 			}
 		}
 	}
@@ -714,7 +736,7 @@ export default {
 			}
 		}
 	}
-	.video{
+	.video {
 		width: 100vw;
 	}
 	.commonTit {
@@ -728,7 +750,7 @@ export default {
 			margin: 0 12rpx;
 		}
 	}
-	.footerBox{
+	.footerBox {
 		position: fixed;
 		left: 0;
 		bottom: 0;
@@ -739,30 +761,28 @@ export default {
 			width: 100%;
 			height: 100rpx;
 			background: #fff;
-			
+
 			padding: 0 24rpx;
-			.mes{
+			.mes {
 				width: 100rpx;
-				
 			}
-			.cm_des{
-				font-size: 20rpx; 
+			.cm_des {
+				font-size: 20rpx;
 			}
-			.sure{
+			.sure {
 				margin-top: 0;
 				width: 100%;
 				color: #fff;
 			}
 		}
-		.shareTip{
+		.shareTip {
 			width: 100%;
 			height: 88rpx;
 			line-height: 88rpx;
-			background: #FFEDE2;
+			background: #ffede2;
 			padding: 0 24rpx;
 		}
 	}
-	
 }
 .mask-screen {
 	width: 100%;
@@ -845,13 +865,12 @@ export default {
 	height: 90rpx;
 	border-radius: 50%;
 	background: #fff;
-	border: 4rpx solid  var(--cl_primary);
+	border: 4rpx solid var(--cl_primary);
 	color: var(--cl_primary);
 	position: fixed;
 	right: 40rpx;
 	bottom: 338rpx;
 }
-
 
 /*底部抽屉样式 start*/
 </style>

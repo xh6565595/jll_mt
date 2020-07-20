@@ -41,8 +41,6 @@
 				</tui-list-cell>
 				<tui-list-cell :hover="false">
 					<view class="tui-line-cell ">
-
-						<!-- <input placeholder-class="phcolor" class="tui-input" name="mobile" placeholder="请输入手机号" maxlength="50" type="text" /> -->
 						<textarea v-model="addressDetail" placeholder="请输入详细地址" />
 						</view>
 				</tui-list-cell>
