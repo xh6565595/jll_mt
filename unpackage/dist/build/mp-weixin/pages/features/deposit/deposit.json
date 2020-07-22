@@ -1,8 +1,0 @@
-{
-  "navigationBarTitleText": "提现",
-  "navigationBarTextStyle": "black",
-  "navigationBarBackgroundColor": "#f4f4f4",
-  "usingComponents": {
-    "success": "/components/success"
-  }
-}

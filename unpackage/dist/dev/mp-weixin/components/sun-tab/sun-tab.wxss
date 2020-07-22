@@ -24,7 +24,7 @@
 /* 垂直间距 */
 /* 透明度 */
 /* 文章场景相关 */
-.uni-tab.data-v-5a6cbd56 {
+.uni-tab.data-v-5813712e {
   position: relative;
   display: -webkit-box;
   display: -webkit-flex;
@@ -34,7 +34,7 @@
   line-height: 36px;
   background-color: #fff;
 }
-.uni-tab .uni-tab-item.data-v-5a6cbd56 {
+.uni-tab .uni-tab-item.data-v-5813712e {
   -webkit-box-flex: 1;
   -webkit-flex: 1;
           flex: 1;
@@ -45,20 +45,20 @@
   overflow: hidden;
   color: #333;
 }
-.uni-tab .uni-tab-scroll-item.data-v-5a6cbd56 {
+.uni-tab .uni-tab-scroll-item.data-v-5813712e {
   -webkit-box-flex: 0;
   -webkit-flex: none;
           flex: none;
   padding: 0px 12px;
 }
-.uni-tab .uni-tab-active.data-v-5a6cbd56 {
+.uni-tab .uni-tab-active.data-v-5813712e {
   color: #333;
   font-weight: 600;
 }
-.uni-tab .uni-tab-scroll-active.data-v-5a6cbd56 {
+.uni-tab .uni-tab-scroll-active.data-v-5813712e {
   border-bottom: 3px solid #1e9fff;
 }
-.uni-tab .uni-tab-bar.data-v-5a6cbd56 {
+.uni-tab .uni-tab-bar.data-v-5813712e {
   display: block;
   height: 3px;
   position: absolute;
@@ -67,7 +67,7 @@
   -webkit-transform: scaleX(0.2);
           transform: scaleX(0.2);
 }
-.uni-scroll-tab.data-v-5a6cbd56 {
+.uni-scroll-tab.data-v-5813712e {
   overflow-x: scroll;
 }
 

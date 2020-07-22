@@ -24,10 +24,10 @@
 /* 垂直间距 */
 /* 透明度 */
 /* 文章场景相关 */
-.pages.data-v-330d291c {
+.pages.data-v-30b3dcf4 {
   height: calc(100vh);
 }
-.pages .note.data-v-330d291c {
+.pages .note.data-v-30b3dcf4 {
   width: 100%;
   height: 66rpx;
   line-height: 66rpx;
@@ -35,7 +35,7 @@
   background: #333;
   padding: 0 20rpx;
 }
-.pages .tabBar.data-v-330d291c {
+.pages .tabBar.data-v-30b3dcf4 {
   line-height: 72rpx;
   height: 72rpx;
   background: #fff;
@@ -43,46 +43,46 @@
   left: 0;
   width: 100%;
 }
-.pages .banners.data-v-330d291c {
+.pages .banners.data-v-30b3dcf4 {
   width: 100%;
   height: calc(100vh - 160rpx);
 }
-.pages .banners .swiper-item.data-v-330d291c {
+.pages .banners .swiper-item.data-v-30b3dcf4 {
   width: 100%;
   height: calc(100vh - 160rpx);
 }
-.pages .modalBg.data-v-330d291c {
+.pages .modalBg.data-v-30b3dcf4 {
   position: fixed;
   width: 100%;
   height: 100vh;
   background: rgba(0, 0, 0, 0.6);
   z-index: 100;
 }
-.pages .modalBg .tui-modal-custom.data-v-330d291c {
+.pages .modalBg .tui-modal-custom.data-v-30b3dcf4 {
   text-align: center;
   width: 80vw;
   height: 300rpx;
   border-radius: 30rpx;
   background: #fff;
 }
-.pages .modalBg .tui-modal-custom .box.data-v-330d291c {
+.pages .modalBg .tui-modal-custom .box.data-v-30b3dcf4 {
   height: 100rpx;
   line-height: 100rpx;
 }
-.pages .modalBg .tui-modal-custom .tui-prompt-title.data-v-330d291c {
+.pages .modalBg .tui-modal-custom .tui-prompt-title.data-v-30b3dcf4 {
   padding-bottom: 20rpx;
   font-size: 34rpx;
   height: 100rpx;
   line-height: 100rpx;
 }
-.pages .modalBg .tui-modal-custom .tui-input.data-v-330d291c {
+.pages .modalBg .tui-modal-custom .tui-input.data-v-30b3dcf4 {
   border: 1rpx solid #e6e6e6;
   font-size: 32rpx;
   height: 80rpx;
   line-height: 80rpx;
   border-radius: 4rpx;
 }
-.pages .modalBg .tui-modal-custom .modalButton.data-v-330d291c {
+.pages .modalBg .tui-modal-custom .modalButton.data-v-30b3dcf4 {
   height: 100%;
   line-height: 100rpx;
   font-size: 36rpx;

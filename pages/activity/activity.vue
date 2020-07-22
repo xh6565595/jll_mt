@@ -14,8 +14,27 @@
 					<view class="f1 tabs" :class="{ active: tap == 1 }" hover-class="cm_hover" @tap="_switch(1)">已完成</view>
 				</view>
 			</view>
-
-			<view v-if="list.length || loadStatus != 'noMore'">
+			<view v-if="noneItem" class="firstLunch animated fadeIn" style="width: 100%;min-height: 80vh;">
+				<image src="../../static/image/activeTop.jpg" mode="widthFix" class="firstLunchTop"></image>
+				<button type="default" class="nowbtn" @tap="_toBuy">立即购买</button>
+				<view class="flex flex_center upBox">
+					<view class="subs">
+						1
+						<!-- <image src="../../static/image/blank.png" mode="scaleToFill" class="cover"></image> -->
+					</view>
+					<view class="subs">
+						2
+						<!-- <image src="../../static/image/blank.png" mode="scaleToFill" class="cover"></image> -->
+					</view>
+					<view class="subs">
+						3
+						<!-- <image src="../../static/image/blank.png" mode="scaleToFill" class="cover"></image> -->
+					</view>
+				</view>
+			
+				<view class="richBox"><rich-text v-if="text" :nodes="text"></rich-text></view>
+			</view>
+			<view v-else>
 				<view class="hot">
 					<block v-for="(item, index) in list" :key="index">
 						<view class="inItem animated fadeIn" v-if="tap == 0">
@@ -70,7 +89,7 @@
 						</view>
 
 						<view class="doneItem  animated fadeIn" v-else @tap="_detail(item)">
-							<view class="flex flex_cente header cm_bdb">
+							<view class="flex flex_center  cm_bdb " style="padding-bottom: 20rpx;margin-bottom: 20rpx;" >
 								<view class="f1 cm_title">免单成功</view>
 								<text class="cm_text">{{ item.pay_date }}</text>
 							</view>
@@ -116,28 +135,7 @@
 				<LoadMore :status="loadStatus" />
 			</view>
 
-			<!-- <view > -->
-				<!-- <tui-tips :fixed="false" imgUrl="/static/img/toast/img_nodata.png">暂无条目</tui-tips> -->
-				<view  v-else  class="firstLunch animated fadeIn" style="width: 100%;min-height: 80vh;">
-					<image src="../../static/image/activeTop.jpg" mode="widthFix" class="firstLunchTop"></image>
-					<button type="default" class="nowbtn" @tap="_toBuy">立即购买</button>
-					<view class="flex flex_center upBox" >
-						<view class="subs">1
-							<!-- <image src="../../static/image/blank.png" mode="scaleToFill" class="cover"></image> -->
-						</view>
-						<view class="subs">2
-							<!-- <image src="../../static/image/blank.png" mode="scaleToFill" class="cover"></image> -->
-						</view>
-						<view class="subs">3
-							<!-- <image src="../../static/image/blank.png" mode="scaleToFill" class="cover"></image> -->
-						</view>
-					</view>
-					
-					<view class="richBox">
-						 <rich-text v-if="text" :nodes="text"></rich-text>
-					</view>
-				</view>
-			<!-- </view> -->
+			
 		</view>
 		<view class="flex  flex_y flex_center" style="width: 100vw;height: 100vh;background-color: #fff;" v-else>
 			<text>暂未登录</text>
@@ -188,8 +186,9 @@ export default {
 				price: ''
 			},
 			modal: false,
-			text:'',
-			topHeight: 144
+			text: '',
+			topHeight: 144,
+			noneItem:false
 		};
 	},
 	mixins: [baseMixins],
@@ -205,7 +204,7 @@ export default {
 			path: `/pages/index/index`,
 			imageUrl: '/static/share.jpg'
 		};
-		this.text = global_Set_jll.activity_constraint
+		this.text = global_Set_jll.activity_constraint;
 		uni.getSystemInfo({
 			success: res => {
 				this.topHeight = 2 * (res.statusBarHeight + 44) + 80;
@@ -230,10 +229,10 @@ export default {
 		}
 	},
 	methods: {
-		_toBuy(){
+		_toBuy() {
 			uni.switchTab({
-				url:'/pages/main/main'
-			})
+				url: '/pages/main/main'
+			});
 		},
 		_detail(item) {
 			let code = item.order_code;
@@ -271,10 +270,17 @@ export default {
 			this.$refs.rule.showModal();
 		},
 		_switch(k) {
+			this.noneItem = false
 			this.tap = k;
 			this.formParams.order_status = k;
 			this.list = [];
 			this._loadData('refresh');
+		},
+		loadDataComplete(){
+			
+			if(this.list.length==0){
+				this.noneItem = true
+			}
 		}
 	}
 };
@@ -385,16 +391,17 @@ export default {
 		background-color: #fff;
 		padding: 20rpx;
 		margin-bottom: 20rpx;
-		.header {
-			padding-top: 12rpx;
-			padding-bottom: 24rpx;
-			line-height: 1;
-			.cm_title {
-				line-height: 1;
-			}
-		}
+		// .header {
+		// 	padding-top: 6rpx;
+		// 	padding-bottom: 6rpx;
+		
+		// 	.cm_title {
+		// 		line-height: 1;
+		// 	}
+		// }
 		.cm_items {
 			margin-top: 20rpx;
+			// padding-top: 0;
 		}
 	}
 }
@@ -422,32 +429,32 @@ export default {
 	.firstLunchTop {
 		width: 100%;
 	}
-	.upBox{
+	.upBox {
 		justify-content: space-between;
 		padding: 72rpx 80rpx;
-		.subs{
+		.subs {
 			width: 120rpx;
 			height: 120rpx;
 			border-radius: 50%;
 			border: 4rpx dashed #fff;
 			text-align: center;
-			line-height: 120rpx;
+			line-height: 116rpx;
 			color: #fff;
-			font-size: 40rpx;
+			font-size: 50rpx;
+			font-weight: 600;
 		}
 	}
-	.nowbtn{
+	.nowbtn {
 		width: 650rpx;
 		height: 86rpx;
 		line-height: 86rpx;
 		border-radius: 43px;
-		background: linear-gradient(0deg, #FEF7BE, #E9B249);
-		color: #4F2006;
+		background: linear-gradient(0deg, #fef7be, #e9b249);
+		color: #4f2006;
 		text-align: center;
 		font-size: 30rpx;
-		
 	}
-	.richBox{
+	.richBox {
 		margin-top: 80rpx;
 		padding: 0 40rpx;
 	}

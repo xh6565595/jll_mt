@@ -1,1 +1,0 @@
-<block wx:if="{{ashow}}"><view data-event-opts="{{[['tap',[['hideModal',['$event']]]]]}}" class="modal  flex flex_center animated fadeIn data-v-7976d0a9" bindtap="__e"><view class="dialog data-v-7976d0a9"><slot name="content"></slot></view></view></block>

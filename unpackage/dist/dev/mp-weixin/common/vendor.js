@@ -346,9 +346,9 @@ function upx2px(number, newDeviceWidth) {
   result = Math.floor(result + EPS);
   if (result === 0) {
     if (deviceDPR === 1 || !isIOS) {
-      return 1;
+      result = 1;
     } else {
-      return 0.5;
+      result = 0.5;
     }
   }
   return number < 0 ? -result : result;
@@ -421,7 +421,10 @@ var protocols = {
 
 
 var todos = [
-'vibrate'];
+'vibrate',
+'preloadPage',
+'unPreloadPage',
+'loadSubPackage'];
 
 var canIUses = [];
 
@@ -1565,9 +1568,9 @@ uni$1;exports.default = _default;
 /***/ }),
 
 /***/ 11:
-/*!*****************************************!*\
-  !*** G:/work/马桶福利购/utils/http/index.js ***!
-  \*****************************************/
+/*!********************************************!*\
+  !*** E:/mywork/jll_mt/utils/http/index.js ***!
+  \********************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1631,9 +1634,9 @@ exports.default = _default;
 /***/ }),
 
 /***/ 12:
-/*!*********************************************!*\
-  !*** G:/work/马桶福利购/utils/http/interface.js ***!
-  \*********************************************/
+/*!************************************************!*\
+  !*** E:/mywork/jll_mt/utils/http/interface.js ***!
+  \************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1826,9 +1829,9 @@ function _reslog(res) {
 /***/ }),
 
 /***/ 13:
-/*!************************************!*\
-  !*** G:/work/马桶福利购/store/index.js ***!
-  \************************************/
+/*!***************************************!*\
+  !*** E:/mywork/jll_mt/store/index.js ***!
+  \***************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2943,9 +2946,9 @@ var index_esm = {
 /***/ }),
 
 /***/ 15:
-/*!****************************!*\
-  !*** G:/work/马桶福利购/SET.js ***!
-  \****************************/
+/*!*******************************!*\
+  !*** E:/mywork/jll_mt/SET.js ***!
+  \*******************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2966,222 +2969,10 @@ var _default = {
 
 /***/ }),
 
-/***/ 16:
-/*!******************************************!*\
-  !*** G:/work/马桶福利购/utils/module/auth.js ***!
-  \******************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
-
-var _interface = _interopRequireDefault(__webpack_require__(/*! ../http/interface */ 12));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} // 用户身份相关接口
-// 我要积分
-var Auth = { // code获取OpenId
-  GetOpenId: function GetOpenId(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    return _interface.default.request({
-      url: '/api/Authorize/GetOpenId',
-      method: 'POST',
-      data: data
-      // handle:true
-    }, ifLoad);
-  },
-  // 微信自动注册
-  WxAutoRegiste: function WxAutoRegiste(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    return _interface.default.request({
-      url: '/api/Authorize/WxAutoRegiste',
-      method: 'POST',
-      data: data
-      // handle:true
-    }, ifLoad);
-  },
-
-
-  // 获取验证码
-  getVerificateCode: function getVerificateCode(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    return _interface.default.request({
-      url: '/api/Msg/SendVerificationCode',
-      method: 'POST',
-      data: data
-      // handle:true
-    }, ifLoad);
-  },
-  // 微信api
-  GetWxJsApiConfig: function GetWxJsApiConfig(data) {
-    return _interface.default.request({
-      url: '/api/Authorize/GetJsApiConfig',
-      method: 'POST',
-      data: data
-      // handle:true
-    });
-  },
-  // 登录
-  userLogin: function userLogin(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    return _interface.default.request({
-      url: '/api/Authorize/Token',
-      method: 'POST',
-      data: data
-      // handle:true
-    }, ifLoad);
-  },
-  // 快捷登录
-  shortcutToken: function shortcutToken(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    return _interface.default.request({
-      url: '/api/Authorize/ShortcutToken',
-      method: 'GET',
-      data: data
-      // handle:true
-    }, ifLoad);
-  },
-  // OpenId登录
-  WxTokenLogin: function WxTokenLogin(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    return _interface.default.request({
-      url: '/api/Authorize/WxToken',
-      method: 'POST',
-      data: data
-      // handle:true
-    }, ifLoad);
-  },
-  // 注册用户 
-  userRegiste: function userRegiste(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    return _interface.default.request({
-      url: '/api/Authorize/Registe',
-      method: 'POST',
-      data: data
-      // handle:true
-    }, ifLoad);
-  },
-  // 忘记密码
-  findPassword: function findPassword(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    return _interface.default.request({
-      url: '/api/Authorize/FindPassword',
-      method: 'POST',
-      data: data
-      // handle:true
-    }, ifLoad);
-  },
-  // 获取用户信息
-  getConsumer: function getConsumer(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    return _interface.default.request({
-      url: '/api/Consumer/Get',
-      method: 'GET',
-      data: data
-      // handle:true
-    }, ifLoad);
-  },
-
-  //更新用户信息
-  PerfectPayInfo: function PerfectPayInfo(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    return _interface.default.request({
-      url: '/api/Consumer/PerfectPayInfo',
-      method: 'POST',
-      data: data
-      // handle:true
-    }, ifLoad);
-  },
-  // 设置支付密码
-  SettingPayPassword: function SettingPayPassword(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    return _interface.default.request({
-      url: '/api/Consumer/SettingPayPassword',
-      method: 'POST',
-      data: data
-      // handle:true
-    }, ifLoad);
-  },
-  // 微信绑定手机号
-  BindWxUserMobile: function BindWxUserMobile(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    return _interface.default.request({
-      url: '/api/Authorize/BindWxUserMobile',
-      method: 'POST',
-      data: data
-      // handle:true
-    }, ifLoad);
-  },
-
-  // 支付
-  toPayment: function toPayment(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    return _interface.default.request({
-      url: '/api/Pay/Payment',
-      method: 'POST',
-      data: data
-      // handle:true
-    }, ifLoad);
-  },
-
-  // 提现
-  SubmitCash: function SubmitCash(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    return _interface.default.request({
-      url: '/api/Cash/SubmitCash',
-      method: 'POST',
-      data: data
-      // handle:true
-    }, ifLoad);
-  },
-  // 	=============商家部分\\\
-
-
-
-  // 获取商家信息
-  GetBusinessInfo: function GetBusinessInfo(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    return _interface.default.request({
-      url: '/api/Shop/GetBusinessInfo',
-      method: 'GET',
-      data: data
-      // handle:true
-    }, ifLoad);
-  },
-  // 修改商家信息
-  BusinessEditor: function BusinessEditor(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    return _interface.default.request({
-      url: '/api/Shop/BusinessEditor',
-      method: 'POST',
-      data: data
-      // handle:true
-    }, ifLoad);
-  },
-
-
-  //=============== 全局=================
-
-  // 获取全局配置
-  getConfig: function getConfig(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    return _interface.default.request({
-      url: '/api/Service/Config',
-      method: 'GET',
-      data: data
-      // handle:true
-    }, ifLoad);
-  },
-
-  // app更新
-  VersionCheck: function VersionCheck(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    return _interface.default.request({
-      url: '/api/AppVersion/VersionCheck',
-      method: 'POST',
-      data: data
-      // handle:true
-    }, ifLoad);
-  },
-
-  // 手机号登录
-  MobileToken: function MobileToken(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    return _interface.default.request({
-      url: '/api/Authorize/MobileToken',
-      method: 'POST',
-      data: data
-      // handle:true
-    }, ifLoad);
-  } };var _default =
-
-Auth;exports.default = _default;
-
-/***/ }),
-
-/***/ 160:
-/*!******************************************!*\
-  !*** G:/work/马桶福利购/utils/picker.city.js ***!
-  \******************************************/
+/***/ 152:
+/*!*********************************************!*\
+  !*** E:/mywork/jll_mt/utils/picker.city.js ***!
+  \*********************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -17619,10 +17410,10 @@ data = data;exports.default = _default;
 
 /***/ }),
 
-/***/ 161:
-/*!****************************************************************!*\
-  !*** G:/work/马桶福利购/js_sdk/graceui-dataChecker/graceChecker.js ***!
-  \****************************************************************/
+/***/ 153:
+/*!*******************************************************************!*\
+  !*** E:/mywork/jll_mt/js_sdk/graceui-dataChecker/graceChecker.js ***!
+  \*******************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -17735,10 +17526,222 @@ obj = obj;exports.default = _default;
 
 /***/ }),
 
+/***/ 16:
+/*!*********************************************!*\
+  !*** E:/mywork/jll_mt/utils/module/auth.js ***!
+  \*********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
+
+var _interface = _interopRequireDefault(__webpack_require__(/*! ../http/interface */ 12));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} // 用户身份相关接口
+// 我要积分
+var Auth = { // code获取OpenId
+  GetOpenId: function GetOpenId(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return _interface.default.request({
+      url: '/api/Authorize/GetOpenId',
+      method: 'POST',
+      data: data
+      // handle:true
+    }, ifLoad);
+  },
+  // 微信自动注册
+  WxAutoRegiste: function WxAutoRegiste(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return _interface.default.request({
+      url: '/api/Authorize/WxAutoRegiste',
+      method: 'POST',
+      data: data
+      // handle:true
+    }, ifLoad);
+  },
+
+
+  // 获取验证码
+  getVerificateCode: function getVerificateCode(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return _interface.default.request({
+      url: '/api/Msg/SendVerificationCode',
+      method: 'POST',
+      data: data
+      // handle:true
+    }, ifLoad);
+  },
+  // 微信api
+  GetWxJsApiConfig: function GetWxJsApiConfig(data) {
+    return _interface.default.request({
+      url: '/api/Authorize/GetJsApiConfig',
+      method: 'POST',
+      data: data
+      // handle:true
+    });
+  },
+  // 登录
+  userLogin: function userLogin(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return _interface.default.request({
+      url: '/api/Authorize/Token',
+      method: 'POST',
+      data: data
+      // handle:true
+    }, ifLoad);
+  },
+  // 快捷登录
+  shortcutToken: function shortcutToken(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return _interface.default.request({
+      url: '/api/Authorize/ShortcutToken',
+      method: 'GET',
+      data: data
+      // handle:true
+    }, ifLoad);
+  },
+  // OpenId登录
+  WxTokenLogin: function WxTokenLogin(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return _interface.default.request({
+      url: '/api/Authorize/WxToken',
+      method: 'POST',
+      data: data
+      // handle:true
+    }, ifLoad);
+  },
+  // 注册用户 
+  userRegiste: function userRegiste(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return _interface.default.request({
+      url: '/api/Authorize/Registe',
+      method: 'POST',
+      data: data
+      // handle:true
+    }, ifLoad);
+  },
+  // 忘记密码
+  findPassword: function findPassword(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return _interface.default.request({
+      url: '/api/Authorize/FindPassword',
+      method: 'POST',
+      data: data
+      // handle:true
+    }, ifLoad);
+  },
+  // 获取用户信息
+  getConsumer: function getConsumer(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return _interface.default.request({
+      url: '/api/Consumer/Get',
+      method: 'GET',
+      data: data
+      // handle:true
+    }, ifLoad);
+  },
+
+  //更新用户信息
+  PerfectPayInfo: function PerfectPayInfo(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return _interface.default.request({
+      url: '/api/Consumer/PerfectPayInfo',
+      method: 'POST',
+      data: data
+      // handle:true
+    }, ifLoad);
+  },
+  // 设置支付密码
+  SettingPayPassword: function SettingPayPassword(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return _interface.default.request({
+      url: '/api/Consumer/SettingPayPassword',
+      method: 'POST',
+      data: data
+      // handle:true
+    }, ifLoad);
+  },
+  // 微信绑定手机号
+  BindWxUserMobile: function BindWxUserMobile(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return _interface.default.request({
+      url: '/api/Authorize/BindWxUserMobile',
+      method: 'POST',
+      data: data
+      // handle:true
+    }, ifLoad);
+  },
+
+  // 支付
+  toPayment: function toPayment(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return _interface.default.request({
+      url: '/api/Pay/Payment',
+      method: 'POST',
+      data: data
+      // handle:true
+    }, ifLoad);
+  },
+
+  // 提现
+  SubmitCash: function SubmitCash(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return _interface.default.request({
+      url: '/api/Cash/SubmitCash',
+      method: 'POST',
+      data: data
+      // handle:true
+    }, ifLoad);
+  },
+  // 	=============商家部分\\\
+
+
+
+  // 获取商家信息
+  GetBusinessInfo: function GetBusinessInfo(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return _interface.default.request({
+      url: '/api/Shop/GetBusinessInfo',
+      method: 'GET',
+      data: data
+      // handle:true
+    }, ifLoad);
+  },
+  // 修改商家信息
+  BusinessEditor: function BusinessEditor(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return _interface.default.request({
+      url: '/api/Shop/BusinessEditor',
+      method: 'POST',
+      data: data
+      // handle:true
+    }, ifLoad);
+  },
+
+
+  //=============== 全局=================
+
+  // 获取全局配置
+  getConfig: function getConfig(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return _interface.default.request({
+      url: '/api/Service/Config',
+      method: 'GET',
+      data: data
+      // handle:true
+    }, ifLoad);
+  },
+
+  // app更新
+  VersionCheck: function VersionCheck(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return _interface.default.request({
+      url: '/api/AppVersion/VersionCheck',
+      method: 'POST',
+      data: data
+      // handle:true
+    }, ifLoad);
+  },
+
+  // 手机号登录
+  MobileToken: function MobileToken(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return _interface.default.request({
+      url: '/api/Authorize/MobileToken',
+      method: 'POST',
+      data: data
+      // handle:true
+    }, ifLoad);
+  } };var _default =
+
+Auth;exports.default = _default;
+
+/***/ }),
+
 /***/ 17:
-/*!**********************************************!*\
-  !*** G:/work/马桶福利购/utils/module/business.js ***!
-  \**********************************************/
+/*!*************************************************!*\
+  !*** E:/mywork/jll_mt/utils/module/business.js ***!
+  \*************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -19087,12 +19090,10 @@ if (true) {
   };
 
   formatComponentName = function (vm, includeFile) {
-    {
-      if(vm.$scope && vm.$scope.is){
-        return vm.$scope.is
-      }
-    }
     if (vm.$root === vm) {
+      if (vm.$options && vm.$options.__file) { // fixed by xxxxxx
+        return ('') + vm.$options.__file
+      }
       return '<Root>'
     }
     var options = typeof vm === 'function' && vm.cid != null
@@ -19127,7 +19128,7 @@ if (true) {
     if (vm._isVue && vm.$parent) {
       var tree = [];
       var currentRecursiveSequence = 0;
-      while (vm) {
+      while (vm && vm.$options.name !== 'PageBody') {
         if (tree.length > 0) {
           var last = tree[tree.length - 1];
           if (last.constructor === vm.constructor) {
@@ -19139,7 +19140,7 @@ if (true) {
             currentRecursiveSequence = 0;
           }
         }
-        tree.push(vm);
+        !vm.$options.isReserved && tree.push(vm);
         vm = vm.$parent;
       }
       return '\n\nfound in\n\n' + tree
@@ -24259,9 +24260,10 @@ function getTarget(obj, path) {
   return getTarget(obj[key], parts.slice(1).join('.'))
 }
 
-function internalMixin(Vue) {
+function internalMixin(Vue ) {
 
-  Vue.config.errorHandler = function(err) {
+  Vue.config.errorHandler = function(err, vm, info) {
+    Vue.util.warn(("Error in " + info + ": \"" + (err.toString()) + "\""), vm);
     console.error(err);
     /* eslint-disable no-undef */
     var app = getApp();
@@ -24613,9 +24615,9 @@ function normalizeComponent (
 /***/ }),
 
 /***/ 21:
-/*!******************************************!*\
-  !*** G:/work/马桶福利购/static/defaultSet.js ***!
-  \******************************************/
+/*!*********************************************!*\
+  !*** E:/mywork/jll_mt/static/defaultSet.js ***!
+  \*********************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -24887,6 +24889,335 @@ set;exports.default = _default;
 
 /***/ }),
 
+/***/ 28:
+/*!***************************************!*\
+  !*** E:/mywork/jll_mt/utils/utils.js ***!
+  \***************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _SET = _interopRequireDefault(__webpack_require__(/*! ../SET.js */ 15));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+var Utils = {
+  emailCheck: function emailCheck(value) {
+    var reg = /^\w+@[a-z0-9]+\.[a-z]+$/i;
+    var r = reg.test(value);
+    return r;
+  },
+  phoneCheck: function phoneCheck(value) {
+    var reg = /^1\d{10}$/;
+    var r = reg.test(value);
+    return r;
+  },
+  passCheck: function passCheck(val) {
+    var patrn = /^(\w){6,20}$/;
+    if (!patrn.exec(val)) return false;
+    return true;
+  },
+  // 银行卡校验
+  bankCardCheck: function bankCardCheck(val) {
+    var patrn = /^([1-9]{1})(\d{15}|\d{18})$/;
+    if (!patrn.test(val)) return false;
+    return true;
+  },
+  // 中文字符
+  chineseCheck: function chineseCheck(val) {
+    var patrn = /^[\u4E00-\u9FA5]{2,4}/;
+
+    if (!patrn.test(val)) return false;
+    return true;
+  },
+  // 银行卡数字加密
+  encryptBankCode: function encryptBankCode(val) {
+
+    var str = val.replace(/\s/g, '');
+    console.log(str);
+    var reg = /^(\d{4})\d+(\d{4})$/;
+    str.replace(reg, "$1 **** **** $2");
+    console.log(str);
+    return str;
+  },
+
+
+  /**
+      * Parse the time to string
+      * @param {(Object|string|number)} time
+      * @param {string} cFormat
+      * @returns {string}
+      */
+  parseTime: function parseTime(time, cFormat) {
+    if (arguments.length === 0) {
+      return null;
+    }
+    var format = cFormat || '{y}-{m}-{d} {h}:{i}:{s}';
+    var date;
+    if (typeof time === 'object') {
+      date = time;
+    } else {
+      if (typeof time === 'string' && /^[0-9]+$/.test(time)) {
+        time = parseInt(time);
+      }
+      if (typeof time === 'number' && time.toString().length === 10) {
+        time = time * 1000;
+      }
+      date = new Date(time);
+    }
+    var formatObj = {
+      y: date.getFullYear(),
+      m: date.getMonth() + 1,
+      d: date.getDate(),
+      h: date.getHours(),
+      i: date.getMinutes(),
+      s: date.getSeconds(),
+      a: date.getDay() };
+
+    var time_str = format.replace(/{(y|m|d|h|i|s|a)+}/g, function (result, key) {
+      var value = formatObj[key];
+      // Note: getDay() returns 0 on Sunday
+      if (key === 'a') {
+        return ['日', '一', '二', '三', '四', '五', '六'][value];
+      }
+      if (result.length > 0 && value < 10) {
+        value = '0' + value;
+      }
+      return value || 0;
+    });
+    return time_str;
+  },
+
+  /**
+      * @param {number} time
+      * @param {string} option
+      * @returns {string}
+      */
+  formatTime: function formatTime(time, option) {
+    if (('' + time).length === 10) {
+      time = parseInt(time) * 1000;
+    } else {
+      time = +time;
+    }
+    var d = new Date(time);
+    var now = Date.now();
+
+    var diff = (now - d) / 1000;
+
+    if (diff < 30) {
+      return '刚刚';
+    } else if (diff < 3600) {
+      // less 1 hour
+      return Math.ceil(diff / 60) + '分钟前';
+    } else if (diff < 3600 * 24) {
+      return Math.ceil(diff / 3600) + '小时前';
+    } else if (diff < 3600 * 24 * 2) {
+      return '1天前';
+    }
+    if (option) {
+      return parseTime(time, option);
+    } else {
+      return (
+        d.getMonth() +
+        1 +
+        '月' +
+        d.getDate() +
+        '日' +
+        d.getHours() +
+        '时' +
+        d.getMinutes() +
+        '分');
+
+    }
+  },
+  /**
+      * @param {string} type
+      * @returns {Date}
+      */
+  getTime: function getTime(type) {
+    if (type === 'start') {
+      return new Date().getTime() - 3600 * 1000 * 24 * 90;
+    } else {
+      return new Date(new Date().toDateString());
+    }
+  },
+
+  // 记录本地足迹
+  // setTrace(item) {
+  // 	let list = uni.getStorageSync('kxTraceList');
+  // 	if (list) {
+  // 		list = JSON.parse(list)
+  // 	} else {
+  // 		list = {}
+  // 	}
+  // 	console.log('存入足迹')
+  // 	// 判断该记录书是否存在
+  // 	let time = new Date().getTime()
+  // 	let id = item.code
+  // 	item.time = time
+  // 	list[id] = item
+  // 	uni.setStorageSync('kxTraceList', JSON.stringify(list));
+  // },
+  // // 获取足迹
+  // getTrace() {
+  // 	let list = uni.getStorageSync('kxTraceList');
+  // 	if (list) {
+  // 		return (JSON.parse(list))
+  // 	} else {
+  // 		return []
+  // 	}
+
+  // },
+  // // 清除所有足迹
+  // clearTrace() {
+  // 	uni.removeStorageSync('kxTraceList');
+  // },
+
+  // 支付宝支付
+  AliPay: function AliPay(strData, callback, failFun) {
+    if (!strData) {
+      uni.showToast({
+        icon: 'none',
+        title: '支付参数无效' });
+
+      return;
+    }
+    uni.requestPayment({
+      provider: "alipay",
+      orderInfo: strData,
+      success: function success(res) {
+        plus.nativeUI.toast('支付成功');
+        if (callback) callback();
+      },
+      fail: function fail(res) {
+        if (failFun) {
+          failFun();
+          return;
+        }
+        uni.showToast({
+          title: '支付失败',
+          icon: "none",
+          duration: 2000,
+          complete: function complete() {
+            uni.redirectTo({
+              url: '/pages/features/order/order?current=1' });
+
+          } });
+
+      } });
+
+  },
+
+  // 微信支付
+  WxPay: function WxPay(orderinfo, callback, failFun) {
+    if (!orderinfo) {
+      uni.showToast({
+        icon: 'none',
+        title: '支付参数无效' });
+
+      return;
+    }
+    // console.log(JSON.stringify(orderinfo));
+    uni.requestPayment({
+      provider: "wxpay",
+      timeStamp: orderinfo.timestamp,
+      nonceStr: orderinfo.noncestr,
+      package: orderinfo.package,
+      signType: "MD5",
+      paySign: orderinfo.paySign,
+      orderInfo: {
+        appid: orderinfo.appid,
+        noncestr: orderinfo.noncestr,
+        package: orderinfo.package,
+        partnerid: orderinfo.mchid,
+        prepayid: orderinfo.prepayid,
+        timestamp: orderinfo.timestamp,
+        sign: orderinfo.sign },
+
+      success: function success(res) {
+        plus.nativeUI.toast('支付成功');
+        if (callback) callback();
+      },
+      fail: function fail(res) {
+        console.log(JSON.stringify(res));
+        if (failFun) {
+          failFun();
+          return;
+        }
+        uni.showToast({
+          title: '支付失败',
+          icon: "none",
+          duration: 2000,
+          complete: function complete() {
+            uni.redirectTo({
+              url: '/pages/features/order/order?current=1' });
+
+          } });
+
+      } });
+
+  },
+  // 判断是否可以指纹解锁
+  // 判断当前机型是否支持指纹
+  checkFinger: function checkFinger() {
+    if (!plus.fingerprint.isSupport()) {
+      plus.nativeUI.toast('此设备不支持指纹识别');
+      // this.supportFinger = false;
+      return false;
+    } else if (!plus.fingerprint.isKeyguardSecure()) {
+      plus.nativeUI.toast('此设备未设置密码锁屏');
+      // this.supportFinger = false;
+      return false;
+    } else if (!plus.fingerprint.isEnrolledFingerprints()) {
+      plus.nativeUI.toast('此设备未录入指纹');
+      // this.supportFinger = false;
+      return false;
+    } else {
+      // this.supportFinger = true;
+      return true;
+    }
+
+  },
+  // 是否微信浏览器
+  is_weixn: function is_weixn() {
+    var ua = navigator.userAgent.toLowerCase();
+    if (ua.match(/MicroMessenger/i) == "micromessenger") {
+      return true;
+    } else {
+      return false;
+    }
+  },
+  // 是否受过权
+  // 返回code
+  ifAuth: function ifAuth(success) {
+    var url = window.location.href;
+    var s = url.match(/code=(.*)&state/);
+    if (s) {
+      // 是授权后的页面,则做opnegid判断 使用code获取pid
+      // return s[1]
+      // 换取oid
+      success(s[1]);
+    } else {
+      // 不是授权的页面，重定向进行授权
+
+      this.wxauth();
+    }
+  },
+
+  // wx授权跳转
+  wx_auth: function wx_auth() {
+    // alert(1)
+    var set = {
+      appid: _SET.default.wx_appid, //测试环境
+      redirect_uri: _SET.default.wx_redirect_url };
+
+    window.location.href = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=' + set.appid + '&redirect_uri=' +
+    set.redirect_uri + '&response_type=code&scope=snsapi_userinfo&state=1#wechat_redirect';
+  } };var _default =
+
+
+Utils;exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
+
+/***/ }),
+
 /***/ 3:
 /*!***********************************!*\
   !*** (webpack)/buildin/global.js ***!
@@ -24918,10 +25249,10 @@ module.exports = g;
 
 /***/ }),
 
-/***/ 317:
-/*!*****************************************************!*\
-  !*** G:/work/马桶福利购/components/tki-qrcode/qrcode.js ***!
-  \*****************************************************/
+/***/ 310:
+/*!********************************************************!*\
+  !*** E:/mywork/jll_mt/components/tki-qrcode/qrcode.js ***!
+  \********************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -26136,350 +26467,10 @@ QRCode;exports.default = _default;
 
 /***/ }),
 
-/***/ 36:
-/*!************************************!*\
-  !*** G:/work/马桶福利购/utils/utils.js ***!
-  \************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _SET = _interopRequireDefault(__webpack_require__(/*! ../SET.js */ 15));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
-var Utils = {
-  emailCheck: function emailCheck(value) {
-    var reg = /^\w+@[a-z0-9]+\.[a-z]+$/i;
-    var r = reg.test(value);
-    return r;
-  },
-  phoneCheck: function phoneCheck(value) {
-    var reg = /^1\d{10}$/;
-    var r = reg.test(value);
-    return r;
-  },
-  passCheck: function passCheck(val) {
-    var patrn = /^(\w){6,20}$/;
-    if (!patrn.exec(val)) return false;
-    return true;
-  },
-  // 银行卡校验
-  bankCardCheck: function bankCardCheck(val) {
-    var patrn = /^([1-9]{1})(\d{15}|\d{18})$/;
-    if (!patrn.test(val)) return false;
-    return true;
-  },
-  // 中文字符
-  chineseCheck: function chineseCheck(val) {
-    var patrn = /^[\u4E00-\u9FA5]{2,4}/;
-
-    if (!patrn.test(val)) return false;
-    return true;
-  },
-  // 银行卡数字加密
-  encryptBankCode: function encryptBankCode(val) {
-
-    var str = val.replace(/\s/g, '');
-    console.log(str);
-    var reg = /^(\d{4})\d+(\d{4})$/;
-    str.replace(reg, "$1 **** **** $2");
-    console.log(str);
-    return str;
-  },
-
-
-  /**
-      * Parse the time to string
-      * @param {(Object|string|number)} time
-      * @param {string} cFormat
-      * @returns {string}
-      */
-  parseTime: function parseTime(time, cFormat) {
-    if (arguments.length === 0) {
-      return null;
-    }
-    var format = cFormat || '{y}-{m}-{d} {h}:{i}:{s}';
-    var date;
-    if (typeof time === 'object') {
-      date = time;
-    } else {
-      if (typeof time === 'string' && /^[0-9]+$/.test(time)) {
-        time = parseInt(time);
-      }
-      if (typeof time === 'number' && time.toString().length === 10) {
-        time = time * 1000;
-      }
-      date = new Date(time);
-    }
-    var formatObj = {
-      y: date.getFullYear(),
-      m: date.getMonth() + 1,
-      d: date.getDate(),
-      h: date.getHours(),
-      i: date.getMinutes(),
-      s: date.getSeconds(),
-      a: date.getDay() };
-
-    var time_str = format.replace(/{(y|m|d|h|i|s|a)+}/g, function (result, key) {
-      var value = formatObj[key];
-      // Note: getDay() returns 0 on Sunday
-      if (key === 'a') {
-        return ['日', '一', '二', '三', '四', '五', '六'][value];
-      }
-      if (result.length > 0 && value < 10) {
-        value = '0' + value;
-      }
-      return value || 0;
-    });
-    return time_str;
-  },
-
-  /**
-      * @param {number} time
-      * @param {string} option
-      * @returns {string}
-      */
-  formatTime: function formatTime(time, option) {
-    if (('' + time).length === 10) {
-      time = parseInt(time) * 1000;
-    } else {
-      time = +time;
-    }
-    var d = new Date(time);
-    var now = Date.now();
-
-    var diff = (now - d) / 1000;
-
-    if (diff < 30) {
-      return '刚刚';
-    } else if (diff < 3600) {
-      // less 1 hour
-      return Math.ceil(diff / 60) + '分钟前';
-    } else if (diff < 3600 * 24) {
-      return Math.ceil(diff / 3600) + '小时前';
-    } else if (diff < 3600 * 24 * 2) {
-      return '1天前';
-    }
-    if (option) {
-      return parseTime(time, option);
-    } else {
-      return (
-        d.getMonth() +
-        1 +
-        '月' +
-        d.getDate() +
-        '日' +
-        d.getHours() +
-        '时' +
-        d.getMinutes() +
-        '分');
-
-    }
-  },
-  /**
-      * @param {string} type
-      * @returns {Date}
-      */
-  getTime: function getTime(type) {
-    if (type === 'start') {
-      return new Date().getTime() - 3600 * 1000 * 24 * 90;
-    } else {
-      return new Date(new Date().toDateString());
-    }
-  },
-
-  // 记录本地足迹
-  // setTrace(item) {
-  // 	let list = uni.getStorageSync('kxTraceList');
-  // 	if (list) {
-  // 		list = JSON.parse(list)
-  // 	} else {
-  // 		list = {}
-  // 	}
-  // 	console.log('存入足迹')
-  // 	// 判断该记录书是否存在
-  // 	let time = new Date().getTime()
-  // 	let id = item.code
-  // 	item.time = time
-  // 	list[id] = item
-  // 	uni.setStorageSync('kxTraceList', JSON.stringify(list));
-  // },
-  // // 获取足迹
-  // getTrace() {
-  // 	let list = uni.getStorageSync('kxTraceList');
-  // 	if (list) {
-  // 		return (JSON.parse(list))
-  // 	} else {
-  // 		return []
-  // 	}
-
-  // },
-  // // 清除所有足迹
-  // clearTrace() {
-  // 	uni.removeStorageSync('kxTraceList');
-  // },
-
-  // 支付宝支付
-  AliPay: function AliPay(strData, callback, failFun) {
-    if (!strData) {
-      uni.showToast({
-        icon: 'none',
-        title: '支付参数无效' });
-
-      return;
-    }
-    uni.requestPayment({
-      provider: "alipay",
-      orderInfo: strData,
-      success: function success(res) {
-        plus.nativeUI.toast('支付成功');
-        if (callback) callback();
-      },
-      fail: function fail(res) {
-        if (failFun) {
-          failFun();
-          return;
-        }
-        uni.showToast({
-          title: '支付失败',
-          icon: "none",
-          duration: 2000,
-          complete: function complete() {
-            uni.redirectTo({
-              url: '/pages/features/order/order?current=1' });
-
-          } });
-
-      } });
-
-  },
-
-  // 微信支付
-  WxPay: function WxPay(orderinfo, callback, failFun) {
-    if (!orderinfo) {
-      uni.showToast({
-        icon: 'none',
-        title: '支付参数无效' });
-
-      return;
-    }
-    // console.log(JSON.stringify(orderinfo));
-    uni.requestPayment({
-      provider: "wxpay",
-      timeStamp: orderinfo.timestamp,
-      nonceStr: orderinfo.noncestr,
-      package: orderinfo.package,
-      signType: "MD5",
-      paySign: orderinfo.paySign,
-      orderInfo: {
-        appid: orderinfo.appid,
-        noncestr: orderinfo.noncestr,
-        package: orderinfo.package,
-        partnerid: orderinfo.mchid,
-        prepayid: orderinfo.prepayid,
-        timestamp: orderinfo.timestamp,
-        sign: orderinfo.sign },
-
-      success: function success(res) {
-        plus.nativeUI.toast('支付成功');
-        if (callback) callback();
-      },
-      fail: function fail(res) {
-        console.log(JSON.stringify(res));
-        if (failFun) {
-          failFun();
-          return;
-        }
-        uni.showToast({
-          title: '支付失败',
-          icon: "none",
-          duration: 2000,
-          complete: function complete() {
-            uni.redirectTo({
-              url: '/pages/features/order/order?current=1' });
-
-          } });
-
-      } });
-
-  },
-  // 判断是否可以指纹解锁
-  // 判断当前机型是否支持指纹
-  checkFinger: function checkFinger() {
-    if (!plus.fingerprint.isSupport()) {
-      plus.nativeUI.toast('此设备不支持指纹识别');
-      // this.supportFinger = false;
-      return false;
-    } else if (!plus.fingerprint.isKeyguardSecure()) {
-      plus.nativeUI.toast('此设备未设置密码锁屏');
-      // this.supportFinger = false;
-      return false;
-    } else if (!plus.fingerprint.isEnrolledFingerprints()) {
-      plus.nativeUI.toast('此设备未录入指纹');
-      // this.supportFinger = false;
-      return false;
-    } else {
-      // this.supportFinger = true;
-      return true;
-    }
-
-  },
-  // 是否微信浏览器
-  is_weixn: function is_weixn() {
-    var ua = navigator.userAgent.toLowerCase();
-    if (ua.match(/MicroMessenger/i) == "micromessenger") {
-      return true;
-    } else {
-      return false;
-    }
-  },
-  // 是否受过权
-  // 返回code
-  ifAuth: function ifAuth(success) {
-    var url = window.location.href;
-    var s = url.match(/code=(.*)&state/);
-    if (s) {
-      // 是授权后的页面,则做opnegid判断 使用code获取pid
-      // return s[1]
-      // 换取oid
-      success(s[1]);
-    } else {
-      // 不是授权的页面，重定向进行授权
-
-      this.wxauth();
-    }
-  },
-
-  // wx授权跳转
-  wx_auth: function wx_auth() {
-    // alert(1)
-    var set = {
-      appid: _SET.default.wx_appid, //测试环境
-      redirect_uri: _SET.default.wx_redirect_url };
-
-    window.location.href = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=' + set.appid + '&redirect_uri=' +
-    set.redirect_uri + '&response_type=code&scope=snsapi_userinfo&state=1#wechat_redirect';
-  } };var _default =
-
-
-Utils;exports.default = _default;
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
-
-/***/ }),
-
-/***/ 4:
-/*!*********************************************************************************************!*\
-  !*** ./node_modules/@vue/babel-preset-app/node_modules/@babel/runtime/regenerator/index.js ***!
-  \*********************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(/*! regenerator-runtime */ 5);
-
-/***/ }),
-
-/***/ 45:
-/*!*****************************************!*\
-  !*** G:/work/马桶福利购/utils/baseMixins.js ***!
-  \*****************************************/
+/***/ 37:
+/*!********************************************!*\
+  !*** E:/mywork/jll_mt/utils/baseMixins.js ***!
+  \********************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -26588,6 +26579,17 @@ var baseMixins = {
 
     } } };exports.baseMixins = baseMixins;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
+
+/***/ }),
+
+/***/ 4:
+/*!*********************************************************************************************!*\
+  !*** ./node_modules/@vue/babel-preset-app/node_modules/@babel/runtime/regenerator/index.js ***!
+  \*********************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(/*! regenerator-runtime */ 5);
 
 /***/ }),
 
@@ -27372,9 +27374,9 @@ if (hadRuntime) {
 /***/ }),
 
 /***/ 7:
-/*!********************************!*\
-  !*** G:/work/马桶福利购/pages.json ***!
-  \********************************/
+/*!***********************************!*\
+  !*** E:/mywork/jll_mt/pages.json ***!
+  \***********************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -27382,10 +27384,10 @@ if (hadRuntime) {
 
 /***/ }),
 
-/***/ 85:
-/*!*************************************************!*\
-  !*** G:/work/马桶福利购/utils/QS-SharePoster/app.js ***!
-  \*************************************************/
+/***/ 77:
+/*!****************************************************!*\
+  !*** E:/mywork/jll_mt/utils/QS-SharePoster/app.js ***!
+  \****************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -27952,16 +27954,16 @@ module.exports = _app;
 
 /***/ }),
 
-/***/ 86:
-/*!************************************************************!*\
-  !*** G:/work/马桶福利购/utils/QS-SharePoster/QS-SharePoster.js ***!
-  \************************************************************/
+/***/ 78:
+/*!***************************************************************!*\
+  !*** E:/mywork/jll_mt/utils/QS-SharePoster/QS-SharePoster.js ***!
+  \***************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@vue/babel-preset-app/node_modules/@babel/runtime/regenerator */ 4));var _app2 = _interopRequireDefault(__webpack_require__(/*! ./app.js */ 85));
-var _QRCodeAlg = _interopRequireDefault(__webpack_require__(/*! ./QRCodeAlg.js */ 87));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _toConsumableArray(arr) {return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread();}function _nonIterableSpread() {throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");}function _unsupportedIterableToArray(o, minLen) {if (!o) return;if (typeof o === "string") return _arrayLikeToArray(o, minLen);var n = Object.prototype.toString.call(o).slice(8, -1);if (n === "Object" && o.constructor) n = o.constructor.name;if (n === "Map" || n === "Set") return Array.from(n);if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);}function _iterableToArray(iter) {if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter);}function _arrayWithoutHoles(arr) {if (Array.isArray(arr)) return _arrayLikeToArray(arr);}function _arrayLikeToArray(arr, len) {if (len == null || len > arr.length) len = arr.length;for (var i = 0, arr2 = new Array(len); i < len; i++) {arr2[i] = arr[i];}return arr2;}function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}
+/* WEBPACK VAR INJECTION */(function(uni) {var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@vue/babel-preset-app/node_modules/@babel/runtime/regenerator */ 4));var _app2 = _interopRequireDefault(__webpack_require__(/*! ./app.js */ 77));
+var _QRCodeAlg = _interopRequireDefault(__webpack_require__(/*! ./QRCodeAlg.js */ 79));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _toConsumableArray(arr) {return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread();}function _nonIterableSpread() {throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");}function _unsupportedIterableToArray(o, minLen) {if (!o) return;if (typeof o === "string") return _arrayLikeToArray(o, minLen);var n = Object.prototype.toString.call(o).slice(8, -1);if (n === "Object" && o.constructor) n = o.constructor.name;if (n === "Map" || n === "Set") return Array.from(n);if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);}function _iterableToArray(iter) {if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter);}function _arrayWithoutHoles(arr) {if (Array.isArray(arr)) return _arrayLikeToArray(arr);}function _arrayLikeToArray(arr, len) {if (len == null || len > arr.length) len = arr.length;for (var i = 0, arr2 = new Array(len); i < len; i++) {arr2[i] = arr[i];}return arr2;}function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}
 var ShreUserPosterBackgroundKey = 'ShrePosterBackground_'; // 背景图片缓存名称前缀
 var idKey = 'QSSHAREPOSTER_IDKEY'; //drawArray自动生成的idkey
 var isMp = false;
@@ -29264,10 +29266,10 @@ module.exports = {
 
 /***/ }),
 
-/***/ 87:
-/*!*******************************************************!*\
-  !*** G:/work/马桶福利购/utils/QS-SharePoster/QRCodeAlg.js ***!
-  \*******************************************************/
+/***/ 79:
+/*!**********************************************************!*\
+  !*** E:/mywork/jll_mt/utils/QS-SharePoster/QRCodeAlg.js ***!
+  \**********************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
