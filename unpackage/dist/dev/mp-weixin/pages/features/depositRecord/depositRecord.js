@@ -94,7 +94,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "components", function() { return components; });
 var components = {
   sunTab: function() {
-    return __webpack_require__.e(/*! import() | components/sun-tab/sun-tab */ "components/sun-tab/sun-tab").then(__webpack_require__.bind(null, /*! @/components/sun-tab/sun-tab.vue */ 334))
+    return __webpack_require__.e(/*! import() | components/sun-tab/sun-tab */ "components/sun-tab/sun-tab").then(__webpack_require__.bind(null, /*! @/components/sun-tab/sun-tab.vue */ 342))
   }
 }
 var render = function() {
@@ -175,7 +175,7 @@ var _vuex = __webpack_require__(/*! vuex */ 14); //
 //
 //
 //
-var sunTab = function sunTab() {__webpack_require__.e(/*! require.ensure | components/sun-tab/sun-tab */ "components/sun-tab/sun-tab").then((function () {return resolve(__webpack_require__(/*! @/components/sun-tab/sun-tab.vue */ 334));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var itemList = function itemList() {Promise.all(/*! require.ensure | pages/features/depositRecord/itemList/itemList */[__webpack_require__.e("common/vendor"), __webpack_require__.e("pages/features/depositRecord/itemList/itemList")]).then((function () {return resolve(__webpack_require__(/*! ./itemList/itemList.vue */ 355));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default = { data: function data() {return { tabObjectList: [//对象数组赋值
+var sunTab = function sunTab() {__webpack_require__.e(/*! require.ensure | components/sun-tab/sun-tab */ "components/sun-tab/sun-tab").then((function () {return resolve(__webpack_require__(/*! @/components/sun-tab/sun-tab.vue */ 342));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var itemList = function itemList() {Promise.all(/*! require.ensure | pages/features/depositRecord/itemList/itemList */[__webpack_require__.e("common/vendor"), __webpack_require__.e("pages/features/depositRecord/itemList/itemList")]).then((function () {return resolve(__webpack_require__(/*! ./itemList/itemList.vue */ 363));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default = { data: function data() {return { tabObjectList: [//对象数组赋值
       { name: '收入', value: 0 }, { name: '支出', value: 1 }], detailType1: 0, detailType2: 1,
       current: 0,
       type: 1,

@@ -1,10 +1,11 @@
 <template>
 	<view class="pages">
 		<!-- 菜单 -->
-		<swiper class="swiper" :indicator-dots="true" :autoplay="true">
+		<swiper class="swiper" :indicator-dots="true" :autoplay="false">
 			<block v-for="(item, index) in banners" :key="index">
-				<swiper-item @click="_href(item.Url)">
-					<image :src="item.Text" mode="aspectFill" lazy-load="true" class="swiper-item uni-bg-red" style="width: 100%;height: 100%;"></image>
+				<swiper-item @click="_href(item)">
+					<video :src="item.Url" v-if="item.UrlType == 'video'" :autoplay="true" controls class="swiper-item" style="width: 100%;height: 100%;"></video>
+					<image :src="item.Text" v-else mode="aspectFill" lazy-load="true" class="swiper-item uni-bg-red" style="width: 100%;height: 100%;"></image>
 				</swiper-item>
 			</block>
 		</swiper>
@@ -81,6 +82,7 @@ export default {
 	onLoad() {
 		let that = this;
 		this.banners = global_Set_jll.banerList;
+		console.log(this.banners)
 		// this.classList = global_Set_jll.classList;
 		// this._loadData('refresh');
 		this._loadData('refresh')
@@ -94,10 +96,44 @@ export default {
 	},
 	methods: {
 		
-		_href(url) {
-			uni.navigateTo({
-				url: url
-			});
+		_href(item) {
+			console.log(item)
+			let type = item.UrlType
+			let url = item.Url
+			// this.$store.commit('setWebviewUrl','http://www.baidu.com')
+			// uni.navigateTo({
+			// 	url:'/pages/webview/webview'
+			// })
+			if(!type || !url)return;
+			switch (type){
+				case 'href':
+					// debugger
+					uni.navigateTo({
+						url: url
+					});
+					break;
+				case 'inWeb':
+					this.$store.commit('setWebviewUrl',url)
+					uni.navigateTo({
+						url:'/pages/webview/webview'
+					})
+					break;
+				case 'mini':
+					uni.navigateToMiniProgram({
+					  appId: url,
+					  path: 'pages/index/index',
+					  extraData: {
+					    'data1': 'test'
+					  },
+					  success(res) {
+					    // 打开成功
+					  }
+					})
+					break;
+				default:
+					break;
+			}
+			
 		},
 
 		imageLoad(index) {
@@ -133,7 +169,7 @@ export default {
 		overflow: hidden;
 		width: 100%;
 		// height: 280rpx;
-		height:388rpx;
+		height:400rpx;
 		background-color: #f8f8f8;
 		.swiper-item {
 			background: #eee;

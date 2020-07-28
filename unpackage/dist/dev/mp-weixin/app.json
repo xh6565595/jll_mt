@@ -23,7 +23,8 @@
     "pages/sisMsg/msg/msg",
     "pages/activity/activityDetail/activityDetail",
     "pages/login/login",
-    "pages/features/invoice/invoice"
+    "pages/features/invoice/invoice",
+    "pages/webview/webview"
   ],
   "subPackages": [],
   "window": {
@@ -68,6 +69,5 @@
     "icon": "/components/icon/icon",
     "tui-modal": "/components/modal/modal",
     "tui-tag": "/components/tag/tag"
-  },
-  "sitemapLocation": "sitemap11.json"
+  }
 }

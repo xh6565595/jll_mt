@@ -5,9 +5,10 @@
 				<block v-for="(item, index) in list" :key="index">
 					<view class="proItemsBox ">
 						<view class=" flex  flex_center proItemTop cm_bdb">
-							<image :src="item.shop_logo" mode="widthFix" class="shopLogo"></image>
-							<view class="f1 cm_tex_l">{{item.shop_name}}</view>
-							<!-- <view class="cm_des">{{ item.create_time }}</view> -->
+							<!-- <image :src="item.shop_logo" mode="widthFix" class="shopLogo"></image> -->
+							<!-- <view class="f1 cm_tex_l">{{item.shop_name}}</view> -->
+							<view class=" cm_tex_l">订单号：</view>
+							<view class="cm_des f1">{{item.order_code}}</view>
 							<view class="status">{{ item.order_status | orderStatusFilter }}</view>
 						</view>
 						<block v-for="(it, ind) in item.project_list" :key="ind">						

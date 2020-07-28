@@ -94,7 +94,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "components", function() { return components; });
 var components = {
   tuiSkeleton: function() {
-    return __webpack_require__.e(/*! import() | components/tui-skeleton/tui-skeleton */ "components/tui-skeleton/tui-skeleton").then(__webpack_require__.bind(null, /*! @/components/tui-skeleton/tui-skeleton.vue */ 270))
+    return __webpack_require__.e(/*! import() | components/tui-skeleton/tui-skeleton */ "components/tui-skeleton/tui-skeleton").then(__webpack_require__.bind(null, /*! @/components/tui-skeleton/tui-skeleton.vue */ 278))
   }
 }
 var render = function() {
@@ -181,7 +181,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var _vuex = __webpack_require__(/*! vuex */ 14);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}var tuiTips = function tuiTips() {__webpack_require__.e(/*! require.ensure | components/extend/tips/tips */ "components/extend/tips/tips").then((function () {return resolve(__webpack_require__(/*! @/components/extend/tips/tips */ 298));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
+var _vuex = __webpack_require__(/*! vuex */ 14);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}var tuiTips = function tuiTips() {__webpack_require__.e(/*! require.ensure | components/extend/tips/tips */ "components/extend/tips/tips").then((function () {return resolve(__webpack_require__(/*! @/components/extend/tips/tips */ 306));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
 {
   data: function data() {
     return {

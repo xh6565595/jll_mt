@@ -138,9 +138,7 @@
 					<text>联系卖家</text>
 				</view>
 			</view>
-			<!-- <picker @change="bindPickerChange" :value="1" mode="date">
-			                        <view class="uni-input">123</view>
-			                    </picker> -->
+
 			<view class="proItemsBox  " style="padding: 0">
 				<view class="cm_title t tui-skeleton-fillet flex flex_center">
 					<text>订单详情</text>
@@ -193,7 +191,7 @@
 					</tui-list-cell>
 				</view>
 			</view>
-			<view class="proItemsBox  " style="padding: 0" v-if="ifInvoice">
+			<view class="proItemsBox  " style="padding: 0" v-if="ifInvoice ">
 				<view class="cm_title t tui-skeleton-fillet flex flex_center">
 					<text>发票信息</text>
 					<text class="f1"></text>
@@ -229,12 +227,12 @@
 			</view>
 			
 			<view class="footerBox" :style="{'padding-bottom':ifx?'40rpx':''}">
-				<text class="footerMark" v-if="item.order_status == 1 && item.delay_ems_time">发货时间：{{ item.delay_ems_time }}</text>
+				<view class="footerMark" v-if="item.order_status == 1 && item.delay_ems_time">发货时间：{{ item.delay_ems_time }}</view>
 				<view class="footer flex flex_center" v-if="item.order_status != 5" >
 					<view class="f1"></view>
 					<tui-button type="primary" class="btns" size="small" shape="circle" @tap="_invoice" v-if="item.order_status!= 0 && !ifInvoice ">开具发票</tui-button>
 					<tui-button type="primary" class="btns" size="small" shape="circle" @tap="_readyToPay" v-if="item.order_status == 0">立即付款</tui-button>
-					<tui-button type="primary" class="btns" size="small" plain shape="circle" @tap="cancelOrder" v-if="item.order_status == 0">取消订单</tui-button>
+					<tui-button type="primary" class="btns" size="small" plain shape="circle" @tap="cancelOrder" v-if="item.order_status == 0">删除订单</tui-button>
 					<tui-button type="primary" class="btns" size="small" shape="circle" v-if="item.order_status == 1" @tap="prompt(item.order_code)">提醒发货</tui-button>
 					<tui-button type="primary" class="btns" size="small" shape="circle" v-if="item.order_status == 2" @tap="sure(item.order_code)">确认收货</tui-button>
 					<tui-button type="primary" class="btns" size="small" shape="circle" plain v-if="item.order_status == 2" @tap="scan(item.order_code)">查看物流</tui-button>
@@ -373,6 +371,10 @@ export default {
 			}
 		},
 		_invoice(){
+			if(this.item.is_tax==1){
+				this.$ui.toast('您已申请退税，无法开具发票');
+				return 
+			}
 			uni.navigateTo({
 				url:'/pages/features/invoice/invoice?order='+ this.formParams.order_code +'&account=' + this.item.pay_price 
 			})
@@ -797,8 +799,9 @@ export default {
 	}
 
 	.tui-title {
-		width: 110rpx;
+		// width: 150rpx;
 		margin-right: 20rpx;
+		font-size: 28rpx;
 		text-align: left;
 	}
 	.footerBox{

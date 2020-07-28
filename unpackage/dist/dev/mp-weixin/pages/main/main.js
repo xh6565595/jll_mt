@@ -190,6 +190,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 var _vuex = __webpack_require__(/*! vuex */ 14);
 
 var _baseMixins = __webpack_require__(/*! @/utils/baseMixins.js */ 37); //
@@ -251,17 +252,42 @@ var _baseMixins = __webpack_require__(/*! @/utils/baseMixins.js */ 37); //
 //
 //
 //
-var global_Set_jll = uni.getStorageSync('global_Set_jll');var _default = { data: function data() {return { baseKey: 'GetGoodsList', banners: [], hasRow: 'Rows', formParams: { key: '', type: '1', pageIndex: 1, pageSize: 10 } };}, components: {}, computed: (0, _vuex.mapState)(['shareUser', 'sharePro', 'hasLogin']), mixins: [_baseMixins.baseMixins], onLoad: function onLoad() {var that = this;this.banners = global_Set_jll.banerList; // this.classList = global_Set_jll.classList;
+//
+var global_Set_jll = uni.getStorageSync('global_Set_jll');var _default = { data: function data() {return { baseKey: 'GetGoodsList', banners: [], hasRow: 'Rows', formParams: { key: '', type: '1', pageIndex: 1, pageSize: 10 } };}, components: {}, computed: (0, _vuex.mapState)(['shareUser', 'sharePro', 'hasLogin']), mixins: [_baseMixins.baseMixins], onLoad: function onLoad() {var that = this;this.banners = global_Set_jll.banerList;console.log(this.banners); // this.classList = global_Set_jll.classList;
     // this._loadData('refresh');
     this._loadData('refresh');}, onShow: function onShow() {// if(!this.hasLogin){
     // 	uni.navigateTo({
     // 		url:'/pages/login/login'
     // 	})
     // }
-  }, methods: { _href: function _href(url) {uni.navigateTo({ url: url });}, imageLoad: function imageLoad(index) {this.$set(this.list[index], 'load', true);}, loadError: function loadError(index) {// console.log('图片未找到');
-      this.list[index].goods_picture = '/static/img/noPic.jpg';}, loadDataComplete: function loadDataComplete(bool) {if (bool) {// 成功
-        this.list.map(function (item) {// console.log(typeof(item.project_img))
-          if (typeof item.project_img == 'string') {item.project_img = item.project_img ? item.project_img.split(',') : [];}});}} } };exports.default = _default;
+  }, methods: { _href: function _href(item) {console.log(item);var type = item.UrlType;var url = item.Url; // this.$store.commit('setWebviewUrl','http://www.baidu.com')
+      // uni.navigateTo({
+      // 	url:'/pages/webview/webview'
+      // })
+      if (!type || !url) return;switch (type) {case 'href': // debugger
+          uni.navigateTo({ url: url });break;case 'inWeb':this.$store.commit('setWebviewUrl', url);uni.navigateTo({ url: '/pages/webview/webview' });break;case 'mini':uni.navigateToMiniProgram({ appId: url, path: 'pages/index/index', extraData: { 'data1': 'test' }, success: function success(res) {// 打开成功
+            } });break;default:break;}},
+
+    imageLoad: function imageLoad(index) {
+      this.$set(this.list[index], 'load', true);
+    },
+    loadError: function loadError(index) {
+      // console.log('图片未找到');
+      this.list[index].goods_picture = '/static/img/noPic.jpg';
+    },
+    loadDataComplete: function loadDataComplete(bool) {
+      if (bool) {
+        // 成功
+        this.list.map(function (item) {
+          // console.log(typeof(item.project_img))
+          if (typeof item.project_img == 'string') {
+            item.project_img = item.project_img ? item.project_img.split(',') : [];
+          }
+
+        });
+
+      }
+    } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),

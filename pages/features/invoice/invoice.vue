@@ -71,10 +71,7 @@
 			</view> -->
 		</view>
 		<view class="invoice-box-2" v-if="formParams.invoice_type == 0">
-			<view class="flex flex_center cells">
-				<view class="label">邮寄地址信息：</view>
-				<view class="f1"></view>
-			</view>
+			
 			<view class="flex flex_center cells" @tap="showPicker">
 				<view class=" flex flex_center">
 					<text class="text  ">{{ text[0] ? text[0] : '请选择' }}</text>
@@ -89,6 +86,10 @@
 					<text class="iconfont icon-fanhui3"></text>
 				</view>
 				<view class="f1 "></view>
+			</view>
+			<view class="flex flex_center cells">
+				<view class="label">邮寄地址信息：</view>
+				<view class="f1"></view>
 			</view>
 			<view class="cells"><textarea v-model="addressDetail" placeholder="请输入详细地址" /></view>
 		</view>

@@ -23,9 +23,13 @@ const store = new Vuex.Store({
 		shareOrder:'',
 		iviCode:'', //邀请码
 		currentRoleCode:'',  //聚友空间当前的账户身份的 code
-		ifx:false    //是否是苹果x
+		ifx:false ,  //是否是苹果x
+		webviewUrl:''
 	},
     mutations: {
+		setWebviewUrl(state, url){
+			state.webviewUrl = url;
+		},
         login(state, userName) {
 			// console.log('login_STORE')
 			uni.showToast({

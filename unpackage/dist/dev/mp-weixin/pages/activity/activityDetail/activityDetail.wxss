@@ -134,6 +134,7 @@
   overflow: hidden;
   background: #fff;
   padding: 20rpx;
+  padding-top: 0;
   padding-bottom: 0;
 }
 .pages .panel .itemBoxTop.data-v-77126db0 {
@@ -176,7 +177,7 @@
   width: 100%;
 }
 .pages .tui-title.data-v-77126db0 {
-  width: 110rpx;
+  width: 150rpx;
   margin-right: 20rpx;
   text-align: left;
 }

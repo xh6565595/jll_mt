@@ -213,6 +213,7 @@ export default {
 	},
 	onShow() {
 		if (this.hasLogin) {
+			this.noneItem = false
 			this._loadData('refresh');
 		}
 	},

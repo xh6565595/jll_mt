@@ -2,6 +2,17 @@
 
 import http from '../http/interface'
 const Set = {
+	
+	
+	// 申请退税
+	Apply_Tax:(data) => {
+	    return http.request({
+	        url: '/api/ShopRefundTax/Apply_Tax',
+	        method: 'POST', 
+	        data,
+			// handle:true
+	    })
+	},	
 	//订单开具发票
 	ApplyInvoice:(data) => {
 	    return http.request({

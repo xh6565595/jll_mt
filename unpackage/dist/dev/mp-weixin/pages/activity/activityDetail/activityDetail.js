@@ -94,7 +94,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "components", function() { return components; });
 var components = {
   tuiSkeleton: function() {
-    return __webpack_require__.e(/*! import() | components/tui-skeleton/tui-skeleton */ "components/tui-skeleton/tui-skeleton").then(__webpack_require__.bind(null, /*! @/components/tui-skeleton/tui-skeleton.vue */ 270))
+    return __webpack_require__.e(/*! import() | components/tui-skeleton/tui-skeleton */ "components/tui-skeleton/tui-skeleton").then(__webpack_require__.bind(null, /*! @/components/tui-skeleton/tui-skeleton.vue */ 278))
   }
 }
 var render = function() {
@@ -273,7 +273,19 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var _utils = _interopRequireDefault(__webpack_require__(/*! @/utils/utils.js */ 28));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}var tuiSkeleton = function tuiSkeleton() {__webpack_require__.e(/*! require.ensure | components/tui-skeleton/tui-skeleton */ "components/tui-skeleton/tui-skeleton").then((function () {return resolve(__webpack_require__(/*! @/components/tui-skeleton/tui-skeleton */ 270));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var tuiListView = function tuiListView() {__webpack_require__.e(/*! require.ensure | components/list-view/list-view */ "components/list-view/list-view").then((function () {return resolve(__webpack_require__(/*! @/components/list-view/list-view */ 320));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var tuiListCell = function tuiListCell() {__webpack_require__.e(/*! require.ensure | components/list-cell/list-cell */ "components/list-cell/list-cell").then((function () {return resolve(__webpack_require__(/*! @/components/list-cell/list-cell */ 327));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};
+
+
+
+
+
+
+
+
+
+
+
+
+var _utils = _interopRequireDefault(__webpack_require__(/*! @/utils/utils.js */ 28));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}var tuiSkeleton = function tuiSkeleton() {__webpack_require__.e(/*! require.ensure | components/tui-skeleton/tui-skeleton */ "components/tui-skeleton/tui-skeleton").then((function () {return resolve(__webpack_require__(/*! @/components/tui-skeleton/tui-skeleton */ 278));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var tuiListView = function tuiListView() {__webpack_require__.e(/*! require.ensure | components/list-view/list-view */ "components/list-view/list-view").then((function () {return resolve(__webpack_require__(/*! @/components/list-view/list-view */ 328));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var tuiListCell = function tuiListCell() {__webpack_require__.e(/*! require.ensure | components/list-cell/list-cell */ "components/list-cell/list-cell").then((function () {return resolve(__webpack_require__(/*! @/components/list-cell/list-cell */ 335));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};
 var global_Set_jll = uni.getStorageSync('global_Set_jll');var _default =
 {
   data: function data() {
@@ -360,6 +372,27 @@ var global_Set_jll = uni.getStorageSync('global_Set_jll');var _default =
     tuiListView: tuiListView },
 
   methods: {
+    // 申请退税
+    _apply: function _apply() {var _this = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {var that, data, res;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:
+                that = _this;_context.prev = 1;
+
+                _this.$ui.showloading();
+                data = {
+                  order_code: _this.formParams.order_code };_context.next = 6;return (
+
+                  _this.$api.Apply_Tax(data, false));case 6:res = _context.sent;
+                _this.$ui.hideloading();
+                if (res.Success) {
+                  that.$ui.toast('退税成功');
+                  that.loadData();
+                } else {
+                  that.$ui.toast(res.Msg);
+                }
+                if (callback) callback();_context.next = 15;break;case 12:_context.prev = 12;_context.t0 = _context["catch"](1);
+
+                console.log('请求结果false : ' + _context.t0);case 15:case "end":return _context.stop();}}}, _callee, null, [[1, 12]]);}))();
+
+    },
     getDate: function getDate(type) {
       var date = new Date();
       var year = date.getFullYear();
@@ -398,41 +431,18 @@ var global_Set_jll = uni.getStorageSync('global_Set_jll');var _default =
 
     },
     // 延迟发货
-    _beLast: function _beLast(d) {var _this = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {var that, data, res;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:
-                that = _this;_context.prev = 1;
-
-                // this.$ui.showloading();
-                data = {
-                  order_code: _this.formParams.order_code,
-                  delay_ems_time: d };_context.next = 5;return (
-
-                  _this.$api.Delayed(data, false));case 5:res = _context.sent;
-                // this.$ui.hideloading();
-                if (res.Success) {
-                  that.$ui.toast('延迟发货成功');
-                  setTimeout(function () {
-                    that.loadData();
-                  }, 1000);
-                } else {
-                  that.$ui.toast(res.Msg);
-                }
-                if (callback) callback();_context.next = 13;break;case 10:_context.prev = 10;_context.t0 = _context["catch"](1);
-
-                console.log('请求结果false : ' + _context.t0);case 13:case "end":return _context.stop();}}}, _callee, null, [[1, 10]]);}))();
-
-    },
-    // 发起退款
-    sure: function sure(code) {var _this2 = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee2() {var that, data, res;return _regenerator.default.wrap(function _callee2$(_context2) {while (1) {switch (_context2.prev = _context2.next) {case 0:
+    _beLast: function _beLast(d) {var _this2 = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee2() {var that, data, res;return _regenerator.default.wrap(function _callee2$(_context2) {while (1) {switch (_context2.prev = _context2.next) {case 0:
                 that = _this2;_context2.prev = 1;
 
                 // this.$ui.showloading();
                 data = {
-                  order_code: code };_context2.next = 5;return (
+                  order_code: _this2.formParams.order_code,
+                  delay_ems_time: d };_context2.next = 5;return (
 
-                  _this2.$api.Receiving(data, false));case 5:res = _context2.sent;
+                  _this2.$api.Delayed(data, false));case 5:res = _context2.sent;
                 // this.$ui.hideloading();
                 if (res.Success) {
-                  that.$ui.toast('收货成功');
+                  that.$ui.toast('延迟发货成功');
                   setTimeout(function () {
                     that.loadData();
                   }, 1000);
@@ -444,23 +454,46 @@ var global_Set_jll = uni.getStorageSync('global_Set_jll');var _default =
                 console.log('请求结果false : ' + _context2.t0);case 13:case "end":return _context2.stop();}}}, _callee2, null, [[1, 10]]);}))();
 
     },
-    prompt: function prompt(code) {var _this3 = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee3() {var that, data, res;return _regenerator.default.wrap(function _callee3$(_context3) {while (1) {switch (_context3.prev = _context3.next) {case 0:
+    // 发起退款
+    sure: function sure(code) {var _this3 = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee3() {var that, data, res;return _regenerator.default.wrap(function _callee3$(_context3) {while (1) {switch (_context3.prev = _context3.next) {case 0:
                 that = _this3;_context3.prev = 1;
+
+                // this.$ui.showloading();
+                data = {
+                  order_code: code };_context3.next = 5;return (
+
+                  _this3.$api.Receiving(data, false));case 5:res = _context3.sent;
+                // this.$ui.hideloading();
+                if (res.Success) {
+                  that.$ui.toast('收货成功');
+                  setTimeout(function () {
+                    that.loadData();
+                  }, 1000);
+                } else {
+                  that.$ui.toast(res.Msg);
+                }
+                if (callback) callback();_context3.next = 13;break;case 10:_context3.prev = 10;_context3.t0 = _context3["catch"](1);
+
+                console.log('请求结果false : ' + _context3.t0);case 13:case "end":return _context3.stop();}}}, _callee3, null, [[1, 10]]);}))();
+
+    },
+    prompt: function prompt(code) {var _this4 = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee4() {var that, data, res;return _regenerator.default.wrap(function _callee4$(_context4) {while (1) {switch (_context4.prev = _context4.next) {case 0:
+                that = _this4;_context4.prev = 1;
 
                 data = {
                   order_code: code };
 
-                _this3.$ui.showloading();_context3.next = 6;return (
-                  _this3.$api.Prompt(data));case 6:res = _context3.sent;
-                _this3.$ui.hideloading();
+                _this4.$ui.showloading();_context4.next = 6;return (
+                  _this4.$api.Prompt(data));case 6:res = _context4.sent;
+                _this4.$ui.hideloading();
                 if (res.Success) {
                   that.$ui.toast('提醒发货成功');
                   that.refresh();
                 } else {
                   that.$ui.toast(res.Msg);
-                }_context3.next = 14;break;case 11:_context3.prev = 11;_context3.t0 = _context3["catch"](1);
+                }_context4.next = 14;break;case 11:_context4.prev = 11;_context4.t0 = _context4["catch"](1);
 
-                console.log('请求结果false : ' + _context3.t0);case 14:case "end":return _context3.stop();}}}, _callee3, null, [[1, 11]]);}))();
+                console.log('请求结果false : ' + _context4.t0);case 14:case "end":return _context4.stop();}}}, _callee4, null, [[1, 11]]);}))();
 
     },
     // 查看物流
@@ -538,15 +571,15 @@ var global_Set_jll = uni.getStorageSync('global_Set_jll');var _default =
       // console.log('图片未找到');
       this.item.project_img = '/static/img/noPic.jpg';
     },
-    loadData: function loadData(callback) {var _this4 = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee4() {var that, data, res;return _regenerator.default.wrap(function _callee4$(_context4) {while (1) {switch (_context4.prev = _context4.next) {case 0:
-                that = _this4;_context4.prev = 1;
+    loadData: function loadData(callback) {var _this5 = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee5() {var that, data, res;return _regenerator.default.wrap(function _callee5$(_context5) {while (1) {switch (_context5.prev = _context5.next) {case 0:
+                that = _this5;_context5.prev = 1;
 
                 // this.$ui.showloading();
                 data = {
-                  order_code: _this4.formParams.order_code,
-                  share_user_id: '' };_context4.next = 5;return (
+                  order_code: _this5.formParams.order_code,
+                  share_user_id: '' };_context5.next = 5;return (
 
-                  _this4.$api.GetShareOrderInfo(data, false));case 5:res = _context4.sent;
+                  _this5.$api.GetShareOrderInfo(data, false));case 5:res = _context5.sent;
                 // this.$ui.hideloading();
 
                 // console.log(res)
@@ -561,9 +594,9 @@ var global_Set_jll = uni.getStorageSync('global_Set_jll');var _default =
                 } else {
                   that.$ui.toast(res.Msg);
                 }
-                if (callback) callback();_context4.next = 13;break;case 10:_context4.prev = 10;_context4.t0 = _context4["catch"](1);
+                if (callback) callback();_context5.next = 13;break;case 10:_context5.prev = 10;_context5.t0 = _context5["catch"](1);
 
-                console.log('请求结果false : ' + _context4.t0);case 13:case "end":return _context4.stop();}}}, _callee4, null, [[1, 10]]);}))();
+                console.log('请求结果false : ' + _context5.t0);case 13:case "end":return _context5.stop();}}}, _callee5, null, [[1, 10]]);}))();
 
     },
     _readyToPay: function _readyToPay() {
@@ -572,11 +605,11 @@ var global_Set_jll = uni.getStorageSync('global_Set_jll');var _default =
     },
 
     // 取消订单
-    cancelOrder: function cancelOrder() {var _this5 = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee5() {var that, res;return _regenerator.default.wrap(function _callee5$(_context5) {while (1) {switch (_context5.prev = _context5.next) {case 0:
-                that = _this5;_context5.prev = 1;
+    cancelOrder: function cancelOrder() {var _this6 = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee6() {var that, res;return _regenerator.default.wrap(function _callee6$(_context6) {while (1) {switch (_context6.prev = _context6.next) {case 0:
+                that = _this6;_context6.prev = 1;
 
-                that.$ui.showloading();_context5.next = 5;return (
-                  _this5.$api.CancelOrder({ order_code: that.payParams.order_num }));case 5:res = _context5.sent;
+                that.$ui.showloading();_context6.next = 5;return (
+                  _this6.$api.CancelOrder({ order_code: that.payParams.order_num }));case 5:res = _context6.sent;
                 that.$ui.hideloading();
                 if (res.Success) {
                   that.$ui.toast('取消成功');
@@ -586,9 +619,9 @@ var global_Set_jll = uni.getStorageSync('global_Set_jll');var _default =
                   }, 500);
                 } else {
                   that.$ui.toast(res.Msg);
-                }_context5.next = 13;break;case 10:_context5.prev = 10;_context5.t0 = _context5["catch"](1);
+                }_context6.next = 13;break;case 10:_context6.prev = 10;_context6.t0 = _context6["catch"](1);
 
-                console.log('请求结果false : ' + _context5.t0);case 13:case "end":return _context5.stop();}}}, _callee5, null, [[1, 10]]);}))();
+                console.log('请求结果false : ' + _context6.t0);case 13:case "end":return _context6.stop();}}}, _callee6, null, [[1, 10]]);}))();
 
     },
     // 支付接口

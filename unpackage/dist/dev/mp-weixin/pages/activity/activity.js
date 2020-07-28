@@ -94,7 +94,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "components", function() { return components; });
 var components = {
   rule: function() {
-    return __webpack_require__.e(/*! import() | components/rule/rule */ "components/rule/rule").then(__webpack_require__.bind(null, /*! @/components/rule/rule.vue */ 291))
+    return __webpack_require__.e(/*! import() | components/rule/rule */ "components/rule/rule").then(__webpack_require__.bind(null, /*! @/components/rule/rule.vue */ 299))
   },
   accredit: function() {
     return __webpack_require__.e(/*! import() | components/accredit/accredit */ "components/accredit/accredit").then(__webpack_require__.bind(null, /*! @/components/accredit/accredit.vue */ 46))
@@ -304,7 +304,7 @@ __webpack_require__.r(__webpack_exports__);
 var _vuex = __webpack_require__(/*! vuex */ 14);
 
 
-var _baseMixins = __webpack_require__(/*! @/utils/baseMixins.js */ 37);var tuiTips = function tuiTips() {__webpack_require__.e(/*! require.ensure | components/extend/tips/tips */ "components/extend/tips/tips").then((function () {return resolve(__webpack_require__(/*! @/components/extend/tips/tips */ 298));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var rule = function rule() {__webpack_require__.e(/*! require.ensure | components/rule/rule */ "components/rule/rule").then((function () {return resolve(__webpack_require__(/*! @/components/rule/rule.vue */ 291));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var global_Set_jll = uni.getStorageSync('global_Set_jll');var _default =
+var _baseMixins = __webpack_require__(/*! @/utils/baseMixins.js */ 37);var tuiTips = function tuiTips() {__webpack_require__.e(/*! require.ensure | components/extend/tips/tips */ "components/extend/tips/tips").then((function () {return resolve(__webpack_require__(/*! @/components/extend/tips/tips */ 306));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var rule = function rule() {__webpack_require__.e(/*! require.ensure | components/rule/rule */ "components/rule/rule").then((function () {return resolve(__webpack_require__(/*! @/components/rule/rule.vue */ 299));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var global_Set_jll = uni.getStorageSync('global_Set_jll');var _default =
 {
   data: function data() {
     return {
@@ -352,6 +352,7 @@ var _baseMixins = __webpack_require__(/*! @/utils/baseMixins.js */ 37);var tuiTi
   },
   onShow: function onShow() {
     if (this.hasLogin) {
+      this.noneItem = false;
       this._loadData('refresh');
     }
   },

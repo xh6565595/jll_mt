@@ -17,6 +17,11 @@
 		</view> -->
 
 			<view class="panel">
+				
+				<view class="cells flex flex_center cm_bdb" style="padding-bottom: 20rpx;margin-bottom:20rpx;">
+					<view class=" ">订单编号</view>
+					<view class="f1 text cm_tex_r">{{ item.order_code }}</view>
+				</view>
 				<view class="cm_bdb" style="padding-bottom: 40rpx;">
 					<block v-for="(it, index) in item.project_list" :key="index">
 						<view class="  tui-skeleton-fillet">
@@ -99,7 +104,7 @@
 					<text>返还详情</text>
 					<text class="f1"></text>
 				</view>
-				<view class="  tui-skeleton-fillet">
+				<view class=" cm_bdb">
 					<tui-list-cell :hover="false">
 						<view class="tui-line-cell flex flex_center tui-cell-last">
 							<view class="tui-title cm_text">支付金额</view>
@@ -127,7 +132,14 @@
 						</view>
 					</tui-list-cell>
 				</view>
+				<view style="padding:20rpx">
+					<button type="text" class="cm_btn" hover-class="cm_hover_m" @tap="_apply" v-if="item.is_invoice==0  && item.is_tax==0">申请退税</button>
+					<view v-if="item.is_tax==1" class="cm_tex_c cm_text " style="color: #DF5000;">您已申请退税</view>
+				</view>
+				
 			</view>
+			
+			
 			
 		</view>
 	</view>
@@ -224,6 +236,27 @@ export default {
 		tuiListView
 	},
 	methods: {
+		// 申请退税
+		async _apply(){
+			let that = this;
+			try {
+				this.$ui.showloading();
+				let data = {
+					order_code: this.formParams.order_code
+				};
+				let res = await this.$api.Apply_Tax(data, false);
+				this.$ui.hideloading();
+				if (res.Success) {
+					that.$ui.toast('退税成功');
+					that.loadData();
+				} else {
+					that.$ui.toast(res.Msg);
+				}
+				if (callback) callback();
+			} catch (err) {
+				console.log('请求结果false : ' + err);
+			}
+		},
 		getDate(type) {
 			const date = new Date();
 			let year = date.getFullYear();
@@ -582,6 +615,7 @@ export default {
 		overflow: hidden;
 		background: #fff;
 		padding: 20rpx;
+		padding-top: 0;
 		padding-bottom: 0;
 		.itemBoxTop {
 			padding-bottom: 20rpx;
@@ -627,7 +661,7 @@ export default {
 	}
 
 	.tui-title {
-		width: 110rpx;
+		width: 150rpx;
 		margin-right: 20rpx;
 		text-align: left;
 	}

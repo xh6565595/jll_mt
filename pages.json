@@ -179,6 +179,10 @@
 				"navigationBarBackgroundColor": "#fff"
 			}
 		}
+        ,{
+            "path" : "pages/webview/webview",
+            "style" : {}
+        }
     ],
 	"tabBar": {
 		"color": "#999",
