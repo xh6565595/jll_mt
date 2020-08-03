@@ -92,7 +92,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "recyclableRender", function() { return recyclableRender; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "components", function() { return components; });
-var components
+var components = {
+  accredit: function() {
+    return __webpack_require__.e(/*! import() | components/accredit/accredit */ "components/accredit/accredit").then(__webpack_require__.bind(null, /*! @/components/accredit/accredit.vue */ 279))
+  }
+}
 var render = function() {
   var _vm = this
   var _h = _vm.$createElement
@@ -130,7 +134,36 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@vue/babel-preset-app/node_modules/@babel/runtime/regenerator */ 4));
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -193,80 +226,126 @@ __webpack_require__.r(__webpack_exports__);
 
 var _vuex = __webpack_require__(/*! vuex */ 14);
 
-var _baseMixins = __webpack_require__(/*! @/utils/baseMixins.js */ 37); //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-var global_Set_jll = uni.getStorageSync('global_Set_jll');var _default = { data: function data() {return { baseKey: 'GetGoodsList', banners: [], hasRow: 'Rows', formParams: { key: '', type: '1', pageIndex: 1, pageSize: 10 } };}, components: {}, computed: (0, _vuex.mapState)(['shareUser', 'sharePro', 'hasLogin']), mixins: [_baseMixins.baseMixins], onLoad: function onLoad() {var that = this;this.banners = global_Set_jll.banerList;console.log(this.banners); // this.classList = global_Set_jll.classList;
-    // this._loadData('refresh');
-    this._loadData('refresh');}, onShow: function onShow() {// if(!this.hasLogin){
+var _baseMixins = __webpack_require__(/*! @/utils/baseMixins.js */ 37);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}var global_Set_jll = uni.getStorageSync('global_Set_jll');var accredit = function accredit() {__webpack_require__.e(/*! require.ensure | components/accredit/accredit */ "components/accredit/accredit").then((function () {return resolve(__webpack_require__(/*! @/components/accredit/accredit */ 279));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
+
+{
+  data: function data() {
+    return {
+      baseKey: 'GetGoodsList',
+      banners: [],
+      hasRow: 'Rows',
+      formParams: {
+        key: '',
+        type: '1',
+        pageIndex: 1,
+        pageSize: 10 } };
+
+
+  },
+  components: {
+    accredit: accredit },
+
+  computed: (0, _vuex.mapState)(['shareUser', 'sharePro', 'hasLogin']),
+  mixins: [_baseMixins.baseMixins],
+  onLoad: function onLoad() {
+    var that = this;
+    this.banners = global_Set_jll.banerList;
+    uni.$on('gzhAuth', function (bool) {
+      that.$refs.dy.hideModal();
+    });
+    this._loadData('refresh');
+
+    // this.$refs.dy.showModal()
+  },
+  onShow: function onShow() {
+    // if(!this.hasLogin){
     // 	uni.navigateTo({
     // 		url:'/pages/login/login'
     // 	})
     // }
-  }, methods: { _href: function _href(item) {console.log(item);var type = item.UrlType;var url = item.Url; // this.$store.commit('setWebviewUrl','http://www.baidu.com')
+
+  },
+  methods: {
+    // 关注检验
+    _sureGz: function _sureGz() {
+      var authId = uni.getStorageSync('authId');
+      if (authId) {
+        this._oidIfAttention(authId);
+      } else {
+        uni.navigateTo({
+          url: '/pages/auth/auth' });
+
+      }
+      // this.$refs.dy.hideModal()			
+      // console.log(1)
+    },
+    // opendi校验是否关注
+    _oidIfAttention: function _oidIfAttention(opendId) {var _this = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {var that, data, res;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:
+                that = _this;_context.prev = 1;
+
+                data = {
+                  openId: opendId };
+
+                uni.showLoading({});_context.next = 6;return (
+                  _this.$api.GetWxOpenid_Attention(data, false));case 6:res = _context.sent;
+                _this.$ui.hideloading();
+                if (res.Success) {
+                  if (res.Data.subscribe == 1) {
+                    that.$ui.toast('订阅功能已开启');
+                  } else {
+                    that.$ui.toast('订阅功能未开启');
+                  }
+                } else {
+                  that.$ui.toast(res.Msg);
+
+                }
+                that.$refs.dy.hideModal();_context.next = 15;break;case 12:_context.prev = 12;_context.t0 = _context["catch"](1);
+
+                console.log('请求结果false : ' + _context.t0);case 15:case "end":return _context.stop();}}}, _callee, null, [[1, 12]]);}))();
+
+    },
+    _cancelGz: function _cancelGz() {
+      this.$refs.dy.hideModal();
+    },
+    _href: function _href(item) {
+      // console.log(item)
+      var type = item.UrlType;
+      var url = item.Url;
+      // this.$store.commit('setWebviewUrl','http://www.baidu.com')
       // uni.navigateTo({
       // 	url:'/pages/webview/webview'
       // })
-      if (!type || !url) return;switch (type) {case 'href': // debugger
-          uni.navigateTo({ url: url });break;case 'inWeb':this.$store.commit('setWebviewUrl', url);uni.navigateTo({ url: '/pages/webview/webview' });break;case 'mini':uni.navigateToMiniProgram({ appId: url, path: 'pages/index/index', extraData: { 'data1': 'test' }, success: function success(res) {// 打开成功
-            } });break;default:break;}},
+      if (!type || !url) return;
+      switch (type) {
+        case 'href':
+          // debugger
+          uni.navigateTo({
+            url: url });
+
+          break;
+        case 'inWeb':
+          this.$store.commit('setWebviewUrl', url);
+          uni.navigateTo({
+            url: '/pages/webview/webview' });
+
+          break;
+        case 'mini':
+          uni.navigateToMiniProgram({
+            appId: url,
+            path: 'pages/index/index',
+            extraData: {
+              'data1': 'test' },
+
+            success: function success(res) {
+              // 打开成功
+            } });
+
+          break;
+        default:
+          break;}
+
+
+    },
 
     imageLoad: function imageLoad(index) {
       this.$set(this.list[index], 'load', true);

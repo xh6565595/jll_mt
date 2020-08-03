@@ -243,9 +243,9 @@ export default {
 					// 	   that.$emit('success');
 					//   }
 					// })
-					uni.redirectTo({
-						url: '/pages/success/success'
-					});
+					uni.switchTab({
+						url: '/pages/activity/activity'
+					})
 					that.$emit('success');
 				},
 				fail: function(err) {

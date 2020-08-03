@@ -4,11 +4,15 @@
 		<swiper class="swiper" :indicator-dots="true" :autoplay="false">
 			<block v-for="(item, index) in banners" :key="index">
 				<swiper-item @click="_href(item)">
-					<video :src="item.Url" v-if="item.UrlType == 'video'" :autoplay="true" controls class="swiper-item" style="width: 100%;height: 100%;"></video>
+					<video :src="item.Url" v-if="item.UrlType == 'video'" :muted="true" :autoplay="true" :poster="item.Text" :show-mute-btn="true" controls class="swiper-item" style="width: 100%;height: 100%;"></video>
 					<image :src="item.Text" v-else mode="aspectFill" lazy-load="true" class="swiper-item uni-bg-red" style="width: 100%;height: 100%;"></image>
 				</swiper-item>
 			</block>
 		</swiper>
+		<!-- <view  style="width: 100%;height: 100rpx;background: red;"> -->
+			
+		<!-- </view> -->
+		
 		<view class="hot">
 			<block v-for="(item, index) in list" :key="index">
 				<navigator :url="'/pages/main/details/details?code=' + item.project_code" class="hotItem">
@@ -55,6 +59,31 @@
 			</block>
 		</view>
 		<LoadMore :status="loadStatus" />
+		<accredit ref="dy" :autoClose="true">
+			<view slot='content' class="dyContent flex flex_y flex-center">
+				<view class="cm_title" style="margin-bottom: 20rpx;">开通订阅消息</view>
+				<view style="width: 100%;height: 100rpx;">
+					<official-account></official-account>
+				</view>
+			
+				<view style="margin: 30rpx 0;">
+					<view class="cm_text" style="padding-bottom: 20rpx;">
+						请你关注洁利来智能厨卫公众号
+					</view>
+					<view class="cm_text">
+						--以便我们向您提供及时的推荐消息
+					</view>
+					<view class="cm_text">
+						--以便我们向您提供及时的业务通知
+					</view>
+					<view class="cm_text">
+						--以便我们向您推送及时的信息反馈
+					</view>
+				</view>		
+				<button type="success" class="cm_btn" @tap="_sureGz" >我已关注，立即开启</button>	
+				<button type="default" class="cm_btn cm_btn_plain" @tap="_cancelGz"   >取消订阅</button>	
+			</view>
+		</accredit>
 	</view>
 </template>
 
@@ -62,6 +91,7 @@
 import { mapState } from 'vuex';
 const global_Set_jll = uni.getStorageSync('global_Set_jll');
 import { baseMixins } from '@/utils/baseMixins.js';
+import accredit from "@/components/accredit/accredit"
 export default {
 	data() {
 		return {
@@ -76,16 +106,20 @@ export default {
 			}
 		};
 	},
-	components: {},
+	components: {
+		accredit
+	},
 	computed: mapState(['shareUser','sharePro','hasLogin']),
 	mixins: [baseMixins],
 	onLoad() {
 		let that = this;
 		this.banners = global_Set_jll.banerList;
-		console.log(this.banners)
-		// this.classList = global_Set_jll.classList;
-		// this._loadData('refresh');
+		uni.$on('gzhAuth',(bool)=>{			
+			that.$refs.dy.hideModal()
+		});
 		this._loadData('refresh')
+		
+		// this.$refs.dy.showModal()
 	},
 	onShow() {
 		// if(!this.hasLogin){
@@ -93,11 +127,52 @@ export default {
 		// 		url:'/pages/login/login'
 		// 	})
 		// }
+		
 	},
 	methods: {
-		
+		// 关注检验
+		_sureGz(){
+			const authId = uni.getStorageSync('authId')
+			if(authId){
+				this._oidIfAttention(authId)	
+			}else{
+				uni.navigateTo({
+					url:'/pages/auth/auth'
+				})
+			}		
+			// this.$refs.dy.hideModal()			
+			// console.log(1)
+		},
+		// opendi校验是否关注
+		async _oidIfAttention(opendId){
+			let that = this;
+			try {
+				let data = {
+					openId: opendId
+				};
+				uni.showLoading({});
+				let res = await this.$api.GetWxOpenid_Attention(data, false);
+				this.$ui.hideloading();
+				if (res.Success) {
+					if(res.Data.subscribe==1){
+						that.$ui.toast('订阅功能已开启');
+					}else{
+						that.$ui.toast('订阅功能未开启');
+					}
+				} else {
+					that.$ui.toast(res.Msg);
+					
+				}
+				that.$refs.dy.hideModal()	
+			} catch (err) {
+				console.log('请求结果false : ' + err);
+			}
+		},
+		_cancelGz(){
+			this.$refs.dy.hideModal()
+		},
 		_href(item) {
-			console.log(item)
+			// console.log(item)
 			let type = item.UrlType
 			let url = item.Url
 			// this.$store.commit('setWebviewUrl','http://www.baidu.com')
@@ -239,6 +314,23 @@ export default {
 				height: 216rpx;
 				border-radius: 16rpx;
 			}
+		}
+	}
+
+
+	.dyContent{
+		width: 90vw;
+		padding: 40rpx;
+		line-height: 2;
+		.cm_title{
+			line-height: 2;
+			font-size: 36rpx;
+		}
+		.cm_text{
+			line-height: 1.5;
+		}
+		.cm_btn{
+			margin-bottom: 20rpx;
 		}
 	}
 }

@@ -82,11 +82,12 @@ export default {
 
 		uni.login({
 		  provider: 'weixin', 
-		  success:async function (res) {
+		  success: function (res) {
 			let code =  res.code;
 			// 获取code换opid
-			const r = await that.getopId(code)	
-
+			console.log(code)
+			// const r = await that.getopId(code)	
+			that.getopId(code)	
 		  }
 		});
 	},
@@ -99,6 +100,7 @@ export default {
 				this.$ui.showloading()
 				let res = await this.$api.GetOpenId({wx_code:code}, false);
 				// this.$ui.hideloading()
+				console.log(res)
 				if (res.Success) {
 					// oNDKY5B658gwmlw5vZnwEUOdG1io
 					let opid = res.Msg;
@@ -158,7 +160,8 @@ export default {
 					if (res.Data) {
 						that.$store.commit('setUserInfo', res.Data);
 						setTimeout(()=>{
-							if(res.Data.consumer_type==3){
+							// if(res.Data.consumer_type==3){
+								if(false){
 								// 安装员
 								uni.redirectTo({
 									url: '/pages/main/serverCenter/serverCenter'

@@ -2973,31 +2973,7 @@ var index_esm = {
 
 /***/ }),
 
-/***/ 15:
-/*!*******************************!*\
-  !*** E:/mywork/jll_mt/SET.js ***!
-  \*******************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
-// 全局设置
-var _default = {
-  baseUrl: "https://gllo.kuxiong999.com/Data", //api业务接口域名
-  mainUrl: "https://gllo.kuxiong999.com", //项目域名
-  // 测试环境
-  // wx_appid: 'wx09daee2f47e178aa',    //微信授权 appid  測試公衆號
-  wx_appid: 'wx35c21791caf26593', //代码力量 测试
-  // wx_redirect_url:'http://192.168.1.9:8080',
-  wx_redirect_url: 'https://gllo.kuxiong999.com', //微信授权 回调页地址
-
-  versionUrl: '/api/AppVersion/VersionCheck' //app版本检测url   // 1是不更新 2是强制更新 3可选择更新 4//appstore更新
-};exports.default = _default;
-
-/***/ }),
-
-/***/ 152:
+/***/ 145:
 /*!*********************************************!*\
   !*** E:/mywork/jll_mt/utils/picker.city.js ***!
   \*********************************************/
@@ -17438,7 +17414,7 @@ data = data;exports.default = _default;
 
 /***/ }),
 
-/***/ 153:
+/***/ 146:
 /*!*******************************************************************!*\
   !*** E:/mywork/jll_mt/js_sdk/graceui-dataChecker/graceChecker.js ***!
   \*******************************************************************/
@@ -17554,6 +17530,30 @@ obj = obj;exports.default = _default;
 
 /***/ }),
 
+/***/ 15:
+/*!*******************************!*\
+  !*** E:/mywork/jll_mt/SET.js ***!
+  \*******************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
+// 全局设置
+var _default = {
+  baseUrl: "https://gllo.kuxiong999.com/Data", //api业务接口域名
+  mainUrl: "https://gllo.kuxiong999.com", //项目域名
+  // 测试环境
+  // wx_appid: 'wx09daee2f47e178aa',    //微信授权 appid  測試公衆號
+  wx_appid: 'wx35c21791caf26593', //代码力量 测试
+  // wx_redirect_url:'http://192.168.1.9:8080',
+  wx_redirect_url: 'https://gllo.kuxiong999.com', //微信授权 回调页地址
+
+  versionUrl: '/api/AppVersion/VersionCheck' //app版本检测url   // 1是不更新 2是强制更新 3可选择更新 4//appstore更新
+};exports.default = _default;
+
+/***/ }),
+
 /***/ 16:
 /*!*********************************************!*\
   !*** E:/mywork/jll_mt/utils/module/auth.js ***!
@@ -17566,7 +17566,25 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 var _interface = _interopRequireDefault(__webpack_require__(/*! ../http/interface */ 12));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} // 用户身份相关接口
 // 我要积分
-var Auth = { // code获取OpenId
+var Auth = { //Openid查询关注
+  GetWxOpenid_Attention: function GetWxOpenid_Attention(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return _interface.default.request({
+      url: '/api/Authorize/GetWxOpenid_Attention',
+      method: 'GET',
+      data: data
+      // handle:true
+    }, ifLoad);
+  },
+  // code查询关注
+  GetWxcode_Attention: function GetWxcode_Attention(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return _interface.default.request({
+      url: '/api/Authorize/GetWxcode_Attention',
+      method: 'GET',
+      data: data
+      // handle:true
+    }, ifLoad);
+  },
+  // code获取OpenId
   GetOpenId: function GetOpenId(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
     return _interface.default.request({
       url: '/api/Authorize/GetOpenId',
@@ -25296,7 +25314,7 @@ module.exports = g;
 
 /***/ }),
 
-/***/ 318:
+/***/ 326:
 /*!********************************************************!*\
   !*** E:/mywork/jll_mt/components/tki-qrcode/qrcode.js ***!
   \********************************************************/
@@ -27431,7 +27449,7 @@ if (hadRuntime) {
 
 /***/ }),
 
-/***/ 77:
+/***/ 70:
 /*!****************************************************!*\
   !*** E:/mywork/jll_mt/utils/QS-SharePoster/app.js ***!
   \****************************************************/
@@ -28001,7 +28019,7 @@ module.exports = _app;
 
 /***/ }),
 
-/***/ 78:
+/***/ 71:
 /*!***************************************************************!*\
   !*** E:/mywork/jll_mt/utils/QS-SharePoster/QS-SharePoster.js ***!
   \***************************************************************/
@@ -28009,8 +28027,8 @@ module.exports = _app;
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@vue/babel-preset-app/node_modules/@babel/runtime/regenerator */ 4));var _app2 = _interopRequireDefault(__webpack_require__(/*! ./app.js */ 77));
-var _QRCodeAlg = _interopRequireDefault(__webpack_require__(/*! ./QRCodeAlg.js */ 79));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _toConsumableArray(arr) {return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread();}function _nonIterableSpread() {throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");}function _unsupportedIterableToArray(o, minLen) {if (!o) return;if (typeof o === "string") return _arrayLikeToArray(o, minLen);var n = Object.prototype.toString.call(o).slice(8, -1);if (n === "Object" && o.constructor) n = o.constructor.name;if (n === "Map" || n === "Set") return Array.from(n);if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);}function _iterableToArray(iter) {if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter);}function _arrayWithoutHoles(arr) {if (Array.isArray(arr)) return _arrayLikeToArray(arr);}function _arrayLikeToArray(arr, len) {if (len == null || len > arr.length) len = arr.length;for (var i = 0, arr2 = new Array(len); i < len; i++) {arr2[i] = arr[i];}return arr2;}function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}
+/* WEBPACK VAR INJECTION */(function(uni) {var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@vue/babel-preset-app/node_modules/@babel/runtime/regenerator */ 4));var _app2 = _interopRequireDefault(__webpack_require__(/*! ./app.js */ 70));
+var _QRCodeAlg = _interopRequireDefault(__webpack_require__(/*! ./QRCodeAlg.js */ 72));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _toConsumableArray(arr) {return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread();}function _nonIterableSpread() {throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");}function _unsupportedIterableToArray(o, minLen) {if (!o) return;if (typeof o === "string") return _arrayLikeToArray(o, minLen);var n = Object.prototype.toString.call(o).slice(8, -1);if (n === "Object" && o.constructor) n = o.constructor.name;if (n === "Map" || n === "Set") return Array.from(n);if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);}function _iterableToArray(iter) {if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter);}function _arrayWithoutHoles(arr) {if (Array.isArray(arr)) return _arrayLikeToArray(arr);}function _arrayLikeToArray(arr, len) {if (len == null || len > arr.length) len = arr.length;for (var i = 0, arr2 = new Array(len); i < len; i++) {arr2[i] = arr[i];}return arr2;}function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}
 var ShreUserPosterBackgroundKey = 'ShrePosterBackground_'; // 背景图片缓存名称前缀
 var idKey = 'QSSHAREPOSTER_IDKEY'; //drawArray自动生成的idkey
 var isMp = false;
@@ -29313,7 +29331,7 @@ module.exports = {
 
 /***/ }),
 
-/***/ 79:
+/***/ 72:
 /*!**********************************************************!*\
   !*** E:/mywork/jll_mt/utils/QS-SharePoster/QRCodeAlg.js ***!
   \**********************************************************/

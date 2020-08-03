@@ -1,5 +1,5 @@
 <template>
-	<view class="modal  flex flex_center animated fadeIn" @tap="hideModal" v-if="ashow">
+	<view class="modal  flex flex_center animated fadeIn" @tap.stop="hideModal" v-if="ashow" @touchmove.stop="_none">
 		<view class="dialog">
 			<slot name="content"></slot>
 		</view>
@@ -21,6 +21,9 @@
 			
 		},
 		methods:{
+			_none(){
+				// console.log(1)
+			},
 			hideModal() {
 				if(!this.autoClose)return;
 				this.ashow = false;

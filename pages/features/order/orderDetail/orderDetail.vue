@@ -54,7 +54,7 @@
 			</view>
 			<view class="proItemsBox addressBox ">
 
-				<view class="flex flex_center address tui-skeleton-fillet">
+				<view class="flex flex_center address tui-skeleton-fillet" >
 					<image src="/static/image/xq_dz.png" mode="scaleToFill" class="icon"></image>
 					<view class="f1  tui-skeleton-rect">
 						<view style="margin-bottom: 20rpx;">{{ item.buy_address }}</view>
@@ -78,7 +78,7 @@
 					<block v-for="(it, index) in item.project_list" :key="index">
 						<view class="  tui-skeleton-fillet">
 							<!-- <view style="padding: 20rpx;"> -->
-							<view class="cm_items flex  flex_center tui-skeleton-fillet">
+							<view class="cm_items flex  flex_center tui-skeleton-fillet" @tap="_hrefPro(it.project_code)">
 								<image v-if="it.skus_img" :src="it.skus_img" mode="aspectFill" class="itemLogo "></image>
 								<view class="f1 ">
 									<view class=" cm_title   name cm_ellipsis2 tui-skeleton-fillet">{{ it.order_name }}</view>

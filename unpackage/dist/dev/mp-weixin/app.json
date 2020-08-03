@@ -24,7 +24,8 @@
     "pages/activity/activityDetail/activityDetail",
     "pages/login/login",
     "pages/features/invoice/invoice",
-    "pages/webview/webview"
+    "pages/webview/webview",
+    "pages/auth/auth"
   ],
   "subPackages": [],
   "window": {

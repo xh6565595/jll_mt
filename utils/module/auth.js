@@ -2,6 +2,24 @@
 // 我要积分
 import http from '../http/interface'
 const Auth = {
+	//Openid查询关注
+	GetWxOpenid_Attention: (data, ifLoad = false) => {
+		return http.request({
+			url: '/api/Authorize/GetWxOpenid_Attention', 
+			method: 'GET',
+			data,
+			// handle:true
+		}, ifLoad)
+	},
+	// code查询关注
+	GetWxcode_Attention: (data, ifLoad = false) => {
+		return http.request({
+			url: '/api/Authorize/GetWxcode_Attention', 
+			method: 'GET',
+			data,
+			// handle:true
+		}, ifLoad)
+	},
 	// code获取OpenId
 	GetOpenId: (data, ifLoad = false) => {
 		return http.request({

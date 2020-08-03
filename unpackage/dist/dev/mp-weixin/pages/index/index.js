@@ -214,23 +214,25 @@ var _index = _interopRequireDefault(__webpack_require__(/*! @/utils/http/index.j
 
     uni.login({
       provider: 'weixin',
-      success: function () {var _success = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee(res) {var code, r;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:
-                  code = res.code;
-                  // 获取code换opid
-                  _context.next = 3;return that.getopId(code);case 3:r = _context.sent;case 4:case "end":return _context.stop();}}}, _callee);}));function success(_x) {return _success.apply(this, arguments);}return success;}() });
-
-
+      success: function success(res) {
+        var code = res.code;
+        // 获取code换opid
+        console.log(code);
+        // const r = await that.getopId(code)	
+        that.getopId(code);
+      } });
 
   },
   computed: {},
   methods: {
     // 换取opndid
-    getopId: function getopId(code) {var _this = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee2() {var that, res, opid;return _regenerator.default.wrap(function _callee2$(_context2) {while (1) {switch (_context2.prev = _context2.next) {case 0:
-                that = _this;_context2.prev = 1;
+    getopId: function getopId(code) {var _this = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {var that, res, opid;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:
+                that = _this;_context.prev = 1;
 
-                _this.$ui.showloading();_context2.next = 5;return (
-                  _this.$api.GetOpenId({ wx_code: code }, false));case 5:res = _context2.sent;
+                _this.$ui.showloading();_context.next = 5;return (
+                  _this.$api.GetOpenId({ wx_code: code }, false));case 5:res = _context.sent;
                 // this.$ui.hideloading()
+                console.log(res);
                 if (res.Success) {
                   // oNDKY5B658gwmlw5vZnwEUOdG1io
                   opid = res.Msg;
@@ -243,17 +245,17 @@ var _index = _interopRequireDefault(__webpack_require__(/*! @/utils/http/index.j
                 } else {
                   that.$ui.hideloading();
 
-                }_context2.next = 12;break;case 9:_context2.prev = 9;_context2.t0 = _context2["catch"](1);
+                }_context.next = 13;break;case 10:_context.prev = 10;_context.t0 = _context["catch"](1);
 
-                that.$ui.hideloading();case 12:case "end":return _context2.stop();}}}, _callee2, null, [[1, 9]]);}))();
+                that.$ui.hideloading();case 13:case "end":return _context.stop();}}}, _callee, null, [[1, 10]]);}))();
 
     },
     // opid直接登录
-    autoLogin: function autoLogin(opid) {var _this2 = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee3() {var that, res;return _regenerator.default.wrap(function _callee3$(_context3) {while (1) {switch (_context3.prev = _context3.next) {case 0:
-                that = _this2;_context3.prev = 1;_context3.next = 4;return (
+    autoLogin: function autoLogin(opid) {var _this2 = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee2() {var that, res;return _regenerator.default.wrap(function _callee2$(_context2) {while (1) {switch (_context2.prev = _context2.next) {case 0:
+                that = _this2;_context2.prev = 1;_context2.next = 4;return (
 
 
-                  _this2.$api.WxTokenLogin({ openId: opid }, false));case 4:res = _context3.sent;
+                  _this2.$api.WxTokenLogin({ openId: opid }, false));case 4:res = _context2.sent;
                 _this2.$ui.hideloading();
                 // if (false) {		
                 if (res.Success) {
@@ -275,27 +277,23 @@ var _index = _interopRequireDefault(__webpack_require__(/*! @/utils/http/index.j
                       url: '/pages/main/main' });
 
                   }
-                }_context3.next = 13;break;case 9:_context3.prev = 9;_context3.t0 = _context3["catch"](1);
+                }_context2.next = 13;break;case 9:_context2.prev = 9;_context2.t0 = _context2["catch"](1);
 
                 _this2.$ui.hideloading();
-                _this2.$ui.toast(_context3.t0);case 13:case "end":return _context3.stop();}}}, _callee3, null, [[1, 9]]);}))();
+                _this2.$ui.toast(_context2.t0);case 13:case "end":return _context2.stop();}}}, _callee2, null, [[1, 9]]);}))();
 
     },
     // 加载登录账户信息
-    initUser: function initUser(callback) {var _this3 = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee4() {var that, res;return _regenerator.default.wrap(function _callee4$(_context4) {while (1) {switch (_context4.prev = _context4.next) {case 0:
-                that = _this3;_context4.prev = 1;_context4.next = 4;return (
+    initUser: function initUser(callback) {var _this3 = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee3() {var that, res;return _regenerator.default.wrap(function _callee3$(_context3) {while (1) {switch (_context3.prev = _context3.next) {case 0:
+                that = _this3;_context3.prev = 1;_context3.next = 4;return (
 
-                  _this3.$api.getConsumer({}, false));case 4:res = _context4.sent;
+                  _this3.$api.getConsumer({}, false));case 4:res = _context3.sent;
                 if (res.Success) {
                   if (res.Data) {
                     that.$store.commit('setUserInfo', res.Data);
                     setTimeout(function () {
-                      if (res.Data.consumer_type == 3) {
-                        // 安装员
-                        uni.redirectTo({
-                          url: '/pages/main/serverCenter/serverCenter' });
-
-                      } else {
+                      // if(res.Data.consumer_type==3){
+                      if (false) {} else {
                         //  消费者 3是安装 2推广者
                         // 记录信息
                         if (that.shareData.proCode && that.shareData.userId && that.shareData.odrCode) {
@@ -313,9 +311,9 @@ var _index = _interopRequireDefault(__webpack_require__(/*! @/utils/http/index.j
                 } else {
                   that.$ui.toast(res.Msg);
                 }
-                if (callback) callback();_context4.next = 12;break;case 9:_context4.prev = 9;_context4.t0 = _context4["catch"](1);
+                if (callback) callback();_context3.next = 12;break;case 9:_context3.prev = 9;_context3.t0 = _context3["catch"](1);
 
-                console.log('请求结果false : ' + _context4.t0);case 12:case "end":return _context4.stop();}}}, _callee4, null, [[1, 9]]);}))();
+                console.log('请求结果false : ' + _context3.t0);case 12:case "end":return _context3.stop();}}}, _callee3, null, [[1, 9]]);}))();
 
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))

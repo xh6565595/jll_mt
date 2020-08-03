@@ -9,26 +9,23 @@
 						<view><text class="rTip"></text></view>
 					</view>
 				</tuiNav>
-				<view class="tabsBox flex flex_center">
+				<!-- <view class="tabsBox flex flex_center">
 					<view class="f1 tabs" :class="{ active: tap == 0 }" hover-class="cm_hover" @tap="_switch(0)">进行中</view>
 					<view class="f1 tabs" :class="{ active: tap == 1 }" hover-class="cm_hover" @tap="_switch(1)">已完成</view>
-				</view>
+				</view> -->
 			</view>
-			<view v-if="noneItem" class="firstLunch animated fadeIn" style="width: 100%;min-height: 80vh;">
+			<view v-if="noneItem" class="firstLunch animated fadeIn" style="width: 100%;min-height: 90vh;">
 				<image src="../../static/image/activeTop.jpg" mode="widthFix" class="firstLunchTop"></image>
 				<button type="default" class="nowbtn" @tap="_toBuy">立即购买</button>
 				<view class="flex flex_center upBox">
 					<view class="subs">
 						1
-						<!-- <image src="../../static/image/blank.png" mode="scaleToFill" class="cover"></image> -->
 					</view>
 					<view class="subs">
 						2
-						<!-- <image src="../../static/image/blank.png" mode="scaleToFill" class="cover"></image> -->
 					</view>
 					<view class="subs">
 						3
-						<!-- <image src="../../static/image/blank.png" mode="scaleToFill" class="cover"></image> -->
 					</view>
 				</view>
 			
@@ -37,12 +34,12 @@
 			<view v-else>
 				<view class="hot">
 					<block v-for="(item, index) in list" :key="index">
-						<view class="inItem animated fadeIn" v-if="tap == 0">
+						<view class="inItem animated fadeIn" v-if="item.user_list.share_count<3">
 							<view class="flex  flex_center cm_bdb " style="padding-bottom: 20rpx;margin-bottom: 20rpx;">
 								<view>进行中</view>
 								<view class="f1 cm_tex_r">活动时间：{{ item.create_time }}</view>
 							</view>
-							<view class="cm_items flex flex_center">
+							<view class="cm_items flex flex_center" @tap="_href(item)">
 								<image :src="item.project_list[0].skus_img" mode="aspectFill" class="itemLogo"></image>
 								<view class="f1">
 									<view class="cm_title cm_ellipsis2">{{ item.project_list[0].order_name }}</view>
@@ -134,8 +131,6 @@
 				</view>
 				<LoadMore :status="loadStatus" />
 			</view>
-
-			
 		</view>
 		<view class="flex  flex_y flex_center" style="width: 100vw;height: 100vh;background-color: #fff;" v-else>
 			<text>暂未登录</text>
@@ -197,7 +192,7 @@ export default {
 		rule,
 		tuiTips
 	},
-
+	
 	onLoad() {
 		this.shareMsg = {
 			title: `分享好友，马桶免费拿`,
@@ -207,7 +202,7 @@ export default {
 		this.text = global_Set_jll.activity_constraint;
 		uni.getSystemInfo({
 			success: res => {
-				this.topHeight = 2 * (res.statusBarHeight + 44) + 80;
+				this.topHeight = 2 * (res.statusBarHeight + 44) ;
 			}
 		});
 	},

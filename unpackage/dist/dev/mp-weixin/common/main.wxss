@@ -3236,7 +3236,7 @@ image {
 	width: 100%;
 	height: 80rpx;
 	text-align: center;
-	line-height: 80rpx;
+	line-height: 78rpx;
 	margin: 0 auto;
 	border-radius: 40rpx;
 	background: var(--cl_theme);
@@ -3247,11 +3247,11 @@ image {
 	width: 100%;
 	height: 80rpx;
 	text-align: center;
-	line-height: 80rpx;
+	line-height: 78rpx;
 	margin: 0 auto;
 	border-radius: 40rpx;
 	background: #fff;
-	color:var(--cl_primary);
+	color:var(--cl_primary)!important;
 	font-size: 30rpx;
 	border:1rpx solid var(--cl_primary)
 }

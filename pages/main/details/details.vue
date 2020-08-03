@@ -381,9 +381,11 @@ export default {
 
 					// }, 1000);
 				} else {
+					that.skeletonShow = false;
 					that.$ui.toast(res.Msg);
 				}
 			} catch (err) {
+				that.skeletonShow = false;
 				console.log('请求结果false : ' + err);
 			}
 			if (callback) callback();

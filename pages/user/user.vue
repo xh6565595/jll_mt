@@ -28,7 +28,7 @@
 		<!-- 推广者显示 -->
 		<navigator url="./share/share"  class="shareBox "  v-if="hasLogin && userInfo.consumer_type==2">
 		<!-- <navigator url="./share/share"  class="shareBox " > -->
-			<image src="../../static/image/wd_yq.png" mode="scaleToFill" class="bg"></image>
+			<image src="../../static/image/wd_yq.jpg" mode="scaleToFill" class="bg"></image>
 		</navigator>
 		<!-- </view> -->
 		<!-- 个人信息 -->
@@ -98,6 +98,11 @@
 						<text class="cm_t_24 f1">清除缓存</text>
 						<text class="iconfont icon-fanhui3"></text>
 					</view>
+					<view class="menus flex flex_center " @tap="_toAttention">
+						<image src="../../static/image/wd_hy.png" class="menusPic"></image>
+						<text class="cm_t_24 f1">订阅消息</text>
+						<text class="iconfont icon-fanhui3"></text>
+					</view>
 				</view>
 			</view>
 		</view>
@@ -112,6 +117,31 @@
 					<button type="text" class="cm_btn_plain" hover-class="cm_hover_m" @tap="_kefu">拨打客服热线</button>
 				</view>
 				<image src="../../static/image/close.png" mode="widthFix" class="closeBtn" ></image>
+			</view>
+		</accredit>
+		<accredit ref="dy" :autoClose="true">
+			<view slot='content' class="dyContent flex flex_y flex-center">
+				<view class="cm_title" style="margin-bottom: 20rpx;">开通订阅消息</view>
+				<view style="width: 100%;height: 180rpx;">
+					<official-account></official-account>
+				</view>
+			
+				<view style="margin: 30rpx 0;">
+					<view class="cm_text" style="padding-bottom: 20rpx;">
+						请你关注洁利来智能厨卫公众号
+					</view>
+					<view class="cm_text">
+						--以便我们向您提供及时的推荐消息
+					</view>
+					<view class="cm_text">
+						--以便我们向您提供及时的业务通知
+					</view>
+					<view class="cm_text">
+						--以便我们向您推送及时的信息反馈
+					</view>
+				</view>		
+				<button type="success" class="cm_btn" @tap="_sureGz" >我已关注，立即开启</button>	
+				<!-- <button type="default" class="cm_btn cm_btn_plain" @tap="_cancelGz"   >取消订阅</button>	 -->
 			</view>
 		</accredit>
 	</view>
@@ -146,18 +176,16 @@ export default {
 	onLoad() {
 		let that = this;
 
-		// this.autoLogin()
-		// this.GetKefu();
-
-		// 注册刷新事件
-		// uni.$on('refresh_user', function() {
-		// 	that.loadData();
-		// });
-		
+		uni.$on('gzhAuth',(bool)=>{
+			
+			that.$refs.dy.hideModal()
+			that._loadData('refresh')
+		})
 	},
 	onShow() {
 		if(this.hasLogin){	
 			this._loadData('refresh')
+		
 		}
 	},
 	computed: mapState(['userInfo','hasLogin']),
@@ -167,12 +195,65 @@ export default {
 		// }
 	},
 	components: {
+		accredit
 	},
 	// 下拉刷新
 	onPullDownRefresh() {
 		this._loadData();
 	},
 	methods: {
+		_toAttention(){
+			if(!this.hasLogin){
+				uni.navigateTo({
+					url:'/pages/login/login'
+				})
+				return
+			}
+			this.$refs.dy.showModal()
+		},
+		// 关注检验
+		_sureGz(){
+			const authId = uni.getStorageSync('authId')
+			if(authId){
+				this._oidIfAttention(authId)	
+			}else{
+				uni.navigateTo({
+					url:'/pages/auth/auth'
+				})
+			}		
+			// this.$refs.dy.hideModal()			
+			// console.log(1)
+		},
+		// opendi校验是否关注
+		async _oidIfAttention(opendId){
+			let that = this;
+			try {
+				let data = {
+					openId: opendId
+				};
+				uni.showLoading({});
+				let res = await this.$api.GetWxOpenid_Attention(data, false);
+				this.$ui.hideloading();
+				if (res.Success) {
+					if(res.Data.subscribe==1){
+						that.$ui.toast('订阅功能已开启');
+					}else{
+						that.$ui.toast('订阅功能未开启');
+					}
+				} else {
+					that.$ui.toast(res.Msg);
+					
+				}
+				// that._loadData('refresh')
+				that.$refs.dy.hideModal()	
+				
+			} catch (err) {
+				console.log('请求结果false : ' + err);
+			}
+		},
+		_cancelGz(){
+			this.$refs.dy.hideModal()
+		},
 		_clear(){
 			uni.removeStorageSync('access_token')
 			this.$ui.toast('清除')
@@ -522,6 +603,21 @@ export default {
 			margin-left: -24rpx;
 			bottom: -86rpx;
 			z-index: 100;
+		}
+	}
+	.dyContent{
+		width: 90vw;
+		padding: 40rpx;
+		line-height: 2;
+		.cm_title{
+			line-height: 2;
+			font-size: 36rpx;
+		}
+		.cm_text{
+			line-height: 1.5;
+		}
+		.cm_btn{
+			margin-bottom: 20rpx;
 		}
 	}
 }

@@ -2,6 +2,7 @@
   "navigationBarTitleText": "活动",
   "navigationBarTextStyle": "black",
   "navigationStyle": "custom",
+  "enablePullDownRefresh": true,
   "usingComponents": {
     "rule": "/components/rule/rule",
     "accredit": "/components/accredit/accredit",

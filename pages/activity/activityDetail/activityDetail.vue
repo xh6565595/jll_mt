@@ -24,9 +24,9 @@
 				</view>
 				<view class="cm_bdb" style="padding-bottom: 40rpx;">
 					<block v-for="(it, index) in item.project_list" :key="index">
-						<view class="  tui-skeleton-fillet">
+						<view class="  tui-skeleton-fillet" @tap="_hrefPro(it.project_code)">
 							<!-- <view style="padding: 20rpx;"> -->
-							<view class="cm_items flex  flex_center tui-skeleton-fillet">
+							<view class="cm_items flex  flex_center tui-skeleton-fillet"  >
 								<image v-if="it.skus_img" :src="it.skus_img" mode="aspectFill" class="itemLogo "></image>
 								<view class="f1 ">
 									<view class=" cm_title   name cm_ellipsis2 tui-skeleton-fillet">{{ it.order_name }}</view>
