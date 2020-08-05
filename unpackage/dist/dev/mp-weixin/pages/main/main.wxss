@@ -88,19 +88,19 @@
 .pages .hot .picBox .left.data-v-52f690a6 {
   width: 442rpx;
   height: 442rpx;
-  border-radius: 16rpx;
+  border-radius: 6rpx;
   margin-right: 16rpx;
 }
 .pages .hot .picBox .rTop.data-v-52f690a6 {
   width: 216rpx;
   height: 216rpx;
-  border-radius: 16rpx;
+  border-radius: 6rpx;
   margin-bottom: 10rpx;
 }
 .pages .hot .picBox .rBot.data-v-52f690a6 {
   width: 216rpx;
   height: 216rpx;
-  border-radius: 16rpx;
+  border-radius: 6rpx;
 }
 .pages .dyContent.data-v-52f690a6 {
   width: 90vw;

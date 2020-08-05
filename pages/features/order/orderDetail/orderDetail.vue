@@ -234,7 +234,7 @@
 					<tui-button type="primary" class="btns" size="small" shape="circle" @tap="_readyToPay" v-if="item.order_status == 0">立即付款</tui-button>
 					<tui-button type="primary" class="btns" size="small" plain shape="circle" @tap="cancelOrder" v-if="item.order_status == 0">删除订单</tui-button>
 					<tui-button type="primary" class="btns" size="small" shape="circle" v-if="item.order_status == 1" @tap="prompt(item.order_code)">提醒发货</tui-button>
-					<tui-button type="primary" class="btns" size="small" shape="circle" v-if="item.order_status == 2" @tap="sure(item.order_code)">确认收货</tui-button>
+					<tui-button type="primary" class="btns" size="small" shape="circle" v-if="item.order_status == 2" @tap="sure(item.order_code)">预约安装</tui-button>
 					<tui-button type="primary" class="btns" size="small" shape="circle" plain v-if="item.order_status == 2" @tap="scan(item.order_code)">查看物流</tui-button>
 				</view>			
 			</view>		
@@ -465,26 +465,25 @@ export default {
 				console.log('请求结果false : ' + err);
 			}
 		},
-		// 发起退款
+		// 确认收货
 		async sure(code) {
 			let that = this;
 			try {
-				// this.$ui.showloading();
+				
 				let data = {
 					order_code: code
 				};
+				this.$ui.showloading();
 				let res = await this.$api.Receiving(data, false);
-				// this.$ui.hideloading();
+				this.$ui.hideloading();
 				if (res.Success) {
 					that.$ui.toast('收货成功');
-					setTimeout(() => {
-						that.loadData();
-					}, 1000);
+					that.loadData();
 				} else {
 					that.$ui.toast(res.Msg);
 				}
 				uni.pageScrollTo({scrollTop: 0,duration: 300});
-				if (callback) callback();
+				
 			} catch (err) {
 				console.log('请求结果false : ' + err);
 			}

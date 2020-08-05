@@ -257,7 +257,10 @@ var _index = _interopRequireDefault(__webpack_require__(/*! @/utils/http/index.j
 
                   _this2.$api.WxTokenLogin({ openId: opid }, false));case 4:res = _context2.sent;
                 _this2.$ui.hideloading();
-                // if (false) {		
+                // uni.navigateTo({
+                // 	url:'/pages/login/login'
+                // })	
+                // 	return
                 if (res.Success) {
                   that.$store.commit('login');
                   uni.setStorageSync('access_token', res.Data.hp);
@@ -292,8 +295,13 @@ var _index = _interopRequireDefault(__webpack_require__(/*! @/utils/http/index.j
                   if (res.Data) {
                     that.$store.commit('setUserInfo', res.Data);
                     setTimeout(function () {
-                      // if(res.Data.consumer_type==3){
-                      if (false) {} else {
+                      if (res.Data.consumer_type == 3) {
+                        // if(false){
+                        // 安装员
+                        uni.redirectTo({
+                          url: '/pages/main/serverCenter/serverCenter' });
+
+                      } else {
                         //  消费者 3是安装 2推广者
                         // 记录信息
                         if (that.shareData.proCode && that.shareData.userId && that.shareData.odrCode) {

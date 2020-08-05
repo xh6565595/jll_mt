@@ -94,13 +94,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "components", function() { return components; });
 var components = {
   tuiSkeleton: function() {
-    return __webpack_require__.e(/*! import() | components/tui-skeleton/tui-skeleton */ "components/tui-skeleton/tui-skeleton").then(__webpack_require__.bind(null, /*! @/components/tui-skeleton/tui-skeleton.vue */ 286))
+    return __webpack_require__.e(/*! import() | components/tui-skeleton/tui-skeleton */ "components/tui-skeleton/tui-skeleton").then(__webpack_require__.bind(null, /*! @/components/tui-skeleton/tui-skeleton.vue */ 308))
   },
   PayPanel: function() {
-    return __webpack_require__.e(/*! import() | components/PayPanel/PayPanel */ "components/PayPanel/PayPanel").then(__webpack_require__.bind(null, /*! @/components/PayPanel/PayPanel.vue */ 329))
+    return __webpack_require__.e(/*! import() | components/PayPanel/PayPanel */ "components/PayPanel/PayPanel").then(__webpack_require__.bind(null, /*! @/components/PayPanel/PayPanel.vue */ 351))
   },
   accredit: function() {
-    return __webpack_require__.e(/*! import() | components/accredit/accredit */ "components/accredit/accredit").then(__webpack_require__.bind(null, /*! @/components/accredit/accredit.vue */ 279))
+    return __webpack_require__.e(/*! import() | components/accredit/accredit */ "components/accredit/accredit").then(__webpack_require__.bind(null, /*! @/components/accredit/accredit.vue */ 301))
   }
 }
 var render = function() {
@@ -415,7 +415,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var _utils = _interopRequireDefault(__webpack_require__(/*! @/utils/utils.js */ 28));
 
-var _vuex = __webpack_require__(/*! vuex */ 14);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var tuiSkeleton = function tuiSkeleton() {__webpack_require__.e(/*! require.ensure | components/tui-skeleton/tui-skeleton */ "components/tui-skeleton/tui-skeleton").then((function () {return resolve(__webpack_require__(/*! @/components/tui-skeleton/tui-skeleton */ 286));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var tuiListView = function tuiListView() {__webpack_require__.e(/*! require.ensure | components/list-view/list-view */ "components/list-view/list-view").then((function () {return resolve(__webpack_require__(/*! @/components/list-view/list-view */ 336));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var tuiListCell = function tuiListCell() {__webpack_require__.e(/*! require.ensure | components/list-cell/list-cell */ "components/list-cell/list-cell").then((function () {return resolve(__webpack_require__(/*! @/components/list-cell/list-cell */ 343));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var PayPanel = function PayPanel() {__webpack_require__.e(/*! require.ensure | components/PayPanel/PayPanel */ "components/PayPanel/PayPanel").then((function () {return resolve(__webpack_require__(/*! @/components/PayPanel/PayPanel */ 329));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};
+var _vuex = __webpack_require__(/*! vuex */ 14);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var tuiSkeleton = function tuiSkeleton() {__webpack_require__.e(/*! require.ensure | components/tui-skeleton/tui-skeleton */ "components/tui-skeleton/tui-skeleton").then((function () {return resolve(__webpack_require__(/*! @/components/tui-skeleton/tui-skeleton */ 308));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var tuiListView = function tuiListView() {__webpack_require__.e(/*! require.ensure | components/list-view/list-view */ "components/list-view/list-view").then((function () {return resolve(__webpack_require__(/*! @/components/list-view/list-view */ 358));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var tuiListCell = function tuiListCell() {__webpack_require__.e(/*! require.ensure | components/list-cell/list-cell */ "components/list-cell/list-cell").then((function () {return resolve(__webpack_require__(/*! @/components/list-cell/list-cell */ 365));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var PayPanel = function PayPanel() {__webpack_require__.e(/*! require.ensure | components/PayPanel/PayPanel */ "components/PayPanel/PayPanel").then((function () {return resolve(__webpack_require__(/*! @/components/PayPanel/PayPanel */ 351));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};
 // import h5Copy from '@/js_sdk/junyi-h5-copy/junyi-h5-copy/junyi-h5-copy.js';
 var global_Set_jll = uni.getStorageSync('global_Set_jll');var _default =
 {
@@ -620,28 +620,27 @@ var global_Set_jll = uni.getStorageSync('global_Set_jll');var _default =
                 console.log('请求结果false : ' + _context2.t0);case 13:case "end":return _context2.stop();}}}, _callee2, null, [[1, 10]]);}))();
 
     },
-    // 发起退款
+    // 确认收货
     sure: function sure(code) {var _this3 = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee3() {var that, data, res;return _regenerator.default.wrap(function _callee3$(_context3) {while (1) {switch (_context3.prev = _context3.next) {case 0:
                 that = _this3;_context3.prev = 1;
 
-                // this.$ui.showloading();
-                data = {
-                  order_code: code };_context3.next = 5;return (
 
-                  _this3.$api.Receiving(data, false));case 5:res = _context3.sent;
-                // this.$ui.hideloading();
+                data = {
+                  order_code: code };
+
+                _this3.$ui.showloading();_context3.next = 6;return (
+                  _this3.$api.Receiving(data, false));case 6:res = _context3.sent;
+                _this3.$ui.hideloading();
                 if (res.Success) {
                   that.$ui.toast('收货成功');
-                  setTimeout(function () {
-                    that.loadData();
-                  }, 1000);
+                  that.loadData();
                 } else {
                   that.$ui.toast(res.Msg);
                 }
-                uni.pageScrollTo({ scrollTop: 0, duration: 300 });
-                if (callback) callback();_context3.next = 14;break;case 11:_context3.prev = 11;_context3.t0 = _context3["catch"](1);
+                uni.pageScrollTo({ scrollTop: 0, duration: 300 });_context3.next = 15;break;case 12:_context3.prev = 12;_context3.t0 = _context3["catch"](1);
 
-                console.log('请求结果false : ' + _context3.t0);case 14:case "end":return _context3.stop();}}}, _callee3, null, [[1, 11]]);}))();
+
+                console.log('请求结果false : ' + _context3.t0);case 15:case "end":return _context3.stop();}}}, _callee3, null, [[1, 12]]);}))();
 
     },
     prompt: function prompt(code) {var _this4 = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee4() {var that, data, res;return _regenerator.default.wrap(function _callee4$(_context4) {while (1) {switch (_context4.prev = _context4.next) {case 0:

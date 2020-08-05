@@ -300,19 +300,19 @@ export default {
 			.left {
 				width: 442rpx;
 				height: 442rpx;
-				border-radius: 16rpx;
+				border-radius:6rpx;
 				margin-right: 16rpx;
 			}
 			.rTop {
 				width: 216rpx;
 				height: 216rpx;
-				border-radius: 16rpx;
+				border-radius:6rpx;
 				margin-bottom: 10rpx;
 			}
 			.rBot {
 				width: 216rpx;
 				height: 216rpx;
-				border-radius: 16rpx;
+				border-radius:6rpx;
 			}
 		}
 	}

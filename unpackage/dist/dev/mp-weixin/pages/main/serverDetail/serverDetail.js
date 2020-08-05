@@ -94,10 +94,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "components", function() { return components; });
 var components = {
   tuiSkeleton: function() {
-    return __webpack_require__.e(/*! import() | components/tui-skeleton/tui-skeleton */ "components/tui-skeleton/tui-skeleton").then(__webpack_require__.bind(null, /*! @/components/tui-skeleton/tui-skeleton.vue */ 286))
+    return __webpack_require__.e(/*! import() | components/tui-skeleton/tui-skeleton */ "components/tui-skeleton/tui-skeleton").then(__webpack_require__.bind(null, /*! @/components/tui-skeleton/tui-skeleton.vue */ 308))
   },
   tuiUpload: function() {
-    return __webpack_require__.e(/*! import() | components/tui-upload/tui-upload */ "components/tui-upload/tui-upload").then(__webpack_require__.bind(null, /*! @/components/tui-upload/tui-upload.vue */ 385))
+    return __webpack_require__.e(/*! import() | components/tui-upload/tui-upload */ "components/tui-upload/tui-upload").then(__webpack_require__.bind(null, /*! @/components/tui-upload/tui-upload.vue */ 407))
   }
 }
 var render = function() {
@@ -202,11 +202,18 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+
+
+
+
+
 var _vuex = __webpack_require__(/*! vuex */ 14);
 
 
 
-var _index = _interopRequireDefault(__webpack_require__(/*! @/utils/http/index.js */ 11));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var tuiListCell = function tuiListCell() {__webpack_require__.e(/*! require.ensure | components/list-cell/list-cell */ "components/list-cell/list-cell").then((function () {return resolve(__webpack_require__(/*! @/components/list-cell/list-cell */ 343));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var tuiUpload = function tuiUpload() {__webpack_require__.e(/*! require.ensure | components/tui-upload/tui-upload */ "components/tui-upload/tui-upload").then((function () {return resolve(__webpack_require__(/*! @/components/tui-upload/tui-upload */ 385));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var tuiListView = function tuiListView() {__webpack_require__.e(/*! require.ensure | components/list-view/list-view */ "components/list-view/list-view").then((function () {return resolve(__webpack_require__(/*! @/components/list-view/list-view */ 336));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var oneInput = function oneInput() {__webpack_require__.e(/*! require.ensure | components/myp-one/myp-one */ "components/myp-one/myp-one").then((function () {return resolve(__webpack_require__(/*! @/components/myp-one/myp-one */ 392));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
+var _index = _interopRequireDefault(__webpack_require__(/*! @/utils/http/index.js */ 11));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var tuiListCell = function tuiListCell() {__webpack_require__.e(/*! require.ensure | components/list-cell/list-cell */ "components/list-cell/list-cell").then((function () {return resolve(__webpack_require__(/*! @/components/list-cell/list-cell */ 365));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var tuiUpload = function tuiUpload() {__webpack_require__.e(/*! require.ensure | components/tui-upload/tui-upload */ "components/tui-upload/tui-upload").then((function () {return resolve(__webpack_require__(/*! @/components/tui-upload/tui-upload */ 407));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var tuiListView = function tuiListView() {__webpack_require__.e(/*! require.ensure | components/list-view/list-view */ "components/list-view/list-view").then((function () {return resolve(__webpack_require__(/*! @/components/list-view/list-view */ 358));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var oneInput = function oneInput() {__webpack_require__.e(/*! require.ensure | components/myp-one/myp-one */ "components/myp-one/myp-one").then((function () {return resolve(__webpack_require__(/*! @/components/myp-one/myp-one */ 414));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
 
 {
   data: function data() {
@@ -217,7 +224,8 @@ var _index = _interopRequireDefault(__webpack_require__(/*! @/utils/http/index.j
       formParams: {
         "order_code": "",
         "service_code": "",
-        "task_service_img": '' },
+        "task_service_img": '',
+        "device_num": "" },
 
       show: false,
       oringinImg: [], //初始化数组
@@ -254,6 +262,55 @@ var _index = _interopRequireDefault(__webpack_require__(/*! @/utils/http/index.j
     this.loadData();
   },
   methods: {
+    // 输完验证码码回调
+    finish: function finish(e) {
+      uni.hideKeyboard();
+      // this.submit()
+      // this.reset()
+    },
+    _scanCode: function _scanCode() {
+      var that = this;
+      this.$ui.showloading();
+      uni.scanCode({
+        onlyFromCamera: true,
+        scanType: ['qrCode'],
+        success: function success(res) {
+          var result = res.result;
+          var s = result.match(/mtId=(.*)mtId/);
+          if (result && s && s[1]) {
+            // uni.showModal({
+            // 	title:'发现新的机器码',
+            // 	content:s[1],
+            // 	confirmText:'使用',
+            // 	success(e) {
+            // 		// console.log(e)
+            // 		if(e.confirm){
+            // 			that.formParams.device_num = s[1]
+            // 		}
+            // 	}
+            // })
+            uni.navigateTo({
+              url: '/pages/main/deviceMsg/deviceMsg?deviceId=' + s[1] });
+
+          } else {
+            uni.showToast({
+              icon: 'none',
+              title: '无效的机号信息' });
+
+          }
+        },
+        fail: function fail() {
+          // plus.nativeUI.alert('请将二维码放在扫描框内')
+          uni.showToast({
+            icon: 'none',
+            title: '请将二维码放在扫描框内' });
+
+        },
+        complete: function complete() {
+          that.$ui.hideloading();
+        } });
+
+    },
     input: function input(e) {
       this.formParams.service_code = e;
     },
@@ -288,19 +345,23 @@ var _index = _interopRequireDefault(__webpack_require__(/*! @/utils/http/index.j
 
     },
     // 确认安装
-    _readyTo: function _readyTo() {var _this2 = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee2() {var that, res;return _regenerator.default.wrap(function _callee2$(_context2) {while (1) {switch (_context2.prev = _context2.next) {case 0:if (!(
-                _this2.formParams.service_code.length != 4)) {_context2.next = 3;break;}
-                _this2.$ui.toast('请输入正确的服务码');return _context2.abrupt("return");case 3:if (
+    _readyTo: function _readyTo() {var _this2 = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee2() {var that, res;return _regenerator.default.wrap(function _callee2$(_context2) {while (1) {switch (_context2.prev = _context2.next) {case 0:if (
+                _this2.formParams.device_num) {_context2.next = 3;break;}
+                _this2.$ui.toast('请输入马桶机号');return _context2.abrupt("return");case 3:if (!(
 
 
-                _this2.formParams.task_service_img) {_context2.next = 6;break;}
-                _this2.$ui.toast('请上传安装结果图片');return _context2.abrupt("return");case 6:
+                _this2.formParams.service_code.length != 4)) {_context2.next = 6;break;}
+                _this2.$ui.toast('请输入正确的服务码');return _context2.abrupt("return");case 6:if (
 
 
-                that = _this2;_context2.prev = 7;
+                _this2.formParams.task_service_img) {_context2.next = 9;break;}
+                _this2.$ui.toast('请上传安装结果图片');return _context2.abrupt("return");case 9:
 
-                _this2.$ui.showloading();_context2.next = 11;return (
-                  _this2.$api.OrderInstall(_this2.formParams, false));case 11:res = _context2.sent;
+
+                that = _this2;_context2.prev = 10;
+
+                _this2.$ui.showloading();_context2.next = 14;return (
+                  _this2.$api.OrderInstall(_this2.formParams, false));case 14:res = _context2.sent;
                 _this2.$ui.hideloading();
                 // console.log(res)
                 if (res.Success) {
@@ -310,9 +371,9 @@ var _index = _interopRequireDefault(__webpack_require__(/*! @/utils/http/index.j
                 } else {
                   that.$ui.toast(res.Msg);
                   that.$refs.hi.set('');
-                }_context2.next = 19;break;case 16:_context2.prev = 16;_context2.t0 = _context2["catch"](7);
+                }_context2.next = 22;break;case 19:_context2.prev = 19;_context2.t0 = _context2["catch"](10);
 
-                console.log('请求结果false : ' + _context2.t0);case 19:case "end":return _context2.stop();}}}, _callee2, null, [[7, 16]]);}))();
+                console.log('请求结果false : ' + _context2.t0);case 22:case "end":return _context2.stop();}}}, _callee2, null, [[10, 19]]);}))();
 
 
     },

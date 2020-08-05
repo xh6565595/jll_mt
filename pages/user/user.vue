@@ -6,66 +6,61 @@
 		</view> -->
 		<!-- 头部 -->
 		<view class="pageTop flex  flex_center" v-if="hasLogin">
-			<image :src="userInfo.consumer_head?userInfo.consumer_head : '../../static/img/default.jpg'" mode="aspectFill" class="avatar"></image>
+			<image :src="userInfo.consumer_head ? userInfo.consumer_head : '../../static/img/default.jpg'" mode="aspectFill" class="avatar"></image>
 			<view class="f1">
-				<view class="name cm_title f1">{{userInfo.consumer_nick_name}}</view>
-				<text class="name  f1">余额：{{userInfo.consumer_blance}}</text>
+				<view class="name cm_title f1">{{ userInfo.consumer_nick_name }}</view>
+				<text class="name  f1">余额：{{ userInfo.consumer_blance }}</text>
 			</view>
 			<navigator class="tx" url="/pages/features/deposit/deposit">提现</navigator>
 		</view>
 		<!-- <view class="pageTop flex  flex_center"  v-else > -->
-		<navigator url="../login/login"  class="pageTop flex  flex_center" v-else >
+		<navigator url="../login/login" class="pageTop flex  flex_center" v-else>
 			<image src="../../static/img/default.jpg" mode="aspectFill" class="avatar"></image>
-			<view class="f1">
-				<view class="name cm_title f1">暂未登录</view>
-			</view>
+			<view class="f1"><view class="name cm_title f1">暂未登录</view></view>
 		</navigator>
 		<!-- </view> -->
-		
-		
-		
+
 		<!-- <view class="shareBox "> -->
 		<!-- 推广者显示 -->
-		<navigator url="./share/share"  class="shareBox "  v-if="hasLogin && userInfo.consumer_type==2">
-		<!-- <navigator url="./share/share"  class="shareBox " > -->
+		<navigator url="./share/share" class="shareBox " v-if="hasLogin && userInfo.consumer_type == 2">
+			<!-- <navigator url="./share/share"  class="shareBox " > -->
 			<image src="../../static/image/wd_yq.jpg" mode="scaleToFill" class="bg"></image>
 		</navigator>
 		<!-- </view> -->
 		<!-- 个人信息 -->
 		<view class="accountBox">
-				<view class=" flex flex_center">
-					<view class="cm_title f1">我的订单</view>
-					<view class="flex flex_center cm_des" @tap="_href('/features/order/order?current=0')">
-						查看更多
-						<text class="iconfont icon-fanhui3"></text>
-					</view>
+			<view class=" flex flex_center">
+				<view class="cm_title f1">我的订单</view>
+				<view class="flex flex_center cm_des" @tap="_href('/features/order/order?current=0')">
+					查看更多
+					<text class="iconfont icon-fanhui3"></text>
 				</view>
-				<view class="flex flex_center flex_between">
-					<view class="menus flex flex_center flex_y " @tap="_href('/features/order/order?current=1')">
-						<image src="../../static/image/dd_df.png" class="menusPic"></image>
-						<text class="cm_t_24">待付款</text>
-						<view class="tips" v-if="hasLogin && userInfo.wait_paying_count">{{ userInfo.wait_paying_count }}</view>
-					</view>
-			
-					<view class="menus flex flex_center flex_y" @tap="_href('/features/order/order?current=2')">
-						<image src="../../static/image/dd_dfh.png" class="menusPic"></image>
-						<text class="cm_t_24">待发货</text>
-						<view class="tips" v-if="hasLogin && userInfo.wait_sending_count">{{ userInfo.wait_sending_count }}</view>
-					</view>
-
-					<view class="menus flex flex_center flex_y" @tap="_href('/features/order/order?current=3')">
-						<image src="../../static/image/dd_dsh.png" class="menusPic"></image>
-						<text class="cm_t_24">待收货</text>
-						<view class="tips" v-if="hasLogin && userInfo.wait_receiving_count">{{ userInfo.wait_receiving_count }}</view>
-					</view>
-
-					<view class="menus flex flex_center flex_y" @tap="_href('/features/order/order?current=4')">
-						<image src="../../static/image/dd_th.png" class="menusPic"></image>
-						<text class="cm_t_24">已签收</text>
-						<!-- <view class="tips" v-if="userInfo.returned_goods_count">{{ userInfo.returned_goods_count }}</view> -->
-					</view>
-	
+			</view>
+			<view class="flex flex_center flex_between">
+				<view class="menus flex flex_center flex_y " @tap="_href('/features/order/order?current=1')">
+					<image src="../../static/image/dd_df.png" class="menusPic"></image>
+					<text class="cm_t_24">待付款</text>
+					<view class="tips" v-if="hasLogin && userInfo.wait_paying_count">{{ userInfo.wait_paying_count }}</view>
 				</view>
+
+				<view class="menus flex flex_center flex_y" @tap="_href('/features/order/order?current=2')">
+					<image src="../../static/image/dd_dfh.png" class="menusPic"></image>
+					<text class="cm_t_24">待发货</text>
+					<view class="tips" v-if="hasLogin && userInfo.wait_sending_count">{{ userInfo.wait_sending_count }}</view>
+				</view>
+
+				<view class="menus flex flex_center flex_y" @tap="_href('/features/order/order?current=3')">
+					<image src="../../static/image/dd_dsh.png" class="menusPic"></image>
+					<text class="cm_t_24">待收货</text>
+					<view class="tips" v-if="hasLogin && userInfo.wait_receiving_count">{{ userInfo.wait_receiving_count }}</view>
+				</view>
+
+				<view class="menus flex flex_center flex_y" @tap="_href('/features/order/order?current=4')">
+					<image src="../../static/image/dd_th.png" class="menusPic"></image>
+					<text class="cm_t_24">已签收</text>
+					<!-- <view class="tips" v-if="userInfo.returned_goods_count">{{ userInfo.returned_goods_count }}</view> -->
+				</view>
+			</view>
 		</view>
 
 		<!-- 菜单 -->
@@ -109,38 +104,31 @@
 		<!-- <button type="success" class="btns" open-type="contact" >客服</button> -->
 		<tui-modal :show="modal" @click="handleClick" @cancel="hide" :content="content" :maskClosable="false" color="#333" :size="32"></tui-modal>
 		<accredit ref="kf" :autoClose="true">
-			<view slot='content' class="fkContent">
-				<image src="../../static/image/kfbg.jpg" mode="widthFix" class="bg" ></image>
+			<view slot="content" class="fkContent">
+				<image src="../../static/image/kfbg.jpg" mode="widthFix" class="bg"></image>
 				<view style="padding: 50rpx;">
 					<view class="gray" style="line-height: 2;">我们将会全心全意为您提供满意周到的咨询服</view>
 					<button type="text" class="cm_btn" hover-class="cm_hover_m" open-type="contact">和他聊聊</button>
 					<button type="text" class="cm_btn_plain" hover-class="cm_hover_m" @tap="_kefu">拨打客服热线</button>
 				</view>
-				<image src="../../static/image/close.png" mode="widthFix" class="closeBtn" ></image>
+				<image src="../../static/image/close.png" mode="widthFix" class="closeBtn"></image>
 			</view>
 		</accredit>
 		<accredit ref="dy" :autoClose="true">
-			<view slot='content' class="dyContent flex flex_y flex-center">
+			<view slot="content" class="dyContent flex flex_y flex-center">
 				<view class="cm_title" style="margin-bottom: 20rpx;">开通订阅消息</view>
-				<view style="width: 100%;height: 180rpx;">
-					<official-account></official-account>
-				</view>
-			
+
+				<view class="flex  flex_center"><image src="https://gllo.kuxiong999.com/logo.jpg" mode="scaleToFill" style="width: 280rpx;height: 280rpx;"></image></view>
+
 				<view style="margin: 30rpx 0;">
-					<view class="cm_text" style="padding-bottom: 20rpx;">
-						请你关注洁利来智能厨卫公众号
-					</view>
-					<view class="cm_text">
-						--以便我们向您提供及时的推荐消息
-					</view>
-					<view class="cm_text">
-						--以便我们向您提供及时的业务通知
-					</view>
-					<view class="cm_text">
-						--以便我们向您推送及时的信息反馈
-					</view>
-				</view>		
-				<button type="success" class="cm_btn" @tap="_sureGz" >我已关注，立即开启</button>	
+					<view class="cm_text" style="padding-bottom: 20rpx;">请你关注洁利来智能厨卫公众号</view>
+					<view class="cm_text">以便我们向您提供及时的推荐消息</view>
+					<view class="cm_text">--点击保存图片</view>
+					<view class="cm_text">--长按图片识别二维码</view>
+					<view class="cm_text">--关注GLLO智能厨卫公众号</view>
+				</view>
+				<!-- <button type="success" class="cm_btn" @tap="_sureGz" >我已关注，立即开启</button>	 -->
+				<button type="success" class="cm_btn" @tap="_save">保存图片到本地</button>
 				<!-- <button type="default" class="cm_btn cm_btn_plain" @tap="_cancelGz"   >取消订阅</button>	 -->
 			</view>
 		</accredit>
@@ -150,7 +138,7 @@
 <script>
 import { mapState, mapMutations } from 'vuex';
 import http from '@/utils/http/index.js';
-import accredit from "@/components/accredit/accredit"
+import accredit from '@/components/accredit/accredit';
 export default {
 	data() {
 		return {
@@ -176,22 +164,19 @@ export default {
 	onLoad() {
 		let that = this;
 
-		uni.$on('gzhAuth',(bool)=>{
-			
-			that.$refs.dy.hideModal()
-			that._loadData('refresh')
-		})
+		uni.$on('gzhAuth', bool => {
+			that.$refs.dy.hideModal();
+			that._loadData('refresh');
+		});
 	},
 	onShow() {
-		if(this.hasLogin){	
-			this._loadData('refresh')
-		
+		if (this.hasLogin) {
+			this._loadData('refresh');
 		}
 	},
-	computed: mapState(['userInfo','hasLogin']),
+	computed: mapState(['userInfo', 'hasLogin']),
 	watch: {
 		// refreshUser(){
-			
 		// }
 	},
 	components: {
@@ -202,30 +187,52 @@ export default {
 		this._loadData();
 	},
 	methods: {
-		_toAttention(){
-			if(!this.hasLogin){
+		_save() {
+			let that = this
+			this.$ui.showloading()
+			uni.saveImageToPhotosAlbum({
+				filePath: '/static/image/ewm.jpg',
+				success: function() {
+					that.$ui.toast('以保存至本地');
+				},
+				fail: function(err) {
+					console.log(err);
+				},
+				complete: function() {
+					that.$ui.hideloading()
+					// console.log(10);
+				}
+			});
+		},
+		_preview(img) {
+			uni.previewImage({
+				urls: [img]
+			});
+		},
+		_toAttention() {
+			if (!this.hasLogin) {
 				uni.navigateTo({
-					url:'/pages/login/login'
-				})
-				return
+					url: '/pages/login/login'
+				});
+				return;
 			}
-			this.$refs.dy.showModal()
+			this.$refs.dy.showModal();
 		},
 		// 关注检验
-		_sureGz(){
-			const authId = uni.getStorageSync('authId')
-			if(authId){
-				this._oidIfAttention(authId)	
-			}else{
+		_sureGz() {
+			const authId = uni.getStorageSync('authId');
+			if (authId) {
+				this._oidIfAttention(authId);
+			} else {
 				uni.navigateTo({
-					url:'/pages/auth/auth'
-				})
-			}		
-			// this.$refs.dy.hideModal()			
+					url: '/pages/auth/auth'
+				});
+			}
+			// this.$refs.dy.hideModal()
 			// console.log(1)
 		},
 		// opendi校验是否关注
-		async _oidIfAttention(opendId){
+		async _oidIfAttention(opendId) {
 			let that = this;
 			try {
 				let data = {
@@ -235,28 +242,26 @@ export default {
 				let res = await this.$api.GetWxOpenid_Attention(data, false);
 				this.$ui.hideloading();
 				if (res.Success) {
-					if(res.Data.subscribe==1){
+					if (res.Data.subscribe == 1) {
 						that.$ui.toast('订阅功能已开启');
-					}else{
+					} else {
 						that.$ui.toast('订阅功能未开启');
 					}
 				} else {
 					that.$ui.toast(res.Msg);
-					
 				}
 				// that._loadData('refresh')
-				that.$refs.dy.hideModal()	
-				
+				that.$refs.dy.hideModal();
 			} catch (err) {
 				console.log('请求结果false : ' + err);
 			}
 		},
-		_cancelGz(){
-			this.$refs.dy.hideModal()
+		_cancelGz() {
+			this.$refs.dy.hideModal();
 		},
-		_clear(){
-			uni.removeStorageSync('access_token')
-			this.$ui.toast('清除')
+		_clear() {
+			uni.removeStorageSync('access_token');
+			this.$ui.toast('清除');
 		},
 		imageLoad(index) {
 			this.$set(this.list[index], 'load', true);
@@ -265,13 +270,13 @@ export default {
 			// console.log('图片未找到');
 			this.list[index].goods_picture = '/static/img/noPic.jpg';
 		},
-	
+
 		_href(val) {
-			if(!this.hasLogin){
+			if (!this.hasLogin) {
 				uni.navigateTo({
-					url:'/pages/login/login'
-				})
-				return
+					url: '/pages/login/login'
+				});
+				return;
 			}
 			switch (val) {
 				case 'set':
@@ -288,9 +293,9 @@ export default {
 		},
 		// 加载个人信息
 		async _loadData(callback) {
-			this.$store.dispatch('refreshUser',()=>{
-				uni.stopPullDownRefresh()
-			})
+			this.$store.dispatch('refreshUser', () => {
+				uni.stopPullDownRefresh();
+			});
 		},
 		handleClick(e) {
 			let index = e.index;
@@ -321,19 +326,19 @@ export default {
 			}
 			this.modal = false;
 		},
-		_close(){
-			this.$refs.kf.hideModal()
+		_close() {
+			this.$refs.kf.hideModal();
 		},
 		// 显示客服弹窗
-		_kefuMenu(){
-			this.$refs.kf.showModal()
+		_kefuMenu() {
+			this.$refs.kf.showModal();
 		},
 		// 客服
 		_kefu() {
 			// let phone = this.waiter.link_value;
 			const phone = uni.getStorageSync('global_Set_jll').service_mobile;
 			let that = this;
-			this.$refs.kf.hideModal()
+			this.$refs.kf.hideModal();
 			uni.showModal({
 				title: 'GLLO健康智能马桶提醒你',
 				content: '立即致电官方客服？',
@@ -379,34 +384,33 @@ export default {
 			}
 		}
 	}
-	.pageTop{
+	.pageTop {
 		height: 180rpx;
-		.avatar{
+		.avatar {
 			width: 100rpx;
 			height: 100rpx;
 			border-radius: 50%;
 			margin-right: 24rpx;
 			border: 4rpx solid #d9d9d9;
 		}
-		.tx{
+		.tx {
 			height: 54rpx;
 			line-height: 50rpx;
 			border-radius: 27rpx;
 			border: 2rpx solid #333;
 			padding: 0 32rpx;
-			
 		}
 	}
-	.shareBox{
+	.shareBox {
 		height: 88rpx;
 		line-height: 88rpx;
 		position: relative;
 		margin-bottom: 20rpx;
-		.bg{
+		.bg {
 			width: 100%;
 			height: 100%;
 		}
-		.share{
+		.share {
 			color: #333333;
 			font-size: 24rpx;
 			padding: 0 24rpx;
@@ -416,7 +420,7 @@ export default {
 			height: 48rpx;
 			line-height: 48rpx;
 			border-radius: 24rpx;
-			background: linear-gradient(45deg, #FAE0C7, #F4C7A4);
+			background: linear-gradient(45deg, #fae0c7, #f4c7a4);
 		}
 	}
 	.accountBox {
@@ -431,7 +435,7 @@ export default {
 		}
 		.menus {
 			width: 100%;
-		
+
 			position: relative;
 			.menusPic {
 				width: 60rpx;
@@ -579,24 +583,24 @@ export default {
 			}
 		}
 	}
-	.fkContent{
+	.fkContent {
 		position: relative;
 		width: 80vw;
-		.bg{
-			border-radius: 30rpx 30rpx 0 0 ;
+		.bg {
+			border-radius: 30rpx 30rpx 0 0;
 			width: 100%;
 			height: 252rpx;
 		}
-		.cm_btn{
+		.cm_btn {
 			margin-top: 50rpx;
-			background:  #43B6B2;
+			background: #43b6b2;
 		}
-		.cm_btn_plain{
+		.cm_btn_plain {
 			margin-top: 10rpx;
-			color:  #333;
+			color: #333;
 			border: none;
 		}
-		.closeBtn{
+		.closeBtn {
 			width: 48rpx;
 			position: absolute;
 			left: 50%;
@@ -605,18 +609,18 @@ export default {
 			z-index: 100;
 		}
 	}
-	.dyContent{
+	.dyContent {
 		width: 90vw;
 		padding: 40rpx;
 		line-height: 2;
-		.cm_title{
+		.cm_title {
 			line-height: 2;
 			font-size: 36rpx;
 		}
-		.cm_text{
+		.cm_text {
 			line-height: 1.5;
 		}
-		.cm_btn{
+		.cm_btn {
 			margin-bottom: 20rpx;
 		}
 	}

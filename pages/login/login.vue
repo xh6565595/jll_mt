@@ -129,8 +129,7 @@ export default {
 		},
 		// 输完验证码码回调
 		finish(e){
-			console.log(this.formParams);
-			// debugger
+			uni.hideKeyboard()
 			this.submit()
 			// this.reset()
 		},

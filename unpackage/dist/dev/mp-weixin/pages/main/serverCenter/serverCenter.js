@@ -92,11 +92,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "recyclableRender", function() { return recyclableRender; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "components", function() { return components; });
-var components = {
-  sunTab: function() {
-    return __webpack_require__.e(/*! import() | components/sun-tab/sun-tab */ "components/sun-tab/sun-tab").then(__webpack_require__.bind(null, /*! @/components/sun-tab/sun-tab.vue */ 350))
-  }
-}
+var components
 var render = function() {
   var _vm = this
   var _h = _vm.$createElement
@@ -181,7 +177,36 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var _vuex = __webpack_require__(/*! vuex */ 14);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}var tuiTips = function tuiTips() {__webpack_require__.e(/*! require.ensure | components/extend/tips/tips */ "components/extend/tips/tips").then((function () {return resolve(__webpack_require__(/*! @/components/extend/tips/tips */ 314));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var sunTab = function sunTab() {__webpack_require__.e(/*! require.ensure | components/sun-tab/sun-tab */ "components/sun-tab/sun-tab").then((function () {return resolve(__webpack_require__(/*! @/components/sun-tab/sun-tab.vue */ 350));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var tuiFab = function tuiFab() {__webpack_require__.e(/*! require.ensure | components/tui-fab/tui-fab */ "components/tui-fab/tui-fab").then((function () {return resolve(__webpack_require__(/*! @/components/tui-fab/tui-fab */ 378));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var _vuex = __webpack_require__(/*! vuex */ 14);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}var tuiTips = function tuiTips() {__webpack_require__.e(/*! require.ensure | components/extend/tips/tips */ "components/extend/tips/tips").then((function () {return resolve(__webpack_require__(/*! @/components/extend/tips/tips */ 336));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var sunTab = function sunTab() {__webpack_require__.e(/*! require.ensure | components/sun-tab/sun-tab */ "components/sun-tab/sun-tab").then((function () {return resolve(__webpack_require__(/*! @/components/sun-tab/sun-tab.vue */ 372));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var tuiFab = function tuiFab() {__webpack_require__.e(/*! require.ensure | components/tui-fab/tui-fab */ "components/tui-fab/tui-fab").then((function () {return resolve(__webpack_require__(/*! @/components/tui-fab/tui-fab */ 400));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
 
 
 
@@ -249,7 +274,6 @@ var _vuex = __webpack_require__(/*! vuex */ 14);function _interopRequireDefault(
     if (this.hasLogin) {
       this._loadData('refresh');
     }
-
   },
   methods: {
     _msg: function _msg() {
@@ -310,6 +334,39 @@ var _vuex = __webpack_require__(/*! vuex */ 14);function _interopRequireDefault(
 
                 console.log('请求结果false : ' + _context.t0);
                 that.loadStatus = 'more';case 13:case "end":return _context.stop();}}}, _callee, null, [[1, 9]]);}))();
+
+    },
+    // 扫码跳转维修历史
+    _scanCode: function _scanCode() {
+      var that = this;
+      this.$ui.showloading();
+      uni.scanCode({
+        onlyFromCamera: true,
+        scanType: ['qrCode'],
+        success: function success(res) {
+          var result = res.result;
+          var s = result.match(/mtId=(.*)mtId/);
+          if (result && s && s[1]) {
+            uni.navigateTo({
+              url: "/pages/main/deviceMsg/deviceMsg?mtId=".concat(s[1]) });
+
+          } else {
+            uni.showToast({
+              icon: 'none',
+              title: '无效的机号信息' });
+
+          }
+        },
+        fail: function fail() {
+          // plus.nativeUI.alert('请将二维码放在扫描框内')
+          uni.showToast({
+            icon: 'none',
+            title: '请将二维码放在扫描框内' });
+
+        },
+        complete: function complete() {
+          that.$ui.hideloading();
+        } });
 
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))

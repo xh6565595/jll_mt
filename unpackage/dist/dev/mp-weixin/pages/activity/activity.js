@@ -94,10 +94,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "components", function() { return components; });
 var components = {
   rule: function() {
-    return __webpack_require__.e(/*! import() | components/rule/rule */ "components/rule/rule").then(__webpack_require__.bind(null, /*! @/components/rule/rule.vue */ 307))
+    return __webpack_require__.e(/*! import() | components/rule/rule */ "components/rule/rule").then(__webpack_require__.bind(null, /*! @/components/rule/rule.vue */ 329))
   },
   accredit: function() {
-    return __webpack_require__.e(/*! import() | components/accredit/accredit */ "components/accredit/accredit").then(__webpack_require__.bind(null, /*! @/components/accredit/accredit.vue */ 279))
+    return __webpack_require__.e(/*! import() | components/accredit/accredit */ "components/accredit/accredit").then(__webpack_require__.bind(null, /*! @/components/accredit/accredit.vue */ 301))
   }
 }
 var render = function() {
@@ -296,10 +296,18 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+
+
+
 var _vuex = __webpack_require__(/*! vuex */ 14);
 
 
-var _baseMixins = __webpack_require__(/*! @/utils/baseMixins.js */ 37);var tuiTips = function tuiTips() {__webpack_require__.e(/*! require.ensure | components/extend/tips/tips */ "components/extend/tips/tips").then((function () {return resolve(__webpack_require__(/*! @/components/extend/tips/tips */ 314));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var rule = function rule() {__webpack_require__.e(/*! require.ensure | components/rule/rule */ "components/rule/rule").then((function () {return resolve(__webpack_require__(/*! @/components/rule/rule.vue */ 307));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var global_Set_jll = uni.getStorageSync('global_Set_jll');var _default =
+var _baseMixins = __webpack_require__(/*! @/utils/baseMixins.js */ 37);var tuiTips = function tuiTips() {__webpack_require__.e(/*! require.ensure | components/extend/tips/tips */ "components/extend/tips/tips").then((function () {return resolve(__webpack_require__(/*! @/components/extend/tips/tips */ 336));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var rule = function rule() {__webpack_require__.e(/*! require.ensure | components/rule/rule */ "components/rule/rule").then((function () {return resolve(__webpack_require__(/*! @/components/rule/rule.vue */ 329));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var global_Set_jll = uni.getStorageSync('global_Set_jll');
+// import qrcodePoster from '@/components/zhangyu-qrcode-poster/zhangyu-qrcode-poster.vue'
+var _default =
+
 {
   data: function data() {
     return {
@@ -322,15 +330,17 @@ var _baseMixins = __webpack_require__(/*! @/utils/baseMixins.js */ 37);var tuiTi
       modal: false,
       text: '',
       topHeight: 144,
-      noneItem: false };
+      noneItem: false,
+      is_show_model: false };
 
   },
   mixins: [_baseMixins.baseMixins],
   computed: (0, _vuex.mapState)(['userInfo', 'hasLogin']),
   components: {
     rule: rule,
-    tuiTips: tuiTips },
-
+    tuiTips: tuiTips
+    // qrcodePoster
+  },
 
   onLoad: function onLoad() {var _this = this;
     this.shareMsg = {
@@ -349,6 +359,7 @@ var _baseMixins = __webpack_require__(/*! @/utils/baseMixins.js */ 37);var tuiTi
     if (this.hasLogin) {
       this.noneItem = false;
       this._loadData('refresh');
+
     }
   },
   onShareAppMessage: function onShareAppMessage(res) {
@@ -364,6 +375,11 @@ var _baseMixins = __webpack_require__(/*! @/utils/baseMixins.js */ 37);var tuiTi
     }
   },
   methods: {
+    sharePoster: function sharePoster() {
+      //获取带参数二维码
+      this.is_show_model = false;
+      this.$refs.poster.showCanvas('https://oss.zhangyubk.com/cmqrcode.jpg');
+    },
     _toBuy: function _toBuy() {
       uni.switchTab({
         url: '/pages/main/main' });
@@ -390,8 +406,8 @@ var _baseMixins = __webpack_require__(/*! @/utils/baseMixins.js */ 37);var tuiTi
         user: usercode,
         order: obj.order_code };
 
-      // console.log(this.goods)
-      this.$refs.share.showModal();
+
+      this.sharePoster();
     },
     _href: function _href(obj) {
       var item = obj.project_list[0];

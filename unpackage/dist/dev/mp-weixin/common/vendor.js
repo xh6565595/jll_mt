@@ -2973,7 +2973,261 @@ var index_esm = {
 
 /***/ }),
 
-/***/ 145:
+/***/ 15:
+/*!*******************************!*\
+  !*** E:/mywork/jll_mt/SET.js ***!
+  \*******************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
+// 全局设置
+var _default = {
+  baseUrl: "https://gllo.kuxiong999.com/Data", //api业务接口域名
+  mainUrl: "https://gllo.kuxiong999.com", //项目域名
+  // 测试环境
+  // wx_appid: 'wx09daee2f47e178aa',    //微信授权 appid  測試公衆號
+  wx_appid: 'wx35c21791caf26593', //代码力量 测试
+  // wx_redirect_url:'http://192.168.1.9:8080',
+  wx_redirect_url: 'https://gllo.kuxiong999.com', //微信授权 回调页地址
+
+  versionUrl: '/api/AppVersion/VersionCheck' //app版本检测url   // 1是不更新 2是强制更新 3可选择更新 4//appstore更新
+};exports.default = _default;
+
+/***/ }),
+
+/***/ 16:
+/*!*********************************************!*\
+  !*** E:/mywork/jll_mt/utils/module/auth.js ***!
+  \*********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
+
+var _interface = _interopRequireDefault(__webpack_require__(/*! ../http/interface */ 12));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} // 用户身份相关接口
+// 我要积分
+var Auth = { //Openid查询关注
+  GetWxOpenid_Attention: function GetWxOpenid_Attention(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return _interface.default.request({
+      url: '/api/Authorize/GetWxOpenid_Attention',
+      method: 'GET',
+      data: data
+      // handle:true
+    }, ifLoad);
+  },
+  // code查询关注
+  GetWxcode_Attention: function GetWxcode_Attention(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return _interface.default.request({
+      url: '/api/Authorize/GetWxcode_Attention',
+      method: 'GET',
+      data: data
+      // handle:true
+    }, ifLoad);
+  },
+  // code获取OpenId
+  GetOpenId: function GetOpenId(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return _interface.default.request({
+      url: '/api/Authorize/GetOpenId',
+      method: 'POST',
+      data: data
+      // handle:true
+    }, ifLoad);
+  },
+  // 微信自动注册
+  WxAutoRegiste: function WxAutoRegiste(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return _interface.default.request({
+      url: '/api/Authorize/WxAutoRegiste',
+      method: 'POST',
+      data: data
+      // handle:true
+    }, ifLoad);
+  },
+
+
+  // 获取验证码
+  getVerificateCode: function getVerificateCode(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return _interface.default.request({
+      url: '/api/Msg/SendVerificationCode',
+      method: 'POST',
+      data: data
+      // handle:true
+    }, ifLoad);
+  },
+  // 微信api
+  GetWxJsApiConfig: function GetWxJsApiConfig(data) {
+    return _interface.default.request({
+      url: '/api/Authorize/GetJsApiConfig',
+      method: 'POST',
+      data: data
+      // handle:true
+    });
+  },
+  // 登录
+  userLogin: function userLogin(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return _interface.default.request({
+      url: '/api/Authorize/Token',
+      method: 'POST',
+      data: data
+      // handle:true
+    }, ifLoad);
+  },
+  // 快捷登录
+  shortcutToken: function shortcutToken(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return _interface.default.request({
+      url: '/api/Authorize/ShortcutToken',
+      method: 'GET',
+      data: data
+      // handle:true
+    }, ifLoad);
+  },
+  // OpenId登录
+  WxTokenLogin: function WxTokenLogin(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return _interface.default.request({
+      url: '/api/Authorize/WxToken',
+      method: 'POST',
+      data: data
+      // handle:true
+    }, ifLoad);
+  },
+  // 注册用户 
+  userRegiste: function userRegiste(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return _interface.default.request({
+      url: '/api/Authorize/Registe',
+      method: 'POST',
+      data: data
+      // handle:true
+    }, ifLoad);
+  },
+  // 忘记密码
+  findPassword: function findPassword(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return _interface.default.request({
+      url: '/api/Authorize/FindPassword',
+      method: 'POST',
+      data: data
+      // handle:true
+    }, ifLoad);
+  },
+  // 获取用户信息
+  getConsumer: function getConsumer(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return _interface.default.request({
+      url: '/api/Consumer/Get',
+      method: 'GET',
+      data: data
+      // handle:true
+    }, ifLoad);
+  },
+
+  //更新用户信息
+  PerfectPayInfo: function PerfectPayInfo(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return _interface.default.request({
+      url: '/api/Consumer/PerfectPayInfo',
+      method: 'POST',
+      data: data
+      // handle:true
+    }, ifLoad);
+  },
+  // 设置支付密码
+  SettingPayPassword: function SettingPayPassword(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return _interface.default.request({
+      url: '/api/Consumer/SettingPayPassword',
+      method: 'POST',
+      data: data
+      // handle:true
+    }, ifLoad);
+  },
+  // 微信绑定手机号
+  BindWxUserMobile: function BindWxUserMobile(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return _interface.default.request({
+      url: '/api/Authorize/BindWxUserMobile',
+      method: 'POST',
+      data: data
+      // handle:true
+    }, ifLoad);
+  },
+
+  // 支付
+  toPayment: function toPayment(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return _interface.default.request({
+      url: '/api/Pay/Payment',
+      method: 'POST',
+      data: data
+      // handle:true
+    }, ifLoad);
+  },
+
+  // 提现
+  SubmitCash: function SubmitCash(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return _interface.default.request({
+      url: '/api/Cash/SubmitCash',
+      method: 'POST',
+      data: data
+      // handle:true
+    }, ifLoad);
+  },
+  // 	=============商家部分\\\
+
+
+
+  // 获取商家信息
+  GetBusinessInfo: function GetBusinessInfo(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return _interface.default.request({
+      url: '/api/Shop/GetBusinessInfo',
+      method: 'GET',
+      data: data
+      // handle:true
+    }, ifLoad);
+  },
+  // 修改商家信息
+  BusinessEditor: function BusinessEditor(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return _interface.default.request({
+      url: '/api/Shop/BusinessEditor',
+      method: 'POST',
+      data: data
+      // handle:true
+    }, ifLoad);
+  },
+
+
+  //=============== 全局=================
+
+  // 获取全局配置
+  getConfig: function getConfig(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return _interface.default.request({
+      url: '/api/Service/Config',
+      method: 'GET',
+      data: data
+      // handle:true
+    }, ifLoad);
+  },
+
+  // app更新
+  VersionCheck: function VersionCheck(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return _interface.default.request({
+      url: '/api/AppVersion/VersionCheck',
+      method: 'POST',
+      data: data
+      // handle:true
+    }, ifLoad);
+  },
+
+  // 手机号登录
+  MobileToken: function MobileToken(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    return _interface.default.request({
+      url: '/api/Authorize/MobileToken',
+      method: 'POST',
+      data: data
+      // handle:true
+    }, ifLoad);
+  } };var _default =
+
+Auth;exports.default = _default;
+
+/***/ }),
+
+/***/ 161:
 /*!*********************************************!*\
   !*** E:/mywork/jll_mt/utils/picker.city.js ***!
   \*********************************************/
@@ -17414,7 +17668,7 @@ data = data;exports.default = _default;
 
 /***/ }),
 
-/***/ 146:
+/***/ 162:
 /*!*******************************************************************!*\
   !*** E:/mywork/jll_mt/js_sdk/graceui-dataChecker/graceChecker.js ***!
   \*******************************************************************/
@@ -17527,260 +17781,6 @@ var obj = {
 
 
 obj = obj;exports.default = _default;
-
-/***/ }),
-
-/***/ 15:
-/*!*******************************!*\
-  !*** E:/mywork/jll_mt/SET.js ***!
-  \*******************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
-// 全局设置
-var _default = {
-  baseUrl: "https://gllo.kuxiong999.com/Data", //api业务接口域名
-  mainUrl: "https://gllo.kuxiong999.com", //项目域名
-  // 测试环境
-  // wx_appid: 'wx09daee2f47e178aa',    //微信授权 appid  測試公衆號
-  wx_appid: 'wx35c21791caf26593', //代码力量 测试
-  // wx_redirect_url:'http://192.168.1.9:8080',
-  wx_redirect_url: 'https://gllo.kuxiong999.com', //微信授权 回调页地址
-
-  versionUrl: '/api/AppVersion/VersionCheck' //app版本检测url   // 1是不更新 2是强制更新 3可选择更新 4//appstore更新
-};exports.default = _default;
-
-/***/ }),
-
-/***/ 16:
-/*!*********************************************!*\
-  !*** E:/mywork/jll_mt/utils/module/auth.js ***!
-  \*********************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
-
-var _interface = _interopRequireDefault(__webpack_require__(/*! ../http/interface */ 12));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} // 用户身份相关接口
-// 我要积分
-var Auth = { //Openid查询关注
-  GetWxOpenid_Attention: function GetWxOpenid_Attention(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    return _interface.default.request({
-      url: '/api/Authorize/GetWxOpenid_Attention',
-      method: 'GET',
-      data: data
-      // handle:true
-    }, ifLoad);
-  },
-  // code查询关注
-  GetWxcode_Attention: function GetWxcode_Attention(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    return _interface.default.request({
-      url: '/api/Authorize/GetWxcode_Attention',
-      method: 'GET',
-      data: data
-      // handle:true
-    }, ifLoad);
-  },
-  // code获取OpenId
-  GetOpenId: function GetOpenId(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    return _interface.default.request({
-      url: '/api/Authorize/GetOpenId',
-      method: 'POST',
-      data: data
-      // handle:true
-    }, ifLoad);
-  },
-  // 微信自动注册
-  WxAutoRegiste: function WxAutoRegiste(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    return _interface.default.request({
-      url: '/api/Authorize/WxAutoRegiste',
-      method: 'POST',
-      data: data
-      // handle:true
-    }, ifLoad);
-  },
-
-
-  // 获取验证码
-  getVerificateCode: function getVerificateCode(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    return _interface.default.request({
-      url: '/api/Msg/SendVerificationCode',
-      method: 'POST',
-      data: data
-      // handle:true
-    }, ifLoad);
-  },
-  // 微信api
-  GetWxJsApiConfig: function GetWxJsApiConfig(data) {
-    return _interface.default.request({
-      url: '/api/Authorize/GetJsApiConfig',
-      method: 'POST',
-      data: data
-      // handle:true
-    });
-  },
-  // 登录
-  userLogin: function userLogin(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    return _interface.default.request({
-      url: '/api/Authorize/Token',
-      method: 'POST',
-      data: data
-      // handle:true
-    }, ifLoad);
-  },
-  // 快捷登录
-  shortcutToken: function shortcutToken(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    return _interface.default.request({
-      url: '/api/Authorize/ShortcutToken',
-      method: 'GET',
-      data: data
-      // handle:true
-    }, ifLoad);
-  },
-  // OpenId登录
-  WxTokenLogin: function WxTokenLogin(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    return _interface.default.request({
-      url: '/api/Authorize/WxToken',
-      method: 'POST',
-      data: data
-      // handle:true
-    }, ifLoad);
-  },
-  // 注册用户 
-  userRegiste: function userRegiste(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    return _interface.default.request({
-      url: '/api/Authorize/Registe',
-      method: 'POST',
-      data: data
-      // handle:true
-    }, ifLoad);
-  },
-  // 忘记密码
-  findPassword: function findPassword(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    return _interface.default.request({
-      url: '/api/Authorize/FindPassword',
-      method: 'POST',
-      data: data
-      // handle:true
-    }, ifLoad);
-  },
-  // 获取用户信息
-  getConsumer: function getConsumer(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    return _interface.default.request({
-      url: '/api/Consumer/Get',
-      method: 'GET',
-      data: data
-      // handle:true
-    }, ifLoad);
-  },
-
-  //更新用户信息
-  PerfectPayInfo: function PerfectPayInfo(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    return _interface.default.request({
-      url: '/api/Consumer/PerfectPayInfo',
-      method: 'POST',
-      data: data
-      // handle:true
-    }, ifLoad);
-  },
-  // 设置支付密码
-  SettingPayPassword: function SettingPayPassword(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    return _interface.default.request({
-      url: '/api/Consumer/SettingPayPassword',
-      method: 'POST',
-      data: data
-      // handle:true
-    }, ifLoad);
-  },
-  // 微信绑定手机号
-  BindWxUserMobile: function BindWxUserMobile(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    return _interface.default.request({
-      url: '/api/Authorize/BindWxUserMobile',
-      method: 'POST',
-      data: data
-      // handle:true
-    }, ifLoad);
-  },
-
-  // 支付
-  toPayment: function toPayment(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    return _interface.default.request({
-      url: '/api/Pay/Payment',
-      method: 'POST',
-      data: data
-      // handle:true
-    }, ifLoad);
-  },
-
-  // 提现
-  SubmitCash: function SubmitCash(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    return _interface.default.request({
-      url: '/api/Cash/SubmitCash',
-      method: 'POST',
-      data: data
-      // handle:true
-    }, ifLoad);
-  },
-  // 	=============商家部分\\\
-
-
-
-  // 获取商家信息
-  GetBusinessInfo: function GetBusinessInfo(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    return _interface.default.request({
-      url: '/api/Shop/GetBusinessInfo',
-      method: 'GET',
-      data: data
-      // handle:true
-    }, ifLoad);
-  },
-  // 修改商家信息
-  BusinessEditor: function BusinessEditor(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    return _interface.default.request({
-      url: '/api/Shop/BusinessEditor',
-      method: 'POST',
-      data: data
-      // handle:true
-    }, ifLoad);
-  },
-
-
-  //=============== 全局=================
-
-  // 获取全局配置
-  getConfig: function getConfig(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    return _interface.default.request({
-      url: '/api/Service/Config',
-      method: 'GET',
-      data: data
-      // handle:true
-    }, ifLoad);
-  },
-
-  // app更新
-  VersionCheck: function VersionCheck(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    return _interface.default.request({
-      url: '/api/AppVersion/VersionCheck',
-      method: 'POST',
-      data: data
-      // handle:true
-    }, ifLoad);
-  },
-
-  // 手机号登录
-  MobileToken: function MobileToken(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    return _interface.default.request({
-      url: '/api/Authorize/MobileToken',
-      method: 'POST',
-      data: data
-      // handle:true
-    }, ifLoad);
-  } };var _default =
-
-Auth;exports.default = _default;
 
 /***/ }),
 
@@ -25314,7 +25314,7 @@ module.exports = g;
 
 /***/ }),
 
-/***/ 326:
+/***/ 348:
 /*!********************************************************!*\
   !*** E:/mywork/jll_mt/components/tki-qrcode/qrcode.js ***!
   \********************************************************/

@@ -14,7 +14,7 @@
 	export default {
 		data() {
 			return {
-				url:'https://gllo.kuxiong999.com//authorized.html'
+				url:'https://gllo.kuxiong999.com/authorized.html'
 			};
 		},
 		computed: mapState(['webviewUrl']),

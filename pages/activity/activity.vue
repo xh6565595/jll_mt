@@ -152,6 +152,11 @@
 				<button type="text" class="cm_btn" hover-class="cm_hover_m" open-type="share">立即分享给好友</button>
 			</view>
 		</accredit>
+		<!-- <qrcodePoster ref="poster" 
+				:title="goods.title" 
+		        :subTitle="goods.sub_title" 
+		        :headerImg="goods.image"
+		        :price="goods.price"></qrcodePoster> -->
 	</view>
 </template>
 
@@ -161,6 +166,9 @@ import { mapState } from 'vuex';
 import rule from '@/components/rule/rule.vue';
 const global_Set_jll = uni.getStorageSync('global_Set_jll');
 import { baseMixins } from '@/utils/baseMixins.js';
+// import qrcodePoster from '@/components/zhangyu-qrcode-poster/zhangyu-qrcode-poster.vue'
+
+
 export default {
 	data() {
 		return {
@@ -183,14 +191,16 @@ export default {
 			modal: false,
 			text: '',
 			topHeight: 144,
-			noneItem:false
+			noneItem:false,
+			is_show_model:false
 		};
 	},
 	mixins: [baseMixins],
 	computed: mapState(['userInfo', 'hasLogin']),
 	components: {
 		rule,
-		tuiTips
+		tuiTips,
+		// qrcodePoster
 	},
 	
 	onLoad() {
@@ -210,6 +220,7 @@ export default {
 		if (this.hasLogin) {
 			this.noneItem = false
 			this._loadData('refresh');
+			
 		}
 	},
 	onShareAppMessage(res) {
@@ -225,6 +236,11 @@ export default {
 		}
 	},
 	methods: {
+		 sharePoster(){
+		        //获取带参数二维码
+		        this.is_show_model = false 
+		        this.$refs.poster.showCanvas('https://oss.zhangyubk.com/cmqrcode.jpg') 
+		},
 		_toBuy() {
 			uni.switchTab({
 				url: '/pages/main/main'
@@ -251,8 +267,8 @@ export default {
 				user: usercode,
 				order: obj.order_code
 			};
-			// console.log(this.goods)
-			this.$refs.share.showModal();
+			
+			this.sharePoster()
 		},
 		_href(obj) {
 			let item = obj.project_list[0];

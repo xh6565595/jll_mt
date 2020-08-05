@@ -86,8 +86,8 @@
   height: 48rpx;
   line-height: 48rpx;
   border-radius: 24rpx;
-  background: -webkit-linear-gradient(45deg, #FAE0C7, #F4C7A4);
-  background: linear-gradient(45deg, #FAE0C7, #F4C7A4);
+  background: -webkit-linear-gradient(45deg, #fae0c7, #f4c7a4);
+  background: linear-gradient(45deg, #fae0c7, #f4c7a4);
 }
 .pages .accountBox.data-v-80842834 {
   width: 100%;
@@ -249,7 +249,7 @@
 }
 .pages .fkContent .cm_btn.data-v-80842834 {
   margin-top: 50rpx;
-  background: #43B6B2;
+  background: #43b6b2;
 }
 .pages .fkContent .cm_btn_plain.data-v-80842834 {
   margin-top: 10rpx;

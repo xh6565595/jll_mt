@@ -1,6 +1,6 @@
 <template>
 	<view class="code-box">
-		<view class="flex-box">
+		<view class="flex-box" @tap="_Focus">
 			<input :value="inputValue" type="number" :focus="autoFocus" :maxlength="maxlength" class="hide-input" @input="getVal" />
 			<block v-for="(item, index) in ranges" :key="index">
 				<view :class="['item', { active: codeIndex === item, middle: type === 'middle', bottom: type === 'bottom', box: type === 'box' }]">
@@ -35,10 +35,10 @@
 				type: Number,
 				default: 4
 			},
-			autoFocus: {
-				type: Boolean,
-				default: false
-			},
+			// autoFocus: {
+			// 	type: Boolean,
+			// 	default: false
+			// },
 			isPwd: {
 				type: Boolean,
 				default: false
@@ -72,13 +72,23 @@
 		},
 		data() {
 			return {
+				autoFocus:false,
 				inputValue: '',
-				codeIndex: 1,
+				codeIndex: 0,
 				codeArr: [],
 				ranges: [1, 2, 3, 4]
 			}
 		},
 		methods: {
+			_Focus(){
+				
+				if(!this.inputValue ){
+					this.codeIndex = 1
+					console.log(this.ranges[0])
+					this.autoFocus = true
+				}
+				
+			},
 			getVal(e) {
 				const val = e.detail.value
 				this.inputValue = val

@@ -71,6 +71,15 @@
 .pages .content .box .container.data-v-35871b92 {
   padding: 30rpx 20rpx;
 }
+.pages .content .box .container .inputs.data-v-35871b92 {
+  border-bottom: 1rpx solid #eee;
+  height: 88rpx;
+  line-height: 88rpx;
+}
+.pages .content .box .container .scan.data-v-35871b92 {
+  width: 88rpx;
+  height: 88rpx;
+}
 .pages .content .picBox.data-v-35871b92 {
   margin-bottom: 0;
 }

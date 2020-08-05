@@ -13,6 +13,8 @@
     "pages/features/depositRecord/depositRecord",
     "pages/main/serverCenter/serverCenter",
     "pages/main/serverDetail/serverDetail",
+    "pages/main/serverLunch/serverLunch",
+    "pages/main/serverRepair/serverRepair",
     "pages/features/adress/adress",
     "pages/features/newAdress/newAdress",
     "pages/user/withdrawal/withdrawal",
@@ -25,7 +27,10 @@
     "pages/login/login",
     "pages/features/invoice/invoice",
     "pages/webview/webview",
-    "pages/auth/auth"
+    "pages/auth/auth",
+    "pages/main/repairRecord/repairRecord",
+    "pages/main/repairDetail/repairDetail",
+    "pages/main/deviceMsg/deviceMsg"
   ],
   "subPackages": [],
   "window": {

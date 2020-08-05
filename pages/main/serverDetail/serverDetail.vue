@@ -38,9 +38,16 @@
 				</view>
 				
 				<view class="box"  style="padding: 20rpx;" v-if="item.task_service_status==0">
+					<view class="cm_title">马桶机号</view>
+					<view class="container flex flex_center" style="height: 88rpx ;line-height: 88rpx;margin-bottom: 20rpx;padding: 0  0 0 20rpx;">
+						 <input type="text" class="f1 inputs" :value="formParams.device_num" />
+						 <view  class="scan flex flex_center" hover-class="cm_hover"  @tap="_scanCode">
+							 <image src="../../../static/image/sys.png" mode="scaleToFill" style="width: 60rpx ;height: 60rpx;" ></image>						 
+						 </view>					 
+					</view>	
 					<view class="cm_title">填写服务码</view>
 					<view class="container flex flex_center">
-						 <one-input ref="hi" type="box" @input="input" :maxlength="4"></one-input>
+						 <one-input ref="hi" type="box" @input="input" @finish="finish" :maxlength="4"></one-input>
 					</view>		
 				</view>
 				
@@ -78,7 +85,8 @@
 				formParams: {
 					"order_code":"",
 					"service_code":"",
-					"task_service_img":''
+					"task_service_img":'',
+					"device_num":"",
 				},
 				show:false,
 				oringinImg:[],  //初始化数组
@@ -115,6 +123,55 @@
 			this.loadData()
 		},
 		methods:{
+			// 输完验证码码回调
+			finish(e){
+				uni.hideKeyboard()
+				// this.submit()
+				// this.reset()
+			},
+			_scanCode(){
+				let  that = this
+				this.$ui.showloading()
+				uni.scanCode({
+					onlyFromCamera: true,
+					scanType: ['qrCode'],
+					success: function(res) {
+						let result = res.result;
+						let s = result.match(/mtId=(.*)mtId/);
+						if (result && s && s[1]) {
+							// uni.showModal({
+							// 	title:'发现新的机器码',
+							// 	content:s[1],
+							// 	confirmText:'使用',
+							// 	success(e) {
+							// 		// console.log(e)
+							// 		if(e.confirm){
+							// 			that.formParams.device_num = s[1]
+							// 		}
+							// 	}
+							// })
+							uni.navigateTo({
+								url:'/pages/main/deviceMsg/deviceMsg?deviceId='+ s[1]
+							})
+						} else {
+							uni.showToast({
+								icon: 'none',
+								title: '无效的机号信息'
+							});
+						}
+					},
+					fail: function() {
+						// plus.nativeUI.alert('请将二维码放在扫描框内')
+						uni.showToast({
+							icon: 'none',
+							title: '请将二维码放在扫描框内'
+						});
+					},
+					complete() {
+						that.$ui.hideloading()
+					}
+				});
+			},
 			input(e){
 				this.formParams.service_code = e
 			},
@@ -150,6 +207,10 @@
 			},
 			// 确认安装
 			async _readyTo(){
+				if(!this.formParams.device_num){
+					this.$ui.toast('请输入马桶机号')
+					return ;
+				}
 				if(this.formParams.service_code.length!=4){
 					this.$ui.toast('请输入正确的服务码')
 					return ;
@@ -241,6 +302,18 @@
 				}
 				.container{
 					padding:30rpx 20rpx;
+					.inputs{
+						border-bottom: 1rpx solid #eee;
+						height: 88rpx;
+						line-height: 88rpx;
+					
+					}
+					.scan{
+						width: 88rpx;
+						height: 88rpx;
+						// background-color: red;
+						
+					}
 				}
 				
 			}

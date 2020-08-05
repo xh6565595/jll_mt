@@ -94,7 +94,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "components", function() { return components; });
 var components = {
   accredit: function() {
-    return __webpack_require__.e(/*! import() | components/accredit/accredit */ "components/accredit/accredit").then(__webpack_require__.bind(null, /*! @/components/accredit/accredit.vue */ 279))
+    return __webpack_require__.e(/*! import() | components/accredit/accredit */ "components/accredit/accredit").then(__webpack_require__.bind(null, /*! @/components/accredit/accredit.vue */ 301))
   }
 }
 var render = function() {
@@ -272,20 +272,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 var _vuex = __webpack_require__(/*! vuex */ 14);
-var _index = _interopRequireDefault(__webpack_require__(/*! @/utils/http/index.js */ 11));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}var accredit = function accredit() {__webpack_require__.e(/*! require.ensure | components/accredit/accredit */ "components/accredit/accredit").then((function () {return resolve(__webpack_require__(/*! @/components/accredit/accredit */ 279));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
+var _index = _interopRequireDefault(__webpack_require__(/*! @/utils/http/index.js */ 11));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}var accredit = function accredit() {__webpack_require__.e(/*! require.ensure | components/accredit/accredit */ "components/accredit/accredit").then((function () {return resolve(__webpack_require__(/*! @/components/accredit/accredit */ 301));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
 
 {
   data: function data() {
@@ -313,7 +301,6 @@ var _index = _interopRequireDefault(__webpack_require__(/*! @/utils/http/index.j
     var that = this;
 
     uni.$on('gzhAuth', function (bool) {
-
       that.$refs.dy.hideModal();
       that._loadData('refresh');
     });
@@ -321,13 +308,11 @@ var _index = _interopRequireDefault(__webpack_require__(/*! @/utils/http/index.j
   onShow: function onShow() {
     if (this.hasLogin) {
       this._loadData('refresh');
-
     }
   },
   computed: (0, _vuex.mapState)(['userInfo', 'hasLogin']),
   watch: {
     // refreshUser(){
-
     // }
   },
   components: {
@@ -338,6 +323,28 @@ var _index = _interopRequireDefault(__webpack_require__(/*! @/utils/http/index.j
     this._loadData();
   },
   methods: {
+    _save: function _save() {
+      var that = this;
+      this.$ui.showloading();
+      uni.saveImageToPhotosAlbum({
+        filePath: '/static/image/ewm.jpg',
+        success: function success() {
+          that.$ui.toast('以保存至本地');
+        },
+        fail: function fail(err) {
+          console.log(err);
+        },
+        complete: function complete() {
+          that.$ui.hideloading();
+          // console.log(10);
+        } });
+
+    },
+    _preview: function _preview(img) {
+      uni.previewImage({
+        urls: [img] });
+
+    },
     _toAttention: function _toAttention() {
       if (!this.hasLogin) {
         uni.navigateTo({
@@ -357,7 +364,7 @@ var _index = _interopRequireDefault(__webpack_require__(/*! @/utils/http/index.j
           url: '/pages/auth/auth' });
 
       }
-      // this.$refs.dy.hideModal()			
+      // this.$refs.dy.hideModal()
       // console.log(1)
     },
     // opendi校验是否关注
@@ -378,11 +385,9 @@ var _index = _interopRequireDefault(__webpack_require__(/*! @/utils/http/index.j
                   }
                 } else {
                   that.$ui.toast(res.Msg);
-
                 }
                 // that._loadData('refresh')
                 that.$refs.dy.hideModal();_context.next = 15;break;case 12:_context.prev = 12;_context.t0 = _context["catch"](1);
-
 
                 console.log('请求结果false : ' + _context.t0);case 15:case "end":return _context.stop();}}}, _callee, null, [[1, 12]]);}))();
 

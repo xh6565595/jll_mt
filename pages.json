@@ -88,17 +88,33 @@
             "style" : {
 				"navigationBarTitleText": "派单中心",
 				"navigationBarTextStyle": "black",
-				"navigationBarBackgroundColor": "#f4f4f4",
-				"enablePullDownRefresh": true
+				"navigationBarBackgroundColor": "#fff",
+				"enablePullDownRefresh": false
 			}
         },{
             "path" : "pages/main/serverDetail/serverDetail",
             "style" : {
 				"navigationBarTitleText": "派单详情",
 				"navigationBarTextStyle": "black",
-				"navigationBarBackgroundColor": "#f4f4f4"
+				"navigationBarBackgroundColor": "#fff"
 			}
         }, {
+            "path" : "pages/main/serverLunch/serverLunch",
+            "style" : {
+				"navigationBarTitleText": "安装派单",
+				"navigationBarTextStyle": "black",
+				"navigationBarBackgroundColor": "#fff",
+				"enablePullDownRefresh": true
+			}
+        },{
+            "path" : "pages/main/serverRepair/serverRepair",
+            "style" : {
+				"navigationBarTitleText": "报修派单",
+				"navigationBarTextStyle": "black",
+				"navigationBarBackgroundColor": "#fff",
+				"enablePullDownRefresh": true
+			}
+        },{
 			"path": "pages/features/adress/adress",
 			"style": {
 				"navigationBarTitleText": "收货地址",
@@ -190,6 +206,30 @@
 				"navigationBarTitleText": "公众号授权"
 			}
 		}
+        ,{
+            "path" : "pages/main/repairRecord/repairRecord",
+            "style" : {
+				"navigationBarTitleText": "详情记录",
+				"navigationBarTextStyle": "black",
+				"navigationBarBackgroundColor": "#fff"
+			}
+        }
+        ,{
+            "path" : "pages/main/repairDetail/repairDetail",
+            "style" : {
+				"navigationBarTitleText": "报修详情",
+				"navigationBarTextStyle": "black",
+				"navigationBarBackgroundColor": "#fff"
+			}
+        }
+        ,{
+            "path" : "pages/main/deviceMsg/deviceMsg",
+            "style" : {
+				"navigationBarTitleText": "设备信息",
+				"navigationBarTextStyle": "black",
+				"navigationBarBackgroundColor": "#fff"
+			}
+        }
     ],
 	"tabBar": {
 		"color": "#999",

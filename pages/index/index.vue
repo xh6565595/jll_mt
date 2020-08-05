@@ -125,7 +125,10 @@ export default {
 			try {
 				let res = await this.$api.WxTokenLogin({openId:opid}, false);
 				this.$ui.hideloading()
-				// if (false) {		
+				// uni.navigateTo({
+				// 	url:'/pages/login/login'
+				// })	
+				// 	return
 				if (res.Success) {		
 					that.$store.commit('login');
 					uni.setStorageSync('access_token',res.Data.hp)
@@ -160,8 +163,8 @@ export default {
 					if (res.Data) {
 						that.$store.commit('setUserInfo', res.Data);
 						setTimeout(()=>{
-							// if(res.Data.consumer_type==3){
-								if(false){
+							if(res.Data.consumer_type==3){
+								// if(false){
 								// 安装员
 								uni.redirectTo({
 									url: '/pages/main/serverCenter/serverCenter'

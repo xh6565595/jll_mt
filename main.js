@@ -53,7 +53,7 @@ const UI = {
 	showloading: function(text) {
 		// #ifdef H5 || MP-WEIXIN
 				uni.showLoading({
-					title: text?text:'',
+					title: text?text:'加载中',
 					mask:true
 				})
 		// #endif
