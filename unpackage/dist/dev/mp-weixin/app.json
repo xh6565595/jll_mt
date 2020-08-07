@@ -30,7 +30,9 @@
     "pages/auth/auth",
     "pages/main/repairRecord/repairRecord",
     "pages/main/repairDetail/repairDetail",
-    "pages/main/deviceMsg/deviceMsg"
+    "pages/main/deviceMsg/deviceMsg",
+    "pages/main/installMsg/installMsg",
+    "pages/main/repairMsg/repairMsg"
   ],
   "subPackages": [],
   "window": {

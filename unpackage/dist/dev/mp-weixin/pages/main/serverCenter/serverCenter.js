@@ -205,8 +205,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
-var _vuex = __webpack_require__(/*! vuex */ 14);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}var tuiTips = function tuiTips() {__webpack_require__.e(/*! require.ensure | components/extend/tips/tips */ "components/extend/tips/tips").then((function () {return resolve(__webpack_require__(/*! @/components/extend/tips/tips */ 336));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var sunTab = function sunTab() {__webpack_require__.e(/*! require.ensure | components/sun-tab/sun-tab */ "components/sun-tab/sun-tab").then((function () {return resolve(__webpack_require__(/*! @/components/sun-tab/sun-tab.vue */ 372));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var tuiFab = function tuiFab() {__webpack_require__.e(/*! require.ensure | components/tui-fab/tui-fab */ "components/tui-fab/tui-fab").then((function () {return resolve(__webpack_require__(/*! @/components/tui-fab/tui-fab */ 400));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
+var _vuex = __webpack_require__(/*! vuex */ 14);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}var tuiTips = function tuiTips() {__webpack_require__.e(/*! require.ensure | components/extend/tips/tips */ "components/extend/tips/tips").then((function () {return resolve(__webpack_require__(/*! @/components/extend/tips/tips */ 370));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var sunTab = function sunTab() {__webpack_require__.e(/*! require.ensure | components/sun-tab/sun-tab */ "components/sun-tab/sun-tab").then((function () {return resolve(__webpack_require__(/*! @/components/sun-tab/sun-tab.vue */ 406));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var tuiFab = function tuiFab() {__webpack_require__.e(/*! require.ensure | components/tui-fab/tui-fab */ "components/tui-fab/tui-fab").then((function () {return resolve(__webpack_require__(/*! @/components/tui-fab/tui-fab */ 434));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
 
 
 
@@ -243,13 +242,12 @@ var _vuex = __webpack_require__(/*! vuex */ 14);function _interopRequireDefault(
   },
   computed: (0, _vuex.mapState)(['userInfo', 'hasLogin']),
   onPullDownRefresh: function onPullDownRefresh() {
-    this.formParams.pageIndex = 1;
-    this.list = [];
-    this._loadData('refresh');
+    this.$store.dispatch('refreshUser', function () {
+      uni.stopPullDownRefresh();
+    });
   },
   // 上拉加载
   onReachBottom: function onReachBottom() {
-    console.log(this.loadStatus);
     if (this.loadStatus == 'noMore') {
       return;
     }
@@ -272,7 +270,9 @@ var _vuex = __webpack_require__(/*! vuex */ 14);function _interopRequireDefault(
   },
   onShow: function onShow() {
     if (this.hasLogin) {
-      this._loadData('refresh');
+      this.$store.dispatch('refreshUser', function () {
+        uni.stopPullDownRefresh();
+      });
     }
   },
   methods: {
@@ -284,7 +284,7 @@ var _vuex = __webpack_require__(/*! vuex */ 14);function _interopRequireDefault(
     objectChange: function objectChange(e) {
       this.current = parseInt(e.tab.value);
       this.formParams.task_status = parseInt(e.tab.value);
-      this._loadData('refresh');
+      // this._loadData('refresh');
     },
 
     _loadData: function _loadData(type) {var _this = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {var that, res;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:
@@ -335,40 +335,41 @@ var _vuex = __webpack_require__(/*! vuex */ 14);function _interopRequireDefault(
                 console.log('请求结果false : ' + _context.t0);
                 that.loadStatus = 'more';case 13:case "end":return _context.stop();}}}, _callee, null, [[1, 9]]);}))();
 
-    },
+    }
     // 扫码跳转维修历史
-    _scanCode: function _scanCode() {
-      var that = this;
-      this.$ui.showloading();
-      uni.scanCode({
-        onlyFromCamera: true,
-        scanType: ['qrCode'],
-        success: function success(res) {
-          var result = res.result;
-          var s = result.match(/mtId=(.*)mtId/);
-          if (result && s && s[1]) {
-            uni.navigateTo({
-              url: "/pages/main/deviceMsg/deviceMsg?mtId=".concat(s[1]) });
-
-          } else {
-            uni.showToast({
-              icon: 'none',
-              title: '无效的机号信息' });
-
-          }
-        },
-        fail: function fail() {
-          // plus.nativeUI.alert('请将二维码放在扫描框内')
-          uni.showToast({
-            icon: 'none',
-            title: '请将二维码放在扫描框内' });
-
-        },
-        complete: function complete() {
-          that.$ui.hideloading();
-        } });
-
-    } } };exports.default = _default;
+    // _scanCode(){
+    // 	let  that = this
+    // 	this.$ui.showloading()
+    // 	uni.scanCode({
+    // 		onlyFromCamera: true,
+    // 		scanType: ['qrCode'],
+    // 		success: function(res) {
+    // 			let result = res.result;
+    // 			let s = result.match(/mtId=(.*)mtId/);
+    // 			if (result && s && s[1]) {
+    // 				uni.navigateTo({
+    // 					url:`/pages/main/deviceMsg/deviceMsg?mtId=${s[1]}`
+    // 				})
+    // 			} else {
+    // 				uni.showToast({
+    // 					icon: 'none',
+    // 					title: '无效的机号信息'
+    // 				});
+    // 			}
+    // 		},
+    // 		fail: function() {
+    // 			// plus.nativeUI.alert('请将二维码放在扫描框内')
+    // 			uni.showToast({
+    // 				icon: 'none',
+    // 				title: '请将二维码放在扫描框内'
+    // 			});
+    // 		},
+    // 		complete() {
+    // 			that.$ui.hideloading()
+    // 		}
+    // 	});
+    // },
+  } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),

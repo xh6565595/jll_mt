@@ -760,7 +760,7 @@ function initData(vueOptions, context) {
     try {
       data = data.call(context); // 支持 Vue.prototype 上挂的数据
     } catch (e) {
-      if (Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
+      if (Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
         console.warn('根据 Vue 的 data 函数初始化小程序 data 失败，请尽量确保 data 函数中不访问 vm 对象，否则可能影响首次数据渲染速度。', data);
       }
     }
@@ -17796,8 +17796,61 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 var _interface = _interopRequireDefault(__webpack_require__(/*! ../http/interface */ 12));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} // 用户身份相关接口
 var Set = {
+  // 全部订单信息
+  GetAllOrderInfo: function GetAllOrderInfo(data) {
+    return _interface.default.request({
+      url: '/api/Order/GetAllOrderInfo',
+      method: 'GET',
+      data: data
+      // handle:true
+    });
+  },
+  // 校验安装
+  CheckInstall: function CheckInstall(data) {
+    return _interface.default.request({
+      url: '/api/Order/CheckInstall',
+      method: 'GET',
+      data: data
+      // handle:true
+    });
+  },
+  // 开始维修
+  BeginMend: function BeginMend(data) {
+    return _interface.default.request({
+      url: '/api/Order/BeginMend',
+      method: 'POST',
+      data: data
+      // handle:true
+    });
+  },
+  // 开始安装
+  BeginInstall: function BeginInstall(data) {
+    return _interface.default.request({
+      url: '/api/Order/BeginInstall',
+      method: 'POST',
+      data: data
+      // handle:true
+    });
+  },
+  // 完成维修
+  OrderMend: function OrderMend(data) {
+    return _interface.default.request({
+      url: '/api/Order/OrderMend',
+      method: 'POST',
+      data: data
+      // handle:true
+    });
+  },
 
-
+  // 校验维修
+  CheckMendTask: function CheckMendTask(data) {
+    return _interface.default.request({
+      url: '/api/Order/CheckMendTask',
+      method: 'GET',
+      data: data
+      // handle:true
+    });
+  },
   // 申请退税
   Apply_Tax: function Apply_Tax(data) {
     return _interface.default.request({
@@ -17870,10 +17923,19 @@ var Set = {
       // handle:true
     });
   },
-  // 订单派发
+  // 订单安装配发列表
   GetUserTaskList: function GetUserTaskList(data) {
     return _interface.default.request({
       url: '/api/UserTask/GetList',
+      method: 'POST',
+      data: data
+      // handle:true
+    });
+  },
+  // 订单维修配发列表
+  GetMendTaskList: function GetMendTaskList(data) {
+    return _interface.default.request({
+      url: '/api/MendTask/GetList',
       method: 'POST',
       data: data
       // handle:true
@@ -18082,7 +18144,7 @@ var Set = {
   // 确认拍品
   Receiving: function Receiving(data) {var ifLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
     return _interface.default.request({
-      url: '	/api/Order/Receiving',
+      url: '/api/Order/Receiving',
       method: 'POST',
       data: data
       // handle:true
@@ -24037,7 +24099,7 @@ function type(obj) {
 
 function flushCallbacks$1(vm) {
     if (vm.__next_tick_callbacks && vm.__next_tick_callbacks.length) {
-        if (Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
+        if (Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
             var mpInstance = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + vm._uid +
                 ']:flushCallbacks[' + vm.__next_tick_callbacks.length + ']');
@@ -24058,14 +24120,14 @@ function nextTick$1(vm, cb) {
     //1.nextTick 之前 已 setData 且 setData 还未回调完成
     //2.nextTick 之前存在 render watcher
     if (!vm.__next_tick_pending && !hasRenderWatcher(vm)) {
-        if(Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG){
+        if(Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG){
             var mpInstance = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + vm._uid +
                 ']:nextVueTick');
         }
         return nextTick(cb, vm)
     }else{
-        if(Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG){
+        if(Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG){
             var mpInstance$1 = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance$1.is || mpInstance$1.route) + '][' + vm._uid +
                 ']:nextMPTick');
@@ -24150,7 +24212,7 @@ var patch = function(oldVnode, vnode) {
     });
     var diffData = this.$shouldDiffData === false ? data : diff(data, mpData);
     if (Object.keys(diffData).length) {
-      if (Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
+      if (Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
         console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + this._uid +
           ']差量更新',
           JSON.stringify(diffData));
@@ -25314,7 +25376,122 @@ module.exports = g;
 
 /***/ }),
 
-/***/ 348:
+/***/ 37:
+/*!********************************************!*\
+  !*** E:/mywork/jll_mt/utils/baseMixins.js ***!
+  \********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.baseMixins = void 0;var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@vue/babel-preset-app/node_modules/@babel/runtime/regenerator */ 4));var _index = _interopRequireDefault(__webpack_require__(/*! @/utils/http/index.js */ 11));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}
+var baseMixins = {
+  data: function data() {
+    return {
+      baseKey: 'GetGoodsList',
+      hasRow: '',
+      list: [],
+      loadStatus: 'more', // 上拉的状态：more-loading前；loading-loading中；noMore-没有更多了
+      // refreshing: false,
+      pageLoad: false,
+      load: false,
+      token: '',
+      showLoad: false };
+
+  },
+  onLoad: function onLoad() {
+
+  },
+
+  // 下拉刷新
+  onPullDownRefresh: function onPullDownRefresh() {
+    this.formParams.pageIndex = 1;
+    this.list = [];
+    this._loadData('refresh');
+  },
+  // 上拉加载
+  onReachBottom: function onReachBottom() {
+    console.log(this.loadStatus);
+    if (this.loadStatus == 'noMore') {
+      return;
+    }
+    this.formParams.pageIndex += 1;
+    this.loadStatus = 'loading';
+    this._loadData('add');
+  },
+  methods: {
+    loadDataComplete: function loadDataComplete() {
+
+    },
+    _loadData: function _loadData(type) {var _this = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {var that, res;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:
+                that = _this;_context.prev = 1;_context.next = 4;return (
+
+                  _index.default[_this.baseKey](that.formParams));case 4:res = _context.sent;
+                // console.log(res);
+                if (type == 'add') {
+                  that.loadStatus = 'loading';
+                } else {
+                  uni.stopPullDownRefresh();
+                }
+                if (res.Success) {
+                  if (type == 'add') {
+                    // 加载更多
+                    if (that.hasRow) {
+                      that.list = that.list.concat(res.Data[that.hasRow]);
+                      if (res.Data[that.hasRow].length < that.formParams.pageSize) {
+                        that.loadStatus = 'noMore';
+                        // console.log(that.loadStatus )
+                        // 没有数据了
+                      } else {
+                        that.loadStatus = 'more';
+                      }
+                    } else {
+                      that.list = that.list.concat(res.Data);
+                      if (res.Data.length < that.formParams.pageSize) {
+                        that.loadStatus = 'noMore';
+                        // 没有数据了
+                      } else {
+                        that.loadStatus = 'more';
+                      }
+                    }
+                  } else {
+                    // 刷新
+                    if (that.hasRow) {
+                      that.list = res.Data[that.hasRow];
+                      if (res.Data[that.hasRow].length < that.formParams.pageSize) {
+                        that.loadStatus = 'noMore';
+                        // 没有数据了
+                      } else {
+                        that.loadStatus = 'more';
+                      }
+
+                    } else {
+                      that.list = res.Data;
+                      if (res.Data.length < that.formParams.pageSize) {
+                        that.loadStatus = 'noMore';
+                        // 没有数据了
+                      } else {
+                        that.loadStatus = 'more';
+                      }
+                    }
+                    that.refreshing = false;
+                  }
+                  that.loadDataComplete(true);
+                } else {
+                  that.$ui.toast(res.Msg);
+                  that.loadDataComplete(false);
+                }_context.next = 14;break;case 9:_context.prev = 9;_context.t0 = _context["catch"](1);
+
+                console.log('请求结果false : ' + _context.t0);
+                that.loadStatus = 'more';
+                that.loadDataComplete(false);case 14:case "end":return _context.stop();}}}, _callee, null, [[1, 9]]);}))();
+
+    } } };exports.baseMixins = baseMixins;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
+
+/***/ }),
+
+/***/ 382:
 /*!********************************************************!*\
   !*** E:/mywork/jll_mt/components/tki-qrcode/qrcode.js ***!
   \********************************************************/
@@ -26528,121 +26705,6 @@ module.exports = g;
 })();var _default =
 
 QRCode;exports.default = _default;
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
-
-/***/ }),
-
-/***/ 37:
-/*!********************************************!*\
-  !*** E:/mywork/jll_mt/utils/baseMixins.js ***!
-  \********************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.baseMixins = void 0;var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@vue/babel-preset-app/node_modules/@babel/runtime/regenerator */ 4));var _index = _interopRequireDefault(__webpack_require__(/*! @/utils/http/index.js */ 11));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}
-var baseMixins = {
-  data: function data() {
-    return {
-      baseKey: 'GetGoodsList',
-      hasRow: '',
-      list: [],
-      loadStatus: 'more', // 上拉的状态：more-loading前；loading-loading中；noMore-没有更多了
-      // refreshing: false,
-      pageLoad: false,
-      load: false,
-      token: '',
-      showLoad: false };
-
-  },
-  onLoad: function onLoad() {
-
-  },
-
-  // 下拉刷新
-  onPullDownRefresh: function onPullDownRefresh() {
-    this.formParams.pageIndex = 1;
-    this.list = [];
-    this._loadData('refresh');
-  },
-  // 上拉加载
-  onReachBottom: function onReachBottom() {
-    console.log(this.loadStatus);
-    if (this.loadStatus == 'noMore') {
-      return;
-    }
-    this.formParams.pageIndex += 1;
-    this.loadStatus = 'loading';
-    this._loadData('add');
-  },
-  methods: {
-    loadDataComplete: function loadDataComplete() {
-
-    },
-    _loadData: function _loadData(type) {var _this = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {var that, res;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:
-                that = _this;_context.prev = 1;_context.next = 4;return (
-
-                  _index.default[_this.baseKey](that.formParams));case 4:res = _context.sent;
-                // console.log(res);
-                if (type == 'add') {
-                  that.loadStatus = 'loading';
-                } else {
-                  uni.stopPullDownRefresh();
-                }
-                if (res.Success) {
-                  if (type == 'add') {
-                    // 加载更多
-                    if (that.hasRow) {
-                      that.list = that.list.concat(res.Data[that.hasRow]);
-                      if (res.Data[that.hasRow].length < that.formParams.pageSize) {
-                        that.loadStatus = 'noMore';
-                        // console.log(that.loadStatus )
-                        // 没有数据了
-                      } else {
-                        that.loadStatus = 'more';
-                      }
-                    } else {
-                      that.list = that.list.concat(res.Data);
-                      if (res.Data.length < that.formParams.pageSize) {
-                        that.loadStatus = 'noMore';
-                        // 没有数据了
-                      } else {
-                        that.loadStatus = 'more';
-                      }
-                    }
-                  } else {
-                    // 刷新
-                    if (that.hasRow) {
-                      that.list = res.Data[that.hasRow];
-                      if (res.Data[that.hasRow].length < that.formParams.pageSize) {
-                        that.loadStatus = 'noMore';
-                        // 没有数据了
-                      } else {
-                        that.loadStatus = 'more';
-                      }
-
-                    } else {
-                      that.list = res.Data;
-                      if (res.Data.length < that.formParams.pageSize) {
-                        that.loadStatus = 'noMore';
-                        // 没有数据了
-                      } else {
-                        that.loadStatus = 'more';
-                      }
-                    }
-                    that.refreshing = false;
-                  }
-                  that.loadDataComplete(true);
-                } else {
-                  that.$ui.toast(res.Msg);
-                  that.loadDataComplete(false);
-                }_context.next = 14;break;case 9:_context.prev = 9;_context.t0 = _context["catch"](1);
-
-                console.log('请求结果false : ' + _context.t0);
-                that.loadStatus = 'more';
-                that.loadDataComplete(false);case 14:case "end":return _context.stop();}}}, _callee, null, [[1, 9]]);}))();
-
-    } } };exports.baseMixins = baseMixins;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),

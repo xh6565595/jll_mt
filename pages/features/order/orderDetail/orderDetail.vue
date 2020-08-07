@@ -474,7 +474,7 @@ export default {
 					order_code: code
 				};
 				this.$ui.showloading();
-				let res = await this.$api.Receiving(data, false);
+				let res = await this.$api.Receiving(data);
 				this.$ui.hideloading();
 				if (res.Success) {
 					that.$ui.toast('收货成功');

@@ -2,8 +2,61 @@
 
 import http from '../http/interface'
 const Set = {
+	// 全部订单信息
+	GetAllOrderInfo:(data) => {
+	    return http.request({
+	        url: '/api/Order/GetAllOrderInfo',
+	        method: 'GET', 
+	        data,
+			// handle:true
+	    })
+	},	
+	// 校验安装
+	CheckInstall:(data) => {
+	    return http.request({
+	        url: '/api/Order/CheckInstall',
+	        method: 'GET', 
+	        data,
+			// handle:true
+	    })
+	},	
+	// 开始维修
+	BeginMend:(data) => {
+	    return http.request({
+	        url: '/api/Order/BeginMend',
+	        method: 'POST', 
+	        data,
+			// handle:true
+	    })
+	},	
+	// 开始安装
+	BeginInstall:(data) => {
+	    return http.request({
+	        url: '/api/Order/BeginInstall',
+	        method: 'POST', 
+	        data,
+			// handle:true
+	    })
+	},
+	// 完成维修
+	OrderMend:(data) => {
+	    return http.request({
+	        url: '/api/Order/OrderMend',
+	        method: 'POST', 
+	        data,
+			// handle:true
+	    })
+	},
 	
-	
+	// 校验维修
+	CheckMendTask:(data) => {
+	    return http.request({
+	        url: '/api/Order/CheckMendTask',
+	        method: 'GET', 
+	        data,
+			// handle:true
+	    })
+	},
 	// 申请退税
 	Apply_Tax:(data) => {
 	    return http.request({
@@ -76,10 +129,19 @@ const Set = {
 			// handle:true
 	    })
 	},
-	// 订单派发
+	// 订单安装配发列表
 	GetUserTaskList:(data) => {
 	    return http.request({
 	        url: '/api/UserTask/GetList',
+	        method: 'POST', 
+	        data,
+			// handle:true
+	    })
+	},
+	// 订单维修配发列表
+	GetMendTaskList:(data) => {
+	    return http.request({
+	        url: '/api/MendTask/GetList',
 	        method: 'POST', 
 	        data,
 			// handle:true
@@ -288,7 +350,7 @@ const Set = {
 	// 确认拍品
 	Receiving: (data, ifLoad = false) => {
 		return http.request({
-			url: '	/api/Order/Receiving',
+			url: '/api/Order/Receiving',
 			method: 'POST',
 			data,
 			// handle:true

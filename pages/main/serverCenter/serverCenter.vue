@@ -19,7 +19,7 @@
 			<view class="flex flex _center ">
 				<navigator url="../serverLunch/serverLunch" class="menus menus1 " hover-class="cm_hover_m">
 					<view class="menusHeader flex flex_center">
-						<text class="menusTags ">你有3条订单待处理</text>
+						<text class="menusTags ">你有{{userInfo.service_count.install_count?userInfo.service_count.install_count:0}}条订单待处理</text>
 						<view class="f1"></view>
 					</view>
 					<view class="menusBody flex flex_center">
@@ -35,7 +35,7 @@
 			<view class="flex flex _center " style="margin-top: 20rpx;">
 				<navigator url="../serverRepair/serverRepair" class="menus menus2 " hover-class="cm_hover_m">
 					<view class="menusHeader flex flex_center">
-						<text class="menusTags ">你有3条订单待处理</text>
+						<text class="menusTags ">你有{{userInfo.service_count.mend_count?userInfo.service_count.mend_count:0}}条订单待处理</text>
 						<view class="f1"></view>
 					</view>
 					<view class="menusBody flex flex_center">
@@ -66,10 +66,9 @@
 			</view>
 		</view>
 
-		<view class="msgTap flex flex_center" hover-class="cm_hover_m"  @tap="_scanCode">
-			<!-- <text class="iconfont icon-xiaoxi" style="font-size: 32rpx;color: #fff;"></text> -->
+		<!-- <view class="msgTap flex flex_center" hover-class="cm_hover_m"  @tap="_scanCode">
 			<image src="../../../static/image/sys.png" mode="scaleToFill" style="width: 100% ;height: 100%;"></image>
-		</view>
+		</view> -->
 	</view>
 </template>
 
@@ -111,13 +110,12 @@ export default {
 	},
 	computed: mapState(['userInfo', 'hasLogin']),
 	onPullDownRefresh() {
-		this.formParams.pageIndex = 1;
-		this.list = [];
-		this._loadData('refresh');
+		this.$store.dispatch('refreshUser', () => {
+			uni.stopPullDownRefresh();
+		});
 	},
 	// 上拉加载
 	onReachBottom() {
-		console.log(this.loadStatus);
 		if (this.loadStatus == 'noMore') {
 			return;
 		}
@@ -140,7 +138,9 @@ export default {
 	},
 	onShow() {
 		if (this.hasLogin) {
-			this._loadData('refresh');
+			this.$store.dispatch('refreshUser', () => {
+				uni.stopPullDownRefresh();
+			});
 		}
 	},
 	methods: {
@@ -152,7 +152,7 @@ export default {
 		objectChange(e) {
 			this.current = parseInt(e.tab.value);
 			this.formParams.task_status = parseInt(e.tab.value);
-			this._loadData('refresh');
+			// this._loadData('refresh');
 		},
 
 		async _loadData(type) {
@@ -205,38 +205,38 @@ export default {
 			}
 		},
 		// 扫码跳转维修历史
-		_scanCode(){
-			let  that = this
-			this.$ui.showloading()
-			uni.scanCode({
-				onlyFromCamera: true,
-				scanType: ['qrCode'],
-				success: function(res) {
-					let result = res.result;
-					let s = result.match(/mtId=(.*)mtId/);
-					if (result && s && s[1]) {
-						uni.navigateTo({
-							url:`/pages/main/deviceMsg/deviceMsg?mtId=${s[1]}`
-						})
-					} else {
-						uni.showToast({
-							icon: 'none',
-							title: '无效的机号信息'
-						});
-					}
-				},
-				fail: function() {
-					// plus.nativeUI.alert('请将二维码放在扫描框内')
-					uni.showToast({
-						icon: 'none',
-						title: '请将二维码放在扫描框内'
-					});
-				},
-				complete() {
-					that.$ui.hideloading()
-				}
-			});
-		},
+		// _scanCode(){
+		// 	let  that = this
+		// 	this.$ui.showloading()
+		// 	uni.scanCode({
+		// 		onlyFromCamera: true,
+		// 		scanType: ['qrCode'],
+		// 		success: function(res) {
+		// 			let result = res.result;
+		// 			let s = result.match(/mtId=(.*)mtId/);
+		// 			if (result && s && s[1]) {
+		// 				uni.navigateTo({
+		// 					url:`/pages/main/deviceMsg/deviceMsg?mtId=${s[1]}`
+		// 				})
+		// 			} else {
+		// 				uni.showToast({
+		// 					icon: 'none',
+		// 					title: '无效的机号信息'
+		// 				});
+		// 			}
+		// 		},
+		// 		fail: function() {
+		// 			// plus.nativeUI.alert('请将二维码放在扫描框内')
+		// 			uni.showToast({
+		// 				icon: 'none',
+		// 				title: '请将二维码放在扫描框内'
+		// 			});
+		// 		},
+		// 		complete() {
+		// 			that.$ui.hideloading()
+		// 		}
+		// 	});
+		// },
 	}
 };
 </script>
