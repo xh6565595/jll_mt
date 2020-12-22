@@ -862,6 +862,11 @@ function initProperties(props) {var isBehavior = arguments.length > 1 && argumen
       type: String,
       value: '' };
 
+    // 用于字节跳动小程序模拟抽象节点
+    properties.generic = {
+      type: Object,
+      value: null };
+
     properties.vueSlots = { // 小程序不能直接定义 $slots 的 props，所以通过 vueSlots 转换到 $slots
       type: null,
       value: [],
@@ -1160,14 +1165,17 @@ function handleEvent(event) {var _this = this;
             }
             handler.once = true;
           }
-          ret.push(handler.apply(handlerCtx, processEventArgs(
+          var params = processEventArgs(
           _this.$vm,
           event,
           eventArray[1],
           eventArray[2],
           isCustom,
-          methodName)));
+          methodName);
 
+          // 参数尾部增加原始事件对象用于复杂表达式内获取额外数据
+          // eslint-disable-next-line no-sparse-arrays
+          ret.push(handler.apply(handlerCtx, (Array.isArray(params) ? params : []).concat([,,,,,,,,,, event])));
         }
       });
     }
@@ -1592,9 +1600,9 @@ uni$1;exports.default = _default;
 /***/ }),
 
 /***/ 11:
-/*!********************************************!*\
-  !*** E:/mywork/jll_mt/utils/http/index.js ***!
-  \********************************************/
+/*!***********************************************************!*\
+  !*** /Users/skia/Desktop/work/jll_mt/utils/http/index.js ***!
+  \***********************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1658,9 +1666,9 @@ exports.default = _default;
 /***/ }),
 
 /***/ 12:
-/*!************************************************!*\
-  !*** E:/mywork/jll_mt/utils/http/interface.js ***!
-  \************************************************/
+/*!***************************************************************!*\
+  !*** /Users/skia/Desktop/work/jll_mt/utils/http/interface.js ***!
+  \***************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1853,9 +1861,9 @@ function _reslog(res) {
 /***/ }),
 
 /***/ 13:
-/*!***************************************!*\
-  !*** E:/mywork/jll_mt/store/index.js ***!
-  \***************************************/
+/*!******************************************************!*\
+  !*** /Users/skia/Desktop/work/jll_mt/store/index.js ***!
+  \******************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2974,9 +2982,9 @@ var index_esm = {
 /***/ }),
 
 /***/ 15:
-/*!*******************************!*\
-  !*** E:/mywork/jll_mt/SET.js ***!
-  \*******************************/
+/*!**********************************************!*\
+  !*** /Users/skia/Desktop/work/jll_mt/SET.js ***!
+  \**********************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2998,9 +3006,9 @@ var _default = {
 /***/ }),
 
 /***/ 16:
-/*!*********************************************!*\
-  !*** E:/mywork/jll_mt/utils/module/auth.js ***!
-  \*********************************************/
+/*!************************************************************!*\
+  !*** /Users/skia/Desktop/work/jll_mt/utils/module/auth.js ***!
+  \************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -3228,9 +3236,9 @@ Auth;exports.default = _default;
 /***/ }),
 
 /***/ 161:
-/*!*********************************************!*\
-  !*** E:/mywork/jll_mt/utils/picker.city.js ***!
-  \*********************************************/
+/*!************************************************************!*\
+  !*** /Users/skia/Desktop/work/jll_mt/utils/picker.city.js ***!
+  \************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -17669,9 +17677,9 @@ data = data;exports.default = _default;
 /***/ }),
 
 /***/ 162:
-/*!*******************************************************************!*\
-  !*** E:/mywork/jll_mt/js_sdk/graceui-dataChecker/graceChecker.js ***!
-  \*******************************************************************/
+/*!**********************************************************************************!*\
+  !*** /Users/skia/Desktop/work/jll_mt/js_sdk/graceui-dataChecker/graceChecker.js ***!
+  \**********************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -17785,9 +17793,9 @@ obj = obj;exports.default = _default;
 /***/ }),
 
 /***/ 17:
-/*!*************************************************!*\
-  !*** E:/mywork/jll_mt/utils/module/business.js ***!
-  \*************************************************/
+/*!****************************************************************!*\
+  !*** /Users/skia/Desktop/work/jll_mt/utils/module/business.js ***!
+  \****************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -24500,7 +24508,7 @@ function internalMixin(Vue) {
   };
 
   Vue.prototype.__map = function(val, iteratee) {
-    //TODO 暂不考虑 string,number
+    //TODO 暂不考虑 string
     var ret, i, l, keys, key;
     if (Array.isArray(val)) {
       ret = new Array(val.length);
@@ -24514,6 +24522,13 @@ function internalMixin(Vue) {
       for (i = 0, l = keys.length; i < l; i++) {
         key = keys[i];
         ret[key] = iteratee(val[key], key, i);
+      }
+      return ret
+    } else if (typeof val === 'number') {
+      ret = new Array(val);
+      for (i = 0, l = val; i < l; i++) {
+        // 第一个参数暂时仍和小程序一致
+        ret[i] = iteratee(i, i);
       }
       return ret
     }
@@ -24742,9 +24757,9 @@ function normalizeComponent (
 /***/ }),
 
 /***/ 21:
-/*!*********************************************!*\
-  !*** E:/mywork/jll_mt/static/defaultSet.js ***!
-  \*********************************************/
+/*!************************************************************!*\
+  !*** /Users/skia/Desktop/work/jll_mt/static/defaultSet.js ***!
+  \************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -25017,9 +25032,9 @@ set;exports.default = _default;
 /***/ }),
 
 /***/ 28:
-/*!***************************************!*\
-  !*** E:/mywork/jll_mt/utils/utils.js ***!
-  \***************************************/
+/*!******************************************************!*\
+  !*** /Users/skia/Desktop/work/jll_mt/utils/utils.js ***!
+  \******************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -25377,9 +25392,9 @@ module.exports = g;
 /***/ }),
 
 /***/ 37:
-/*!********************************************!*\
-  !*** E:/mywork/jll_mt/utils/baseMixins.js ***!
-  \********************************************/
+/*!***********************************************************!*\
+  !*** /Users/skia/Desktop/work/jll_mt/utils/baseMixins.js ***!
+  \***********************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -25492,9 +25507,9 @@ var baseMixins = {
 /***/ }),
 
 /***/ 382:
-/*!********************************************************!*\
-  !*** E:/mywork/jll_mt/components/tki-qrcode/qrcode.js ***!
-  \********************************************************/
+/*!***********************************************************************!*\
+  !*** /Users/skia/Desktop/work/jll_mt/components/tki-qrcode/qrcode.js ***!
+  \***********************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -27501,9 +27516,9 @@ if (hadRuntime) {
 /***/ }),
 
 /***/ 7:
-/*!***********************************!*\
-  !*** E:/mywork/jll_mt/pages.json ***!
-  \***********************************/
+/*!**************************************************!*\
+  !*** /Users/skia/Desktop/work/jll_mt/pages.json ***!
+  \**************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -27512,9 +27527,9 @@ if (hadRuntime) {
 /***/ }),
 
 /***/ 70:
-/*!****************************************************!*\
-  !*** E:/mywork/jll_mt/utils/QS-SharePoster/app.js ***!
-  \****************************************************/
+/*!*******************************************************************!*\
+  !*** /Users/skia/Desktop/work/jll_mt/utils/QS-SharePoster/app.js ***!
+  \*******************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -28082,9 +28097,9 @@ module.exports = _app;
 /***/ }),
 
 /***/ 71:
-/*!***************************************************************!*\
-  !*** E:/mywork/jll_mt/utils/QS-SharePoster/QS-SharePoster.js ***!
-  \***************************************************************/
+/*!******************************************************************************!*\
+  !*** /Users/skia/Desktop/work/jll_mt/utils/QS-SharePoster/QS-SharePoster.js ***!
+  \******************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -29394,9 +29409,9 @@ module.exports = {
 /***/ }),
 
 /***/ 72:
-/*!**********************************************************!*\
-  !*** E:/mywork/jll_mt/utils/QS-SharePoster/QRCodeAlg.js ***!
-  \**********************************************************/
+/*!*************************************************************************!*\
+  !*** /Users/skia/Desktop/work/jll_mt/utils/QS-SharePoster/QRCodeAlg.js ***!
+  \*************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 

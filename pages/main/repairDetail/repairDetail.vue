@@ -129,7 +129,7 @@
 					<view style="padding: 20rpx;">
 						<tui-time-axis v-if="mendlog_list.length">
 							<tui-timeaxis-item bgcolor="none" v-for="(item, index) in mendlog_list" :key="index">
-								<template v-slot:node>
+								<template slot:node>
 									<view class="tui-node tui-bg-primary">
 										<!-- <tui-icon name="check" color="#fff" :size="14" :bold="true"></tui-icon> -->
 										<image v-if="item.mend_status != 1" src="../../../static/img/wl_xz.png" mode="aspectFit" style="width: 30rpx;height: 30rpx;"></image>
@@ -137,7 +137,7 @@
 									</view>
 								</template>
 				
-								<template v-slot:content>
+								<template slot:content>
 									<view v-if="item.mend_status == 1">
 										<view class="tui-order-desc" :style="{ color: '#999' }">{{ item.mend_status | mend_statusFilter }}</view>
 										<view class="tui-order-time tui-gray" :style="{ color: '#999' }">维修师傅：{{ item.task_service_user_name }}</view>

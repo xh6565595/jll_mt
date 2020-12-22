@@ -27,7 +27,7 @@
 				<view class="tui-order-tracking tui-skeleton-rect">
 					<tui-time-axis v-if="emsMsg.list.length">
 						<tui-timeaxis-item bgcolor="none" v-for="(item,index) in emsMsg.list " :key="index">
-							<template v-slot:node>
+							<template slot:node>
 								<view class="tui-node tui-bg-primary">
 									<!-- <tui-icon name="check" color="#fff" :size="14" :bold="true"></tui-icon> -->
 									<image v-if="index==0" src="../../../static/img/wl_xz.png" mode="aspectFit" style="width: 30rpx;height: 30rpx;"></image>
@@ -35,7 +35,7 @@
 								</view>
 							</template>
 				
-							<template v-slot:content>
+							<template slot:content>
 								<view>
 									<view class="tui-order-desc" :style="{'color':index==0?'#333':'#999'}">{{item.status}}</view>
 									<view class="tui-order-time tui-gray" :style="{'color':index==0?'#333':'#999'}">{{item.time}}</view>
