@@ -599,11 +599,16 @@ export default {
 						that.item = res.Data;
 						that.formParams.ems_code = res.Data.ems_code;
 						that.oderId = res.Data.order_code;
-						// alert(that.oderId)
+						that.ifInActive = res.Data.is_fq==1?true:false
+						// console.log(that.ifInActive)
 					}
 					that.skeletonShow = false;
 				} else {
 					that.$ui.toast(res.Msg);
+					that.skeletonShow = false;
+					uni.switchTab({
+						url: '/pages/main/main'
+					});
 				}
 				if (callback) callback();
 			} catch (err) {
@@ -611,6 +616,7 @@ export default {
 			}
 		},
 		_readyToPay() {
+			// this.success()
 			let that = this;
 			this.$refs.payPanel._show(that.formParams.order_code);
 		},
@@ -638,7 +644,14 @@ export default {
 		// 支付接口
 		success() {
 			// alert('支付接口')
-			this.loadData();
+			
+			if(this.ifInActive){
+				uni.switchTab({
+					url: '/pages/activity/activity'
+				});
+			}else{
+				this.loadData();
+			}
 		},
 		cancel() {
 			// uni.redirectTo({

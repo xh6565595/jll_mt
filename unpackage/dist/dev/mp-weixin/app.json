@@ -77,6 +77,5 @@
     "icon": "/components/icon/icon",
     "tui-modal": "/components/modal/modal",
     "tui-tag": "/components/tag/tag"
-  },
-  "sitemapLocation": "sitemap87.json"
+  }
 }

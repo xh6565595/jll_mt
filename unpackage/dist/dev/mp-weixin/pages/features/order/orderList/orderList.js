@@ -135,7 +135,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@vue/babel-preset-app/node_modules/@babel/runtime/regenerator */ 4));
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@babel/runtime/regenerator */ 4));
 
 
 
@@ -293,9 +293,9 @@ var _vuex = __webpack_require__(/*! vuex */ 14);function _interopRequireDefault(
                 } else {
                   that.loadStatus = 'loading';
                 }
-                _this2.$ui.showloading();_context2.next = 6;return (
-                  _this2.$api.GetOrderList(_this2.formParams));case 6:res = _context2.sent;
-                _this2.$ui.hideloading();
+                // this.$ui.showloading();
+                _context2.next = 5;return _this2.$api.GetOrderList(_this2.formParams);case 5:res = _context2.sent;
+                // this.$ui.hideloading();
                 if (type == 'refresh') {
                   // this.$ui.hideloading()
                 } else {
@@ -323,13 +323,13 @@ var _vuex = __webpack_require__(/*! vuex */ 14);function _interopRequireDefault(
                   }
                 } else {
                   that.$ui.toast(res.Msg);
-                }_context2.next = 15;break;case 12:_context2.prev = 12;_context2.t0 = _context2["catch"](1);
+                }_context2.next = 13;break;case 10:_context2.prev = 10;_context2.t0 = _context2["catch"](1);
 
-                console.log('请求结果false : ' + _context2.t0);case 15:
+                console.log('请求结果false : ' + _context2.t0);case 13:
 
                 // this.loadModal = false;
                 // this.$ui.hideloading();
-                if (callback) callback();case 16:case "end":return _context2.stop();}}}, _callee2, null, [[1, 12]]);}))();
+                if (callback) callback();case 14:case "end":return _context2.stop();}}}, _callee2, null, [[1, 10]]);}))();
     },
     refresh: function refresh() {
       this.formParams.pageIndex = 1;

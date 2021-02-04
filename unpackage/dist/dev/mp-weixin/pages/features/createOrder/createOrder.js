@@ -92,9 +92,28 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "recyclableRender", function() { return recyclableRender; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "components", function() { return components; });
-var components = {
-  PayPanel: function() {
-    return __webpack_require__.e(/*! import() | components/PayPanel/PayPanel */ "components/PayPanel/PayPanel").then(__webpack_require__.bind(null, /*! @/components/PayPanel/PayPanel.vue */ 385))
+var components
+try {
+  components = {
+    PayPanel: function() {
+      return __webpack_require__.e(/*! import() | components/PayPanel/PayPanel */ "components/PayPanel/PayPanel").then(__webpack_require__.bind(null, /*! @/components/PayPanel/PayPanel.vue */ 385))
+    }
+  }
+} catch (e) {
+  if (
+    e.message.indexOf("Cannot find module") !== -1 &&
+    e.message.indexOf(".vue") !== -1
+  ) {
+    console.error(e.message)
+    console.error("1. 排查组件名称拼写是否正确")
+    console.error(
+      "2. 排查组件是否符合 easycom 规范，文档：https://uniapp.dcloud.net.cn/collocation/pages?id=easycom"
+    )
+    console.error(
+      "3. 若组件不符合 easycom 规范，需手动引入，并在 components 中注册该组件"
+    )
+  } else {
+    throw e
   }
 }
 var render = function() {
@@ -134,7 +153,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@vue/babel-preset-app/node_modules/@babel/runtime/regenerator */ 4));
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@babel/runtime/regenerator */ 4));
 
 
 
@@ -268,13 +287,14 @@ var global_Set_jll = uni.getStorageSync('global_Set_jll');var _default =
       allEms: 0, //运费
       modal: false,
       oderId: '',
-      tex: 0 };
+      tex: 0,
+      ifInActive: false };
 
   },
   onLoad: function onLoad(options) {
     this.formParams.create_order_type = options.type;
     this.formParams.share_order_code = options.shareOrder;
-    console.log(this.formParams);
+    // console.log(this.formParams)
     this.tex = global_Set_jll.taxes_ratio * 100;
     // if(this.shareUser){
     // 	this.formParams.share_order_code = this.shareUser
@@ -296,8 +316,8 @@ var global_Set_jll = uni.getStorageSync('global_Set_jll');var _default =
     tuiSkeleton: tuiSkeleton,
     PayPanel: PayPanel },
 
-  computed: _objectSpread({},
-  (0, _vuex.mapState)(['currentOrder', 'shareUser', 'sharePro', 'ifx']), {
+  computed: _objectSpread(_objectSpread({},
+  (0, _vuex.mapState)(['currentOrder', 'shareUser', 'sharePro', 'ifx'])), {}, {
     allPrize: function allPrize() {
       var s = 0;
       this.currentOrder.forEach(function (item) {
@@ -428,6 +448,7 @@ var global_Set_jll = uni.getStorageSync('global_Set_jll');var _default =
     _sure: function _sure() {var _this4 = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee4() {var that, d, s, res;return _regenerator.default.wrap(function _callee4$(_context4) {while (1) {switch (_context4.prev = _context4.next) {case 0:
                 that = _this4;
                 // this.$ui.toast('暂未开放');
+                // this.success()
                 // return;
                 _context4.prev = 1;
                 d = { pjc: [], prc: [], pjn: [], cart: [] };
@@ -467,9 +488,9 @@ var global_Set_jll = uni.getStorageSync('global_Set_jll');var _default =
                   that.payParams.order_num = res.Data.order_code;
                   // that.payParams.order_num ='H7280202001140330267942143'
                   that.$ui.toast('订单创建成功');
-
+                  that.ifInActive = res.Data.is_fq == 1 ? true : false;
+                  // console.log(that.ifInActive)
                   setTimeout(function () {
-
                     that._readyToPay(res.Data.order_code);
                   }, 500);
                 } else {
@@ -508,9 +529,20 @@ var global_Set_jll = uni.getStorageSync('global_Set_jll');var _default =
     // 支付接口
     success: function success() {
       // alert(this.formParams)
-      console.log(this.formParams);
-      uni.redirectTo({
-        url: '/pages/activity/activity' });
+      // console.log(this.formParams);
+      // alert()
+      if (this.ifInActive) {
+        uni.switchTab({
+          url: '/pages/activity/activity' });
+
+      } else {
+        uni.redirectTo({
+          url: '/pages/features/order/order' });
+
+        // uni.redirectTo({
+        // 	url: '/pages/features/order/orderDetail/orderDetail?code=' + this.oderId
+        // });
+      }
 
     },
     cancel: function cancel() {

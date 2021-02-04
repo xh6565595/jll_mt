@@ -179,6 +179,13 @@ export default {
 		// refreshUser(){
 		// }
 	},
+	onShareAppMessage(res) {
+		return {
+			title: '洁利来智能马桶',
+			path: `/pages/index/index`,
+			imageUrl: 'http://gllo.kuxiong999.com/upload/head/jjl.png'
+		};
+	},
 	components: {
 		accredit
 	},
@@ -260,8 +267,20 @@ export default {
 			this.$refs.dy.hideModal();
 		},
 		_clear() {
-			uni.removeStorageSync('access_token');
-			this.$ui.toast('清除');
+			let that = this
+			uni.showModal({
+				title:'洁利来提醒您',
+				content:'改操作需要重新认证账户信息',
+				success(res) {
+					if(res.confirm){
+						uni.removeStorageSync('access_token');
+						uni.removeStorageSync('jll_opid');				
+						that.$ui.toast('清除');
+						that.$store.commit('logout')
+					}
+				}
+			})
+			
 		},
 		imageLoad(index) {
 			this.$set(this.list[index], 'load', true);

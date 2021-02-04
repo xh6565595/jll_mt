@@ -5,6 +5,7 @@
   "usingComponents": {
     "tui-skeleton": "/components/tui-skeleton/tui-skeleton",
     "xh-store-params-s-k-u": "/components/xhStoreParamsSKU/xhStoreParamsSKU",
+    "accredit": "/components/accredit/accredit",
     "tui-numberbox": "/components/numberbox/numberbox"
   }
 }

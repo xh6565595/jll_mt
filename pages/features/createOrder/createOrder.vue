@@ -132,13 +132,14 @@ export default {
 			allEms: 0, //运费
 			modal: false,
 			oderId: '',
-			tex:0
+			tex:0,
+			ifInActive:false
 		};
 	},
 	onLoad(options) {
 		this.formParams.create_order_type = options.type;
 		this.formParams.share_order_code = options.shareOrder;
-		console.log(this.formParams)
+		// console.log(this.formParams)
 		this.tex = global_Set_jll.taxes_ratio*100
 		// if(this.shareUser){
 		// 	this.formParams.share_order_code = this.shareUser
@@ -292,6 +293,7 @@ export default {
 		async _sure() {
 			let that = this;
 			// this.$ui.toast('暂未开放');
+			// this.success()
 			// return;
 			try {
 				let d = { pjc: [], prc: [], pjn: [], cart: [] };
@@ -331,9 +333,9 @@ export default {
 					that.payParams.order_num = res.Data.order_code;
 					// that.payParams.order_num ='H7280202001140330267942143'
 					that.$ui.toast('订单创建成功');
-						
+					that.ifInActive = res.Data.is_fq==1?true:false	
+					// console.log(that.ifInActive)
 					setTimeout(() => {
-
 						that._readyToPay(res.Data.order_code);
 					}, 500);
 				} else {
@@ -372,10 +374,21 @@ export default {
 		// 支付接口
 		success() {
 			// alert(this.formParams)
-			console.log(this.formParams);
-			uni.redirectTo({
-				url: '/pages/activity/activity'
-			});
+			// console.log(this.formParams);
+			// alert()
+			if(this.ifInActive){
+				uni.switchTab({
+					url: '/pages/activity/activity'
+				});
+			}else{
+				uni.redirectTo({
+					url:'/pages/features/order/order'
+				})
+				// uni.redirectTo({
+				// 	url: '/pages/features/order/orderDetail/orderDetail?code=' + this.oderId
+				// });
+			}
+			
 		},
 		cancel() {
 			uni.redirectTo({

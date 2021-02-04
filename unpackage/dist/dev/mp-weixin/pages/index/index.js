@@ -130,7 +130,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@vue/babel-preset-app/node_modules/@babel/runtime/regenerator */ 4));
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@babel/runtime/regenerator */ 4));
 
 
 
@@ -197,7 +197,7 @@ var _index = _interopRequireDefault(__webpack_require__(/*! @/utils/http/index.j
     } else if (options.icode) {
       icode = options.icode;
     }
-    console.log(icode);
+    // console.log(icode);
     this.shareData = {
       proCode: options.pcode ? options.pcode : '', //商品code
       userId: options.ucode ? options.ucode : '', //人物code
@@ -211,28 +211,33 @@ var _index = _interopRequireDefault(__webpack_require__(/*! @/utils/http/index.j
 
 
     // console.log('shareData',this.shareData)
+    var jll_opid = uni.getStorageSync('jll_opid');
+    if (jll_opid) {
+      that.autoLogin(jll_opid);
+    } else {
+      uni.login({
+        provider: 'weixin',
+        success: function success(res) {
+          var code = res.code;
+          // 获取code换opid
+          // console.log(code)
+          // const r = await that.getopId(code)	
+          that.getopId(code);
+        } });
 
-    uni.login({
-      provider: 'weixin',
-      success: function success(res) {
-        var code = res.code;
-        // 获取code换opid
-        console.log(code);
-        // const r = await that.getopId(code)	
-        that.getopId(code);
-      } });
+    }
 
   },
   computed: {},
   methods: {
     // 换取opndid
     getopId: function getopId(code) {var _this = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {var that, res, opid;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:
-                that = _this;_context.prev = 1;
+                that = _this;_context.prev = 1;_context.next = 4;return (
 
-                _this.$ui.showloading();_context.next = 5;return (
-                  _this.$api.GetOpenId({ wx_code: code }, false));case 5:res = _context.sent;
+
+                  _this.$api.GetOpenId({ wx_code: code }, false));case 4:res = _context.sent;
                 // this.$ui.hideloading()
-                console.log(res);
+                // console.log(res)
                 if (res.Success) {
                   // oNDKY5B658gwmlw5vZnwEUOdG1io
                   opid = res.Msg;
@@ -245,9 +250,9 @@ var _index = _interopRequireDefault(__webpack_require__(/*! @/utils/http/index.j
                 } else {
                   that.$ui.hideloading();
 
-                }_context.next = 13;break;case 10:_context.prev = 10;_context.t0 = _context["catch"](1);
+                }_context.next = 11;break;case 8:_context.prev = 8;_context.t0 = _context["catch"](1);
 
-                that.$ui.hideloading();case 13:case "end":return _context.stop();}}}, _callee, null, [[1, 10]]);}))();
+                that.$ui.hideloading();case 11:case "end":return _context.stop();}}}, _callee, null, [[1, 8]]);}))();
 
     },
     // opid直接登录
@@ -256,7 +261,7 @@ var _index = _interopRequireDefault(__webpack_require__(/*! @/utils/http/index.j
 
 
                   _this2.$api.WxTokenLogin({ openId: opid }, false));case 4:res = _context2.sent;
-                _this2.$ui.hideloading();
+                // this.$ui.hideloading()
                 // uni.navigateTo({
                 // 	url:'/pages/login/login'
                 // })	
@@ -280,10 +285,10 @@ var _index = _interopRequireDefault(__webpack_require__(/*! @/utils/http/index.j
                       url: '/pages/main/main' });
 
                   }
-                }_context2.next = 13;break;case 9:_context2.prev = 9;_context2.t0 = _context2["catch"](1);
+                }_context2.next = 12;break;case 8:_context2.prev = 8;_context2.t0 = _context2["catch"](1);
 
                 _this2.$ui.hideloading();
-                _this2.$ui.toast(_context2.t0);case 13:case "end":return _context2.stop();}}}, _callee2, null, [[1, 9]]);}))();
+                _this2.$ui.toast(_context2.t0);case 12:case "end":return _context2.stop();}}}, _callee2, null, [[1, 8]]);}))();
 
     },
     // 加载登录账户信息

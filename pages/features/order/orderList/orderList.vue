@@ -156,9 +156,9 @@ export default {
 				} else {
 					that.loadStatus = 'loading';
 				}
-					this.$ui.showloading();
+					// this.$ui.showloading();
 				let res = await this.$api.GetOrderList(this.formParams);
-				this.$ui.hideloading();
+				// this.$ui.hideloading();
 				if (type == 'refresh') {
 					// this.$ui.hideloading()
 				} else {

@@ -43,6 +43,8 @@
 				<view class="flex titleBox tui-skeleton-fillet" v-if="goods.is_activity == 0">
 					<text class="cm_prize">￥{{ goods.project_raise_price }}</text>
 					<text class="cm_delete" style="margin-left: 20rpx;">原价￥{{ goods.project_price }}</text>
+					<view class="f1"></view>
+					<text style="color:#009688" @tap="sharePoster">立即分享</text>
 				</view>
 
 				<view class="logoBox flex  flex_center tui-skeleton-fillet">
@@ -94,7 +96,10 @@
 				<view class="blank"></view>
 			</view>
 			<view>
-				<block v-for="(item, index) in details_img" :key="index"><image :src="item" mode="widthFix" style="width: 100%;"></image></block>
+				<!-- <block v-for="(item, index) in details_img" :key="index">
+					<image :src="item" mode="widthFix" style="width: 100%;"></image>
+				</block> -->
+				<rich-text :nodes="details_img"></rich-text>
 			</view>
 			<view class="footerBox" :style="{ 'padding-bottom': ifx ? '40rpx' : '' }">
 				<view class="shareTip flex flex_center" v-if="shareActive">
@@ -141,7 +146,21 @@
 		<!-- <view class="back"> -->
 		<image src="../../../static/img/ic_xq_zd.png" mode="aspectFill" class="backBtn animated slideInUp" @tap="_backTop"></image>
 		<!-- </view> -->
-		<!-- <view class="asideBar flex flex_center animated slideInUp" @tap="home"><Icon name="home" :size="20" color="#fff"></Icon></view> -->
+		<accredit ref="share" :autoClose="true">
+			<view slot="content" class="shareBox">
+				<view class="flex flexd_center">
+					<image :src=" banners[0]" mode="aspectFill" class="itemLogo"></image>
+					<view class="f1">
+						<view class="cm_title cm_ellipsis2">{{ goods.project_name }}</view>
+						<view class="flex flex_center" style="margin: 10rpx 0;">
+							<view class="cm_des f1 ">原价：{{ goods.project_price }}</view>
+						</view>
+						<view class="cm_price" style="margin-bottom: 20rpx;">￥{{ goods.project_raise_price }}</view>
+					</view>
+				</view>
+				<button type="text" class="cm_btn" hover-class="cm_hover_m" open-type="share">立即分享给好友</button>
+			</view>
+		</accredit>
 	</view>
 </template>
 
@@ -272,7 +291,20 @@ export default {
 			return obj;
 		}
 	},
+	onShareAppMessage(res) {
+		return {
+			title: this.goods.project_name,
+			path: `/pages/main/details/details?code=${this.formParams.project_code}`,
+			imageUrl: this.banners[0]
+		};
+	},
 	methods: {
+		sharePoster(){
+		        //获取带参数二维码
+		        this.is_show_model = false 
+		        // this.$refs.poster.showCanvas('https://oss.zhangyubk.com/cmqrcode.jpg') 
+				this.$refs.share.showModal() 
+		},
 		_fullscreenchange(event){
 			console.log(event.detail )
 			let iffull = event.detail.fullScreen
@@ -363,7 +395,7 @@ export default {
 					
 					that.auction = res.Data.auction;
 					that.banners = res.Data.goods.project_img.split(',');
-					that.details_img = res.Data.goods.details_img.split(',');
+					that.details_img = res.Data.goods.project_details;
 					that.service1 = res.Data.projectService1;
 					that.service2 = res.Data.projectService2;
 					that.service3 = res.Data.projectService3;
@@ -824,7 +856,18 @@ export default {
 		}
 	}
 }
-
+.shareBox {
+	width: 80vw;
+	background-color: #fff;
+	border-radius: 30rpx;
+	padding: 40rpx;
+	.itemLogo {
+		width: 100rpx;
+		height: 100rpx;
+		border-radius: 50%;
+		margin-right: 20rpx;
+	}
+}
 .btnBox {
 	width: 100%;
 	height: 80rpx;

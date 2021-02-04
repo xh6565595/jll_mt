@@ -74,7 +74,25 @@ export default {
 	},
 	computed:  mapState(['shareUser','iviCode','sharePro','shareOrder','userInfo','hasLogin']),
 	methods: {
-
+		async getopId(code){
+			let that = this
+			try {
+				this.$ui.showloading()
+				let res = await this.$api.GetOpenId({wx_code:code}, false);
+				this.$ui.hideloading()
+				if (res.Success) {
+					let opid = res.Msg;
+					uni.setStorageSync('jll_opid',opid);  
+					that.autoLogin(opid)
+		
+				}else{
+					that.$ui.hideloading()
+					
+				}
+			} catch (err) {
+				that.$ui.hideloading()
+			}
+		},
 		// 立即注册
 		async submit(){
 			let that = this
@@ -180,48 +198,48 @@ export default {
 
 		// 获取个人信息
 		getuserinfo(res){
+			let  that = this
 			let userInfo = res.detail.userInfo
 			// console.log(res)
 			this.formParams.nickname = userInfo.nickName
 			this.formParams.headimgurl =  userInfo.avatarUrl
-			this.$refs.userBox.showModal();
-
+			
+			const jll_opid =  uni.getStorageSync('jll_opid');
+			if(jll_opid){
+				that.autoLogin(jll_opid)
+			}else{
+				uni.login({
+				  provider: 'weixin', 
+				  success: function (res) {
+					let code =  res.code;
+					// 获取code换opid
+					that.getopId(code)	
+				  }
+				});
+			}
+			
+			
 		},
 		// opid直接登录
 		async autoLogin(opid) {
 			let that = this;
 
 			try {
-				this.$ui.showloading()
+				// this.$ui.showloading()
 				let res = await this.$api.WxTokenLogin({openId:opid}, false);
-				this.$ui.hideloading()
+				// this.$ui.hideloading()
 		
 				if (res.Success) {		
-					// that.$store.commit('login');
 					uni.setStorageSync('access_token',res.Data.hp)
-					// that.$store.dispatch('userLogin',res.Data.hp,(r)=>{
-					// 	console.log(r)
-					// 	uni.redirectTo({
-					// 		url: '/pages/main/main'
-					// 	});	
-					// });
 					that.initUser()
 				
 				} else {
-					// that.initUser()
-					// uni.showModal({
-					// 	showCancel:false,
-					// 	title:'登录失效',
-					// 	content:res.Msg?res.Msg:'未知错误'
-					// })
+
 					if(res.Msg && res.Msg!='用户不存在' ){
 						this.$ui.toast(res.Msg)
-					}
-					
-					// debugger
-						// uni.switchTab({ 
-						// 	url: '/pages/main/main'
-						// });	
+					}else{
+						this.$refs.userBox.showModal();
+					}				
 				}
 			} catch (err) {
 				// console.log('请求结果false : ' + err);
@@ -247,6 +265,7 @@ export default {
 						that.$store.commit('login');
 						setTimeout(()=>{
 							if(res.Data.consumer_type==3){
+							// if(true){
 								// 安装员
 								uni.reLaunch({
 									url: '/pages/main/serverCenter/serverCenter'

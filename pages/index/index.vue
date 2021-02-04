@@ -65,7 +65,7 @@ export default {
 		}else if(options.icode){
 			icode = options.icode
 		}
-		console.log(icode);
+		// console.log(icode);
 		this.shareData = {
 			proCode:options.pcode?options.pcode:'',  //商品code
 			userId:options.ucode?options.ucode:'' ,  //人物code
@@ -79,17 +79,22 @@ export default {
 		
 		
 		// console.log('shareData',this.shareData)
-
-		uni.login({
-		  provider: 'weixin', 
-		  success: function (res) {
-			let code =  res.code;
-			// 获取code换opid
-			console.log(code)
-			// const r = await that.getopId(code)	
-			that.getopId(code)	
-		  }
-		});
+		const jll_opid =  uni.getStorageSync('jll_opid');  
+		if(jll_opid){
+			that.autoLogin(jll_opid)
+		}else{
+			uni.login({
+			  provider: 'weixin', 
+			  success: function (res) {
+				let code =  res.code;
+				// 获取code换opid
+				// console.log(code)
+				// const r = await that.getopId(code)	
+				that.getopId(code)	
+			  }
+			});
+		}
+		
 	},
 	computed: {},
 	methods: {
@@ -97,10 +102,10 @@ export default {
 		async getopId(code){
 			let that = this
 			try {
-				this.$ui.showloading()
+				// this.$ui.showloading()
 				let res = await this.$api.GetOpenId({wx_code:code}, false);
 				// this.$ui.hideloading()
-				console.log(res)
+				// console.log(res)
 				if (res.Success) {
 					// oNDKY5B658gwmlw5vZnwEUOdG1io
 					let opid = res.Msg;
@@ -124,7 +129,7 @@ export default {
 
 			try {
 				let res = await this.$api.WxTokenLogin({openId:opid}, false);
-				this.$ui.hideloading()
+				// this.$ui.hideloading()
 				// uni.navigateTo({
 				// 	url:'/pages/login/login'
 				// })	

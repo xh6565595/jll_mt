@@ -109,6 +109,13 @@ export default {
 	components: {
 		accredit
 	},
+	onShareAppMessage(res) {
+		return {
+			title: '洁利来智能马桶',
+			path: `/pages/index/index`,
+			imageUrl: 'http://gllo.kuxiong999.com/upload/head/jjl.png'
+		};
+	},
 	computed: mapState(['shareUser','sharePro','hasLogin']),
 	mixins: [baseMixins],
 	onLoad() {

@@ -24,7 +24,13 @@ export default {
 	onHide: function() {
 		console.log('App Hide');
 	},
-
+	onShareAppMessage(res) {
+		return {
+			title: '洁利来智能马桶',
+			path: `/pages/index/index`,
+			imageUrl: 'http://gllo.kuxiong999.com/upload/head/jjl.png'
+		};
+	},
 	methods: {
 		// 是否微信浏览器
 		// is_weixn() {

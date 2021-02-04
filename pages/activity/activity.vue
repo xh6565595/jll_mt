@@ -218,7 +218,7 @@ export default {
 	},
 	onShow() {
 		if (this.hasLogin) {
-			this.noneItem = false
+			// this.noneItem = false
 			this._loadData('refresh');
 			
 		}
@@ -239,7 +239,8 @@ export default {
 		 sharePoster(){
 		        //获取带参数二维码
 		        this.is_show_model = false 
-		        this.$refs.poster.showCanvas('https://oss.zhangyubk.com/cmqrcode.jpg') 
+		        // this.$refs.poster.showCanvas('https://oss.zhangyubk.com/cmqrcode.jpg') 
+				 this.$refs.share.showModal() 
 		},
 		_toBuy() {
 			uni.switchTab({
@@ -292,6 +293,8 @@ export default {
 			
 			if(this.list.length==0){
 				this.noneItem = true
+			}else{
+				this.noneItem = false
 			}
 		}
 	}

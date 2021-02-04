@@ -92,12 +92,34 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "recyclableRender", function() { return recyclableRender; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "components", function() { return components; });
-var components = {
-  tuiSkeleton: function() {
-    return __webpack_require__.e(/*! import() | components/tui-skeleton/tui-skeleton */ "components/tui-skeleton/tui-skeleton").then(__webpack_require__.bind(null, /*! @/components/tui-skeleton/tui-skeleton.vue */ 342))
-  },
-  xhStoreParamsSKU: function() {
-    return __webpack_require__.e(/*! import() | components/xhStoreParamsSKU/xhStoreParamsSKU */ "components/xhStoreParamsSKU/xhStoreParamsSKU").then(__webpack_require__.bind(null, /*! @/components/xhStoreParamsSKU/xhStoreParamsSKU.vue */ 349))
+var components
+try {
+  components = {
+    tuiSkeleton: function() {
+      return __webpack_require__.e(/*! import() | components/tui-skeleton/tui-skeleton */ "components/tui-skeleton/tui-skeleton").then(__webpack_require__.bind(null, /*! @/components/tui-skeleton/tui-skeleton.vue */ 342))
+    },
+    xhStoreParamsSKU: function() {
+      return __webpack_require__.e(/*! import() | components/xhStoreParamsSKU/xhStoreParamsSKU */ "components/xhStoreParamsSKU/xhStoreParamsSKU").then(__webpack_require__.bind(null, /*! @/components/xhStoreParamsSKU/xhStoreParamsSKU.vue */ 349))
+    },
+    accredit: function() {
+      return __webpack_require__.e(/*! import() | components/accredit/accredit */ "components/accredit/accredit").then(__webpack_require__.bind(null, /*! @/components/accredit/accredit.vue */ 335))
+    }
+  }
+} catch (e) {
+  if (
+    e.message.indexOf("Cannot find module") !== -1 &&
+    e.message.indexOf(".vue") !== -1
+  ) {
+    console.error(e.message)
+    console.error("1. 排查组件名称拼写是否正确")
+    console.error(
+      "2. 排查组件是否符合 easycom 规范，文档：https://uniapp.dcloud.net.cn/collocation/pages?id=easycom"
+    )
+    console.error(
+      "3. 若组件不符合 easycom 规范，需手动引入，并在 components 中注册该组件"
+    )
+  } else {
+    throw e
   }
 }
 var render = function() {
@@ -137,7 +159,26 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@vue/babel-preset-app/node_modules/@babel/runtime/regenerator */ 4));
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@babel/runtime/regenerator */ 4));
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -377,8 +418,8 @@ var _default = {
     clearInterval(this.time);
     this.time = null;
   },
-  computed: _objectSpread({},
-  (0, _vuex.mapState)(['shareUser', 'sharePro', 'shareOrder', 'userInfo', 'hasLogin', 'ifx']), {
+  computed: _objectSpread(_objectSpread({},
+  (0, _vuex.mapState)(['shareUser', 'sharePro', 'shareOrder', 'userInfo', 'hasLogin', 'ifx'])), {}, {
     restTimeValied: function restTimeValied() {
       var t = this.endTime;
       console.log(t);
@@ -411,7 +452,20 @@ var _default = {
       return obj;
     } }),
 
+  onShareAppMessage: function onShareAppMessage(res) {
+    return {
+      title: this.goods.project_name,
+      path: "/pages/main/details/details?code=".concat(this.formParams.project_code),
+      imageUrl: this.banners[0] };
+
+  },
   methods: {
+    sharePoster: function sharePoster() {
+      //获取带参数二维码
+      this.is_show_model = false;
+      // this.$refs.poster.showCanvas('https://oss.zhangyubk.com/cmqrcode.jpg') 
+      this.$refs.share.showModal();
+    },
     _fullscreenchange: function _fullscreenchange(event) {
       console.log(event.detail);
       var iffull = event.detail.fullScreen;
@@ -502,7 +556,7 @@ var _default = {
 
                   that.auction = res.Data.auction;
                   that.banners = res.Data.goods.project_img.split(',');
-                  that.details_img = res.Data.goods.details_img.split(',');
+                  that.details_img = res.Data.goods.project_details;
                   that.service1 = res.Data.projectService1;
                   that.service2 = res.Data.projectService2;
                   that.service3 = res.Data.projectService3;
