@@ -293,10 +293,30 @@ var _index = _interopRequireDefault(__webpack_require__(/*! @/utils/http/index.j
 // const jweixin = require('jweixin-module');
 var _default =
 {
+  data: function data() {
+    return {
+      loadModal: true,
+      updatedInfo: {},
+      result: '',
+      effective: '',
+      formParams: {
+        "openId": "",
+        "vilidate": "",
+        "mobile": "",
+        "invitation": "", //邀请码
+        "nickname": "", //微信昵称
+        "headimgurl": "", //用户头像
+        "share_user_id": "" //userid 分享活动
+      },
+      seconds: 0,
+      time: null,
+      iviCode: '',
+      shareData: '' };
+
+  },
   onLaunch: function onLaunch(options) {
     // console.log('App Launch', options);
-    uni.removeStorageSync('access_token');
-
+    // uni.removeStorageSync('access_token')		
     var that = this;
     uni.getSystemInfo({
       success: function success(res) {
@@ -307,6 +327,41 @@ var _default =
         }
       } });
 
+
+    // let icode = ''
+    // if(options.q){
+    // 	let  url = decodeURIComponent(options.q);
+    // 	icode = url.split('icode=')[1]
+    // }else if(options.icode){
+    // 	icode = options.icode
+    // }
+    // // console.log(icode);
+    // this.shareData = {
+    // 	proCode:options.pcode?options.pcode:'',  //商品code
+    // 	userId:options.ucode?options.ucode:'' ,  //人物code
+    // 	odrCode:options.ocode?options.ocode:'' ,  //人物code
+    // 	iviCode:icode?icode:'',
+    // }
+    // // console.log(this.shareData );
+    // if(that.shareData.proCode || that.shareData.userId || that.shareData.odrCode || that.shareData.iviCode){
+    // 	that.$store.commit('setShare',{proCode:that.shareData.proCode,userId:that.shareData.userId,orderCode:that.shareData.odrCode,iviCode:that.shareData.iviCode})
+    // }
+
+
+    // console.log('shareData',this.shareData)
+    // const jll_opid =  uni.getStorageSync('jll_opid');  
+    // if(jll_opid){
+    // 	that.autoLogin(jll_opid)
+    // }else{
+    uni.login({
+      provider: 'weixin',
+      success: function success(res) {
+        var code = res.code;
+        // 获取code换opid 
+        that.getopId(code);
+      } });
+
+    // }
   },
   onShow: function onShow() {
     console.log('App Show');
@@ -322,131 +377,104 @@ var _default =
 
   },
   methods: {
-    // 是否微信浏览器
-    // is_weixn() {
-    // 	var ua = navigator.userAgent.toLowerCase();
-    // 	if (ua.match(/MicroMessenger/i) == 'micromessenger') {
-    // 		return true;
-    // 	} else {
-    // 		return false;
-    // 	}
-    // },
-    autoLogin: function autoLogin() {var _this = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {var that, user, loginParams, res;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:
-                that = _this;
-                user = uni.getStorageSync('user');
-                // console.log(user)
-                loginParams = {};if (!
-                user) {_context.next = 8;break;}
-                loginParams.username = user.username;
-                loginParams.password = user.password;_context.next = 9;break;case 8:return _context.abrupt("return",
+
+    // 换取opndid
+    getopId: function getopId(code) {var _this = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {var that, res, opid;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:
+                that = _this;_context.prev = 1;_context.next = 4;return (
 
 
-
-
-                false);case 9:_context.prev = 9;_context.next = 12;return (
-
-
-
-                  _this.$api.userLogin(loginParams, false));case 12:res = _context.sent;
-
+                  _this.$api.GetOpenId({ wx_code: code }, false));case 4:res = _context.sent;
+                // this.$ui.hideloading()
+                // console.log(res)
                 if (res.Success) {
-                  uni.setStorageSync('user', loginParams);
+                  // oNDKY5B658gwmlw5vZnwEUOdG1io
+                  opid = res.Msg;
+                  uni.setStorageSync('jll_opid', opid);
+                  that.formParams.openId = opid;
+                  // that.$refs.userBox.showModal()
+                  // 自动登录一次
+                  that.autoLogin(opid);
 
-                  that.$store.commit('login');
-
-                  that.initUser();
                 } else {
-                }_context.next = 18;break;case 16:_context.prev = 16;_context.t0 = _context["catch"](9);case 18:case "end":return _context.stop();}}}, _callee, null, [[9, 16]]);}))();
+                  that.$ui.hideloading();
+
+                }_context.next = 11;break;case 8:_context.prev = 8;_context.t0 = _context["catch"](1);
+
+                that.$ui.hideloading();case 11:case "end":return _context.stop();}}}, _callee, null, [[1, 8]]);}))();
 
     },
-    // 加载登录账户信息
-    initUser: function initUser(callback) {var _this2 = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee2() {var that, res;return _regenerator.default.wrap(function _callee2$(_context2) {while (1) {switch (_context2.prev = _context2.next) {case 0:
+    // opid直接登录
+    autoLogin: function autoLogin(opid) {var _this2 = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee2() {var that, res;return _regenerator.default.wrap(function _callee2$(_context2) {while (1) {switch (_context2.prev = _context2.next) {case 0:
                 that = _this2;_context2.prev = 1;_context2.next = 4;return (
 
 
+                  _this2.$api.WxTokenLogin({ openId: opid }, false));case 4:res = _context2.sent;
+                // this.$ui.hideloading()
+                // uni.navigateTo({
+                // 	url:'/pages/login/login'
+                // })	
+                // 	return
+                if (res.Success) {
+                  that.$store.commit('login');
+                  uni.setStorageSync('access_token', res.Data.hp);
+                  that.initUser();
 
-                  _this2.$api.getConsumer({}, false));case 4:res = _context2.sent;
-                // this.$ui.hideloading();
+                } else {
+                  _this2.$ui.hideloading();
+                  if (res.Msg && res.Msg != '用户不存在') {
+                    _this2.$ui.toast(res.Msg);
+                  }
+                  if (that.shareData.proCode && that.shareData.userId && that.shareData.odrCode) {
+                    uni.redirectTo({
+                      url: '/pages/main/details/details?code=' + that.shareData.proCode });
 
-                // console.log(res)
+                  } else {
+                    // uni.redirectTo({
+                    // 	url:'/pages/loding/loding'
+                    // })	
+                  }
+                }_context2.next = 12;break;case 8:_context2.prev = 8;_context2.t0 = _context2["catch"](1);
+
+                _this2.$ui.hideloading();
+                _this2.$ui.toast(_context2.t0);case 12:case "end":return _context2.stop();}}}, _callee2, null, [[1, 8]]);}))();
+
+    },
+    // 加载登录账户信息
+    initUser: function initUser(callback) {var _this3 = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee3() {var that, res;return _regenerator.default.wrap(function _callee3$(_context3) {while (1) {switch (_context3.prev = _context3.next) {case 0:
+                that = _this3;_context3.prev = 1;_context3.next = 4;return (
+
+                  _this3.$api.getConsumer({}, false));case 4:res = _context3.sent;
                 if (res.Success) {
                   if (res.Data) {
-                    that.$store.commit('setAccountInfo', res.Data);
-                    // that.userAccount = res.Data;
-                    that.$store.commit('login');
-                    console.log('login');
+                    that.$store.commit('setUserInfo', res.Data);
+                    setTimeout(function () {
+                      if (res.Data.consumer_type == 3) {
+                        // if(false){
+                        // 安装员
+                        uni.redirectTo({
+                          url: '/pages/main/serverCenter/serverCenter' });
+
+                      } else {
+                        //  消费者 3是安装 2推广者
+                        // 记录信息
+                        if (that.shareData.proCode && that.shareData.userId && that.shareData.odrCode) {
+                          uni.redirectTo({
+                            url: '/pages/main/details/details?code=' + that.shareData.proCode });
+
+                        } else {
+                          // uni.redirectTo({
+                          // 	url: '/pages/loding/loding'
+                          // });
+                        }
+                      }
+                    }, 500);
                   }
                 } else {
                   that.$ui.toast(res.Msg);
-                  that.$store.commit('logout');
-                  uni.removeStorageSync('hepai_token');
                 }
-                if (callback) callback();_context2.next = 11;break;case 9:_context2.prev = 9;_context2.t0 = _context2["catch"](1);case 11:case "end":return _context2.stop();}}}, _callee2, null, [[1, 9]]);}))();
+                if (callback) callback();_context3.next = 12;break;case 9:_context3.prev = 9;_context3.t0 = _context3["catch"](1);
 
-
-
-    },
-    _iniWxJdk: function _iniWxJdk() {var _this3 = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee3() {var that, res, set;return _regenerator.default.wrap(function _callee3$(_context3) {while (1) {switch (_context3.prev = _context3.next) {case 0:
-                that = _this3;_context3.prev = 1;_context3.next = 4;return (
-
-
-
-
-
-                  _this3.$api.GetWxJsApiConfig({ url: url }, true));case 4:res = _context3.sent;
-                // console.log(666,res)
-                if (res.Success) {
-                  set = res.Data;
-                  jweixin.config({
-                    debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
-                    appId: set.appId, // 必填，公众号的唯一标识
-                    timestamp: set.timestamp, // 必填，生成签名的时间戳
-                    nonceStr: set.noncestr, // 必填，生成签名的随机串
-                    signature: set.signature, // 必填，签名
-                    jsApiList: [
-                    'onMenuShareAppMessage',
-                    'onMenuShareTimeline',
-                    'onMenuShareQQ',
-                    'onMenuShareQZone',
-                    'onMenuShareWeibo',
-                    'chooseWXPay',
-                    'chooseImage',
-                    'uploadImage']
-                    // 必填，需要使用的JS接口列表
-                  });
-                  jweixin.ready(function () {
-                    // alert('ok')
-                    // 我自己的pid
-                    // let parentId = that.accountInfo.invitation_code
-                    var options = {
-                      title: 'GLLO健康智能马桶', // 分享标题
-                      link: _index.default.mainUrl + 'index.html', // 分享链接，记得使用绝对路径，不能用document.URL
-                      imgUrl: 'http://h5.gllo.com.cn/upload/head/jjl.png', // 分享图标
-                      desc: 'GLLO健康智能马桶', // 分享描述
-                      success: function success() {
-                        console.info('分享成功！');
-                      },
-                      cancel: function cancel() {
-                        console.info('取消分享！');
-                        // 用户取消分享后执行的回调函数
-                      } };
-
-                    // jweixin.updateTimelineShareData(options); // 分享到朋友圈
-                    // jweixin.updateAppMessageShareData(options); // 分享给朋友
-                    jweixin.onMenuShareAppMessage(options); // 分享到朋友圈
-                    jweixin.onMenuShareTimeline(options); // 分享给朋友
-                    jweixin.onMenuShareQQ(options); // 分享到朋友圈
-                    jweixin.onMenuShareQZone(options); // 分享给朋友
-                    jweixin.onMenuShareWeibo(options); // 分享到朋友圈
-                  });
-                  jweixin.error(function (res) {
-                    // config信息验证失败会执行error函数，如签名过期导致验证失败，具体错误信息可以打开config的debug模式查看，也可以在返回的res参数中查看，对于SPA可以在这里更新签名。
-                    console.log(JSON.stringify(res));
-                  });
-                } else {
-                }_context3.next = 11;break;case 8:_context3.prev = 8;_context3.t0 = _context3["catch"](1);
-
-                console.log('请求结果false : ' + _context3.t0);case 11:case "end":return _context3.stop();}}}, _callee3, null, [[1, 8]]);}))();
+                console.log('请求结果false : ' + _context3.t0);case 12:case "end":return _context3.stop();}}}, _callee3, null, [[1, 9]]);}))();
 
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))

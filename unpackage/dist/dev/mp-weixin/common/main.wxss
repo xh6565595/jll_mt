@@ -3217,12 +3217,26 @@ image {
 	overflow: hidden;
 	padding: 20rpx;
 }
+.cm_price_box {
+	box-sizing: border-box;
+	border-radius: 20rpx;
+	overflow: hidden;
+	padding: 20rpx;
+}
 .cm_title {
 	/* font-weight: bolder; */
 	font-size: 28rpx;
 	line-height: 42rpx;
 	color: #333;
 	font-weight: 600;
+}
+.cm_top_title {
+	width: 60%;
+	height: 90rpx;
+	font-size: 32rpx;
+	line-height: 90rpx;
+	color: #FFFDEF;
+    margin-bottom: 30rpx;
 }
 .cm_text {
 	font-size: 24rpx;

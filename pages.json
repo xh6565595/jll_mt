@@ -1,12 +1,13 @@
 {
 	"pages": [ //pages数组中第一项表示应用启动页,
-		
+ 
 		{
-			"path": "pages/index/index",
+			"path": "pages/loding/loding",
 			"style": {
 				"navigationBarTitleText": "欢迎"
 			}
 		},
+	 
 		{
 			"path": "pages/main/main",
 			"style": {
@@ -39,7 +40,6 @@
             "style" : {
 				"navigationBarTitleText": "活动",
 				"navigationBarTextStyle": "black",
-				"navigationStyle":"custom",
 				"enablePullDownRefresh": true
 			}
         },{

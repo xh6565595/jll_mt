@@ -3,10 +3,30 @@ import http from '@/utils/http/index.js';
 // const jweixin = require('jweixin-module');
 
 export default {
+	data() {
+		return {
+			loadModal: true,
+			updatedInfo: {},
+			result: '',
+			effective:'',
+			formParams:{
+				"openId": "",
+				"vilidate":"",
+				"mobile": "",
+				"invitation":"",   //邀请码
+				"nickname":"",   //微信昵称
+				"headimgurl":"",    //用户头像
+				"share_user_id":"", //userid 分享活动
+			},
+			seconds:0,
+			time:null,
+			iviCode:'',
+			shareData:''
+		};
+	},
 	onLaunch: function(options) {
 		// console.log('App Launch', options);
-		uni.removeStorageSync('access_token')
-			
+		// uni.removeStorageSync('access_token')		
 		let that = this;
 		uni.getSystemInfo({
 			success: res => {
@@ -16,7 +36,42 @@ export default {
 					that.$store.commit('setPhoneX',true);
 				}
 			}
-		});
+		}); 
+			
+		// let icode = ''
+		// if(options.q){
+		// 	let  url = decodeURIComponent(options.q);
+		// 	icode = url.split('icode=')[1]
+		// }else if(options.icode){
+		// 	icode = options.icode
+		// }
+		// // console.log(icode);
+		// this.shareData = {
+		// 	proCode:options.pcode?options.pcode:'',  //商品code
+		// 	userId:options.ucode?options.ucode:'' ,  //人物code
+		// 	odrCode:options.ocode?options.ocode:'' ,  //人物code
+		// 	iviCode:icode?icode:'',
+		// }
+		// // console.log(this.shareData );
+		// if(that.shareData.proCode || that.shareData.userId || that.shareData.odrCode || that.shareData.iviCode){
+		// 	that.$store.commit('setShare',{proCode:that.shareData.proCode,userId:that.shareData.userId,orderCode:that.shareData.odrCode,iviCode:that.shareData.iviCode})
+		// }
+		
+		
+		// console.log('shareData',this.shareData)
+		// const jll_opid =  uni.getStorageSync('jll_opid');  
+		// if(jll_opid){
+		// 	that.autoLogin(jll_opid)
+		// }else{
+			uni.login({
+			  provider: 'weixin', 
+			  success: function (res) {
+				let code =  res.code;
+				// 获取code换opid 
+				that.getopId(code)	
+			  }
+			});
+		// }
 	},
 	onShow: function() {
 		console.log('App Show');
@@ -32,133 +87,107 @@ export default {
 		};
 	},
 	methods: {
-		// 是否微信浏览器
-		// is_weixn() {
-		// 	var ua = navigator.userAgent.toLowerCase();
-		// 	if (ua.match(/MicroMessenger/i) == 'micromessenger') {
-		// 		return true;
-		// 	} else {
-		// 		return false;
-		// 	}
-		// },
-		async autoLogin() {
-			let that = this;
-			const user = uni.getStorageSync('user');
-			// console.log(user)
-			let loginParams = {};
-			if (user) {
-				loginParams.username = user.username;
-				loginParams.password = user.password;
-			} else {
-				// uni.reLaunch({
-				// 	url: '/pages/main/main'
-				// });
-				return false;
-			}
-
-			try {
-				let res = await this.$api.userLogin(loginParams, false);
-
-				if (res.Success) {
-					uni.setStorageSync('user', loginParams);
-
-					that.$store.commit('login');
-
-					that.initUser();
-				} else {
-				}
-			} catch (err) {}
-		},
-		// 加载登录账户信息
-		async initUser(callback) {
-			let that = this;
-			try {
-				// this.$ui.showloading();
-
-				let res = await this.$api.getConsumer({}, false);
-				// this.$ui.hideloading();
-
-				// console.log(res)
-				if (res.Success) {
-					if (res.Data) {
-						that.$store.commit('setAccountInfo', res.Data);
-						// that.userAccount = res.Data;
-						that.$store.commit('login');
-						console.log('login');
+		
+		// 换取opndid
+			async getopId(code){
+				let that = this
+				try {
+					// this.$ui.showloading()
+					let res = await this.$api.GetOpenId({wx_code:code}, false);
+					// this.$ui.hideloading()
+					// console.log(res)
+					if (res.Success) {
+						// oNDKY5B658gwmlw5vZnwEUOdG1io
+						let opid = res.Msg;
+						uni.setStorageSync('jll_opid',opid);  
+						that.formParams.openId = opid
+						// that.$refs.userBox.showModal()
+						// 自动登录一次
+						that.autoLogin(opid)
+		
+					}else{
+						that.$ui.hideloading()
+						
 					}
-				} else {
-					that.$ui.toast(res.Msg);
-					that.$store.commit('logout');
-					uni.removeStorageSync('hepai_token');
+				} catch (err) {
+					that.$ui.hideloading()
 				}
-				if (callback) callback();
-			} catch (err) {
-				// console.log('请求结果false : ' + err);
-			}
-		},
-		async _iniWxJdk() {
-			let that = this;
-			try {
-				// #ifdef H5
-				let url = window.location.href;
-				// let url = 'http://192.168.1.5:8080'
-				// #endif
-				let res = await this.$api.GetWxJsApiConfig({ url: url }, true);
-				// console.log(666,res)
-				if (res.Success) {
-					let set = res.Data;
-					jweixin.config({
-						debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
-						appId: set.appId, // 必填，公众号的唯一标识
-						timestamp: set.timestamp, // 必填，生成签名的时间戳
-						nonceStr: set.noncestr, // 必填，生成签名的随机串
-						signature: set.signature, // 必填，签名
-						jsApiList: [
-							'onMenuShareAppMessage',
-							'onMenuShareTimeline',
-							'onMenuShareQQ',
-							'onMenuShareQZone',
-							'onMenuShareWeibo',
-							'chooseWXPay',
-							'chooseImage',
-							'uploadImage'
-						] // 必填，需要使用的JS接口列表
-					});
-					jweixin.ready(function() {
-						// alert('ok')
-						// 我自己的pid
-						// let parentId = that.accountInfo.invitation_code
-						let options = {
-							title: 'GLLO健康智能马桶', // 分享标题
-							link: http.mainUrl + 'index.html', // 分享链接，记得使用绝对路径，不能用document.URL
-							imgUrl: 'http://h5.gllo.com.cn/upload/head/jjl.png', // 分享图标
-							desc: 'GLLO健康智能马桶', // 分享描述
-							success: function() {
-								console.info('分享成功！');
-							},
-							cancel: function() {
-								console.info('取消分享！');
-								// 用户取消分享后执行的回调函数
-							}
-						};
-						// jweixin.updateTimelineShareData(options); // 分享到朋友圈
-						// jweixin.updateAppMessageShareData(options); // 分享给朋友
-						jweixin.onMenuShareAppMessage(options); // 分享到朋友圈
-						jweixin.onMenuShareTimeline(options); // 分享给朋友
-						jweixin.onMenuShareQQ(options); // 分享到朋友圈
-						jweixin.onMenuShareQZone(options); // 分享给朋友
-						jweixin.onMenuShareWeibo(options); // 分享到朋友圈
-					});
-					jweixin.error(function(res) {
-						// config信息验证失败会执行error函数，如签名过期导致验证失败，具体错误信息可以打开config的debug模式查看，也可以在返回的res参数中查看，对于SPA可以在这里更新签名。
-						console.log(JSON.stringify(res));
-					});
-				} else {
+			},
+			// opid直接登录
+			async autoLogin(opid) {
+				let that = this;
+		
+				try {
+					let res = await this.$api.WxTokenLogin({openId:opid}, false);
+					// this.$ui.hideloading()
+					// uni.navigateTo({
+					// 	url:'/pages/login/login'
+					// })	
+					// 	return
+					if (res.Success) {		
+						that.$store.commit('login');
+						uni.setStorageSync('access_token',res.Data.hp)
+						that.initUser()
+					
+					} else {
+						this.$ui.hideloading()
+						if(res.Msg && res.Msg!='用户不存在' ){
+							this.$ui.toast(res.Msg)
+						}
+						if(that.shareData.proCode && that.shareData.userId && that.shareData.odrCode){
+							uni.redirectTo({
+								url: '/pages/main/details/details?code='+ that.shareData.proCode
+							});
+						}else{
+							// uni.redirectTo({
+							// 	url:'/pages/loding/loding'
+							// })	
+						}			
+					}
+				} catch (err) {
+					this.$ui.hideloading()
+					this.$ui.toast(err)
 				}
-			} catch (err) {
-				console.log('请求结果false : ' + err);
+			},
+			// 加载登录账户信息
+			async initUser(callback) {
+				let that = this;
+				try {
+					let res = await this.$api.getConsumer({}, false);
+					if (res.Success) {
+						if (res.Data) {
+							that.$store.commit('setUserInfo', res.Data);
+							setTimeout(()=>{
+								if(res.Data.consumer_type==3){
+									// if(false){
+									// 安装员
+									uni.redirectTo({
+										url: '/pages/main/serverCenter/serverCenter'
+									});
+								}else{
+									//  消费者 3是安装 2推广者
+									// 记录信息
+									if(that.shareData.proCode && that.shareData.userId && that.shareData.odrCode){
+										uni.redirectTo({
+											url: '/pages/main/details/details?code='+ that.shareData.proCode
+										});
+									}else{
+										// uni.redirectTo({
+										// 	url: '/pages/loding/loding'
+										// });
+									}						
+								}
+							},500)						
+						}
+					} else {
+						that.$ui.toast(res.Msg);
+					}
+					if (callback) callback();
+				} catch (err) {
+					console.log('请求结果false : ' + err);
+				}
 			}
-		}
+		
 	}
 };
 </script>

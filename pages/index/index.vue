@@ -149,8 +149,8 @@ export default {
 							url: '/pages/main/details/details?code='+ that.shareData.proCode
 						});
 					}else{
-						uni.switchTab({
-							url:'/pages/main/main'
+						uni.redirectTo({
+							url:'/pages/loding/loding'
 						})	
 					}			
 				}
@@ -182,8 +182,8 @@ export default {
 										url: '/pages/main/details/details?code='+ that.shareData.proCode
 									});
 								}else{
-									uni.switchTab({
-										url: '/pages/main/main'
+									uni.redirectTo({
+										url: '/pages/loding/loding'
 									});
 								}						
 							}

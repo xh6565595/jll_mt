@@ -8,7 +8,7 @@
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.createApp = createApp;exports.createComponent = createComponent;exports.createPage = createPage;exports.default = void 0;var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ 2));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _slicedToArray(arr, i) {return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest();}function _nonIterableRest() {throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");}function _iterableToArrayLimit(arr, i) {if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return;var _arr = [];var _n = true;var _d = false;var _e = undefined;try {for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {_arr.push(_s.value);if (i && _arr.length === i) break;}} catch (err) {_d = true;_e = err;} finally {try {if (!_n && _i["return"] != null) _i["return"]();} finally {if (_d) throw _e;}}return _arr;}function _arrayWithHoles(arr) {if (Array.isArray(arr)) return arr;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}function _toConsumableArray(arr) {return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread();}function _nonIterableSpread() {throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");}function _unsupportedIterableToArray(o, minLen) {if (!o) return;if (typeof o === "string") return _arrayLikeToArray(o, minLen);var n = Object.prototype.toString.call(o).slice(8, -1);if (n === "Object" && o.constructor) n = o.constructor.name;if (n === "Map" || n === "Set") return Array.from(o);if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);}function _iterableToArray(iter) {if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter);}function _arrayWithoutHoles(arr) {if (Array.isArray(arr)) return _arrayLikeToArray(arr);}function _arrayLikeToArray(arr, len) {if (len == null || len > arr.length) len = arr.length;for (var i = 0, arr2 = new Array(len); i < len; i++) {arr2[i] = arr[i];}return arr2;}
+Object.defineProperty(exports, "__esModule", { value: true });exports.createApp = createApp;exports.createComponent = createComponent;exports.createPage = createPage;exports.createPlugin = createPlugin;exports.createSubpackageApp = createSubpackageApp;exports.default = void 0;var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ 2));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _slicedToArray(arr, i) {return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest();}function _nonIterableRest() {throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");}function _iterableToArrayLimit(arr, i) {if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return;var _arr = [];var _n = true;var _d = false;var _e = undefined;try {for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {_arr.push(_s.value);if (i && _arr.length === i) break;}} catch (err) {_d = true;_e = err;} finally {try {if (!_n && _i["return"] != null) _i["return"]();} finally {if (_d) throw _e;}}return _arr;}function _arrayWithHoles(arr) {if (Array.isArray(arr)) return arr;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}function _toConsumableArray(arr) {return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread();}function _nonIterableSpread() {throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");}function _unsupportedIterableToArray(o, minLen) {if (!o) return;if (typeof o === "string") return _arrayLikeToArray(o, minLen);var n = Object.prototype.toString.call(o).slice(8, -1);if (n === "Object" && o.constructor) n = o.constructor.name;if (n === "Map" || n === "Set") return Array.from(o);if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);}function _iterableToArray(iter) {if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter);}function _arrayWithoutHoles(arr) {if (Array.isArray(arr)) return _arrayLikeToArray(arr);}function _arrayLikeToArray(arr, len) {if (len == null || len > arr.length) len = arr.length;for (var i = 0, arr2 = new Array(len); i < len; i++) {arr2[i] = arr[i];}return arr2;}
 
 var _toString = Object.prototype.toString;
 var hasOwnProperty = Object.prototype.hasOwnProperty;
@@ -241,7 +241,7 @@ var promiseInterceptor = {
 
 
 var SYNC_API_RE =
-/^\$|sendNativeEvent|restoreGlobal|getCurrentSubNVue|getMenuButtonBoundingClientRect|^report|interceptors|Interceptor$|getSubNVueById|requireNativePlugin|upx2px|hideKeyboard|canIUse|^create|Sync$|Manager$|base64ToArrayBuffer|arrayBufferToBase64/;
+/^\$|Window$|WindowStyle$|sendNativeEvent|restoreGlobal|getCurrentSubNVue|getMenuButtonBoundingClientRect|^report|interceptors|Interceptor$|getSubNVueById|requireNativePlugin|upx2px|hideKeyboard|canIUse|^create|Sync$|Manager$|base64ToArrayBuffer|arrayBufferToBase64/;
 
 var CONTEXT_API_RE = /^create|Manager$/;
 
@@ -432,7 +432,19 @@ var previewImage = {
   } };
 
 
-// import navigateTo from 'uni-helpers/navigate-to'
+var UUID_KEY = '__DC_STAT_UUID';
+var deviceId;
+function addUuid(result) {
+  deviceId = deviceId || wx.getStorageSync(UUID_KEY);
+  if (!deviceId) {
+    deviceId = Date.now() + '' + Math.floor(Math.random() * 1e7);
+    wx.setStorage({
+      key: UUID_KEY,
+      data: deviceId });
+
+  }
+  result.deviceId = deviceId;
+}
 
 function addSafeAreaInsets(result) {
   if (result.safeArea) {
@@ -445,16 +457,22 @@ function addSafeAreaInsets(result) {
 
   }
 }
+
+var getSystemInfo = {
+  returnValue: function returnValue(result) {
+    addUuid(result);
+    addSafeAreaInsets(result);
+  } };
+
+
+// import navigateTo from 'uni-helpers/navigate-to'
+
 var protocols = {
   redirectTo: redirectTo,
   // navigateTo,  // 由于在微信开发者工具的页面参数，会显示__id__参数，因此暂时关闭mp-weixin对于navigateTo的AOP
   previewImage: previewImage,
-  getSystemInfo: {
-    returnValue: addSafeAreaInsets },
-
-  getSystemInfoSync: {
-    returnValue: addSafeAreaInsets } };
-
+  getSystemInfo: getSystemInfo,
+  getSystemInfoSync: getSystemInfo };
 
 var todos = [
 'vibrate',
@@ -485,7 +503,7 @@ function processArgs(methodName, fromArgs) {var argsOption = arguments.length > 
           keyOption = keyOption(fromArgs[key], fromArgs, toArgs);
         }
         if (!keyOption) {// 不支持的参数
-          console.warn("\u5FAE\u4FE1\u5C0F\u7A0B\u5E8F ".concat(methodName, "\u6682\u4E0D\u652F\u6301").concat(key));
+          console.warn("The '".concat(methodName, "' method of platform '\u5FAE\u4FE1\u5C0F\u7A0B\u5E8F' does not support option '").concat(key, "'"));
         } else if (isStr(keyOption)) {// 重写参数 key
           toArgs[keyOption] = fromArgs[key];
         } else if (isPlainObject(keyOption)) {// {name:newName,value:value}可重新指定参数 key:value
@@ -520,7 +538,7 @@ function wrapper(methodName, method) {
     var protocol = protocols[methodName];
     if (!protocol) {// 暂不支持的 api
       return function () {
-        console.error("\u5FAE\u4FE1\u5C0F\u7A0B\u5E8F \u6682\u4E0D\u652F\u6301".concat(methodName));
+        console.error("Platform '\u5FAE\u4FE1\u5C0F\u7A0B\u5E8F' does not support '".concat(methodName, "'."));
       };
     }
     return function (arg1, arg2) {// 目前 api 最多两个参数
@@ -567,7 +585,7 @@ function createTodoApi(name) {
 
   {var fail = _ref.fail,complete = _ref.complete;
     var res = {
-      errMsg: "".concat(name, ":fail:\u6682\u4E0D\u652F\u6301 ").concat(name, " \u65B9\u6CD5") };
+      errMsg: "".concat(name, ":fail method '").concat(name, "' not supported") };
 
     isFn(fail) && fail(res);
     isFn(complete) && complete(res);
@@ -601,7 +619,7 @@ function getProvider(_ref2)
     isFn(success) && success(res);
   } else {
     res = {
-      errMsg: 'getProvider:fail:服务[' + service + ']不存在' };
+      errMsg: 'getProvider:fail service not found' };
 
     isFn(fail) && fail(res);
   }
@@ -663,7 +681,7 @@ var customize = cached(function (str) {
 
 function initTriggerEvent(mpInstance) {
   {
-    if (!wx.canIUse('nextTick')) {
+    if (!wx.canIUse || !wx.canIUse('nextTick')) {
       return;
     }
   }
@@ -686,16 +704,19 @@ function initHook(name, options) {
     };
   }
 }
+if (!MPPage.__$wrappered) {
+  MPPage.__$wrappered = true;
+  Page = function Page() {var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+    initHook('onLoad', options);
+    return MPPage(options);
+  };
+  Page.after = MPPage.after;
 
-Page = function Page() {var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-  initHook('onLoad', options);
-  return MPPage(options);
-};
-
-Component = function Component() {var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-  initHook('created', options);
-  return MPComponent(options);
-};
+  Component = function Component() {var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+    initHook('created', options);
+    return MPComponent(options);
+  };
+}
 
 var PAGE_EVENT_HOOKS = [
 'onPullDownRefresh',
@@ -1214,9 +1235,13 @@ function handleEvent(event) {var _this = this;
           isCustom,
           methodName);
 
+          params = Array.isArray(params) ? params : [];
           // 参数尾部增加原始事件对象用于复杂表达式内获取额外数据
-          // eslint-disable-next-line no-sparse-arrays
-          ret.push(handler.apply(handlerCtx, (Array.isArray(params) ? params : []).concat([,,,,,,,,,, event])));
+          if (/=\s*\S+\.eventParams\s*\|\|\s*\S+\[['"]event-params['"]\]/.test(handler.toString())) {
+            // eslint-disable-next-line no-sparse-arrays
+            params = params.concat([,,,,,,,,,, event]);
+          }
+          ret.push(handler.apply(handlerCtx, params));
         }
       });
     }
@@ -1231,6 +1256,19 @@ function handleEvent(event) {var _this = this;
   }
 }
 
+var eventChannels = {};
+
+var eventChannelStack = [];
+
+function getEventChannel(id) {
+  if (id) {
+    var eventChannel = eventChannels[id];
+    delete eventChannels[id];
+    return eventChannel;
+  }
+  return eventChannelStack.shift();
+}
+
 var hooks = [
 'onShow',
 'onHide',
@@ -1240,10 +1278,80 @@ var hooks = [
 'onUnhandledRejection'];
 
 
+function initEventChannel() {
+  _vue.default.prototype.getOpenerEventChannel = function () {
+    // 微信小程序使用自身getOpenerEventChannel
+    {
+      return this.$scope.getOpenerEventChannel();
+    }
+  };
+  var callHook = _vue.default.prototype.__call_hook;
+  _vue.default.prototype.__call_hook = function (hook, args) {
+    if (hook === 'onLoad' && args && args.__id__) {
+      this.__eventChannel__ = getEventChannel(args.__id__);
+      delete args.__id__;
+    }
+    return callHook.call(this, hook, args);
+  };
+}
+
+function initScopedSlotsParams() {
+  var center = {};
+  var parents = {};
+
+  _vue.default.prototype.$hasScopedSlotsParams = function (vueId) {
+    var has = center[vueId];
+    if (!has) {
+      parents[vueId] = this;
+      this.$on('hook:destory', function () {
+        delete parents[vueId];
+      });
+    }
+    return has;
+  };
+
+  _vue.default.prototype.$getScopedSlotsParams = function (vueId, name, key) {
+    var data = center[vueId];
+    if (data) {
+      var object = data[name] || {};
+      return key ? object[key] : object;
+    } else {
+      parents[vueId] = this;
+      this.$on('hook:destory', function () {
+        delete parents[vueId];
+      });
+    }
+  };
+
+  _vue.default.prototype.$setScopedSlotsParams = function (name, value) {
+    var vueId = this.$options.propsData.vueId;
+    var object = center[vueId] = center[vueId] || {};
+    object[name] = value;
+    if (parents[vueId]) {
+      parents[vueId].$forceUpdate();
+    }
+  };
+
+  _vue.default.mixin({
+    destroyed: function destroyed() {
+      var propsData = this.$options.propsData;
+      var vueId = propsData && propsData.vueId;
+      if (vueId) {
+        delete center[vueId];
+        delete parents[vueId];
+      }
+    } });
+
+}
+
 function parseBaseApp(vm, _ref3)
 
 
 {var mocks = _ref3.mocks,initRefs = _ref3.initRefs;
+  initEventChannel();
+  {
+    initScopedSlotsParams();
+  }
   if (vm.$options.store) {
     _vue.default.prototype.$store = vm.$options.store;
   }
@@ -1267,7 +1375,12 @@ function parseBaseApp(vm, _ref3)
 
       delete this.$options.mpType;
       delete this.$options.mpInstance;
-
+      if (this.mpType === 'page' && typeof getApp === 'function') {// hack vue-i18n
+        var app = getApp();
+        if (app.$vm && app.$vm.$i18n) {
+          this._i18n = app.$vm.$i18n;
+        }
+      }
       if (this.mpType !== 'app') {
         initRefs(this);
         initMocks(this, mocks);
@@ -1281,7 +1394,7 @@ function parseBaseApp(vm, _ref3)
         return;
       }
       {
-        if (!wx.canIUse('nextTick')) {// 事实 上2.2.3 即可，简单使用 2.3.0 的 nextTick 判断
+        if (wx.canIUse && !wx.canIUse('nextTick')) {// 事实 上2.2.3 即可，简单使用 2.3.0 的 nextTick 判断
           console.error('当前微信基础库版本过低，请将 微信开发者工具-详情-项目设置-调试基础库版本 更换为`2.3.0`以上');
         }
       }
@@ -1412,34 +1525,7 @@ function parseApp(vm) {
 
 }
 
-var eventChannels = {};
-
-var eventChannelStack = [];
-
-function getEventChannel(id) {
-  if (id) {
-    var eventChannel = eventChannels[id];
-    delete eventChannels[id];
-    return eventChannel;
-  }
-  return eventChannelStack.shift();
-}
-
 function createApp(vm) {
-  _vue.default.prototype.getOpenerEventChannel = function () {
-    // 微信小程序使用自身getOpenerEventChannel
-    {
-      return this.$scope.getOpenerEventChannel();
-    }
-  };
-  var callHook = _vue.default.prototype.__call_hook;
-  _vue.default.prototype.__call_hook = function (hook, args) {
-    if (hook === 'onLoad' && args && args.__id__) {
-      this.__eventChannel__ = getEventChannel(args.__id__);
-      delete args.__id__;
-    }
-    return callHook.call(this, hook, args);
-  };
   App(parseApp(vm));
   return vm;
 }
@@ -1642,6 +1728,60 @@ function createComponent(vueOptions) {
   }
 }
 
+function createSubpackageApp(vm) {
+  var appOptions = parseApp(vm);
+  var app = getApp({
+    allowDefault: true });
+
+  var globalData = app.globalData;
+  if (globalData) {
+    Object.keys(appOptions.globalData).forEach(function (name) {
+      if (!hasOwn(globalData, name)) {
+        globalData[name] = appOptions.globalData[name];
+      }
+    });
+  }
+  Object.keys(appOptions).forEach(function (name) {
+    if (!hasOwn(app, name)) {
+      app[name] = appOptions[name];
+    }
+  });
+  if (isFn(appOptions.onShow) && wx.onAppShow) {
+    wx.onAppShow(function () {for (var _len5 = arguments.length, args = new Array(_len5), _key5 = 0; _key5 < _len5; _key5++) {args[_key5] = arguments[_key5];}
+      appOptions.onShow.apply(app, args);
+    });
+  }
+  if (isFn(appOptions.onHide) && wx.onAppHide) {
+    wx.onAppHide(function () {for (var _len6 = arguments.length, args = new Array(_len6), _key6 = 0; _key6 < _len6; _key6++) {args[_key6] = arguments[_key6];}
+      appOptions.onHide.apply(app, args);
+    });
+  }
+  if (isFn(appOptions.onLaunch)) {
+    var args = wx.getLaunchOptionsSync && wx.getLaunchOptionsSync();
+    appOptions.onLaunch.call(app, args);
+  }
+  return vm;
+}
+
+function createPlugin(vm) {
+  var appOptions = parseApp(vm);
+  if (isFn(appOptions.onShow) && wx.onAppShow) {
+    wx.onAppShow(function () {for (var _len7 = arguments.length, args = new Array(_len7), _key7 = 0; _key7 < _len7; _key7++) {args[_key7] = arguments[_key7];}
+      appOptions.onShow.apply(vm, args);
+    });
+  }
+  if (isFn(appOptions.onHide) && wx.onAppHide) {
+    wx.onAppHide(function () {for (var _len8 = arguments.length, args = new Array(_len8), _key8 = 0; _key8 < _len8; _key8++) {args[_key8] = arguments[_key8];}
+      appOptions.onHide.apply(vm, args);
+    });
+  }
+  if (isFn(appOptions.onLaunch)) {
+    var args = wx.getLaunchOptionsSync && wx.getLaunchOptionsSync();
+    appOptions.onLaunch.call(vm, args);
+  }
+  return vm;
+}
+
 todos.forEach(function (todoApi) {
   protocols[todoApi] = false;
 });
@@ -1721,6 +1861,8 @@ if (typeof Proxy !== 'undefined' && "mp-weixin" !== 'app-plus') {
 wx.createApp = createApp;
 wx.createPage = createPage;
 wx.createComponent = createComponent;
+wx.createSubpackageApp = createSubpackageApp;
+wx.createPlugin = createPlugin;
 
 var uni$1 = uni;var _default =
 
@@ -18885,7 +19027,7 @@ Set;exports.default = _default;
 __webpack_require__.r(__webpack_exports__);
 /* WEBPACK VAR INJECTION */(function(global) {/*!
  * Vue.js v2.6.11
- * (c) 2014-2020 Evan You
+ * (c) 2014-2021 Evan You
  * Released under the MIT License.
  */
 /*  */
@@ -21529,7 +21671,7 @@ function renderList (
       var iterator = val[Symbol.iterator]();
       var result = iterator.next();
       while (!result.done) {
-        ret.push(render(result.value, ret.length, i++, i)); // fixed by xxxxxx
+        ret.push(render(result.value, ret.length, i, i++)); // fixed by xxxxxx
         result = iterator.next();
       }
     } else {
@@ -24690,7 +24832,7 @@ function internalMixin(Vue) {
     Vue.util.warn(("Error in " + info + ": \"" + (err.toString()) + "\""), vm);
     console.error(err);
     /* eslint-disable no-undef */
-    var app = getApp();
+    var app = typeof getApp === 'function' && getApp();
     if (app && app.onError) {
       app.onError(err);
     }
@@ -24844,6 +24986,7 @@ var LIFECYCLE_HOOKS$1 = [
     'onError',
     'onUnhandledRejection',
     //Page
+    'onInit',
     'onLoad',
     // 'onShow',
     'onReady',
@@ -25326,366 +25469,6 @@ set;exports.default = _default;
 /***/ }),
 
 /***/ 28:
-/*!******************************************************!*\
-  !*** /Users/skia/Desktop/work/jll_mt/utils/utils.js ***!
-  \******************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _SET = _interopRequireDefault(__webpack_require__(/*! ../SET.js */ 15));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
-var Utils = {
-  emailCheck: function emailCheck(value) {
-    var reg = /^\w+@[a-z0-9]+\.[a-z]+$/i;
-    var r = reg.test(value);
-    return r;
-  },
-  phoneCheck: function phoneCheck(value) {
-    var reg = /^1\d{10}$/;
-    var r = reg.test(value);
-    return r;
-  },
-  passCheck: function passCheck(val) {
-    var patrn = /^(\w){6,20}$/;
-    if (!patrn.exec(val)) return false;
-    return true;
-  },
-  // 银行卡校验
-  bankCardCheck: function bankCardCheck(val) {
-    var patrn = /^([1-9]{1})(\d{15}|\d{18})$/;
-    if (!patrn.test(val)) return false;
-    return true;
-  },
-  // 中文字符
-  chineseCheck: function chineseCheck(val) {
-    var patrn = /^[\u4E00-\u9FA5]{2,4}/;
-
-    if (!patrn.test(val)) return false;
-    return true;
-  },
-  // 银行卡数字加密
-  encryptBankCode: function encryptBankCode(val) {
-
-    var str = val.replace(/\s/g, '');
-    console.log(str);
-    var reg = /^(\d{4})\d+(\d{4})$/;
-    str.replace(reg, "$1 **** **** $2");
-    console.log(str);
-    return str;
-  },
-
-
-  /**
-      * Parse the time to string
-      * @param {(Object|string|number)} time
-      * @param {string} cFormat
-      * @returns {string}
-      */
-  parseTime: function parseTime(time, cFormat) {
-    if (arguments.length === 0) {
-      return null;
-    }
-    var format = cFormat || '{y}-{m}-{d} {h}:{i}:{s}';
-    var date;
-    if (typeof time === 'object') {
-      date = time;
-    } else {
-      if (typeof time === 'string' && /^[0-9]+$/.test(time)) {
-        time = parseInt(time);
-      }
-      if (typeof time === 'number' && time.toString().length === 10) {
-        time = time * 1000;
-      }
-      date = new Date(time);
-    }
-    var formatObj = {
-      y: date.getFullYear(),
-      m: date.getMonth() + 1,
-      d: date.getDate(),
-      h: date.getHours(),
-      i: date.getMinutes(),
-      s: date.getSeconds(),
-      a: date.getDay() };
-
-    var time_str = format.replace(/{(y|m|d|h|i|s|a)+}/g, function (result, key) {
-      var value = formatObj[key];
-      // Note: getDay() returns 0 on Sunday
-      if (key === 'a') {
-        return ['日', '一', '二', '三', '四', '五', '六'][value];
-      }
-      if (result.length > 0 && value < 10) {
-        value = '0' + value;
-      }
-      return value || 0;
-    });
-    return time_str;
-  },
-
-  /**
-      * @param {number} time
-      * @param {string} option
-      * @returns {string}
-      */
-  formatTime: function formatTime(time, option) {
-    if (('' + time).length === 10) {
-      time = parseInt(time) * 1000;
-    } else {
-      time = +time;
-    }
-    var d = new Date(time);
-    var now = Date.now();
-
-    var diff = (now - d) / 1000;
-
-    if (diff < 30) {
-      return '刚刚';
-    } else if (diff < 3600) {
-      // less 1 hour
-      return Math.ceil(diff / 60) + '分钟前';
-    } else if (diff < 3600 * 24) {
-      return Math.ceil(diff / 3600) + '小时前';
-    } else if (diff < 3600 * 24 * 2) {
-      return '1天前';
-    }
-    if (option) {
-      return parseTime(time, option);
-    } else {
-      return (
-        d.getMonth() +
-        1 +
-        '月' +
-        d.getDate() +
-        '日' +
-        d.getHours() +
-        '时' +
-        d.getMinutes() +
-        '分');
-
-    }
-  },
-  /**
-      * @param {string} type
-      * @returns {Date}
-      */
-  getTime: function getTime(type) {
-    if (type === 'start') {
-      return new Date().getTime() - 3600 * 1000 * 24 * 90;
-    } else {
-      return new Date(new Date().toDateString());
-    }
-  },
-
-  // 记录本地足迹
-  // setTrace(item) {
-  // 	let list = uni.getStorageSync('kxTraceList');
-  // 	if (list) {
-  // 		list = JSON.parse(list)
-  // 	} else {
-  // 		list = {}
-  // 	}
-  // 	console.log('存入足迹')
-  // 	// 判断该记录书是否存在
-  // 	let time = new Date().getTime()
-  // 	let id = item.code
-  // 	item.time = time
-  // 	list[id] = item
-  // 	uni.setStorageSync('kxTraceList', JSON.stringify(list));
-  // },
-  // // 获取足迹
-  // getTrace() {
-  // 	let list = uni.getStorageSync('kxTraceList');
-  // 	if (list) {
-  // 		return (JSON.parse(list))
-  // 	} else {
-  // 		return []
-  // 	}
-
-  // },
-  // // 清除所有足迹
-  // clearTrace() {
-  // 	uni.removeStorageSync('kxTraceList');
-  // },
-
-  // 支付宝支付
-  AliPay: function AliPay(strData, callback, failFun) {
-    if (!strData) {
-      uni.showToast({
-        icon: 'none',
-        title: '支付参数无效' });
-
-      return;
-    }
-    uni.requestPayment({
-      provider: "alipay",
-      orderInfo: strData,
-      success: function success(res) {
-        plus.nativeUI.toast('支付成功');
-        if (callback) callback();
-      },
-      fail: function fail(res) {
-        if (failFun) {
-          failFun();
-          return;
-        }
-        uni.showToast({
-          title: '支付失败',
-          icon: "none",
-          duration: 2000,
-          complete: function complete() {
-            uni.redirectTo({
-              url: '/pages/features/order/order?current=1' });
-
-          } });
-
-      } });
-
-  },
-
-  // 微信支付
-  WxPay: function WxPay(orderinfo, callback, failFun) {
-    if (!orderinfo) {
-      uni.showToast({
-        icon: 'none',
-        title: '支付参数无效' });
-
-      return;
-    }
-    // console.log(JSON.stringify(orderinfo));
-    uni.requestPayment({
-      provider: "wxpay",
-      timeStamp: orderinfo.timestamp,
-      nonceStr: orderinfo.noncestr,
-      package: orderinfo.package,
-      signType: "MD5",
-      paySign: orderinfo.paySign,
-      orderInfo: {
-        appid: orderinfo.appid,
-        noncestr: orderinfo.noncestr,
-        package: orderinfo.package,
-        partnerid: orderinfo.mchid,
-        prepayid: orderinfo.prepayid,
-        timestamp: orderinfo.timestamp,
-        sign: orderinfo.sign },
-
-      success: function success(res) {
-        plus.nativeUI.toast('支付成功');
-        if (callback) callback();
-      },
-      fail: function fail(res) {
-        console.log(JSON.stringify(res));
-        if (failFun) {
-          failFun();
-          return;
-        }
-        uni.showToast({
-          title: '支付失败',
-          icon: "none",
-          duration: 2000,
-          complete: function complete() {
-            uni.redirectTo({
-              url: '/pages/features/order/order?current=1' });
-
-          } });
-
-      } });
-
-  },
-  // 判断是否可以指纹解锁
-  // 判断当前机型是否支持指纹
-  checkFinger: function checkFinger() {
-    if (!plus.fingerprint.isSupport()) {
-      plus.nativeUI.toast('此设备不支持指纹识别');
-      // this.supportFinger = false;
-      return false;
-    } else if (!plus.fingerprint.isKeyguardSecure()) {
-      plus.nativeUI.toast('此设备未设置密码锁屏');
-      // this.supportFinger = false;
-      return false;
-    } else if (!plus.fingerprint.isEnrolledFingerprints()) {
-      plus.nativeUI.toast('此设备未录入指纹');
-      // this.supportFinger = false;
-      return false;
-    } else {
-      // this.supportFinger = true;
-      return true;
-    }
-
-  },
-  // 是否微信浏览器
-  is_weixn: function is_weixn() {
-    var ua = navigator.userAgent.toLowerCase();
-    if (ua.match(/MicroMessenger/i) == "micromessenger") {
-      return true;
-    } else {
-      return false;
-    }
-  },
-  // 是否受过权
-  // 返回code
-  ifAuth: function ifAuth(success) {
-    var url = window.location.href;
-    var s = url.match(/code=(.*)&state/);
-    if (s) {
-      // 是授权后的页面,则做opnegid判断 使用code获取pid
-      // return s[1]
-      // 换取oid
-      success(s[1]);
-    } else {
-      // 不是授权的页面，重定向进行授权
-
-      this.wxauth();
-    }
-  },
-
-  // wx授权跳转
-  wx_auth: function wx_auth() {
-    // alert(1)
-    var set = {
-      appid: _SET.default.wx_appid, //测试环境
-      redirect_uri: _SET.default.wx_redirect_url };
-
-    window.location.href = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=' + set.appid + '&redirect_uri=' +
-    set.redirect_uri + '&response_type=code&scope=snsapi_userinfo&state=1#wechat_redirect';
-  } };var _default =
-
-
-Utils;exports.default = _default;
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
-
-/***/ }),
-
-/***/ 3:
-/*!***********************************!*\
-  !*** (webpack)/buildin/global.js ***!
-  \***********************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-var g;
-
-// This works in non-strict mode
-g = (function() {
-	return this;
-})();
-
-try {
-	// This works if eval is allowed (see CSP)
-	g = g || new Function("return this")();
-} catch (e) {
-	// This works if the window reference is available
-	if (typeof window === "object") g = window;
-}
-
-// g can still be undefined, but nothing to do about it...
-// We return undefined, instead of nothing here, so it's
-// easier to handle this case. if(!global) { ...}
-
-module.exports = g;
-
-
-/***/ }),
-
-/***/ 37:
 /*!***********************************************************!*\
   !*** /Users/skia/Desktop/work/jll_mt/utils/baseMixins.js ***!
   \***********************************************************/
@@ -25797,6 +25580,37 @@ var baseMixins = {
 
     } } };exports.baseMixins = baseMixins;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
+
+/***/ }),
+
+/***/ 3:
+/*!***********************************!*\
+  !*** (webpack)/buildin/global.js ***!
+  \***********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+var g;
+
+// This works in non-strict mode
+g = (function() {
+	return this;
+})();
+
+try {
+	// This works if eval is allowed (see CSP)
+	g = g || new Function("return this")();
+} catch (e) {
+	// This works if the window reference is available
+	if (typeof window === "object") g = window;
+}
+
+// g can still be undefined, but nothing to do about it...
+// We return undefined, instead of nothing here, so it's
+// easier to handle this case. if(!global) { ...}
+
+module.exports = g;
+
 
 /***/ }),
 
@@ -27809,18 +27623,7 @@ if (hadRuntime) {
 
 /***/ }),
 
-/***/ 7:
-/*!**************************************************!*\
-  !*** /Users/skia/Desktop/work/jll_mt/pages.json ***!
-  \**************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-
-
-/***/ }),
-
-/***/ 70:
+/***/ 69:
 /*!*******************************************************************!*\
   !*** /Users/skia/Desktop/work/jll_mt/utils/QS-SharePoster/app.js ***!
   \*******************************************************************/
@@ -28390,7 +28193,18 @@ module.exports = _app;
 
 /***/ }),
 
-/***/ 71:
+/***/ 7:
+/*!**************************************************!*\
+  !*** /Users/skia/Desktop/work/jll_mt/pages.json ***!
+  \**************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+
+
+/***/ }),
+
+/***/ 70:
 /*!******************************************************************************!*\
   !*** /Users/skia/Desktop/work/jll_mt/utils/QS-SharePoster/QS-SharePoster.js ***!
   \******************************************************************************/
@@ -28398,8 +28212,8 @@ module.exports = _app;
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@babel/runtime/regenerator */ 4));var _app2 = _interopRequireDefault(__webpack_require__(/*! ./app.js */ 70));
-var _QRCodeAlg = _interopRequireDefault(__webpack_require__(/*! ./QRCodeAlg.js */ 72));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _toConsumableArray(arr) {return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread();}function _nonIterableSpread() {throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");}function _unsupportedIterableToArray(o, minLen) {if (!o) return;if (typeof o === "string") return _arrayLikeToArray(o, minLen);var n = Object.prototype.toString.call(o).slice(8, -1);if (n === "Object" && o.constructor) n = o.constructor.name;if (n === "Map" || n === "Set") return Array.from(o);if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);}function _iterableToArray(iter) {if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter);}function _arrayWithoutHoles(arr) {if (Array.isArray(arr)) return _arrayLikeToArray(arr);}function _arrayLikeToArray(arr, len) {if (len == null || len > arr.length) len = arr.length;for (var i = 0, arr2 = new Array(len); i < len; i++) {arr2[i] = arr[i];}return arr2;}function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}
+/* WEBPACK VAR INJECTION */(function(uni) {var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@babel/runtime/regenerator */ 4));var _app2 = _interopRequireDefault(__webpack_require__(/*! ./app.js */ 69));
+var _QRCodeAlg = _interopRequireDefault(__webpack_require__(/*! ./QRCodeAlg.js */ 71));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _toConsumableArray(arr) {return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread();}function _nonIterableSpread() {throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");}function _unsupportedIterableToArray(o, minLen) {if (!o) return;if (typeof o === "string") return _arrayLikeToArray(o, minLen);var n = Object.prototype.toString.call(o).slice(8, -1);if (n === "Object" && o.constructor) n = o.constructor.name;if (n === "Map" || n === "Set") return Array.from(o);if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);}function _iterableToArray(iter) {if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter);}function _arrayWithoutHoles(arr) {if (Array.isArray(arr)) return _arrayLikeToArray(arr);}function _arrayLikeToArray(arr, len) {if (len == null || len > arr.length) len = arr.length;for (var i = 0, arr2 = new Array(len); i < len; i++) {arr2[i] = arr[i];}return arr2;}function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}
 var ShreUserPosterBackgroundKey = 'ShrePosterBackground_'; // 背景图片缓存名称前缀
 var idKey = 'QSSHAREPOSTER_IDKEY'; //drawArray自动生成的idkey
 var isMp = false;
@@ -29702,7 +29516,7 @@ module.exports = {
 
 /***/ }),
 
-/***/ 72:
+/***/ 71:
 /*!*************************************************************************!*\
   !*** /Users/skia/Desktop/work/jll_mt/utils/QS-SharePoster/QRCodeAlg.js ***!
   \*************************************************************************/
@@ -30718,6 +30532,335 @@ QRBitBuffer.prototype = {
     }
     this.length++;
   } };
+
+/***/ }),
+
+/***/ 80:
+/*!******************************************************!*\
+  !*** /Users/skia/Desktop/work/jll_mt/utils/utils.js ***!
+  \******************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _SET = _interopRequireDefault(__webpack_require__(/*! ../SET.js */ 15));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+var Utils = {
+  emailCheck: function emailCheck(value) {
+    var reg = /^\w+@[a-z0-9]+\.[a-z]+$/i;
+    var r = reg.test(value);
+    return r;
+  },
+  phoneCheck: function phoneCheck(value) {
+    var reg = /^1\d{10}$/;
+    var r = reg.test(value);
+    return r;
+  },
+  passCheck: function passCheck(val) {
+    var patrn = /^(\w){6,20}$/;
+    if (!patrn.exec(val)) return false;
+    return true;
+  },
+  // 银行卡校验
+  bankCardCheck: function bankCardCheck(val) {
+    var patrn = /^([1-9]{1})(\d{15}|\d{18})$/;
+    if (!patrn.test(val)) return false;
+    return true;
+  },
+  // 中文字符
+  chineseCheck: function chineseCheck(val) {
+    var patrn = /^[\u4E00-\u9FA5]{2,4}/;
+
+    if (!patrn.test(val)) return false;
+    return true;
+  },
+  // 银行卡数字加密
+  encryptBankCode: function encryptBankCode(val) {
+
+    var str = val.replace(/\s/g, '');
+    console.log(str);
+    var reg = /^(\d{4})\d+(\d{4})$/;
+    str.replace(reg, "$1 **** **** $2");
+    console.log(str);
+    return str;
+  },
+
+
+  /**
+      * Parse the time to string
+      * @param {(Object|string|number)} time
+      * @param {string} cFormat
+      * @returns {string}
+      */
+  parseTime: function parseTime(time, cFormat) {
+    if (arguments.length === 0) {
+      return null;
+    }
+    var format = cFormat || '{y}-{m}-{d} {h}:{i}:{s}';
+    var date;
+    if (typeof time === 'object') {
+      date = time;
+    } else {
+      if (typeof time === 'string' && /^[0-9]+$/.test(time)) {
+        time = parseInt(time);
+      }
+      if (typeof time === 'number' && time.toString().length === 10) {
+        time = time * 1000;
+      }
+      date = new Date(time);
+    }
+    var formatObj = {
+      y: date.getFullYear(),
+      m: date.getMonth() + 1,
+      d: date.getDate(),
+      h: date.getHours(),
+      i: date.getMinutes(),
+      s: date.getSeconds(),
+      a: date.getDay() };
+
+    var time_str = format.replace(/{(y|m|d|h|i|s|a)+}/g, function (result, key) {
+      var value = formatObj[key];
+      // Note: getDay() returns 0 on Sunday
+      if (key === 'a') {
+        return ['日', '一', '二', '三', '四', '五', '六'][value];
+      }
+      if (result.length > 0 && value < 10) {
+        value = '0' + value;
+      }
+      return value || 0;
+    });
+    return time_str;
+  },
+
+  /**
+      * @param {number} time
+      * @param {string} option
+      * @returns {string}
+      */
+  formatTime: function formatTime(time, option) {
+    if (('' + time).length === 10) {
+      time = parseInt(time) * 1000;
+    } else {
+      time = +time;
+    }
+    var d = new Date(time);
+    var now = Date.now();
+
+    var diff = (now - d) / 1000;
+
+    if (diff < 30) {
+      return '刚刚';
+    } else if (diff < 3600) {
+      // less 1 hour
+      return Math.ceil(diff / 60) + '分钟前';
+    } else if (diff < 3600 * 24) {
+      return Math.ceil(diff / 3600) + '小时前';
+    } else if (diff < 3600 * 24 * 2) {
+      return '1天前';
+    }
+    if (option) {
+      return parseTime(time, option);
+    } else {
+      return (
+        d.getMonth() +
+        1 +
+        '月' +
+        d.getDate() +
+        '日' +
+        d.getHours() +
+        '时' +
+        d.getMinutes() +
+        '分');
+
+    }
+  },
+  /**
+      * @param {string} type
+      * @returns {Date}
+      */
+  getTime: function getTime(type) {
+    if (type === 'start') {
+      return new Date().getTime() - 3600 * 1000 * 24 * 90;
+    } else {
+      return new Date(new Date().toDateString());
+    }
+  },
+
+  // 记录本地足迹
+  // setTrace(item) {
+  // 	let list = uni.getStorageSync('kxTraceList');
+  // 	if (list) {
+  // 		list = JSON.parse(list)
+  // 	} else {
+  // 		list = {}
+  // 	}
+  // 	console.log('存入足迹')
+  // 	// 判断该记录书是否存在
+  // 	let time = new Date().getTime()
+  // 	let id = item.code
+  // 	item.time = time
+  // 	list[id] = item
+  // 	uni.setStorageSync('kxTraceList', JSON.stringify(list));
+  // },
+  // // 获取足迹
+  // getTrace() {
+  // 	let list = uni.getStorageSync('kxTraceList');
+  // 	if (list) {
+  // 		return (JSON.parse(list))
+  // 	} else {
+  // 		return []
+  // 	}
+
+  // },
+  // // 清除所有足迹
+  // clearTrace() {
+  // 	uni.removeStorageSync('kxTraceList');
+  // },
+
+  // 支付宝支付
+  AliPay: function AliPay(strData, callback, failFun) {
+    if (!strData) {
+      uni.showToast({
+        icon: 'none',
+        title: '支付参数无效' });
+
+      return;
+    }
+    uni.requestPayment({
+      provider: "alipay",
+      orderInfo: strData,
+      success: function success(res) {
+        plus.nativeUI.toast('支付成功');
+        if (callback) callback();
+      },
+      fail: function fail(res) {
+        if (failFun) {
+          failFun();
+          return;
+        }
+        uni.showToast({
+          title: '支付失败',
+          icon: "none",
+          duration: 2000,
+          complete: function complete() {
+            uni.redirectTo({
+              url: '/pages/features/order/order?current=1' });
+
+          } });
+
+      } });
+
+  },
+
+  // 微信支付
+  WxPay: function WxPay(orderinfo, callback, failFun) {
+    if (!orderinfo) {
+      uni.showToast({
+        icon: 'none',
+        title: '支付参数无效' });
+
+      return;
+    }
+    // console.log(JSON.stringify(orderinfo));
+    uni.requestPayment({
+      provider: "wxpay",
+      timeStamp: orderinfo.timestamp,
+      nonceStr: orderinfo.noncestr,
+      package: orderinfo.package,
+      signType: "MD5",
+      paySign: orderinfo.paySign,
+      orderInfo: {
+        appid: orderinfo.appid,
+        noncestr: orderinfo.noncestr,
+        package: orderinfo.package,
+        partnerid: orderinfo.mchid,
+        prepayid: orderinfo.prepayid,
+        timestamp: orderinfo.timestamp,
+        sign: orderinfo.sign },
+
+      success: function success(res) {
+        plus.nativeUI.toast('支付成功');
+        if (callback) callback();
+      },
+      fail: function fail(res) {
+        console.log(JSON.stringify(res));
+        if (failFun) {
+          failFun();
+          return;
+        }
+        uni.showToast({
+          title: '支付失败',
+          icon: "none",
+          duration: 2000,
+          complete: function complete() {
+            uni.redirectTo({
+              url: '/pages/features/order/order?current=1' });
+
+          } });
+
+      } });
+
+  },
+  // 判断是否可以指纹解锁
+  // 判断当前机型是否支持指纹
+  checkFinger: function checkFinger() {
+    if (!plus.fingerprint.isSupport()) {
+      plus.nativeUI.toast('此设备不支持指纹识别');
+      // this.supportFinger = false;
+      return false;
+    } else if (!plus.fingerprint.isKeyguardSecure()) {
+      plus.nativeUI.toast('此设备未设置密码锁屏');
+      // this.supportFinger = false;
+      return false;
+    } else if (!plus.fingerprint.isEnrolledFingerprints()) {
+      plus.nativeUI.toast('此设备未录入指纹');
+      // this.supportFinger = false;
+      return false;
+    } else {
+      // this.supportFinger = true;
+      return true;
+    }
+
+  },
+  // 是否微信浏览器
+  is_weixn: function is_weixn() {
+    var ua = navigator.userAgent.toLowerCase();
+    if (ua.match(/MicroMessenger/i) == "micromessenger") {
+      return true;
+    } else {
+      return false;
+    }
+  },
+  // 是否受过权
+  // 返回code
+  ifAuth: function ifAuth(success) {
+    var url = window.location.href;
+    var s = url.match(/code=(.*)&state/);
+    if (s) {
+      // 是授权后的页面,则做opnegid判断 使用code获取pid
+      // return s[1]
+      // 换取oid
+      success(s[1]);
+    } else {
+      // 不是授权的页面，重定向进行授权
+
+      this.wxauth();
+    }
+  },
+
+  // wx授权跳转
+  wx_auth: function wx_auth() {
+    // alert(1)
+    var set = {
+      appid: _SET.default.wx_appid, //测试环境
+      redirect_uri: _SET.default.wx_redirect_url };
+
+    window.location.href = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=' + set.appid + '&redirect_uri=' +
+    set.redirect_uri + '&response_type=code&scope=snsapi_userinfo&state=1#wechat_redirect';
+  } };var _default =
+
+
+Utils;exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ })
 
