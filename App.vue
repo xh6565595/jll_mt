@@ -57,12 +57,11 @@ export default {
 		// 	that.$store.commit('setShare',{proCode:that.shareData.proCode,userId:that.shareData.userId,orderCode:that.shareData.odrCode,iviCode:that.shareData.iviCode})
 		// }
 		
-		
-		// console.log('shareData',this.shareData)
-		// const jll_opid =  uni.getStorageSync('jll_opid');  
-		// if(jll_opid){
-		// 	that.autoLogin(jll_opid)
-		// }else{
+	 
+		const jll_opid =  uni.getStorageSync('jll_opid');  
+		if(jll_opid){
+			that.autoLogin(jll_opid)
+		}else{
 			uni.login({
 			  provider: 'weixin', 
 			  success: function (res) {
@@ -71,7 +70,7 @@ export default {
 				that.getopId(code)	
 			  }
 			});
-		// }
+		}
 	},
 	onShow: function() {
 		console.log('App Show');
@@ -195,9 +194,10 @@ export default {
 <style lang="scss">
 @import '/static/font/iconfont.css';
 @import '/static/common/animate.css';
-
 /*每个页面公共css */
 @import '/static/common/common.css';
+
+
 button {
 	border: none;
 	border-radius: 50rpx;

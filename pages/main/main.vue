@@ -144,7 +144,7 @@ export default {
 				this._oidIfAttention(authId)	
 			}else{
 				uni.navigateTo({
-					url:'/pages/auth/auth'
+					url:'/pages/features/auth/auth'
 				})
 			}		
 			// this.$refs.dy.hideModal()			

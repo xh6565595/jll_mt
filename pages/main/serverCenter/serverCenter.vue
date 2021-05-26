@@ -50,7 +50,7 @@
 				</navigator>
 			</view>
 			<view class="flex flex _center " style="margin-top: 20rpx;">
-				<navigator url="/pages/sisMsg/sisMsg" class="menus menus3 "  hover-class="cm_hover_m">
+				<navigator url="/pages/features/sisMsg/sisMsg" class="menus menus3 "  hover-class="cm_hover_m">
 				<!-- 	<view class="menusHeader">
 						<text class="itemTags">你有3条订单待处理</text>
 					</view> -->
@@ -146,7 +146,7 @@ export default {
 	methods: {
 		_msg() {
 			uni.navigateTo({
-				url: '/pages/sisMsg/sisMsg'
+				url: '/pages/features/sisMsg/sisMsg'
 			});
 		},
 		objectChange(e) {

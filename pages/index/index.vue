@@ -2,30 +2,7 @@
 	<view class="pages flex flex_center flex_y">
 		<image src="../../static/image/logo.png" mode="scaleToFill" class="logo" ></image>
 		<text class="name">GLLO健康智能马桶</text>
-	<!-- 	<text class="text">您尚未登录</text>
-		<text class="text">需要获取您的授权之后完成登录</text>
-		<button type="success" class="btns" open-type="getUserInfo" @getuserinfo="getuserinfo">微信登录</button>
-		
-		<accredit ref="userBox">
-			<view class="formBox" slot="content">
-				<view class="cm_title cm_tex_c title" > 账户绑定</view>
-				<view class=" inputBoxs ">
-					<text class="cm_title label  ">手机号码:</text>
-				</view>
-					
-				<view class=" inputBoxs  flex flex_center cm_bdb">					
-					<input class="cm_tex_l f1 inp" type="text"  v-model="formParams.mobile" placeholder="请输入手机号">
-					<view class="yzmBtn" size="mini" hover-class="cm_hover" @tap="_getCode">{{seconds>0?seconds+'s':'发送验证码'}}</view>
-				</view>
-				<view class=" inputBoxs ">
-					<text class="cm_title label  ">验证码:</text>
-				</view>
-				<view class=" ">
-					 <one-input ref="hi" type="box" @finish="finish" @input="input" :maxlength="6"></one-input>
-				</view>
-				<button type="success" class="btns"   @tap="submit">立即登录</button>		
-			</view>		
-		</accredit> -->
+ 
 	</view>
 </template>
 

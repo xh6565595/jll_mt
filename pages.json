@@ -1,13 +1,18 @@
 {
 	"pages": [ //pages数组中第一项表示应用启动页,
- 
+		// {
+		// 	"path": "pages/index/index",
+		// 	"style": {
+		// 		"navigationBarTitleText": "欢迎"
+		// 	}
+		// },
 		{
 			"path": "pages/loding/loding",
 			"style": {
 				"navigationBarTitleText": "欢迎"
 			}
 		},
-	 
+
 		{
 			"path": "pages/main/main",
 			"style": {
@@ -22,111 +27,62 @@
 				"navigationBarTitleText": "我的",
 				"enablePullDownRefresh": true
 			}
-		},{
+		}, {
 			"path": "pages/main/details/details",
 			"style": {
 				"navigationBarTitleText": "商品详情",
 				"navigationBarTextStyle": "black",
-				"navigationStyle":"custom"
+				"navigationStyle": "custom"
 				// "mp-weixin": {
 				//       "usingComponents": {
 				//         "txv-video": "plugin://tencentvideo/video"
 				//       }
 				//     }
 			}
-		}
-        ,{
-            "path" : "pages/activity/activity",
-            "style" : {
+		}, {
+			"path": "pages/activity/activity",
+			"style": {
 				"navigationBarTitleText": "活动",
 				"navigationBarTextStyle": "black",
 				"enablePullDownRefresh": true
 			}
-        },{
-            "path" : "pages/user/share/share",
-            "style" : {
+		}, {
+			"path": "pages/user/share/share",
+			"style": {
 				"navigationBarTitleText": "分享",
 				"navigationBarTextStyle": "black"
 			}
-        },{
-            "path" : "pages/features/createOrder/createOrder",
-            "style" : {
-				"navigationBarTitleText": "提交订单",
-				"navigationBarTextStyle": "black",
-				"navigationBarBackgroundColor": "#f4f4f4"
-			}
-        },{
-            "path" : "pages/features/order/order",
-            "style" : {
-				"navigationBarTitleText": "订单列表",
-				"navigationBarTextStyle": "black",
-				"navigationBarBackgroundColor": "#fff"
-			}
-        },{
-            "path" : "pages/features/order/orderDetail/orderDetail",
-            "style" : {
-				"navigationBarTitleText": "订单详情",
-				"navigationBarTextStyle": "black",
-				"navigationBarBackgroundColor": "#fff"
-			}
-        },{
-            "path" : "pages/features/deposit/deposit",
-            "style" : {
-				"navigationBarTitleText": "提现",
-				"navigationBarTextStyle": "black",
-				"navigationBarBackgroundColor": "#f4f4f4"
-			}
-        },{
-            "path" : "pages/features/depositRecord/depositRecord",
-            "style" : {
-				"navigationBarTitleText": "余额明细",
-				"navigationBarTextStyle": "black",
-				"navigationBarBackgroundColor": "#fff"
-			}
-        },{
-            "path" : "pages/main/serverCenter/serverCenter",
-            "style" : {
+		},
+		{
+			"path": "pages/main/serverCenter/serverCenter",
+			"style": {
 				"navigationBarTitleText": "派单管理",
 				"navigationBarTextStyle": "black",
 				"navigationBarBackgroundColor": "#fff",
 				"enablePullDownRefresh": false
 			}
-        },{
-            "path" : "pages/main/serverDetail/serverDetail",
-            "style" : {
+		}, {
+			"path": "pages/main/serverDetail/serverDetail",
+			"style": {
 				"navigationBarTitleText": "安装详情",
 				"navigationBarTextStyle": "black",
 				"navigationBarBackgroundColor": "#fff"
 			}
-        }, {
-            "path" : "pages/main/serverLunch/serverLunch",
-            "style" : {
+		}, {
+			"path": "pages/main/serverLunch/serverLunch",
+			"style": {
 				"navigationBarTitleText": "安装列表",
 				"navigationBarTextStyle": "black",
 				"navigationBarBackgroundColor": "#fff",
 				"enablePullDownRefresh": true
 			}
-        },{
-            "path" : "pages/main/serverRepair/serverRepair",
-            "style" : {
+		}, {
+			"path": "pages/main/serverRepair/serverRepair",
+			"style": {
 				"navigationBarTitleText": "维修列表",
 				"navigationBarTextStyle": "black",
 				"navigationBarBackgroundColor": "#fff",
 				"enablePullDownRefresh": true
-			}
-        },{
-			"path": "pages/features/adress/adress",
-			"style": {
-				"navigationBarTitleText": "收货地址",
-				"navigationBarTextStyle": "black",
-				"navigationBarBackgroundColor": "#fff"
-			} 
-		}, {
-			"path": "pages/features/newAdress/newAdress",
-			"style": {
-				"navigationBarTitleText": "新建地址",
-				"navigationBarTextStyle": "black",
-				"navigationBarBackgroundColor": "#fff"
 			}
 		}, {
 			"path": "pages/user/withdrawal/withdrawal",
@@ -135,118 +91,177 @@
 				"navigationBarTextStyle": "black",
 				"navigationBarBackgroundColor": "#fff"
 			}
-		}, {
-			"path": "pages/features/comment/comment",
-			"style": {
-				"navigationBarTitleText": "意见反馈",
-				"navigationBarTextStyle": "black",
-				"navigationBarBackgroundColor": "#fff"
-			}
-		}, {
+		},{
 			"path": "pages/success/success",
 			"style": {
 				"navigationBarTitleText": "支付成功",
 				"navigationBarTextStyle": "black",
 				"navigationBarBackgroundColor": "#fff"
 			}
-		}, {
-			"path": "pages/features/ems/ems",
+		},  {
+			"path": "pages/activity/activityDetail/activityDetail",
 			"style": {
-				"navigationBarTitleText": "物流信息",
+				"navigationBarTitleText": "详情",
 				"navigationBarTextStyle": "black",
 				"navigationBarBackgroundColor": "#fff"
 			}
 		}, {
-			"path": "pages/sisMsg/sisMsg",
+			"path": "pages/login/login",
 			"style": {
-				"navigationBarTitleText": "系统信息",
+				"navigationBarTitleText": "登录",
 				"navigationBarTextStyle": "black",
 				"navigationBarBackgroundColor": "#fff"
 			}
-		}
-        ,{
-            "path" : "pages/sisMsg/msg/msg",
-            "style": {
-            	"navigationBarTitleText": "消息详情",
-            	"navigationBarTextStyle": "black",
-            	"navigationBarBackgroundColor": "#fff"
-            }
-        }
-        ,{
-            "path" : "pages/activity/activityDetail/activityDetail",
-            "style": {
-            	"navigationBarTitleText": "详情",
-            	"navigationBarTextStyle": "black",
-            	"navigationBarBackgroundColor": "#fff"
-            }
-        }
-        ,{
-            "path" : "pages/login/login",
-            "style": {
-            	"navigationBarTitleText": "登录",
-            	"navigationBarTextStyle": "black",
-            	"navigationBarBackgroundColor": "#fff"
-            }
-        },
-		{
-			"path" : "pages/features/invoice/invoice",
+		},
+		
+		 {
+			"path": "pages/main/repairRecord/repairRecord",
 			"style": {
-				"navigationBarTitleText": "开具发票",
-				"navigationBarTextStyle": "black",
-				"navigationBarBackgroundColor": "#fff"
-			}
-		}
-        ,{
-            "path" : "pages/webview/webview",
-            "style" : {}
-        },
-		{
-		    "path" : "pages/auth/auth",
-		    "style" : {
-				"navigationBarTitleText": "公众号授权"
-			}
-		}
-        ,{
-            "path" : "pages/main/repairRecord/repairRecord",
-            "style" : {
 				"navigationBarTitleText": "详情记录",
 				"navigationBarTextStyle": "black",
 				"navigationBarBackgroundColor": "#fff"
 			}
-        }
-        ,{
-            "path" : "pages/main/repairDetail/repairDetail",
-            "style" : {
+		}, {
+			"path": "pages/main/repairDetail/repairDetail",
+			"style": {
 				"navigationBarTitleText": "维修详情",
 				"navigationBarTextStyle": "black",
 				"navigationBarBackgroundColor": "#fff"
 			}
-        }
-        ,{
-            "path" : "pages/main/deviceMsg/deviceMsg",
-            "style" : {
+		}, {
+			"path": "pages/main/deviceMsg/deviceMsg",
+			"style": {
 				"navigationBarTitleText": "设备信息",
 				"navigationBarTextStyle": "black",
 				"navigationBarBackgroundColor": "#fff"
 			}
-        }
-        ,{
-            "path" : "pages/main/installMsg/installMsg",
-            "style" : {
+		}, {
+			"path": "pages/main/installMsg/installMsg",
+			"style": {
 				"navigationBarTitleText": "安装信息",
 				"navigationBarTextStyle": "black",
 				"navigationBarBackgroundColor": "#fff"
 			}
-        }
-        ,{
-            "path" : "pages/main/repairMsg/repairMsg",
-            "style" : {
+		}, {
+			"path": "pages/main/repairMsg/repairMsg",
+			"style": {
 				"navigationBarTitleText": "维修信息",
 				"navigationBarTextStyle": "black",
 				"navigationBarBackgroundColor": "#fff"
 			}
-        }
-    ],
+		}
+	],
+	"subPackages": [{
+		"root": "pages/features",
+		"pages": [
+			{
+				"path": "webview/webview",
+				"style": {}
+			},
+			{
+				"path": "auth/auth",
+				"style": {
+					"navigationBarTitleText": "授权"
+				}
+			},
+			{
+				"path": "sisMsg/msg/msg",
+				"style": {
+					"navigationBarTitleText": "消息详情",
+					"navigationBarTextStyle": "black",
+					"navigationBarBackgroundColor": "#fff"
+				}
+			},
+			{
+				"path": "sisMsg/sisMsg",
+				"style": {
+					"navigationBarTitleText": "系统信息",
+					"navigationBarTextStyle": "black",
+					"navigationBarBackgroundColor": "#fff"
+				}
+			},
+			{
+				"path": "createOrder/createOrder",
+				"style": {
+					"navigationBarTitleText": "提交订单",
+					"navigationBarTextStyle": "black",
+					"navigationBarBackgroundColor": "#f4f4f4"
+				}
+			}, {
+				"path": "order/order",
+				"style": {
+					"navigationBarTitleText": "订单列表",
+					"navigationBarTextStyle": "black",
+					"navigationBarBackgroundColor": "#fff"
+				}
+			}, {
+				"path": "order/orderDetail/orderDetail",
+				"style": {
+					"navigationBarTitleText": "订单详情",
+					"navigationBarTextStyle": "black",
+					"navigationBarBackgroundColor": "#fff"
+				}
+			}, {
+				"path": "deposit/deposit",
+				"style": {
+					"navigationBarTitleText": "提现",
+					"navigationBarTextStyle": "black",
+					"navigationBarBackgroundColor": "#f4f4f4"
+				}
+			}, {
+				"path": "depositRecord/depositRecord",
+				"style": {
+					"navigationBarTitleText": "余额明细",
+					"navigationBarTextStyle": "black",
+					"navigationBarBackgroundColor": "#fff"
+				}
+			}, {
+				"path": "backRecord/backRecord",
+				"style": {
+					"navigationBarTitleText": "返还记录",
+					"navigationBarTextStyle": "black",
+					"navigationBarBackgroundColor": "#fff"
+				}
+			}, {
+				"path": "comment/comment",
+				"style": {
+					"navigationBarTitleText": "意见反馈",
+					"navigationBarTextStyle": "black",
+					"navigationBarBackgroundColor": "#fff"
+				}
+			},
+			{
+				"path": "ems/ems",
+				"style": {
+					"navigationBarTitleText": "物流信息",
+					"navigationBarTextStyle": "black",
+					"navigationBarBackgroundColor": "#fff"
+				}
+			}, {
+				"path": "adress/adress",
+				"style": {
+					"navigationBarTitleText": "收货地址",
+					"navigationBarTextStyle": "black",
+					"navigationBarBackgroundColor": "#fff"
+				}
+			}, {
+				"path": "newAdress/newAdress",
+				"style": {
+					"navigationBarTitleText": "新建地址",
+					"navigationBarTextStyle": "black",
+					"navigationBarBackgroundColor": "#fff"
+				}
+			}, 
+			{
+				"path": "invoice/invoice",
+				"style": {
+					"navigationBarTitleText": "开具发票",
+					"navigationBarTextStyle": "black",
+					"navigationBarBackgroundColor": "#fff"
+				}
+			}
+		]
+	}],
 	"tabBar": {
 		"color": "#999",
 		"selectedColor": "#FF7809",
@@ -275,4 +290,4 @@
 		"navigationBarBackgroundColor": "#ffffff",
 		"backgroundColor": "#f8f8f8"
 	}
-} 
+}

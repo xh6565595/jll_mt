@@ -233,23 +233,42 @@ export default {
 		xhStoreParamsSKU
 	},
 	onLoad(options) {
+		let that = this
+		let icode = ''
+		if(options.q){
+			let  url = decodeURIComponent(options.q);
+			icode = url.split('icode=')[1]
+		}else if(options.icode){
+			icode = options.icode
+		}
+		// console.log(icode);
+		this.shareData = {
+			proCode:options.code?options.code:'',  //商品code
+			userId:options.ucode?options.ucode:'' ,  //人物code
+			odrCode:options.ocode?options.ocode:'' ,  //人物code
+			iviCode:icode?icode:'',
+		}
+		// console.log(this.shareData );
+		if(that.shareData.proCode || that.shareData.userId || that.shareData.odrCode || that.shareData.iviCode){
+			that.$store.commit('setShare',{proCode:that.shareData.proCode,userId:that.shareData.userId,orderCode:that.shareData.odrCode,iviCode:that.shareData.iviCode})
+		}
+		
 		this.formParams.project_code = options.code;
-		this.formParams.share_user_id = this.shareUser;
+		this.formParams.share_user_id = that.shareData.userId;
 		this.selfOrder = options.order;
-		if (options.code == this.sharePro) {
+		if (options.code == that.shareData.proCode) {
 			this.shareActive = true; //是分享活动商品
 		}
 		if (options.type == 'self' && options.order) {
 			this.shareActive = true;
 			this.selfBuy = true;
 			this.formParams.project_code = options.code;
-			this.formParams.share_user_id = this.shareUser;
+			this.formParams.share_user_id = that.shareData.userId;
 
 			// debugger
 		}
 		this._loadData('refresh');
-		let that = this;
-		
+	 
 		
 	},
 	onUnload() {

@@ -1,8 +1,0 @@
-{
-  "navigationBarTitleText": "系统信息",
-  "navigationBarTextStyle": "black",
-  "navigationBarBackgroundColor": "#fff",
-  "usingComponents": {
-    "tui-tips": "/components/extend/tips/tips"
-  }
-}

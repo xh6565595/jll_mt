@@ -24,6 +24,17 @@
 /* 垂直间距 */
 /* 透明度 */
 /* 文章场景相关 */
+.pages .fixBtn.data-v-00316766 {
+  line-height: 50rpx;
+  padding: 0 20rpx;
+  border-radius: 34rpx;
+  border: 1rpx solid #fff;
+  font-size: 24rpx;
+  color: #ffffff;
+  width: 160rpx;
+  background: #ecbe51;
+  margin: 20rpx auto 0 auto;
+}
 .pages .fixed.data-v-00316766 {
   width: 100%;
   position: fixed;

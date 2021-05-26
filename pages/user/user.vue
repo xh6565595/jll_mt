@@ -68,6 +68,11 @@
 			<view class="boxs">
 				<!-- <view class="cm_title">其他工具</view> -->
 				<view class="">
+					<!-- <view class="menus flex flex_center " @tap="_href('/features/backRecord/backRecord')">
+						<image src="../../static/image/wd_mx@2x.png" class="menusPic"></image>
+						<text class="cm_t_24 f1">返还记录</text>
+						<text class="iconfont icon-fanhui3"></text>
+					</view> -->
 					<view class="menus flex flex_center " @tap="_href('/features/depositRecord/depositRecord')">
 						<image src="../../static/image/wd_mx@2x.png" class="menusPic"></image>
 						<text class="cm_t_24 f1">余额明细</text>
@@ -232,7 +237,7 @@ export default {
 				this._oidIfAttention(authId);
 			} else {
 				uni.navigateTo({
-					url: '/pages/auth/auth'
+					url: '/pages/features/auth/auth'
 				});
 			}
 			// this.$refs.dy.hideModal()

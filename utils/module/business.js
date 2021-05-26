@@ -437,7 +437,15 @@ const Set = {
 			// handle:true
 		}, ifLoad)
 	},
-	
+	// 余额明细
+	rebackList: (data, ifLoad = false) => {
+		return http.request({
+			url: '/api/Order/GetOrderSettle',
+			method: 'POST',
+			data,
+			// handle:true
+		}, ifLoad)
+	},
 	// 关注列表
 	GetAttentionList: (data, ifLoad = false) => {
 		return http.request({

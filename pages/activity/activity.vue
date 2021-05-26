@@ -9,6 +9,7 @@
 					</view>
 				</tuiNav>
 			</view> -->
+			
 			<view v-if="noneItem" class="firstLunch animated fadeIn" style="width: 100%;min-height: 90vh;">
 				<image src="../static/image/hd_fm.png" mode="widthFix" class="firstLunchTop" width='100%'></image>
 
@@ -82,8 +83,8 @@
 											mode="widthFix"></image>
 									</view>
 								</view>
-								<view v-if="item.user_list.share_count<2" class="text">{{ item.user_list.schedule_date_msg }}</view>
-								<view v-else class="text">{{ item.user_list.schedule_success_msg }}</view>
+								<view v-if="item.user_list.share_count<2" class="text">{{ item.user_list.schedule_date_msg }}<navigator class="fixBtn" :url="`/pages/features/backRecord/backRecord?code=${item.order_code}`">返还记录</navigator></view>
+								<view v-else class="text">{{ item.user_list.schedule_success_msg }}<navigator class="fixBtn" :url="`/pages/features/backRecord/backRecord?code=${item.order_code}`">返还记录</navigator></view>
 								<view style="display:flex;  justify-content:center;">
 									<view class="submenber">
 										<image
@@ -309,7 +310,17 @@
 
 <style lang="scss" scoped>
 	.pages {
-
+		.fixBtn{
+			    line-height: 50rpx;
+			    padding: 0 20rpx;
+			    border-radius: 34rpx;
+			    border: 1rpx solid #fff;
+			    font-size: 24rpx;
+			    color: #ffffff;
+			    width: 160rpx;
+			    background: #ecbe51;
+			    margin: 20rpx auto 0 auto;
+		}
 		// padding: 20rpx;
 		// padding-top: 260rpx;
 		.fixed {
