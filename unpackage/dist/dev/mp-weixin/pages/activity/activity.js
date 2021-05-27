@@ -387,8 +387,8 @@ var _default =
       // 来自页面内分享按钮
       return {
         title: this.goods.title,
-        // path: `/pages/index/index?pcode=${this.goods.code}&ucode=${this.goods.user}&ocode=${this.goods.order}`,
-        path: "/pages/main/details/details?code=".concat(this.goods.code, "&ucode=").concat(this.goods.user, "&ocode=").concat(this.goods.order),
+        path: "/pages/index/index?pcode=".concat(this.goods.code, "&ucode=").concat(this.goods.user, "&ocode=").concat(this.goods.order),
+        // path: `/pages/main/details/details?code=${this.goods.code}&ucode=${this.goods.user}&ocode=${this.goods.order}`,
         imageUrl: this.goods.image };
 
     } else {

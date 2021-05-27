@@ -348,19 +348,19 @@ var _default =
     // }
 
 
-    var jll_opid = uni.getStorageSync('jll_opid');
-    if (jll_opid) {
-      that.autoLogin(jll_opid);
-    } else {
-      uni.login({
-        provider: 'weixin',
-        success: function success(res) {
-          var code = res.code;
-          // 获取code换opid 
-          that.getopId(code);
-        } });
-
-    }
+    // const jll_opid =  uni.getStorageSync('jll_opid');  
+    // if(jll_opid){
+    // 	that.autoLogin(jll_opid)
+    // }else{
+    // 	uni.login({
+    // 	  provider: 'weixin', 
+    // 	  success: function (res) {
+    // 		let code =  res.code;
+    // 		// 获取code换opid 
+    // 		that.getopId(code)	
+    // 	  }
+    // 	});
+    // }
   },
   onShow: function onShow() {
     console.log('App Show');
@@ -423,15 +423,15 @@ var _default =
                   if (res.Msg && res.Msg != '用户不存在') {
                     _this2.$ui.toast(res.Msg);
                   }
-                  if (that.shareData.proCode && that.shareData.userId && that.shareData.odrCode) {
-                    uni.redirectTo({
-                      url: '/pages/main/details/details?code=' + that.shareData.proCode });
-
-                  } else {
-                    // uni.redirectTo({
-                    // 	url:'/pages/loding/loding'
-                    // })	
-                  }
+                  // if(that.shareData.proCode && that.shareData.userId && that.shareData.odrCode){
+                  // 	uni.redirectTo({
+                  // 		url: '/pages/main/details/details?code='+ that.shareData.proCode
+                  // 	});
+                  // }else{
+                  // uni.redirectTo({
+                  // 	url:'/pages/loding/loding'
+                  // })	
+                  // }			
                 }_context2.next = 12;break;case 8:_context2.prev = 8;_context2.t0 = _context2["catch"](1);
 
                 _this2.$ui.hideloading();
@@ -456,15 +456,15 @@ var _default =
                       } else {
                         //  消费者 3是安装 2推广者
                         // 记录信息
-                        if (that.shareData.proCode && that.shareData.userId && that.shareData.odrCode) {
-                          uni.redirectTo({
-                            url: '/pages/main/details/details?code=' + that.shareData.proCode });
-
-                        } else {
-                          // uni.redirectTo({
-                          // 	url: '/pages/loding/loding'
-                          // });
-                        }
+                        // if(that.shareData.proCode && that.shareData.userId && that.shareData.odrCode){
+                        // 	uni.redirectTo({
+                        // 		url: '/pages/main/details/details?code='+ that.shareData.proCode
+                        // 	});
+                        // }else{
+                        // 	// uni.redirectTo({
+                        // 	// 	url: '/pages/loding/loding'
+                        // 	// });
+                        // }						
                       }
                     }, 500);
                   }

@@ -58,19 +58,19 @@ export default {
 		// }
 		
 	 
-		const jll_opid =  uni.getStorageSync('jll_opid');  
-		if(jll_opid){
-			that.autoLogin(jll_opid)
-		}else{
-			uni.login({
-			  provider: 'weixin', 
-			  success: function (res) {
-				let code =  res.code;
-				// 获取code换opid 
-				that.getopId(code)	
-			  }
-			});
-		}
+		// const jll_opid =  uni.getStorageSync('jll_opid');  
+		// if(jll_opid){
+		// 	that.autoLogin(jll_opid)
+		// }else{
+		// 	uni.login({
+		// 	  provider: 'weixin', 
+		// 	  success: function (res) {
+		// 		let code =  res.code;
+		// 		// 获取code换opid 
+		// 		that.getopId(code)	
+		// 	  }
+		// 	});
+		// }
 	},
 	onShow: function() {
 		console.log('App Show');
@@ -133,15 +133,15 @@ export default {
 						if(res.Msg && res.Msg!='用户不存在' ){
 							this.$ui.toast(res.Msg)
 						}
-						if(that.shareData.proCode && that.shareData.userId && that.shareData.odrCode){
-							uni.redirectTo({
-								url: '/pages/main/details/details?code='+ that.shareData.proCode
-							});
-						}else{
+						// if(that.shareData.proCode && that.shareData.userId && that.shareData.odrCode){
+						// 	uni.redirectTo({
+						// 		url: '/pages/main/details/details?code='+ that.shareData.proCode
+						// 	});
+						// }else{
 							// uni.redirectTo({
 							// 	url:'/pages/loding/loding'
 							// })	
-						}			
+						// }			
 					}
 				} catch (err) {
 					this.$ui.hideloading()
@@ -166,15 +166,15 @@ export default {
 								}else{
 									//  消费者 3是安装 2推广者
 									// 记录信息
-									if(that.shareData.proCode && that.shareData.userId && that.shareData.odrCode){
-										uni.redirectTo({
-											url: '/pages/main/details/details?code='+ that.shareData.proCode
-										});
-									}else{
-										// uni.redirectTo({
-										// 	url: '/pages/loding/loding'
-										// });
-									}						
+									// if(that.shareData.proCode && that.shareData.userId && that.shareData.odrCode){
+									// 	uni.redirectTo({
+									// 		url: '/pages/main/details/details?code='+ that.shareData.proCode
+									// 	});
+									// }else{
+									// 	// uni.redirectTo({
+									// 	// 	url: '/pages/loding/loding'
+									// 	// });
+									// }						
 								}
 							},500)						
 						}

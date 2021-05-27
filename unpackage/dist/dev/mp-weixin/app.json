@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/index/index",
     "pages/loding/loding",
     "pages/main/main",
     "pages/user/user",
@@ -84,5 +85,6 @@
     "icon": "/components/icon/icon",
     "tui-modal": "/components/modal/modal",
     "tui-tag": "/components/tag/tag"
-  }
+  },
+  "sitemapLocation": "sitemap40.json"
 }
