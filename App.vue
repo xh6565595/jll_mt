@@ -37,7 +37,7 @@ export default {
 				}
 			}
 		}); 
-			
+			 
 		// let icode = ''
 		// if(options.q){
 		// 	let  url = decodeURIComponent(options.q);
