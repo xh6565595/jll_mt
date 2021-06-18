@@ -232,6 +232,7 @@
   font-size: 30rpx;
   color: #FEE7B9;
   margin-top: 20rpx;
+  line-height: 1.8;
 }
 .firstLunch .nowbtn.data-v-00316766 {
   width: 650rpx;
