@@ -245,7 +245,7 @@ export default {
 		if (options.type == 'self' && options.order) {
 			this.shareActive = true;
 			this.selfBuy = true;
-			this.formParams.project_code = options.code;
+			
 			this.formParams.share_user_id = that.shareUser;
 
 			// debugger
