@@ -104,7 +104,7 @@ export default {
 			
 			try {
 				this.$ui.showloading()
-				
+				//console.log(this.formParams)
 				let res = await this.$api.WxAutoRegiste(this.formParams, false);
 				// console.log(res);
 				this.$ui.hideloading()

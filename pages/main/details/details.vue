@@ -114,18 +114,7 @@
 			</view>
 		</view>
 		<tui-modal :show="modal" @click="handleClick" @cancel="hide" :content="content" :maskClosable="false" color="#333" :size="32"></tui-modal>
-	<!-- 	<view v-if="videoShow" style="width: 100vw;height:100vh;background: rgba(0,0,0,0.6);left:0;top:0;position:fixed;z-index: 100;">
-			<txv-video
-				poster="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1595225914239&di=0209c0ec09478b31a4ab399bc8141e68&imgtype=0&src=http%3A%2F%2Fm.new35.com%2FUploads%2Fimage%2F20180309%2F5aa22fd9a53b2.jpg"
-				poster-for-crawler="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1595225914239&di=0209c0ec09478b31a4ab399bc8141e68&imgtype=0&src=http%3A%2F%2Fm.new35.com%2FUploads%2Fimage%2F20180309%2F5aa22fd9a53b2.jpg"
-				vid="x0972m45dcx"
-				width="100%"
-				height="100%"
-				:usePoster="true"
-				playerid="x0972m45dcx"
-				:autoplay="true"
-			></txv-video>
-		</view> -->
+
 		<xhStoreParamsSKU
 			ref="params"
 			:preImg="banners[0]"
@@ -236,16 +225,20 @@ export default {
 		let that = this
 
 		
-		this.formParams.project_code = options.code;
-		this.formParams.share_user_id = that.shareUser;
+		this.formParams.project_code = options.code;//商口code
+		this.formParams.share_user_id = that.shareUser;//订单推荐人
+		
+		
 		this.selfOrder = options.order;
-		if (options.code == that.sharePro) {
+		
+		if (that.shareUser!='') {
 			this.shareActive = true; //是分享活动商品
+			
 		}
 		if (options.type == 'self' && options.order) {
 			this.shareActive = true;
 			this.selfBuy = true;
-			
+			this.formParams.project_code = options.code;
 			this.formParams.share_user_id = that.shareUser;
 
 			// debugger
@@ -263,14 +256,14 @@ export default {
 		...mapState(['shareUser', 'sharePro', 'shareOrder', 'userInfo', 'hasLogin', 'ifx']),
 		restTimeValied() {
 			let t = this.endTime;
-			console.log(t);
+			//console.log(t);
 			if (!t) {
 				return false;
 			}
 			let s = new Date(t).getTime();
 
 			let n = new Date().getTime();
-			console.log(s);
+			//console.log(s);
 			let date = s - n;
 
 			let days = date / 1000 / 60 / 60 / 24;

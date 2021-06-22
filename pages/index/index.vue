@@ -123,7 +123,8 @@ export default {
 					}
 					if(that.shareData.proCode && that.shareData.userId && that.shareData.odrCode){
 						uni.redirectTo({
-							url: '/pages/main/details/details?code='+ that.shareData.proCode
+							// url: '/pages/main/details/details?code='+ that.shareData.proCode
+							url:'/pages/loding/loding'
 						});
 					}else{
 						uni.redirectTo({
