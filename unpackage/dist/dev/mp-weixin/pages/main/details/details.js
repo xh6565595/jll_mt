@@ -321,17 +321,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
-
-
-
-
-
-
-
-
-
-
 var _vuex = __webpack_require__(/*! vuex */ 14);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var tuiSkeleton = function tuiSkeleton() {__webpack_require__.e(/*! require.ensure | components/tui-skeleton/tui-skeleton */ "components/tui-skeleton/tui-skeleton").then((function () {return resolve(__webpack_require__(/*! @/components/tui-skeleton/tui-skeleton */ 358));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var tuiNumberbox = function tuiNumberbox() {__webpack_require__.e(/*! require.ensure | components/numberbox/numberbox */ "components/numberbox/numberbox").then((function () {return resolve(__webpack_require__(/*! @/components/numberbox/numberbox */ 372));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);}; // import CountCalc from '@/components/uni-countdown.vue'
 var global_Set_jll = uni.getStorageSync('global_Set_jll');var xhStoreParamsSKU = function xhStoreParamsSKU() {__webpack_require__.e(/*! require.ensure | components/xhStoreParamsSKU/xhStoreParamsSKU */ "components/xhStoreParamsSKU/xhStoreParamsSKU").then((function () {return resolve(__webpack_require__(/*! @/components/xhStoreParamsSKU/xhStoreParamsSKU */ 365));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);}; // import bestPaymentPassword from '@/components/best-payment-password/best-payment-password.vue';
 var _default = {
@@ -397,11 +386,15 @@ var _default = {
     var that = this;
 
 
-    this.formParams.project_code = options.code;
-    this.formParams.share_user_id = that.shareUser;
+    this.formParams.project_code = options.code; //商口code
+    this.formParams.share_user_id = that.shareUser; //订单推荐人
+
+
     this.selfOrder = options.order;
-    if (options.code == that.sharePro) {
+
+    if (that.shareUser != '') {
       this.shareActive = true; //是分享活动商品
+
     }
     if (options.type == 'self' && options.order) {
       this.shareActive = true;
@@ -424,14 +417,14 @@ var _default = {
   (0, _vuex.mapState)(['shareUser', 'sharePro', 'shareOrder', 'userInfo', 'hasLogin', 'ifx'])), {}, {
     restTimeValied: function restTimeValied() {
       var t = this.endTime;
-      console.log(t);
+      //console.log(t);
       if (!t) {
         return false;
       }
       var s = new Date(t).getTime();
 
       var n = new Date().getTime();
-      console.log(s);
+      //console.log(s);
       var date = s - n;
 
       var days = date / 1000 / 60 / 60 / 24;

@@ -25,7 +25,7 @@
   width: 346rpx;
   line-height: 80rpx;
   height: 80rpx;
-  border-radius: 40rpx ;
+  border-radius: 40rpx;
   text-align: center;
   color: #fff;
   font-size: 32rpx;

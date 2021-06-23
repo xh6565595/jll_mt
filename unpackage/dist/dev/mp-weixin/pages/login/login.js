@@ -185,11 +185,15 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
 var _utils = _interopRequireDefault(__webpack_require__(/*! @/utils/utils.js */ 28));
 var _index = _interopRequireDefault(__webpack_require__(/*! @/utils/http/index.js */ 11));
 
 
 var _vuex = __webpack_require__(/*! vuex */ 14);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}var oneInput = function oneInput() {__webpack_require__.e(/*! require.ensure | components/myp-one/myp-one */ "components/myp-one/myp-one").then((function () {return resolve(__webpack_require__(/*! @/components/myp-one/myp-one */ 436));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var accredit = function accredit() {__webpack_require__.e(/*! require.ensure | components/accredit/accredit */ "components/accredit/accredit").then((function () {return resolve(__webpack_require__(/*! @/components/accredit/accredit */ 351));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
+
+
 {
   data: function data() {
     return {
@@ -207,7 +211,8 @@ var _vuex = __webpack_require__(/*! vuex */ 14);function _interopRequireDefault(
         "share_user_id": "" //userid 分享活动
       },
       seconds: 0,
-      time: null };
+      time: null,
+      canIUseGetUserProfile: false };
 
   },
   components: {
@@ -226,6 +231,14 @@ var _vuex = __webpack_require__(/*! vuex */ 14);function _interopRequireDefault(
     // 		showCancel:true
     // 	})
     // }
+    if (uni.getUserProfile) {
+
+      this.canIUseGetUserProfile = true;
+
+    } else {
+
+    }
+    // debugger
   },
   computed: (0, _vuex.mapState)(['shareUser', 'iviCode', 'sharePro', 'shareOrder', 'userInfo', 'hasLogin']),
   methods: {
@@ -233,7 +246,9 @@ var _vuex = __webpack_require__(/*! vuex */ 14);function _interopRequireDefault(
                 that = _this;_context.prev = 1;
 
                 _this.$ui.showloading();_context.next = 5;return (
-                  _this.$api.GetOpenId({ wx_code: code }, false));case 5:res = _context.sent;
+                  _this.$api.GetOpenId({
+                    wx_code: code },
+                  false));case 5:res = _context.sent;
                 _this.$ui.hideloading();
                 if (res.Success) {
                   opid = res.Msg;
@@ -258,9 +273,9 @@ var _vuex = __webpack_require__(/*! vuex */ 14);function _interopRequireDefault(
 
 
 
-                _this2.$ui.showloading();_context2.next = 9;return (
-
-                  _this2.$api.WxAutoRegiste(_this2.formParams, false));case 9:res = _context2.sent;
+                _this2.$ui.showloading();
+                //console.log(this.formParams)
+                _context2.next = 9;return _this2.$api.WxAutoRegiste(_this2.formParams, false);case 9:res = _context2.sent;
                 // console.log(res);
                 _this2.$ui.hideloading();
                 if (res.Success) {
@@ -350,38 +365,76 @@ var _vuex = __webpack_require__(/*! vuex */ 14);function _interopRequireDefault(
 
 
     },
+    getUserProfile: function getUserProfile(e) {var _this4 = this;
+      var that = this;
+      // debugger
+      // 推荐使用wx.getUserProfile获取用户信息，开发者每次通过该接口获取用户个人信息均需用户确认
+      // 开发者妥善保管用户快速填写的头像昵称，避免重复弹窗
+      uni.getUserProfile({
+        desc: '获取您的信息头像和昵称', // 声明获取用户个人信息后的用途，后续会展示在弹窗中，请谨慎填写
+        success: function success(res) {
+          // this.setData({
+          //   userInfo: res.userInfo,
+          //   hasUserInfo: true
+          // })
+          // console.log(res)
 
+          _this4.formParams.nickname = res.userInfo.nickName;
+          _this4.formParams.headimgurl = res.userInfo.avatarUrl;
+
+          var jll_opid = uni.getStorageSync('jll_opid');
+          if (jll_opid) {
+            that.autoLogin(jll_opid);
+          } else {
+            uni.login({
+              provider: 'weixin',
+              success: function success(res) {
+                var code = res.code;
+                // 获取code换opid
+                that.getopId(code);
+              } });
+
+          }
+        },
+        fail: function fail(e) {console.log(e);} });
+
+    },
     // 获取个人信息
     getuserinfo: function getuserinfo(res) {
       var that = this;
       var userInfo = res.detail.userInfo;
-      // console.log(res)
-      this.formParams.nickname = userInfo.nickName;
-      this.formParams.headimgurl = userInfo.avatarUrl;
+      console.log(res);
+      if (userInfo) {
+        this.formParams.nickname = userInfo.nickName;
+        this.formParams.headimgurl = userInfo.avatarUrl;
+        return;
+        var jll_opid = uni.getStorageSync('jll_opid');
+        if (jll_opid) {
+          that.autoLogin(jll_opid);
+        } else {
+          uni.login({
+            provider: 'weixin',
+            success: function success(res) {
+              var code = res.code;
+              // 获取code换opid
+              that.getopId(code);
+            } });
 
-      var jll_opid = uni.getStorageSync('jll_opid');
-      if (jll_opid) {
-        that.autoLogin(jll_opid);
-      } else {
-        uni.login({
-          provider: 'weixin',
-          success: function success(res) {
-            var code = res.code;
-            // 获取code换opid
-            that.getopId(code);
-          } });
-
+        }
       }
+
 
 
     },
     // opid直接登录
-    autoLogin: function autoLogin(opid) {var _this4 = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee4() {var that, res;return _regenerator.default.wrap(function _callee4$(_context4) {while (1) {switch (_context4.prev = _context4.next) {case 0:
-                that = _this4;_context4.prev = 1;_context4.next = 4;return (
+    autoLogin: function autoLogin(opid) {var _this5 = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee4() {var that, res;return _regenerator.default.wrap(function _callee4$(_context4) {while (1) {switch (_context4.prev = _context4.next) {case 0:
+                that = _this5;_context4.prev = 1;_context4.next = 4;return (
 
 
 
-                  _this4.$api.WxTokenLogin({ openId: opid }, false));case 4:res = _context4.sent;
+                  _this5.$api.WxTokenLogin({
+                    openId: opid },
+                  false));case 4:res = _context4.sent;
                 // this.$ui.hideloading()
 
                 if (res.Success) {
@@ -391,9 +444,9 @@ var _vuex = __webpack_require__(/*! vuex */ 14);function _interopRequireDefault(
                 } else {
 
                   if (res.Msg && res.Msg != '用户不存在') {
-                    _this4.$ui.toast(res.Msg);
+                    _this5.$ui.toast(res.Msg);
                   } else {
-                    _this4.$refs.userBox.showModal();
+                    _this5.$refs.userBox.showModal();
                   }
                 }_context4.next = 10;break;case 8:_context4.prev = 8;_context4.t0 = _context4["catch"](1);case 10:case "end":return _context4.stop();}}}, _callee4, null, [[1, 8]]);}))();
 
@@ -407,12 +460,12 @@ var _vuex = __webpack_require__(/*! vuex */ 14);function _interopRequireDefault(
 
     },
     // 加载登录账户信息
-    initUser: function initUser(callback) {var _this5 = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee5() {var that, res;return _regenerator.default.wrap(function _callee5$(_context5) {while (1) {switch (_context5.prev = _context5.next) {case 0:
-                that = _this5;_context5.prev = 1;_context5.next = 4;return (
+    initUser: function initUser(callback) {var _this6 = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee5() {var that, res;return _regenerator.default.wrap(function _callee5$(_context5) {while (1) {switch (_context5.prev = _context5.next) {case 0:
+                that = _this6;_context5.prev = 1;_context5.next = 4;return (
 
 
 
-                  _this5.$api.getConsumer({}, false));case 4:res = _context5.sent;
+                  _this6.$api.getConsumer({}, false));case 4:res = _context5.sent;
 
                 if (res.Success) {
                   if (res.Data) {
