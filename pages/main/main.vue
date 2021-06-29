@@ -126,7 +126,7 @@
 					</view>
 				</scroll-view>
 				<!-- <tui-button  :size="28" type="danger" shape="circle" @click="handleClick">确定</tui-button> -->
-				<button type="success" class="cm_btn" @tap="_close">关闭</button>
+				<button type="success" class="cm_btn" @tap="_close">同意</button>
 			</view>
 		</tui-modal>
 	</view>

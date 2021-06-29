@@ -158,7 +158,7 @@
 				 
 					</view>
 				</scroll-view>
-				<button type="success" class="cm_btn" @tap="_close1">关闭</button>
+				<button type="success" class="cm_btn" @tap="_close1">同意</button>
 			</view>
 		</tui-modal>
 	</view>
