@@ -12,9 +12,10 @@
 					<view class="f1"></view>
 				</view>
 			</tuiNav>
+			
 			<video 
 				v-if="goods.project_video"
-				src="http://down.kuxiong999.com/9933.mp4"
+				:src="goods.project_video"
 				id="proVideo"
 				controls 
 				:direction ="0"
@@ -301,7 +302,7 @@ export default {
 				this.$refs.share.showModal() 
 		},
 		_fullscreenchange(event){
-			console.log(event.detail )
+			
 			let iffull = event.detail.fullScreen
 			if(iffull){
 				this.videoContext.play()
@@ -310,7 +311,8 @@ export default {
 			}
 		},
 		videoToggle(){
-			// this.videoShow = true
+			
+			this.videoShow = true
 			this.videoContext.requestFullScreen()
 		},
 		_back() {
@@ -384,7 +386,9 @@ export default {
 					that.business = res.Data.business;
 					that.goods = res.Data.goods;
 					if(that.goods.project_video){
+						
 						that.videoContext = uni.createVideoContext('proVideo')
+						
 					}
 					
 					
@@ -413,7 +417,7 @@ export default {
 				}
 			} catch (err) {
 				that.skeletonShow = false;
-				console.log('请求结果false : ' + err);
+				//nsole.log('请求结果false : ' + err);
 			}
 			if (callback) callback();
 		},

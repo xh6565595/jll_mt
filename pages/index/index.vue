@@ -122,13 +122,13 @@ export default {
 						this.$ui.toast(res.Msg)
 					}
 					if(that.shareData.proCode && that.shareData.userId && that.shareData.odrCode){
-						uni.redirectTo({
+						uni.switchTab({
 							// url: '/pages/main/details/details?code='+ that.shareData.proCode
-							url:'/pages/loding/loding'
+							url:'/pages/main/main'
 						});
 					}else{
-						uni.redirectTo({
-							url:'/pages/loding/loding'
+						uni.switchTab({
+							url:'/pages/main/main'
 						})	
 					}			
 				}
@@ -156,12 +156,16 @@ export default {
 								//  消费者 3是安装 2推广者
 								// 记录信息
 								if(that.shareData.proCode && that.shareData.userId && that.shareData.odrCode){
-									uni.redirectTo({
-										url: '/pages/main/details/details?code='+ that.shareData.proCode
+									// uni.redirectTo({
+									// 	url: '/pages/main/details/details?code='+ that.shareData.proCode
+									// });
+									uni.switchTab({
+										url:'/pages/main/main'
 									});
 								}else{
-									uni.redirectTo({
-										url: '/pages/loding/loding'
+									
+									uni.switchTab({
+										url: '/pages/main/main'
 									});
 								}						
 							}

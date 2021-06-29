@@ -63,7 +63,7 @@
 									<text style="display:flex; flex-direction: column; margin-top: 20rpx; width: 240rpx; height: 60rpx; line-height: 60rpx; align-items: center; background: #EC7538; color: #FFFDEF; border-radius:27rpx;">
 									免单进度</text>
 								</view>
-								<view v-if="item.user_list.share_count<2" class="text">{{ item.user_list.schedule_date_msg }}<navigator class="fixBtn" :url="`/pages/features/backRecord/backRecord?code=${item.order_code}`">返还记录</navigator></view>
+								<view v-if="item.user_list.share_count<2" class="text">{{ item.user_list.schedule_date_msg }}</view>
 								<view v-else  class="fixbox2">{{ item.user_list.schedule_success_msg }}<navigator class="fixBtn2" :url="`/pages/features/backRecord/backRecord?code=${item.order_code}`">返还记录</navigator></view>
 								<view style="display:flex;  justify-content:center;">
 									<view class="submenber">

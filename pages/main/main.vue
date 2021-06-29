@@ -1,18 +1,43 @@
 <template>
 	<view class="pages">
 		<!-- 菜单 -->
-		<swiper class="swiper" :indicator-dots="true" :autoplay="false">
+		<!-- <swiper class="swiper" :indicator-dots="true" :autoplay="false">
 			<block v-for="(item, index) in banners" :key="index">
 				<swiper-item @click="_href(item)">
 					<video :src="item.Url" v-if="item.UrlType == 'video'" :muted="true" :autoplay="true" :poster="item.Text" :show-mute-btn="true" controls class="swiper-item" style="width: 100%;height: 100%;"></video>
 					<image :src="item.Text" v-else mode="aspectFill" lazy-load="true" class="swiper-item uni-bg-red" style="width: 100%;height: 100%;"></image>
 				</swiper-item>
 			</block>
-		</swiper>
+		</swiper> -->
 		<!-- <view  style="width: 100%;height: 100rpx;background: red;"> -->
 			
 		<!-- </view> -->
+		<view class="flex flex_start" style="background-color: #fff;padding: 20rpx;">
+			<image lazy-load="true" src="../../static/image/logo.png" mode="widthFix" class="iLogo"></image>
+			<view style="line-height: 60rpx; ">洁利来官方店</view>
+			<view class="f1"></view>
+			<button type="default" class="inbtn" @tap="_toBuy">我的活动</button>
+		</view>
 		
+		
+		
+		<view style="border-radius: 8rpx;overflow: hidden; width: 100%;">
+			<image src="http://gllo.kuxiong999.com/zly_fm.jpg" mode="widthFix" style="width: 100%;" class="firstLunchTop"></image>
+		</view>
+		<view style="background-color: #fff;padding: 20rpx;">
+			<view class="grayBox">
+				GLLO洁利来健康智能马桶的最大益处：能水疗痣疮和水疗便秘，冬天坐圈是热的，便后清洗更加卫生，让您的生活从此自信满满。健康从好的习惯开始！
+			</view>
+			
+			<button type="success" class="cm_btn" style="background-color: #ff8400;" @tap="_gz">查看活动规则</button>
+		</view>
+		<!-- <view
+			style="background:#FAE0BF; color: #BF8758; font-size: 30rpx; line-height: 40rpx; height: 230rpx; padding: 20rpx;">
+			2021年是疫情后重建健康世界的契机，GLLO为答谢新老顾客，现推出两款智能健康马桶参与“2021助力健康优惠返佣活动”！帮您重启健康生活，无接触冲水让您减少细茵接触，自动冲洗功能让你预防妇科疾病以及改善便秘问题。
+		</view> -->
+		<view style="background: #FCF4E7; padding:0 20rpx 20rpx 20rpx;">
+			<view class="flex flex_center hottitle">—— 活动商品 ——</view>
+		</view>
 		<view class="hot">
 			<block v-for="(item, index) in list" :key="index">
 				<navigator :url="'/pages/main/details/details?code=' + item.project_code" class="hotItem">
@@ -84,6 +109,26 @@
 				<button type="default" class="cm_btn cm_btn_plain" @tap="_cancelGz"   >取消订阅</button>	
 			</view>
 		</accredit>
+		<tui-modal :show="gzshow" custom>
+			<view class="tui-modal-custom">
+				<!-- <image src="/static/images/chat/fail.png" class="tui-tips-img"></image> -->
+				<scroll-view class="scrollBox" :scroll-y="true">
+					<view class="tui-modal-custom-text">
+						健康马桶免费拿活动规则：</br>
+						1、凡成功购买一台健康马桶的用户即获得本次活动的参与资格。</br>
+						2、获得本次活动参与资格的用户，在成功推荐两台健康马桶付款成交后，即可享受从次月三号起每月返还100元本金，返还累计与所购健康马桶价款等额为止。</br>
+						3、本次活动不限于只可推荐两台健康马桶，如成功推荐四台健康马桶付款成交，则次月三号起可获得每月300元的本金返还，推荐六台健康马桶成交可获得每月500元本金返还，推荐八台健康马桶成交可获得每月700元本金返还，推荐十台健康马桶成交可获得每月1000元的本金返还，但返还奖励的总额都只累计至与用户所购健康马桶价款等额为止。</br>
+						4、活动期间产品运输费用及安装费用由本公司承担。</br>
+						五、如购买健康马桶用户的产品使用空间位置未预留220V电源插座，需用户付费安装。</br>
+						六、本次活动产品一律享有，两年免费保修，终身售后的服务。</br>
+						七、本活动无参与次数限制。取得活动参与资格的用户返还奖励终止后，可再次购买健康马桶重新获取活动参与资格，并享有同等权益。</br>
+				 
+					</view>
+				</scroll-view>
+				<!-- <tui-button  :size="28" type="danger" shape="circle" @click="handleClick">确定</tui-button> -->
+				<button type="success" class="cm_btn" @tap="_close">关闭</button>
+			</view>
+		</tui-modal>
 	</view>
 </template>
 
@@ -103,7 +148,8 @@ export default {
 				type: '1',
 				pageIndex: 1,
 				pageSize: 10
-			}
+			},
+				gzshow:false
 		};
 	},
 	components: {
@@ -149,6 +195,19 @@ export default {
 			}		
 			// this.$refs.dy.hideModal()			
 			// console.log(1)
+		},
+		_toBuy() {
+			uni.switchTab({
+				url: '/pages/activity/activity'
+			});
+		},
+		_close(){
+				this.gzshow = false
+		},
+		_gz(){
+			// debugger
+			this.gzshow = true
+			
 		},
 		// opendi校验是否关注
 		async _oidIfAttention(opendId){
@@ -257,7 +316,67 @@ export default {
 			background: #eee;
 		}
 	}
-
+    .gsStip{
+    	height: 60rpx;
+    	line-height: 60rpx;
+    	text-align: center;
+    	background-color: #f1f1f1;
+    	border-radius: 8rpx;
+    }
+    .grayBox{
+    	// height: 60rpx;
+    	// line-height: 60rpx;
+    	// text-align: center;
+    	background-color: #f1f1f1;
+    	padding: 20rpx;
+    	border-radius: 8rpx;
+    	margin-bottom: 20rpx;
+    	color: #555;
+    	line-height: 1.4;
+    }
+    .gpstatus{
+    	background-color: #fff;
+    	text-align: center;
+    	line-height: 60rpx;
+    	color: #d28e47;
+    }
+    .iLogo {
+    	width: 68rpx;
+    	height: 68rpx;
+    	border-radius: 50%;
+    	margin-right: 16rpx;
+    }
+    
+    .inbtn {
+    	background: #EB5233;
+    	color: #FFFFFF;
+    	height: 60rpx;
+    	line-height: 60rpx;
+    
+    }
+    
+    .nowbtn {
+    	background: #EB5233;
+    	color: #FFFFFF;
+    	height: 60rpx;
+    	line-height: 60rpx;
+    	margin-top: 20rpx;
+    }
+    
+    .hottitle {
+    	font-size: 36rpx;
+    	color: #A85D3B;
+    	font-weight: 600;
+    
+    	margin-top: 30rpx;
+    }
+    
+    .hottext {
+    	font-size: 30rpx;
+    	color: #C4916B;
+    	margin-top: 20rpx;
+    }
+    
 	.hot {
 		width: 100%;
 		.hotItem {
@@ -301,7 +420,9 @@ export default {
 					padding: 0 16rpx;
 				}
 			}
+			
 		}
+		
 		.picBox {
 			width: 100%;
 			.left {
@@ -323,7 +444,14 @@ export default {
 			}
 		}
 	}
-
+    .scrollBox{
+    	height: 50vh;
+    	padding: 20rpx 0;
+    		.tui-modal-custom-text{
+    			line-height: 1.8;
+    			color: #333;
+    		}
+    }
 
 	.dyContent{
 		width: 90vw;

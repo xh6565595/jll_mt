@@ -385,7 +385,7 @@ export default {
 				//如果全部选完
 				if (this.selectArr.every(item => item != '')) {
 					this.selectshop = this.shopItemInfo[this.selectArr];
-					console.log(this.selectshop)
+					//console.log(this.selectshop)
 					// this.selectNum = 1;
 					this.nowprice = this.selectshop.sellprice 
 					
@@ -407,7 +407,7 @@ export default {
 			// console.time('筛选可选路径需要的时间是');
 			//循环所有属性判断哪些属性可选
 			//当前选中的兄弟节点和已选中属性不需要循环
-			console.log(this.specifications)
+			//console.log(this.specifications)
 			
 			for (let i = 0, len = this.localspecifications.length; i < len; i++) {
 				if (i == clickIndex) {
@@ -433,7 +433,7 @@ export default {
 					}
 				}
 			}
-			console.log(this.localspecifications)
+			//console.log(this.localspecifications)
 			// console.timeEnd('筛选可选路径需要的时间是');
 		},
 		checkItem() {
@@ -462,7 +462,7 @@ export default {
 				[[]]
 			);
 			
-			console.log(this.shopItemInfo)
+			//console.log(this.shopItemInfo)
 		},
 		// 创建订单
 		_creatOrder() {

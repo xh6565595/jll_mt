@@ -5,7 +5,7 @@
 			<image lazy-load="true" src="../../static/image/logo.png" mode="widthFix" class="iLogo"></image>
 			<view style="line-height: 60rpx; ">洁利来官方店</view>
 			<view class="f1"></view>
-			<button type="default" class="inbtn" @tap="_toBuy">进入商城</button>
+			<button type="default" class="inbtn" @tap="_toBuy">查看活动</button>
 		</view>
 
 		<view class="" style="background-color: #fff;padding: 20rpx;" >
@@ -244,7 +244,7 @@
 			},
 			_toBuy() {
 				uni.switchTab({
-					url: '/pages/main/main'
+					url: '/pages/user/user'
 				});
 			},
 			_href(item) {
