@@ -11,59 +11,36 @@
 			</view> -->
 			<!-- 苏打粉 -->
 			<view v-if="noneItem" class="firstLunch animated fadeIn" style="width: 100%;min-height: 90vh;">
-				<image src="http://gllo.kuxiong999.com/hd_fm.png" mode="widthFix" class="firstLunchTop" width='100%'></image>
+				<image src="http://gllo.kuxiong999.com/hd_fm.jpg" mode="widthFix" class="firstLunchTop" width='100%'></image>
 
 				<button type="default" class="nowbtn" @tap="_toBuy">立即购买</button>
 
 
 				<view class="f1" style="padding: 20rpx;">
-						<!-- <view class="hottext">健康马桶免费拿活动规则：</view>
-						<view class="hottext">1、凡成功购买一台健康马桶的用户即获得本次活动的参与资格。</view>
-						<view class="hottext">2、获得本次活动参与资格的用户，在成功推荐两台健康马桶付款成交后，即可享受从次月三号起每月返还100元本金，返还累计与所购健康马桶价款等额为止。</view>
-						<view class="hottext">3、本次活动不限于只可推荐两台健康马桶，如成功推荐四台健康马桶付款成交，则次月三号起可获得每月300元的本金返还，推荐六台健康马桶成交可获得每月500元本金返还，推荐八台健康马桶成交可获得每月700元本金返还，推荐十台健康马桶成交可获得每月1000元的本金返还，但返还奖励的总额都只累计至与用户所购健康马桶价款等额为止。</view>
-						<view class="hottext">4、活动期间产品运输费用及安装费用由本公司承担。</view>
-						<view class="hottext">五、如购买健康马桶用户的产品使用空间位置未预留220V电源插座，需用户付费安装。</view>
-						<view class="hottext">六、本次活动产品一律享有，两年免费保修，终身售后的服务。</view>
-						<view class="hottext">七、本活动无参与次数限制。取得活动参与资格的用户返还奖励终止后，可再次购买健康马桶重新获取活动参与资格，并享有同等权益。</view>
-							 -->		 
-					<!-- <view class="hottext">
-						1、自购一台智能马桶，
-					</view>
-					<view class="hottext">
-						2、推荐二台智能马桶成功
-					</view>
-					<view class="hottext" style="height: 75rpx; line-height: 45rpx; ">
-						3、从推荐成功的次月1号起每月返还100元直到全返本为止，免单成功后每邀请2人，每月返还增加100元
-					</view>
-					<view class="hottext">
-						4、产品运费和安装费用由公司负责
-					</view>
-					<view class="hottext">
-						5、如果卫浴间没有播座，安装插座的工本费由用户负责
-					</view>
-					<view class="hottext">
-						6、产品免费保修二年，长期售后服务
-					</view> -->
+				
 				</view>
 			</view>
 			<view v-else>
-				<image src="http://gllo.kuxiong999.com/hd_fm.png" mode="widthFix" class="firstLunchTop" width="100%"></image>
+			    <view class=" flex-center" style="height: 54rpx;
+			    line-height: 54rpx;
+			    position: absolute;
+			    padding: 0 25rpx;
+			    background-color: #6b3a04;
+			    color: #fff;
+			    border-radius: 27rpx 0 0 27rpx;
+			    left: 78%;
+			    top: 19rpx; right: 0rpx; " ><text @tap="_gz" >活动规则</text></view>
+				<image src="http://gllo.kuxiong999.com/hd_fm.jpg" mode="widthFix" class="firstLunchTop" width="100%"></image>
+				
 				<view class="hot">
 					<block v-for="(item, index) in list" :key="index">
 						<view v-if="item.user_list.share_count<11">
-							<view class="inItem animated fadeIn" style="background: #FCF4E7;">
+							<view class="inItem animated fadeIn" style="background: #ffffff;">
 								<view style="display:flex;  justify-content:center;">
-									<view class="cm_top_title"
-										style="display:flex;  justify-content:center; background-image: url(http://gllo.kuxiong999.com/hd_bt.png);background-size: 100% 100%;  background-repeat: no-repeat center;  ">
-										<image src="../../static/image/hd_bt_left.png" class="hot_left_img"
-											mode="widthFix">
-										</image>
-										免单产品
-										<image src="../../static/image/hd_bt_right.png" class="hot_right_img"
-											mode="widthFix"></image>
-									</view>
+									<text style="display:flex; flex-direction: column; margin-top: 20rpx; width: 240rpx; height: 60rpx; line-height: 60rpx; align-items: center; background: #EC7538; color: #FFFDEF; border-radius:27rpx;">
+									免单产品</text>
 								</view>
-								<view class="cm_items flex flex_center" @tap="_href(item)">
+								<view class="cm_items flex flex_center" style="margin-top: 20rpx;" @tap="_href(item)">
 									<image :src="item.project_list[0].skus_img" mode="aspectFill" class="itemLogo">
 									</image>
 									<view class="f1">
@@ -81,19 +58,13 @@
 									</view>
 								</view>
 							</view>
-							<view class="inItem animated fadeIn" style="background: #FCF4E7;">
+							<view class="inItem animated fadeIn" style="background: #ffffff;">
 								<view style="display:flex;  justify-content:center;">
-									<view class="cm_top_title"
-										style="display:flex;  justify-content:center; background-image: url(http://gllo.kuxiong999.com/hd_bt.png);background-size: 100% 100%;  background-repeat: no-repeat center;  ">
-										<image src="../../static/image/hd_bt_left.png" class="hot_left_img"
-											mode="widthFix"></image>
-										免单进度
-										<image src="../../static/image/hd_bt_right.png" class="hot_right_img"
-											mode="widthFix"></image>
-									</view>
+									<text style="display:flex; flex-direction: column; margin-top: 20rpx; width: 240rpx; height: 60rpx; line-height: 60rpx; align-items: center; background: #EC7538; color: #FFFDEF; border-radius:27rpx;">
+									免单进度</text>
 								</view>
 								<view v-if="item.user_list.share_count<2" class="text">{{ item.user_list.schedule_date_msg }}<navigator class="fixBtn" :url="`/pages/features/backRecord/backRecord?code=${item.order_code}`">返还记录</navigator></view>
-								<view v-else class="text">{{ item.user_list.schedule_success_msg }}<navigator class="fixBtn" :url="`/pages/features/backRecord/backRecord?code=${item.order_code}`">返还记录</navigator></view>
+								<view v-else  class="fixbox2">{{ item.user_list.schedule_success_msg }}<navigator class="fixBtn2" :url="`/pages/features/backRecord/backRecord?code=${item.order_code}`">返还记录</navigator></view>
 								<view style="display:flex;  justify-content:center;">
 									<view class="submenber">
 										<image
@@ -101,11 +72,11 @@
 											mode="aspectFill" class="submenber_img">
 										</image>
 										  <text
-											style="display:flex; flex-direction: column; width: 120rpx; align-items: center; background: #EC7538; color: #FFFDEF; border-radius:27rpx;">
+											style="display:flex; flex-direction: column; height: 40rpx; line-height: 40rpx; width: 120rpx; align-items: center; background: #EC7538; color: #FFFDEF; border-radius:27rpx;">
 											发起人</text>
 									</view>
 								</view>
-								<view class="text">{{ item.user_list.schedule_msg }}</view>
+								<view class="text" style="margin-top: 20rpx;">{{ item.user_list.schedule_msg }}</view>
 								<view class="flex  flex_start flex_wrap">
 									<block v-for="(item_img, index) in item.user_list.list" :key="index">
 										<view class="submenber" style="margin-top: 20rpx;">
@@ -155,6 +126,25 @@
 				<button type="text" class="cm_btn" hover-class="cm_hover_m" open-type="share">立即分享给好友</button>
 			</view>
 		</accredit>
+		<tui-modal :show="gzshow" custom>
+			<view class="tui-modal-custom">
+				<scroll-view class="scrollBox" :scroll-y="true">
+					<view class="tui-modal-custom-text">
+						健康马桶免费拿活动规则：</br>
+						1、凡成功购买一台健康马桶的用户即获得本次活动的参与资格。</br>
+						2、获得本次活动参与资格的用户，在成功推荐两台健康马桶付款成交后，即可享受从次月三号起每月返还100元本金，返还累计与所购健康马桶价款等额为止。</br>
+						3、本次活动不限于只可推荐两台健康马桶，如成功推荐四台健康马桶付款成交，则次月三号起可获得每月300元的本金返还，推荐六台健康马桶成交可获得每月500元本金返还，推荐八台健康马桶成交可获得每月700元本金返还，推荐十台健康马桶成交可获得每月1000元的本金返还，但返还奖励的总额都只累计至与用户所购健康马桶价款等额为止。</br>
+						4、活动期间产品运输费用及安装费用由本公司承担。</br>
+						五、如购买健康马桶用户的产品使用空间位置未预留220V电源插座，需用户付费安装。</br>
+						六、本次活动产品一律享有，两年免费保修，终身售后的服务。</br>
+						七、本活动无参与次数限制。取得活动参与资格的用户返还奖励终止后，可再次购买健康马桶重新获取活动参与资格，并享有同等权益。</br>
+				 
+					</view>
+				</scroll-view>
+				<!-- <tui-button  :size="28" type="danger" shape="circle" @click="handleClick">确定</tui-button> -->
+				<button type="success" class="cm_btn" @tap="_close">关闭</button>
+			</view>
+		</tui-modal>
 		<!-- <qrcodePoster ref="poster" 
 				:title="goods.title" 
 		        :subTitle="goods.sub_title" 
@@ -192,6 +182,7 @@
 					pageIndex: 1,
 					pageSize: 10
 				},
+				gzshow:false,
 				shareMsg: '',
 				goods: {
 					title: '',
@@ -258,6 +249,14 @@
 					url: '/pages/main/main'
 				});
 			},
+			_close(){
+					this.gzshow = false
+			},
+			_gz(){
+				
+				this.gzshow = true
+				
+			},
 			_detail(item) {
 				let code = item.order_code;
 				uni.navigateTo({
@@ -319,6 +318,19 @@
 
 <style lang="scss" scoped>
 	.pages {
+		.fixbox2
+		{
+			line-height: 80rpx;
+			padding:0rpx 0rpx 0rpx 20rpx; 
+			height: 80rpx; 
+			margin-top: 30rpx;
+			margin-bottom: 50rpx; 
+			border-radius: 27rpx; 
+			background: #FAE0BF; 
+			color: #BE8E62; 
+			display:flex;
+			
+		}
 		.fixBtn{
 			    line-height: 50rpx;
 			    padding: 0 20rpx;
@@ -327,8 +339,23 @@
 			    font-size: 24rpx;
 			    color: #ffffff;
 			    width: 160rpx;
-			    background: #ecbe51;
+			    background: #BB6E3D;
 			    margin: 20rpx auto 0 auto;
+		}
+		.fixBtn2
+		{
+			margin-top: 18rpx;
+			
+			margin-left: 25%;
+			line-height: 50rpx;
+			height: 50rpx;
+			padding: 0 20rpx;
+			border-radius: 34rpx;
+			font-size: 24rpx;
+			color: #ffffff;
+			width: 150rpx;
+			text-align:center;
+			background: #BB6E3D;
 		}
 		// padding: 20rpx;
 		// padding-top: 260rpx;
@@ -511,7 +538,15 @@
 			margin-left: 20rpx;
 		}
 	}
-
+   .scrollBox{
+			height: 50vh;
+			padding: 20rpx 0;
+				.tui-modal-custom-text{
+					line-height: 1.8;
+					color: #333;
+				}
+		}
+	
 	.shareBox {
 		width: 80vw;
 		background-color: #fff;
