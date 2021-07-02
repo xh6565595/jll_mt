@@ -112,8 +112,9 @@
 							</view>
 							<view class="cells flex flex_center" >
 								<view class="label cm_tex_r">运费</view>
-								<view class="f1 text">{{ item.is_ems?'￥'+item.is_ems:'包邮' }}</view>
+								<view class="f1 text">{{ item.is_ems?'￥'+item.is_ems:'包邮' }} 送货上门并安装</view>
 							</view>
+							
 							<view class="cells flex flex_center">
 								<view class="label cm_tex_r">税费({{tex}}%)</view>
 								<view class="f1 text">￥{{ item.taxes_price }}</view>
@@ -135,7 +136,7 @@
 			<view class="proItemsBox  " @click="_call">
 				<view class="flex flex_center">
 					<image src="../../../../static/img/phone.png" mode="widthFix" class="call"></image>
-					<text>联系卖家</text>
+					<text>联系客服</text>
 				</view>
 			</view>
 

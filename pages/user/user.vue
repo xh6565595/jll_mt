@@ -146,19 +146,15 @@
 			<view class="tui-modal-custom">
 				<!-- <image src="/static/images/chat/fail.png" class="tui-tips-img"></image> -->
 				<scroll-view class="scrollBox" :scroll-y="true">
-					<view class="tui-modal-custom-text">
-						健康马桶免费拿活动规则：</br>
-						1、凡成功购买一台健康马桶的用户即获得本次活动的参与资格。</br>
-						2、获得本次活动参与资格的用户，在成功推荐两台健康马桶付款成交后，即可享受从次月三号起每月返还100元本金，返还累计与所购健康马桶价款等额为止。</br>
-						3、本次活动不限于只可推荐两台健康马桶，如成功推荐四台健康马桶付款成交，则次月三号起可获得每月300元的本金返还，推荐六台健康马桶成交可获得每月500元本金返还，推荐八台健康马桶成交可获得每月700元本金返还，推荐十台健康马桶成交可获得每月1000元的本金返还，但返还奖励的总额都只累计至与用户所购健康马桶价款等额为止。</br>
-						4、活动期间产品运输费用及安装费用由本公司承担。</br>
-						五、如购买健康马桶用户的产品使用空间位置未预留220V电源插座，需用户付费安装。</br>
-						六、本次活动产品一律享有，两年免费保修，终身售后的服务。</br>
-						七、本活动无参与次数限制。取得活动参与资格的用户返还奖励终止后，可再次购买健康马桶重新获取活动参与资格，并享有同等权益。</br>
-				 
+					<view class="tui-modal-custom-text" style="white-space:pre-wrap;">
+					 {{text}}
 					</view>
 				</scroll-view>
-				<button type="success" class="cm_btn" @tap="_close1">同意</button>
+				<view  class="flex flex_center">
+				<!-- <tui-button  :size="28" type="danger" shape="circle" @click="handleClick">确定</tui-button> -->
+				<button type="success"  class="cm_btn1" @tap="_close1">同意</button>
+				<button type="success" style="background: #888888;"  class="cm_btn1" @tap="_close1">再看看</button>
+				</view>
 			</view>
 		</tui-modal>
 	</view>
@@ -166,6 +162,7 @@
 
 <script>
 import { mapState, mapMutations } from 'vuex';
+const global_Set_jll = uni.getStorageSync('global_Set_jll');
 import http from '@/utils/http/index.js';
 import accredit from '@/components/accredit/accredit';
 export default {
@@ -188,12 +185,13 @@ export default {
 				pageIndex: 1,
 				pageSize: 6
 			},
+			text: '',
 			gzshow:false,
 		};
 	},
 	onLoad() {
 		let that = this;
-
+        this.text = global_Set_jll.activity_constraint;
 		uni.$on('gzhAuth', bool => {
 			that.$refs.dy.hideModal();
 			that._loadData('refresh');
@@ -686,6 +684,17 @@ export default {
 		.cm_btn {
 			margin-bottom: 20rpx;
 		}
+	}
+	.cm_btn1{
+		width: 40%;
+		height: 80rpx;
+		text-align: center;
+		line-height: 78rpx;
+		margin: 0 auto;
+		border-radius: 40rpx;
+		background: var(--cl_theme);
+		color: #fff;
+		font-size: 30rpx;
 	}
 }
 </style>

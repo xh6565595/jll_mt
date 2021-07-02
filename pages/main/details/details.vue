@@ -109,7 +109,7 @@
 						mode="scaleToFill"
 						style="width: 64rpx;height: 64rpx;border-radius: 50%;margin-right: 20rpx;"
 					></image>
-					<view class="f1">{{ selfBuy ? userInfo.consumer_nick_name : share_consumer_info.consumer_name }}</view>
+					<view class="f1">{{ selfBuy ? userInfo.consumer_nick_name : share_consumer_info.consumer_name }}  推荐好物！</view>
 				</view>
 				<view class="footer flex flex_center" v-if="!skeletonShow"><button class="cm_btn sure" @tap="_next">购买</button></view>
 			</view>

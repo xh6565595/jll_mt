@@ -5,14 +5,20 @@
 			<view class="blank"></view>
 			<block v-for="(item, index) in list" :key="index">
 				<view class="proItemsBox  ">
-					<View class="proTitle">{{item.settle_time}}</View>
-					<View class="proText">订单号：{{item.busi_code}}</View>
+					<View class="proTitle">返本到账时间：{{item.settle_time}}</View>
+						<view class="flex flex_center  content">
+							<view class="f1">
+								<view class=" name">订单号：{{item.busi_code}} </view>
+							</view>
+							<text class="cm_prize">{{item.status==0?'待返还':'已到账'}}</text>
+						</view>
 					<view class="flex flex_center  content">
 						<view class="f1">
 							<view class=" name">{{item.project_name}}</view>
 							<text class="text">{{item.before_price_test}}</text>
 						</view>
-						<text class="cm_prize ">{{item.settle_price}}</text>
+						<text class="cm_prize">{{item.settle_price}}</text>
+						
 					</view>
 
 				</view>
@@ -172,21 +178,20 @@
 			border-radius: 20rpx;
 
 			.proTitle {
-				    line-height: 70rpx;
+				    line-height: 30rpx;
 				    color: #666;
 				    font-size: 28rpx;
 				    font-weight: 600;
 				    border-bottom: 1rpx solid #f8f8f8;
-				    margin-bottom: 20rpx;
+				    margin-bottom: 0rpx;
 			}
 
 			.content {
-				padding: 20rpx 0;
-
+				padding: 10rpx 0;
 				.name {
-					margin-bottom: 16rpx;
+					
 					font-size: 28rpx;
-					max-height: 80rpx;
+					max-height: 30rpx;
 					line-height: 1;
 					margin-top: 12rpx;
 				}
