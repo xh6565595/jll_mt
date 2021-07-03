@@ -42,14 +42,15 @@ export default {
 		}else if(options.icode){
 			icode = options.icode
 		}
-		// console.log(icode);
+		 
 		this.shareData = {
 			proCode:options.pcode?options.pcode:'',  //商品code
 			userId:options.ucode?options.ucode:'' ,  //人物code
 			odrCode:options.ocode?options.ocode:'' ,  //人物code
 			iviCode:icode?icode:'',
 		}
-		// console.log(this.shareData );
+		console.log(options.ocode);
+		console.log(options.ucode);
 		if(that.shareData.proCode || that.shareData.userId || that.shareData.odrCode || that.shareData.iviCode){
 			that.$store.commit('setShare',{proCode:that.shareData.proCode,userId:that.shareData.userId,orderCode:that.shareData.odrCode,iviCode:that.shareData.iviCode})
 		}

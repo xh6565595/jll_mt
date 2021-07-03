@@ -281,12 +281,16 @@
 				let item = obj.project_list[0];
 				let code = item.project_code;
 
+				// uni.navigateTo({
+				// 	url: `/pages/main/details/details?type=self&order=${obj.order_code}&code=` + code
+				// });
+				
 				uni.navigateTo({
-					url: `/pages/main/details/details?type=self&order=${obj.order_code}&code=` + code
+					url: '/pages/index/index?ocode='+obj.order_code+'&ucode='+this.userInfo.consumer_code
 				});
 			},
 			_hrefShow(obj) {
-				console.log(1)
+				
 			},
 			_showRule() {
 				this.$refs.rule.showModal();

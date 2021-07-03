@@ -225,13 +225,13 @@ export default {
 	onLoad(options) {
 		let that = this
 
-		
+		//debugger
 		this.formParams.project_code = options.code;//商口code
 		this.formParams.share_user_id = that.shareUser;//订单推荐人
 		
 		
 		this.selfOrder = options.order;
-		
+	
 		if (that.shareUser!='') {
 			this.shareActive = true; //是分享活动商品
 			
@@ -242,7 +242,7 @@ export default {
 			this.formParams.project_code = options.code;
 			this.formParams.share_user_id = that.shareUser;
 
-			// debugger
+			 
 		}
 		this._loadData('refresh');
 	 

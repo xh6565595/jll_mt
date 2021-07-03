@@ -1,7 +1,7 @@
 <template>
 	<view class="pages">
 		<!-- 菜单 -->
-		<!-- <swiper class="swiper" :indicator-dots="true" :autoplay="false">
+	<!-- 	<swiper class="swiper" :indicator-dots="true" :autoplay="false">
 			<block v-for="(item, index) in banners" :key="index">
 				<swiper-item @click="_href(item)">
 					<video :src="item.Url" v-if="item.UrlType == 'video'" :muted="true" :autoplay="true" :poster="item.Text" :show-mute-btn="true" controls class="swiper-item" style="width: 100%;height: 100%;"></video>
@@ -18,7 +18,11 @@
 			<view class="f1"></view>
 			<button type="default" class="inbtn" @tap="_toBuy">我的活动</button>
 		</view>
-		
+		<scroll-view enable-back-to-top="true" scroll-x="true" class="scroll" style="border: 1px solid #00ff7f; height: 50rpx; line-height: 50rpx;">
+		  <view >
+		     <text>123123123123123</text>
+		   </view>
+		</scroll-view>
 		
 		
 		<view style="border-radius: 8rpx;overflow: hidden; width: 100%;">
