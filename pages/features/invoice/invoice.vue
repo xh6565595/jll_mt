@@ -114,6 +114,9 @@
 				</picker-view-column>
 			</picker-view>
 		</view>
+	    <view >
+			<image src="http://gllo.kuxiong999.com/fp.png"  width='100%'></image>
+		</view>
 	</view>
 </template>
 

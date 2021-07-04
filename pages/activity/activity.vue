@@ -11,7 +11,7 @@
 			</view> -->
 			<!-- 苏打粉 -->
 			<view v-if="noneItem" class="firstLunch animated fadeIn" style="width: 100%;min-height: 90vh;">
-				<image src="http://gllo.kuxiong999.com/hd_fm.jpg" mode="widthFix" class="firstLunchTop" width='100%'></image>
+				<image src="http://gllo.kuxiong999.com/hd_fm1.jpg" mode="widthFix" class="firstLunchTop" width='100%'></image>
 
 				<button type="default" class="nowbtn" @tap="_toBuy">立即购买</button>
 
@@ -30,17 +30,17 @@
 			    border-radius: 27rpx 0 0 27rpx;
 			    left: 78%;
 			    top: 19rpx; right: 0rpx; " ><text @tap="_gz" >活动规则</text></view>
-				<image src="http://gllo.kuxiong999.com/hd_fm.jpg" mode="widthFix" class="firstLunchTop" width="100%"></image>
+				<image src="http://gllo.kuxiong999.com/hd_fm1.jpg" mode="widthFix" class="firstLunchTop" width="100%"></image>
 				
 				<view class="hot">
 					<block v-for="(item, index) in list" :key="index">
 						<view v-if="item.user_list.share_count<11">
+							<view v-if="item.user_list.share_count<2" style="background:#A15126; border-radius: 23rpx 23rpx 0 0 ;  color: #F1F1F1; height: 70rpx; line-height: 70rpx; padding-left: 20rpx;">{{ item.user_list.schedule_date_msg }}</view>
+							
 							<view class="inItem animated fadeIn" style="background: #ffffff;">
-								<view style="display:flex;  justify-content:center;">
-									<text style="display:flex; flex-direction: column; margin-top: 20rpx; width: 240rpx; height: 60rpx; line-height: 60rpx; align-items: center; background: #EC7538; color: #FFFDEF; border-radius:27rpx;">
-									免单产品</text>
-								</view>
-								<view class="cm_items flex flex_center" style="margin-top: 20rpx;" @tap="_href(item)">
+								<view style="height: 20rpx;"></view>
+								<view v-if="item.user_list.share_count>=2"  class="fixbox2">{{ item.user_list.schedule_success_msg }}<navigator class="fixBtn2" :url="`/pages/features/backRecord/backRecord?code=${item.order_code}`">查看返还记录</navigator></view>
+								<view class="cm_items flex flex_center" style=" border-radius: 27rpx; background: #F4F3F8;  padding: 20rpx; "  @tap="_href(item)">
 									<image :src="item.project_list[0].skus_img" mode="aspectFill" class="itemLogo">
 									</image>
 									<view class="f1">
@@ -50,55 +50,54 @@
 										<view class="cm_des" style="font-size: 30rpx;">
 											{{ item.project_list[0].skus_name }}
 										</view>
-										<view class="flex flex_center cm_price_box">
-											<view class="cm_price" style="font-size: 30rpx;">
+										
+											<view class="cm_price" style="font-size: 36rpx; margin-top: 40rpx;">
 												￥{{ item.project_list[0].price }}</view>
-											<view class="f1"></view>
-										</view>
+											
+										
 									</view>
 								</view>
-							</view>
-							<view class="inItem animated fadeIn" style="background: #ffffff;">
-								<view style="display:flex;  justify-content:center;">
-									<text style="display:flex; flex-direction: column; margin-top: 20rpx; width: 240rpx; height: 60rpx; line-height: 60rpx; align-items: center; background: #EC7538; color: #FFFDEF; border-radius:27rpx;">
-									免单进度</text>
-								</view>
-								<view v-if="item.user_list.share_count<2" class="text">{{ item.user_list.schedule_date_msg }}</view>
-								<view v-else  class="fixbox2">{{ item.user_list.schedule_success_msg }}<navigator class="fixBtn2" :url="`/pages/features/backRecord/backRecord?code=${item.order_code}`">返还记录</navigator></view>
-								<view style="display:flex;  justify-content:center;">
+                             
+							 <view class="text" style="margin-top: 20rpx;">{{ item.user_list.schedule_msg }}</view>
+							 
+							<view class="flex" >
+								<view style="width:20%; margin-right: 20rpx; ">
 									<view class="submenber">
 										<image
 											:src="item.consumer_head ? item.consumer_head : '/static/image/hd_yq.png'"
 											mode="aspectFill" class="submenber_img">
 										</image>
 										  <text
-											style="display:flex; flex-direction: column; height: 40rpx; line-height: 40rpx; width: 120rpx; align-items: center; background: #EC7538; color: #FFFDEF; border-radius:27rpx;">
+											style="display:flex; flex-direction: column; height: 30rpx; line-height: 30rpx; font-size: 20rpx; width: 100rpx; align-items: center; background: #EC7538; color: #FFFDEF; border-radius:27rpx;">
 											发起人</text>
 									</view>
 								</view>
-								<view class="text" style="margin-top: 20rpx;">{{ item.user_list.schedule_msg }}</view>
-								<view class="flex  flex_start flex_wrap">
+								<view class="flex  flex_wrap flex_wrap" >
 									<block v-for="(item_img, index) in item.user_list.list" :key="index">
-										<view class="submenber" style="margin-top: 20rpx;">
+										<view class="submenber" >
 											<image
 												:src="item_img.consumer_head ? item_img.consumer_head : '/static/image/hd_yq.png'"
 												mode="aspectFill" class="submenber_img"></image>
 											<text class="submenber_text" style="margin-top: 10rpx;">
 												{{item_img.pay_date}}</text>
 										</view>
-
+																 
 									</block>
 									<view v-if="item.user_list.share_count<10" class=" submenber1" @tap="_hrefSahre(item)">
 										<image :src="'/static/image/hd_yq.png'" mode="aspectFill" class="avatar">
 										</image>
 									</view>
-
 								</view>
-								<button type="text" class="cm_btn" hover-class="cm_hover_m"
-									@tap="_hrefSahre(item)">邀请好友购买</button>
-
-								<button type="text" class="cm_btn_plain" hover-class="cm_hover_m"
-									@tap="_href(item)">自己购买</button>
+							</view>
+							
+							<view  class="flex flex_center">
+							<button type="text" class="cm_btn_plain" hover-class="cm_hover_m"
+								@tap="_href(item)">自己购买</button>
+								
+							 <button type="text" class="cm_btn" hover-class="cm_hover_m"
+							 		@tap="_hrefSahre(item)">邀请好友购买</button>
+							</view>
+							<view style="height: 30rpx;"></view>
 							</view>
 						</view>
 					</block>
@@ -321,15 +320,15 @@
 		.fixbox2
 		{
 			line-height: 80rpx;
+			
 			padding:0rpx 0rpx 0rpx 20rpx; 
 			height: 80rpx; 
-			margin-top: 30rpx;
-			margin-bottom: 50rpx; 
+			margin-bottom: 20rpx; 
 			border-radius: 27rpx; 
 			background: #FAE0BF; 
 			color: #BE8E62; 
 			display:flex;
-			
+	
 		}
 		.fixBtn{
 			    line-height: 50rpx;
@@ -345,15 +344,14 @@
 		.fixBtn2
 		{
 			margin-top: 18rpx;
-			
-			margin-left: 25%;
+			margin-left: 20%;
 			line-height: 50rpx;
 			height: 50rpx;
 			padding: 0 20rpx;
 			border-radius: 34rpx;
 			font-size: 24rpx;
 			color: #ffffff;
-			width: 150rpx;
+			
 			text-align:center;
 			background: #BB6E3D;
 		}
@@ -468,24 +466,22 @@
 
 				display: flex;
 				flex-direction: column;
-				width: 20%;
 				align-items: center;
-
-
+				
 				.submenber_img {
 					display: flex;
-					width: 100rpx;
-					height: 100rpx;
+					width: 110rpx;
+					height: 110rpx;
 					border: 2rpx solid #fff;
 					border-radius: 60rpx;
-					margin-left: 16rpx;
+					
 				}
 
 				.submenber_text {
 					display: flex;
 					font-size: 20rpx;
 					flex-direction: column;
-					width: 120rpx;
+					width: 110rpx;
 					align-items: center;
 					color: #9A6440;
 					border-radius: 27rpx;
@@ -495,12 +491,13 @@
 
 			.cm_btn {
 				margin-top: 72rpx;
+				width: 40%;
 			}
 
 			.cm_btn_plain {
-				margin-top: 20rpx;
-				background-color: #fff;
-				border: none;
+				margin-top: 72rpx;
+				width: 40%;
+				border: 1px solid #C1BCB3;
 			}
 		}
 

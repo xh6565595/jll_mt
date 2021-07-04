@@ -18,12 +18,8 @@
 			<view class="f1"></view>
 			<button type="default" class="inbtn" @tap="_toBuy">我的活动</button>
 		</view>
-		<scroll-view enable-back-to-top="true" scroll-x="true" class="scroll" style="border: 1px solid #00ff7f; height: 50rpx; line-height: 50rpx;">
-		  <view >
-		     <text>123123123123123</text>
-		   </view>
-		</scroll-view>
 		
+	
 		
 		<view style="border-radius: 8rpx;overflow: hidden; width: 100%;">
 			<image src="http://gllo.kuxiong999.com/zly_fm.jpg" mode="widthFix" style="width: 100%;" class="firstLunchTop"></image>
