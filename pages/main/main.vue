@@ -1,7 +1,6 @@
 <template>
 	<view>
-		<uni-notice-bar scrollable="true" single="true" :text="text">
-		</uni-notice-bar>
+		<uni-notice-bar v-if="text" scrollable="true" single="true" :text="text"></uni-notice-bar>
 		<view class="pages">
 			<!-- 菜单 -->
 			<!-- 	<swiper class="swiper" :indicator-dots="true" :autoplay="false">
@@ -126,6 +125,7 @@
 		baseMixins
 	} from '@/utils/baseMixins.js';
 	import accredit from "@/components/accredit/accredit"
+	import uniNoticeBar from "@/components/uni-notice-bar/uni-notice-bar"
 	export default {
 		data() {
 			return {
@@ -144,9 +144,10 @@
 			};
 		},
 		components: {
-			accredit
+			accredit,
+			uniNoticeBar
 		},
-		onShareAppMessage(res) {
+		onShareAppMessage(res) { 
 			return {
 				title: '洁利来智能马桶',
 				path: `/pages/index/index`,
