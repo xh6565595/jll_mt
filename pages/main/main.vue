@@ -1,6 +1,6 @@
 <template>
 	<view>
-		
+
 		<view class="pages">
 			<!-- 菜单 -->
 			<!-- 	<swiper class="swiper" :indicator-dots="true" :autoplay="false">
@@ -22,15 +22,15 @@
 				<view class="f1"></view>
 				<button type="default" class="inbtn" @tap="_toBuy">我的活动</button>
 			</view>
-            <uni-notice-bar  v-if="notice" scrollable="true" single="true" :text="notice"></uni-notice-bar>
+			<uni-notice-bar v-if="notice" scrollable="true" single="true" :text="notice"></uni-notice-bar>
 
 
-			<view style="border-radius: 8rpx;overflow: hidden; width: 100%;">
-			
-				
-				<image src="http://gllo.kuxiong999.com/zly_fm.jpg"  mode="widthFix" style="width: 100%;"
+			<view style="border-radius: 8rpx;overflow: hidden; width: 100%;" @tap="videoToggle">
+
+
+				<image src="http://gllo.kuxiong999.com/zly_fm.jpg" mode="widthFix" style="width: 100%;"
 					class="firstLunchTop"></image>
-					
+
 			</view>
 			<view style="background-color: #fff;padding: 20rpx;">
 				<view class="grayBox">
@@ -100,20 +100,22 @@
 				<button type="default" class="cm_btn cm_btn_plain" @tap="_cancelGz">取消订阅</button>
 			</view>
 		</accredit>
-	<tui-modal :show="gzshow" custom>
-		<view class="tui-modal-custom" >
-			<scroll-view class="scrollBox" style="height: 50vh;padding: 20rpx 0;" :scroll-y="true">
-				<view class="tui-modal-custom-text" style="white-space:pre-wrap;line-height: 1.8;color: #333;">
-				 {{text}}
+		<tui-modal :show="gzshow" custom>
+			<view class="tui-modal-custom">
+				<scroll-view class="scrollBox" style="height: 50vh;padding: 20rpx 0;" :scroll-y="true">
+					<view class="tui-modal-custom-text" style="white-space:pre-wrap;line-height: 1.8;color: #333;">
+						{{text}}
+					</view>
+				</scroll-view>
+				<view class="flex flex_center">
+
+					<button type="success" class="cm_btn1" @tap="_close">同意</button>
+					<button type="success" style="background: #888888;" class="cm_btn1" @tap="_close">再看看</button>
 				</view>
-			</scroll-view>
-			<view  class="flex flex_center">
-			
-			<button type="success"  class="cm_btn1" @tap="_close">同意</button>
-			<button type="success" style="background: #888888;"  class="cm_btn1" @tap="_close">再看看</button>
 			</view>
-		</view>
-	</tui-modal>
+		</tui-modal>
+		<video src="http://gllo.kuxiong999.com/home.mp4" id="proVideo" controls :direction="0" class="videoBox"
+			@fullscreenchange="_fullscreenchange"></video>
 	</view>
 
 </template>
@@ -135,7 +137,7 @@
 				banners: [],
 				hasRow: 'Rows',
 				text: '',
-				notice:'',
+				notice: '',
 				formParams: {
 					key: '',
 					type: '1',
@@ -143,14 +145,16 @@
 					pageSize: 10
 				},
 				gzshow: false,
-				global_Set_jll:global_Set_jll
+				global_Set_jll: global_Set_jll,
+				videoShow: false,
+				videoContext: ''
 			};
 		},
 		components: {
 			accredit,
 			uniNoticeBar
 		},
-		onShareAppMessage(res) { 
+		onShareAppMessage(res) {
 			return {
 				title: '洁利来智能马桶',
 				path: `/pages/index/index`,
@@ -163,13 +167,13 @@
 			let that = this;
 			this.banners = global_Set_jll.banerList;
 			this.text = global_Set_jll.activity_constraint;
-		    this.notice= global_Set_jll.notice;
-			
+			this.notice = global_Set_jll.notice;
+
 			uni.$on('gzhAuth', (bool) => {
 				that.$refs.dy.hideModal()
 			});
 			this._loadData('refresh')
-
+			that.videoContext = uni.createVideoContext('proVideo')
 			// this.$refs.dy.showModal()
 		},
 		onShow() {
@@ -181,6 +185,20 @@
 
 		},
 		methods: {
+			videoToggle() {
+
+				this.videoShow = true
+				this.videoContext.requestFullScreen()
+			},
+			_fullscreenchange(event) {
+
+				let iffull = event.detail.fullScreen
+				if (iffull) {
+					this.videoContext.play()
+				} else {
+					this.videoContext.pause()
+				}
+			},
 			// 关注检验
 			_sureGz() {
 				const authId = uni.getStorageSync('authId')
@@ -301,9 +319,18 @@
 
 <style lang="scss" scoped>
 	.pages {
-		
+
 		background: #f4f4f4;
 		padding: 20rpx;
+
+		.videoBox {
+			width: 100%;
+			height: 774rpx;
+			position: absolute;
+			left: -999;
+			top: -999;
+			z-index: -1;
+		}
 
 		.swiper {
 			border-radius: 8rpx;
@@ -460,7 +487,7 @@
 			}
 		}
 
-	
+
 
 		.dyContent {
 			width: 90vw;
@@ -479,9 +506,9 @@
 			.cm_btn {
 				margin-bottom: 20rpx;
 			}
-			
+
 		}
-      
-		
+
+
 	}
 </style>
