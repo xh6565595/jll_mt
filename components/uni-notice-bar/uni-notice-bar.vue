@@ -277,6 +277,9 @@
 		align-items: center;
 		padding: 6px 12px;
 		margin-bottom: 10px;
+		
+		
+		
 	}
 
 	.uni-cursor-point {
@@ -313,7 +316,7 @@
 	/* #ifndef APP-NVUE */
 	.uni-noticebar__content-wrapper--scrollable {
 		position: relative;
-		height: 18px;
+		height: 30px;
 	}
 	/* #endif */
 
@@ -338,7 +341,7 @@
 	}
 
 	.uni-noticebar__content-text {
-		font-size: 14px;
+		font-size: 20px;
 		line-height: 18px;
 		/* #ifndef APP-NVUE */
 		word-break: break-all;
@@ -366,8 +369,8 @@
 		/* #ifndef APP-NVUE */
 		position: absolute;
 		display: block;
-		height: 18px;
-		line-height: 18px;
+		height: 30px;
+		line-height: 30px;
 		white-space: nowrap;
 		padding-left: 100%;
 		animation: notice 10s 0s linear infinite both;

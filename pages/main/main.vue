@@ -1,6 +1,6 @@
 <template>
 	<view>
-		<uni-notice-bar v-if="text" scrollable="true" single="true" :text="text"></uni-notice-bar>
+		
 		<view class="pages">
 			<!-- 菜单 -->
 			<!-- 	<swiper class="swiper" :indicator-dots="true" :autoplay="false">
@@ -22,12 +22,15 @@
 				<view class="f1"></view>
 				<button type="default" class="inbtn" @tap="_toBuy">我的活动</button>
 			</view>
-
+            <uni-notice-bar  v-if="notice" scrollable="true" single="true" :text="notice"></uni-notice-bar>
 
 
 			<view style="border-radius: 8rpx;overflow: hidden; width: 100%;">
-				<image src="http://gllo.kuxiong999.com/zly_fm.jpg" mode="widthFix" style="width: 100%;"
+			
+				
+				<image src="http://gllo.kuxiong999.com/zly_fm.jpg"  mode="widthFix" style="width: 100%;"
 					class="firstLunchTop"></image>
+					
 			</view>
 			<view style="background-color: #fff;padding: 20rpx;">
 				<view class="grayBox">
@@ -97,21 +100,20 @@
 				<button type="default" class="cm_btn cm_btn_plain" @tap="_cancelGz">取消订阅</button>
 			</view>
 		</accredit>
-		<tui-modal :show="gzshow" custom>
-			<view class="tui-modal-custom">
-				<!-- <image src="/static/images/chat/fail.png" class="tui-tips-img"></image> -->
-				<scroll-view class="scrollBox" :scroll-y="true">
-					<view class="tui-modal-custom-text" style="white-space:pre-wrap;">
-						{{text}}
-					</view>
-				</scroll-view>
-				<view class="flex flex_center">
-					<!-- <tui-button  :size="28" type="danger" shape="circle" @click="handleClick">确定</tui-button> -->
-					<button type="success" class="cm_btn1" @tap="_close">同意</button>
-					<button type="success" style="background: #888888;" class="cm_btn1" @tap="_close">再看看</button>
+	<tui-modal :show="gzshow" custom>
+		<view class="tui-modal-custom" >
+			<scroll-view class="scrollBox" style="height: 50vh;padding: 20rpx 0;" :scroll-y="true">
+				<view class="tui-modal-custom-text" style="white-space:pre-wrap;line-height: 1.8;color: #333;">
+				 {{text}}
 				</view>
+			</scroll-view>
+			<view  class="flex flex_center">
+			
+			<button type="success"  class="cm_btn1" @tap="_close">同意</button>
+			<button type="success" style="background: #888888;"  class="cm_btn1" @tap="_close">再看看</button>
 			</view>
-		</tui-modal>
+		</view>
+	</tui-modal>
 	</view>
 
 </template>
@@ -133,6 +135,7 @@
 				banners: [],
 				hasRow: 'Rows',
 				text: '',
+				notice:'',
 				formParams: {
 					key: '',
 					type: '1',
@@ -160,7 +163,8 @@
 			let that = this;
 			this.banners = global_Set_jll.banerList;
 			this.text = global_Set_jll.activity_constraint;
-		 
+		    this.notice= global_Set_jll.notice;
+			
 			uni.$on('gzhAuth', (bool) => {
 				that.$refs.dy.hideModal()
 			});
@@ -297,6 +301,7 @@
 
 <style lang="scss" scoped>
 	.pages {
+		
 		background: #f4f4f4;
 		padding: 20rpx;
 
@@ -455,15 +460,7 @@
 			}
 		}
 
-		.scrollBox {
-			height: 50vh;
-			padding: 20rpx 0;
-
-			.tui-modal-custom-text {
-				line-height: 1.8;
-				color: #333;
-			}
-		}
+	
 
 		.dyContent {
 			width: 90vw;
@@ -482,19 +479,9 @@
 			.cm_btn {
 				margin-bottom: 20rpx;
 			}
-
+			
 		}
-
-		.cm_btn1 {
-			width: 40%;
-			height: 80rpx;
-			text-align: center;
-			line-height: 78rpx;
-			margin: 0 auto;
-			border-radius: 40rpx;
-			background: var(--cl_theme);
-			color: #fff;
-			font-size: 30rpx;
-		}
+      
+		
 	}
 </style>

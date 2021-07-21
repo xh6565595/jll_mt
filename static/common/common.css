@@ -229,6 +229,17 @@ image {
 	color: #fff;
 	font-size: 30rpx;
 }
+.cm_btn1 {
+	width: 40%;
+	height: 80rpx;
+	text-align: center;
+	line-height: 78rpx;
+	margin: 0 auto;
+	border-radius: 40rpx;
+	background: var(--cl_theme);
+	color: #fff;
+	font-size: 30rpx;
+}
 .cm_btn_plain {
 	width: 100%;
 	height: 80rpx;

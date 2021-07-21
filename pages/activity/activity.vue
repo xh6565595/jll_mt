@@ -11,6 +11,15 @@
 			</view> -->
 			<!-- 苏打粉 -->
 			<view v-if="noneItem" class="firstLunch animated fadeIn" style="width: 100%;min-height: 90vh;">
+				<view class=" flex-center" style="height: 54rpx;
+				line-height: 54rpx;
+				position: absolute;
+				padding: 0 25rpx;
+				background-color: #6b3a04;
+				color: #fff;
+				border-radius: 27rpx 0 0 27rpx;
+				left: 78%;
+				top: 19rpx; right: 0rpx; " ><text @tap="_gz" >活动规则</text></view>
 				<image src="http://gllo.kuxiong999.com/hd_fm1.jpg" mode="widthFix" class="firstLunchTop" width='100%'></image>
 
 				<button type="default" class="nowbtn" @tap="_toBuy">立即购买</button>
@@ -35,7 +44,7 @@
 				<view class="hot">
 					<block v-for="(item, index) in list" :key="index">
 						<view v-if="item.user_list.share_count<11">
-							<view v-if="item.user_list.share_count<2" style="background:#A15126; border-radius: 23rpx 23rpx 0 0 ;  color: #F1F1F1; height: 70rpx; line-height: 70rpx; padding-left: 20rpx;">{{ item.user_list.schedule_date_msg }}</view>
+							<view v-if="item.user_list.share_count<2"  style="background:#A15126; border-radius: 23rpx 23rpx 0 0 ;  color: #F1F1F1; height: 70rpx; line-height: 70rpx; text-align: center; padding-left: 20rpx;">{{ item.user_list.schedule_date_msg }}</view>
 							
 							<view class="inItem animated fadeIn" style="background: #ffffff;">
 								<view style="height: 20rpx;"></view>
@@ -90,7 +99,7 @@
 								</view>
 							</view>
 							
-							<view  class="flex flex_center">
+							<view v-if="item.user_list.share_count<10"  class="flex flex_center">
 							<button type="text" class="cm_btn_plain" hover-class="cm_hover_m"
 								@tap="_href(item)">自己购买</button>
 								
@@ -127,7 +136,7 @@
 		</accredit>
 		<tui-modal :show="gzshow" custom>
 			<view class="tui-modal-custom">
-				<scroll-view class="scrollBox" :scroll-y="true">
+				<scroll-view class="scrollBox"  :scroll-y="true">
 					<view class="tui-modal-custom-text" style="white-space:pre-wrap;">
 					 {{text}}
 					</view>

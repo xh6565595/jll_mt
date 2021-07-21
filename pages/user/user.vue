@@ -24,7 +24,7 @@
 		<!-- 推广者显示 -->
 		<navigator url="./share/share" class="shareBox " v-if="hasLogin && userInfo.consumer_type == 2">
 			<!-- <navigator url="./share/share"  class="shareBox " > -->
-			<image src="../../static/image/wd_yq.jpg" mode="scaleToFill" class="bg"></image>
+			<image src="http://gllo.kuxiong999.com/wd_yq.png" mode="scaleToFill" class="bg"></image>
 		</navigator>
 		<!-- </view> -->
 		<!-- 个人信息 -->

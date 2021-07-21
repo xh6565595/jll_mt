@@ -133,7 +133,7 @@
 					<text class="cm_price">￥{{ item.pay_price }}</text>
 				</view>
 			</view>
-			<view class="proItemsBox  " @click="_call">
+			<view class="proItemsBox  " @click="_kefuMenu">
 				<view class="flex flex_center">
 					<image src="../../../../static/img/phone.png" mode="widthFix" class="call"></image>
 					<text>联系客服</text>
@@ -238,20 +238,22 @@
 					<tui-button type="primary" class="btns" size="small" shape="circle" v-if="item.order_status == 2" @tap="sure(item.order_code)">预约安装</tui-button>
 					<tui-button type="primary" class="btns" size="small" shape="circle" plain v-if="item.order_status == 2" @tap="scan(item.order_code)">查看物流</tui-button>
 				</view>			
-			</view>		
+			</view>	
+				<accredit ref="kf" :autoClose="true">
+					<view slot='content' class="fkContent">
+						<image src="/static/image/kfbg.jpg" mode="widthFix" class="bg" ></image>
+						<view style="padding: 50rpx;">
+							<view class="gray" style="line-height: 2;">我们将会全心全意为您提供满意周到的咨询服</view>
+							<button type="text" class="cm_btn" hover-class="cm_hover_m" open-type="contact">和他聊聊</button>
+							<button type="text" class="cm_btn_plain" hover-class="cm_hover_m" @tap="_kefu">拨打客服热线</button>
+						</view>
+						<image src="/static/image/close.png" mode="widthFix" class="closeBtn" ></image>
+					</view>
+				</accredit>
 		</view>
 		<PayPanel ref="payPanel" :oderId="oderId" :amout="item.pay_price" @success="success" @cancel="cancel"></PayPanel>
-		<accredit ref="kf" :autoClose="true">
-			<view slot='content' class="fkContent">
-				<image src="/static/image/kfbg.jpg" mode="widthFix" class="bg" ></image>
-				<view style="padding: 50rpx;">
-					<view class="gray" style="line-height: 2;">我们将会全心全意为您提供满意周到的咨询服</view>
-					<button type="text" class="cm_btn" hover-class="cm_hover_m" open-type="contact">和他聊聊</button>
-					<button type="text" class="cm_btn_plain" hover-class="cm_hover_m" @tap="_kefu">拨打客服热线</button>
-				</view>
-				<image src="/static/image/close.png" mode="widthFix" class="closeBtn" ></image>
-			</view>
-		</accredit>
+
+		
 	</view>
 </template>
 
@@ -315,7 +317,7 @@ export default {
 					t = '请你尽快完成订单付款';
 					break;
 				case 1:
-					t = '卖家将在48小时内发货';
+					t = '商家将在8天后发货';
 					break;
 				case 2:
 					t = '商品已经在运送途中,请保持手机畅通';
@@ -377,17 +379,19 @@ export default {
 				return 
 			}
 			uni.navigateTo({
-				url:'/pages/features/invoice/invoice?order='+ this.formParams.order_code +'&account=' + this.item.pay_price 
+				url:'/pages/features/invoice/invoice?order='+ this.formParams.order_code +'&account=' + this.item.pay_price +'&taxes_price=' + this.item.taxes_price 
 			})
 		},
 		// 显示客服弹窗
 		_kefuMenu(){
+			
 			this.$refs.kf.showModal()
 		},
 		// 客服
 		_kefu() {
 			// let phone = this.waiter.link_value;
 			const phone = uni.getStorageSync('global_Set_jll').service_mobile;
+			
 			let that = this;
 			this.$refs.kf.hideModal()
 			uni.showModal({
@@ -514,9 +518,10 @@ export default {
 				url: '/pages/features/ems/ems?orderCode=' + code
 			});
 		},
-		_call() {
+		_call(str) {
+			
 			uni.makePhoneCall({
-				phoneNumber: this.item.seller_phone //仅为示例
+				phoneNumber:str //仅为示例
 			});
 		},
 		_copy(str) {
@@ -669,6 +674,33 @@ export default {
 	position: relative;
 	padding-top: 160rpx;
 	// padding-bottom: 160rpx;
+	.fkContent {
+		position: relative;
+		width: 80vw;
+		.bg {
+			border-radius: 30rpx 30rpx 0 0;
+			width: 100%;
+			height: 252rpx;
+		}
+		.cm_btn {
+			margin-top: 50rpx;
+			background: #43b6b2;
+		}
+		.cm_btn_plain {
+			margin-top: 10rpx;
+			color: #333;
+			border: none;
+		}
+		.closeBtn {
+			width: 48rpx;
+			position: absolute;
+			left: 50%;
+			margin-left: -24rpx;
+			bottom: -86rpx;
+			z-index: 100;
+		}
+	}
+	
 	.bgbox {
 		font-size: 40rpx;
 		text-align: left;
@@ -919,5 +951,6 @@ export default {
 		line-height: 50px;
 		text-align: center;
 	}
+	
 }
 </style>

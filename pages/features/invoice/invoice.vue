@@ -15,7 +15,7 @@
 				<view class="label">申请类型</view>
 				<view class="flex f1">
 					<view class="radio-group">
-						<view class="radio mr-20" :class="{ checked: !formParams.invoice_type }" @tap="formParams.invoice_type = 0">普通增值税发票</view>
+<!-- 						<view class="radio mr-20" :class="{ checked: !formParams.invoice_type }" @tap="formParams.invoice_type = 0">普通增值税发票</view> -->
 						<view class="radio" :class="{ checked: formParams.invoice_type }" @tap="formParams.invoice_type = 1">电子发票</view>
 					</view>
 				</view>
@@ -38,6 +38,11 @@
 				<view class="label">发票金额</view>
 				<view class="f1"></view>
 				<text>￥{{pay}}</text>
+			</view>
+			<view class="flex flex_center cells">
+				<view class="label">应扣发票税额</view>
+				<view class="f1"></view>
+				<text>￥{{taxes_price}}</text>
 			</view>
 		</view>
 
@@ -114,8 +119,9 @@
 				</picker-view-column>
 			</picker-view>
 		</view>
-	    <view >
-			<image src="http://gllo.kuxiong999.com/fp.png"  width='100%'></image>
+	    <view  class="flex flex-center" >
+			<image src="http://gllo.kuxiong999.com/fp.png" mode="widthFix" class="firstLunchTop" ></image>
+
 		</view>
 	</view>
 </template>
@@ -132,8 +138,8 @@ export default {
 		return {
 			formParams: {
 				order_code:'',
-				invoice_type: 0, // 发票类型(0-增值税普通发票 1-电子发票)
-				apply_type: 0, // 申请类型(0-公司 1-个人)
+				invoice_type: 1, // 发票类型(0-增值税普通发票 1-电子发票)
+				apply_type: 1, // 申请类型(0-公司 1-个人)
 				invoice_title: '', // 企业抬头
 				invoice_number: '', // 公司税号
 				mail: '', // 电子邮箱地址
@@ -147,6 +153,7 @@ export default {
 			value: [0, 0, 0],
 			showPickerStatus: false,
 			pay:0,
+			taxes_price:0,
 			addressDetail: '' //详细地址
 		};
 	},
@@ -159,6 +166,7 @@ export default {
 		
 		this.formParams.order_code = options.order
 		this.pay = options.account
+		this.taxes_price = options.taxes_price
 	},
 	methods: {
 		async submit(){
@@ -418,4 +426,7 @@ export default {
 	line-height: 50px;
 	text-align: center;
 }
+.firstLunchTop {
+		width: 100%;
+	}
 </style>
