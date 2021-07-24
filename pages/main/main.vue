@@ -318,19 +318,20 @@
 </script>
 
 <style lang="scss" scoped>
+	.videoBox {
+		width: 100%;
+		height: 774rpx;
+		position: fixed;
+		left: -999;
+		top: -999;
+		z-index: -1;
+	}
 	.pages {
 
 		background: #f4f4f4;
 		padding: 20rpx;
 
-		.videoBox {
-			width: 100%;
-			height: 774rpx;
-			position: absolute;
-			left: -999;
-			top: -999;
-			z-index: -1;
-		}
+		
 
 		.swiper {
 			border-radius: 8rpx;
